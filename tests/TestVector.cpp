@@ -30,5 +30,5 @@ TEST(test_vector, scalar_multiplication)
   Vector<0> vector_dyanmic = {1.0, 2.0};
   vector_dyanmic = vector_dyanmic*2.0;
   EXPECT_DOUBLE_EQ(vector_dyanmic[0], 2.0);
-  EXPECT_DOUBLE_EQ(vector_dyanmic[0], 4.0);
+  EXPECT_DOUBLE_EQ(vector_dyanmic[1], 4.0);
 }
