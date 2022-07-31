@@ -18,3 +18,11 @@
 // File Name: main.h
 // Description: Temporary main file, just to get the project off the ground.
 //----------------------------------------------------------------------------------------------------------------------
+
+#include <iostream>
+
+int main(int argc, char *argv[])
+{
+  std::cout<<"\nHello World";
+  return 0;
+}//main
