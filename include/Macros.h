@@ -50,19 +50,19 @@ namespace Disa {
    * \return Formatted string: '[logging level | file name::line number]:'
    */
   inline std::basic_string<char> console_format(const Log_Level level, const std::source_location &location) {
-    auto const iter = std::basic_string_view<char>(location.file_name()).find_last_of('/');
-    const auto suffix = std::basic_string<char>(location.file_name()).substr(iter + 1) + "::"
-                        + std::to_string(location.line()) + "]: ";
-    switch (level) {
-      case Log_Level::Debug:
-        return "[Debug|" + std::basic_string(suffix);
-      case Log_Level::Info:
-        return "[Info |" + std::basic_string(suffix);
-      case Log_Level::Warning:
-        return "[Warn|" + std::basic_string(suffix);
-      case Log_Level::Error:
-        return "[Error|" + std::basic_string(suffix);
-    }
+  auto const iter = std::basic_string_view<char>(location.file_name()).find_last_of('/');
+  const auto suffix = std::basic_string<char>(location.file_name()).substr(iter + 1) + "::"
+                      + std::to_string(location.line()) + "]: ";
+  switch (level) {
+  case Log_Level::Debug:
+  return "[Debug|" + std::basic_string(suffix);
+  case Log_Level::Info:
+  return "[Info |" + std::basic_string(suffix);
+  case Log_Level::Warning:
+  return "[Warn|" + std::basic_string(suffix);
+  case Log_Level::Error:
+  return "[Error|" + std::basic_string(suffix);
+  }
   }//console_format
 
   /**
@@ -72,7 +72,7 @@ namespace Disa {
    */
   inline void debug(const std::string_view message,
                     const std::source_location location = std::source_location::current()) {
-    std::cout << "\n" << console_format(Log_Level::Debug, location) << message << std::flush;
+  std::cout << "\n" << console_format(Log_Level::Debug, location) << message << std::flush;
   }//debug
 
   /**
@@ -82,7 +82,7 @@ namespace Disa {
    */
   inline void
   info(const std::string_view message, const std::source_location location = std::source_location::current()) {
-    std::cout << "\n" << console_format(Log_Level::Info, location) << message << std::flush;
+  std::cout << "\n" << console_format(Log_Level::Info, location) << message << std::flush;
   }//info
 
   /**
@@ -92,7 +92,7 @@ namespace Disa {
    */
   inline void warning(const std::string_view message,
                       const std::source_location location = std::source_location::current()) {
-    std::cout << "\n" << console_format(Log_Level::Warning, location) << message << std::flush;
+  std::cout << "\n" << console_format(Log_Level::Warning, location) << message << std::flush;
   }//warning
 
   /**
@@ -102,8 +102,8 @@ namespace Disa {
    */
   inline void
   error(const std::string_view message, const std::source_location location = std::source_location::current()) {
-    std::cerr << "\n" << console_format(Log_Level::Error, location) << message << std::endl;
-    exit(1);
+  std::cerr << "\n" << console_format(Log_Level::Error, location) << message << std::endl;
+  exit(1);
   }//error
 
   /**
@@ -114,8 +114,8 @@ namespace Disa {
    */
   inline void assert_check(const bool &condition, const std::string_view message,
                            const std::source_location location = std::source_location::current()) {
-    if (!condition) error(message, location);
-    else return;
+  if (!condition) error(message, location);
+  else return;
   }//assert_check
 
   // ---------------------------------------------------------------------------------------------------------------------
