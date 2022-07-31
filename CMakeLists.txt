@@ -56,20 +56,19 @@ add_executable(disa ${SOURCES})
 # Testing
 # ----------------------------------------------------------------------------------------------------------------------
 
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.12.1
+)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
 if (ENABLE_TEST)
 
-  include(FetchContent)
-  FetchContent_Declare(
-          googletest
-          GIT_REPOSITORY https://github.com/google/googletest.git
-          GIT_TAG release-1.12.1
-  )
-
   include(CTest)
   include(GoogleTest)
-
-  add_subdirectory(external/googletest)
 
   add_executable(test_vector tests/TestVector.cpp)
   target_link_libraries(test_vector GTest::gtest_main)
