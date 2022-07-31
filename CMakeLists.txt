@@ -25,7 +25,7 @@ cmake_minimum_required(VERSION 3.22)
 
 project(disa LANGUAGES CXX VERSION 0.1)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Options
@@ -44,6 +44,7 @@ option(ENABLE_TEST "Turn on to enable tests" ON)
 include_directories(include)
 
 set(SOURCES
+        include/Macros.h
         include/Vector.h
         src/main.cpp)
 
