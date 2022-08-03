@@ -118,6 +118,20 @@ inline void assert_check(const bool &condition, const std::string_view message,
   else return;
 }//assert_check
 
+/**
+ * \brief Checks if a condition is true in debug build, if it is not the program will exit.
+ * \param[in] condition The condition to check.
+ * \param[in] message The message to print to the error stream in the event of a false condition.
+ * \param[in] location Source code location object, containing the origin of the console message.
+ */
+inline void assert_check_debug(const bool &condition, const std::string_view message,
+                               const std::source_location location = std::source_location::current()) {
+#ifdef DISA_DEBUG
+  if (!condition) error(message, location);
+  else return;
+#endif
+}//assert_check
+
 // ---------------------------------------------------------------------------------------------------------------------
 // Looping Macros
 // ---------------------------------------------------------------------------------------------------------------------
@@ -135,6 +149,13 @@ inline void assert_check(const bool &condition, const std::string_view message,
  * \param[in] container Container to loop over
  */
 #define FOR_EACH(element, container) for(const auto& (element) : (container))
+
+/**
+ * \brief Range based for-loop macro
+ * \param[in, out] element Constant reference to the elements in the container.
+ * \param[in] container Container to loop over
+ */
+#define FOR_EACH_REF(element, container) for(auto& (element) : (container))
 
 }//Disa
 
