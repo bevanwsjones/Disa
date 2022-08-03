@@ -23,6 +23,8 @@
 #ifndef DISA_VECTOR_H
 #define DISA_VECTOR_H
 
+#include "Macros.h"
+
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -30,52 +32,114 @@
 #include <numeric>
 #include <vector>
 
-namespace Disa{
+namespace Disa {
 
 template<std::size_t _size>
-struct Vector : public std::array<double, _size>
-{
-  typedef Vector<_size> t_vector;
-  const static bool dynamic = false;
+struct Vector : public std::array<double, _size> {
+  typedef Vector<_size> _vector;
+  const static bool dynamic = false;  /**< Indicates the vector is compile time sized. */
+
+  /**
+   * @brief Constructor to construct from initializer list, list and vector must be of the same size.
+   * @param[in] list The list of doubles to initialised the vector.
+   */
+  Vector(const std::initializer_list<double> &list) {
+    assert_check_debug(list.size() == _size, "Initializer list of incorrect size, " + std::to_string(list.size())
+                                             + " vs. " + std::to_string(_size) + ".", std::source_location::current());
+    auto iter = this->begin();
+    FOR_EACH(item, list) *iter++ = item;
+  }
+
+  /**
+   * @brief Constructor to construct a vector from a lambda.
+   * @tparam _lambda Template lambda function double(std::size_t).
+   * @param[in] lambda Lambda expression.
+   */
+  template<class _lambda>
+  explicit Vector(_lambda lambda) {
+    FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Arithmetic Operators
   //--------------------------------------------------------------------------------------------------------------------
 
-  constexpr t_vector& operator*(const double& scalar)
-  {
-    for(auto& element: *this) element *= scalar;
+  /**
+   * @brief Multiplies the vector by a scalar, a' = a*b, where a is the vectors and b is a scalar.
+   * @param scalar Scalar value, b, to multiply the vector by.
+   * @return Updated vector (a).
+   */
+  constexpr _vector &operator*(const double &scalar) {
+    FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
-
 
 };//Vector
 
 template<>
-struct Vector<0> : public std::vector<double>
-{
-  typedef Vector<0> t_vector;
-  const static bool dynamic = true;
+struct Vector<0> : public std::vector<double> {
+  typedef Vector<0> _vector;
+  const static bool dynamic = true;    /**< Indicates the vector is runtime resizable. */
 
-  Vector<0>(std::initializer_list<double> list)
-  {
+  /**
+   * @brief Constructor to construct from initializer list, vector is resized to list size.
+   * @param[in] list The list of doubles to initialised the vector.
+   */
+  Vector(const std::initializer_list<double> &list) {
     resize(list.size());
     auto iter = begin();
-    for(const auto& item: list) *iter++ = item;
+    FOR_EACH(item, list) *iter++ = item;
+  }
+
+  /**
+   * @brief Constructor to construct a vector from a lambda.
+   * @tparam _lambda Template lambda function double(std::size_t).
+   * @param[in] size Desired size of the vector.
+   * @param[in] lambda Lambda expression.
+   */
+  template<class _lambda>
+  explicit Vector(std::size_t size, _lambda lambda) : std::vector<double>(size) {
+    FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Arithmetic Operators
   //--------------------------------------------------------------------------------------------------------------------
 
-  inline t_vector& operator*(const double& scalar)
-  {
-    std::for_each(this->begin(), this->end(), [&](const double& element)
-    {return element*scalar;});
+  /**
+   * @brief Multiplies the vector by a scalar, a' = a*b, where a is the vectors and b is a scalar.
+   * @param scalar Scalar value, b, to multiply the vector by.
+   * @return Updated vector (a).
+   */
+  _vector &operator*(const double &scalar) {
+    FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
-
 };//Vector
+
+
+
+template<class _vector>
+constexpr _vector &operator*(const double &scalar, _vector &vector) {
+  return vector * scalar;
+}
+
+template<class _vector>
+constexpr _vector &operator/(_vector &vector, const double &scalar) {
+  FOR_EACH_REF(element, vector) element /= scalar;
+  return vector;
+}
+
+template<class _vector0, class _vector1>
+constexpr typename std::conditional<!_vector0::dynamic, _vector0, _vector1>::type
+operator+(const _vector0 &vector0, const _vector1 &vector1) {
+  typedef typename std::conditional<!_vector0::dynamic, _vector0, _vector1>::type _return;
+  return _return([&](const std::size_t ii) { return vector0[ii] + vector1[ii]; });
+}
+
+Vector<0> operator+(const Vector<0> &vector0, const Vector<0> &vector1) {
+  return Vector<0>(vector0.size(), [&](const std::size_t ii) { return vector0[ii] + vector1[ii]; });
+}
 
 }//Disa
 
