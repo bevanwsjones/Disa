@@ -55,14 +55,27 @@ TEST(test_vector, lambda_lambda) {
 
 TEST(test_vector, scalar_multiplication) {
   Vector<0> dynamic_vector = {1.0, 2.0, 3.0};
-  -3.0 * dynamic_vector;
+  -3.0*dynamic_vector;
   EXPECT_DOUBLE_EQ(dynamic_vector[0], -3.0);
   EXPECT_DOUBLE_EQ(dynamic_vector[1], -6.0);
   EXPECT_DOUBLE_EQ(dynamic_vector[2], -9.0);
 
   Vector<2> static_vector = {3.0, -5.0};
-  4.0 * static_vector;
+  4.0*static_vector;
   EXPECT_DOUBLE_EQ(static_vector[0], 12.0);
   EXPECT_DOUBLE_EQ(static_vector[1], -20.0);
+}
+
+TEST(test_vector, scalar_division) {
+  Vector<0> dynamic_vector = {3.0, 6.0, -5.0};
+  dynamic_vector/3.0;
+  EXPECT_DOUBLE_EQ(dynamic_vector[0], 1.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[1], 2.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[2], -5.0/3.0);
+
+  Vector<2> static_vector = {3.0, -5.0};
+  static_vector/4.0;
+  EXPECT_DOUBLE_EQ(static_vector[0], 3.0/4.0);
+  EXPECT_DOUBLE_EQ(static_vector[1], -5.0/4.0);
 }
 

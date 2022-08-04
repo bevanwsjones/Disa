@@ -16,7 +16,7 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //----------------------------------------------------------------------------------------------------------------------
 // File Name: Vector.h
-// Description:
+// Description: Contains the declaration and definitions for the basic static and dynamic vector class for Disa.
 //----------------------------------------------------------------------------------------------------------------------
 
 //TODO: fill in above
@@ -74,6 +74,18 @@ struct Vector : public std::array<double, _size> {
     return *this;
   }
 
+  /**
+   * @brief Divides the vector by a scalar, a' = a/b, where a is the vectors and b is a scalar.
+   * @param scalar Scalar value, b, to multiply the vector by.
+   * @return Updated vector (a).
+   *
+   * Note: Division by zero is left to the user to handle.
+   */
+  constexpr _vector &operator/(const double &scalar) {
+    FOR_EACH_REF(element, *this) element /= scalar;
+    return *this;
+  }
+
 };//Vector
 
 template<>
@@ -115,20 +127,20 @@ struct Vector<0> : public std::vector<double> {
     FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
+
+  /**
+   * @brief Divides the vector by a scalar, a' = a/b, where a is the vectors and b is a scalar.
+   * @param scalar Scalar value, b, to multiply the vector by.
+   * @return Updated vector (a).
+   *
+   * Note: Division by zero is left to the user to handle.
+   */
+  _vector &operator/(const double &scalar) {
+    FOR_EACH_REF(element, *this) element /= scalar;
+    return *this;
+  }
 };//Vector
 
-
-
-template<class _vector>
-constexpr _vector &operator*(const double &scalar, _vector &vector) {
-  return vector * scalar;
-}
-
-template<class _vector>
-constexpr _vector &operator/(_vector &vector, const double &scalar) {
-  FOR_EACH_REF(element, vector) element /= scalar;
-  return vector;
-}
 
 template<class _vector0, class _vector1>
 constexpr typename std::conditional<!_vector0::dynamic, _vector0, _vector1>::type
