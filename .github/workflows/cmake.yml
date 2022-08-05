@@ -20,7 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up GCC
+      - name: Configure GCC
+        # Configure GCC, we need to use gcc 11, to get some of the c++20 features.
+        # See https://github.com/marketplace/actions/install-gcc
         uses: egor-tensin/setup-gcc@v1
         with:
           version: 11
