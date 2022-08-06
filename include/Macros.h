@@ -62,6 +62,9 @@ inline std::basic_string<char> console_format(const Log_Level level, const std::
       return "[Warn|" + std::basic_string(suffix);
     case Log_Level::Error:
       return "[Error|" + std::basic_string(suffix);
+    default:
+      std::cout<<"[Error|" + std::basic_string(suffix) + " Unrecognised log level parsed.";
+      exit(1);
   }
 }//console_format
 
