@@ -46,8 +46,9 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDISA_DEBUG")
 include_directories(include)
 
 set(SOURCES
-        include/Macros.h
-        include/Vector.h
+        include/macros.h
+        include/vector_dense.h
+        include/vector_operators.h
         src/main.cpp)
 
 #add_library(disa ${SOURCES})
