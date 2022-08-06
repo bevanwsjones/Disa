@@ -15,14 +15,14 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //----------------------------------------------------------------------------------------------------------------------
-// File Name: Vector.h
-// Description: Contains the declaration and definitions for the basic static and dynamic vector class for Disa.
+// File Name: vector_dense.h
+// Description: Contains the declaration and definitions for the basic static and dynamic dense vector classes for Disa.
 //----------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_VECTOR_H
-#define DISA_VECTOR_H
+#ifndef DISA_VECTOR_DENSE_H
+#define DISA_VECTOR_DENSE_H
 
-#include "Macros.h"
+#include "macros.h"
 
 #include <algorithm>
 #include <array>
@@ -34,13 +34,13 @@
 namespace Disa {
 
 //----------------------------------------------------------------------------------------------------------------------
-// Statically Sized Vector
+// Statically Sized Dense Vector Class
 //----------------------------------------------------------------------------------------------------------------------
 
 template<std::size_t _size>
-struct Vector : public std::array<double, _size> {
+struct Vector_Dense : public std::array<double, _size> {
 
-  typedef Vector<_size> _vector;         /** @typedef Short hand for this vector type. */
+  typedef Vector_Dense<_size> _vector;         /** @typedef Short hand for this vector type. */
   const static bool is_dynamic = false;  /** @var Indicates the vector is compile time sized. */
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -50,13 +50,13 @@ struct Vector : public std::array<double, _size> {
   /**
    * @brief Initialise empty vector.
    */
-  Vector() : std::array<double, _size>() {};
+  Vector_Dense() : std::array<double, _size>() {};
 
   /**
    * @brief Constructor to construct from initializer list, list and vector must be of the same size.
    * @param[in] list The list of doubles to initialised the vector.
    */
-  Vector(const std::initializer_list<double>& list) {
+  Vector_Dense(const std::initializer_list<double>& list) {
     assert_check_debug(list.size() == _size, "Initializer list of incorrect size, " + std::to_string(list.size())
                                              + " vs. " + std::to_string(_size) + ".");
     auto iter = this->begin();
@@ -70,7 +70,7 @@ struct Vector : public std::array<double, _size> {
    * @param[in] size Desired size of the vector.
    */
   template<class _lambda>
-  explicit Vector(_lambda lambda, std::size_t size = _size) {
+  explicit Vector_Dense(_lambda lambda, std::size_t size = _size) {
     FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
 
@@ -127,15 +127,15 @@ struct Vector : public std::array<double, _size> {
     FOR(index, _size) (*this)[index] -= vector[index];
     return *this;
   }
-};//Vector
+};//Vector_Dense
 
 //----------------------------------------------------------------------------------------------------------------------
-// Dynamically Sized Vector
+// Dynamically Sized Dense Vector Class
 //----------------------------------------------------------------------------------------------------------------------
 
 template<>
-struct Vector<0> : public std::vector<double> {
-  typedef Vector<0> _vector;              /** @typedef Short hand for this vector type. */
+struct Vector_Dense<0> : public std::vector<double> {
+  typedef Vector_Dense<0> _vector;              /** @typedef Short hand for this vector type. */
   const static bool is_dynamic = true;    /** @var Indicates the vector is runtime resizable. */
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -145,13 +145,13 @@ struct Vector<0> : public std::vector<double> {
   /**
    * @brief Initialise empty vector.
    */
-  Vector() : std::vector<double>() {};
+  Vector_Dense() : std::vector<double>() {};
 
   /**
    * @brief Constructor to construct from initializer list, vector is resized to list size.
    * @param[in] list The list of doubles to initialised the vector.
    */
-  Vector(const std::initializer_list<double>& list) {
+  Vector_Dense(const std::initializer_list<double>& list) {
     resize(list.size());
     auto iter = begin();
     FOR_EACH(item, list) *iter++ = item;
@@ -164,7 +164,7 @@ struct Vector<0> : public std::vector<double> {
    * @param[in] size Desired size of the vector.
    */
   template<class _lambda>
-  explicit Vector(_lambda lambda, std::size_t size) : std::vector<double>(size) {
+  explicit Vector_Dense(_lambda lambda, std::size_t size) : std::vector<double>(size) {
     FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
 
@@ -222,7 +222,7 @@ struct Vector<0> : public std::vector<double> {
     return *this;
   }
 
-};//Vector
+};//Vector_Dense
 
 //----------------------------------------------------------------------------------------------------------------------
 // Template Meta Programming
@@ -276,11 +276,11 @@ constexpr _vector operator/(_vector vector, const double& scalar) {
  * @return Newly constructed vector c.
  */
 template<std::size_t _size_0, std::size_t _size_1>
-typename StaticPromoter<Vector<_size_0>, Vector<_size_1> >::type
-constexpr operator+(const Vector<_size_0>& vector0, const Vector<_size_1>& vector1) {
+typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type
+constexpr operator+(const Vector_Dense<_size_0>& vector0, const Vector_Dense<_size_1>& vector1) {
   assert_check_debug(vector0.size() == vector1.size(), "Incompatible vector sizes, " + std::to_string(vector0.size())
                                                        + " vs. " + std::to_string(vector1.size()) + ".");
-  typedef typename StaticPromoter<Vector<_size_0>, Vector<_size_1> >::type _return_vector;
+  typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type _return_vector;
   return _return_vector([&](const std::size_t ii) { return vector0[ii] + vector1[ii]; }, vector0.size());
 }
 
@@ -293,14 +293,14 @@ constexpr operator+(const Vector<_size_0>& vector0, const Vector<_size_1>& vecto
  * @return Newly constructed vector c.
  */
 template<std::size_t _size_0, std::size_t _size_1>
-typename StaticPromoter<Vector<_size_0>, Vector<_size_1> >::type
-operator-(const Vector<_size_0>& vector0, const Vector<_size_1>& vector1) {
+typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type
+operator-(const Vector_Dense<_size_0>& vector0, const Vector_Dense<_size_1>& vector1) {
   assert_check_debug(vector0.size() == vector1.size(), "Incompatible vector sizes, " + std::to_string(vector0.size())
                                                        + " vs. " + std::to_string(vector1.size()) + ".");
-  typedef typename StaticPromoter<Vector<_size_0>, Vector<_size_1> >::type _return_vector;
+  typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type _return_vector;
   return _return_vector([&](const std::size_t ii) { return vector0[ii] - vector1[ii]; }, vector0.size());
 }
 
 }//Disa
 
-#endif //DISA_VECTOR_H
+#endif //DISA_VECTOR_DENSE_H
