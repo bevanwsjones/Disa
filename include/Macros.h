@@ -43,26 +43,26 @@ enum class Log_Level : uint8_t {
   Debug,
 };//Log_Level
 
-/**
- * \brief Adds additional information to messages about to be printed to screen, such as file and line numbers.
- * \param[in] level Logging level enumerator, determine prefixing of returned string.
- * \param[in] location Source code location object, containing the origin of the console message.
- * \return Formatted string: '[logging level | file name::line number]:'
- */
-inline std::basic_string<char> console_format(const Log_Level level, const std::source_location &location) {
+  /**
+   * \brief Adds additional information to messages about to be printed to screen, such as file and line numbers.
+   * \param[in] level Logging level enumerator, determine prefixing of returned string.
+   * \param[in] location Source code location object, containing the origin of the console message.
+   * \return Formatted string: '[logging level | file name::line number]:'
+   */
+  inline std::basic_string<char> console_format(const Log_Level level, const std::source_location &location) {
   auto const iter = std::basic_string_view<char>(location.file_name()).find_last_of('/');
   const auto suffix = std::basic_string<char>(location.file_name()).substr(iter + 1) + "::"
                       + std::to_string(location.line()) + "]: ";
   switch (level) {
-    case Log_Level::Debug:
-      return "[Debug|" + std::basic_string(suffix);
-    case Log_Level::Info:
-      return "[Info |" + std::basic_string(suffix);
-    case Log_Level::Warning:
-      return "[Warn|" + std::basic_string(suffix);
-    case Log_Level::Error:
-      return "[Error|" + std::basic_string(suffix);
-    default:
+  case Log_Level::Debug:
+  return "[Debug|" + std::basic_string(suffix);
+  case Log_Level::Info:
+  return "[Info |" + std::basic_string(suffix);
+  case Log_Level::Warning:
+  return "[Warn|" + std::basic_string(suffix);
+  case Log_Level::Error:
+  return "[Error|" + std::basic_string(suffix);
+  default:
       std::cout<<"[Error|" + std::basic_string(suffix) + " Unrecognised log level parsed.";
       exit(1);
   }
