@@ -16,12 +16,13 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //----------------------------------------------------------------------------------------------------------------------
 // File Name: Vector.h
-// Description:
+// Description: Contains the declaration and definitions for the basic static and dynamic vector class for Disa.
 //----------------------------------------------------------------------------------------------------------------------
 
-//TODO: fill in above
 #ifndef DISA_VECTOR_H
 #define DISA_VECTOR_H
+
+#include "Macros.h"
 
 #include <algorithm>
 #include <array>
@@ -30,52 +31,275 @@
 #include <numeric>
 #include <vector>
 
-namespace Disa{
+namespace Disa {
+
+//----------------------------------------------------------------------------------------------------------------------
+// Statically Sized Vector
+//----------------------------------------------------------------------------------------------------------------------
 
 template<std::size_t _size>
-struct Vector : public std::array<double, _size>
-{
-  typedef Vector<_size> t_vector;
-  const static bool dynamic = false;
+struct Vector : public std::array<double, _size> {
+
+  typedef Vector<_size> _vector;         /** @typedef Short hand for this vector type. */
+  const static bool is_dynamic = false;  /** @var Indicates the vector is compile time sized. */
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Arithmetic Operators
+  // Constructors/Destructors
   //--------------------------------------------------------------------------------------------------------------------
 
-  constexpr t_vector& operator*(const double& scalar)
-  {
-    for(auto& element: *this) element *= scalar;
+  /**
+   * @brief Initialise empty vector.
+   */
+  Vector() : std::array<double, _size>() {};
+
+  /**
+   * @brief Constructor to construct from initializer list, list and vector must be of the same size.
+   * @param[in] list The list of doubles to initialised the vector.
+   */
+  Vector(const std::initializer_list<double>& list) {
+    assert_check_debug(list.size() == _size, "Initializer list of incorrect size, " + std::to_string(list.size())
+                                             + " vs. " + std::to_string(_size) + ".");
+    auto iter = this->begin();
+    FOR_EACH(item, list) *iter++ = item;
+  }
+
+  /**
+   * @brief Constructor to construct a vector from a lambda.
+   * @tparam _lambda Template lambda function double(std::size_t).
+   * @param[in] lambda Lambda expression.
+   * @param[in] size Desired size of the vector.
+   */
+  template<class _lambda>
+  explicit Vector(_lambda lambda, std::size_t size = _size) {
+    FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Assignment Operators
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @brief Multiplies the vector by a scalar, a' = a*b, where a is the vectors and b is a scalar.
+   * @param scalar Scalar value, b, to multiply the vector by.
+   * @return Updated vector (a').
+   */
+  constexpr _vector& operator*=(const double& scalar) {
+    FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
 
+  /**
+   * @brief Divides the vector by a scalar, a' = a/b, where a is the vectors and b is a scalar.
+   * @param scalar Scalar value, b, to multiply the vector by.
+   * @return Updated vector (a').
+   *
+   * Note: Division by zero is left to the user to handle.
+   */
+  constexpr _vector& operator/=(const double& scalar) {
+    FOR_EACH_REF(element, *this) element /= scalar;
+    return *this;
+  }
 
+  /**
+   * @brief Addition of a second vector, a' = a + b, where a and b are vectors.
+   * @tparam _vector_other Vector type, dynamic/static.
+   * @param vector The second vector, b, to add.
+   * @return Updated vector (a').
+   */
+  template<class _vector_other>
+  constexpr _vector& operator+=(const _vector_other& vector) {
+    assert_check_debug(_size == vector.size(), "Incompatible vector sizes, " + std::to_string(_size)
+                                               + " vs. " + std::to_string(vector.size()) + ".");
+    FOR(index, _size) (*this)[index] += vector[index];
+    return *this;
+  }
+
+  /**
+   * @brief Subtraction by a second vector, a' = a - b, where a and b are vectors.
+   * @tparam _vector_other Vector type, dynamic/static.
+   * @param vector The second vector, b, to subtract.
+   * @return Updated vector (a').
+   */
+  template<class _vector_other>
+  constexpr _vector& operator-=(const _vector_other& vector) {
+    assert_check_debug(_size == vector.size(), "Incompatible vector sizes, " + std::to_string(_size)
+                                               + " vs. " + std::to_string(vector.size()) + ".");
+    FOR(index, _size) (*this)[index] -= vector[index];
+    return *this;
+  }
 };//Vector
+
+//----------------------------------------------------------------------------------------------------------------------
+// Dynamically Sized Vector
+//----------------------------------------------------------------------------------------------------------------------
 
 template<>
-struct Vector<0> : public std::vector<double>
-{
-  typedef Vector<0> t_vector;
-  const static bool dynamic = true;
+struct Vector<0> : public std::vector<double> {
+  typedef Vector<0> _vector;              /** @typedef Short hand for this vector type. */
+  const static bool is_dynamic = true;    /** @var Indicates the vector is runtime resizable. */
 
-  Vector<0>(std::initializer_list<double> list)
-  {
+  //--------------------------------------------------------------------------------------------------------------------
+  // Constructors/Destructors
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @brief Initialise empty vector.
+   */
+  Vector() : std::vector<double>() {};
+
+  /**
+   * @brief Constructor to construct from initializer list, vector is resized to list size.
+   * @param[in] list The list of doubles to initialised the vector.
+   */
+  Vector(const std::initializer_list<double>& list) {
     resize(list.size());
     auto iter = begin();
-    for(const auto& item: list) *iter++ = item;
+    FOR_EACH(item, list) *iter++ = item;
+  }
+
+  /**
+   * @brief Constructor to construct a vector from a lambda.
+   * @tparam _lambda Template lambda function double(std::size_t).
+   * @param[in] lambda Lambda expression.
+   * @param[in] size Desired size of the vector.
+   */
+  template<class _lambda>
+  explicit Vector(_lambda lambda, std::size_t size) : std::vector<double>(size) {
+    FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Arithmetic Operators
+  // Assignment Operators
   //--------------------------------------------------------------------------------------------------------------------
 
-  inline t_vector& operator*(const double& scalar)
-  {
-    std::for_each(this->begin(), this->end(), [&](const double& element)
-    {return element*scalar;});
+  /**
+   * @brief Multiplies the vector by a scalar, a' = a*b, where a is the vectors and b is a scalar.
+   * @param scalar Scalar value, b, to multiply the vector by.
+   * @return Updated vector (a).
+   */
+  _vector& operator*=(const double& scalar) {
+    FOR_EACH_REF(element, *this) element *= scalar;
+    return *this;
+  }
+
+  /**
+   * @brief Divides the vector by a scalar, a' = a/b, where a is the vectors and b is a scalar.
+   * @param scalar Scalar value, b, to multiply the vector by.
+   * @return Updated vector (a).
+   *
+   * Note: Division by zero is left to the user to handle.
+   */
+  _vector& operator/=(const double& scalar) {
+    FOR_EACH_REF(element, *this) element /= scalar;
+    return *this;
+  }
+
+  /**
+   * @brief Addition of a second vector, a' = a + b, where a and b are vectors.
+   * @tparam _vector_other Vector type, dynamic/static.
+   * @param vector The second vector, b, to add.
+   * @return Updated vector (a').
+   */
+  template<class _vector_other>
+  constexpr _vector& operator+=(const _vector_other& vector) {
+    assert_check_debug(size() == vector.size(), "Incompatible vector sizes, " + std::to_string(size())
+                                                + " vs. " + std::to_string(vector.size()) + ".");
+    FOR(index, size()) (*this)[index] += vector[index];
+    return *this;
+  }
+
+  /**
+   * @brief Subtraction by a second vector, a' = a - b, where a and b are vectors.
+   * @tparam _vector_other Vector type, dynamic/static.
+   * @param vector The second vector, b, to subtract.
+   * @return Updated vector (a').
+   */
+  template<class _vector_other>
+  constexpr _vector& operator-=(const _vector_other& vector) {
+    assert_check_debug(size() == vector.size(), "Incompatible vector sizes, " + std::to_string(size())
+                                                + " vs. " + std::to_string(vector.size()) + ".");
+    FOR(index, size()) (*this)[index] -= vector[index];
     return *this;
   }
 
 };//Vector
+
+//----------------------------------------------------------------------------------------------------------------------
+// Template Meta Programming
+//----------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @brief Chooses, between two vectors the static vector type if possible.
+ * @tparam _vector0 The first vector type.
+ * @tparam _vector1 The second vector type.
+ */
+template<class _vector0, class _vector1>
+struct StaticPromoter {
+  typedef typename std::conditional<!_vector0::is_dynamic, _vector0,
+                                    _vector1>::type type;    /** @var Static vector type if either _vector_0 or _vector_1 is static else dynamic. */
+};
+
+//----------------------------------------------------------------------------------------------------------------------
+// Arithmetic Operators
+//----------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @brief Multiplies a vector by a scalar, c = b*a, where a, and c are vectors and b is a scalar.
+ * @tparam _vector Vector type, dynamic/static.
+ * @param scalar Scalar value, b, to multiply the vector by.
+ * @param vector Vector, a, to be multiplied.
+ * @return New vector (c).
+ */
+template<class _vector>
+constexpr _vector operator*(const double& scalar, _vector vector) {
+  return vector *= scalar;
+}
+
+/**
+ * @brief Divides a vector by a scalar, c = b*a, where a, and c are vectors and b is a scalar.
+ * @tparam _vector Vector type, dynamic/static.
+ * @param scalar Scalar value, b, to multiply the vector by.
+ * @param vector Vector, a, to be multiplied.
+ * @return New vector (c).
+ */
+template<class _vector>
+constexpr _vector operator/(_vector vector, const double& scalar) {
+  return vector /= scalar;
+}
+
+/**
+ * @brief Adds two vectors together, c = a + b, where a, b, and c are vectors.
+ * @tparam _vector0 Vector type, dynamic/static, of a.
+ * @tparam _vector1 Vector type, dynamic/static, of b.
+ * @param vector0 The first vector of the addition, a.
+ * @param vector1 The second vector of the addition, b.
+ * @return Newly constructed vector c.
+ */
+template<std::size_t _size_0, std::size_t _size_1>
+typename StaticPromoter<Vector<_size_0>, Vector<_size_1> >::type
+constexpr operator+(const Vector<_size_0>& vector0, const Vector<_size_1>& vector1) {
+  assert_check_debug(vector0.size() == vector1.size(), "Incompatible vector sizes, " + std::to_string(vector0.size())
+                                                       + " vs. " + std::to_string(vector1.size()) + ".");
+  typedef typename StaticPromoter<Vector<_size_0>, Vector<_size_1> >::type _return_vector;
+  return _return_vector([&](const std::size_t ii) { return vector0[ii] + vector1[ii]; }, vector0.size());
+}
+
+/**
+ * @brief Subtracts two vectors, c = a - b, where a, b, and c are vectors.
+ * @tparam _vector0 Vector type, dynamic/static, of a.
+ * @tparam _vector1 Vector type, dynamic/static, of b.
+ * @param vector0 The vector being subtracted from, a.
+ * @param vector1 The subtracting vector, b.
+ * @return Newly constructed vector c.
+ */
+template<std::size_t _size_0, std::size_t _size_1>
+typename StaticPromoter<Vector<_size_0>, Vector<_size_1> >::type
+operator-(const Vector<_size_0>& vector0, const Vector<_size_1>& vector1) {
+  assert_check_debug(vector0.size() == vector1.size(), "Incompatible vector sizes, " + std::to_string(vector0.size())
+                                                       + " vs. " + std::to_string(vector1.size()) + ".");
+  typedef typename StaticPromoter<Vector<_size_0>, Vector<_size_1> >::type _return_vector;
+  return _return_vector([&](const std::size_t ii) { return vector0[ii] - vector1[ii]; }, vector0.size());
+}
 
 }//Disa
 

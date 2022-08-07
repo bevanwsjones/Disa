@@ -28,20 +28,20 @@
 
 namespace Disa {
 
-  // ---------------------------------------------------------------------------------------------------------------------
-  // Logging and Error handling
-  // ---------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+// Logging and Error handling
+// ---------------------------------------------------------------------------------------------------------------------
 
-  /**
-   * \enum Log_Level
-   * \brief Logging Level, used to defines the severity of messages to the console.
-   */
-  enum class Log_Level : uint8_t {
-    Error,
-    Warning,
-    Info,
-    Debug,
-  };//Log_Level
+/**
+ * \enum Log_Level
+ * \brief Logging Level, used to defines the severity of messages to the console.
+ */
+enum class Log_Level : uint8_t {
+  Error,
+  Warning,
+  Info,
+  Debug,
+};//Log_Level
 
   /**
    * \brief Adds additional information to messages about to be printed to screen, such as file and line numbers.
@@ -62,79 +62,103 @@ namespace Disa {
   return "[Warn|" + std::basic_string(suffix);
   case Log_Level::Error:
   return "[Error|" + std::basic_string(suffix);
+  default:
+      std::cout<<"[Error|" + std::basic_string(suffix) + " Unrecognised log level parsed.";
+      exit(1);
   }
-  }//console_format
+}//console_format
 
-  /**
-   * \brief Debug level console write out.
-   * \param[in] message The message to print to the output stream.
-   * \param[in] location Source code location object, containing the origin of the console message.
-   */
-  inline void debug(const std::string_view message,
-                    const std::source_location location = std::source_location::current()) {
+/**
+ * \brief Debug level console write out.
+ * \param[in] message The message to print to the output stream.
+ * \param[in] location Source code location object, containing the origin of the console message.
+ */
+inline void debug(const std::string_view message,
+                  const std::source_location location = std::source_location::current()) {
   std::cout << "\n" << console_format(Log_Level::Debug, location) << message << std::flush;
-  }//debug
+}//debug
 
-  /**
-   * \brief General information level console write out.
-   * \param[in] message The message to print to the output stream.
-   * \param[in] location Source code location object, containing the origin of the console message.
-   */
-  inline void
-  info(const std::string_view message, const std::source_location location = std::source_location::current()) {
+/**
+ * \brief General information level console write out.
+ * \param[in] message The message to print to the output stream.
+ * \param[in] location Source code location object, containing the origin of the console message.
+ */
+inline void
+info(const std::string_view message, const std::source_location location = std::source_location::current()) {
   std::cout << "\n" << console_format(Log_Level::Info, location) << message << std::flush;
-  }//info
+}//info
 
-  /**
-   * \brief Warning level console write out.
-   * \param[in] message The message to print to the output stream.
-   * \param[in] location Source code location object, containing the origin of the console message.
-   */
-  inline void warning(const std::string_view message,
-                      const std::source_location location = std::source_location::current()) {
+/**
+ * \brief Warning level console write out.
+ * \param[in] message The message to print to the output stream.
+ * \param[in] location Source code location object, containing the origin of the console message.
+ */
+inline void warning(const std::string_view message,
+                    const std::source_location location = std::source_location::current()) {
   std::cout << "\n" << console_format(Log_Level::Warning, location) << message << std::flush;
-  }//warning
+}//warning
 
-  /**
-   * \brief Error level console write out, writes to std::cerr and exits.
-   * \param[in] message The message to print to the error stream.
-   * \param[in] location Source code location object, containing the origin of the console message.
-   */
-  inline void
-  error(const std::string_view message, const std::source_location location = std::source_location::current()) {
+/**
+ * \brief Error level console write out, writes to std::cerr and exits.
+ * \param[in] message The message to print to the error stream.
+ * \param[in] location Source code location object, containing the origin of the console message.
+ */
+inline void
+error(const std::string_view message, const std::source_location location = std::source_location::current()) {
   std::cerr << "\n" << console_format(Log_Level::Error, location) << message << std::endl;
   exit(1);
-  }//error
+}//error
 
-  /**
-   * \brief Checks if a condition is true, if it is not the program will exit.
-   * \param[in] condition The condition to check.
-   * \param[in] message The message to print to the error stream in the event of a false condition.
-   * \param[in] location Source code location object, containing the origin of the console message.
-   */
-  inline void assert_check(const bool &condition, const std::string_view message,
-                           const std::source_location location = std::source_location::current()) {
+/**
+ * \brief Checks if a condition is true, if it is not the program will exit.
+ * \param[in] condition The condition to check.
+ * \param[in] message The message to print to the error stream in the event of a false condition.
+ * \param[in] location Source code location object, containing the origin of the console message.
+ */
+inline void assert_check(const bool &condition, const std::string_view message,
+                         const std::source_location location = std::source_location::current()) {
   if (!condition) error(message, location);
   else return;
-  }//assert_check
+}//assert_check
 
-  // ---------------------------------------------------------------------------------------------------------------------
-  // Looping Macros
-  // ---------------------------------------------------------------------------------------------------------------------
+/**
+ * \brief Checks if a condition is true in debug build, if it is not the program will exit.
+ * \param[in] condition The condition to check.
+ * \param[in] message The message to print to the error stream in the event of a false condition.
+ * \param[in] location Source code location object, containing the origin of the console message.
+ */
+inline void assert_check_debug(const bool &condition, const std::string_view message,
+                               const std::source_location location = std::source_location::current()) {
+#ifdef DISA_DEBUG
+  if (!condition) error(message, location);
+  else return;
+#endif
+}//assert_check
 
-  /**
-   * \brief Traditional integer type for-loop macro, will start at 0, and end at max_iter - 1.
-   * \param[in, out] index The for loop index.
-   * \param[in] max_iter Maximum number of iterations.
-   */
+// ---------------------------------------------------------------------------------------------------------------------
+// Looping Macros
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * \brief Traditional integer type for-loop macro, will start at 0, and end at max_iter - 1.
+ * \param[in, out] index The for loop index.
+ * \param[in] max_iter Maximum number of iterations.
+ */
 #define FOR(index, max_iter) for(auto (index) = static_cast<decltype(max_iter)>(0); (index) < (max_iter); ++(index))
 
-  /**
-   * \brief Range based for-loop macro
-   * \param[in, out] element Constant reference to the elements in the container.
-   * \param[in] container Container to loop over
-   */
+/**
+ * \brief Range based for-loop macro
+ * \param[in, out] element Constant reference to the elements in the container.
+ * \param[in] container Container to loop over
+ */
 #define FOR_EACH(element, container) for(const auto& (element) : (container))
+
+/**
+ * \brief Range based for-loop macro
+ * \param[in, out] element Constant reference to the elements in the container.
+ * \param[in] container Container to loop over
+ */
+#define FOR_EACH_REF(element, container) for(auto& (element) : (container))
 
 }//Disa
 

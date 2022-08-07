@@ -24,11 +24,200 @@
 
 using namespace Disa;
 
-// Demonstrate some basic assertions.
-TEST(test_vector, scalar_multiplication)
-{
+//--------------------------------------------------------------------------------------------------------------------
+// Constructors/Destructors
+//--------------------------------------------------------------------------------------------------------------------
 
-  Vector<0> vector_dyanmic = {1.0, 2.0};
-  EXPECT_TRUE(false);
+TEST(test_vector, constructors_initialiser_lists) {
+  Vector<0> dynamic_vector = {1.0, 3.0, 4.0, -8.0};
+  EXPECT_EQ(dynamic_vector.size(), 4);
+  EXPECT_DOUBLE_EQ(dynamic_vector[0], 1.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[1], 3.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[2], 4.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[3], -8.0);
 
+  Vector<3> static_vector = {-34.0, 56.0, 23.0};
+  EXPECT_DOUBLE_EQ(static_vector[0], -34.0);
+  EXPECT_DOUBLE_EQ(static_vector[1], 56.0);
+  EXPECT_DOUBLE_EQ(static_vector[2], 23.0);
+
+  EXPECT_DEATH(Vector<4>({-34.0, 56.0, 23.0}), "");
 }
+
+TEST(test_vector, lambda_lambda) {
+  Vector<0> dynamic_vector([](const std::size_t index) { return 2.0*static_cast<double>(index); }, 3);
+  EXPECT_EQ(dynamic_vector.size(), 3);
+  EXPECT_DOUBLE_EQ(dynamic_vector[0], 0.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[1], 2.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[2], 4.0);
+
+  Vector<3> static_vector([](const std::size_t index) { return -3.0*static_cast<double>(index); });
+  EXPECT_DOUBLE_EQ(static_vector[0], -0);
+  EXPECT_DOUBLE_EQ(static_vector[1], -3);
+  EXPECT_DOUBLE_EQ(static_vector[2], -6);
+}
+
+//--------------------------------------------------------------------------------------------------------------------
+// Assignment Operators
+//--------------------------------------------------------------------------------------------------------------------
+
+TEST(test_vector, scalar_multiplication_assignment) {
+  Vector<0> dynamic_vector = {1.0, 2.0, 3.0};
+  dynamic_vector *= -3.0;
+  EXPECT_DOUBLE_EQ(dynamic_vector[0], -3.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[1], -6.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[2], -9.0);
+
+  Vector<2> static_vector = {3.0, -5.0};
+  static_vector *= 4.0;
+  EXPECT_DOUBLE_EQ(static_vector[0], 12.0);
+  EXPECT_DOUBLE_EQ(static_vector[1], -20.0);
+}
+
+TEST(test_vector, scalar_division_assignment) {
+  Vector<0> dynamic_vector = {3.0, 6.0, -5.0};
+  dynamic_vector /= 3.0;
+  EXPECT_DOUBLE_EQ(dynamic_vector[0], 1.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[1], 2.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[2], -5.0/3.0);
+
+  Vector<2> static_vector = {3.0, -5.0};
+  static_vector /= 4.0;
+  EXPECT_DOUBLE_EQ(static_vector[0], 3.0/4.0);
+  EXPECT_DOUBLE_EQ(static_vector[1], -5.0/4.0);
+}
+
+TEST(test_vector, vector_addition_assignment) {
+  Vector<0> dynamic_vector_0 = {1.0, 2.0, 3.0};
+  Vector<0> dynamic_vector_1 = {-1.0, -2.0, -3.0};
+  Vector<3> static_vector_0 = {4.0, 5.0, 6.0};
+  Vector<3> static_vector_1 = {-4.0, -5.0, -6.0};
+
+  // assignment of dynamic vectors
+  dynamic_vector_0 += dynamic_vector_1;
+  static_vector_0 += dynamic_vector_1;
+  FOR_EACH(element, dynamic_vector_0) EXPECT_DOUBLE_EQ(element, 0.0);
+  FOR_EACH(element, static_vector_0) EXPECT_DOUBLE_EQ(element, 3.0);
+
+  // assignment of static vectors
+  dynamic_vector_0 = {1.0, 2.0, 3.0};
+  static_vector_0 = {4.0, 5.0, 6.0};
+  dynamic_vector_0 += static_vector_1;
+  static_vector_0 += static_vector_1;
+  FOR_EACH(element, dynamic_vector_0) EXPECT_DOUBLE_EQ(element, -3.0);
+  FOR_EACH(element, static_vector_0) EXPECT_DOUBLE_EQ(element, 0.0);
+
+  Vector<0> dynamic_vector_2;
+  Vector<2> static_vector_2;
+  EXPECT_DEATH(dynamic_vector_0 += dynamic_vector_2, ".*");
+  EXPECT_DEATH(static_vector_0 += dynamic_vector_2, ".*");
+  EXPECT_DEATH(dynamic_vector_0 += static_vector_2, ".*");
+  EXPECT_DEATH(static_vector_0 += static_vector_2, ".*");
+}
+
+TEST(test_vector, vector_subtraction_assignment) {
+  Vector<0> dynamic_vector_0 = {-1.0, -2.0, -3.0};
+  Vector<0> dynamic_vector_1 = {-1.0, -2.0, -3.0};
+  Vector<3> static_vector_0 = {-4.0, -5.0, -6.0};
+  Vector<3> static_vector_1 = {-4.0, -5.0, -6.0};
+
+  // assignment of dynamic vectors
+  dynamic_vector_0 -= dynamic_vector_1;
+  static_vector_0 -= dynamic_vector_1;
+  FOR_EACH(element, dynamic_vector_0) EXPECT_DOUBLE_EQ(element, 0.0);
+  FOR_EACH(element, static_vector_0) EXPECT_DOUBLE_EQ(element, -3.0);
+
+  // assignment of static vectors
+  dynamic_vector_0 = {-1.0, -2.0, -3.0};
+  static_vector_0 = {-4.0, -5.0, -6.0};
+  dynamic_vector_0 -= static_vector_1;
+  static_vector_0 -= static_vector_1;
+  FOR_EACH(element, dynamic_vector_0) EXPECT_DOUBLE_EQ(element, 3.0);
+  FOR_EACH(element, static_vector_0) EXPECT_DOUBLE_EQ(element, 0.0);
+
+  Vector<0> dynamic_vector_2;
+  Vector<2> static_vector_2;
+  EXPECT_DEATH(dynamic_vector_0 -= dynamic_vector_2, ".*");
+  EXPECT_DEATH(static_vector_0 -= dynamic_vector_2, ".*");
+  EXPECT_DEATH(dynamic_vector_0 -= static_vector_2, ".*");
+  EXPECT_DEATH(static_vector_0 -= static_vector_2, ".*");
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// Arithmetic Operators
+//----------------------------------------------------------------------------------------------------------------------
+
+TEST(test_vector, scalar_multiplication) {
+  Vector<0> dynamic_vector = {1.0, 2.0, 3.0};
+  dynamic_vector = -3.0*dynamic_vector;
+  EXPECT_DOUBLE_EQ(dynamic_vector[0], -3.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[1], -6.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[2], -9.0);
+
+  Vector<2> static_vector = {3.0, -5.0};
+  static_vector = 4.0*static_vector;
+  EXPECT_DOUBLE_EQ(static_vector[0], 12.0);
+  EXPECT_DOUBLE_EQ(static_vector[1], -20.0);
+}
+
+TEST(test_vector, scalar_division) {
+  Vector<0> dynamic_vector = {3.0, 6.0, -5.0};
+  dynamic_vector = dynamic_vector/3.0;
+  EXPECT_DOUBLE_EQ(dynamic_vector[0], 1.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[1], 2.0);
+  EXPECT_DOUBLE_EQ(dynamic_vector[2], -5.0/3.0);
+
+  Vector<2> static_vector = {3.0, -5.0};
+  static_vector = static_vector/4.0;
+  EXPECT_DOUBLE_EQ(static_vector[0], 3.0/4.0);
+  EXPECT_DOUBLE_EQ(static_vector[1], -5.0/4.0);
+}
+
+TEST(test_vector, vector_addition) {
+  Vector<0> dynamic_vector_0 = {1.0, 2.0, 3.0};
+  Vector<0> dynamic_vector_1 = {-1.0, -2.0, -3.0};
+  Vector<3> static_vector_0 = {4.0, 5.0, 6.0};
+  Vector<3> static_vector_1 = {-4.0, -5.0, -6.0};
+
+  Vector<0> result_0 = dynamic_vector_0 + dynamic_vector_1;
+  Vector<3> result_1 = static_vector_0 + dynamic_vector_1;
+  Vector<3> result_2 = dynamic_vector_0 + static_vector_1;
+  Vector<3> result_3 = static_vector_0 + static_vector_1;
+  FOR_EACH(element, result_0) EXPECT_DOUBLE_EQ(element, 0.0);
+  FOR_EACH(element, result_1) EXPECT_DOUBLE_EQ(element, 3.0);
+  FOR_EACH(element, result_2) EXPECT_DOUBLE_EQ(element, -3.0);
+  FOR_EACH(element, result_3) EXPECT_DOUBLE_EQ(element, 0.0);
+
+  Vector<0> dynamic_vector_2;
+  Vector<2> static_vector_2;
+  EXPECT_DEATH(dynamic_vector_0 + dynamic_vector_2, ".*");
+  EXPECT_DEATH(static_vector_0 + dynamic_vector_2, ".*");
+  EXPECT_DEATH(dynamic_vector_0 + static_vector_2, ".*");
+  EXPECT_DEATH(static_vector_0 + static_vector_2, ".*");
+}
+
+TEST(test_vector, vector_subtraction) {
+  Vector<0> dynamic_vector_0 = {-1.0, -2.0, -3.0};
+  Vector<0> dynamic_vector_1 = {-1.0, -2.0, -3.0};
+  Vector<3> static_vector_0 = {-4.0, -5.0, -6.0};
+  Vector<3> static_vector_1 = {-4.0, -5.0, -6.0};
+
+  Vector<0> result_0 = dynamic_vector_0 - dynamic_vector_1;
+  Vector<3> result_1 = static_vector_0 - dynamic_vector_1;
+  Vector<3> result_2 = dynamic_vector_0 - static_vector_1;
+  Vector<3> result_3 = static_vector_0 - static_vector_1;
+  FOR_EACH(element, result_0) EXPECT_DOUBLE_EQ(element, 0.0);
+  FOR_EACH(element, result_1) EXPECT_DOUBLE_EQ(element, -3.0);
+  FOR_EACH(element, result_2) EXPECT_DOUBLE_EQ(element, 3.0);
+  FOR_EACH(element, result_3) EXPECT_DOUBLE_EQ(element, 0.0);
+
+  Vector<0> dynamic_vector_2;
+  Vector<2> static_vector_2;
+  EXPECT_DEATH(dynamic_vector_0 - dynamic_vector_2, ".*");
+  EXPECT_DEATH(static_vector_0 - dynamic_vector_2, ".*");
+  EXPECT_DEATH(dynamic_vector_0 - static_vector_2, ".*");
+  EXPECT_DEATH(static_vector_0 - static_vector_2, ".*");
+}
+
+
+
