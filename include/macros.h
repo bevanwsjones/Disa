@@ -105,35 +105,15 @@ inline void warning(const std::string_view message,
  */
 inline void
 error(const std::string_view message, const std::source_location location = std::source_location::current()) {
-  std::cerr << "\n" << console_format(Log_Level::Error, location) << message << std::endl;
+  std::cerr<<"\n"<<console_format(Log_Level::Error, location)<<message<<std::endl;
   exit(1);
 }//error
 
-/**
- * \brief Checks if a condition is true, if it is not the program will exit.
- * \param[in] condition The condition to check.
- * \param[in] message The message to print to the error stream in the event of a false condition.
- * \param[in] location Source code location object, containing the origin of the console message.
- */
-inline void assert_check(const bool &condition, const std::string_view message,
-                         const std::source_location location = std::source_location::current()) {
-  if (!condition) error(message, location);
-  else return;
-}//assert_check
-
-/**
- * \brief Checks if a condition is true in debug build, if it is not the program will exit.
- * \param[in] condition The condition to check.
- * \param[in] message The message to print to the error stream in the event of a false condition.
- * \param[in] location Source code location object, containing the origin of the console message.
- */
-inline void assert_check_debug(const bool &condition, const std::string_view message,
-                               const std::source_location location = std::source_location::current()) {
 #ifdef DISA_DEBUG
-  if (!condition) error(message, location);
-  else return;
+#define DEBUG_ASSERT(condition, exception) if(!(condition)) throw (exception)
+#elif
+#define DEBUG_ASSERT(condition, exception)
 #endif
-}//assert_check
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Looping Macros

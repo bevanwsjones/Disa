@@ -51,9 +51,9 @@ set(SOURCES
         include/vector_operators.h
         src/main.cpp)
 
-#add_library(disa ${SOURCES})
+add_library(disa ${SOURCES})
 
-add_executable(disa ${SOURCES})
+add_executable(example ${SOURCES})
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Testing
@@ -69,8 +69,11 @@ if (ENABLE_TEST)
   include(CTest)
   include(GoogleTest)
 
-  add_executable(test_vector tests/TestVector.cpp)
-  target_link_libraries(test_vector GTest::gtest_main)
+  add_executable(test_vector_dense tests/test_vector_dense.cpp)
+  target_link_libraries(test_vector_dense GTest::gtest_main disa)
 
-  gtest_discover_tests(test_vector)
-endif()
+  add_executable(test_vector_operators tests/test_vector_operators.cpp)
+  target_link_libraries(test_vector_operators GTest::gtest_main disa)
+
+  gtest_discover_tests(test_vector_dense test_vector_operators)
+endif ()
