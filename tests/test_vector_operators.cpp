@@ -22,7 +22,6 @@
 #include "gtest/gtest.h"
 #include "vector_operators.h"
 
-Project
 #ifdef DISA_DEBUG
 
 using namespace Disa;
