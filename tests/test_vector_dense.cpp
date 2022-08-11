@@ -46,7 +46,7 @@ TEST(test_vector_dense, constructors_initialiser_lists) {
   ASSERT_THROW(Vector_Dense<4>({-34.0, 56.0, 23.0}), std::invalid_argument);
 }
 
-TEST(test_vector_dense, lambda_lambda) {
+TEST(test_vector_dense, constructors_lambda) {
   Vector_Dense<0> dynamic_vector([](const std::size_t index) { return 2.0*static_cast<double>(index); }, 3);
   EXPECT_EQ(dynamic_vector.size(), 3);
   EXPECT_DOUBLE_EQ(dynamic_vector[0], 0.0);
@@ -57,6 +57,8 @@ TEST(test_vector_dense, lambda_lambda) {
   EXPECT_DOUBLE_EQ(static_vector[0], -0);
   EXPECT_DOUBLE_EQ(static_vector[1], -3);
   EXPECT_DOUBLE_EQ(static_vector[2], -6);
+  ASSERT_THROW(Vector_Dense<3>([](const std::size_t index) { return -3.0*static_cast<double>(index); }, 2),
+               std::invalid_argument);
 }
 
 //--------------------------------------------------------------------------------------------------------------------

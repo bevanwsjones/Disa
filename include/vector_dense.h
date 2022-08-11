@@ -40,7 +40,6 @@ namespace Disa {
 
 template<std::size_t _size>
 struct Vector_Dense : public std::array<double, _size> {
-
   typedef Vector_Dense<_size> _vector;     /** @typedef Short hand for this vector type. */
   const static bool is_dynamic = false;    /** @var Indicates the vector is compile time sized. */
 
@@ -72,6 +71,7 @@ struct Vector_Dense : public std::array<double, _size> {
    * @param[in] size Desired size of the vector. Added for interoperability with dynamic vectors.
    */
   explicit Vector_Dense(const std::function<double(const std::size_t)>& lambda, std::size_t size = _size) {
+    DEBUG_ASSERT(size == _size, std::invalid_argument("Cannot change the size for a static vector."));
     FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
 
