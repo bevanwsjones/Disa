@@ -47,6 +47,7 @@ include_directories(include)
 
 set(SOURCES
         include/macros.h
+        include/matrix_dense.h
         include/vector_dense.h
         include/vector_operators.h
         src/main.cpp)
@@ -69,11 +70,14 @@ if (ENABLE_TEST)
   include(CTest)
   include(GoogleTest)
 
+  add_executable(test_matrix_dense tests/test_matrix_dense.cpp)
+  target_link_libraries(test_matrix_dense GTest::gtest_main disa)
+
   add_executable(test_vector_dense tests/test_vector_dense.cpp)
   target_link_libraries(test_vector_dense GTest::gtest_main disa)
 
   add_executable(test_vector_operators tests/test_vector_operators.cpp)
   target_link_libraries(test_vector_operators GTest::gtest_main disa)
 
-  gtest_discover_tests(test_vector_dense test_vector_operators)
+  gtest_discover_tests(test_matrix_dense test_vector_dense test_vector_operators)
 endif ()
