@@ -2,7 +2,6 @@ sidebar:
   Basic Tutorial:
     - Getting Started: README.md
     - License: LICENSE
-  Important API: [ ]
 autodocSettings:
   Public API:
     language: cpp
