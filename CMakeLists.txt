@@ -76,7 +76,7 @@ if (ENABLE_TEST)
 
   add_executable(test_vector_dense tests/test_vector_dense.cpp)
   target_link_libraries(test_vector_dense GTest::gtest_main disa)
-  gtest_discover_tests(test_matrix_dense)
+  gtest_discover_tests(test_vector_dense)
 
   add_executable(test_vector_operators tests/test_vector_operators.cpp)
   target_link_libraries(test_vector_operators GTest::gtest_main disa)
