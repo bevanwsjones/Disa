@@ -36,6 +36,14 @@ option(ENABLE_TEST "Turn on to enable tests" ON)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDISA_DEBUG")
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Project Setup
+# ----------------------------------------------------------------------------------------------------------------------
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Compiler Setup
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -50,11 +58,12 @@ set(SOURCES
         include/matrix_dense.h
         include/vector_dense.h
         include/vector_operators.h
-        src/main.cpp)
+        )
 
-add_library(disa ${SOURCES})
+add_library(disa STATIC ${SOURCES})
+set_target_properties(disa PROPERTIES LINKER_LANGUAGE CXX)
 
-add_executable(example ${SOURCES})
+add_executable(example src/main.cpp ${SOURCES})
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Testing
