@@ -98,6 +98,91 @@ struct Matrix_Dense : public std::array<Vector_Dense<_cols>, _rows> {
     return std::make_pair(size_row(), size_column());
   }
 
+  //--------------------------------------------------------------------------------------------------------------------
+  // Assignment Operators
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @brief Multiplies the matrix by a scalar, A' = A*b, where A is the matrix and b is the scalar
+   * @param[in] scalar Scalar value, b, to multiply the matrix by.
+   * @return Updated matrix (A').
+   */
+  constexpr _matrix& operator*=(const double& scalar) {
+    FOR_EACH_REF(element, *this) element *= scalar;
+    return *this;
+  }
+
+  /**
+   * @brief Divides the matrix by a scalar, A' = A/b, where A is the matrix and b is a scalar.
+   * @param[in] scalar Scalar value, b, to multiply the vector by.
+   * @return Updated matrix (A').
+   *
+   * Note: Division by zero is left to the user to handle.
+   */
+  constexpr _matrix& operator/=(const double& scalar) {
+    FOR_EACH_REF(element, *this) element /= scalar;
+    return *this;
+  }
+
+  /**
+   * @brief Addition of a second matrix, A' = A + B, where A and B are matrices.
+   * @tparam _rows_other The number of rows of the B matrix, dynamic/static.
+   * @tparam _cols_other The number of column of the B matrix, dynamic/static.
+   * @param[in] matrix The second matrix, B, to add.
+   * @return Updated matrix (A').
+   */
+  template<std::size_t _rows_other, std::size_t _cols_other>
+  constexpr _matrix& operator+=(const Matrix_Dense<_rows_other, _cols_other>& matrix) {
+    ASSERT_DEBUG(size() == matrix.size(),
+                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
+                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
+    FOR(row, _rows) (*this)[row] += matrix[row];
+    return *this;
+  }
+
+  /**
+   * @brief Subtraction by a second matrix, A' = A - B, where A and B are matrices.
+   * @tparam _rows_other The number of rows of the B matrix, dynamic/static.
+   * @tparam _cols_other The number of column of the B matrix, dynamic/static.
+   * @param[in] matrix The second matrix, B, to subtract.
+   * @return Updated matrix (A').
+   */
+  template<std::size_t _rows_other, std::size_t _cols_other>
+  constexpr _matrix& operator-=(const Matrix_Dense<_rows_other, _cols_other>& matrix) {
+    ASSERT_DEBUG(size() == matrix.size(),
+                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
+                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
+    FOR(row, _rows) (*this)[row] -= matrix[row];
+    return *this;
+  }
+
+  /**
+   * @brief Multiplies the matrix by another matrix, A' = A*B, where A and B are matrices.
+   * @tparam _rows_other The number of rows of the B matrix, dynamic/static.
+   * @tparam _cols_other The number of column of the B matrix, dynamic/static.
+   * @param[in] matrix The second matrix, B, to add.
+   * @return Updated matrix (A').
+   *
+   * Note: Due to the static nature of the size of rows and columns it is only possible to multiply by square matrices.
+   */
+  template<std::size_t _rows_other, std::size_t _cols_other>
+  constexpr _matrix& operator*=(const Matrix_Dense<_rows_other, _cols_other>& matrix) {
+    // For static containers the matrices must be square.
+    ASSERT_DEBUG(size() == matrix.size(),
+                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
+                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
+    _matrix copy;
+    std::swap(*this, copy);
+    FOR(i_row, size_row()) {
+      FOR(i_row_other, matrix.size_row()) {
+        FOR(i_column, size_column()) {
+          if (i_row_other == 0) (*this)[i_row][i_column] = 0.0;
+          (*this)[i_row][i_column] += copy[i_row][i_row_other]*matrix[i_row_other][i_column];
+        }
+      }
+    }
+    return *this;
+  }
 };
 
 template<>
@@ -176,7 +261,118 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
    */
   std::pair<std::size_t, std::size_t> size() const noexcept { return std::make_pair(size_row(), size_column()); }
 
+  //--------------------------------------------------------------------------------------------------------------------
+  // Assignment Operators
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @brief Multiplies the matrix by a scalar, A' = A*b, where A is the matrix and b is the scalar
+   * @param[in] scalar Scalar value, b, to multiply the matrix by.
+   * @return Updated matrix (A').
+   */
+  _matrix& operator*=(const double& scalar) {
+    FOR_EACH_REF(element, *this) element *= scalar;
+    return *this;
+  }
+
+  /**
+   * @brief Divides the matrix by a scalar, A' = A/b, where A is the matrix and b is a scalar.
+   * @param[in] scalar Scalar value, b, to multiply the vector by.
+   * @return Updated vector (A').
+   *
+   * Note: Division by zero is left to the user to handle.
+   */
+  _matrix& operator/=(const double& scalar) {
+    FOR_EACH_REF(element, *this) element /= scalar;
+    return *this;
+  }
+
+  /**
+   * @brief Addition of a second matrix, A' = A + B, where A and B are matrices.
+   * @tparam _rows_other The number of rows of the B matrix, dynamic/static.
+   * @tparam _cols_other The number of column of the B matrix, dynamic/static.
+   * @param[in] matrix The second matrix, B, to add.
+   * @return Updated matrix (A').
+   */
+  template<std::size_t _rows_other, std::size_t _cols_other>
+  constexpr _matrix& operator+=(const Matrix_Dense<_rows_other, _cols_other>& matrix) {
+    ASSERT_DEBUG(size() == matrix.size(),
+                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
+                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
+    FOR(row, size_row()) (*this)[row] += matrix[row];
+    return *this;
+  }
+
+  /**
+   * @brief Subtraction by a second matrix, A' = A - B, where A and B are matrices.
+   * @tparam _rows_other The number of rows of the B matrix, dynamic/static.
+   * @tparam _cols_other The number of column of the B matrix, dynamic/static.
+   * @param[in] matrix The second matrix, B, to subtract.
+   * @return Updated matrix (A').
+   */
+  template<std::size_t _rows_other, std::size_t _cols_other>
+  constexpr _matrix& operator-=(const Matrix_Dense<_rows_other, _cols_other>& matrix) {
+    ASSERT_DEBUG(size() == matrix.size(),
+                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
+                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
+    FOR(row, size_row()) (*this)[row] -= matrix[row];
+    return *this;
+  }
+
+  /**
+   * @brief Multiplies the matrix by another matrix, A' = A*B, where A and B are matrices.
+   * @tparam _rows_other The number of rows of the B matrix, dynamic/static.
+   * @tparam _cols_other The number of column of the B matrix, dynamic/static.
+   * @param[in] matrix The second matrix, B, to add.
+   * @return Updated matrix (A').
+   *
+   * Note: Number of rows and columns will change if either matrix is not square.
+   */
+  template<std::size_t _rows_other, std::size_t _cols_other>
+  _matrix& operator*=(const Matrix_Dense<_rows_other, _cols_other>& matrix) {
+    // For static containers the matrices must be square.
+    ASSERT_DEBUG(size_column() == matrix.size_row(),
+                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
+                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
+    _matrix copy;
+    copy.resize(size_row(), matrix.size_column());
+    std::swap(*this, copy);
+    FOR(i_row, size_row()) {
+      FOR(i_row_other, matrix.size_row()) {
+        FOR(i_column, size_column()) {
+          if (i_row_other == 0) (*this)[i_row][i_column] = 0.0;
+          (*this)[i_row][i_column] += copy[i_row][i_row_other]*matrix[i_row_other][i_column];
+        }
+      }
+    }
+    return *this;
+  }
 };
+
+template<std::size_t _rows, std::size_t _cols>
+constexpr Matrix_Dense<_rows, _cols> operator*(const double& scalar, Matrix_Dense<_rows, _cols> matrix) {
+  return matrix *= scalar;
+}
+
+template<std::size_t _rows, std::size_t _cols>
+constexpr Vector_Dense<_rows>& operator*(const Matrix_Dense<_rows, _cols>& matrix, const Vector_Dense<_rows>& vector) {
+  return Vector_Dense<_rows>([&](const std::size_t i_row) { return dot_product(matrix[i_row], vector[i_row]); });
+}
+
+template<std::size_t _rows, std::size_t _cols>
+constexpr Matrix_Dense<_rows, _cols>
+operator*(const Matrix_Dense<_rows, _cols>& matrix_0, const Matrix_Dense<_rows, _cols>& matrix_1) {
+  Matrix_Dense<_rows, _cols> matrix([&](const std::size_t i_row) {
+    Vector_Dense<_rows> row(0.0);
+    FOR(i_column, matrix_0.column()) {
+      FOR(i_row_1, matrix_1.row()) {
+        row[i_column] += matrix_0[i_row][i_column]*matrix_1[i_row_1][i_column];
+      }
+      return row;
+    }
+  });
+}
+
 
 }
 
