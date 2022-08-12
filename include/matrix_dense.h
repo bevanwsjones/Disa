@@ -70,8 +70,7 @@ struct Matrix_Dense : public std::array<Vector_Dense<_cols>, _rows> {
    */
   explicit Matrix_Dense(const std::function<double(std::size_t, std::size_t)>& lambda,
                         std::size_t row = _rows, std::size_t column = _cols) {
-    DEBUG_ASSERT(row == _rows && column == _cols,
-                 std::invalid_argument("Cannot change the number of rows and columns for a static matrix."));
+    ASSERT_DEBUG(row == _rows && column == _cols, "Cannot change the number of rows and columns for a static matrix.");
     FOR(i_row, row) { FOR(i_column, column) (*this)[i_row][i_column] = lambda(i_row, i_column); }
   }
 
@@ -123,7 +122,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
     resize(list.size());
     auto iter = this->begin();
     FOR_EACH(item, list) {
-      DEBUG_ASSERT(item.size() == list.begin()->size(), std::invalid_argument("List dimension varies."));
+      ASSERT_DEBUG(item.size() == list.begin()->size(), "List dimension varies.");
       *iter++ = item;
     }
   }

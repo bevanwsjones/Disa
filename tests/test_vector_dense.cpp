@@ -43,7 +43,7 @@ TEST(test_vector_dense, constructors_initialiser_lists) {
   EXPECT_DOUBLE_EQ(static_vector[1], 56.0);
   EXPECT_DOUBLE_EQ(static_vector[2], 23.0);
 
-  ASSERT_THROW(Vector_Dense<4>({-34.0, 56.0, 23.0}), std::invalid_argument);
+  EXPECT_DEATH(Vector_Dense<4>({-34.0, 56.0, 23.0}), "./*");
 }
 
 TEST(test_vector_dense, constructors_lambda) {
@@ -57,8 +57,8 @@ TEST(test_vector_dense, constructors_lambda) {
   EXPECT_DOUBLE_EQ(static_vector[0], -0);
   EXPECT_DOUBLE_EQ(static_vector[1], -3);
   EXPECT_DOUBLE_EQ(static_vector[2], -6);
-  ASSERT_THROW(Vector_Dense<3>([](const std::size_t index) { return -3.0*static_cast<double>(index); }, 2),
-               std::invalid_argument);
+  EXPECT_DEATH(Vector_Dense<3>([](const std::size_t index) { return -3.0*static_cast<double>(index); }, 2),
+               "./*");
 }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -113,10 +113,10 @@ TEST(test_vector_dense, vector_addition_assignment) {
 
   Vector_Dense<0> dynamic_vector_2;
   Vector_Dense<2> static_vector_2;
-  ASSERT_THROW(dynamic_vector_0 += dynamic_vector_2, std::invalid_argument);
-  ASSERT_THROW(static_vector_0 += dynamic_vector_2, std::invalid_argument);
-  ASSERT_THROW(dynamic_vector_0 += static_vector_2, std::invalid_argument);
-  ASSERT_THROW(static_vector_0 += static_vector_2, std::invalid_argument);
+  EXPECT_DEATH(dynamic_vector_0 += dynamic_vector_2, "./*");
+  EXPECT_DEATH(static_vector_0 += dynamic_vector_2, "./*");
+  EXPECT_DEATH(dynamic_vector_0 += static_vector_2, "./*");
+  EXPECT_DEATH(static_vector_0 += static_vector_2, "./*");
 }
 
 TEST(test_vector_dense, vector_subtraction_assignment) {
@@ -141,10 +141,10 @@ TEST(test_vector_dense, vector_subtraction_assignment) {
 
   Vector_Dense<0> dynamic_vector_2;
   Vector_Dense<2> static_vector_2;
-  ASSERT_THROW(dynamic_vector_0 -= dynamic_vector_2, std::invalid_argument);
-  ASSERT_THROW(static_vector_0 -= dynamic_vector_2, std::invalid_argument);
-  ASSERT_THROW(dynamic_vector_0 -= static_vector_2, std::invalid_argument);
-  ASSERT_THROW(static_vector_0 -= static_vector_2, std::invalid_argument);
+  EXPECT_DEATH(dynamic_vector_0 -= dynamic_vector_2, "./*");
+  EXPECT_DEATH(static_vector_0 -= dynamic_vector_2, "./*");
+  EXPECT_DEATH(dynamic_vector_0 -= static_vector_2, "./*");
+  EXPECT_DEATH(static_vector_0 -= static_vector_2, "./*");
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -194,10 +194,10 @@ TEST(test_vector_dense, vector_addition) {
 
   Vector_Dense<0> dynamic_vector_2;
   Vector_Dense<2> static_vector_2;
-  ASSERT_THROW(dynamic_vector_0 + dynamic_vector_2, std::invalid_argument);
-  ASSERT_THROW(static_vector_0 + dynamic_vector_2, std::invalid_argument);
-  ASSERT_THROW(dynamic_vector_0 + static_vector_2, std::invalid_argument);
-  ASSERT_THROW(static_vector_0 + static_vector_2, std::invalid_argument);
+  EXPECT_DEATH(dynamic_vector_0 + dynamic_vector_2, "./*");
+  EXPECT_DEATH(static_vector_0 + dynamic_vector_2, "./*");
+  EXPECT_DEATH(dynamic_vector_0 + static_vector_2, "./*");
+  EXPECT_DEATH(static_vector_0 + static_vector_2, "./*");
 }
 
 TEST(test_vector_dense, vector_subtraction) {
@@ -217,10 +217,10 @@ TEST(test_vector_dense, vector_subtraction) {
 
   Vector_Dense<0> dynamic_vector_2;
   Vector_Dense<2> static_vector_2;
-  ASSERT_THROW(dynamic_vector_0 - dynamic_vector_2, std::invalid_argument);
-  ASSERT_THROW(static_vector_0 - dynamic_vector_2, std::invalid_argument);
-  ASSERT_THROW(dynamic_vector_0 - static_vector_2, std::invalid_argument);
-  ASSERT_THROW(static_vector_0 - static_vector_2, std::invalid_argument);
+  EXPECT_DEATH(dynamic_vector_0 - dynamic_vector_2, "./*");
+  EXPECT_DEATH(static_vector_0 - dynamic_vector_2, "./*");
+  EXPECT_DEATH(dynamic_vector_0 - static_vector_2, "./*");
+  EXPECT_DEATH(static_vector_0 - static_vector_2, "./*");
 }
 
 #endif //DISA_DEBUG
