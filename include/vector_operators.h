@@ -71,7 +71,7 @@ constexpr double l_norm(const Vector_Dense<_size>& vector) {
  */
 template<std::size_t _size>
 constexpr double mean(const Vector_Dense<_size>& vector) {
-  DEBUG_ASSERT(_size != 0 || !vector.empty(), std::invalid_argument("Dynamic vector is empty."));
+  ASSERT_DEBUG(_size != 0 || !vector.empty(), "Dynamic vector is empty.");
   return std::accumulate(vector.begin(), vector.end(), 0.0)/static_cast<double>(vector.size());
 }
 
@@ -85,8 +85,9 @@ constexpr double mean(const Vector_Dense<_size>& vector) {
  */
 template<std::size_t _size_0, std::size_t _size_1>
 constexpr double dot_product(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
-  DEBUG_ASSERT(vector_0.size() == vector_1.size(), std::invalid_argument(
-    "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " + std::to_string(vector_1.size()) + "."));
+  ASSERT_DEBUG(vector_0.size() == vector_1.size(),
+               "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
+               std::to_string(vector_1.size()) + ".");
   return std::inner_product(vector_0.begin(), vector_0.end(), vector_1.begin(), 0.0);
 }
 
@@ -114,10 +115,11 @@ constexpr Vector_Dense<_size> unit(Vector_Dense<_size> vector) {
  */
 template<std::size_t _size_0, std::size_t _size_1, bool _is_radians = true>
 constexpr double angle(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
-  DEBUG_ASSERT(vector_0.size() == vector_1.size(), std::invalid_argument(
-    "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " + std::to_string(vector_1.size()) + "."));
-  DEBUG_ASSERT(vector_0.size() == 2 || vector_0.size() == 3, std::invalid_argument(
-    "Incompatible vector size, " + std::to_string(vector_0.size()) + ", must be 2 or 3."));
+  ASSERT_DEBUG(vector_0.size() == vector_1.size(),
+               "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
+               std::to_string(vector_1.size()) + ".");
+  ASSERT_DEBUG(vector_0.size() == 2 || vector_0.size() == 3,
+               "Incompatible vector size, " + std::to_string(vector_0.size()) + ", must be 2 or 3.");
   return std::acos(std::clamp(dot_product(unit(vector_0), unit(vector_1)), -1.0, 1.0))/
          (_is_radians ? 1.0 : std::numbers::pi/180.0);
 }
@@ -133,12 +135,12 @@ constexpr double angle(const Vector_Dense<_size_0>& vector_0, const Vector_Dense
 template<std::size_t _size_0, std::size_t _size_1>
 constexpr typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type
 cross_product(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
-  DEBUG_ASSERT(vector_0.size() == vector_1.size(), std::invalid_argument(
-    "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " + std::to_string(vector_1.size()) + "."));
-  DEBUG_ASSERT(vector_0.size() == 2 || vector_0.size() == 3, std::invalid_argument(
-    "Incompatible vector size, " + std::to_string(vector_0.size()) + ", must be 2 or 3."));
+  ASSERT_DEBUG(vector_0.size() == vector_1.size(),
+               "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
+               std::to_string(vector_1.size()) + ".");
+  ASSERT_DEBUG(vector_0.size() == 2 || vector_0.size() == 3,
+               "Incompatible vector size, " + std::to_string(vector_0.size()) + ", must be 2 or 3.");
   typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type _return_vector;
-
   if (vector_0.size() == 2) return {0.0, 0.0, vector_0[0]*vector_1[1] - vector_0[1]*vector_1[0]};
   else
     return {vector_0[1]*vector_1[2] - vector_0[2]*vector_1[1],
@@ -158,9 +160,10 @@ cross_product(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>
 template<std::size_t _size_0, std::size_t _size_1>
 constexpr typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type
 projection_tangent(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
-  DEBUG_ASSERT(l_norm<2>(vector_1), std::invalid_argument("Second vector is not a unit vector."));
-  DEBUG_ASSERT(vector_0.size() == vector_1.size(), std::invalid_argument(
-    "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " + std::to_string(vector_1.size()) + "."));
+  ASSERT_DEBUG(l_norm<2>(vector_1), "Second vector is not a unit vector.");
+  ASSERT_DEBUG(vector_0.size() == vector_1.size(),
+               "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
+               std::to_string(vector_1.size()) + ".");
   typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type _return_vector;
   return dot_product(vector_0, vector_1)*
          _return_vector([&](const std::size_t i_element) { return vector_1[i_element]; }, vector_1.size());
@@ -177,9 +180,9 @@ projection_tangent(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_si
 template<std::size_t _size_0, std::size_t _size_1>
 constexpr typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type
 projection_orthogonal(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
-  DEBUG_ASSERT(vector_0.size() == vector_1.size(),
-               std::invalid_argument("Incompatible vector sizes, " + std::to_string(vector_0.size())
-                                     + " vs. " + std::to_string(vector_1.size()) + "."));
+  ASSERT_DEBUG(vector_0.size() == vector_1.size(),
+               "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
+               std::to_string(vector_1.size()) + ".");
   typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type _return_vector;
   _return_vector vector([&](const std::size_t index) { return vector_0[index]; }, vector_1.size());
   return vector - projection_tangent(vector_0, vector_1);

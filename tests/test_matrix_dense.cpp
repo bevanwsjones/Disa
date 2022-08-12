@@ -63,12 +63,12 @@ TEST(test_matrix_dense, constructors_lambda) {
   EXPECT_DOUBLE_EQ(static_matrix[1][0], 6.0);
   EXPECT_DOUBLE_EQ(static_matrix[1][1], 7.0);
 
-  ASSERT_THROW((Matrix_Dense<2, 2>([](const std::size_t row, const std::size_t column) {
+  EXPECT_DEATH((Matrix_Dense<2, 2>([](const std::size_t row, const std::size_t column) {
     return static_cast<double>(row)*2.0 + 4.0 + static_cast<double>(column);
-  }, 1, 2)), std::invalid_argument);
-  ASSERT_THROW((Matrix_Dense<2, 2>([](const std::size_t row, const std::size_t column) {
+  }, 1, 2)), "./*");
+  EXPECT_DEATH((Matrix_Dense<2, 2>([](const std::size_t row, const std::size_t column) {
     return static_cast<double>(row)*2.0 + 4.0 + static_cast<double>(column);
-  }, 2, 1)), std::invalid_argument);
+  }, 2, 1)), "./*");
 }
 
 //----------------------------------------------------------------------------------------------------------------------

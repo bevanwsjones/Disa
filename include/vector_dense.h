@@ -57,9 +57,8 @@ struct Vector_Dense : public std::array<double, _size> {
    * @param[in] list The list of doubles to initialised the vector.
    */
   Vector_Dense(const std::initializer_list<double>& list) {
-    DEBUG_ASSERT(list.size() == _size,
-                 std::invalid_argument("Initializer list of incorrect size, " + std::to_string(list.size())
-                                       + " vs. " + std::to_string(_size) + "."));
+    ASSERT_DEBUG(list.size() == _size, "Initializer list of incorrect size, " + std::to_string(list.size()) + " vs. " +
+                                       std::to_string(_size) + ".");
     auto iter = this->begin();
     FOR_EACH(item, list) *iter++ = item;
   }
@@ -71,7 +70,7 @@ struct Vector_Dense : public std::array<double, _size> {
    * @param[in] size Desired size of the vector. Added for interoperability with dynamic vectors.
    */
   explicit Vector_Dense(const std::function<double(const std::size_t)>& lambda, std::size_t size = _size) {
-    DEBUG_ASSERT(size == _size, std::invalid_argument("Cannot change the size for a static vector."));
+    ASSERT_DEBUG(size == _size, "Cannot change the size for a static vector.");
     FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
 
@@ -109,8 +108,8 @@ struct Vector_Dense : public std::array<double, _size> {
    */
   template<class _vector_other>
   constexpr _vector& operator+=(const _vector_other& vector) {
-    DEBUG_ASSERT(_size == vector.size(), std::invalid_argument(
-      "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + "."));
+    ASSERT_DEBUG(_size == vector.size(),
+                 "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + ".");
     FOR(index, _size) (*this)[index] += vector[index];
     return *this;
   }
@@ -123,8 +122,8 @@ struct Vector_Dense : public std::array<double, _size> {
    */
   template<class _vector_other>
   constexpr _vector& operator-=(const _vector_other& vector) {
-    DEBUG_ASSERT(_size == vector.size(), std::invalid_argument(
-      "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + "."));
+    ASSERT_DEBUG(_size == vector.size(),
+                 "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + ".");
     FOR(index, _size) (*this)[index] -= vector[index];
     return *this;
   }
@@ -203,8 +202,9 @@ struct Vector_Dense<0> : public std::vector<double> {
    */
   template<class _vector_other>
   constexpr _vector& operator+=(const _vector_other& vector) {
-    DEBUG_ASSERT(size() == vector.size(), std::invalid_argument(
-      "Incompatible vector sizes, " + std::to_string(size()) + " vs. " + std::to_string(vector.size()) + "."));
+    ASSERT_DEBUG(size() == vector.size(),
+                 "Incompatible vector sizes, " + std::to_string(size()) + " vs. " + std::to_string(vector.size()) +
+                 ".");
     FOR(index, size()) (*this)[index] += vector[index];
     return *this;
   }
@@ -217,8 +217,9 @@ struct Vector_Dense<0> : public std::vector<double> {
    */
   template<class _vector_other>
   constexpr _vector& operator-=(const _vector_other& vector) {
-    DEBUG_ASSERT(size() == vector.size(), std::invalid_argument(
-      "Incompatible vector sizes, " + std::to_string(size()) + " vs. " + std::to_string(vector.size()) + "."));
+    ASSERT_DEBUG(size() == vector.size(),
+                 "Incompatible vector sizes, " + std::to_string(size()) + " vs. " + std::to_string(vector.size()) +
+                 ".");
     FOR(index, size()) (*this)[index] -= vector[index];
     return *this;
   }
@@ -279,9 +280,9 @@ constexpr Vector_Dense<_size> operator/(Vector_Dense<_size> vector, const double
 template<std::size_t _size_0, std::size_t _size_1>
 typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type
 constexpr operator+(const Vector_Dense<_size_0>& vector0, const Vector_Dense<_size_1>& vector1) {
-  DEBUG_ASSERT(vector0.size() == vector1.size(), std::invalid_argument(
-    "Incompatible vector sizes, " + std::to_string(vector0.size()) + " vs. " + std::to_string(vector1.size()) + "."));
-
+  ASSERT_DEBUG(vector0.size() == vector1.size(),
+               "Incompatible vector sizes, " + std::to_string(vector0.size()) + " vs. " +
+               std::to_string(vector1.size()) + ".");
   typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type _return_vector;
   return _return_vector([&](const std::size_t ii) { return vector0[ii] + vector1[ii]; }, vector0.size());
 }
@@ -297,9 +298,9 @@ constexpr operator+(const Vector_Dense<_size_0>& vector0, const Vector_Dense<_si
 template<std::size_t _size_0, std::size_t _size_1>
 typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type
 operator-(const Vector_Dense<_size_0>& vector0, const Vector_Dense<_size_1>& vector1) {
-  DEBUG_ASSERT(vector0.size() == vector1.size(), std::invalid_argument(
-    "Incompatible vector sizes, " + std::to_string(vector0.size()) + " vs. " + std::to_string(vector1.size()) + "."));
-
+  ASSERT_DEBUG(vector0.size() == vector1.size(),
+               "Incompatible vector sizes, " + std::to_string(vector0.size()) + " vs. " +
+               std::to_string(vector1.size()) + ".");
   typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type _return_vector;
   return _return_vector([&](const std::size_t ii) { return vector0[ii] - vector1[ii]; }, vector0.size());
 }

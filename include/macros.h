@@ -22,7 +22,7 @@
 #ifndef DISA_MACROS_H
 #define DISA_MACROS_H
 
-#include <ostream>
+#include <iostream>
 #include <source_location>
 #include <string>
 
@@ -43,76 +43,75 @@ enum class Log_Level : uint8_t {
   Debug,
 };//Log_Level
 
-  /**
-   * \brief Adds additional information to messages about to be printed to screen, such as file and line numbers.
-   * \param[in] level Logging level enumerator, determine prefixing of returned string.
-   * \param[in] location Source code location object, containing the origin of the console message.
-   * \return Formatted string: '[logging level | file name::line number]:'
-   */
-  inline std::basic_string<char> console_format(const Log_Level level, const std::source_location &location) {
+/**
+ * \brief Adds additional information to messages about to be printed to screen, such as file and line numbers.
+ * \param[in] level Logging level enumerator, determine prefixing of returned string.
+ * \param[in] location Source code location object, containing the origin of the console message.
+ * \return Formatted string: '[logging level | file name::line number]:'
+ */
+inline std::basic_string<char> console_format(const Log_Level level, const std::source_location& location) {
   auto const iter = std::basic_string_view<char>(location.file_name()).find_last_of('/');
   const auto suffix = std::basic_string<char>(location.file_name()).substr(iter + 1) + "::"
                       + std::to_string(location.line()) + "]: ";
   switch (level) {
-  case Log_Level::Debug:
-  return "[Debug|" + std::basic_string(suffix);
-  case Log_Level::Info:
-  return "[Info |" + std::basic_string(suffix);
-  case Log_Level::Warning:
-  return "[Warn|" + std::basic_string(suffix);
-  case Log_Level::Error:
-  return "[Error|" + std::basic_string(suffix);
-  default:
+    case Log_Level::Debug:
+      return "[Debug|" + std::basic_string(suffix);
+    case Log_Level::Info:
+      return "[Info |" + std::basic_string(suffix);
+    case Log_Level::Warning:
+      return "[Warn |" + std::basic_string(suffix);
+    case Log_Level::Error:
+      return "[Error|" + std::basic_string(suffix);
+    default:
       std::cout<<"[Error|" + std::basic_string(suffix) + " Unrecognised log level parsed.";
       exit(1);
   }
 }//console_format
 
+#ifdef DISA_DEBUG
 /**
  * \brief Debug level console write out.
  * \param[in] message The message to print to the output stream.
- * \param[in] location Source code location object, containing the origin of the console message.
  */
-inline void debug(const std::string_view message,
-                  const std::source_location location = std::source_location::current()) {
-  std::cout << "\n" << console_format(Log_Level::Debug, location) << message << std::flush;
-}//debug
+#define DEBUG(message) std::cout<<"\n"<<console_format(Disa::Log_Level::Debug, std::source_location::current())<<(message)<<std::flush
+#else
+#define DEBUG(message) {}
+#endif
 
 /**
  * \brief General information level console write out.
  * \param[in] message The message to print to the output stream.
- * \param[in] location Source code location object, containing the origin of the console message.
  */
-inline void
-info(const std::string_view message, const std::source_location location = std::source_location::current()) {
-  std::cout << "\n" << console_format(Log_Level::Info, location) << message << std::flush;
-}//info
+#define INFO(message) std::cout<<"\n"<<console_format(Disa::Log_Level::Info, std::source_location::current())<<(message)<<std::flush
 
 /**
  * \brief Warning level console write out.
  * \param[in] message The message to print to the output stream.
- * \param[in] location Source code location object, containing the origin of the console message.
  */
-inline void warning(const std::string_view message,
-                    const std::source_location location = std::source_location::current()) {
-  std::cout << "\n" << console_format(Log_Level::Warning, location) << message << std::flush;
-}//warning
+#define WARNING(message) std::cout<<"\n"<<console_format(Disa::Log_Level::Warning, std::source_location::current())<<(message)<<std::flush
 
 /**
- * \brief Error level console write out, writes to std::cerr and exits.
+ * \brief Error level console write out, writes to std::cerr.
  * \param[in] message The message to print to the error stream.
- * \param[in] location Source code location object, containing the origin of the console message.
  */
-inline void
-error(const std::string_view message, const std::source_location location = std::source_location::current()) {
-  std::cerr<<"\n"<<console_format(Log_Level::Error, location)<<message<<std::endl;
-  exit(1);
-}//error
+#define ERROR(message) std::cerr<<"\n"<<console_format(Disa::Log_Level::Error, std::source_location::current())<<(message)<<std::endl
+
+/**
+ * \brief Checks for a true condition, if not, writes an error message to screen and exits the program.
+ * \param[in] condition The condition to check.
+ * \param[in] message The error message to print to the error stream if the condition is false.
+ */
+#define ASSERT(condition, message) do {if(!(condition)) {ERROR((message)); exit(1);} } while(0)
 
 #ifdef DISA_DEBUG
-#define DEBUG_ASSERT(condition, exception) if(!(condition)) throw (exception)
+/**
+ * \brief Checks for a true condition in debug build, if not, writes an error message to screen and exits the program.
+ * \param[in] condition The condition to check.
+ * \param[in] message The error message to print to the error stream if the condition is false.
+ */
+#define ASSERT_DEBUG(condition, message) ASSERT(condition, message)
 #elif
-#define DEBUG_ASSERT(condition, exception)
+#define ASSERT_DEBUG(condition, exception) {}
 #endif
 
 // ---------------------------------------------------------------------------------------------------------------------

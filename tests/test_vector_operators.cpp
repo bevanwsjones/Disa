@@ -49,7 +49,7 @@ TEST(test_vector_operators, mean) {
   EXPECT_DOUBLE_EQ(mean(static_vector), -2.0/4.0);
 
   Vector_Dense<0> zero_size;
-  ASSERT_THROW(mean(zero_size), std::invalid_argument);
+  EXPECT_DEATH(mean(zero_size), "./*");
 }
 
 TEST(test_vector_operators, dot_product) {
@@ -69,8 +69,8 @@ TEST(test_vector_operators, dot_product) {
   EXPECT_DOUBLE_EQ(dot_product(dynamic_vector_0, static_vector_0), 33.0);
   EXPECT_DOUBLE_EQ(dot_product(static_vector_0, static_vector_1), 24.0);
 
-  ASSERT_THROW(dot_product(dynamic_vector_0, Vector_Dense<0>({1.0, 2.0})), std::invalid_argument);
-  ASSERT_THROW(dot_product(static_vector_0, Vector_Dense<0>({1.0, 2.0})), std::invalid_argument);
+  EXPECT_DEATH(dot_product(dynamic_vector_0, Vector_Dense<0>({1.0, 2.0})), "./*");
+  EXPECT_DEATH(dot_product(static_vector_0, Vector_Dense<0>({1.0, 2.0})), "./*");
 }
 
 TEST(test_vector_operators, unit) {
@@ -122,8 +122,8 @@ TEST(test_vector_operators, angle) {
   EXPECT_DOUBLE_EQ(angle_radian, 0.5*std::numbers::pi);
   EXPECT_DOUBLE_EQ(angle_degree, 90.0);
 
-  ASSERT_THROW(cross_product(Vector_Dense<0>(), Vector_Dense<3>()), std::invalid_argument);
-  ASSERT_THROW(cross_product(Vector_Dense<4>(), Vector_Dense<4>()), std::invalid_argument);
+  EXPECT_DEATH(cross_product(Vector_Dense<0>(), Vector_Dense<3>()), "./*");
+  EXPECT_DEATH(cross_product(Vector_Dense<4>(), Vector_Dense<4>()), "./*");
 }
 
 TEST(test_vector_operators, cross_product) {
@@ -156,9 +156,9 @@ TEST(test_vector_operators, cross_product) {
   EXPECT_DOUBLE_EQ(static_result[2], 1.0);
 
   Vector_Dense<0> dynamics_bad_size = {1.0, 2.0};
-  ASSERT_THROW(cross_product(dynamic_vector_0, dynamics_bad_size), std::invalid_argument);
-  ASSERT_THROW(cross_product(static_vector_0, dynamics_bad_size), std::invalid_argument);
-  ASSERT_THROW(cross_product(Vector_Dense<4>(), Vector_Dense<4>()), std::invalid_argument);
+  EXPECT_DEATH(cross_product(dynamic_vector_0, dynamics_bad_size), "./*");
+  EXPECT_DEATH(cross_product(static_vector_0, dynamics_bad_size), "./*");
+  EXPECT_DEATH(cross_product(Vector_Dense<4>(), Vector_Dense<4>()), "./*");
 }
 
 TEST(test_vector_operators, tangent_projection) {
@@ -178,8 +178,8 @@ TEST(test_vector_operators, tangent_projection) {
 
   Vector_Dense<0> dynamics_bad_size = {1.0, 2.0};
   Vector_Dense<2> static_bad_size = {1.0, 2.0};
-  ASSERT_THROW(projection_tangent(dynamic_vector, dynamics_bad_size), std::invalid_argument);
-  ASSERT_THROW(projection_tangent(static_vector, static_bad_size), std::invalid_argument);
+  EXPECT_DEATH(projection_tangent(dynamic_vector, dynamics_bad_size), "./*");
+  EXPECT_DEATH(projection_tangent(static_vector, static_bad_size), "./*");
 }
 
 TEST(test_vector_operators, orthogonal_projection) {
@@ -197,8 +197,8 @@ TEST(test_vector_operators, orthogonal_projection) {
   EXPECT_NEAR(static_result[1], 0.5, std::numeric_limits<double>::epsilon()*10.0);
   EXPECT_DOUBLE_EQ(static_result[2], -0.5);
 
-  ASSERT_THROW(projection_orthogonal(dynamic_vector, Vector_Dense<0>({1.0, 2.0})), std::invalid_argument);
-  ASSERT_THROW(projection_orthogonal(static_vector, Vector_Dense<2>({1.0, 2.0})), std::invalid_argument);
+  EXPECT_DEATH(projection_orthogonal(dynamic_vector, Vector_Dense<0>({1.0, 2.0})), "./*");
+  EXPECT_DEATH(projection_orthogonal(static_vector, Vector_Dense<2>({1.0, 2.0})), "./*");
 }
 
 #endif//DISA_DEBUG
