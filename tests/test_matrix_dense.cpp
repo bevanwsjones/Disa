@@ -104,5 +104,217 @@ TEST(test_matrix_dense, size_row_column_size_resize) {
   FOR_EACH(row, dynamic_matrix) EXPECT_EQ(row.size(), 2);
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+// Assignment Operators
+//----------------------------------------------------------------------------------------------------------------------
+
+TEST(test_matrix_dense, scalar_matrix_multiplication_assignment) {
+  Matrix_Dense<0, 0> dynamic_matrix = {{1, 2, 3},
+                                       {4, 5, 6},
+                                       {7, 8, 9}};
+  Matrix_Dense<3, 3> static_matrix = {{10, 20, 30},
+                                      {40, 50, 60},
+                                      {70, 80, 90}};
+
+  dynamic_matrix *= -10.0;
+  EXPECT_DOUBLE_EQ(dynamic_matrix[0][0], -1.0*static_matrix[0][0]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[0][1], -1.0*static_matrix[0][1]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[0][2], -1.0*static_matrix[0][2]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[1][0], -1.0*static_matrix[1][0]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[1][1], -1.0*static_matrix[1][1]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[1][2], -1.0*static_matrix[1][2]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[2][0], -1.0*static_matrix[2][0]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[2][1], -1.0*static_matrix[2][1]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[2][2], -1.0*static_matrix[2][2]);
+
+  static_matrix *= 0.1;
+  EXPECT_DOUBLE_EQ(-0.1*dynamic_matrix[0][0], static_matrix[0][0]);
+  EXPECT_DOUBLE_EQ(-0.1*dynamic_matrix[0][1], static_matrix[0][1]);
+  EXPECT_DOUBLE_EQ(-0.1*dynamic_matrix[0][2], static_matrix[0][2]);
+  EXPECT_DOUBLE_EQ(-0.1*dynamic_matrix[1][0], static_matrix[1][0]);
+  EXPECT_DOUBLE_EQ(-0.1*dynamic_matrix[1][1], static_matrix[1][1]);
+  EXPECT_DOUBLE_EQ(-0.1*dynamic_matrix[1][2], static_matrix[1][2]);
+  EXPECT_DOUBLE_EQ(-0.1*dynamic_matrix[2][0], static_matrix[2][0]);
+  EXPECT_DOUBLE_EQ(-0.1*dynamic_matrix[2][1], static_matrix[2][1]);
+  EXPECT_DOUBLE_EQ(-0.1*dynamic_matrix[2][2], static_matrix[2][2]);
+}
+
+TEST(test_matrix_dense, scalar_matrix_division_assignment) {
+  Matrix_Dense<0, 0> dynamic_matrix = {{1, 2, 3},
+                                       {4, 5, 6},
+                                       {7, 8, 9}};
+  Matrix_Dense<3, 3> static_matrix = {{10, 20, 30},
+                                      {40, 50, 60},
+                                      {70, 80, 90}};
+
+  static_matrix /= -10.0;
+  EXPECT_DOUBLE_EQ(-1.0*dynamic_matrix[0][0], static_matrix[0][0]);
+  EXPECT_DOUBLE_EQ(-1.0*dynamic_matrix[0][1], static_matrix[0][1]);
+  EXPECT_DOUBLE_EQ(-1.0*dynamic_matrix[0][2], static_matrix[0][2]);
+  EXPECT_DOUBLE_EQ(-1.0*dynamic_matrix[1][0], static_matrix[1][0]);
+  EXPECT_DOUBLE_EQ(-1.0*dynamic_matrix[1][1], static_matrix[1][1]);
+  EXPECT_DOUBLE_EQ(-1.0*dynamic_matrix[1][2], static_matrix[1][2]);
+  EXPECT_DOUBLE_EQ(-1.0*dynamic_matrix[2][0], static_matrix[2][0]);
+  EXPECT_DOUBLE_EQ(-1.0*dynamic_matrix[2][1], static_matrix[2][1]);
+  EXPECT_DOUBLE_EQ(-1.0*dynamic_matrix[2][2], static_matrix[2][2]);
+
+  dynamic_matrix /= 0.1;
+  EXPECT_DOUBLE_EQ(dynamic_matrix[0][0], -10.0*static_matrix[0][0]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[0][1], -10.0*static_matrix[0][1]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[0][2], -10.0*static_matrix[0][2]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[1][0], -10.0*static_matrix[1][0]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[1][1], -10.0*static_matrix[1][1]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[1][2], -10.0*static_matrix[1][2]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[2][0], -10.0*static_matrix[2][0]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[2][1], -10.0*static_matrix[2][1]);
+  EXPECT_DOUBLE_EQ(dynamic_matrix[2][2], -10.0*static_matrix[2][2]);
+}
+
+TEST(test_matrix_dense, matrix_matrix_addition_assignment) {
+  Matrix_Dense<0, 0> dynamic_matrix_0 = {{1, 2},
+                                         {3, 4}};
+  Matrix_Dense<0, 0> dynamic_matrix_1 = {{4, 3},
+                                         {2, 1}};
+  Matrix_Dense<2, 2> static_matrix_0 = {{10, 20},
+                                        {30, 40}};
+  Matrix_Dense<2, 2> static_matrix_1 = {{40, 30},
+                                        {20, 10}};
+
+  dynamic_matrix_0 += dynamic_matrix_1;
+  static_matrix_0 += static_matrix_1;
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][0], 5);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][1], 5);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][0], 5);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][1], 5);
+  EXPECT_DOUBLE_EQ(static_matrix_0[0][0], 50);
+  EXPECT_DOUBLE_EQ(static_matrix_0[0][1], 50);
+  EXPECT_DOUBLE_EQ(static_matrix_0[1][0], 50);
+  EXPECT_DOUBLE_EQ(static_matrix_0[1][1], 50);
+
+  dynamic_matrix_1 += static_matrix_0;
+  static_matrix_1 += dynamic_matrix_0;
+  EXPECT_DOUBLE_EQ(dynamic_matrix_1[0][0], 54);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_1[0][1], 53);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_1[1][0], 52);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_1[1][1], 51);
+  EXPECT_DOUBLE_EQ(static_matrix_1[0][0], 45);
+  EXPECT_DOUBLE_EQ(static_matrix_1[0][1], 35);
+  EXPECT_DOUBLE_EQ(static_matrix_1[1][0], 25);
+  EXPECT_DOUBLE_EQ(static_matrix_1[1][1], 15);
+
+  Matrix_Dense<0, 0> dynamic_incorrect;
+  Matrix_Dense<2, 3> static_incorrect;
+  EXPECT_DEATH(dynamic_matrix_0 += dynamic_incorrect, "./*");
+  EXPECT_DEATH(dynamic_matrix_0 += static_incorrect, "./*");
+  EXPECT_DEATH(dynamic_matrix_0 += dynamic_incorrect, "./*");
+  EXPECT_DEATH(dynamic_matrix_0 += static_incorrect, "./*");
+}
+
+TEST(test_matrix_dense, matrix_matrix_subtraction_assignment) {
+  Matrix_Dense<0, 0> dynamic_matrix_0 = {{1, 2},
+                                         {3, 4}};
+  Matrix_Dense<0, 0> dynamic_matrix_1 = {{2, 2},
+                                         {3, 3}};
+  Matrix_Dense<2, 2> static_matrix_0 = {{10, 20},
+                                        {30, 40}};
+  Matrix_Dense<2, 2> static_matrix_1 = {{20, 20},
+                                        {30, 30}};
+
+  dynamic_matrix_0 -= dynamic_matrix_1;
+  static_matrix_0 -= static_matrix_1;
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][0], -1);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][1], 0);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][0], 0);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][1], 1);
+  EXPECT_DOUBLE_EQ(static_matrix_0[0][0], -10);
+  EXPECT_DOUBLE_EQ(static_matrix_0[0][1], 0);
+  EXPECT_DOUBLE_EQ(static_matrix_0[1][0], 0);
+  EXPECT_DOUBLE_EQ(static_matrix_0[1][1], 10);
+
+  dynamic_matrix_1 -= static_matrix_0;
+  static_matrix_1 -= dynamic_matrix_0;
+  EXPECT_DOUBLE_EQ(dynamic_matrix_1[0][0], 12);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_1[0][1], 2);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_1[1][0], 3);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_1[1][1], -7);
+  EXPECT_DOUBLE_EQ(static_matrix_1[0][0], 21);
+  EXPECT_DOUBLE_EQ(static_matrix_1[0][1], 20);
+  EXPECT_DOUBLE_EQ(static_matrix_1[1][0], 30);
+  EXPECT_DOUBLE_EQ(static_matrix_1[1][1], 29);
+
+  Matrix_Dense<0, 0> dynamic_incorrect;
+  Matrix_Dense<2, 3> static_incorrect;
+  EXPECT_DEATH(dynamic_matrix_0 -= dynamic_incorrect, "./*");
+  EXPECT_DEATH(dynamic_matrix_0 -= static_incorrect, "./*");
+  EXPECT_DEATH(dynamic_matrix_0 -= dynamic_incorrect, "./*");
+  EXPECT_DEATH(dynamic_matrix_0 -= static_incorrect, "./*");
+}
+
+TEST(test_matrix_dense, matrix_matrix_multiplication_assignment) {
+  Matrix_Dense<0, 0> dynamic_matrix_0 = {{1, 2},
+                                         {3, 4}};
+  Matrix_Dense<0, 0> dynamic_matrix_1 = {{5, 6},
+                                         {7, 8}};
+  Matrix_Dense<2, 2> static_matrix_0 = {{1, 2},
+                                        {3, 4}};
+  Matrix_Dense<2, 2> static_matrix_1 = {{5, 6},
+                                        {7, 8}};
+
+  dynamic_matrix_0 *= dynamic_matrix_1;
+  static_matrix_0 *= static_matrix_1;
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][0], 19);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][1], 22);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][0], 43);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][1], 50);
+  EXPECT_DOUBLE_EQ(static_matrix_0[0][0], 19);
+  EXPECT_DOUBLE_EQ(static_matrix_0[0][1], 22);
+  EXPECT_DOUBLE_EQ(static_matrix_0[1][0], 43);
+  EXPECT_DOUBLE_EQ(static_matrix_0[1][1], 50);
+
+  // reset
+  dynamic_matrix_0 = {{1, 2},
+                      {3, 4}};
+  static_matrix_0 = {{1, 2},
+                     {3, 4}};
+  dynamic_matrix_0 *= static_matrix_1;
+  static_matrix_0 *= dynamic_matrix_1;
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][0], 19);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][1], 22);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][0], 43);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][1], 50);
+  EXPECT_DOUBLE_EQ(static_matrix_0[0][0], 19);
+  EXPECT_DOUBLE_EQ(static_matrix_0[0][1], 22);
+  EXPECT_DOUBLE_EQ(static_matrix_0[1][0], 43);
+  EXPECT_DOUBLE_EQ(static_matrix_0[1][1], 50);
+
+  // non-square
+  dynamic_matrix_0 = {{1, 2},
+                      {3, 4},
+                      {5, 6}};
+  dynamic_matrix_1 = {{7,  8,  9,  10},
+                      {11, 12, 13, 14}};
+  dynamic_matrix_0 *= dynamic_matrix_1;
+  EXPECT_EQ(dynamic_matrix_0.size_row(), 3);
+  EXPECT_EQ(dynamic_matrix_0.size_column(), 4);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][0], 29);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][1], 32);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][2], 35);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][3], 38);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][0], 65);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][1], 72);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][2], 79);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][3], 86);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[2][0], 101);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[2][1], 112);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[2][2], 123);
+  EXPECT_DOUBLE_EQ(dynamic_matrix_0[2][3], 134);
+
+  dynamic_matrix_0.resize(1, 1);
+  Matrix_Dense<2, 3> incorrect;
+  EXPECT_DEATH(dynamic_matrix_1 *= incorrect, "./*");
+  EXPECT_DEATH(dynamic_matrix_1 *= dynamic_matrix_0, "./*");
+  EXPECT_DEATH(static_matrix_0 *= incorrect, "./*");
+  EXPECT_DEATH(static_matrix_0 *= dynamic_matrix_0, "./*");
+}
 
 #endif//DISA_DEBUG
