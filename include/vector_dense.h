@@ -30,6 +30,7 @@
 #include <initializer_list>
 #include <numeric>
 #include <stdexcept>
+#include <stdexcept>
 #include <vector>
 
 namespace Disa {
@@ -38,6 +39,18 @@ namespace Disa {
 // Statically Sized Dense Vector Class
 //----------------------------------------------------------------------------------------------------------------------
 
+/**
+ * @struct Vector_Dense
+ * @brief Mathematical Vector, of dimension _size, where every vector element has allocated has memory.
+ * @tparam _size The size of the vector, if 0 a specialisation of the class is created.
+ *
+ * The Vector_Dense struct the implements a mathematical vector of real numbers. Disa does not make distinctions row and
+ * column vectors, as such this information is not stored.
+ *
+ * To avoid massive boiler plate the vector inherits from std::array, which implies the vector's dimension is fixed at
+ * compile time. To obtain a dynamically allocated dense vector the _size value can be set to 0. In which case the
+ * std::vector is inherited, see below specialisation.
+ */
 template<std::size_t _size>
 struct Vector_Dense : public std::array<double, _size> {
   typedef Vector_Dense<_size> _vector;     /** @typedef Short hand for this vector type. */
@@ -58,7 +71,7 @@ struct Vector_Dense : public std::array<double, _size> {
    */
   Vector_Dense(const std::initializer_list<double>& list) {
     ASSERT_DEBUG(list.size() == _size, "Initializer list of incorrect size, " + std::to_string(list.size()) + " vs. " +
-                                       std::to_string(_size) + ".");
+      std::to_string(_size) + ".");
     auto iter = this->begin();
     FOR_EACH(item, list) *iter++ = item;
   }
@@ -102,12 +115,12 @@ struct Vector_Dense : public std::array<double, _size> {
 
   /**
    * @brief Addition of a second vector, a' = a + b, where a and b are vectors.
-   * @tparam _vector_other Vector type, dynamic/static.
+   * @tparam _size_other Vector size of b, dynamic/static.
    * @param vector The second vector, b, to add.
    * @return Updated vector (a').
    */
-  template<class _vector_other>
-  constexpr _vector& operator+=(const _vector_other& vector) {
+  template<std::size_t _size_other>
+  constexpr _vector& operator+=(const Vector_Dense<_size_other>& vector) {
     ASSERT_DEBUG(_size == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + ".");
     FOR(index, _size) (*this)[index] += vector[index];
@@ -116,12 +129,12 @@ struct Vector_Dense : public std::array<double, _size> {
 
   /**
    * @brief Subtraction by a second vector, a' = a - b, where a and b are vectors.
-   * @tparam _vector_other Vector type, dynamic/static.
+   * @tparam _size_other Vector size of b, dynamic/static.
    * @param vector The second vector, b, to subtract.
    * @return Updated vector (a').
    */
-  template<class _vector_other>
-  constexpr _vector& operator-=(const _vector_other& vector) {
+  template<std::size_t _size_other>
+  constexpr _vector& operator-=(const Vector_Dense<_size_other>& vector) {
     ASSERT_DEBUG(_size == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + ".");
     FOR(index, _size) (*this)[index] -= vector[index];
@@ -133,6 +146,17 @@ struct Vector_Dense : public std::array<double, _size> {
 // Dynamically Sized Dense Vector Class
 //----------------------------------------------------------------------------------------------------------------------
 
+/**
+ * @struct Vector_Dense
+ * @brief Mathematical Vector, of dimension _size, where every vector element has allocated has memory.
+ *
+ * The Vector_Dense struct the implements a mathematical vector of real numbers. Disa does not make distinctions row and
+ * column vectors, as such this information is not stored.
+ *
+ * To avoid massive boiler plate the vector inherits from std::array, which implies the vector's dimension is fixed at
+ * compile time. To obtain a dynamically allocated dense vector the _size value can be set to 0. In which case the
+ * std::vector is inherited, see below specialisation.
+ */
 template<>
 struct Vector_Dense<0> : public std::vector<double> {
   typedef Vector_Dense<0> _vector;      /** @typedef Short hand for this vector type. */
@@ -196,12 +220,12 @@ struct Vector_Dense<0> : public std::vector<double> {
 
   /**
    * @brief Addition of a second vector, a' = a + b, where a and b are vectors.
-   * @tparam _vector_other Vector type, dynamic/static.
+      * @tparam _size_other Vector size of b, dynamic/static.
    * @param vector The second vector, b, to add.
    * @return Updated vector (a').
    */
-  template<class _vector_other>
-  constexpr _vector& operator+=(const _vector_other& vector) {
+  template<std::size_t _size_other>
+  constexpr _vector& operator+=(const Vector_Dense<_size_other>& vector) {
     ASSERT_DEBUG(size() == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(size()) + " vs. " + std::to_string(vector.size()) +
                  ".");
@@ -211,12 +235,12 @@ struct Vector_Dense<0> : public std::vector<double> {
 
   /**
    * @brief Subtraction by a second vector, a' = a - b, where a and b are vectors.
-   * @tparam _vector_other Vector type, dynamic/static.
+   * @tparam _size_other Vector size of b, dynamic/static.
    * @param vector The second vector, b, to subtract.
    * @return Updated vector (a').
    */
-  template<class _vector_other>
-  constexpr _vector& operator-=(const _vector_other& vector) {
+  template<std::size_t _size_other>
+  constexpr _vector& operator-=(const Vector_Dense<_size_other>& vector) {
     ASSERT_DEBUG(size() == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(size()) + " vs. " + std::to_string(vector.size()) +
                  ".");
