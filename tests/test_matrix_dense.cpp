@@ -544,20 +544,20 @@ TEST(test_matrix_dense, matrix_matrix_multiplication) {
   dynamic_matrix_1 = {{7,  8,  9,  10},
                       {11, 12, 13, 14}};
   result_dynamic_0 = dynamic_matrix_0*dynamic_matrix_1;
-  EXPECT_EQ(dynamic_matrix_0.size_row(), 3);
-  EXPECT_EQ(dynamic_matrix_0.size_column(), 4);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][0], 29);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][1], 32);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][2], 35);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[0][3], 38);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][0], 65);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][1], 72);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][2], 79);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[1][3], 86);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[2][0], 101);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[2][1], 112);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[2][2], 123);
-  EXPECT_DOUBLE_EQ(dynamic_matrix_0[2][3], 134);
+  EXPECT_EQ(result_dynamic_0.size_row(), 3);
+  EXPECT_EQ(result_dynamic_0.size_column(), 4);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[0][0], 29);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[0][1], 32);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[0][2], 35);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[0][3], 38);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[1][0], 65);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[1][1], 72);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[1][2], 79);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[1][3], 86);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[2][0], 101);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[2][1], 112);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[2][2], 123);
+  EXPECT_DOUBLE_EQ(result_dynamic_0[2][3], 134);
 
   dynamic_matrix_0.resize(1, 1);
   Matrix_Dense<2, 3> incorrect;
