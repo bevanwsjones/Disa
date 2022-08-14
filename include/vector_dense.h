@@ -44,11 +44,11 @@ namespace Disa {
  * @brief Mathematical Vector, of dimension _size, where every vector element has allocated has memory.
  * @tparam _size The size of the vector, if 0 a specialisation of the class is created.
  *
- * The Vector_Dense struct the implements a mathematical vector of real numbers. Disa does not make distinctions row and
+ * The Vector_Dense struct implements a mathematical vector of real numbers. Disa does not make distinctions row and
  * column vectors, as such this information is not stored.
  *
  * To avoid massive boiler plate the vector inherits from std::array, which implies the vector's dimension is fixed at
- * compile time. To obtain a dynamically allocated dense vector the _size value can be set to 0. In which case the
+ * compile time. To obtain a dynamically allocated dense vector the _size value can be set to 0. In which case
  * std::vector is inherited, see below specialisation.
  */
 template<std::size_t _size>
@@ -147,7 +147,7 @@ struct Vector_Dense : public std::array<double, _size> {
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * @struct Vector_Dense
+ * @struct Vector_Dense<0>
  * @brief Mathematical Vector, of dimension _size, where every vector element has allocated has memory.
  *
  * The Vector_Dense struct the implements a mathematical vector of real numbers. Disa does not make distinctions row and
