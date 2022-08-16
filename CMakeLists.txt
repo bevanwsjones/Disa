@@ -56,6 +56,7 @@ include_directories(include)
 set(SOURCES
         include/macros.h
         include/matrix_dense.h
+        include/matrix_sparse.h
         include/vector_dense.h
         include/vector_operators.h
         )
@@ -82,6 +83,10 @@ if (ENABLE_TEST)
   add_executable(test_matrix_dense tests/test_matrix_dense.cpp)
   target_link_libraries(test_matrix_dense GTest::gtest_main disa)
   gtest_discover_tests(test_matrix_dense)
+
+  add_executable(test_matrix_sparse tests/test_matrix_sparse.cpp)
+  target_link_libraries(test_matrix_sparse GTest::gtest_main disa)
+  gtest_discover_tests(test_matrix_sparse)
 
   add_executable(test_vector_dense tests/test_vector_dense.cpp)
   target_link_libraries(test_vector_dense GTest::gtest_main disa)

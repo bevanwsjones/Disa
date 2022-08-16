@@ -272,19 +272,21 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
    * @brief Returns the number of rows in the matrix.
    * @return The number of rows.
    */
-  std::size_t size_row() const noexcept { return std::distance(cbegin(), cend()); }
+  [[nodiscard]] std::size_t size_row() const noexcept { return std::distance(cbegin(), cend()); }
 
   /**
    * @brief Returns the number of columns in the matrix.
    * @return The number of columns.
    */
-  std::size_t size_column() const noexcept { return empty() ? 0 : (*this)[0].size(); }
+  [[nodiscard]] std::size_t size_column() const noexcept { return empty() ? 0 : (*this)[0].size(); }
 
   /**
    * @brief Returns the number of rows and columns in the matrix. If rows are 0, columns are 0.
    * @return Pair containing [rows, columns].
    */
-  std::pair<std::size_t, std::size_t> size() const noexcept { return std::make_pair(size_row(), size_column()); }
+  [[nodiscard]] std::pair<std::size_t, std::size_t> size() const noexcept {
+    return std::make_pair(size_row(), size_column());
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Assignment Operators
