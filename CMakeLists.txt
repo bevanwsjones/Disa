@@ -59,6 +59,7 @@ set(SOURCES
         include/matrix_sparse.h
         include/vector_dense.h
         include/vector_operators.h
+        src/matrix_sparse.cpp
         )
 
 add_library(disa STATIC ${SOURCES})

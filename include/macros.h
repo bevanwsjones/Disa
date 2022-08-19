@@ -115,6 +115,10 @@ inline std::basic_string<char> console_format(const Log_Level level, const std::
 #define ASSERT_DEBUG(condition, exception) {}
 #endif
 
+// ---------------------------------------------------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------------------------------------------------
+
 typedef std::make_signed<
   std::size_t>::type size_t_signed; /** @typedef Signed type for size type, used for conversion. */
 
