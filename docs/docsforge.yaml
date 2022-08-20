@@ -8,3 +8,4 @@ autodocSettings:
   Public API:
     language: cpp
     INPUT: include src
+    GENERATE_LATEX: YES
