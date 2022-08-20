@@ -26,20 +26,20 @@
 
 using namespace Disa;
 
-TEST(test_vector_operators, l_norm) {
+TEST(test_vector_operators, lp_norm) {
   Vector_Dense<0> dynamic_vector = {1.0, -2.0, 3.0, -4.0};
   Vector_Dense<4> static_vector = {1.0, 2.0, -3.0, 4.0};
 
-  EXPECT_DOUBLE_EQ(l_norm<0>(dynamic_vector), 3.0);
-  EXPECT_DOUBLE_EQ(l_norm<0>(static_vector), 4.0);
-  EXPECT_DOUBLE_EQ(l_norm<1>(dynamic_vector), 10.0);
-  EXPECT_DOUBLE_EQ(l_norm<1>(static_vector), 10.0);
-  EXPECT_DOUBLE_EQ(l_norm<2>(dynamic_vector), std::sqrt(1.0 + 4.0 + 9.0 + 16.0));
-  EXPECT_DOUBLE_EQ(l_norm<2>(static_vector), std::sqrt(1.0 + 4.0 + 9.0 + 16.0));
-  EXPECT_DOUBLE_EQ(l_norm<3>(dynamic_vector), std::cbrt(1.0 + 8.0 + 27.0 + 64.0));
-  EXPECT_DOUBLE_EQ(l_norm<3>(static_vector), std::cbrt(1.0 + 8.0 + 27.0 + 64.0));
-  EXPECT_DOUBLE_EQ(l_norm<4>(dynamic_vector), std::pow(1.0 + 16.0 + 81.0 + 256.0, 0.25));
-  EXPECT_DOUBLE_EQ(l_norm<4>(static_vector), std::pow(1.0 + 16.0 + 81.0 + 256.0, 0.25));
+  EXPECT_DOUBLE_EQ(lp_norm<0>(dynamic_vector), 3.0);
+  EXPECT_DOUBLE_EQ(lp_norm<0>(static_vector), 4.0);
+  EXPECT_DOUBLE_EQ(lp_norm<1>(dynamic_vector), 10.0);
+  EXPECT_DOUBLE_EQ(lp_norm<1>(static_vector), 10.0);
+  EXPECT_DOUBLE_EQ(lp_norm<2>(dynamic_vector), std::sqrt(1.0 + 4.0 + 9.0 + 16.0));
+  EXPECT_DOUBLE_EQ(lp_norm<2>(static_vector), std::sqrt(1.0 + 4.0 + 9.0 + 16.0));
+  EXPECT_DOUBLE_EQ(lp_norm<3>(dynamic_vector), std::cbrt(1.0 + 8.0 + 27.0 + 64.0));
+  EXPECT_DOUBLE_EQ(lp_norm<3>(static_vector), std::cbrt(1.0 + 8.0 + 27.0 + 64.0));
+  EXPECT_DOUBLE_EQ(lp_norm<4>(dynamic_vector), std::pow(1.0 + 16.0 + 81.0 + 256.0, 0.25));
+  EXPECT_DOUBLE_EQ(lp_norm<4>(static_vector), std::pow(1.0 + 16.0 + 81.0 + 256.0, 0.25));
 }
 
 TEST(test_vector_operators, mean) {

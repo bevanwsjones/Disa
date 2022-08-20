@@ -119,8 +119,7 @@ inline std::basic_string<char> console_format(const Log_Level level, const std::
 // Types
 // ---------------------------------------------------------------------------------------------------------------------
 
-typedef std::make_signed<
-  std::size_t>::type size_t_signed; /** @typedef Signed type for size type, used for conversion. */
+typedef std::make_signed<std::size_t>::type size_t_signed;    //!< Signed type for size type, used for conversion.
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Looping Macros

@@ -53,8 +53,8 @@ namespace Disa {
  */
 template<std::size_t _size>
 struct Vector_Dense : public std::array<double, _size> {
-  typedef Vector_Dense<_size> _vector;     /** @typedef Short hand for this vector type. */
-  const static bool is_dynamic = false;    /** @var Indicates the vector is compile time sized. */
+  typedef Vector_Dense<_size> _vector;     //!< Brief Short hand for this vector type.
+  const static bool is_dynamic = false;    //!< Brief Indicates the vector is compile time sized.
 
   //--------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
@@ -159,8 +159,8 @@ struct Vector_Dense : public std::array<double, _size> {
  */
 template<>
 struct Vector_Dense<0> : public std::vector<double> {
-  typedef Vector_Dense<0> _vector;      /** @typedef Short hand for this vector type. */
-  const static bool is_dynamic = true;  /** @var Indicates the vector is runtime resizable. */
+  typedef Vector_Dense<0> _vector;      //!< Short hand for this vector type.
+  const static bool is_dynamic = true;  //!< Indicates the vector is runtime resizable.
 
   //--------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
@@ -262,7 +262,7 @@ struct Vector_Dense<0> : public std::vector<double> {
 template<class _vector0, class _vector1>
 struct StaticPromoter {
   typedef typename std::conditional<!_vector0::is_dynamic, _vector0,
-                                    _vector1>::type type;    /** @var Static vector type if either _vector_0 or _vector_1 is static else dynamic. */
+                                    _vector1>::type type;    //! Static vector type if either _vector_0 or _vector_1 is static else dynamic. */
 };
 
 //----------------------------------------------------------------------------------------------------------------------
