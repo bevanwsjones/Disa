@@ -54,8 +54,8 @@ namespace Disa {
  */
 template<std::size_t _row, std::size_t _col>
 struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
-  typedef Matrix_Dense<_row, _col> _matrix;    /** @typedef Short hand for this vector type. */
-  const static bool is_dynamic = false;          /** @var Indicates the vector is compile time sized. */
+  using _matrix = Matrix_Dense<_row, _col>;  //!< Breif Short hand for this vector type.
+  const static bool is_dynamic = false;      //!< Breif Indicates the vector is compile time sized.
   static_assert(_row != 0 && _col != 0, "Semi-static matrices are not supported");
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -212,8 +212,8 @@ struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
  */
 template<>
 struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
-  typedef Matrix_Dense<0, 0> _matrix;         /** @typedef Short hand for this vector type. */
-  const static bool is_dynamic = true;        /** @var Indicates the vector is compile time sized. */
+  using _matrix = Matrix_Dense<0, 0>;         //!< Short hand for this vector type.
+  const static bool is_dynamic = true;        //!< Indicates the vector is compile time sized.
 
   //--------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
