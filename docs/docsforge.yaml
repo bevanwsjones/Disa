@@ -10,5 +10,4 @@ autodocSettings:
     INPUT: include src
 
     # MathJax support
-    markdown_commonmark_gfm: false
     markdown_math: true
