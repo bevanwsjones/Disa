@@ -3,7 +3,7 @@ sidebar:
     - Getting Started: README.md
     - License: LICENSE
   Development:
-    - Conventions: Conventions.md
+    - Conventions: docs/conventions.md
 autodocSettings:
   Public API:
     language: cpp
