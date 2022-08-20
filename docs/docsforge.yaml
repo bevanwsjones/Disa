@@ -1,8 +1,13 @@
 sidebar:
-  Basic Tutorial:
+  Overview:
     - Getting Started: README.md
     - License: LICENSE
+  Development:
+    - Conventions: docs/conventions.md
 autodocSettings:
   Public API:
     language: cpp
     INPUT: include src
+
+    # MathJax support
+    markdown_math: true

@@ -36,15 +36,15 @@
 namespace Disa {
 
 /**
- * @brief Computes the L_p-norm of a parsed vector, L_p = (sum_i |a_i|^p)^1/p.
+ * @brief Computes the $L_p$-norm of a parsed vector, \f$L_p = (\sum_i |a_i|^p)^1/p\f$.
  * @tparam _p_value the p value for the norm, if 0 the l_infinity norm is computed.
  * @tparam _size Size of the vector if static, else 0.
  * @param vector The vector for which the norm is being computed.
  * @return The computed L_p-norm.
  */
 template<unsigned int _p_value, std::size_t _size>
-constexpr double l_norm(const Vector_Dense<_size>& vector) {
-  switch (_p_value) {
+constexpr double lp_norm(const Vector_Dense<_size>& vector) {
+  switch(_p_value) {
     case 0:
       return *std::max_element(vector.begin(), vector.end());
     case 1:
@@ -99,7 +99,7 @@ constexpr double dot_product(const Vector_Dense<_size_0>& vector_0, const Vector
  */
 template<std::size_t _size>
 constexpr Vector_Dense<_size> unit(Vector_Dense<_size> vector) {
-  const double inverse_l_2 = 1.0/l_norm<2>(vector);
+  const double inverse_l_2 = 1.0/lp_norm<2>(vector);
   vector *= std::isinf(inverse_l_2) ? 0.0 : inverse_l_2; // properly zero, zero vectors.
   return vector;
 }
@@ -160,7 +160,7 @@ cross_product(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>
 template<std::size_t _size_0, std::size_t _size_1>
 constexpr typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type
 projection_tangent(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
-  ASSERT_DEBUG(l_norm<2>(vector_1), "Second vector is not a unit vector.");
+  ASSERT_DEBUG(lp_norm<2>(vector_1), "Second vector is not a unit vector.");
   ASSERT_DEBUG(vector_0.size() == vector_1.size(),
                "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
                std::to_string(vector_1.size()) + ".");
