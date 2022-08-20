@@ -8,4 +8,7 @@ autodocSettings:
   Public API:
     language: cpp
     INPUT: include src
-    GENERATE_LATEX: YES
+
+    # MathJax support
+    markdown_commonmark_gfm: false
+    markdown_math: true
