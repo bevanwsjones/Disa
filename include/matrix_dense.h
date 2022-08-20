@@ -34,7 +34,7 @@
 #include <vector>
 
 //----------------------------------------------------------------------------------------------------------------------
-// Statically Sized Dense Vector Class
+// Statically Sized Dense Matrix Class
 //----------------------------------------------------------------------------------------------------------------------
 
 namespace Disa {
@@ -48,14 +48,14 @@ namespace Disa {
  * The Matrix_Dense struct implements a mathematical matrix of nxm real numbers.
  *
  * To avoid massive boiler plate the matrix inherits from std::array, which implies the matrix's dimension is fixed at
- * compile time. To obtain a dynamically allocated dense vector the _row and _col value can be set to 0.  In which case
- * std::vector is inherited, see below specialisation. Note that semi-static matrices are not supported, e.g. _row = 1,
+ * compile time. To obtain a dynamically allocated dense matrix the _row and _col value can be set to 0.  In which case
+ * std::matrix is inherited, see below specialisation. Note that semi-static matrices are not supported, e.g. _row = 1,
  * _col = 0.
  */
 template<std::size_t _row, std::size_t _col>
 struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
-  using _matrix = Matrix_Dense<_row, _col>;  //!< Breif Short hand for this vector type.
-  const static bool is_dynamic = false;      //!< Breif Indicates the vector is compile time sized.
+  using _matrix = Matrix_Dense<_row, _col>;  //!< Short hand for this matrix type.
+  const static bool is_dynamic = false;      //!< Indicates the matrix is compile time sized.
   static_assert(_row != 0 && _col != 0, "Semi-static matrices are not supported");
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -206,14 +206,14 @@ struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
  * The Matrix_Dense struct implements a mathematical matrix of nxm real numbers.
  *
  * To avoid massive boiler plate the matrix inherits from std::array, which implies the matrix's dimension is fixed at
- * compile time. To obtain a dynamically allocated dense vector the _row and _col value can be set to 0.  In which case
+ * compile time. To obtain a dynamically allocated dense matrix the _row and _col value can be set to 0.  In which case
  * std::vector is inherited, see below specialisation. Note that semi-static matrices are not supported, e.g. _row = 1,
  * _col = 0.
  */
 template<>
 struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
-  using _matrix = Matrix_Dense<0, 0>;         //!< Short hand for this vector type.
-  const static bool is_dynamic = true;        //!< Indicates the vector is compile time sized.
+  using _matrix = Matrix_Dense<0, 0>;         //!< Short hand for this matrix type.
+  const static bool is_dynamic = true;        //!< Indicates the matrix is compile time sized.
 
   //--------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
@@ -226,7 +226,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
 
   /**
    * @brief Constructor to construct a matrix from an initializer list, matrix is resized to list size.
-   * @param[in] list The list of doubles to initialise the vector. Each row much be the same size.
+   * @param[in] list The list of doubles to initialise the matrix. Each row much be the same size.
    */
   Matrix_Dense(const std::initializer_list<Vector_Dense<0> >& list) {
     resize(list.size());
@@ -392,7 +392,7 @@ struct Matrix_Static_Demoter {
   const static std::size_t row_new = is_dynamic ? 0 : _row_0;
   const static std::size_t colu_new = is_dynamic ? 0 : _colu_1;
   typedef Matrix_Dense<row_new,
-                       colu_new> type;    /** @var Static vector type if either _vector_0 or _vector_1 is static else dynamic. */
+                       colu_new> type;    //!< Static Matrix type if either _row_0/_colu_0 or _row_1/_colu_1 is static else dynamic. */
 };
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -405,7 +405,7 @@ struct Matrix_Static_Demoter {
  * @tparam _col The number of column of the A matrix, dynamic/static.
  * @param[in] scalar The scalar value, b, to multiply the matrix by.
  * @param[in] matrix The matrix, A, to be multiplied.
- * @return New vector, C.
+ * @return New matrix, C.
  */
 template<std::size_t _row, std::size_t _col>
 constexpr Matrix_Dense<_row, _col> operator*(const double& scalar, Matrix_Dense<_row, _col> matrix) {
