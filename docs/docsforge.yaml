@@ -1,7 +1,9 @@
 sidebar:
-  Basic Tutorial:
+  Overview:
     - Getting Started: README.md
     - License: LICENSE
+  Development:
+    - Conventions: Conventions.md
 autodocSettings:
   Public API:
     language: cpp
