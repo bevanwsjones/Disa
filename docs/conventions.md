@@ -1,16 +1,21 @@
 # Conventions
 
-## General Convention
+## Introduction
 
 Disa follows, as much as possible,
 the [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines).
 If there is a need to deviate from this then this should be added to the documentation of the relevant section in
-code. As suggested by the `Core Guidelines` `snake_case` is used for most variable names and `Pascal_Snake_Case` for
-classes and created types, while `SCREAMING_SNAKE_CASE` should be used for macros. General `K&R layout` should be
-used and the line length is set to 120 characters. However, occasional inline documentation commenting may exceed
-this.
+code.
 
-One can refer to core guidelines in using `CG-x`, where `x` indicates the rule being referred to.
+General Conversions:
+
+- One can refer to core guidelines in using `CG-x`, where `x` indicates the rule being referred to.
+- Layout: `K&R layout`
+- Variable names: `snake_case`
+- Classes and defined types names: `Pascal_Snake_Case`
+- Macros: `SCREAMING_SNAKE_CASE`
+- Line length: 120 characters, however, occasional inline (documentation) commenting may exceed this.
+- Tabs: 2 white space characters
 
 ## Naming
 
