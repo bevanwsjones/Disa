@@ -41,10 +41,8 @@ namespace Disa {
  * 5. For each row of column indexes the indexes are unique and within the parsed column size.
  */
 Matrix_Sparse::Matrix_Sparse(std::initializer_list<std::size_t> non_zero, std::initializer_list<std::size_t> index,
-                             std::initializer_list<double> value, std::size_t column) : row_non_zero(non_zero),
-                                                                                        column_index(index),
-                                                                                        element_value(value),
-                                                                                        column_size(column) {
+                             std::initializer_list<double> value, std::size_t column)
+                             : row_non_zero(non_zero), column_index(index), element_value(value), column_size(column) {
   ASSERT(row_non_zero.front() == 0, "First value must be zero, but is " + std::to_string(row_non_zero.front()) + ".");
   ASSERT(row_non_zero.back() == column_index.size(), "Number of non-zeros does not match number of column non zeros");
   ASSERT(std::is_sorted(row_non_zero.begin(), row_non_zero.end()), "Inconsistent non-zeros list, but be ascending.");
@@ -92,7 +90,7 @@ constexpr Matrix_Sparse_Row Matrix_Sparse::operator[](const std::size_t& i_row) 
   return {i_row, this};
 }
 
-constexpr Const_Matrix_Sparse_Row Matrix_Sparse::operator[](const std::size_t& i_row) const {
+constexpr Matrix_Sparse_Row_Const Matrix_Sparse::operator[](const std::size_t& i_row) const {
   ASSERT_DEBUG(i_row < size_row(), "Row " + std::to_string(i_row) + " not in range " + range_row() + ".");
   return {i_row, this};
 }
@@ -100,7 +98,6 @@ constexpr Const_Matrix_Sparse_Row Matrix_Sparse::operator[](const std::size_t& i
 //--------------------------------------------------------------------------------------------------------------------
 // Element Access
 //--------------------------------------------------------------------------------------------------------------------
-
 
 constexpr Matrix_Sparse::iterator Matrix_Sparse::begin() noexcept {
   return {0, this};
@@ -143,20 +140,22 @@ Matrix_Sparse::insert(const std::size_t& i_row, const std::size_t& i_column, con
   ASSERT_DEBUG(i_row < size_row(), "Row " + std::to_string(i_row) + " not in range " + range_row() + ".");
   ASSERT_DEBUG(i_column < size_column(),
                "Column " + std::to_string(i_column) + " not in range " + range_column() + ".");
-
-  // Determine if the value exists.
   auto iter_insert = find(i_row, i_column);
-  if(iter_insert != end()->end() || iter_insert != (begin() + static_cast<s_size_t>(i_row))->end())
-    return {iter_insert, false};
-
-  // Insert the new value.
-  for(auto non_zeros = std::next(row_non_zero.begin(), static_cast<s_size_t>(i_row + 1));
-      non_zeros < row_non_zero.end(); ++(*non_zeros++));
-  const auto distance = std::distance(&*value.begin(), &*iter_insert);
-  auto iter_entry = value.insert(value.begin() + distance, value);
-  auto iter_column = column_index.insert(column_index.begin() + distance, i_column);
-  return {{this, i_row, &*iter_column, &*iter_entry}, true};
+  return (iter_insert != end()->end() || iter_insert != (begin() + static_cast<s_size_t>(i_row))->end())
+         ? std::make_pair(Matrix_Sparse::iterator_element(iter_insert), false) : insert(iter_insert, i_column, value);
 }
+
+std::pair<Matrix_Sparse::iterator_element, bool>
+Matrix_Sparse::insert(const Matrix_Sparse::iterator_element& iter_insert, const std::size_t& i_column,
+                      const double& value) {
+  ASSERT_DEBUG(i_column != iter_insert.i_column(), "Cannot insert into the same column.");
+  for(auto non_zeros = std::next(row_non_zero.begin(), static_cast<s_size_t>(iter_insert.i_row() + 1));
+      non_zeros < row_non_zero.end(); ++(*non_zeros++));
+  const auto distance = std::distance(&*element_value.cbegin(), &*iter_insert);
+  auto iter_entry = element_value.insert(element_value.begin() + distance, value);
+  auto iter_column = column_index.insert(column_index.begin() + distance, i_column);
+  return {{this, iter_insert.i_row(), &*iter_column, &*iter_entry}, true};
+};
 
 std::pair<Matrix_Sparse::iterator_element, bool>
 Matrix_Sparse::insert_or_assign(const std::size_t& i_row, const std::size_t& i_column, const double& value) {
@@ -220,43 +219,66 @@ bool Matrix_Sparse::contains(const std::size_t& i_row, const std::size_t& i_colu
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// Matrix Sparse Row Helper Class
+// Helper Classes for Sparse Matrices
+//----------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Row Non-Const Helper
 //----------------------------------------------------------------------------------------------------------------------
 
-Iterator_Matrix_Sparse_Element Matrix_Sparse_Row::begin() {
-  auto iter = matrix->begin(row_index);
-  return {matrix, row_index, &(*iter.first), &(*iter.second)};
+Matrix_Sparse_Row::iterator Matrix_Sparse_Row::begin() {
+  const std::size_t& offset = matrix->row_non_zero[row_index];
+  return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
 }
 
-Iterator_Matrix_Sparse_Element Matrix_Sparse_Row::end() {
-  auto iter = matrix->begin_column(row_index + 1);
-  return {matrix, row_index, &(*iter.first), &(*iter.second)};
+Matrix_Sparse_Row::iterator Matrix_Sparse_Row::end() {
+  const std::size_t& offset = matrix->row_non_zero[row_index + 1];
+  return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
+}
+
+Matrix_Sparse_Row::const_iterator Matrix_Sparse_Row::begin() const{
+  const std::size_t& offset = matrix->row_non_zero[row_index];
+  return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
+}
+
+Matrix_Sparse_Row::const_iterator Matrix_Sparse_Row::end() const{
+  const std::size_t& offset = matrix->row_non_zero[row_index + 1];
+  return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
+}
+
+double& Matrix_Sparse_Row::operator[](const std::size_t& i_column) {
+  auto iter_element = matrix->find(row_index, i_column);
+  if(iter_element == end()) iter_element = matrix->insert(iter_element, i_column, 0.0).first;
+  return *iter_element;
+}
+
+const double& Matrix_Sparse_Row::operator[](const std::size_t& i_column) const {
+  ASSERT_DEBUG(matrix->contains(row_index, i_column),
+               "Trying to access a zero element at [" + matrix->row_column(row_index, i_column) + "].");
+  return *matrix->find(row_index, i_column);
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// Iterators for Sparse Matrices
+// Matrix Sparse Row Const Helper
 //----------------------------------------------------------------------------------------------------------------------
+
+Matrix_Sparse_Row_Const::iterator Matrix_Sparse_Row_Const::begin() const {
+  const std::size_t& offset = matrix->row_non_zero[row_index];
+  return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
+
+}
+
+Matrix_Sparse_Row_Const::iterator Matrix_Sparse_Row_Const::end() const {
+  const std::size_t& offset = matrix->row_non_zero[row_index + 1];
+  return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
+}
+
+const double& Matrix_Sparse_Row_Const::operator[](const std::size_t& i_column) const {
+  ASSERT_DEBUG(matrix->contains(row_index, i_column),
+               "Trying to access a zero element at [" + matrix->row_column(row_index, i_column) + "].");
+  return *matrix->find(row_index, i_column);
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 // Stand Alone Sparse Matrix Operators
 //----------------------------------------------------------------------------------------------------------------------
 
-double& Matrix_Sparse_Row::operator[](const std::size_t& column) {
-  auto col_iter = std::lower_bound(offset.begin(), offset.end(), column);
-
-  //  if(col_iter == offset.end()) {
-  //    matrix->insert(row_index, column, 0.0);
-  //    *this = (*matrix)[row_index];
-  //    col_iter = std::lower_bound(offset.begin(), offset.end(), column); // iterator might have been invalidated.
-  //  }
-  return row_entry[std::distance(offset.begin(), col_iter)];
 }
-
-const double& Matrix_Sparse_Row::operator[](const std::size_t& column) const {
-  auto col_iter = std::lower_bound(offset.begin(), offset.end(), column);
-  ASSERT_DEBUG(col_iter != offset.end(), "does not exist.");
-  return row_entry[std::distance(offset.begin(), col_iter)];
-}
-
-}
-
