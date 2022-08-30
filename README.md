@@ -1,7 +1,7 @@
 # Disa
 
 ![GitHub](https://img.shields.io/github/license/bevanwsjones/Disa)
-[![cpp application](https://img.shields.io/github/workflow/status/bevanwsjones/Disa/CMake/main)](https://github.com/bevanwsjones/Disa/actions/workflows/cmake.yml)
+[![CMake](https://github.com/bevanwsjones/Disa/actions/workflows/cmake.yml/badge.svg)](https://github.com/bevanwsjones/Disa/actions/workflows/cmake.yml)
 [![Documentation](https://img.shields.io/badge/docs-docsforge-blue)](https://disa.docsforge.com/)
 
 General purpose linear algebra library with sparse solving capabilities.
