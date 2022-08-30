@@ -171,13 +171,13 @@ public:
    * @brief Checks whether the matrix is empty. An empty matrix is considered where the number of rows is 0.
    * @return True if the matrix is empty, else false.
    */
-  [[nodiscard]] constexpr bool empty() const noexcept { return row_non_zero.empty() || row_non_zero.size() < 2; };
+  [[nodiscard]] bool empty() const noexcept { return row_non_zero.empty() || row_non_zero.size() < 2; };
 
   /**
    * @brief Returns the number of rows in the matrix.
    * @return The number of rows.
    */
-  [[nodiscard]] constexpr std::size_t size_row() const noexcept {
+  [[nodiscard]] std::size_t size_row() const noexcept {
     return !row_non_zero.empty() ? row_non_zero.size() - 1 : 0;
   };
 
@@ -185,19 +185,19 @@ public:
    * @brief Returns the number of columns in the matrix.
    * @return The number of columns.
    */
-  [[nodiscard]] constexpr std::size_t size_column() const noexcept { return column_size; };
+  [[nodiscard]] std::size_t size_column() const noexcept { return column_size; };
 
   /**
    * @brief Returns the number of non-zeros in the matrix.
    * @return The number of non-zeros.
    */
-  [[nodiscard]] constexpr std::size_t size_non_zero() const noexcept { return column_index.size(); };
+  [[nodiscard]] std::size_t size_non_zero() const noexcept { return column_index.size(); };
 
   /**
    * @brief Returns the number of rows and columns in the matrix. If rows are 0, columns are 0.
    * @return Pair containing [rows, columns].
    */
-  [[nodiscard]] constexpr std::pair<std::size_t, std::size_t> size() const noexcept {
+  [[nodiscard]] std::pair<std::size_t, std::size_t> size() const noexcept {
     return std::make_pair(size_row(), size_column());
   };
 
@@ -206,7 +206,7 @@ public:
    * @param[in] row The number of rows to reserve.
    * @param[in] non_zero The number of non-zeros to reserve. Note this is not the column size.
    */
-  void constexpr reserve(const std::size_t& row, const std::size_t& non_zero) noexcept {
+  void reserve(const std::size_t& row, const std::size_t& non_zero) noexcept {
     row_non_zero.reserve(row);
     column_index.reserve(non_zero);
     element_value.reserve(non_zero);
@@ -218,14 +218,14 @@ public:
    *
    * Note: The number of row offsets (for CSR matrices) is always one greater than the actual matrix row size.
    */
-  [[nodiscard]] constexpr std::pair<std::size_t, std::size_t> capacity() const noexcept {
+  [[nodiscard]] std::pair<std::size_t, std::size_t> capacity() const noexcept {
     return std::make_pair(row_non_zero.capacity(), column_index.capacity());
   };
 
   /**
    * @brief reduces memory usage by the matrix by freeing unused memory for both rows and non-zeros
    */
-  constexpr void shrink_to_fit() noexcept {
+  void shrink_to_fit() noexcept {
     row_non_zero.shrink_to_fit();
     column_index.shrink_to_fit();
     element_value.shrink_to_fit();
@@ -238,7 +238,7 @@ public:
   /**
    * @brief Clears the contents of the matrix, sets the column size to zero.
    */
-  constexpr void clear() noexcept {
+  void clear() noexcept {
     row_non_zero.clear();
     column_index.clear();
     element_value.clear();
@@ -280,7 +280,7 @@ public:
    *
    * Note: Does not effect number of non-zeros.
    */
-  constexpr void resize(const std::size_t& row, const std::size_t& column) noexcept {
+  void resize(const std::size_t& row, const std::size_t& column) noexcept {
     row_non_zero.resize(row + 1, row_non_zero.empty() ? 0 : row_non_zero.back());
     column_size = column;
   };
@@ -289,7 +289,7 @@ public:
    * @brief Swaps the contents of the matrix with the parsed matrix
    * @param[in,out] other The other matrix, this matrix will obtain the other's value and visa versa.
    */
-  constexpr void swap(Matrix_Sparse& other) noexcept {
+  void swap(Matrix_Sparse& other) noexcept {
     std::swap(row_non_zero, other.row_non_zero);
     std::swap(column_index, other.column_index);
     std::swap(element_value, other.element_value);
