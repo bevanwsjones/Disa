@@ -34,6 +34,7 @@ set(CMAKE_CXX_STANDARD 20)
 option(ENABLE_TEST "Turn on to enable tests" ON)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDISA_DEBUG")
+add_compile_definitions("DISA_DEBUG")
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Project Setup
@@ -62,16 +63,17 @@ set(SOURCES
         src/matrix_sparse.cpp
         )
 
-add_library(disa STATIC ${SOURCES})
+add_library(disa ${SOURCES})
 set_target_properties(disa PROPERTIES LINKER_LANGUAGE CXX)
 
 add_executable(example src/main.cpp ${SOURCES})
+target_link_libraries(example disa)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Testing
 # ----------------------------------------------------------------------------------------------------------------------
 
-if (ENABLE_TEST)
+if(ENABLE_TEST)
 
   include(FetchContent)
   FetchContent_Declare(googletest GIT_REPOSITORY https://github.com/google/googletest.git GIT_TAG release-1.12.1)
