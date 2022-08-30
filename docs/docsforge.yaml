@@ -8,6 +8,3 @@ autodocSettings:
   Public API:
     language: cpp
     INPUT: include src
-
-    # MathJax support
-    markdown_math: true
