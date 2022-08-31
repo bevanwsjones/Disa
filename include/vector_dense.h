@@ -44,6 +44,7 @@ namespace Disa {
  * @brief Mathematical Vector, of dimension _size, where every vector element has allocated has memory.
  * @tparam _size The size of the vector, if 0 a specialisation of the class is created.
  *
+ * @details
  * The Vector_Dense struct implements a mathematical vector of real numbers. Disa does not make distinctions row and
  * column vectors, as such this information is not stored.
  *

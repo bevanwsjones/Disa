@@ -88,6 +88,9 @@ TEST(test_matrix_sparse_row, operator_subscript) {
   EXPECT_DOUBLE_EQ(matrix_1[0][0], 1.0);
   EXPECT_DOUBLE_EQ(matrix_1[0][1], 3.0);
   EXPECT_DOUBLE_EQ(matrix_1[1][1], 2.0);
+
+  // Check debug for const matrix.
+  EXPECT_DEATH(matrix_1[1][0], "./*");
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -359,7 +362,6 @@ TEST(test_matrix_sparse_row, swap) {
 
 TEST(test_matrix_sparse_row, find) {
   Matrix_Sparse matrix({0, 1, 3, 3}, {1, 0, 2}, {3.0, 4.0, 5.0}, 3);
-
   EXPECT_EQ(matrix.find(0, 0), matrix[0].end());
   EXPECT_EQ(matrix.find(0, 1).i_row(), 0);
   EXPECT_EQ(matrix.find(0, 1).i_column(), 1);
@@ -404,7 +406,6 @@ TEST(test_matrix_sparse_row, contains) {
 
 TEST(test_matrix_sparse_row, lower_bound) {
   Matrix_Sparse matrix({0, 1, 3, 3}, {1, 0, 2}, {3.0, 4.0, 5.0}, 3);
-
   EXPECT_EQ(matrix.lower_bound(0, 0).i_row(), 0);
   EXPECT_EQ(matrix.lower_bound(0, 0).i_column(), 1);
   EXPECT_EQ(matrix.lower_bound(0, 1).i_row(), 0);
@@ -422,7 +423,6 @@ TEST(test_matrix_sparse_row, lower_bound) {
   EXPECT_EQ(matrix.lower_bound(3, 3), matrix.end()->end());
 
   const Matrix_Sparse matrix_const({0, 1, 3, 3}, {1, 0, 2}, {3.0, 4.0, 5.0}, 3);
-
   EXPECT_EQ(matrix_const.lower_bound(0, 0).i_row(), 0);
   EXPECT_EQ(matrix_const.lower_bound(0, 0).i_column(), 1);
   EXPECT_EQ(matrix_const.lower_bound(0, 1).i_row(), 0);

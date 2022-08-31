@@ -45,6 +45,7 @@ namespace Disa {
  * @tparam _row The number of rows in the matrix, if 0 a specialisation of the class is created.
  * @tparam _col The number of columns in the matrix, if 0 a specialisation of the class is created.
  *
+ * @details
  * The Matrix_Dense struct implements a mathematical matrix of nxm real numbers.
  *
  * To avoid massive boiler plate the matrix inherits from std::array, which implies the matrix's dimension is fixed at
