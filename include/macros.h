@@ -27,6 +27,7 @@
 #include <string>
 #include <type_traits>
 
+
 namespace Disa {
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -111,11 +112,15 @@ inline std::basic_string<char> console_format(const Log_Level level, const std::
  * \param[in] message The error message to print to the error stream if the condition is false.
  */
 #define ASSERT_DEBUG(condition, message) ASSERT(condition, message)
-#elif
+#else
 #define ASSERT_DEBUG(condition, exception) {}
 #endif
 
-typedef std::make_signed<std::size_t>::type size_t_signed;    //!< Signed type for size type, used for conversion.
+// ---------------------------------------------------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------------------------------------------------
+
+typedef std::make_signed<std::size_t>::type s_size_t;    //!< Signed type for size type, used for conversion.
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Looping Macros
@@ -137,10 +142,25 @@ typedef std::make_signed<std::size_t>::type size_t_signed;    //!< Signed type f
 
 /**
  * \brief Range based for-loop macro
- * \param[in, out] element Constant reference to the elements in the container.
+ * \param[in, out] element reference to the elements in the container.
  * \param[in] container Container to loop over
  */
 #define FOR_EACH_REF(element, container) for(auto& (element) : (container))
+
+/**
+ * \brief Iterator based for-loop macro
+ * \param[in, out] iter Constant reference to the elements in the container.
+ * \param[in] container Container acquire the iterator from, must have cbegin() and cend() functions.
+ */
+#define FOR_ITER(iter, container) for(auto (iter) = (container).cbegin(); (iter) != (container).cend(); ++(iter))
+
+/**
+ * \brief Iterator based for-loop macro
+ * \param[in, out] iter Reference to the elements in the container.
+ * \param[in] container Container acquire the iterator from, must have cbegin() and cend() functions.
+ */
+#define FOR_ITER_REF(iter, container) for(auto (iter) = (container).begin(); (iter) != (container).end(); ++(iter))
+
 
 }//Disa
 
