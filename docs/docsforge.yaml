@@ -5,14 +5,11 @@ sidebar:
   Development:
     - Conventions: docs/conventions.md
   Important API:
-    Data Containers:
-      Matrices:
-        - Dense Dynamic Matrices: api/Disa/Matrix_Dense< 0, 0 >
-        - Dense Static Matrices: api/Disa/Matrix_Dense
-        - Sparse Matrices: api/Disa/Matrix_Sparse
-      Vectors:
-        - Dense Dynamic Vectors: api/Disa/Vector_Dense< 0 >
-        - Dense Static Vectors: api/Disa/Vector_Dense
+    - Dense Dynamic Matrices: api/Disa/Matrix_Dense< 0, 0 >
+    - Dense Static Matrices: api/Disa/Matrix_Dense
+    - Sparse Matrices: api/Disa/Matrix_Sparse
+    - Dense Dynamic Vectors: api/Disa/Vector_Dense< 0 >
+    - Dense Static Vectors: api/Disa/Vector_Dense
 autodocSettings:
   Public API:
     language: cpp

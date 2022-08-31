@@ -48,32 +48,35 @@ template<typename _matrix_type> struct Iterator_Matrix_Sparse_Element;
  * The Matrix_Sparse struct implements a mathematical matrix of nxm real numbers, but only stores memory for non-zero
  * entries.
  *
- * The CSR approach stores three vectors; the first indicates the number of non-zeros per row (row_non_zero), this is
- * achieved by storing for each element (row) in row_non_zero the accumulated non-zeros to that row. With the last
- * element being one greater than n, the number of rows, and storing the total non-zeros in the matrix. The next vector
- * stores the column indexes for each non-zero matrix index (column_index), and for each row the is sorted in an
- * ascending manner. The start of each row's columns in column index is given by the value in row_non_zero for the row.
- * Finally, the last vector contains the values of each non-zero element (element_value) and has a one-to-one
- * correspondence with column_index. The last piece of data stored is the number of columns in the matrix, this ensures
- * correctness of mathematical operations.
+ * A CSR matrix stores three vectors; the first indicates the number of non-zeros per row (row_non_zero), this is
+ * achieved by recording, for each element (row) in the row_non_zero vector the accumulated non-zeros upto that row.
+ * With the last element being one greater than n, the number of rows, and recording the total number of non-zeros in
+ * the matrix. The next vector stores the column indexes (column_index) for each non-zero matrix element, and for each
+ * row the indexes are sorted in an ascending manner. The start of each row's columns in the column index vector is
+ * given by the value in row_non_zero for that row. Finally, the last vector contains the values of each non-zero
+ * element (element_value) and has a one-to-one correspondence with column_index vector. The last piece of data stored
+ * is the number of columns in the matrix, this ensures correctness of mathematical operations.
  *
  * From a design perspective the class has two goals. The first is for the class to have a behaviour similar to that of
  * a dense matrix for sub-script operators and class iterators. This is achieved via a helper class and two iterator
  * classes which allow (range) loops over rows and then columns, further non-const subscript operators are fully able to
- * add non-zero entries to the matrix (just be away this may invalidate iterators). Finally, the use of iterators (when)
- * accessed sequentially allows for efficient caching, the use of the i_row() and i_column() functions also allow for
- * the iterator to provide use for information about the dereferenceable matrix entry.
+ * add non-zero entries to the matrix (just be aware this may invalidate iterators). Finally, the use of iterators
+ * (when) accessed sequentially allows for efficient caching, the use of the element_iterator::i_row() and
+ * element_iterator::i_column() functions also allow for the iterator to provide use for information about the
+ * dereferenceable matrix entry.
  *
  * The second goal is to have have the class have a behaviour similar to a std::map structure, where the 'key' is the
  * row-column index pair for an entry. Thus functions, not normally associated with continuous structures (eg find,
- * contains, lower_bound, etc) are supported by the matrix.
+ * contains, lower_bound, etc), are supported by the matrix.
  *
  * Note: The user should be aware of the following:
  * 1. Iterators advance over non-zero data - i.e. an iterator will not be dereferenceable to a zero entry (when defined
  *    behaviour is expected).
- * 2. Unlike a map or vector insertion or erasure does not effect the size of the matrix only the number of non-zeroes.
- * 3. Sub-script operators behave like a map in terms of overflow, i.e. the matrix is resized to accommodate entries
- *    added past the last row or column.
+ * 2. Unlike map or vector erasure functions do not effect the size of the matrix only the number of non-zeroes.
+ * 2. Unlike map or vector insertion functions, size is only changed if the row or column index exceeds the matrix row
+ *    or column size respectively, the number of non-zeroes will however always change.
+ * 3. Non-const sub-script operators behave like a map in terms of overflow, i.e. the matrix is resized to accommodate
+ *    entries added past the last row or column.
  * 4. As with all 'end() iterators', dereferencing should be considered undefined behaviour, with particular focus on
  *    a row end() iterator, which may dereference to the first entry on the next row (you have been warned).
  *
