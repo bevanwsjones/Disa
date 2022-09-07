@@ -145,6 +145,7 @@ Matrix_Sparse::insert_or_assign(const std::size_t& i_row, const std::size_t& i_c
   return iter_inserted;
 }
 
+
 Matrix_Sparse::iterator_element
 Matrix_Sparse::erase(const Iterator_Matrix_Sparse_Element<Matrix_Sparse>& iter_element) {
   ASSERT_DEBUG(iter_element != end()->end() && iter_element != (*this)[iter_element.i_row()].end() &&
@@ -156,6 +157,38 @@ Matrix_Sparse::erase(const Iterator_Matrix_Sparse_Element<Matrix_Sparse>& iter_e
   return {this, iter_element.i_row(), &*(column_index.erase(column_index.begin() + distance)),
           &*(element_value.erase(element_value.begin() + distance))};
 };
+
+void Matrix_Sparse::resize(const std::size_t& row, const std::size_t& column) {
+  ASSERT_DEBUG(row != 0 || column == 0,
+               "Attempting to size a matrix with zero rows but "+ std::to_string(column) + " columns.");
+
+  // resize rows first
+  if(row < size_row()) {
+    column_index.resize(row_non_zero[row]);
+    element_value.resize(row_non_zero[row]);
+  }
+  row_non_zero.resize(row + 1, row_non_zero.empty() ? 0 : row_non_zero.back());
+
+  // resize columns
+  // Note: Since we may have to do column erases over multiple rows we do it directly here rather than use erase().
+  if(column < size_column()) {
+    std::size_t offset_loss = 0;
+    FOR(i_row, size_row()) {
+      const auto& iter_column_end = column_index.begin() + static_cast<s_size_t>(row_non_zero[i_row + 1] - offset_loss);
+      auto iter_column = std::upper_bound(column_index.begin() + static_cast<s_size_t>(row_non_zero[i_row]),
+                                          iter_column_end, column - 1);
+      if(iter_column != iter_column_end) {
+        const s_size_t& start_distance = std::distance(column_index.begin(), iter_column);
+        const s_size_t& end_distance = std::distance(column_index.begin(), iter_column_end);
+        column_index.erase(iter_column, iter_column_end);
+        element_value.erase(element_value.begin() + start_distance, element_value.begin() + end_distance);
+        offset_loss += end_distance - start_distance;
+      }
+      row_non_zero[i_row + 1] -= offset_loss;
+    }
+  }
+  column_size = column;
+}
 
 //--------------------------------------------------------------------------------------------------------------------
 // Lookup
