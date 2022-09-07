@@ -390,8 +390,6 @@ TEST(test_matrix_sparse_row, resize) {
   EXPECT_EQ(matrix.size_row(), 0);
   EXPECT_EQ(matrix.size_column(), 0);
   EXPECT_EQ(matrix.size_non_zero(), 0);
-
-  EXPECT_DEATH(matrix.resize(0, 1), "./*");
 }
 
 TEST(test_matrix_sparse_row, swap) {

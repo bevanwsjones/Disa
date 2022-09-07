@@ -159,8 +159,6 @@ Matrix_Sparse::erase(const Iterator_Matrix_Sparse_Element<Matrix_Sparse>& iter_e
 };
 
 void Matrix_Sparse::resize(const std::size_t& row, const std::size_t& column) {
-  ASSERT_DEBUG(row != 0 || column == 0,
-               "Attempting to size a matrix with zero rows but "+ std::to_string(column) + " columns.");
 
   // resize rows first
   if(row < size_row()) {
