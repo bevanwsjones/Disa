@@ -329,6 +329,8 @@ TEST(test_matrix_sparse_row, erase) {
 
 TEST(test_matrix_sparse_row, resize) {
   Matrix_Sparse matrix;
+
+  // check row and column expansion
   matrix.resize(5, 9);
   EXPECT_FALSE(matrix.empty());
   EXPECT_EQ(matrix.size_row(), 5);
@@ -336,6 +338,58 @@ TEST(test_matrix_sparse_row, resize) {
   EXPECT_EQ(matrix.size_non_zero(), 0);
   EXPECT_EQ(matrix.size().first, std::make_pair(5, 9).first);
   EXPECT_EQ(matrix.size().second, std::make_pair(5, 9).second);
+
+  // check row reduction
+  matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+  matrix.resize(3, 5);
+  EXPECT_EQ(matrix.size_row(), 3);
+  EXPECT_EQ(matrix.size_column(), 5);
+  EXPECT_EQ(matrix.size_non_zero(), 5);
+
+  // check column reduction
+  matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+  matrix.resize(4, 2);
+  EXPECT_EQ(matrix.size_row(), 4);
+  EXPECT_EQ(matrix.size_column(), 2);
+  EXPECT_EQ(matrix.size_non_zero(), 2);
+  EXPECT_EQ(matrix[0][1], 1.0);
+  EXPECT_EQ(matrix[1][0], 4.0);
+
+  // check row reduction with column expansion
+  matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+  matrix.resize(2, 8);
+  EXPECT_EQ(matrix.size_row(), 2);
+  EXPECT_EQ(matrix.size_column(), 8);
+  EXPECT_EQ(matrix.size_non_zero(), 5);
+  EXPECT_EQ(matrix[0][1], 1.0);
+  EXPECT_EQ(matrix[0][3], 2.0);
+  EXPECT_EQ(matrix[1][0], 4.0);
+  EXPECT_EQ(matrix[1][2], 3.0);
+  EXPECT_EQ(matrix[1][3], 5.0);
+
+  // check row expansion with column reduction
+  matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+  matrix.resize(10, 2);
+  EXPECT_EQ(matrix.size_row(), 10);
+  EXPECT_EQ(matrix.size_column(), 2);
+  EXPECT_EQ(matrix.size_non_zero(), 2);
+  EXPECT_EQ(matrix[0][1], 1.0);
+  EXPECT_EQ(matrix[1][0], 4.0);
+
+  // check row and column reduction
+  matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+  matrix.resize(1, 2);
+  EXPECT_EQ(matrix.size_row(), 1);
+  EXPECT_EQ(matrix.size_column(), 2);
+  EXPECT_EQ(matrix.size_non_zero(), 1);
+  EXPECT_EQ(matrix[0][1], 1.0);
+
+  // check zero sizing.
+  matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+  matrix.resize(0, 0);
+  EXPECT_EQ(matrix.size_row(), 0);
+  EXPECT_EQ(matrix.size_column(), 0);
+  EXPECT_EQ(matrix.size_non_zero(), 0);
 }
 
 TEST(test_matrix_sparse_row, swap) {

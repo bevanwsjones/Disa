@@ -303,12 +303,9 @@ public:
    * @param[in] row Number of rows to resized the matrix to.
    * @param[in] column Number of columns to resized the matrix to.
    *
-   * Note: Does not effect number of non-zeros.
+   * Note: Does not effect number of non-zeros, unless the new row and column sizes reduce the size of the matrix.
    */
-  void resize(const std::size_t& row, const std::size_t& column) noexcept {
-    row_non_zero.resize(row + 1, row_non_zero.empty() ? 0 : row_non_zero.back());
-    column_size = column;
-  };
+  void resize(const std::size_t& row, const std::size_t& column);
 
   /**
    * @brief Swaps the contents of the matrix with the parsed matrix
@@ -354,7 +351,7 @@ public:
   [[nodiscard]] bool contains(const std::size_t& i_row, const std::size_t& i_column) const;
 
   /**
-   * @brief returns an element iterator to the first element not less than the given key
+   * @brief Returns an element iterator to the first element not less than the given key.
    * @param[in] i_row The row index to the element.
    * @param[in] i_column The column index of the element.
    * @return Iterator pointing to the first element that is not less than key.
@@ -364,7 +361,7 @@ public:
   iterator_element lower_bound(const std::size_t& i_row, const std::size_t& i_column);
 
   /**
-   * @brief returns an element iterator to the first element not less than the given key
+   * @brief Returns an element iterator to the first element not less than the given key.
    * @param[in] i_row The row index to the element.
    * @param[in] i_column The column index of the element.
    * @return Const iterator pointing to the first element that is not less than key.
@@ -388,7 +385,7 @@ private:
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * @brief Converts and formates a row and colum index to string.
+   * @brief Converts and formats a row and colum index to string.
    * @param[in] i_row The row index.
    * @param[in] i_column The column index.
    * @return Formatted string.
