@@ -13,7 +13,6 @@ General purpose linear algebra library with sparse solving capabilities.
 ## Design Goals:
 
 - Easy to use linear algebra objects, static vs. dynamic vs. sparse
-  - Interoperability of containers.
   - Containers should feel natural to use, almost as an extension of the `C++ stl`.
 
 ## Behaviour Notes:
