@@ -24,6 +24,7 @@
 #define DISA_MATRIX_SPARSE_H
 
 #include "macros.h"
+#include "vector_dense.h"
 
 #include <numeric>
 #include <vector>
@@ -31,9 +32,13 @@
 namespace Disa {
 
 // Forward declarations
-template<typename _matrix_type> class Matrix_Sparse_Row;
-template<typename _matrix_type> struct Iterator_Matrix_Sparse_Row;
-template<typename _matrix_type> struct Iterator_Matrix_Sparse_Element;
+template<typename _matrix_type>
+class Matrix_Sparse_Row;
+
+template<typename _matrix_type>
+struct Iterator_Matrix_Sparse_Row;
+template<typename _matrix_type>
+struct Iterator_Matrix_Sparse_Element;
 
 //----------------------------------------------------------------------------------------------------------------------
 // Matrix Sparse
@@ -87,10 +92,11 @@ class Matrix_Sparse {
 
 public:
   // shorthands
-  using iterator = Iterator_Matrix_Sparse_Row<Matrix_Sparse>;
-  using const_iterator = Iterator_Matrix_Sparse_Row<const Matrix_Sparse>;
-  using iterator_element = Iterator_Matrix_Sparse_Element<Matrix_Sparse>;
-  using const_iterator_element = Iterator_Matrix_Sparse_Element<const Matrix_Sparse>;
+  using matrix = Matrix_Sparse;
+  using iterator = Iterator_Matrix_Sparse_Row<matrix>;
+  using const_iterator = Iterator_Matrix_Sparse_Row<const matrix>;
+  using iterator_element = Iterator_Matrix_Sparse_Element<matrix>;
+  using const_iterator_element = Iterator_Matrix_Sparse_Element<const matrix>;
 
   //--------------------------------------------------------------------------------------------------------------------
   // Public Member functions
@@ -128,25 +134,54 @@ public:
    * @param[in] other The other sparse matrix.
    * @return Updated copy of this matrix.
    */
-  Matrix_Sparse& operator=(const Matrix_Sparse& other) = default;
+  matrix& operator=(const matrix& other) = default;
 
   //--------------------------------------------------------------------------------------------------------------------
   // Element Access
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * @brief Subscript operator for access to a specified matrix row.
-   * @param[in] i_row The row index of the matrix.
-   * @return A sparse matrix row helper class, providing further operators for column access.
+   * @brief Access specified element with bounds checking.
+   * @param[in] i_row The row index of the element.
+   * @param[in] i_column The column index of the element.
+   * @return Value of the element.
    */
-  Matrix_Sparse_Row<Matrix_Sparse> operator[](const std::size_t& i_row);
+  [[nodiscard]] double& at(const std::size_t& i_row, const std::size_t& i_column);
+
+  /**
+   * @brief Access specified element with bounds checking.
+   * @param[in] i_row The row index of the element.
+   * @param[in] i_column The column index of the element.
+   * @return Value of the element.
+   */
+  [[nodiscard]] const double& at(const std::size_t& i_row, const std::size_t& i_column) const;
 
   /**
    * @brief Subscript operator for access to a specified matrix row.
-   * @param[in] i_row The row index of the matrix.
+   * @param[in] i_row The row index of the element.
+   * @return A sparse matrix row helper class, providing further operators for column access.
+   */
+  Matrix_Sparse_Row<matrix> operator[](const std::size_t& i_row);
+
+  /**
+   * @brief Subscript operator for access to a specified matrix row.
+   * @param[in] i_row The row index of the element.
    * @return A constant sparse matrix row helper class, providing further operators for column access.
    */
-  Matrix_Sparse_Row<const Matrix_Sparse> operator[](const std::size_t& i_row) const;
+  Matrix_Sparse_Row<const matrix> operator[](const std::size_t& i_row) const;
+
+  /**
+   * @brief Direct access to the underlying array of the sparse matrix.
+   * @return tuple [pointer to non zero offset start, pointer to column index start, pointer to double start].
+   *
+   * Note: If empty all pointers will be nullptrs, if the size_non_zero is 0 the element and column index will be
+   *       nullptrs.
+   */
+  std::tuple<std::size_t*, std::size_t*, double*> inline data() noexcept {
+    if(!empty() && !size_non_zero()) std::make_tuple(row_non_zero.data(), column_index.data(), element_value.data());
+    else if(!size_non_zero()) return std::make_tuple(row_non_zero.data(), nullptr, nullptr);
+    else return std::make_tuple(nullptr, nullptr, nullptr);
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Iterators
@@ -196,13 +231,13 @@ public:
    * @brief Checks whether the matrix is empty. An empty matrix is considered where the number of rows is 0.
    * @return True if the matrix is empty, else false.
    */
-  [[nodiscard]] bool empty() const noexcept { return row_non_zero.empty() || row_non_zero.size() < 2; };
+  [[nodiscard]] inline bool empty() const noexcept { return row_non_zero.empty() || row_non_zero.size() < 2; };
 
   /**
    * @brief Returns the number of rows in the matrix.
    * @return The number of rows.
    */
-  [[nodiscard]] std::size_t size_row() const noexcept {
+  [[nodiscard]] inline std::size_t size_row() const noexcept {
     return !row_non_zero.empty() ? row_non_zero.size() - 1 : 0;
   };
 
@@ -210,29 +245,31 @@ public:
    * @brief Returns the number of columns in the matrix.
    * @return The number of columns.
    */
-  [[nodiscard]] std::size_t size_column() const noexcept { return column_size; };
+  [[nodiscard]] inline std::size_t size_column() const noexcept { return column_size; };
 
   /**
    * @brief Returns the number of non-zeros in the matrix.
    * @return The number of non-zeros.
    */
-  [[nodiscard]] std::size_t size_non_zero() const noexcept { return column_index.size(); };
+  [[nodiscard]] inline std::size_t size_non_zero() const noexcept { return column_index.size(); };
 
   /**
    * @brief Returns the number of rows and columns in the matrix. If rows are 0, columns are 0.
    * @return Pair containing [rows, columns].
    */
-  [[nodiscard]] std::pair<std::size_t, std::size_t> size() const noexcept {
+  [[nodiscard]] inline std::pair<std::size_t, std::size_t> size() const noexcept {
     return std::make_pair(size_row(), size_column());
   };
 
   /**
    * @brief Reserves storage for the matrix.
-   * @param[in] row The number of rows to reserve.
+   * @param[in] row The number of rows to reserve for.
    * @param[in] non_zero The number of non-zeros to reserve. Note this is not the column size.
+   *
+   * Note: The number of row offsets which are reserved will be one greater than the row size passed.
    */
-  void reserve(const std::size_t& row, const std::size_t& non_zero) noexcept {
-    row_non_zero.reserve(row);
+  inline void reserve(const std::size_t& row, const std::size_t& non_zero) noexcept {
+    row_non_zero.reserve(row + 1);
     column_index.reserve(non_zero);
     element_value.reserve(non_zero);
   };
@@ -243,14 +280,14 @@ public:
    *
    * Note: The number of row offsets (for CSR matrices) is always one greater than the actual matrix row size.
    */
-  [[nodiscard]] std::pair<std::size_t, std::size_t> capacity() const noexcept {
+  [[nodiscard]] inline std::pair<std::size_t, std::size_t> capacity() const noexcept {
     return std::make_pair(row_non_zero.capacity(), column_index.capacity());
   };
 
   /**
    * @brief reduces memory usage by the matrix by freeing unused memory for both rows and non-zeros
    */
-  void shrink_to_fit() noexcept {
+  inline void shrink_to_fit() noexcept {
     row_non_zero.shrink_to_fit();
     column_index.shrink_to_fit();
     element_value.shrink_to_fit();
@@ -263,7 +300,7 @@ public:
   /**
    * @brief Clears the contents of the matrix, sets the column size to zero.
    */
-  void clear() noexcept {
+  inline void clear() noexcept {
     row_non_zero.clear();
     column_index.clear();
     element_value.clear();
@@ -272,8 +309,8 @@ public:
 
   /**
    * @brief Inserts an value with the parsed value at [i_row, i_column], if an value exists nothing occurs.
-   * @param[in] i_row The i_row index to insert the value.
-   * @param[in] i_column The i_column index to insert the value.
+   * @param[in] i_row The i_row index to the insert value.
+   * @param[in] i_column The i_column index to the insert value.
    * @param[in] value The value to insert.
    * @return [iterator to the inserted or existing element, true if insertion took place, else false].
    */
@@ -281,8 +318,8 @@ public:
 
   /**
    * @brief Inserts or updates an value with the parsed value at [i_row, i_column].
-   * @param[in] i_row The i_row index to insert the value.
-   * @param[in] i_column The i_column index to insert the value.
+   * @param[in] i_row The i_row index to the insert value.
+   * @param[in] i_column The i_column index to the insert value.
    * @param[in] value The value to insert.
    * @return [iterator to the inserted or existing element, true if insertion took place, else false].
    */
@@ -296,7 +333,7 @@ public:
    *
    * Note: Undefined behaviour exists if the element does not exist, i.e. the iterator must be dereferenceable.
    */
-  iterator_element erase(const Iterator_Matrix_Sparse_Element<Matrix_Sparse>& iter_element);
+  iterator_element erase(const Iterator_Matrix_Sparse_Element<matrix>& iter_element);
 
   /**
    * @brief Changes the number of rows and columns of the matrix.
@@ -311,7 +348,7 @@ public:
    * @brief Swaps the contents of the matrix with the parsed matrix
    * @param[in,out] other The other matrix, this matrix will obtain the other's value and visa versa.
    */
-  void swap(Matrix_Sparse& other) noexcept {
+  inline void swap(matrix& other) noexcept {
     std::swap(row_non_zero, other.row_non_zero);
     std::swap(column_index, other.column_index);
     std::swap(element_value, other.element_value);
@@ -371,6 +408,53 @@ public:
   [[nodiscard]] const_iterator_element lower_bound(const std::size_t& i_row, const std::size_t& i_column) const;
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Mathematical Assignment Operators
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @brief Multiplies the matrix by a scalar, A' = A*b, where A is the matrix and b is the scalar.
+   * @param[in] scalar Scalar value, b, to multiply the matrix by.
+   * @return Updated matrix (A').
+   */
+  inline matrix& operator*=(const double& scalar) {
+    FOR_EACH_REF(element, element_value) element *= scalar;
+    return *this;
+  }
+
+  /**
+   * @brief Divides the matrix by a scalar, A' = A/b, where A is the matrix and b is a scalar.
+   * @param[in] scalar Scalar value, b, to multiply the vector by.
+   * @return Updated matrix (A').
+   *
+   * Note: Division by zero is left to the user to handle.
+   */
+  inline matrix& operator/=(const double& scalar) {
+    FOR_EACH_REF(element, element_value) element /= scalar;
+    return *this;
+  }
+
+  /**
+   * @brief Addition of a second matrix, A' = A + B, where A and B are matrices.
+   * @param[in] other The second matrix, B, to add.
+   * @return Updated matrix (A').
+   */
+  inline matrix& operator+=(const matrix& other) { return matrix_arithmetic<true>(other); };
+
+  /**
+   * @brief Subtraction by a second matrix, A' = A - B, where A and B are matrices.
+   * @param[in] other The second matrix, B, to subtract.
+   * @return Updated matrix (A').
+   */
+  inline matrix& operator-=(const matrix& other) { return matrix_arithmetic<false>(other); };
+
+  /**
+   * @brief Multiplies this matrix by another, A' = A*B, where A and B are matrices.
+   * @param[in] other The second other, B, to multiply by.
+   * @return Updated matrix (A').
+   */
+  matrix& operator*=(const matrix& other);
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Private Members
   //--------------------------------------------------------------------------------------------------------------------
 
@@ -378,7 +462,7 @@ private:
   std::vector<std::size_t> row_non_zero;    //!< Total non-zero elements in the matrix for each row (size is one greater than number of rows).
   std::vector<std::size_t> column_index;    //!< The column index for each non-zero value, corresponds to value.
   std::vector<double> element_value;        //!< The each non-zero value value, corresponds to column_index.
-  std::size_t column_size {0};              //!< The number of columns of the matrix (used to check validity of operations).
+  std::size_t column_size{0};               //!< The number of columns of the matrix (used to check validity of operations).
 
   //--------------------------------------------------------------------------------------------------------------------
   // Private Member Functions
@@ -406,14 +490,24 @@ private:
    */
   [[nodiscard]] std::string range_column() const { return "[0, " + std::to_string(column_size) + ")"; };
 
+  /**
+   * @brief Performs addition and subtraction operations between this matrix and another, i.e. A' = A + B or A' = A - B.
+   * @tparam _is_add If true, addition is performed else subtraction is performed.
+   * @param[in] other The other matrix B.
+   * @return Updated matrix (A').
+   */
+  template<bool _is_add>
+  Matrix_Sparse& matrix_arithmetic(const Matrix_Sparse& other);
+
+
   // Friend types and functions.
-  friend class Matrix_Sparse_Row<Matrix_Sparse>;
-  friend class Matrix_Sparse_Row<const Matrix_Sparse>;
-  friend struct Iterator_Matrix_Sparse_Row<Matrix_Sparse>;
-  friend struct Iterator_Matrix_Sparse_Row<const Matrix_Sparse>;
-  friend struct Iterator_Matrix_Sparse_Element<Matrix_Sparse>;
-  friend struct Iterator_Matrix_Sparse_Element<const Matrix_Sparse>;
-  friend std::ostream& operator<<(std::ostream& stream, Matrix_Sparse& matrix);
+  friend class Matrix_Sparse_Row<matrix>;
+  friend class Matrix_Sparse_Row<const matrix>;
+  friend struct Iterator_Matrix_Sparse_Row<matrix>;
+  friend struct Iterator_Matrix_Sparse_Row<const matrix>;
+  friend struct Iterator_Matrix_Sparse_Element<matrix>;
+  friend struct Iterator_Matrix_Sparse_Element<const matrix>;
+  friend std::ostream& operator<<(std::ostream& stream, matrix& matrix);
 };
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -443,7 +537,7 @@ public:
    * @tparam _matrix Only enabled if this helper is const.
    * @param[in] other The other const helper.
    */
-  template<typename _matrix, typename std::enable_if_t<std::is_const_v<_matrix>, bool > = true>
+  template<typename _matrix, typename std::enable_if_t<std::is_const_v<_matrix>, bool> = true>
   constexpr explicit Matrix_Sparse_Row(const Matrix_Sparse_Row<const Matrix_Sparse>& other)
     : matrix(other.matrix), row_index(other.row_index) {};
 
@@ -452,7 +546,7 @@ public:
    * @param[in] other The other non-const helper.
    */
   constexpr explicit Matrix_Sparse_Row(const Matrix_Sparse_Row<Matrix_Sparse>& other)
-  : matrix(other.matrix), row_index(other.row_index) {};
+    : matrix(other.matrix), row_index(other.row_index) {};
 
   /**
    * @brief Raw constructor, directly constructs private data.
@@ -460,7 +554,7 @@ public:
    * @param[in] sparse_matrix Pointer to the underlying sparse matrix.
    */
   constexpr Matrix_Sparse_Row(std::size_t i_row, matrix_type* sparse_matrix) noexcept
-  : matrix(sparse_matrix), row_index(i_row) {};
+    : matrix(sparse_matrix), row_index(i_row) {};
 
   //--------------------------------------------------------------------------------------------------------------------
   // Element Access
@@ -474,7 +568,7 @@ public:
    *
    * Note if the element does not exist it is inserted.
    */
-  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool > = true >
+  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool> = true>
   constexpr double& operator[](const std::size_t& i_column) {
     auto iter_element = matrix->lower_bound(row_index, i_column);
     if(iter_element == end() || i_column != iter_element.i_column())
@@ -540,8 +634,8 @@ public:
   //--------------------------------------------------------------------------------------------------------------------
 
 private:
-  _matrix_type* const matrix{nullptr};                              //!< Pointer to the associated sparse matrix.
-  std::size_t row_index{std::numeric_limits<std::size_t>::max()};   //!< Current row index of the iterator.
+  _matrix_type* const matrix {nullptr};                              //!< Pointer to the associated sparse matrix.
+  std::size_t row_index {std::numeric_limits<std::size_t>::max()};   //!< Current row index of the iterator.
 
   // Friend types.
   friend class Matrix_Sparse_Row<Matrix_Sparse>;
@@ -565,11 +659,11 @@ template<typename _matrix_type>
 struct Iterator_Matrix_Sparse_Row {
 
   using iterator_category = std::random_access_iterator_tag;
-  using difference_type   = std::ptrdiff_t;
-  using matrix_type       = _matrix_type;
-  using value_type        = Matrix_Sparse_Row<_matrix_type>;
-  using pointer           = value_type*;
-  using reference         = value_type&;
+  using difference_type = std::ptrdiff_t;
+  using matrix_type = _matrix_type;
+  using value_type = Matrix_Sparse_Row<_matrix_type>;
+  using pointer = value_type*;
+  using reference = value_type&;
 
   //--------------------------------------------------------------------------------------------------------------------
   // Public Member Functions
@@ -579,7 +673,7 @@ struct Iterator_Matrix_Sparse_Row {
    * @brief Constructor from helper class.
    * @param[in] row Sparse Matrix Row helper to initialise from.
    */
-  explicit Iterator_Matrix_Sparse_Row(const value_type& row) : matrix_row(row) {};
+  explicit constexpr Iterator_Matrix_Sparse_Row(const value_type& row) : matrix_row(row) {};
 
   /**
    * @brief Raw constructor, directly constructs the Sparse Matrix Row helper private data.
@@ -587,7 +681,7 @@ struct Iterator_Matrix_Sparse_Row {
    * @param[in] sparse_matrix Pointer to the underlying sparse matrix.
    */
   constexpr Iterator_Matrix_Sparse_Row(std::size_t i_row, matrix_type* sparse_matrix)
-  : matrix_row(value_type(i_row, sparse_matrix)) {};
+    : matrix_row(value_type(i_row, sparse_matrix)) {};
 
   //--------------------------------------------------------------------------------------------------------------------
   // I/O Iterator Support
@@ -616,7 +710,7 @@ struct Iterator_Matrix_Sparse_Row {
    * @tparam _matrix Only enabled if this iterator is for a non-const helper.
    * @return The underlying non-const sparse matrix row helper class.
    */
-  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool > = true >
+  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool> = true>
   constexpr reference operator*() { return matrix_row; }
 
   /**
@@ -632,7 +726,7 @@ struct Iterator_Matrix_Sparse_Row {
    * @tparam _matrix Only enabled if this iterator is for a non-const helper.
    * @return Pointer to the helper class.
    */
-  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool > = true >
+  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool> = true>
   constexpr pointer operator->() { return &matrix_row; }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -710,7 +804,7 @@ struct Iterator_Matrix_Sparse_Row {
    * @param[in] offset The amount to advance the iterator by.
    * @return Updated iterator, row index advanced by the offset amount.
    */
-  Iterator_Matrix_Sparse_Row& operator+=(difference_type offset){
+  Iterator_Matrix_Sparse_Row& operator+=(difference_type offset) {
     matrix_row.row_index += offset;
     return *this;
   };
@@ -720,7 +814,7 @@ struct Iterator_Matrix_Sparse_Row {
    * @param[in] offset The amount to reduce the iterator by.
    * @return Updated iterator, row index reduced by the offset amount.
    */
-  constexpr Iterator_Matrix_Sparse_Row& operator-=(difference_type offset){
+  constexpr Iterator_Matrix_Sparse_Row& operator-=(difference_type offset) {
     matrix_row.row_index -= offset;
     return *this;
   };
@@ -731,7 +825,7 @@ struct Iterator_Matrix_Sparse_Row {
    * @param[in] offset The relative amount to advance the iterator by.
    * @return A non-const sparse matrix row helper with a row index advanced by the offset (relative to this iterator).
    */
-  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool > = true >
+  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool> = true>
   constexpr value_type operator[](const difference_type& offset) {
     return value_type(*std::next(*this, offset));
   }
@@ -767,12 +861,12 @@ template<typename _matrix_type>
 struct Iterator_Matrix_Sparse_Element {
 
   using iterator_category = std::random_access_iterator_tag;
-  using difference_type   = std::ptrdiff_t;
-  using matrix_type       = _matrix_type;
-  using value_type        = std::conditional_t<std::is_const_v<_matrix_type>, const double, double>;
-  using size_type         = std::conditional_t<std::is_const_v<_matrix_type>, const std::size_t, std::size_t>;
-  using pointer           = value_type*;
-  using reference         = value_type&;
+  using difference_type = std::ptrdiff_t;
+  using matrix_type = _matrix_type;
+  using value_type = std::conditional_t<std::is_const_v<_matrix_type>, const double, double>;
+  using size_type = std::conditional_t<std::is_const_v<_matrix_type>, const std::size_t, std::size_t>;
+  using pointer = value_type*;
+  using reference = value_type&;
 
   //--------------------------------------------------------------------------------------------------------------------
   // Public Member Functions
@@ -782,13 +876,13 @@ struct Iterator_Matrix_Sparse_Element {
    * @brief Raw constructor, directly constructs the private data.
    * @param[in] sparse_matrix Pointer to the sparse matrix this iterator is associated with.
    * @param[in] i_row The row index the dereferenceable matrix element is in.
-   * @param[in] i_column_index The column index the dereferenceable matrix element is in.
+   * @param[in] i_column The column index the dereferenceable matrix element is in.
    * @param[in] value Pointer to the the dereferenceable matrix element.
    */
-  Iterator_Matrix_Sparse_Element(matrix_type* sparse_matrix, const std::size_t& i_row, size_type* i_column_index,
-                                 pointer value)
-                                 : row_index(i_row), matrix(sparse_matrix), column_index(i_column_index), value(value)
-                                 {}
+  constexpr Iterator_Matrix_Sparse_Element(matrix_type* sparse_matrix, const std::size_t& i_row, size_type* i_column,
+                                           pointer value)
+                                           : row_index(i_row), matrix(sparse_matrix), column_index(i_column),
+                                           value(value) {}
 
   /**
    * @brief Returns the row index for the dereferenceable matrix element.
@@ -834,7 +928,7 @@ struct Iterator_Matrix_Sparse_Element {
    * @tparam _matrix Only enabled if this iterator is for a non-const matrix.
    * @return The underlying non-const matrix element.
    */
-  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool > = true >
+  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool> = true>
   constexpr reference operator*() { return *value; }
 
   /**
@@ -922,7 +1016,7 @@ struct Iterator_Matrix_Sparse_Element {
    * @param[in] offset The amount to advance the iterator by.
    * @return Updated iterator, column index of non-zero elements advanced by the offset amount.
    */
-  constexpr Iterator_Matrix_Sparse_Element& operator+=(difference_type offset){
+  constexpr Iterator_Matrix_Sparse_Element& operator+=(difference_type offset) {
     this + offset;
     return *this;
   };
@@ -932,7 +1026,7 @@ struct Iterator_Matrix_Sparse_Element {
    * @param[in] offset The amount to reduce the iterator by.
    * @return Updated iterator, column index of non-zero elements reduced by the offset amount.
    */
-  constexpr Iterator_Matrix_Sparse_Element& operator-=(difference_type offset){
+  constexpr Iterator_Matrix_Sparse_Element& operator-=(difference_type offset) {
     this - offset;
     return *this;
   };
@@ -943,7 +1037,7 @@ struct Iterator_Matrix_Sparse_Element {
    * @param[in] offset The relative amount to advance the iterator by.
    * @return A non-const sparse matrix element with a non-zero column index advanced by the offset (relative to this iterator).
    */
-  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool > = true >
+  template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool> = true>
   constexpr reference operator[](const difference_type& i_advance) { return *(value + i_advance); }
 
 
@@ -972,11 +1066,90 @@ private:
 //----------------------------------------------------------------------------------------------------------------------
 // Stand Alone Sparse Matrix Operators
 //----------------------------------------------------------------------------------------------------------------------
+// Arithmetic Operators
+//----------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @brief Multiplies a sparse matrix by a scalar, C = b*A, where A, and C are matrices and b is a scalar
+ * @param[in] scalar The scalar value, b, to multiply the matrix by.
+ * @param[in] matrix The sparse matrix, A, to be multiplied.
+ * @return New sparse matrix, C.
+ */
+inline Matrix_Sparse operator*(const double& scalar, Matrix_Sparse matrix) {
+  return matrix *= scalar;
+}
+
+/**
+ * @brief Divides a sparse matrix by a scalar, C = A/b, where A, and C are sparse matrices and b is a scalar
+ * @param[in] matrix The sparse matrix, A, to be divided.
+ * @param[in] scalar The scalar value, b, to divide the matrix by.
+ * @return New sparse matrix, C.
+ */
+inline Matrix_Sparse operator/(Matrix_Sparse matrix, const double& scalar) {
+  return matrix /= scalar;
+}
+
+/**
+ * @brief Multiplies a sparse matrix and vector, c = A*b, where A is a sparse matrix and c and b are vectors.
+ * @tparam _size The number of column of the A matrix, dynamic/static.
+ * @param[in] matrix The sparse matrix, A, to be multiplied.
+ * @param[in] vector The vector, b, to multiply the matrix by.
+ * @return New vector, c.
+ *
+ * Note: at present for static vectors the matrix must be square.
+ */
+template<std::size_t _size>
+Vector_Dense<_size> operator*(const Matrix_Sparse& matrix, const Vector_Dense<_size>& vector) {
+  ASSERT_DEBUG(matrix.size_column() == vector.size(),
+               "Incompatible vector-matrix dimensions, " + std::to_string(matrix.size_row()) + "," +
+               std::to_string(matrix.size_column()) + " vs. " + std::to_string(vector.size()) + ".");
+  ASSERT_DEBUG(!_size || matrix.size_row() == vector.size(), "For static vectors the matrix must be square.");
+  return Vector_Dense<_size>([&](const std::size_t i_row, double value = 0) {
+    FOR_ITER(iter, *(matrix.begin() + i_row)) value += *iter*vector[iter.i_column()];
+    return value; }, matrix.size_row());
+}
+
+/**
+ * @brief Adds two sparse matrices together, C = A + B, where A, B, and C are sparse matrices
+ * @param[in] matrix_0 The first sparse matrix, A, to add.
+ * @param[in] matrix_1 The second sparse matrix, B, to add.
+ * @return New sparse matrix, C.
+ */
+inline Matrix_Sparse operator+(Matrix_Sparse matrix_0, const Matrix_Sparse& matrix_1) {
+  ASSERT_DEBUG(matrix_0.size() == matrix_1.size(),
+               "Incompatible matrix dimensions, " + std::to_string(matrix_0.size_row()) + "," +
+               std::to_string(matrix_0.size_column()) + " vs. " + std::to_string(matrix_1.size_row()) + "," +
+               std::to_string(matrix_1.size_column()) + ".");
+  matrix_0 += matrix_1;
+  return matrix_0;
+}
+
+/**
+ * @brief Subtracts one sparse matrix from another, C = A - B, where A, B, and C are sparse matrices
+ * @param[in] matrix_0 The sparse matrix, A, to be subtracted from.
+ * @param[in] matrix_1 The sparse matrix, B, to subtract by.
+ * @return New sparse matrix, C.
+ */
+inline Matrix_Sparse operator-(Matrix_Sparse matrix_0, const Matrix_Sparse& matrix_1) {
+  matrix_0 -= matrix_1;
+  return matrix_0;
+}
+
+/**
+ * @brief Multiples two sparse matrices together, C = A*B, where A, B, and C are sparse matrices.
+ * @param[in] matrix_0 The left sparse matrix, A, to multiply.
+ * @param[in] matrix_1 The right sparse matrix, B, to multiply.
+ * @return New sparse matrix, C.
+ */
+inline Matrix_Sparse operator*(Matrix_Sparse matrix_0, const Matrix_Sparse& matrix_1) {
+  matrix_0 *= matrix_1;
+  return matrix_0;
+}
 
 /**
  * @brief Output shift operator - to write to console.
  * @param[in, out] stream Stream object to write to.
- * @param[in] matrix The matrix to write out.
+ * @param[in] matrix The sparse matrix to write out.
  * @return The inputted stream.
  *
  * todo: properly format - this is just here to help occasional debugging.

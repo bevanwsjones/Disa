@@ -97,13 +97,13 @@ struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
    * @brief Returns the number of rows in the matrix.
    * @return The number of rows.
    */
-  constexpr std::size_t size_row() const noexcept { return _row; }
+  [[nodiscard]] constexpr std::size_t size_row() const noexcept { return _row; }
 
   /**
    * @brief Returns the number of columns in the matrix.
    * @return The number of columns.
    */
-  constexpr std::size_t size_column() const noexcept { return _col; }
+  [[nodiscard]] constexpr std::size_t size_column() const noexcept { return _col; }
 
   /**
    * @brief Returns the number of rows and columns in the matrix.
@@ -175,7 +175,7 @@ struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
    * @brief Multiplies the matrix by another matrix, A' = A*B, where A and B are matrices.
    * @tparam _row_other The number of rows of the B matrix, dynamic/static.
    * @tparam _col_other The number of column of the B matrix, dynamic/static.
-   * @param[in] matrix The second matrix, B, to add.
+   * @param[in] matrix The second matrix, B, to multiply by.
    * @return Updated matrix (A').
    *
    * Note: Due to the static nature of the size of rows and columns it is only possible to multiply by square matrices.
@@ -348,7 +348,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
   }
 
   /**
-   * @brief Multiplies the matrix by another matrix, A' = A*B, where A and B are matrices.
+   * @brief Multiplies this matrix by another matrix, A' = A*B, where A and B are matrices.
    * @tparam _row_other The number of rows of the B matrix, dynamic/static.
    * @tparam _col_other The number of column of the B matrix, dynamic/static.
    * @param[in] matrix The second matrix, B, to add.
@@ -368,7 +368,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
     FOR(i_row, size_row()) {
       FOR(i_row_other, matrix.size_row()) {
         FOR(i_column, size_column()) {
-          if (i_row_other == 0) (*this)[i_row][i_column] = 0.0;
+          if(i_row_other == 0) (*this)[i_row][i_column] = 0.0;
           (*this)[i_row][i_column] += copy[i_row][i_row_other]*matrix[i_row_other][i_column];
         }
       }
@@ -376,6 +376,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
     return *this;
   }
 };
+
 //----------------------------------------------------------------------------------------------------------------------
 // Template Meta Programming
 //----------------------------------------------------------------------------------------------------------------------
@@ -438,7 +439,7 @@ constexpr Matrix_Dense<_row, _col> operator/(Matrix_Dense<_row, _col> matrix, co
 template<std::size_t _row, std::size_t _col, std::size_t _size>
 typename StaticPromoter<Vector_Dense<_row>, Vector_Dense<_size> >::type
 constexpr operator*(const Matrix_Dense<_row, _col>& matrix, const Vector_Dense<_size>& vector) {
-  ASSERT_DEBUG(matrix.size_row() == vector.size(),
+  ASSERT_DEBUG(matrix.size_column() == vector.size(),
                "Incompatible vector-matrix dimensions, " + std::to_string(matrix.size_row()) + "," +
                std::to_string(matrix.size_column()) + " vs. " + std::to_string(vector.size()));
   typedef typename StaticPromoter<Vector_Dense<_row>, Vector_Dense<_size> >::type _return_vector;

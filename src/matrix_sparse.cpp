@@ -20,6 +20,7 @@
 //               to sparse matrices.
 // ----------------------------------------------------------------------------------------------------------------------
 
+#include <tuple>
 #include "matrix_sparse.h"
 
 namespace Disa {
@@ -77,9 +78,30 @@ Matrix_Sparse::Matrix_Sparse(std::initializer_list<std::size_t> non_zero, std::i
   }
 }
 
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 // Element Access
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+
+[[nodiscard]] double& Matrix_Sparse::at(const std::size_t& i_row, const std::size_t& i_column) {
+  ASSERT(i_row < size_row(), "Row index " + std::to_string(i_row) + " not in range " + range_row() + ".");
+  ASSERT(i_column < size_column(),
+         "Column index " + std::to_string(i_column) + " not in range " + range_column() + ".");
+  auto iter = lower_bound(i_row, i_column);
+  ASSERT(i_column == iter.i_column(), "Row, column index " + std::to_string(i_row) + ", " + std::to_string(i_column)
+                                      + "not in range " + range_column() + ".");
+
+  return *iter;
+};
+
+[[nodiscard]] const double& Matrix_Sparse::at(const std::size_t& i_row, const std::size_t& i_column) const {
+  ASSERT(i_row < size_row(), "Row index " + std::to_string(i_row) + " not in range " + range_row() + ".");
+  ASSERT(i_column < size_column(),
+         "Column index " + std::to_string(i_column) + " not in range " + range_column() + ".");
+  const auto iter = lower_bound(i_row, i_column);
+  ASSERT(i_column == iter.i_column(), "Row, column index " + std::to_string(i_row) + ", " + std::to_string(i_column)
+                                      + "not in range " + range_column() + ".");
+  return *iter;
+};
 
 Matrix_Sparse_Row<Matrix_Sparse> Matrix_Sparse::operator[](const std::size_t& i_row) {
   return {i_row, this};
@@ -90,9 +112,9 @@ Matrix_Sparse_Row<const Matrix_Sparse> Matrix_Sparse::operator[](const std::size
   return {i_row, this};
 }
 
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 // Element Access
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 Matrix_Sparse::iterator Matrix_Sparse::begin() noexcept {
   return {0, this};
@@ -118,9 +140,9 @@ Matrix_Sparse::const_iterator Matrix_Sparse::cend() const noexcept {
   return end();
 }
 
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 // Modifiers
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 std::pair<Matrix_Sparse::iterator_element, bool>
 Matrix_Sparse::insert(const std::size_t& i_row, const std::size_t& i_column, const double& value) {
@@ -188,9 +210,9 @@ void Matrix_Sparse::resize(const std::size_t& row, const std::size_t& column) {
   column_size = column;
 }
 
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 // Lookup
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 Matrix_Sparse::iterator_element Matrix_Sparse::find(const std::size_t& i_row, const std::size_t& i_column) {
   if(i_row < size_row()) {
@@ -212,7 +234,7 @@ Matrix_Sparse::const_iterator_element Matrix_Sparse::find(const std::size_t& i_r
 
 bool Matrix_Sparse::contains(const std::size_t& i_row, const std::size_t& i_column) const {
   const auto iter_element = find(i_row, i_column);
-  return iter_element.i_row() == i_row && iter_element.i_column() == i_column;
+  return iter_element.i_row() == i_row && iter_element != (*(begin() + static_cast<s_size_t>(i_row))).end();
 }
 
 Matrix_Sparse::iterator_element Matrix_Sparse::lower_bound(const std::size_t& i_row, const std::size_t& i_column) {
@@ -235,10 +257,80 @@ Matrix_Sparse::lower_bound(const std::size_t& i_row, const std::size_t& i_column
 }
 
 //----------------------------------------------------------------------------------------------------------------------
+// Mathematical Assignment Operators
+//----------------------------------------------------------------------------------------------------------------------
+
+/**
+ * SpGEMM algorithm.
+ */
+Matrix_Sparse& Matrix_Sparse::operator*=(const Matrix_Sparse& other) {
+  ASSERT_DEBUG(column_size == other.size_row(),
+               "Incompatible other dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
+               " vs. " + std::to_string(other.size_row()) + "," + std::to_string(other.size_column()) + ".");
+  Matrix_Sparse copy;
+  copy.reserve(size_row(), size_non_zero() + other.size_non_zero());
+  copy.resize(size_row(), other.size_column());
+  std::swap(*this, copy);
+  FOR_EACH_REF(iter_row, copy) {
+    FOR_ITER_REF(iter_element, iter_row) {
+      FOR_ITER(iter_element_other, *(other.begin() + iter_element.i_column())) {
+        const std::size_t& i_row = iter_element.i_row();
+        const std::size_t& i_column = iter_element_other.i_column();
+        const double& value = (*iter_element)*(*iter_element_other);
+        if(!contains(i_row, i_column)) insert(i_row, i_column, value);
+        else (*this)[i_row][i_column] += value;
+      }
+    }
+  }
+  shrink_to_fit();
+  return *this;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// Private Member Functions
+//----------------------------------------------------------------------------------------------------------------------
+
+template<bool _is_add>
+Matrix_Sparse& Matrix_Sparse::matrix_arithmetic(const Matrix_Sparse& other) {
+  ASSERT_DEBUG(size_row() == other.size_row() && size_column() == other.size_column(),
+               "Incompatible other dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
+               " vs. " + std::to_string(other.size_row()) + "," + std::to_string(other.size_column()) + ".");
+
+  bool insert_state;
+  iterator iter_this = begin();
+  const_iterator iter_other = other.begin();
+  while(iter_other != other.end()) {
+    auto iter_element_this = iter_this->begin();
+    const_iterator_element iter_element_other = (*iter_other).begin();
+    while(iter_element_other != (*iter_other).end())
+    {
+      if(iter_element_this == iter_this->end() || iter_element_this.i_column() > iter_element_other.i_column()) {
+        std::tie(iter_element_this, insert_state) = insert(iter_element_other.i_row(), iter_element_other.i_column(), _is_add ? (*iter_element_other) : -(*iter_element_other));
+        ++iter_element_this;
+        ++iter_element_other;
+      }
+      else if(iter_element_this.i_column() < iter_element_other.i_column()) {
+        ++iter_element_this;
+      }
+      else {
+        *iter_element_this += _is_add ? (*iter_element_other) : -(*iter_element_other);
+        ++iter_element_this;
+        ++iter_element_other;
+      }
+    }
+    ++iter_this;
+    ++iter_other;
+  }
+  return *this;
+};
+template Matrix_Sparse& Matrix_Sparse::matrix_arithmetic<true>(const Matrix_Sparse&);
+template Matrix_Sparse& Matrix_Sparse::matrix_arithmetic<false>(const Matrix_Sparse&);
+
+//----------------------------------------------------------------------------------------------------------------------
 // Matrix Sparse Row Helper
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 // Iterators
-//--------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 template<typename _matrix_type>
 typename Matrix_Sparse_Row<_matrix_type>::iterator Matrix_Sparse_Row<_matrix_type>::begin() {
@@ -281,7 +373,6 @@ template struct Iterator_Matrix_Sparse_Row<Matrix_Sparse>;
 template struct Iterator_Matrix_Sparse_Row<const Matrix_Sparse>;
 template struct Iterator_Matrix_Sparse_Element<Matrix_Sparse>;
 template struct Iterator_Matrix_Sparse_Element<const Matrix_Sparse>;
-
 
 //----------------------------------------------------------------------------------------------------------------------
 // Stand Alone Sparse Matrix Operators
