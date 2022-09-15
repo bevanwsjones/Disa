@@ -82,6 +82,10 @@ Matrix_Sparse::Matrix_Sparse(std::initializer_list<std::size_t> non_zero, std::i
 // Element Access
 //----------------------------------------------------------------------------------------------------------------------
 
+/**
+ * \details Using lower bound, finds and returns the element value at the requested row and column index. If it does not
+ * exist an error is thrown.
+ */
 [[nodiscard]] double& Matrix_Sparse::at(const std::size_t& i_row, const std::size_t& i_column) {
   ASSERT(i_row < size_row(), "Row index " + std::to_string(i_row) + " not in range " + range_row() + ".");
   ASSERT(i_column < size_column(),
@@ -93,6 +97,10 @@ Matrix_Sparse::Matrix_Sparse(std::initializer_list<std::size_t> non_zero, std::i
   return *iter;
 };
 
+/**
+ * \details Using lower bound, finds and returns the element value, as a const, at the requested row and column index.
+ * If it does not exist an error is thrown.
+ */
 [[nodiscard]] const double& Matrix_Sparse::at(const std::size_t& i_row, const std::size_t& i_column) const {
   ASSERT(i_row < size_row(), "Row index " + std::to_string(i_row) + " not in range " + range_row() + ".");
   ASSERT(i_column < size_column(),
@@ -103,10 +111,17 @@ Matrix_Sparse::Matrix_Sparse(std::initializer_list<std::size_t> non_zero, std::i
   return *iter;
 };
 
+/**
+ * \details Constructs and returns a sparse matrix row object for the given row. In debug range checking is performed.
+ */
 Matrix_Sparse_Row<Matrix_Sparse> Matrix_Sparse::operator[](const std::size_t& i_row) {
+  ASSERT_DEBUG(i_row < size_row(), "Row " + std::to_string(i_row) + " not in range " + range_row() + ".");
   return {i_row, this};
 }
 
+/**
+ * \details Constructs and returns a sparse matrix row object for the given row. In debug range checking is performed.
+ */
 Matrix_Sparse_Row<const Matrix_Sparse> Matrix_Sparse::operator[](const std::size_t& i_row) const {
   ASSERT_DEBUG(i_row < size_row(), "Row " + std::to_string(i_row) + " not in range " + range_row() + ".");
   return {i_row, this};
@@ -116,26 +131,44 @@ Matrix_Sparse_Row<const Matrix_Sparse> Matrix_Sparse::operator[](const std::size
 // Element Access
 //----------------------------------------------------------------------------------------------------------------------
 
+/**
+ * \details Constructs and returns a sparse matrix row iterator for the first row.
+ */
 Matrix_Sparse::iterator Matrix_Sparse::begin() noexcept {
   return {0, this};
 }
 
+/**
+ * \details Constructs and returns a constant sparse matrix row iterator for the first row.
+ */
 Matrix_Sparse::const_iterator Matrix_Sparse::begin() const noexcept {
   return {0, this};
 }
 
+/**
+ * \details Constructs and returns a constant sparse matrix row iterator for the first row.
+ */
 Matrix_Sparse::const_iterator Matrix_Sparse::cbegin() const noexcept {
   return begin();
 }
 
+/**
+ * \details Constructs and returns a sparse matrix row iterator for 'a row' past the last row.
+ */
 Matrix_Sparse::iterator Matrix_Sparse::end() noexcept {
   return {size_row(), this};
 }
 
+/**
+ * \details Constructs and returns a constant sparse matrix row iterator for 'a row' past the last row.
+ */
 Matrix_Sparse::const_iterator Matrix_Sparse::end() const noexcept {
   return {size_row(), this};
 }
 
+/**
+ * \details Constructs and returns a constant sparse matrix row iterator for 'a row' past the last row.
+ */
 Matrix_Sparse::const_iterator Matrix_Sparse::cend() const noexcept {
   return end();
 }
@@ -144,7 +177,15 @@ Matrix_Sparse::const_iterator Matrix_Sparse::cend() const noexcept {
 // Modifiers
 //----------------------------------------------------------------------------------------------------------------------
 
-std::pair<Matrix_Sparse::iterator_element, bool>
+/**
+ * \details If the value to be inserted has a row or column index greater than the current size of the matrix, the
+ * matrix is resized to accommodate the insertion. Lower bound is then used to find the iterator to the position where
+ * the new value is to be inserted. If there is a value already present at the position the function 'aborts' reporting
+ * this as false in the second value of the pair. Otherwise the row non-zero vector us updated indicating the new
+ * non-zero in the row by propagating the offset incrementation to the remaining parts of the vector. The column index
+ * and element value vectors are appropriately updated.
+ */
+  std::pair<Matrix_Sparse::iterator_element, bool>
 Matrix_Sparse::insert(const std::size_t& i_row, const std::size_t& i_column, const double& value) {
 
   // Resize if we need to.
@@ -160,6 +201,10 @@ Matrix_Sparse::insert(const std::size_t& i_row, const std::size_t& i_column, con
            &*element_value.insert(element_value.begin() + distance, value)}, true};
 }
 
+/**
+ * \details First the function will attempt to insert with the parsed value. If this fails the value will be assigned to
+ * the existing matrix element.
+ */
 std::pair<Matrix_Sparse::iterator_element, bool>
 Matrix_Sparse::insert_or_assign(const std::size_t& i_row, const std::size_t& i_column, const double& value) {
   auto iter_inserted = insert(i_row, i_column, value);
@@ -167,7 +212,11 @@ Matrix_Sparse::insert_or_assign(const std::size_t& i_row, const std::size_t& i_c
   return iter_inserted;
 }
 
-
+/**
+ * \details Erases a element from the matrix, if the element does not exist and error is thrown in debug. The number of
+ * row non-zeros at the row is decremented for the 'next row' and propagated to the rest of the row non-zero vector. The
+ * value and column index vectors have the associated matrix entry data erased (reducing their size by 1).
+ */
 Matrix_Sparse::iterator_element
 Matrix_Sparse::erase(const Iterator_Matrix_Sparse_Element<Matrix_Sparse>& iter_element) {
   ASSERT_DEBUG(iter_element != end()->end() && iter_element != (*this)[iter_element.i_row()].end() &&
@@ -180,6 +229,14 @@ Matrix_Sparse::erase(const Iterator_Matrix_Sparse_Element<Matrix_Sparse>& iter_e
           &*(element_value.erase(element_value.begin() + distance))};
 };
 
+/**
+ * \details For general increase in size the row non-zero vector is resized, with the new entries containing the current
+ * row non-zero back() value. For column size increase the column_size member is updated. If the rows are to be reduced,
+ * however, all the column indexes and element values greater than the row non-zero value at the new row size are
+ * erased. Finally, a column reduction requires looping over all rows to determine which column indexes and element
+ * values have 'fallen away'. These entries are removed from the vector and the total update of non-zeros is then
+ * propagated through the remainder of the row non-zero vector (in an efficient way).
+ */
 void Matrix_Sparse::resize(const std::size_t& row, const std::size_t& column) {
 
   // resize rows first
@@ -214,6 +271,11 @@ void Matrix_Sparse::resize(const std::size_t& row, const std::size_t& column) {
 // Lookup
 //----------------------------------------------------------------------------------------------------------------------
 
+/**
+ * \details If the parsed row is in range, the column index is searched using std::find in the given sparse matrix row.
+ * An iterator to the found matrix entry is constructed and returned. If the entry is not contained in the sparse
+ * matrix, an end() or *(begin + i_row).end() iterator is constructed.
+ */
 Matrix_Sparse::iterator_element Matrix_Sparse::find(const std::size_t& i_row, const std::size_t& i_column) {
   if(i_row < size_row()) {
     const auto& iter_start = column_index.begin() + static_cast<s_size_t>(row_non_zero[i_row]);
@@ -223,6 +285,11 @@ Matrix_Sparse::iterator_element Matrix_Sparse::find(const std::size_t& i_row, co
   } else return (*end()).end();
 }
 
+/**
+ * \details If the parsed row is in range, the column index is searched using std::find in the given sparse matrix row.
+ * A const iterator to the found matrix entry is constructed and returned. If the entry is not contained in the sparse
+ * matrix, an end() or *(begin + i_row).end() iterator is constructed.
+ */
 Matrix_Sparse::const_iterator_element Matrix_Sparse::find(const std::size_t& i_row, const std::size_t& i_column) const {
   if(i_row < size_row()) {
     const auto& iter_start = column_index.begin() + static_cast<s_size_t>(row_non_zero[i_row]);
@@ -232,11 +299,19 @@ Matrix_Sparse::const_iterator_element Matrix_Sparse::find(const std::size_t& i_r
   } else return (*end()).end();
 }
 
+/**
+ * \details Calls find, if the iterator is referencable true is returned, else false.
+ */
 bool Matrix_Sparse::contains(const std::size_t& i_row, const std::size_t& i_column) const {
   const auto iter_element = find(i_row, i_column);
   return iter_element.i_row() == i_row && iter_element != (*(begin() + static_cast<s_size_t>(i_row))).end();
 }
 
+/**
+ * \details If the parsed row is in range, the column index is searched using std::lower_bound in the given sparse
+ * matrix row. An iterator is then constructed from the first column index not less than the parsed column index. If the
+ * row is greater than the number of rows an end() iterator is constructed.
+ */
 Matrix_Sparse::iterator_element Matrix_Sparse::lower_bound(const std::size_t& i_row, const std::size_t& i_column) {
   if(i_row < size_row()) {
     const auto& iter_start = column_index.begin() + static_cast<s_size_t>(row_non_zero[i_row]);
@@ -246,6 +321,11 @@ Matrix_Sparse::iterator_element Matrix_Sparse::lower_bound(const std::size_t& i_
   } else return (*end()).end();
 }
 
+/**
+ * \details If the parsed row is in range, the column index is searched using std::lower_bound in the given sparse
+ * matrix row. A const iterator is then constructed from the first column index not less than the parsed column index.
+ * If the row is greater than the number of rows an end() iterator is constructed.
+ */
 Matrix_Sparse::const_iterator_element
 Matrix_Sparse::lower_bound(const std::size_t& i_row, const std::size_t& i_column) const {
   if(i_row < size_row()) {
@@ -261,7 +341,9 @@ Matrix_Sparse::lower_bound(const std::size_t& i_row, const std::size_t& i_column
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * SpGEMM algorithm.
+ * \details A very basic SpGEMM algorithm, a simple loop through the rows and columns of each matrix looking for
+ * non-zero entries to multiply and construct and return the resulting matrix. In debug the matrix sizes are checked for
+ * compatibility.
  */
 Matrix_Sparse& Matrix_Sparse::operator*=(const Matrix_Sparse& other) {
   ASSERT_DEBUG(column_size == other.size_row(),
@@ -290,6 +372,12 @@ Matrix_Sparse& Matrix_Sparse::operator*=(const Matrix_Sparse& other) {
 // Private Member Functions
 //----------------------------------------------------------------------------------------------------------------------
 
+/**
+ * \details Consolidation of both addition and subtraction operations for sparse matrix arithmetic. Looping over both
+ * matrices row and columns, entries which do not exist in this matrix are inserted (either with addition or
+ * subtraction) and entries which do exist are modified by either addition or subtracting to/from the existing value. In
+ * debug the matrix sizes are checked for compatibility.
+ */
 template<bool _is_add>
 Matrix_Sparse& Matrix_Sparse::matrix_arithmetic(const Matrix_Sparse& other) {
   ASSERT_DEBUG(size_row() == other.size_row() && size_column() == other.size_column(),
@@ -305,7 +393,8 @@ Matrix_Sparse& Matrix_Sparse::matrix_arithmetic(const Matrix_Sparse& other) {
     while(iter_element_other != (*iter_other).end())
     {
       if(iter_element_this == iter_this->end() || iter_element_this.i_column() > iter_element_other.i_column()) {
-        std::tie(iter_element_this, insert_state) = insert(iter_element_other.i_row(), iter_element_other.i_column(), _is_add ? (*iter_element_other) : -(*iter_element_other));
+        std::tie(iter_element_this, insert_state) = insert(iter_element_other.i_row(), iter_element_other.i_column(),
+                                                           _is_add ? (*iter_element_other) : -(*iter_element_other));
         ++iter_element_this;
         ++iter_element_other;
       }
@@ -332,35 +421,53 @@ template Matrix_Sparse& Matrix_Sparse::matrix_arithmetic<false>(const Matrix_Spa
 // Iterators
 //----------------------------------------------------------------------------------------------------------------------
 
+/**
+ * \details Construct a new element iterator using the current row index.
+ */
 template<typename _matrix_type>
 typename Matrix_Sparse_Row<_matrix_type>::iterator Matrix_Sparse_Row<_matrix_type>::begin() {
   const std::size_t& offset = matrix->row_non_zero[row_index];
   return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
 }
 
+/**
+ * \details Construct a new element iterator, to one past the last column element, using the current row index.
+ */
 template<typename _matrix_type>
 typename Matrix_Sparse_Row<_matrix_type>::iterator Matrix_Sparse_Row<_matrix_type>::end() {
   const std::size_t& offset = matrix->row_non_zero[row_index + 1];
   return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
 }
 
+/**
+ * \details Construct a new constant element iterator using the current row index.
+ */
 template<typename _matrix_type>
 typename Matrix_Sparse_Row<_matrix_type>::const_iterator Matrix_Sparse_Row<_matrix_type>::begin() const {
   const std::size_t& offset = matrix->row_non_zero[row_index];
   return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
 }
 
+/**
+ * \details Construct a constant new element iterator, to one past the last column element, using the current row index.
+ */
 template<typename _matrix_type>
 typename Matrix_Sparse_Row<_matrix_type>::const_iterator Matrix_Sparse_Row<_matrix_type>::end() const {
   const std::size_t& offset = matrix->row_non_zero[row_index + 1];
   return {matrix, row_index, &matrix->column_index[offset], &matrix->element_value[offset]};
 }
 
+/**
+ * \details Construct a new constant element iterator using the current row index.
+ */
 template<typename _matrix_type>
 typename Matrix_Sparse_Row<_matrix_type>::const_iterator Matrix_Sparse_Row<_matrix_type>::cbegin() const {
   return begin();
 }
 
+/**
+ * \details Construct a new constant element iterator, to one past the last column element, using the current row index.
+ */
 template<typename _matrix_type>
 typename Matrix_Sparse_Row<_matrix_type>::const_iterator Matrix_Sparse_Row<_matrix_type>::cend() const {
   return end();
@@ -373,9 +480,5 @@ template struct Iterator_Matrix_Sparse_Row<Matrix_Sparse>;
 template struct Iterator_Matrix_Sparse_Row<const Matrix_Sparse>;
 template struct Iterator_Matrix_Sparse_Element<Matrix_Sparse>;
 template struct Iterator_Matrix_Sparse_Element<const Matrix_Sparse>;
-
-//----------------------------------------------------------------------------------------------------------------------
-// Stand Alone Sparse Matrix Operators
-//----------------------------------------------------------------------------------------------------------------------
 
 }
