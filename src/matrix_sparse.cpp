@@ -358,7 +358,7 @@ Matrix_Sparse& Matrix_Sparse::operator*=(const Matrix_Sparse& other) {
       FOR_ITER(iter_element_other, *(other.begin() + iter_element.i_column())) {
         const std::size_t& i_row = iter_element.i_row();
         const std::size_t& i_column = iter_element_other.i_column();
-        const double& value = (*iter_element)*(*iter_element_other);
+        const Scalar& value = (*iter_element)*(*iter_element_other);
         if(!contains(i_row, i_column)) insert(i_row, i_column, value);
         else (*this)[i_row][i_column] += value;
       }
