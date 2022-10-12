@@ -42,15 +42,15 @@ constexpr const static Scalar& scalar_lowest = std::numeric_limits<Scalar>::lowe
 constexpr const static Scalar& scalar_max = std::numeric_limits<Scalar>::max();             //!< Alias for scalar max
 constexpr const static Scalar& scalar_min = std::numeric_limits<Scalar>::min();             //!< Alias for scalar min
 
-constexpr static Scalar default_absolute = static_cast<Scalar>(64)*scalar_epsilon;       //!< Global for default absolute equality check, 'reasonably over 2 orders of epsilon.
-constexpr static Scalar default_relative = static_cast<Scalar>(65536)*scalar_epsilon;    //!< Global for default relative equality check, 'reasonably over 2 orders of epsilon.
+constexpr const static Scalar default_absolute = static_cast<Scalar>(64)*scalar_epsilon;       //!< Global for default absolute equality check, 'reasonably over 2 orders of epsilon.
+constexpr const static Scalar default_relative = static_cast<Scalar>(65536)*scalar_epsilon;    //!< Global for default relative equality check, 'reasonably over 2 orders of epsilon.
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Equality Checks
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @brief Checks if two scalars are 'almost' equal to each other, using tolerancing. could be though of as operator=~.
+ * @brief Checks if two scalars are 'almost' equal to each other, using tolerancing. I.e. definition of an operator=~.
  * @param scalar_0 The first scalar value, s_0, to compare.
  * @param scalar_1 The second scalar value, s_1, to compare.
  * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
@@ -72,7 +72,7 @@ constexpr static Scalar default_relative = static_cast<Scalar>(65536)*scalar_eps
  *
  * Note: Solution taken from https://stackoverflow.com/questions/4915462/how-should-i-do-floating-point-comparison
  */
-[[nodiscard]] consteval bool is_nearly_equal(const Scalar& scalar_0, const Scalar& scalar_1,
+[[nodiscard]] constexpr bool is_nearly_equal(const Scalar& scalar_0, const Scalar& scalar_1,
                                              const Scalar& tolerance_relative = default_relative,
                                              const Scalar& tolerance_absolute = default_absolute) {
   ASSERT_DEBUG(scalar_epsilon <= tolerance_relative,
@@ -92,11 +92,11 @@ constexpr static Scalar default_relative = static_cast<Scalar>(65536)*scalar_eps
  * @param scalar_1 The second scalar value, s_1, to compare.
  * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
  * @param tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars will be considered equal.
- * @return True if the scalars are nearly equal to each other, s_0 >=~ s_1.
+ * @return True if the s_0 > s_1 or s_0 ~= s_1, i.e. s_0 >=~ s_1.
  */
-[[nodiscard]] consteval bool is_greater_equal(const Scalar& scalar_0, const Scalar& scalar_1,
-                                              const Scalar& tolerance_relative = default_relative,
-                                              const Scalar& tolerance_absolute = default_absolute) {
+[[nodiscard]] constexpr bool is_nearly_greater_equal(const Scalar& scalar_0, const Scalar& scalar_1,
+                                                     const Scalar& tolerance_relative = default_relative,
+                                                     const Scalar& tolerance_absolute = default_absolute) {
   return scalar_0 > scalar_1 || is_nearly_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);
 }
 
@@ -106,12 +106,54 @@ constexpr static Scalar default_relative = static_cast<Scalar>(65536)*scalar_eps
  * @param scalar_1 The second scalar value, s_1, to compare.
  * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
  * @param tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars will be considered equal.
- * @return True if the scalars are nearly equal to each other, s_0 >=~ s_1.
+ * @return True if the s_0 < s_1 or s_0 ~= s_1, i.e. s_0 <=~ s_1.
  */
-[[nodiscard]] consteval bool is_less_equal(const Scalar& scalar_0, const Scalar& scalar_1,
-                                           const Scalar& tolerance_relative = default_relative,
-                                           const Scalar& tolerance_absolute = default_absolute) {
+[[nodiscard]] constexpr bool is_nearly_less_equal(const Scalar& scalar_0, const Scalar& scalar_1,
+                                                  const Scalar& tolerance_relative = default_relative,
+                                                  const Scalar& tolerance_absolute = default_absolute) {
   return scalar_0 < scalar_1 || is_nearly_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);
+}
+
+/**
+ * @brief Checks if a first scalar is not less than or nearly equal to a second, could be though of as operator>~.
+ * @param scalar_0 The first scalar value, s_0, to compare.
+ * @param scalar_1 The second scalar value, s_1, to compare.
+ * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
+ * @param tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars will be considered equal.
+ * @return True if the s_0 > s_1 and s_0 !~= s_1, i.e. s_0 !<=~ s_1.
+ *
+ * @warning
+ * This function does not give a strictly greater than operation, it is designed to give consistent/continuous results
+ * between with is_nearly_less_equal. i.e. If is_nearly_less_equal(s_0, s_1) returns true this function will return
+ * false, and via versa if is_nearly_less_equal(s_0, s_1) returns false. This occurs even if the first scalar, s_0, is
+ * actually greater than the second, s_1. For this reason there is also no test for it, as is_nearly_less_equal is
+ * tested.
+ */
+[[nodiscard]] constexpr bool is_nearly_greater(const Scalar& scalar_0, const Scalar& scalar_1,
+                                              const Scalar& tolerance_relative = default_relative,
+                                              const Scalar& tolerance_absolute = default_absolute) {
+  return !is_nearly_less_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);
+}
+
+/**
+ * @brief Checks if a first scalar is not greater than or nearly equal to a second, could be though of as operator<~.
+ * @param scalar_0 The first scalar value, s_0, to compare.
+ * @param scalar_1 The second scalar value, s_1, to compare.
+ * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
+ * @param tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars will be considered equal.
+ * @return True if the s_0 < s_1 and s_0 !~= s_1, i.e. s_0 !>=~ s_1.
+ *
+ * @warning
+ * This function does not give a strictly less than operation, it is designed to give consistent/continuous results
+ * between with is_nearly_greater_equal. i.e. If is_nearly_greater_equal(s_0, s_1) returns true this function will
+ * return false, and via versa if is_nearly_greater_equal(s_0, s_1) returns false. This occurs even if the first scalar,
+ * s_0, is actually less than the second, s_1. For this reason there is also no test for it, as is_nearly_greater_equal
+ * is tested.
+ */
+[[nodiscard]] constexpr bool is_nearly_less(const Scalar& scalar_0, const Scalar& scalar_1,
+                                        const Scalar& tolerance_relative = default_relative,
+                                        const Scalar& tolerance_absolute = default_absolute) {
+  return !is_nearly_greater_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);
 }
 
 }
