@@ -25,6 +25,7 @@
 #define DISA_VECTOR_OPERATORS_H
 
 #include "macros.h"
+#include "scalar.h"
 #include "vector_dense.h"
 
 #include <algorithm>
@@ -43,21 +44,21 @@ namespace Disa {
  * @return The computed L_p-norm.
  */
 template<unsigned int _p_value, std::size_t _size>
-constexpr double lp_norm(const Vector_Dense<_size>& vector) {
+constexpr Scalar lp_norm(const Vector_Dense<_size>& vector) {
   switch(_p_value) {
     case 0:
       return *std::max_element(vector.begin(), vector.end());
     case 1:
-      return std::accumulate(vector.begin(), vector.end(), 0.0, [](double a, double b) { return a + std::abs(b); });
+      return std::accumulate(vector.begin(), vector.end(), 0.0, [](Scalar a, Scalar b) { return a + std::abs(b); });
     case 2:
-      return std::sqrt(std::accumulate(vector.begin(), vector.end(), 0.0, [](double a, double b) { return a + b*b; }));
+      return std::sqrt(std::accumulate(vector.begin(), vector.end(), 0.0, [](Scalar a, Scalar b) { return a + b*b; }));
     case 3:
-      return std::cbrt(std::accumulate(vector.begin(), vector.end(), 0.0, [](double a, double b) {
-        const double abs_b = std::abs(b);
+      return std::cbrt(std::accumulate(vector.begin(), vector.end(), 0.0, [](Scalar a, Scalar b) {
+        const Scalar abs_b = std::abs(b);
         return a + abs_b*abs_b*abs_b;
       }));
     default:
-      return std::pow(std::accumulate(vector.begin(), vector.end(), 0.0, [](double a, double b) {
+      return std::pow(std::accumulate(vector.begin(), vector.end(), 0.0, [](Scalar a, Scalar b) {
         return a + std::pow(_p_value%2 == 0 ? b : std::abs(b), _p_value);
       }), 1.0/_p_value);
   }
@@ -70,9 +71,9 @@ constexpr double lp_norm(const Vector_Dense<_size>& vector) {
  * @return The arithmetic mean value of the vector.
  */
 template<std::size_t _size>
-constexpr double mean(const Vector_Dense<_size>& vector) {
+constexpr Scalar mean(const Vector_Dense<_size>& vector) {
   ASSERT_DEBUG(_size != 0 || !vector.empty(), "Dynamic vector is empty.");
-  return std::accumulate(vector.begin(), vector.end(), 0.0)/static_cast<double>(vector.size());
+  return std::accumulate(vector.begin(), vector.end(), 0.0)/static_cast<Scalar>(vector.size());
 }
 
 /**
@@ -84,7 +85,7 @@ constexpr double mean(const Vector_Dense<_size>& vector) {
  * @return The scalar result.
  */
 template<std::size_t _size_0, std::size_t _size_1>
-constexpr double dot_product(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
+constexpr Scalar dot_product(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
   ASSERT_DEBUG(vector_0.size() == vector_1.size(),
                "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
                std::to_string(vector_1.size()) + ".");
@@ -99,7 +100,7 @@ constexpr double dot_product(const Vector_Dense<_size_0>& vector_0, const Vector
  */
 template<std::size_t _size>
 constexpr Vector_Dense<_size> unit(Vector_Dense<_size> vector) {
-  const double inverse_l_2 = 1.0/lp_norm<2>(vector);
+  const Scalar inverse_l_2 = 1.0/lp_norm<2>(vector);
   vector *= std::isinf(inverse_l_2) ? 0.0 : inverse_l_2; // properly zero, zero vectors.
   return vector;
 }
@@ -114,7 +115,7 @@ constexpr Vector_Dense<_size> unit(Vector_Dense<_size> vector) {
  * @return The angle between the vectors.
  */
 template<std::size_t _size_0, std::size_t _size_1, bool _is_radians = true>
-constexpr double angle(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
+constexpr Scalar angle(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
   ASSERT_DEBUG(vector_0.size() == vector_1.size(),
                "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
                std::to_string(vector_1.size()) + ".");

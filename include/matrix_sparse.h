@@ -24,6 +24,7 @@
 #define DISA_MATRIX_SPARSE_H
 
 #include "macros.h"
+#include "scalar.h"
 #include "vector_dense.h"
 
 #include <numeric>
@@ -122,7 +123,7 @@ public:
    * @param[in] column The absolute number of columns per row.
    */
   Matrix_Sparse(std::initializer_list<std::size_t> non_zero, std::initializer_list<std::size_t> index,
-                std::initializer_list<double> value, std::size_t column);
+                std::initializer_list<Scalar> value, std::size_t column);
 
   /**
    * @brief Default destructor.
@@ -146,7 +147,7 @@ public:
    * @param[in] i_column The column index of the element.
    * @return Value of the element.
    */
-  [[nodiscard]] double& at(const std::size_t& i_row, const std::size_t& i_column);
+  [[nodiscard]] Scalar& at(const std::size_t& i_row, const std::size_t& i_column);
 
   /**
    * @brief Access specified element with bounds checking.
@@ -154,7 +155,7 @@ public:
    * @param[in] i_column The column index of the element.
    * @return Value of the element.
    */
-  [[nodiscard]] const double& at(const std::size_t& i_row, const std::size_t& i_column) const;
+  [[nodiscard]] const Scalar& at(const std::size_t& i_row, const std::size_t& i_column) const;
 
   /**
    * @brief Subscript operator for access to a specified matrix row.
@@ -172,12 +173,12 @@ public:
 
   /**
    * @brief Direct access to the underlying array of the sparse matrix.
-   * @return tuple [pointer to non zero offset start, pointer to column index start, pointer to double start].
+   * @return tuple [pointer to non zero offset start, pointer to column index start, pointer to Scalar start].
    *
    * Note: If empty all pointers will be nullptrs, if the size_non_zero is 0 the element and column index will be
    *       nullptrs.
    */
-  std::tuple<std::size_t*, std::size_t*, double*> inline data() noexcept {
+  std::tuple<std::size_t*, std::size_t*, Scalar*> inline data() noexcept {
     if(!empty() && !size_non_zero()) std::make_tuple(row_non_zero.data(), column_index.data(), element_value.data());
     else if(!size_non_zero()) return std::make_tuple(row_non_zero.data(), nullptr, nullptr);
     else return std::make_tuple(nullptr, nullptr, nullptr);
@@ -314,7 +315,7 @@ public:
    * @param[in] value The value to insert.
    * @return [iterator to the inserted or existing element, true if insertion took place, else false].
    */
-  std::pair<iterator_element, bool> insert(const std::size_t& i_row, const std::size_t& i_column, const double& value);
+  std::pair<iterator_element, bool> insert(const std::size_t& i_row, const std::size_t& i_column, const Scalar& value);
 
   /**
    * @brief Inserts or updates an value with the parsed value at [i_row, i_column].
@@ -324,7 +325,7 @@ public:
    * @return [iterator to the inserted or existing element, true if insertion took place, else false].
    */
   std::pair<iterator_element, bool>
-  insert_or_assign(const std::size_t& i_row, const std::size_t& i_column, const double& value);
+  insert_or_assign(const std::size_t& i_row, const std::size_t& i_column, const Scalar& value);
 
   /**
    * @brief Erases an value at the specified row and column.
@@ -416,7 +417,7 @@ public:
    * @param[in] scalar Scalar value, b, to multiply the matrix by.
    * @return Updated matrix (A').
    */
-  inline matrix& operator*=(const double& scalar) {
+  inline matrix& operator*=(const Scalar& scalar) {
     FOR_EACH_REF(element, element_value) element *= scalar;
     return *this;
   }
@@ -428,7 +429,7 @@ public:
    *
    * Note: Division by zero is left to the user to handle.
    */
-  inline matrix& operator/=(const double& scalar) {
+  inline matrix& operator/=(const Scalar& scalar) {
     FOR_EACH_REF(element, element_value) element /= scalar;
     return *this;
   }
@@ -461,7 +462,7 @@ public:
 private:
   std::vector<std::size_t> row_non_zero;    //!< Total non-zero elements in the matrix for each row (size is one greater than number of rows).
   std::vector<std::size_t> column_index;    //!< The column index for each non-zero value, corresponds to value.
-  std::vector<double> element_value;        //!< The each non-zero value value, corresponds to column_index.
+  std::vector<Scalar> element_value;        //!< The each non-zero value value, corresponds to column_index.
   std::size_t column_size{0};               //!< The number of columns of the matrix (used to check validity of operations).
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -569,10 +570,10 @@ public:
    * Note if the element does not exist it is inserted.
    */
   template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool> = true>
-  constexpr double& operator[](const std::size_t& i_column) {
+  constexpr Scalar& operator[](const std::size_t& i_column) {
     auto iter_element = matrix->lower_bound(row_index, i_column);
     if(iter_element == end() || i_column != iter_element.i_column())
-      iter_element = matrix->insert(row_index, i_column, double()).first;
+      iter_element = matrix->insert(row_index, i_column, Scalar()).first;
     return *iter_element;
   };
 
@@ -583,7 +584,7 @@ public:
    *
    * Note if the element does not exist undefined behaviour occurs (caught in debug).
    */
-  constexpr const double& operator[](const std::size_t& i_column) const {
+  constexpr const Scalar& operator[](const std::size_t& i_column) const {
     ASSERT_DEBUG(matrix->contains(row_index, i_column),
                  "Trying to access a zero element at [" + matrix->row_column(row_index, i_column) + "].");
     return *matrix->find(row_index, i_column);
@@ -863,7 +864,7 @@ struct Iterator_Matrix_Sparse_Element {
   using iterator_category = std::random_access_iterator_tag;
   using difference_type = std::ptrdiff_t;
   using matrix_type = _matrix_type;
-  using value_type = std::conditional_t<std::is_const_v<_matrix_type>, const double, double>;
+  using value_type = std::conditional_t<std::is_const_v<_matrix_type>, const Scalar, Scalar>;
   using size_type = std::conditional_t<std::is_const_v<_matrix_type>, const std::size_t, std::size_t>;
   using pointer = value_type*;
   using reference = value_type&;
@@ -935,7 +936,7 @@ struct Iterator_Matrix_Sparse_Element {
    * @brief Iterator indirection member access operator.
    * @return The underlying const matrix element.
    */
-  constexpr const double& operator*() const { return *value; }
+  constexpr const Scalar& operator*() const { return *value; }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Forward Iterator Support
@@ -1046,7 +1047,7 @@ struct Iterator_Matrix_Sparse_Element {
    * @param[in] offset The relative amount to advance the iterator by.
    * @return A const sparse matrix element with a non-zero column index advanced by the offset (relative to this iterator).
    */
-  constexpr const double& operator[](const difference_type& i_advance) const { return *(value + i_advance); }
+  constexpr const Scalar& operator[](const difference_type& i_advance) const { return *(value + i_advance); }
 
   //--------------------------------------------------------------------------------------------------------------------
   // Private Members
@@ -1075,7 +1076,7 @@ private:
  * @param[in] matrix The sparse matrix, A, to be multiplied.
  * @return New sparse matrix, C.
  */
-inline Matrix_Sparse operator*(const double& scalar, Matrix_Sparse matrix) {
+inline Matrix_Sparse operator*(const Scalar& scalar, Matrix_Sparse matrix) {
   return matrix *= scalar;
 }
 
@@ -1085,7 +1086,7 @@ inline Matrix_Sparse operator*(const double& scalar, Matrix_Sparse matrix) {
  * @param[in] scalar The scalar value, b, to divide the matrix by.
  * @return New sparse matrix, C.
  */
-inline Matrix_Sparse operator/(Matrix_Sparse matrix, const double& scalar) {
+inline Matrix_Sparse operator/(Matrix_Sparse matrix, const Scalar& scalar) {
   return matrix /= scalar;
 }
 
@@ -1104,7 +1105,7 @@ Vector_Dense<_size> operator*(const Matrix_Sparse& matrix, const Vector_Dense<_s
                "Incompatible vector-matrix dimensions, " + std::to_string(matrix.size_row()) + "," +
                std::to_string(matrix.size_column()) + " vs. " + std::to_string(vector.size()) + ".");
   ASSERT_DEBUG(!_size || matrix.size_row() == vector.size(), "For static vectors the matrix must be square.");
-  return Vector_Dense<_size>([&](const std::size_t i_row, double value = 0) {
+  return Vector_Dense<_size>([&](const std::size_t i_row, Scalar value = 0) {
     FOR_ITER(iter, *(matrix.begin() + i_row)) value += *iter*vector[iter.i_column()];
     return value; }, matrix.size_row());
 }

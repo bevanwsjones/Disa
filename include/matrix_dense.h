@@ -22,6 +22,8 @@
 #ifndef DISA_MATRIX_DENSE_H
 #define DISA_MATRIX_DENSE_H
 
+#include "macros.h"
+#include "scalar.h"
 #include "vector_dense.h"
 #include "vector_operators.h"
 
@@ -83,7 +85,7 @@ struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
    * @param[in] row Desired number of rows of the matrix. Defaulted, allows interoperability with dynamic matrices
    * @param[in] column Desired number of columns of the matrix. Defaulted, allows interoperability with dynamic matrices
    */
-  explicit Matrix_Dense(const std::function<double(std::size_t, std::size_t)>& lambda,
+  explicit Matrix_Dense(const std::function<Scalar(std::size_t, std::size_t)>& lambda,
                         std::size_t row = _row, std::size_t column = _col) {
     ASSERT_DEBUG(row == _row && column == _col, "Cannot change the number of rows and columns for a static matrix.");
     FOR(i_row, row) { FOR(i_column, column) (*this)[i_row][i_column] = lambda(i_row, i_column); }
@@ -122,7 +124,7 @@ struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
    * @param[in] scalar Scalar value, b, to multiply the matrix by.
    * @return Updated matrix (A').
    */
-  constexpr _matrix& operator*=(const double& scalar) {
+  constexpr _matrix& operator*=(const Scalar& scalar) {
     FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
@@ -134,7 +136,7 @@ struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
    *
    * Note: Division by zero is left to the user to handle.
    */
-  constexpr _matrix& operator/=(const double& scalar) {
+  constexpr _matrix& operator/=(const Scalar& scalar) {
     FOR_EACH_REF(element, *this) element /= scalar;
     return *this;
   }
@@ -227,7 +229,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
 
   /**
    * @brief Constructor to construct a matrix from an initializer list, matrix is resized to list size.
-   * @param[in] list The list of doubles to initialise the matrix. Each row much be the same size.
+   * @param[in] list The list of Scalars to initialise the matrix. Each row much be the same size.
    */
   Matrix_Dense(const std::initializer_list<Vector_Dense<0> >& list) {
     resize(list.size());
@@ -244,7 +246,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
    * @param[in] row Desired number of rows of the matrix.
    * @param[in] column Desired  number of columns of the matrix.
    */
-  explicit Matrix_Dense(const std::function<double(std::size_t, std::size_t)>& lambda, std::size_t row,
+  explicit Matrix_Dense(const std::function<Scalar(std::size_t, std::size_t)>& lambda, std::size_t row,
                         std::size_t column) {
     resize(row);
     FOR(i_row, row) {
@@ -298,7 +300,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
    * @param[in] scalar Scalar value, b, to multiply the matrix by.
    * @return Updated matrix (A').
    */
-  _matrix& operator*=(const double& scalar) {
+  _matrix& operator*=(const Scalar& scalar) {
     FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
@@ -310,7 +312,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
    *
    * Note: Division by zero is left to the user to handle.
    */
-  _matrix& operator/=(const double& scalar) {
+  _matrix& operator/=(const Scalar& scalar) {
     FOR_EACH_REF(element, *this) element /= scalar;
     return *this;
   }
@@ -410,7 +412,7 @@ struct Matrix_Static_Demoter {
  * @return New matrix, C.
  */
 template<std::size_t _row, std::size_t _col>
-constexpr Matrix_Dense<_row, _col> operator*(const double& scalar, Matrix_Dense<_row, _col> matrix) {
+constexpr Matrix_Dense<_row, _col> operator*(const Scalar& scalar, Matrix_Dense<_row, _col> matrix) {
   return matrix *= scalar;
 }
 
@@ -423,7 +425,7 @@ constexpr Matrix_Dense<_row, _col> operator*(const double& scalar, Matrix_Dense<
  * @return New matrix, C.
  */
 template<std::size_t _row, std::size_t _col>
-constexpr Matrix_Dense<_row, _col> operator/(Matrix_Dense<_row, _col> matrix, const double& scalar) {
+constexpr Matrix_Dense<_row, _col> operator/(Matrix_Dense<_row, _col> matrix, const Scalar& scalar) {
   return matrix /= scalar;
 }
 

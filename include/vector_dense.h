@@ -23,6 +23,7 @@
 #define DISA_VECTOR_DENSE_H
 
 #include "macros.h"
+#include "scalar.h"
 
 #include <algorithm>
 #include <array>
@@ -53,9 +54,9 @@ namespace Disa {
  * std::vector is inherited, see below specialisation.
  */
 template<std::size_t _size>
-struct Vector_Dense : public std::array<double, _size> {
-  typedef Vector_Dense<_size> _vector;     //!< Brief Short hand for this vector type.
-  const static bool is_dynamic = false;    //!< Brief Indicates the vector is compile time sized.
+struct Vector_Dense : public std::array<Scalar, _size> {
+  typedef Vector_Dense<_size> _vector;     //!< Short hand for this vector type.
+  const static bool is_dynamic = false;    //!< Indicates the vector is compile time sized.
 
   //--------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
@@ -64,13 +65,13 @@ struct Vector_Dense : public std::array<double, _size> {
   /**
    * @brief Initialise empty vector.
    */
-  Vector_Dense() : std::array<double, _size>() {};
+  Vector_Dense() : std::array<Scalar, _size>() {};
 
   /**
    * @brief Constructor to construct from initializer list, list and vector must be of the same size.
-   * @param[in] list The list of doubles to initialised the vector.
+   * @param[in] list The list of Scalars to initialised the vector.
    */
-  Vector_Dense(const std::initializer_list<double>& list) {
+  Vector_Dense(const std::initializer_list<Scalar>& list) {
     ASSERT_DEBUG(list.size() == _size, "Initializer list of incorrect size, " + std::to_string(list.size()) + " vs. " +
       std::to_string(_size) + ".");
     auto iter = this->begin();
@@ -79,11 +80,11 @@ struct Vector_Dense : public std::array<double, _size> {
 
   /**
    * @brief Constructor to construct a vector from a lambda.
-   * @tparam _lambda Template lambda function double(std::size_t).
+   * @tparam _lambda Template lambda function Scalar(std::size_t).
    * @param[in] lambda Lambda expression.
    * @param[in] size Desired size of the vector. Added for interoperability with dynamic vectors.
    */
-  explicit Vector_Dense(const std::function<double(const std::size_t)>& lambda, std::size_t size = _size) {
+  explicit Vector_Dense(const std::function<Scalar(const std::size_t)>& lambda, std::size_t size = _size) {
     ASSERT_DEBUG(size == _size, "Cannot change the size for a static vector.");
     FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
@@ -97,7 +98,7 @@ struct Vector_Dense : public std::array<double, _size> {
    * @param scalar Scalar value, b, to multiply the vector by.
    * @return Updated vector (a').
    */
-  constexpr _vector& operator*=(const double& scalar) {
+  constexpr _vector& operator*=(const Scalar& scalar) {
     FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
@@ -109,7 +110,7 @@ struct Vector_Dense : public std::array<double, _size> {
    *
    * Note: Division by zero is left to the user to handle.
    */
-  constexpr _vector& operator/=(const double& scalar) {
+  constexpr _vector& operator/=(const Scalar& scalar) {
     FOR_EACH_REF(element, *this) element /= scalar;
     return *this;
   }
@@ -159,7 +160,7 @@ struct Vector_Dense : public std::array<double, _size> {
  * std::vector is inherited, see below specialisation.
  */
 template<>
-struct Vector_Dense<0> : public std::vector<double> {
+struct Vector_Dense<0> : public std::vector<Scalar> {
   typedef Vector_Dense<0> _vector;      //!< Short hand for this vector type.
   const static bool is_dynamic = true;  //!< Indicates the vector is runtime resizable.
 
@@ -170,13 +171,13 @@ struct Vector_Dense<0> : public std::vector<double> {
   /**
    * @brief Initialise empty vector.
    */
-  Vector_Dense() : std::vector<double>() {};
+  Vector_Dense() : std::vector<Scalar>() {};
 
   /**
    * @brief Constructor to construct from initializer list, vector is resized to list size.
-   * @param[in] list The list of doubles to initialised the vector.
+   * @param[in] list The list of Scalars to initialised the vector.
    */
-  Vector_Dense(const std::initializer_list<double>& list) {
+  Vector_Dense(const std::initializer_list<Scalar>& list) {
     resize(list.size());
     auto iter = begin();
     FOR_EACH(item, list) *iter++ = item;
@@ -184,11 +185,11 @@ struct Vector_Dense<0> : public std::vector<double> {
 
   /**
    * @brief Constructor to construct a vector from a lambda.
-   * @tparam _lambda Template lambda function double(std::size_t).
+   * @tparam _lambda Template lambda function Scalar(std::size_t).
    * @param[in] lambda Lambda expression.
    * @param[in] size Desired size of the vector.
    */
-  explicit Vector_Dense(const std::function<double(std::size_t)>& lambda, std::size_t size) : std::vector<double>(
+  explicit Vector_Dense(const std::function<Scalar(std::size_t)>& lambda, std::size_t size) : std::vector<Scalar>(
     size) {
     FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
@@ -202,7 +203,7 @@ struct Vector_Dense<0> : public std::vector<double> {
    * @param scalar Scalar value, b, to multiply the vector by.
    * @return Updated vector (a).
    */
-  _vector& operator*=(const double& scalar) {
+  _vector& operator*=(const Scalar& scalar) {
     FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
@@ -214,7 +215,7 @@ struct Vector_Dense<0> : public std::vector<double> {
    *
    * Note: Division by zero is left to the user to handle.
    */
-  _vector& operator/=(const double& scalar) {
+  _vector& operator/=(const Scalar& scalar) {
     FOR_EACH_REF(element, *this) element /= scalar;
     return *this;
   }
@@ -278,7 +279,7 @@ struct StaticPromoter {
  * @return New vector (c).
  */
 template<std::size_t _size>
-constexpr Vector_Dense<_size> operator*(const double& scalar, Vector_Dense<_size> vector) {
+constexpr Vector_Dense<_size> operator*(const Scalar& scalar, Vector_Dense<_size> vector) {
   return vector *= scalar;
 }
 
@@ -290,7 +291,7 @@ constexpr Vector_Dense<_size> operator*(const double& scalar, Vector_Dense<_size
  * @return New vector (c).
  */
 template<std::size_t _size>
-constexpr Vector_Dense<_size> operator/(Vector_Dense<_size> vector, const double& scalar) {
+constexpr Vector_Dense<_size> operator/(Vector_Dense<_size> vector, const Scalar& scalar) {
   return vector /= scalar;
 }
 
