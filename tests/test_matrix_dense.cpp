@@ -567,4 +567,52 @@ TEST(test_matrix_dense, matrix_matrix_multiplication) {
   EXPECT_DEATH(static_matrix_0*dynamic_matrix_0, "./*");
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+// Mathematical Methods
+//----------------------------------------------------------------------------------------------------------------------
+
+TEST(test_matrix_sparse, matrix_transpose) {
+
+  Matrix_Dense<0, 0> matrix_empty;
+  Matrix_Dense<0, 0> matrix_0({{0, 1, 2}, {3, 4, 5}, {6, 7, 8}});
+  Matrix_Dense<0, 0> matrix_1({{0, 2, 4}, {1, 3, 5}});
+  Matrix_Dense<0, 0> matrix_2({{0, 3}, {1, 4}, {2, 5}});
+  Matrix_Dense<3, 3> matrix_static({{0, 1, 2}, {3, 4, 5}, {6, 7, 8}});
+
+  // null
+  matrix_empty.transpose();
+  EXPECT_EQ(matrix_empty.size_row(), 0);
+  EXPECT_EQ(matrix_empty.size_column(), 0);
+
+  // square - dynamic
+  matrix_0.transpose();
+  EXPECT_EQ(matrix_0.size_row(), 3);
+  EXPECT_EQ(matrix_0.size_column(), 3);
+  FOR(i_row, matrix_0.size_row())
+    FOR(i_column, matrix_0.size_column())
+    EXPECT_EQ(matrix_0[i_column][i_row], static_cast<Scalar>(i_row*matrix_0.size_column() + i_column));
+
+  // square - static
+  matrix_static.transpose();
+  FOR(i_row, matrix_static.size_row())
+    FOR(i_column, matrix_static.size_column())
+      EXPECT_EQ(matrix_static[i_column][i_row], static_cast<Scalar>(i_row*matrix_static.size_column() + i_column));
+
+  // rectangular row < column
+  matrix_1.transpose();
+  EXPECT_EQ(matrix_1.size_row(), 3);
+  EXPECT_EQ(matrix_1.size_column(), 2);
+  FOR(i_row, matrix_1.size_row())
+    FOR(i_column, matrix_1.size_column())
+      EXPECT_EQ(matrix_1[i_row][i_column], static_cast<Scalar>(i_row*matrix_1.size_column() + i_column));
+
+  // rectangular row > column
+  matrix_2.transpose();
+  EXPECT_EQ(matrix_2.size_row(), 2);
+  EXPECT_EQ(matrix_2.size_column(), 3);
+      FOR(i_row, matrix_2.size_row())
+        FOR(i_column, matrix_2.size_column())
+          EXPECT_EQ(matrix_2[i_row][i_column], static_cast<Scalar>(i_row*matrix_2.size_column() + i_column));
+}
+
 #endif//DISA_DEBUG

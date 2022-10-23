@@ -200,6 +200,24 @@ struct Matrix_Dense : public std::array<Vector_Dense<_col>, _row> {
     }
     return *this;
   }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Mathematical Methods
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * \brief Transposes the matrix, such that aij = aji.
+   *
+   * Note the matrix must be square.
+   */
+  inline void transpose(){
+    static_assert(_row == _col, "Only square static matrices can be transposed.");
+    FOR(i_row, size_row()){
+      FOR(i_column, i_row, size_column()){
+        std::swap((*this)[i_row][i_column], (*this)[i_column][i_row]);
+      }
+    }
+  }
 };
 
 /**
@@ -376,6 +394,26 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
       }
     }
     return *this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  // Mathematical Methods
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * \brief Transposes the matrix, such that aij = aji.
+   */
+  inline void transpose(){
+    auto original_size = size();
+    const std::size_t& max = std::max(original_size.first, original_size.second);
+    resize(max, max);
+    FOR(i_row, size_row()){
+      FOR(i_column, i_row, size_column()){
+        std::swap((*this)[i_row][i_column], (*this)[i_column][i_row]);
+      }
+    }
+    resize(original_size.second, original_size.first);
+    shrink_to_fit();
   }
 };
 

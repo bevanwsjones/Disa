@@ -456,6 +456,16 @@ public:
   matrix& operator*=(const matrix& other);
 
   //--------------------------------------------------------------------------------------------------------------------
+  // Mathematical Methods
+  //--------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * \brief Transposes the matrix, such that aij = aji.
+   * \param[out] matrix .
+   */
+  void transpose(Matrix_Sparse* matrix = nullptr);
+
+  //--------------------------------------------------------------------------------------------------------------------
   // Private Members
   //--------------------------------------------------------------------------------------------------------------------
 
@@ -499,7 +509,6 @@ private:
    */
   template<bool _is_add>
   Matrix_Sparse& matrix_arithmetic(const Matrix_Sparse& other);
-
 
   // Friend types and functions.
   friend class Matrix_Sparse_Row<matrix>;
