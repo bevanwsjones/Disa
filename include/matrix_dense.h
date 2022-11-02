@@ -403,7 +403,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
   /**
    * \brief Transposes the matrix, such that aij = aji.
    */
-  inline void transpose(){
+  inline void transpose() {
     auto original_size = size();
     const std::size_t& max = std::max(original_size.first, original_size.second);
     resize(max, max);

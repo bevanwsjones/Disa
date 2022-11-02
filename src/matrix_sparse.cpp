@@ -70,7 +70,7 @@ Matrix_Sparse::Matrix_Sparse(std::initializer_list<std::size_t> non_zero, std::i
              " not in range" + range_column() + ".");
     }
     ASSERT(std::adjacent_find(org_index.begin(), org_index.end()) == org_index.end(),
-           "Duplicate column index, " + std::to_string(column_size) + "in row " + std::to_string(row) + ".");
+           "Duplicate column index, " + std::to_string(column_size) + ", in row " + std::to_string(row) + ".");
     std::swap_ranges(new_value.begin(), new_value.end(),
                      std::next(element_value.begin(), static_cast<s_size_t>(row_non_zero[row])));
     std::swap_ranges(org_index.begin(), org_index.end(),
@@ -366,6 +366,45 @@ Matrix_Sparse& Matrix_Sparse::operator*=(const Matrix_Sparse& other) {
   }
   shrink_to_fit();
   return *this;
+}
+
+//--------------------------------------------------------------------------------------------------------------------
+// Mathematical Methods
+//--------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @details Transposes the sparse matrix, by creating a second sparse matrix. The second sparse matrix is built as the
+ * transpose, and then swapped at the end. Note that if a pointer to a sparse matrix is parsed to this function it will
+ * store the old matrix to this pointer.
+ */
+void Matrix_Sparse::transpose(Matrix_Sparse* matrix)
+{
+  const bool is_parse_null = matrix == nullptr;
+  if(is_parse_null) matrix = new Matrix_Sparse();
+
+  matrix->clear();
+  matrix->row_non_zero.resize(column_size + 1);
+  matrix->column_index.resize(size_non_zero());
+  matrix->element_value.resize(size_non_zero());
+  matrix->column_size = size_row();
+
+  // Determine new row non-zeros.
+  FOR_EACH(i_column, column_index) ++matrix->row_non_zero[i_column + 1];
+  std::size_t number_offset = 0;
+  FOR(i_non_zero, 1, matrix->row_non_zero.size()) {
+    number_offset += matrix->row_non_zero[i_non_zero];
+    matrix->row_non_zero[i_non_zero] = number_offset - matrix->row_non_zero[i_non_zero];
+  }
+
+  FOR(i_row, size_row())
+    FOR(i_non_zero, row_non_zero[i_row],  row_non_zero[i_row + 1]){
+      matrix->column_index[matrix->row_non_zero[column_index[i_non_zero] + 1]] = i_row;
+      matrix->element_value[matrix->row_non_zero[column_index[i_non_zero] + 1]] = element_value[i_non_zero];
+      ++matrix->row_non_zero[column_index[i_non_zero] + 1];
+    }
+
+  swap(*matrix);
+  if(is_parse_null) delete matrix;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

@@ -636,6 +636,72 @@ TEST(test_matrix_sparse, operator_matrix_multiplication_assignement){
 }
 
 //----------------------------------------------------------------------------------------------------------------------
+// Mathematical Matrix Operators
+//----------------------------------------------------------------------------------------------------------------------
+
+TEST(test_matrix_sparse, transpose){
+
+  Matrix_Sparse matrix_empty;
+  Matrix_Sparse matrix_0({0, 2, 4, 6}, {0, 1, 0, 2, 1, 2}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0}, 3);
+  Matrix_Sparse matrix_1({0, 2, 5, 5, 7}, {1, 2, 2, 0, 1, 1, 2}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 3);
+  Matrix_Sparse matrix_2({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+
+  // null
+  matrix_empty.transpose();
+  EXPECT_EQ(matrix_empty.size_row(), 0);
+  EXPECT_EQ(matrix_empty.size_column(), 0);
+
+  // square - dynamic
+  Matrix_Sparse original;
+  matrix_0.transpose(&original);
+  EXPECT_EQ(matrix_0.size_row(), original.size_column());
+  EXPECT_EQ(matrix_0.size_column(), original.size_row());
+  EXPECT_EQ(matrix_0.size_non_zero(), original.size_non_zero());
+  FOR(i_row, matrix_0.size_row())
+    FOR(i_column, matrix_0.size_column())
+    {
+      if(matrix_0.contains(i_row, i_column))
+      {
+        EXPECT_TRUE(original.contains(i_column, i_row));
+        EXPECT_EQ(matrix_0[i_row][i_column], original[i_column][i_row]);
+      }
+      else EXPECT_FALSE(original.contains(i_column, i_row));
+    }
+
+  // rectangular row < column
+  matrix_1.transpose(&original);
+  EXPECT_EQ(matrix_1.size_row(), original.size_column());
+  EXPECT_EQ(matrix_1.size_column(), original.size_row());
+  EXPECT_EQ(matrix_1.size_non_zero(), original.size_non_zero());
+  FOR(i_row, matrix_1.size_row())
+    FOR(i_column, matrix_1.size_column())
+    {
+      if(matrix_1.contains(i_row, i_column))
+      {
+        EXPECT_TRUE(original.contains(i_column, i_row));
+        EXPECT_EQ(matrix_1[i_row][i_column], original[i_column][i_row]);
+      }
+      else EXPECT_FALSE(original.contains(i_column, i_row));
+    }
+
+  // rectangular row > column
+  matrix_2.transpose(&original);
+  EXPECT_EQ(matrix_2.size_row(), original.size_column());
+  EXPECT_EQ(matrix_2.size_column(), original.size_row());
+  EXPECT_EQ(matrix_2.size_non_zero(), original.size_non_zero());
+  FOR(i_row, matrix_2.size_row())
+    FOR(i_column, matrix_2.size_column())
+    {
+      if(matrix_2.contains(i_row, i_column))
+      {
+        EXPECT_TRUE(original.contains(i_column, i_row));
+        EXPECT_EQ(matrix_2[i_row][i_column], original[i_column][i_row]);
+      }
+      else EXPECT_FALSE(original.contains(i_column, i_row));
+    }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
 // Stand Alone Sparse Matrix Operators
 //----------------------------------------------------------------------------------------------------------------------
 
