@@ -88,6 +88,10 @@ if(ENABLE_TEST)
   target_link_libraries(test_matrix_dense GTest::gtest_main disa)
   gtest_discover_tests(test_matrix_dense)
 
+  add_executable(test_matrix_operators tests/test_matrix_operators.cpp)
+  target_link_libraries(test_matrix_operators GTest::gtest_main disa)
+  gtest_discover_tests(test_matrix_operators)
+
   add_executable(test_matrix_sparse tests/test_matrix_sparse.cpp)
   target_link_libraries(test_matrix_sparse GTest::gtest_main disa)
   gtest_discover_tests(test_matrix_sparse)
