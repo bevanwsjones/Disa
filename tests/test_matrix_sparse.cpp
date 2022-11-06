@@ -16,9 +16,8 @@
 //  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ----------------------------------------------------------------------------------------------------------------------
 //  File Name: test_matrix_sparse.cpp
-//  Description: todo
+//  Description: Tests the sparse matrix class and supporting functions.
 // ----------------------------------------------------------------------------------------------------------------------
-//
 
 #include "gtest/gtest.h"
 #include "matrix_sparse.h"
