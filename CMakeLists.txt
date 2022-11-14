@@ -44,6 +44,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+add_subdirectory(${PROJECT_SOURCE_DIR}/libs/core)
+add_subdirectory(${PROJECT_SOURCE_DIR}/libs/solvers)
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Compiler Setup
 # ----------------------------------------------------------------------------------------------------------------------
@@ -55,17 +58,20 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 include_directories(include)
 
 set(SOURCES
-        include/macros.h
         include/matrix_dense.h
         include/matrix_sparse.h
-        include/scalar.h
         include/vector_dense.h
         include/vector_operators.h
         src/matrix_sparse.cpp
         )
 
+set(LIBRARIES
+        core
+        )
+
 add_library(disa ${SOURCES})
 set_target_properties(disa PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(disa ${LIBRARIES})
 
 add_executable(example src/main.cpp ${SOURCES})
 target_link_libraries(example disa)
@@ -91,10 +97,6 @@ if(ENABLE_TEST)
   add_executable(test_matrix_sparse tests/test_matrix_sparse.cpp)
   target_link_libraries(test_matrix_sparse GTest::gtest_main disa)
   gtest_discover_tests(test_matrix_sparse)
-
-  add_executable(test_scalar tests/test_scalar.cpp)
-  target_link_libraries(test_scalar GTest::gtest_main disa)
-  gtest_discover_tests(test_scalar)
 
   add_executable(test_vector_dense tests/test_vector_dense.cpp)
   target_link_libraries(test_vector_dense GTest::gtest_main disa)
