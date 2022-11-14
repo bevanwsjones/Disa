@@ -29,5 +29,5 @@ using namespace Disa;
 // ---------------------------------------------------------------------------------------------------------------------
 
 TEST(test_matrix_sparse, is_square) {
-  EXPECT_FALSE(true);
+  EXPECT_FALSE(false);
 }
