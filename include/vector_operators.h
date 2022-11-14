@@ -54,8 +54,7 @@ constexpr Scalar lp_norm(const Vector_Dense<_size>& vector) {
       return std::sqrt(std::accumulate(vector.begin(), vector.end(), 0.0, [](Scalar a, Scalar b) { return a + b*b; }));
     case 3:
       return std::cbrt(std::accumulate(vector.begin(), vector.end(), 0.0, [](Scalar a, Scalar b) {
-        const Scalar abs_b = std::abs(b);
-        return a + abs_b*abs_b*abs_b;
+        return a + std::abs(b)*b*b;
       }));
     default:
       return std::pow(std::accumulate(vector.begin(), vector.end(), 0.0, [](Scalar a, Scalar b) {

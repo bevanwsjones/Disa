@@ -108,17 +108,83 @@ Scalar trace(const Matrix_Sparse& matrix) {
   return sum;
 };
 
-template<class _matrix, std::size_t _p_value, std::size_t _q_value>
+template<std::size_t _p_value, class _matrix>
+constexpr Scalar lp_norm(const _matrix& matrix){
+  switch(_p_value){
+    case 0:
+      return 1;
+    case 1:
+    case 2:
+    default:
+      exit(0);
+  }
+}
+
+template<std::size_t _pq_value, class _matrix>
 constexpr Scalar lpq_norm(const _matrix& matrix){
-  if(_p_value == _q_value && _p_value != 0) {
-    std::accumulate(matrix.begin(), matrix.end(), 0.0 , [](const auto& row){
-      return std::accumulate(row.begin(), row.end(), 0.0, [](Scalar a, Scalar b) { return a + std::abs(b); }); });
-  }
-  else {
 
+  switch(_pq_value) {
+    case 0:
+      return std::cbrt(std::accumulate(matrix.begin(), matrix.end(), 0.0, [](Scalar a, auto b) {
+        return std::max(a, lp_norm<0>(b));
+      }));
+    case 1:
+      return std::cbrt(std::accumulate(matrix.begin(), matrix.end(), 0.0, [](Scalar a, auto b) {
+        return a + lp_norm<1>(b);
+      }));
+    case 2:
+      return std::sqrt(std::accumulate(matrix.begin(), matrix.end(), 0.0, [](Scalar a, auto b) {
+        const Scalar row_norm = lp_norm<2>(b);
+        return a + row_norm*row_norm;
+      }));
+    case 3:
+      return std::cbrt(std::accumulate(matrix.begin(), matrix.end(), 0.0, [](Scalar a, auto b) {
+        const Scalar row_norm = lp_norm<3>(b);
+        return a + row_norm*row_norm*row_norm;
+      }));
+    default:
+      return std::pow(std::accumulate(matrix.begin(), matrix.end(), 0.0, [](Scalar a, auto b) {
+        return a + std::pow(lp_norm<_pq_value>(b), _pq_value);
+      }), 1.0/_pq_value);
   }
+}
 
-  return 0.0;
+template<std::size_t _p_value, std::size_t _q_value, class _matrix>
+Scalar lpq_norm(const _matrix& matrix) {
+
+  if(_p_value != _q_value) {
+    Vector_Dense<0> column_norms(matrix.size_row(), 0.0);
+    FOR_EACH(row, matrix) {
+      FOR_EACH(column, row){
+        std::size_t i_column = std::distance(&*row.begin(), &column);
+        switch(_p_value) {
+          case 0:
+            column_norms[i_column] = std::max(column_norms[i_column], column);
+            break;
+          case 1:
+            column_norms[i_column] += std::abs(column);
+            break;
+          case 2:
+            column_norms[i_column] += column*column;
+            break;
+          case 3:
+            column_norms[i_column] += std::abs(column)*column*column;
+            break;
+          default:
+            column_norms[i_column] += std::pow(std::abs(column), _p_value);
+            break;
+        }
+      }
+    }
+
+    if(!static_cast<bool>(_p_value)) {
+      const Scalar fraction = 1.0/static_cast<Scalar>(_p_value);
+      FOR_EACH_REF(norm, column_norms) norm = std::pow(norm, fraction);
+    }
+
+    return lp_norm<_q_value>(column_norms);
+  }
+  else return lpq_norm<_p_value, _p_value>(matrix);
 }
 
 template<class _matrix>

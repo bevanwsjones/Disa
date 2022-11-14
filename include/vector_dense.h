@@ -184,6 +184,13 @@ struct Vector_Dense<0> : public std::vector<Scalar> {
   }
 
   /**
+   * @brief TODO
+   * @param size
+   * @param value
+   */
+  explicit Vector_Dense(const std::size_t size, const Scalar& value) : std::vector<Scalar>(size, value) {};
+
+  /**
    * @brief Constructor to construct a vector from a lambda.
    * @tparam _lambda Template lambda function Scalar(std::size_t).
    * @param[in] lambda Lambda expression.
