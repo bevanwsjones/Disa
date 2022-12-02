@@ -15,10 +15,10 @@
 //  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 //  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ----------------------------------------------------------------------------------------------------------------------
-//  File Name: matrix_sparse.cpp
-//  Description: Implements the definitions for out-of-line declarations for member and non-member functions relating
-//               to sparse matrices.
+//  File Name:
+//  Description:
 // ----------------------------------------------------------------------------------------------------------------------
+//
 
 #include <tuple>
 #include "matrix_sparse.h"

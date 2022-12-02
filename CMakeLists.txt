@@ -58,15 +58,12 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/libs/solvers)
 include_directories(include)
 
 set(SOURCES
-        include/matrix_dense.h
-        include/matrix_sparse.h
-        include/vector_dense.h
-        include/vector_operators.h
-        src/matrix_sparse.cpp
+        include/disa.h
         )
 
 set(LIBRARIES
         core
+        solvers
         )
 
 add_library(disa ${SOURCES})
@@ -90,19 +87,4 @@ if(ENABLE_TEST)
   include(CTest)
   include(GoogleTest)
 
-  add_executable(test_matrix_dense tests/test_matrix_dense.cpp)
-  target_link_libraries(test_matrix_dense GTest::gtest_main disa)
-  gtest_discover_tests(test_matrix_dense)
-
-  add_executable(test_matrix_sparse tests/test_matrix_sparse.cpp)
-  target_link_libraries(test_matrix_sparse GTest::gtest_main disa)
-  gtest_discover_tests(test_matrix_sparse)
-
-  add_executable(test_vector_dense tests/test_vector_dense.cpp)
-  target_link_libraries(test_vector_dense GTest::gtest_main disa)
-  gtest_discover_tests(test_vector_dense)
-
-  add_executable(test_vector_operators tests/test_vector_operators.cpp)
-  target_link_libraries(test_vector_operators GTest::gtest_main disa)
-  gtest_discover_tests(test_vector_operators)
 endif ()
