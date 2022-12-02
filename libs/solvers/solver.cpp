@@ -23,8 +23,30 @@
 
 namespace Disa {
 
-void Solver::Solve() {
-  int x = 1;
+ConvergenceData Iterative_Solver::solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) {
+
+  ConvergenceData data;
+
+  Vector_Dense<0> x_np1;
+  x_np1.resize(x_vector.size());
+
+  FOR(iteration, 1000) {
+    FOR(i_row, matrix.size_row()) {
+      Scalar offs_row_dot = 0;
+      FOR_ITER(column_iter, matrix[i_row]){
+        if(column_iter.i_column() != i_row) offs_row_dot += *column_iter*x_vector[column_iter.i_column()];
+      }
+      x_np1[i_row] = (b_vector[i_row] - offs_row_dot)/matrix[i_row][i_row];
+    }
+    data.iteration = iteration;
+
+    std::cout<<"\niteration: "<<data.iteration<<"\tresidual: "<<lp_norm<2>(matrix*x_vector - b_vector)/lp_norm<2>(b_vector);
+
+    std::swap(x_vector, x_np1);
+  }
+
+
+  return data;
 }
 
 }

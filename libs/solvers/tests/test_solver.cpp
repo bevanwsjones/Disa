@@ -25,9 +25,85 @@
 using namespace Disa;
 
 // ---------------------------------------------------------------------------------------------------------------------
+// Testing Fixture Setup
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * todo
+ */
+class Laplace2DProblem : public ::testing::Test
+{
+public:
+  Matrix_Sparse a_matrix;      //!< Sparse coefficient matrix of the linear system
+  Vector_Dense<0> x_vector;    //!< Solution vector of the linear system.
+  Vector_Dense<0> b_vector;    //!< Constant vector of the linear system.
+
+  /**
+   * @brief Calls below setup function with a mesh size of 100 grid points (10 on each axis).
+   */
+  void SetUp() override {
+    SetUp(10);
+  }
+
+  /**
+   * @brief Constructs a linear system to solve a 2D Laplace problem on a unit equi-spaced domain.
+   * @param[in] size_x The number of nodes in one of the cardinal x-direction.
+   *
+   * @details Consider an equi-spaced structured domain of size 1 + 2dx and the Laplace equation:
+   *
+   * d^2phi/dx^2 + d^2phi/dy^2 = 1,
+   *
+   * where dx = 1/(n_x - 1), and with zero as a dirichlet boundary condition. The discrete equation for a generic (non-
+   * boundary) node/vertex reads:
+   *                 A                         x         =    b
+   * |              ...              | |       .       |   | dx^2 |
+   * |              ...              | | phi_{i - n_x} |   | dx^2 |
+   * |              ...              | |       .       |   | dx^2 |
+   * |              ...              | | phi_{i - 1}   |   | dx^2 |
+   * | ... -1 ... -1 4 -1 ... -1 ... | | phi_{i}       | = | dx^2 |.
+   * |              ...              | | phi_{i + 1}   |   | dx^2 |
+   * |              ...              | |       .       |   | dx^2 |
+   * |              ...              | | phi_{i + n_x} |   | dx^2 |
+   * |              ...              | |       .       |   | dx^2 |
+   *
+   * Finally for this problem a zero initial condition is set.
+   */
+  void SetUp(const int size_x) {
+    ASSERT_DEBUG(size_x >= 3, "Must be greater than 3.");
+
+    const int size_xy = size_x*size_x;
+    a_matrix.resize(size_xy, size_xy);
+    x_vector.resize(size_xy, 0);
+    b_vector.resize(size_xy, std::pow(1.0/(size_x - 1.0), 2.0));
+
+    // populate
+    FOR(node_index, size_xy)
+    {
+      if((node_index + size_x) < size_xy) a_matrix[node_index][node_index + size_x] = -1.0;
+      if(node_index%size_x != 0) a_matrix[node_index][node_index - 1] = -1.0;
+      a_matrix[node_index][node_index] = 4;
+      if((node_index + 1)%size_x != 0) a_matrix[node_index][node_index + 1] = -1.0;
+      if((node_index - size_x) >= 0) a_matrix[node_index][node_index - size_x] = -1.0;
+    }
+  }
+};
+
+// ---------------------------------------------------------------------------------------------------------------------
 // Matrix Type
 // ---------------------------------------------------------------------------------------------------------------------
 
-TEST(test_matrix_sparse, is_square) {
-  EXPECT_FALSE(false);
+TEST_F(Laplace2DProblem, iterative_solver_test) {
+
+  Scalar tolerance = 10;
+  uint max_iterations = 10;
+  Iterative_Solver solver(a_matrix);
+
+  ConvergenceData result = solver.solve(x_vector, b_vector);
+
+
+  // Solve and check solution.
+  EXPECT_LE(result.residual, tolerance);
+  EXPECT_GE(result.iteration, 1); // make sure it actual did a solve.
+  EXPECT_LE(result.iteration, max_iterations);//todo more than 1 iteration
+  EXPECT_LE(lp_norm<2>(a_matrix*x_vector - b_vector)/lp_norm<2>(b_vector), tolerance); // safty check - just incase the residual calc gets knocked
 }

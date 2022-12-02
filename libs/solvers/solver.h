@@ -22,12 +22,40 @@
 #ifndef DISA_SOLVERS_H
 #define DISA_SOLVERS_H
 
+#include "scalar.h"
+
+#include "vector_operators.h"
+#include "matrix_sparse.h"
+#include "vector_dense.h"
+
 namespace Disa{
+
+struct ConvergenceData{
+  std::size_t iteration{0};
+  Scalar residual{0};
+};
 
 class Solver{
 
-  void Solve();
+public:
 
+  virtual void setup(Matrix_Sparse& a_matrix) = 0;
+  virtual ConvergenceData solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) = 0;
+
+};
+
+class Iterative_Solver : public Solver{
+
+public:
+  explicit Iterative_Solver(Matrix_Sparse& a_matrix) : matrix(a_matrix) {};
+
+  void setup(Matrix_Sparse& _a_matrix) override {
+  }
+
+  ConvergenceData solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) override;
+
+  private:
+  Matrix_Sparse& matrix;
 };
 
 }

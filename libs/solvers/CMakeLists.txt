@@ -26,9 +26,14 @@ set(SOURCES
         solver.cpp
         )
 
+set(LIBRARIES
+        core
+        )
+
 add_library(solvers ${SOURCES})
 set_target_properties(solvers PROPERTIES LINKER_LANGUAGE CXX)
-target_include_directories(solvers PUBLIC .)
+target_link_libraries(solvers PUBLIC ${LIBRARIES})
+target_include_directories(solvers INTERFACE .)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Testing
