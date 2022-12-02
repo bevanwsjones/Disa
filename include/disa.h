@@ -15,21 +15,27 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: solver.h
-// Description:
+// File Name: disa.h
+// Description: Library header, adds all relevant includes for sub-libraries.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_SOLVERS_H
-#define DISA_SOLVERS_H
+#ifndef DISA_DISA_H
+#define DISA_DISA_H
 
-namespace Disa{
+// ---------------------------------------------------------------------------------------------------------------------
+// Core library headers
+// ---------------------------------------------------------------------------------------------------------------------
 
-class Solver{
+#include "matrix_sparse.h"
+#include "matrix_dense.h"
+#include "scalar.h"
+#include "vector_dense.h"
+#include "vector_operators.h"
 
-  void Solve();
+// ---------------------------------------------------------------------------------------------------------------------
+// Solver library headers
+// ---------------------------------------------------------------------------------------------------------------------
 
-};
+#include "solver.h"
 
-}
-
-#endif //DISA_SOLVERS_H
+#endif //DISA_DISA_H
