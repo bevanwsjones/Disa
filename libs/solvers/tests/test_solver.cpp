@@ -20,7 +20,11 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
-#include "solver.h"
+
+#include "matrix_sparse.h"
+#include "matrix_dense.h"
+
+#include "iterative_solvers.h"
 
 using namespace Disa;
 
@@ -96,10 +100,12 @@ TEST_F(Laplace2DProblem, iterative_solver_test) {
 
   Scalar tolerance = 10;
   uint max_iterations = 10;
-  Iterative_Solver solver(a_matrix);
 
+  Iterative_Solver solver(a_matrix, {2000, 1.0e-5});
+  solver.setup();
   ConvergenceData result = solver.solve(x_vector, b_vector);
 
+  std::cout<<"\n"<<result.iteration<<"\t"<<result.residual;
 
   // Solve and check solution.
   EXPECT_LE(result.residual, tolerance);

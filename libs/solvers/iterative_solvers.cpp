@@ -15,54 +15,46 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: solver.h
-// Description: Contains the base definitions for the solver library.
+// File Name: iterative_solvers.cpp
+// Description: Contains the class definitions for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_SOLVERS_H
-#define DISA_SOLVERS_H
+#include "iterative_solvers.h"
 
-#include "scalar.h"
+#include "matrix_sparse.h"
+#include "vector_operators.h"
 
-namespace Disa{
-
-// Forward declarations
-class Matrix_Sparse;
-template<std::size_t> class Vector_Dense;
+namespace Disa {
 
 /**
- * @struct Options
- * @brief
+ * @details
  */
-struct SolverConfig {
-  std::size_t maximum_iterations{0}; //!<
-  Scalar convergence_tolerance{0};       //!<
-};
-
-/**
- * @struct ConvergenceData
- * @brief
- */
-struct ConvergenceData {
-  std::size_t iteration{0}; //!<
-  Scalar residual{scalar_max};       //!<
-};
-
-/**
- * @brief
- */
-class Solver {
-
-public:
-  explicit Solver(const Matrix_Sparse& a_matrix, const SolverConfig solver_config) : matrix(a_matrix), config(solver_config) {} ;
-  virtual void setup() = 0;
-  virtual ConvergenceData solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) = 0;
-
-protected:
-  const Matrix_Sparse& matrix;
-  SolverConfig config;
-};
-
+void Iterative_Solver::setup() {
+  x_working.resize(matrix.size_row());
 }
 
-#endif //DISA_SOLVERS_H
+/**
+ * @details basic jacobi
+ */
+ConvergenceData Iterative_Solver::solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) {
+
+  ConvergenceData data;
+
+  while(data.iteration < config.maximum_iterations && data.residual > config.convergence_tolerance) {
+
+    FOR(i_row, matrix.size_row()) {
+      Scalar offs_row_dot = 0;
+      FOR_ITER(column_iter, matrix[i_row]){
+        if(column_iter.i_column() != i_row) offs_row_dot += *column_iter*x_vector[column_iter.i_column()];
+      }
+      x_working[i_row] = (b_vector[i_row] - offs_row_dot)/matrix[i_row][i_row];
+    }
+    data.iteration++;
+    data.residual = lp_norm<2>(matrix*x_vector - b_vector)/lp_norm<2>(b_vector);
+    std::swap(x_vector, x_working);
+  }
+
+  return data;
+}
+
+}

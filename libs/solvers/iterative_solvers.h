@@ -15,38 +15,50 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: Solver.cpp
-// Description:
+// File Name: iterative_solvers.h
+// Description: Contains the class declarations for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
 // ---------------------------------------------------------------------------------------------------------------------
 
+#ifndef DISA_ITERATIVE_SOLVERS_H
+#define DISA_ITERATIVE_SOLVERS_H
+
 #include "solver.h"
+#include "vector_dense.h"
 
-namespace Disa {
+namespace Disa{
 
-ConvergenceData Iterative_Solver::solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) {
+// Forward declarations
+class Matrix_Sparse;
 
-  ConvergenceData data;
+/**
+ * @class
+ * @brief
+ *
+ */
+class Iterative_Solver : public Solver {
 
-  Vector_Dense<0> x_np1;
-  x_np1.resize(x_vector.size());
+public:
+  explicit Iterative_Solver(const Matrix_Sparse& a_matrix, SolverConfig config) : Solver(a_matrix, config) {
 
-  FOR(iteration, 1000) {
-    FOR(i_row, matrix.size_row()) {
-      Scalar offs_row_dot = 0;
-      FOR_ITER(column_iter, matrix[i_row]){
-        if(column_iter.i_column() != i_row) offs_row_dot += *column_iter*x_vector[column_iter.i_column()];
-      }
-      x_np1[i_row] = (b_vector[i_row] - offs_row_dot)/matrix[i_row][i_row];
-    }
-    data.iteration = iteration;
+  };
 
-    std::cout<<"\niteration: "<<data.iteration<<"\tresidual: "<<lp_norm<2>(matrix*x_vector - b_vector)/lp_norm<2>(b_vector);
+  /**
+   * @brief
+   */
+  void setup() override;
 
-    std::swap(x_vector, x_np1);
-  }
+  /**
+   * @brief  basic jacobi
+   * @param x_vector
+   * @param b_vector
+   * @return
+   */
+  ConvergenceData solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) override;
 
+private:
+  Vector_Dense<0> x_working;
+};
 
-  return data;
 }
 
-}
+#endif //DISA_ITERATIVE_SOLVERS_H

@@ -22,8 +22,9 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 set(SOURCES
+        iterative_solvers.h
         solver.h
-        solver.cpp
+        iterative_solvers.cpp
         )
 
 set(LIBRARIES
