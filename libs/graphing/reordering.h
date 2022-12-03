@@ -15,35 +15,15 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: disa.h
-// Description: Library header, adds all relevant includes for sub-libraries.
+// File Name: reordering.h
+// Description: todo
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_DISA_H
-#define DISA_DISA_H
+#ifndef DISA_REORDERING_H
+#define DISA_REORDERING_H
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Core library headers
-// ---------------------------------------------------------------------------------------------------------------------
+namespace Disa {
 
-#include "matrix_sparse.h"
-#include "matrix_dense.h"
-#include "scalar.h"
-#include "vector_dense.h"
-#include "vector_operators.h"
+}
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Graphing library headers
-// ---------------------------------------------------------------------------------------------------------------------
-
-#include "graph.h"
-#include "partitioning.h"
-#include "reordering.h"
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Solver library headers
-// ---------------------------------------------------------------------------------------------------------------------
-
-#include "solver.h"
-
-#endif //DISA_DISA_H
+#endif //DISA_REORDERING_H
