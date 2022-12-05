@@ -25,6 +25,7 @@ set(SOURCES
         graph.h
         partitioning.h
         reordering.h
+        graph.cpp
         )
 
 set(LIBRARIES
@@ -45,8 +46,8 @@ if(ENABLE_TEST)
   include(CTest)
   include(GoogleTest)
 
-#  add_executable(test_solver tests/test_solver.cpp)
-#  target_link_libraries(test_solver GTest::gtest_main solvers)
-#  gtest_discover_tests(test_solver)
+  add_executable(test_graph tests/test_graph.cpp)
+  target_link_libraries(test_graph GTest::gtest_main graphing)
+  gtest_discover_tests(test_graph)
 
 endif ()
