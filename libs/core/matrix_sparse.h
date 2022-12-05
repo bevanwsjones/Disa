@@ -75,7 +75,7 @@ struct Iterator_Matrix_Sparse_Element;
  * row-column index pair for an entry. Thus functions, not normally associated with continuous structures (eg find,
  * contains, lower_bound, etc), are supported by the matrix.
  *
- * Note: The user should be aware of the following:
+ * @note The user should be aware of the following:
  * 1. Iterators advance over non-zero data - i.e. an iterator will not be dereferenceable to a zero entry (when defined
  *    behaviour is expected).
  * 2. Unlike map or vector erasure functions do not effect the size of the matrix only the number of non-zeroes.
@@ -100,7 +100,7 @@ public:
   using const_iterator_element = Iterator_Matrix_Sparse_Element<const matrix>;
 
   //--------------------------------------------------------------------------------------------------------------------
-  // Public Member functions
+  // Public Member Functions
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
@@ -175,7 +175,7 @@ public:
    * @brief Direct access to the underlying array of the sparse matrix.
    * @return tuple [pointer to non zero offset start, pointer to column index start, pointer to Scalar start].
    *
-   * Note: If empty all pointers will be nullptrs, if the size_non_zero is 0 the element and column index will be
+   * @note If empty all pointers will be nullptrs, if the size_non_zero is 0 the element and column index will be
    *       nullptrs.
    */
   std::tuple<std::size_t*, std::size_t*, Scalar*> inline data() noexcept {
@@ -267,7 +267,7 @@ public:
    * @param[in] row The number of rows to reserve for.
    * @param[in] non_zero The number of non-zeros to reserve. Note this is not the column size.
    *
-   * Note: The number of row offsets which are reserved will be one greater than the row size passed.
+   * @note The number of row offsets which are reserved will be one greater than the row size passed.
    */
   inline void reserve(const std::size_t& row, const std::size_t& non_zero) noexcept {
     row_non_zero.reserve(row + 1);
@@ -279,7 +279,7 @@ public:
    * @brief Returns the number of row offsets and non-zeros entries that can be held in currently allocated storage.
    * @return [number of rows offsets, number of non-zeros entries.]
    *
-   * Note: The number of row offsets (for CSR matrices) is always one greater than the actual matrix row size.
+   * @note The number of row offsets (for CSR matrices) is always one greater than the actual matrix row size.
    */
   [[nodiscard]] inline std::pair<std::size_t, std::size_t> capacity() const noexcept {
     return std::make_pair(row_non_zero.capacity(), column_index.capacity());
@@ -332,7 +332,7 @@ public:
    * @param[in] iter_element The iterator to the value to delete.
    * @return The iterator to the value after the deleted value.
    *
-   * Note: Undefined behaviour exists if the element does not exist, i.e. the iterator must be dereferenceable.
+   * @note Undefined behaviour exists if the element does not exist, i.e. the iterator must be dereferenceable.
    */
   iterator_element erase(const Iterator_Matrix_Sparse_Element<matrix>& iter_element);
 
@@ -341,7 +341,7 @@ public:
    * @param[in] row Number of rows to resized the matrix to.
    * @param[in] column Number of columns to resized the matrix to.
    *
-   * Note: Does not effect number of non-zeros, unless the new row and column sizes reduce the size of the matrix.
+   * @note Does not effect number of non-zeros, unless the new row and column sizes reduce the size of the matrix.
    */
   void resize(const std::size_t& row, const std::size_t& column);
 
@@ -366,7 +366,7 @@ public:
    * @param[in] i_column The column index to the element.
    * @return Element iterator.
    *
-   * Note: If i_row >= row_size() end() is returned, if no element is found *(begin + i_row).end() is returned.
+   * @note If i_row >= row_size() end() is returned, if no element is found *(begin + i_row).end() is returned.
    */
   iterator_element find(const std::size_t& i_row, const std::size_t& i_column);
 
@@ -376,7 +376,7 @@ public:
    * @param[in] i_column The column index to the element.
    * @return constant element iterator.
    *
-   * Note: If i_row >= row_size() end() is returned, if no element is found *(begin + i_row).end() is returned.
+   * @note If i_row >= row_size() end() is returned, if no element is found *(begin + i_row).end() is returned.
    */
   [[nodiscard]] const_iterator_element find(const std::size_t& i_row, const std::size_t& i_column) const;
 
@@ -394,7 +394,7 @@ public:
    * @param[in] i_column The column index of the element.
    * @return Iterator pointing to the first element that is not less than key.
    *
-   * Note: If i_row >= row_size() end() is returned, if no element is found *(begin + i_row).end() is returned.
+   * @note If i_row >= row_size() end() is returned, if no element is found *(begin + i_row).end() is returned.
    */
   iterator_element lower_bound(const std::size_t& i_row, const std::size_t& i_column);
 
@@ -404,7 +404,7 @@ public:
    * @param[in] i_column The column index of the element.
    * @return Const iterator pointing to the first element that is not less than key.
    *
-   * Note: If i_row >= row_size() end() is returned, if no element is found *(begin + i_row).end() is returned.
+   * @note If i_row >= row_size() end() is returned, if no element is found *(begin + i_row).end() is returned.
    */
   [[nodiscard]] const_iterator_element lower_bound(const std::size_t& i_row, const std::size_t& i_column) const;
 
@@ -427,7 +427,7 @@ public:
    * @param[in] scalar Scalar value, b, to multiply the vector by.
    * @return Updated matrix (A').
    *
-   * Note: Division by zero is left to the user to handle.
+   * @note Division by zero is left to the user to handle.
    */
   inline matrix& operator/=(const Scalar& scalar) {
     FOR_EACH_REF(element, element_value) element /= scalar;
@@ -889,7 +889,7 @@ struct Iterator_Matrix_Sparse_Element {
    * @brief Returns the row index for the dereferenceable matrix element.
    * @return Row index of the matrix element.
    *
-   * Note: Undefined behaviour if the iterator is not dereferenceable.
+   * @note Undefined behaviour if the iterator is not dereferenceable.
    */
   [[nodiscard]] constexpr const std::size_t& i_row() const { return row_index; };
 
@@ -897,7 +897,7 @@ struct Iterator_Matrix_Sparse_Element {
    * @brief Returns the column index for the dereferenceable matrix element.
    * @return Column index of the matrix element.
    *
-   * Note: Undefined behaviour if the iterator is not dereferenceable.
+   * @note Undefined behaviour if the iterator is not dereferenceable.
    */
   [[nodiscard]] constexpr const std::size_t& i_column() const { return *column_index; };
 
@@ -1097,7 +1097,7 @@ inline Matrix_Sparse operator/(Matrix_Sparse matrix, const Scalar& scalar) {
  * @param[in] vector The vector, b, to multiply the matrix by.
  * @return New vector, c.
  *
- * Note: at present for static vectors the matrix must be square.
+ * @note at present for static vectors the matrix must be square.
  */
 template<std::size_t _size>
 Vector_Dense<_size> operator*(const Matrix_Sparse& matrix, const Vector_Dense<_size>& vector) {

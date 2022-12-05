@@ -127,11 +127,31 @@ typedef std::make_signed<std::size_t>::type s_size_t;    //!< Signed type for si
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
+ * \brief Maco to select the correct macro based on the number of arguments (allows macro overloading).
+ */
+#define GET_MACRO(_1, _2, _3, NAME,...) NAME
+
+/**
  * \brief Traditional integer type for-loop macro, will start at 0, and end at max_iter - 1.
  * \param[in, out] index The for loop index.
  * \param[in] max_iter Maximum number of iterations.
  */
-#define FOR(index, max_iter) for(auto (index) = static_cast<decltype(max_iter)>(0); (index) < (max_iter); ++(index))
+#define FOR_INDEX(index, max_iter) for(auto (index) = static_cast<decltype(max_iter)>(0); (index) < (max_iter); ++(index))
+
+/**
+ * \brief Traditional integer type for loop, by loops between two values either incrementally or decrementally .
+ * \param[in, out] index The for loop index.
+ * \param[in] start_index Starting value of the index.
+ * \param[in] end_index One past the last index.
+ *
+ * Note if the start < end the loop will increment, else decrement.
+ */
+#define FOR_INDEX_RANGE(index, start, end) for(auto (index) = (start); (index) != (end); (start) < (end) ? ++(index) : --(index))
+
+/**
+ * \brief Selects either the index or ranged index for loop macros, see descriptions.
+ */
+#define FOR(...) GET_MACRO(__VA_ARGS__, FOR_INDEX_RANGE, FOR_INDEX)(__VA_ARGS__)
 
 /**
  * \brief Range based for-loop macro
