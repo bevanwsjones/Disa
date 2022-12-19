@@ -177,6 +177,8 @@ public:
    *
    * @note If empty all pointers will be nullptrs, if the size_non_zero is 0 the element and column index will be
    *       nullptrs.
+   *
+   * todo: Add test for function.
    */
   std::tuple<std::size_t*, std::size_t*, Scalar*> inline data() noexcept {
     if(!empty() && !size_non_zero()) std::make_tuple(row_non_zero.data(), column_index.data(), element_value.data());
@@ -328,7 +330,7 @@ public:
   insert_or_assign(const std::size_t& i_row, const std::size_t& i_column, const Scalar& value);
 
   /**
-   * @brief Erases an value at the specified row and column.
+   * @brief Erases a value at the specified row and column, using an element iterator.
    * @param[in] iter_element The iterator to the value to delete.
    * @return The iterator to the value after the deleted value.
    *
@@ -499,7 +501,6 @@ private:
    */
   template<bool _is_add>
   Matrix_Sparse& matrix_arithmetic(const Matrix_Sparse& other);
-
 
   // Friend types and functions.
   friend class Matrix_Sparse_Row<matrix>;

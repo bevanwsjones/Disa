@@ -22,16 +22,14 @@
 #ifndef DISA_GRAPH_H
 #define DISA_GRAPH_H
 
+#include "edge.h"
 #include "macros.h"
 
 #include <algorithm>
 #include <span>
-#include <utility>
 #include <vector>
 
 namespace Disa {
-
-using Edge = std::pair<std::size_t, std::size_t>; // shorthand for an edge
 
 //----------------------------------------------------------------------------------------------------------------------
 // AdjacencyGraph
