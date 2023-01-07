@@ -122,11 +122,12 @@ void AdjacencyGraph::resize(const std::size_t& size) {
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * @details To begin new memory is allocated for a new graph. Using the parsed re-ordering/numbering map (re_order), the
- * new vertices are iterated over. The offset vector is populated by pushing back the back() offset value plus the
- * difference between the corresponding old vertex and the 'next-old' vertex offset difference. The vertex adjacency
- * list is populated by copying the old vertex adjacency range to the back of the new adjacency range and performing a
- * renumbering in the process. Finally the new graph is swapped with the current and returned.
+ * @details To begin new memory is allocated for a new graph. First the offsets for the new graph of determined. First
+ * by computing and storing the offset for each old vertex and storing it in the new vertex position, and then by
+ * summing preceding offsets to obtain the new offset for each vertex. The new vertex lists are populated by coping
+ * and renumbering the old vertex lists data to the new positions, using both the re_ordering vector and the newly
+ * computed offsets. Each must also be resorted in an ascending fashion. Finally, the new graph is swapped with the
+ * current and returned.
  */
 AdjacencyGraph AdjacencyGraph::reorder(const std::vector<std::size_t>& re_order) {
 
@@ -137,17 +138,24 @@ AdjacencyGraph AdjacencyGraph::reorder(const std::vector<std::size_t>& re_order)
 
   // Allocate memory.
   AdjacencyGraph graph;
-  graph.offset.reserve(offset.size());
-  graph.vertex_adjacent_list.reserve(vertex_adjacent_list.size());
+  graph.offset.resize(offset.size());
+  graph.vertex_adjacent_list.resize(vertex_adjacent_list.size());
 
-  // populate the new graph using the reorder mapping.
-  graph.offset.push_back(0);
-  FOR(i_vertex, size_vertex()) {
-    graph.offset.push_back(graph.offset.back() + offset[re_order[i_vertex] + 1] - offset[re_order[i_vertex]]);
-    auto adjacency_iter = vertex_adjacency_iter(re_order[i_vertex]);
-    std::transform(adjacency_iter.first, adjacency_iter.second, std::back_inserter(graph.vertex_adjacent_list),
-                   [re_order](const std::size_t& new_vertex) { return re_order[new_vertex]; });
-    adjacency_iter = graph.vertex_adjacency_iter(i_vertex);
+  // Set up the offsets for the new graph.
+  if(!empty()) {
+    graph.offset[0] = 0;
+    FOR(i_old, size_vertex()) graph.offset[re_order[i_old] + 1] = offset[i_old + 1] - offset[i_old];
+    FOR(i_new, size_vertex()) graph.offset[i_new + 1] += graph.offset[i_new];
+  }
+
+  // Populate the new graph using the reorder mapping.
+  FOR(i_old, size_vertex()) {
+    const std::size_t& i_new = re_order[i_old];
+    auto adjacency_iter = vertex_adjacency_iter(i_old);
+    std::transform(adjacency_iter.first, adjacency_iter.second,
+                   std::next(graph.vertex_adjacent_list.begin(), static_cast<s_size_t>(graph.offset[i_new])),
+                   [re_order](const std::size_t& i_old){return re_order[i_old];});
+    adjacency_iter = graph.vertex_adjacency_iter(i_new);
     std::sort(adjacency_iter.first, adjacency_iter.second);
   }
 
