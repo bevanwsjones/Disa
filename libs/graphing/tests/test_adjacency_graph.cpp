@@ -325,12 +325,74 @@ TEST(test_adjacency_graph, contains) {
 //--------------------------------------------------------------------------------------------------------------------
 
 TEST(test_adjacency_graph, reorder) {
-  AdjacencyGraph graph({{0, 1}, {1, 2},{2, 3}, {3, 4}, {0, 4}});
-  std::vector<std::size_t> new_numbering = {2, 3, 4, 0, 1};
-  graph.reorder(new_numbering);
 
-  std::cout<<"\n---";
-  std::cout<<graph;
-  std::cout<<"\n---\n";
+  // Check empty graph calls
+  AdjacencyGraph graph;
+  EXPECT_NO_FATAL_FAILURE(graph.reorder(std::vector<std::size_t>()));
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({0, 1})), "./*");
+
+  graph = AdjacencyGraph({{0, 1}, {1, 2}, {2, 3}, {3, 4}, {0, 3}, {0, 4}}); // pentagon with diagonal connection.
+
+  // Check death conditions
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({0, 1})), "./*");               // check under size crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 0, 3, 2, 5, 4})), "./*");   // check over size crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 3, 2, 4})), "./*");      // check duplicate crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 9, 2, 4})), "./*");      // check index > size
+
+  // Actual reordering check, needs to re-order and ensure sorted lists are created.
+  //                            old index   0  1  2  3  4
+  std::vector<std::size_t> new_numbering = {2, 3, 4, 0, 1};
+  AdjacencyGraph old_graph = graph.reorder(new_numbering);
+  EXPECT_EQ(graph.size().first, 5);
+  EXPECT_EQ(graph.size().second, 6);
+
+  // 0 : 1, 3, 4 -> 2 : 0, 1, 3
+  EXPECT_EQ(graph[2].size(), 3);
+  EXPECT_EQ(graph[2][0], 0);
+  EXPECT_EQ(graph[2][1], 1);
+  EXPECT_EQ(graph[2][2], 3);
+
+  // 1 : 0, 2    -> 3 : 2, 4
+  EXPECT_EQ(graph[3].size(), 2);
+  EXPECT_EQ(graph[3][0], 2);
+  EXPECT_EQ(graph[3][1], 4);
+
+  // 2 : 1, 3    -> 4 : 0, 3
+  EXPECT_EQ(graph[4].size(), 2);
+  EXPECT_EQ(graph[4][0], 0);
+  EXPECT_EQ(graph[4][1], 3);
+
+  // 3 : 0, 2, 4 -> 0 : 1, 2, 4
+  EXPECT_EQ(graph[0].size(), 3);
+  EXPECT_EQ(graph[0][0], 1);
+  EXPECT_EQ(graph[0][1], 2);
+  EXPECT_EQ(graph[0][2], 4);
+
+  // 4 : 0, 3    -> 1 : 0, 2
+  EXPECT_EQ(graph[1].size(), 2);
+  EXPECT_EQ(graph[1][0], 0);
+  EXPECT_EQ(graph[1][1], 2);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

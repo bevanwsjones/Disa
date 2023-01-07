@@ -240,8 +240,8 @@ public:
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
-   * @brief Reorders this graph given a new numbering.
-   * @param[in] re_order The new numbering map, vertex_old = re_order[vertex_new].
+   * @brief Reorders this graph given a new index numbering.
+   * @param[in] re_order The numbering index map, new_index = re_order[old_index].
    * @return The old, unmodified, adjacency graph.
    */
   AdjacencyGraph reorder(const std::vector<std::size_t>& re_order);
