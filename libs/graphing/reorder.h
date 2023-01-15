@@ -15,36 +15,28 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: disa.h
-// Description: Library header, adds all relevant includes for sub-libraries.
+// File Name: reorder.h
+// Description: Declarations for the various reordering algorithms available in Disa.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_DISA_H
-#define DISA_DISA_H
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Core library headers
-// ---------------------------------------------------------------------------------------------------------------------
-
-#include "matrix_sparse.h"
-#include "matrix_dense.h"
-#include "scalar.h"
-#include "vector_dense.h"
-#include "vector_operators.h"
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Graphing library headers
-// ---------------------------------------------------------------------------------------------------------------------
+#ifndef DISA_REORDER_H
+#define DISA_REORDER_H
 
 #include "adjacency_graph.h"
-#include "edge.h"
-#include "partitioning.h"
-#include "reorder.h"
+
+namespace Disa {
 
 // ---------------------------------------------------------------------------------------------------------------------
-// Solver library headers
+// Level-Set Orderings
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "solver.h"
+/**
+ * @brief Using the bread first (search) algorithm and a parsed new vertex root the non-disjoint graph is reordered.
+ * @param[in] graph The graph to reorder.
+ * @param[in] root_vertex The new root, or starting vertex for the reordering. Defaults to 0.
+ * @return A mapping for the graph where new_index = re_order[old_index].
+ */
+[[nodiscard]] std::vector<std::size_t> breadth_first(const AdjacencyGraph& graph, std::size_t root_vertex = 0);
 
-#endif //DISA_DISA_H
+}
+#endif //DISA_REORDER_H

@@ -30,20 +30,6 @@ using namespace Disa;
 // Public Member Functions
 //--------------------------------------------------------------------------------------------------------------------
 
-
-
-//// Insert lower vertex.
-//insert_vertex_adjacent_list(i_lower_vertex, i_upper_vertex);
-//std::for_each(std::next(offset.begin(), static_cast<s_size_t>(i_lower_vertex + 1)),
-//  std::next(offset.begin(), static_cast<s_size_t>(i_upper_vertex + 2)), [](std::size_t& off){off++;});
-//
-//// Insert upper vertex (tricky: last for loop is safe -> The highest vertex + 1 (for size) + 1 (for offset) <= end()).
-//insert_vertex_adjacent_list(i_upper_vertex, i_lower_vertex);
-//++(*std::next(offset.begin(), static_cast<s_size_t>(i_upper_vertex + 1)));
-//std::for_each(std::next(offset.begin(), static_cast<s_size_t>(i_upper_vertex + 2)), offset.end(),
-//[](std::size_t& off){off += 2;});
-
-
 TEST(test_adjacency_graph, edge_list_construction) {
 
   // test problem

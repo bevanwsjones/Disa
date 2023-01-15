@@ -15,15 +15,43 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: reordering.h
-// Description: todo
+// File Name:
+// Description:
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_REORDERING_H
-#define DISA_REORDERING_H
+#include "gtest/gtest.h"
+#include "reorder.h"
 
-namespace Disa {
+using namespace Disa;
 
+// ---------------------------------------------------------------------------------------------------------------------
+// Level-Set Orderings
+// ---------------------------------------------------------------------------------------------------------------------
+
+TEST(test_reorder, breadth_first) {
+
+  // test problem
+  // 0 - 1 - 2
+  // |   |   |
+  // 3 - 4 - 5
+  //  \ / \ /
+  //   6 - 7
+  AdjacencyGraph graph({{0, 1}, {0, 3}, {1, 2}, {1, 4}, {2, 5}, {3, 4}, {3, 6}, {4, 5}, {4, 6}, {4, 7}, {5, 7},
+                        {6, 7}});
+
+  // Reorder with a new root of index 5.
+  std::vector<std::size_t> reorder = breadth_first(graph, 5);
+
+  EXPECT_EQ(reorder.size(), graph.size_vertex());
+  EXPECT_EQ(reorder[0], 7);
+  EXPECT_EQ(reorder[1], 4);
+  EXPECT_EQ(reorder[2], 1);
+  EXPECT_EQ(reorder[3], 5);
+  EXPECT_EQ(reorder[4], 2);
+  EXPECT_EQ(reorder[5], 0);
+  EXPECT_EQ(reorder[6], 6);
+  EXPECT_EQ(reorder[7], 3);
+
+  EXPECT_DEATH(breadth_first(graph, 10), "./*");
+  EXPECT_DEATH(breadth_first(AdjacencyGraph()), "./*"); // ensure empty graphs also crash.
 }
-
-#endif //DISA_REORDERING_H
