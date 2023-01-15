@@ -25,8 +25,9 @@ set(SOURCES
         edge.h
         adjacency_graph.h
         partitioning.h
-        reordering.h
-        adjacency_graph.cpp)
+        reorder.h
+        adjacency_graph.cpp
+        reorder.cpp)
 
 set(LIBRARIES
         core

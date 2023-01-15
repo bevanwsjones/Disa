@@ -31,24 +31,59 @@ using namespace Disa;
 //--------------------------------------------------------------------------------------------------------------------
 
 TEST(test_adjacency_graph, edge_list_construction) {
-  AdjacencyGraph graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}}); // place some edge backwards.
 
-  EXPECT_EQ(graph.size_vertex(), 4);
-  EXPECT_EQ(graph.size_edge(), 4);
+  // test problem
+  // 0 - 1 - 2
+  // |   |   |
+  // 3 - 4 - 5
+  //  \ / \ /
+  //   6 - 7
+  AdjacencyGraph graph({{3, 0}, {0, 1}, {7, 4}, {6, 7}, {2, 5}, {3, 4}, {6, 3}, {4, 5}, {4, 6}, {7, 4}, {5, 7}, {2, 1},
+                        {1, 4}});
+
+  EXPECT_EQ(graph.size_vertex(), 8);
+  EXPECT_EQ(graph.size_edge(), 12);
 
   EXPECT_EQ(graph[0].size(), 2);
-  EXPECT_EQ(graph[1].size(), 2);
+  EXPECT_EQ(graph[1].size(), 3);
   EXPECT_EQ(graph[2].size(), 2);
-  EXPECT_EQ(graph[3].size(), 2);
+  EXPECT_EQ(graph[3].size(), 3);
+  EXPECT_EQ(graph[4].size(), 5);
+  EXPECT_EQ(graph[5].size(), 3);
+  EXPECT_EQ(graph[6].size(), 3);
+  EXPECT_EQ(graph[7].size(), 3);
 
   EXPECT_EQ(graph[0][0], 1);
   EXPECT_EQ(graph[0][1], 3);
+
   EXPECT_EQ(graph[1][0], 0);
   EXPECT_EQ(graph[1][1], 2);
+  EXPECT_EQ(graph[1][2], 4);
+
   EXPECT_EQ(graph[2][0], 1);
-  EXPECT_EQ(graph[2][1], 3);
+  EXPECT_EQ(graph[2][1], 5);
+
   EXPECT_EQ(graph[3][0], 0);
-  EXPECT_EQ(graph[3][1], 2);
+  EXPECT_EQ(graph[3][1], 4);
+  EXPECT_EQ(graph[3][2], 6);
+
+  EXPECT_EQ(graph[4][0], 1);
+  EXPECT_EQ(graph[4][1], 3);
+  EXPECT_EQ(graph[4][2], 5);
+  EXPECT_EQ(graph[4][3], 6);
+  EXPECT_EQ(graph[4][4], 7);
+
+  EXPECT_EQ(graph[5][0], 2);
+  EXPECT_EQ(graph[5][1], 4);
+  EXPECT_EQ(graph[5][2], 7);
+
+  EXPECT_EQ(graph[6][0], 3);
+  EXPECT_EQ(graph[6][1], 4);
+  EXPECT_EQ(graph[6][2], 7);
+
+  EXPECT_EQ(graph[7][0], 4);
+  EXPECT_EQ(graph[7][1], 5);
+  EXPECT_EQ(graph[7][2], 6);
 }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -195,24 +230,13 @@ TEST(test_adjacency_graph, insert) {
   EXPECT_TRUE(graph.insert({2, 3}));
   EXPECT_TRUE(graph.insert({1, 2}));
 
+  // Add two additional vertices, as an 'appendage'.
+  EXPECT_TRUE(graph.insert({3, 6}));
+  EXPECT_TRUE(graph.insert({5, 6}));
+
   // check ascending order has been maintained.
-  EXPECT_EQ(graph.size_edge(), 5);
-  EXPECT_EQ(graph.size_vertex(), 5);
-  FOR(i_vertex, graph.size_vertex()) {
-    EXPECT_EQ(graph[i_vertex].size(), 2);
-    if(i_vertex == 0){
-      EXPECT_EQ(graph[i_vertex][0], 1);
-      EXPECT_EQ(graph[i_vertex][1], graph.size_vertex() - 1);
-    }
-    else if(i_vertex == graph.size_vertex() - 1) {
-      EXPECT_EQ(graph[i_vertex][0], 0);
-      EXPECT_EQ(graph[i_vertex][1], i_vertex - 1);
-    }
-    else{
-      EXPECT_EQ(graph[i_vertex][0], i_vertex - 1);
-      EXPECT_EQ(graph[i_vertex][1], i_vertex + 1);
-    }
-  }
+  EXPECT_EQ(graph.size_edge(), 7);
+  EXPECT_EQ(graph.size_vertex(), 7);
 
   // Attempt to insert an existing edge
   EXPECT_FALSE(graph.insert({1, 2}));
@@ -222,13 +246,15 @@ TEST(test_adjacency_graph, insert) {
   EXPECT_TRUE(graph.insert({0, 2}));
 
   // Check graph
-  EXPECT_EQ(graph.size_edge(), 7);
-  EXPECT_EQ(graph.size_vertex(), 5);
+  EXPECT_EQ(graph.size_edge(), 9);
+  EXPECT_EQ(graph.size_vertex(), 7);
   EXPECT_EQ(graph[0].size(), 4);
   EXPECT_EQ(graph[1].size(), 2);
   EXPECT_EQ(graph[2].size(), 3);
-  EXPECT_EQ(graph[3].size(), 3);
+  EXPECT_EQ(graph[3].size(), 4);
   EXPECT_EQ(graph[4].size(), 2);
+  EXPECT_EQ(graph[5].size(), 1);
+  EXPECT_EQ(graph[6].size(), 2);
 
   EXPECT_EQ(graph[0][0], 1);
   EXPECT_EQ(graph[0][1], 2);
@@ -242,8 +268,12 @@ TEST(test_adjacency_graph, insert) {
   EXPECT_EQ(graph[3][0], 0);
   EXPECT_EQ(graph[3][1], 2);
   EXPECT_EQ(graph[3][2], 4);
+  EXPECT_EQ(graph[3][3], 6);
   EXPECT_EQ(graph[4][0], 0);
   EXPECT_EQ(graph[4][1], 3);
+  EXPECT_EQ(graph[5][0], 6);
+  EXPECT_EQ(graph[6][0], 3);
+  EXPECT_EQ(graph[6][1], 5);
 
   // death test - invalid edge
   EXPECT_DEATH(graph.insert({1, 1}), ".*");

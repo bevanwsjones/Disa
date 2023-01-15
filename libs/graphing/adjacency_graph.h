@@ -254,6 +254,10 @@ private:
   std::vector<std::size_t> vertex_adjacent_list;    //!< Single contiguous list of all vertex adjacency for the graph.
   std::vector<std::size_t> offset;                  //!< List pointing to the start of each vertex's adjacency graph.
 
+  //--------------------------------------------------------------------------------------------------------------------
+  // Helper Functions
+  //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @brief Returns iterators to the beginning and end of a vertex adjacency graph.
    * @param[in] i_vertex The vertex index to the adjacency graph being sought.
@@ -263,6 +267,21 @@ private:
   vertex_adjacency_iter(const std::size_t& i_vertex) {
     return std::make_pair(std::next(vertex_adjacent_list.begin(), static_cast<s_size_t>(offset[i_vertex])),
                           std::next(vertex_adjacent_list.begin(), static_cast<s_size_t>(offset[i_vertex + 1])));
+  }
+
+  /**
+   * @brief Inserts into the vertex adjacent list a new vertex in a sorted manner.
+   * @param[in] vertex The vertex to have its adjacency updated.
+   * @param[in] insert_vertex The new vertex index to insert.
+   *
+   * @warning This operation breaks the graph if not used correctly, as the offsets are not updated. Further, if the
+   *          offset vector is not upto date this operation produces undefined behaviour.
+   */
+  void insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex){
+    const auto& adjacency = vertex_adjacency_iter(vertex);
+    const auto& insert_iter = std::lower_bound(adjacency.first, adjacency.second, insert_vertex);
+    const auto& distance = std::distance(vertex_adjacent_list.begin(), insert_iter);
+    vertex_adjacent_list.insert(vertex_adjacent_list.begin() + distance, insert_vertex);
   }
 };
 
