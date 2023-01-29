@@ -24,6 +24,8 @@
 
 #include "adjacency_graph.h"
 
+#include <numeric>
+
 namespace Disa {
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -33,10 +35,45 @@ namespace Disa {
 /**
  * @brief Using the bread first (search) algorithm and a parsed new vertex root the non-disjoint graph is reordered.
  * @param[in] graph The graph to reorder.
- * @param[in] root_vertex The new root, or starting vertex for the reordering. Defaults to 0.
+ * @param[in] root_vertex The new graph root vertex, or starting vertex for the reordering. Defaults to 0.
  * @return A mapping for the graph where new_index = re_order[old_index].
  */
 [[nodiscard]] std::vector<std::size_t> breadth_first(const AdjacencyGraph& graph, std::size_t root_vertex = 0);
+
+/**
+ * @brief Reorders a given non-disjoint graph using the Cuthill-Mckee algorithm.
+ * @param[in] graph The graph to reorder.
+ * @param[in] start_vertex The new graph root vertex, if default a periphery node will be search for. Defaults to max().
+ * @return A mapping for the graph where new_index = re_order[old_index].
+ */
+std::vector<std::size_t> cuthill_mckee(const AdjacencyGraph& graph,
+                                       std::size_t root_vertex = std::numeric_limits<std::size_t>::max());
+
+/**
+ * @brief Reorders a given non-disjoint graph using the Reverse Cuthill-Mckee algorithm.
+ * @param[in] graph The graph to reorder.
+ * @param[in] start_vertex The new graph root vertex, if default a periphery node will be search for. Defaults to max().
+ * @return A mapping for the graph where new_index = re_order[old_index].
+ */
+inline std::vector<std::size_t> cuthill_mckee_reverse(const AdjacencyGraph& graph,
+                                                      std::size_t root_vertex = std::numeric_limits<std::size_t>::max())
+                                                      {
+  std::vector reorder = cuthill_mckee(graph, root_vertex);
+  FOR_EACH_REF(t, reorder) {t = reorder.size() - t - 1;}
+  return reorder;
+};
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Independent set orderings
+// ---------------------------------------------------------------------------------------------------------------------
+
+//std::vector<std::size_t>  increasing_degree_traversal(const AdjacencyGraph& graph);
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Multicolor Ordering
+// ---------------------------------------------------------------------------------------------------------------------
+
+//std::vector<std::size_t>  greedy_multicoloring(const AdjacencyGraph& graph);
 
 }
 #endif //DISA_REORDER_H
