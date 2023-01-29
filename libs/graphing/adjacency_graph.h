@@ -240,6 +240,17 @@ public:
   //--------------------------------------------------------------------------------------------------------------------
 
   /**
+   * @brief Computes the degree of a vertex: defined as the number of vertices it adjacent (connected) to.
+   * @param[in] i_vertex The vertex index for which to compute the degree.
+   * @return The degree of the vertex.
+   */
+  [[nodiscard]] std::size_t degree(const std::size_t& i_vertex) const {
+    ASSERT_DEBUG(i_vertex < size_vertex(), "Vertex index " + std::to_string(i_vertex) + " not in range [0, "
+    + std::to_string(i_vertex) + ").");
+    return offset[i_vertex + 1] - offset[i_vertex];
+  }
+
+  /**
    * @brief Reorders this graph given a new index numbering.
    * @param[in] re_order The numbering index map, new_index = re_order[old_index].
    * @return The old, unmodified, adjacency graph.

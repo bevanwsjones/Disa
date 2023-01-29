@@ -354,6 +354,23 @@ TEST(test_adjacency_graph, contains) {
 // Graph Operators
 //--------------------------------------------------------------------------------------------------------------------
 
+TEST(test_adjacency_graph, degree) {
+
+  // test problem
+  // 0 - 1 - 2
+  // |   |   |
+  // 3 - 4 - 5
+  //  \ / \ /
+  //   6 - 7
+  AdjacencyGraph graph({{3, 0}, {0, 1}, {7, 4}, {6, 7}, {2, 5}, {3, 4}, {6, 3}, {4, 5}, {4, 6}, {7, 4}, {5, 7}, {2, 1},
+                        {1, 4}});
+
+  EXPECT_EQ(graph.degree(0), 2);
+  EXPECT_EQ(graph.degree(3), 3);
+  EXPECT_EQ(graph.degree(4), 5);
+  EXPECT_DEATH(graph.degree(50), "./*");
+}
+
 TEST(test_adjacency_graph, reorder) {
 
   // Check empty graph calls
@@ -365,7 +382,7 @@ TEST(test_adjacency_graph, reorder) {
 
   // Check death conditions
   EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({0, 1})), "./*");               // check under size crashes
-  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 0, 3, 2, 5, 4})), "./*");   // check over size crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 0, 3, 2, 5, 4})), "./*");   // check oversize crashes
   EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 3, 2, 4})), "./*");      // check duplicate crashes
   EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 9, 2, 4})), "./*");      // check index > size
 
