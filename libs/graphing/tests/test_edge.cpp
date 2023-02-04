@@ -15,36 +15,28 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: disa.h
-// Description: Library header, adds all relevant includes for sub-libraries.
+// File Name:
+// Description:
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_DISA_H
-#define DISA_DISA_H
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Core library headers
-// ---------------------------------------------------------------------------------------------------------------------
-
-#include "matrix_sparse.h"
-#include "matrix_dense.h"
-#include "scalar.h"
-#include "vector_dense.h"
-#include "vector_operators.h"
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Graphing library headers
-// ---------------------------------------------------------------------------------------------------------------------
-
-#include "adjacency_graph.h"
+#include "gtest/gtest.h"
 #include "edge.h"
-#include "partitioning.h"
-#include "reorder.h"
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Solver library headers
-// ---------------------------------------------------------------------------------------------------------------------
+using namespace Disa;
 
-#include "solver.h"
+//----------------------------------------------------------------------------------------------------------------------
+// Edge
+//--------------------------------------------------------------------------------------------------------------------
 
-#endif //DISA_DISA_H
+TEST(test_edge, order_edge_vertex) {
+  Edge edge({0, 1});
+  EXPECT_EQ(order_edge_vertex(&edge).first, 0);
+  EXPECT_EQ(order_edge_vertex(&edge).second, 1);
+
+  edge = Edge({3, 2});
+  EXPECT_EQ(order_edge_vertex(&edge).first, 2);
+  EXPECT_EQ(order_edge_vertex(&edge).second, 3);
+
+  EXPECT_DEATH(order_edge_vertex(nullptr), ".*");
+}
+

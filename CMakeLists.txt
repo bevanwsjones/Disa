@@ -45,6 +45,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/libs/core)
+add_subdirectory(${PROJECT_SOURCE_DIR}/libs/graphing)
 add_subdirectory(${PROJECT_SOURCE_DIR}/libs/solvers)
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -63,12 +64,13 @@ set(SOURCES
 
 set(LIBRARIES
         core
+        graphing
         solvers
         )
 
 add_library(disa ${SOURCES})
-set_target_properties(disa PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(disa ${LIBRARIES})
+set_target_properties(disa PROPERTIES LINKER_LANGUAGE CXX)
 
 add_executable(example src/main.cpp ${SOURCES})
 target_link_libraries(example disa)

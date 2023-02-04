@@ -310,7 +310,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
    * @param[in] scalar Scalar value, b, to multiply the vector by.
    * @return Updated vector (A').
    *
-   * Note: Division by zero is left to the user to handle.
+   * @note Division by zero is left to the user to handle.
    */
   _matrix& operator/=(const Scalar& scalar) {
     FOR_EACH_REF(element, *this) element /= scalar;
@@ -356,7 +356,7 @@ struct Matrix_Dense<0, 0> : public std::vector<Vector_Dense<0> > {
    * @param[in] matrix The second matrix, B, to add.
    * @return Updated matrix (A').
    *
-   * Note: Number of rows and columns will change if either matrix is not square.
+   * @note Number of rows and columns will change if either matrix is not square.
    */
   template<std::size_t _row_other, std::size_t _col_other>
   _matrix& operator*=(const Matrix_Dense<_row_other, _col_other>& matrix) {

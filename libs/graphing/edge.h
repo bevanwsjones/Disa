@@ -15,36 +15,36 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: disa.h
-// Description: Library header, adds all relevant includes for sub-libraries.
+// File Name: edge.h
+// Description: Contains the 'alias' for an edge, as well as some utility functions.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_DISA_H
-#define DISA_DISA_H
+#ifndef DISA_EDGE_H
+#define DISA_EDGE_H
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Core library headers
-// ---------------------------------------------------------------------------------------------------------------------
+#include "macros.h"
 
-#include "matrix_sparse.h"
-#include "matrix_dense.h"
-#include "scalar.h"
-#include "vector_dense.h"
-#include "vector_operators.h"
+#include <utility>
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Graphing library headers
-// ---------------------------------------------------------------------------------------------------------------------
+namespace Disa {
 
-#include "adjacency_graph.h"
-#include "edge.h"
-#include "partitioning.h"
-#include "reorder.h"
+//----------------------------------------------------------------------------------------------------------------------
+// Edge
+//----------------------------------------------------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Solver library headers
-// ---------------------------------------------------------------------------------------------------------------------
+using Edge = std::pair<std::size_t, std::size_t>; //! Definition of an edge, alias for a pair of unsigned ints.
 
-#include "solver.h"
+/**
+ * @brief Returns an ordered vertex list for an edge (without duplicated memory).
+ * @param[in] edge The edge to re_order.
+ * @return A new 'edge', [reference to lower indexed vertex, reference to upper indexed vertex].
+ */
+inline constexpr std::pair<const std::size_t&, const std::size_t&> order_edge_vertex(const Edge* edge) {
+  ASSERT_DEBUG(edge != nullptr, "Parsed edge point is null.");
+  return edge->first < edge->second ? std::pair<const std::size_t&, const std::size_t&>({edge->first, edge->second})
+                                    : std::pair<const std::size_t&, const std::size_t&>({edge->second, edge->first});
+}
 
-#endif //DISA_DISA_H
+}
+
+#endif //DISA_EDGE_H
