@@ -252,10 +252,10 @@ public:
 
   /**
    * @brief Reorders this graph given a new index numbering.
-   * @param[in] re_order The numbering index map, new_index = re_order[old_index].
-   * @return The old, unmodified, adjacency graph.
+   * @param[in] permutation The permutation vector, mapping new_index = permutation[old_index].
+   * @return The old, permuted, adjacency graph.
    */
-  AdjacencyGraph reorder(const std::vector<std::size_t>& re_order);
+  AdjacencyGraph reorder(const std::vector<std::size_t>& permutation);
 
   //--------------------------------------------------------------------------------------------------------------------
   // Private Members

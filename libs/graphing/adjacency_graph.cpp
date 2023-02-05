@@ -116,18 +116,18 @@ void AdjacencyGraph::resize(const std::size_t& size) {
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * @details To begin new memory is allocated for a new graph. First the offsets for the new graph of determined. First
- * by computing and storing the offset for each old vertex and storing it in the new vertex position, and then by
- * summing preceding offsets to obtain the new offset for each vertex. The new vertex lists are populated by coping
- * and renumbering the old vertex lists data to the new positions, using both the re_ordering vector and the newly
- * computed offsets. Each must also be resorted in an ascending fashion. Finally, the new graph is swapped with the
- * current and returned.
+ * @details To begin new memory is allocated for a new graph. First the offsets for the new graph of determined by
+ * computing and storing the offset for each old vertex and storing it in the new vertex position, and then by summing
+ * the preceding offsets to obtain the new offset for each vertex. The new vertex lists are populated by coping and
+ * renumbering the old vertex list's data to the new positions, using both the permutation vector and the newly computed
+ * offsets. Each must also be resorted in an ascending fashion. Finally, the new graph is swapped with the current and
+ * returned.
  */
-AdjacencyGraph AdjacencyGraph::reorder(const std::vector<std::size_t>& re_order) {
+AdjacencyGraph AdjacencyGraph::reorder(const std::vector<std::size_t>& permutation) {
 
-  ASSERT_DEBUG(re_order.size() == size_vertex(), "Incorrect sizes, " + std::to_string(re_order.size()) + " vs. "
-                                                 + std::to_string(size_vertex()) + ".");
-  ASSERT_DEBUG(std::accumulate(re_order.begin(), re_order.end(), 0.0) == (size_vertex() - 1)*size_vertex()/2.0,
+  ASSERT_DEBUG(permutation.size() == size_vertex(), "Incorrect sizes, " + std::to_string(permutation.size()) + " vs. "
+                                                    + std::to_string(size_vertex()) + ".");
+  ASSERT_DEBUG(std::accumulate(permutation.begin(), permutation.end(), 0.0) == (size_vertex() - 1)*size_vertex()/2.0,
                "Checksum for parsed re_ordering, are the elements unique?");
 
   // Allocate memory.
@@ -138,17 +138,17 @@ AdjacencyGraph AdjacencyGraph::reorder(const std::vector<std::size_t>& re_order)
   // Set up the offsets for the new graph.
   if(!empty()) {
     graph.offset[0] = 0;
-    FOR(i_old, size_vertex()) graph.offset[re_order[i_old] + 1] = offset[i_old + 1] - offset[i_old];
+    FOR(i_old, size_vertex()) graph.offset[permutation[i_old] + 1] = offset[i_old + 1] - offset[i_old];
     FOR(i_new, size_vertex()) graph.offset[i_new + 1] += graph.offset[i_new];
   }
 
   // Populate the new graph using the reorder mapping.
   FOR(i_old, size_vertex()) {
-    const std::size_t& i_new = re_order[i_old];
+    const std::size_t& i_new = permutation[i_old];
     auto adjacency_iter = vertex_adjacency_iter(i_old);
     std::transform(adjacency_iter.first, adjacency_iter.second,
                    std::next(graph.vertex_adjacent_list.begin(), static_cast<s_size_t>(graph.offset[i_new])),
-                   [re_order](const std::size_t& i_old){return re_order[i_old];});
+                   [permutation](const std::size_t& i_old){return permutation[i_old];});
     adjacency_iter = graph.vertex_adjacency_iter(i_new);
     std::sort(adjacency_iter.first, adjacency_iter.second);
   }
