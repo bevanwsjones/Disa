@@ -73,7 +73,7 @@ TEST_F(test_reorder, breadth_first) {
   EXPECT_EQ(reorder[7], 3);
 
   EXPECT_DEATH(breadth_first(graph, 10), "./*");
-  EXPECT_DEATH(breadth_first(AdjacencyGraph()), "./*"); // ensure empty graphs also crash.
+  EXPECT_TRUE(breadth_first(AdjacencyGraph()).empty()); // ensure empty graphs returns empty reorder.
 }
 
 TEST_F(test_reorder, cuthill_mckee) {
@@ -121,11 +121,10 @@ TEST_F(test_reorder, cuthill_mckee) {
   EXPECT_EQ(reorder[14], 13);
 
   EXPECT_DEATH(cuthill_mckee_reverse(graph_saad, 36), "./*");
-  EXPECT_DEATH(cuthill_mckee_reverse(AdjacencyGraph()), "./*"); // ensure empty graphs also crash.
-
+  EXPECT_TRUE(cuthill_mckee_reverse(AdjacencyGraph()).empty()); // ensure empty graphs returns empty reorder.
 }
 
-TEST_F(test_reorder, cuthill_mckee_reverse){
+TEST_F(test_reorder, cuthill_mckee_reverse) {
 
   // Test search vertex (should be old vertex 0)
   // New Index:  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14
@@ -170,8 +169,39 @@ TEST_F(test_reorder, cuthill_mckee_reverse){
   EXPECT_EQ(reorder[14], 1);
 
   EXPECT_DEATH(cuthill_mckee_reverse(graph_saad, 36), "./*");
-  EXPECT_DEATH(cuthill_mckee_reverse(AdjacencyGraph()), "./*"); // ensure empty graphs also crash.
+  EXPECT_TRUE(greedy_multicolouring(AdjacencyGraph()).empty()); // ensure empty graphs returns empty reorder.
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Multicolor Ordering
+// ---------------------------------------------------------------------------------------------------------------------
+
+TEST_F(test_reorder, greedy_multicolouring) {
+
+  // Test search vertex (should be old vertex 0)
+  // New Index:  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14
+  // Old Index:  0,  1,  2,  3,  4,  5,  6,  9, 11,  7, 12,  8, 10, 11, 14
+  std::vector<std::size_t> reorder = greedy_multicolouring(graph_saad);
+  EXPECT_EQ(reorder.size(), graph_saad.size_vertex());
+  EXPECT_EQ(reorder[0], 0);
+  EXPECT_EQ(reorder[1], 1);
+  EXPECT_EQ(reorder[2], 2);
+  EXPECT_EQ(reorder[3], 3);
+  EXPECT_EQ(reorder[4], 4);
+  EXPECT_EQ(reorder[5], 5);
+  EXPECT_EQ(reorder[6], 6);
+  EXPECT_EQ(reorder[7], 9);
+  EXPECT_EQ(reorder[8], 12);
+  EXPECT_EQ(reorder[9], 7);
+  EXPECT_EQ(reorder[10], 13);
+  EXPECT_EQ(reorder[11], 8);
+  EXPECT_EQ(reorder[12], 10);
+  EXPECT_EQ(reorder[13], 11);
+  EXPECT_EQ(reorder[14], 14);
+
+  EXPECT_TRUE(greedy_multicolouring(AdjacencyGraph()).empty()); // ensure empty graphs returns empty reorder.
+}
+
 
 
 
