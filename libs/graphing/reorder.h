@@ -16,7 +16,7 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
 // File Name: reorder.h
-// Description: Declarations for the various reordering algorithms available in Disa.
+// Description: Declarations for the various reordering/permutation algorithms available in Disa.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_REORDER_H
