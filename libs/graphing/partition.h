@@ -41,28 +41,28 @@ void multinode_level_set_expansion();
  */
 void recursive_graph_bisection(std::size_t number_domains){
   ASSERT_DEBUG(number_domains > 0, "Cannot split a graph into zero domains.");
-
-  int pseudo_peripheral = pseudo_peripheral_node(graph);
-  std::vector<int> levels = level_traversal(graph, pseudo_peripheral);
-
-  std::vector<std::size_t> i_sub_graph;
-
-  int num_nodes = graph.num_nodes;
-  int mid = ceil(num_nodes / 2.0);
-
-  std::vector<int> left_partition, right_partition;
-  for (int i = 0; i < num_nodes; i++) {
-    if (levels[i] < mid) {
-      left_partition.push_back(i);
-    } else {
-      right_partition.push_back(i);
-    }
-  }
-
-  while(number_domains != 0){
-
-    --number_domains;
-  }
+//
+//  int pseudo_peripheral = pseudo_peripheral_node(graph);
+//  std::vector<int> levels = level_traversal(graph, pseudo_peripheral);
+//
+//  std::vector<std::size_t> i_sub_graph;
+//
+//  int num_nodes = graph.num_nodes;
+//  int mid = ceil(num_nodes / 2.0);
+//
+//  std::vector<int> left_partition, right_partition;
+//  for (int i = 0; i < num_nodes; i++) {
+//    if (levels[i] < mid) {
+//      left_partition.push_back(i);
+//    } else {
+//      right_partition.push_back(i);
+//    }
+//  }
+//
+//  while(number_domains != 0){
+//
+//    --number_domains;
+//  }
 };
 
 // ---------------------------------------------------------------------------------------------------------------------

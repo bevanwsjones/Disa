@@ -36,7 +36,7 @@ namespace Disa {
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * @class AdjacencyGraph
+ * @class Adjacency_Graph
  * @brief An graph G(V, E), where V is a set of vertex indices and E is a set of undirected edges connecting the
  *        vertices in V.
  *
@@ -62,7 +62,7 @@ namespace Disa {
  * 1. Add iterators, begin(), end() etc.
  * 2. Create arithmetic operators +,-, etc for unions and intersections.
  */
-class AdjacencyGraph {
+class Adjacency_Graph {
 
 public:
 
@@ -73,7 +73,7 @@ public:
   /**
    * @brief Default constructor.
    */
-  AdjacencyGraph() = default;
+  Adjacency_Graph() = default;
 
   /**
    * @brief Construction via a list of edges connecting two vertices i and j, where i != j.
@@ -81,7 +81,7 @@ public:
    *
    * @note At preset this is not writen efficiently, and can be improved, mainly used for testing.
    */
-  AdjacencyGraph(std::initializer_list<Edge> edge_graph) {
+  Adjacency_Graph(std::initializer_list<Edge> edge_graph) {
     const auto iter = std::max_element(edge_graph.begin(), edge_graph.end(),
                                        [](const Edge& edge_0, const Edge& edge_1) {
                                          return order_edge_vertex(&edge_0).second < order_edge_vertex(&edge_1).second;
@@ -246,16 +246,8 @@ public:
    */
   [[nodiscard]] std::size_t degree(const std::size_t& i_vertex) const {
     ASSERT_DEBUG(i_vertex < size_vertex(), "Vertex index " + std::to_string(i_vertex) + " not in range [0, "
-    + std::to_string(i_vertex) + ").");
+                                           + std::to_string(i_vertex) + ").");
     return offset[i_vertex + 1] - offset[i_vertex];
-  }
-
-  /**
-   *
-   * @return
-   */
-  std::vector<Adjacency_Graph> partition(std::vector<std::size_t> i_subgraph){
-
   }
 
   /**
@@ -296,7 +288,7 @@ private:
    * @warning This operation breaks the graph if not used correctly, as the offsets are not updated. Further, if the
    *          offset vector is not upto date this operation produces undefined behaviour.
    */
-  void insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex){
+  void insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex) {
     const auto& adjacency = vertex_adjacency_iter(vertex);
     const auto& insert_iter = std::lower_bound(adjacency.first, adjacency.second, insert_vertex);
     const auto& distance = std::distance(vertex_adjacent_list.begin(), insert_iter);
@@ -319,25 +311,19 @@ private:
 inline std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph) {
   FOR(i_vertex, graph.size_vertex()) {
     if(i_vertex != 0) ostream<<"\n";
-    FOR_EACH(adjacent_vertex, graph[i_vertex])
-      ostream<<adjacent_vertex
-             <<(adjacent_vertex != graph[i_vertex].back() ? ", " : "");
+    FOR_EACH(adjacent_vertex, graph[i_vertex])ostream<<adjacent_vertex
+                                                     <<(adjacent_vertex != graph[i_vertex].back() ? ", " : "");
     if(graph[i_vertex].empty()) ostream<<".";
   }
   return ostream;
 }
 
+//
+//class Adjacency_Sub_Graph : public Adjacency_Graph {
+//
+//
+//};
 
-class Adjacency_Sub_Graph(Adjacency_Graph){
-  /**
- *
- * @return
- */
-  std::vector<AdjacencyGraph> partition(std::vector<std::size_t> i_subgraph){
-
-  }
-
-}
 }
 
 #endif //DISA_ADJACENCY_GRAPH_H
