@@ -38,7 +38,7 @@ namespace Disa {
  * increased by one until the upper index is reached. The lower index is then inserted into the upper index adjacency
  * list. Finally the offset values are increase by two till the end of the offset vector.
  */
-bool AdjacencyGraph::insert(const Edge& edge) {
+bool Adjacency_Graph::insert(const Edge& edge) {
   ASSERT_DEBUG(edge.first != edge.second, "Edge vertices identical, " + std::to_string(edge.first) + " and "
                                           + std::to_string(edge.second) + ".");
 
@@ -67,7 +67,7 @@ bool AdjacencyGraph::insert(const Edge& edge) {
  * the graph the vertices with an index greater or equal to the new size are removed. The 'edges' connecting the removed
  * vertices from the remaining vertices are sought and removed from the graph.
  */
-void AdjacencyGraph::resize(const std::size_t& size) {
+void Adjacency_Graph::resize(const std::size_t& size) {
 
   // Branch based on expansion or contraction of the graph.
   if(size_vertex() < size) {
@@ -101,7 +101,7 @@ void AdjacencyGraph::resize(const std::size_t& size) {
  * @details First ensures that the vertex exists in the graph, then using std::ranges looks for the second vertex of the
  * edge in the adjacency graph of the first.
  */
-[[nodiscard]] bool AdjacencyGraph::contains(const Edge& edge) const {
+[[nodiscard]] bool Adjacency_Graph::contains(const Edge& edge) const {
   ASSERT_DEBUG(edge.first != edge.second, "Edge vertices identical, " + std::to_string(edge.first) + " and "
                                           + std::to_string(edge.second) + ".");
   const Edge ordered_edge = order_edge_vertex(&edge);
@@ -123,7 +123,7 @@ void AdjacencyGraph::resize(const std::size_t& size) {
  * offsets. Each must also be resorted in an ascending fashion. Finally, the new graph is swapped with the current and
  * returned.
  */
-AdjacencyGraph AdjacencyGraph::reorder(const std::vector<std::size_t>& permutation) {
+Adjacency_Graph Adjacency_Graph::reorder(const std::vector<std::size_t>& permutation) {
 
   ASSERT_DEBUG(permutation.size() == size_vertex(), "Incorrect sizes, " + std::to_string(permutation.size()) + " vs. "
                                                     + std::to_string(size_vertex()) + ".");
@@ -131,7 +131,7 @@ AdjacencyGraph AdjacencyGraph::reorder(const std::vector<std::size_t>& permutati
                "Checksum for parsed re_ordering, are the elements unique?");
 
   // Allocate memory.
-  AdjacencyGraph graph;
+  Adjacency_Graph graph;
   graph.offset.resize(offset.size());
   graph.vertex_adjacent_list.resize(vertex_adjacent_list.size());
 

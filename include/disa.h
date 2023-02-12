@@ -38,7 +38,7 @@
 
 #include "adjacency_graph.h"
 #include "edge.h"
-#include "partitioning.h"
+#include "partition.h"
 #include "reorder.h"
 
 // ---------------------------------------------------------------------------------------------------------------------

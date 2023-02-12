@@ -219,7 +219,7 @@ public:
    * @brief Swaps the contents of the graph with the parsed graph
    * @param[in,out] other The other graph, this graph will obtain the other's vertices and edges, and visa versa.
    */
-  inline void swap(AdjacencyGraph& graph_other) {
+  inline void swap(Adjacency_Graph& graph_other) {
     vertex_adjacent_list.swap(graph_other.vertex_adjacent_list);
     offset.swap(graph_other.offset);
   }
@@ -251,11 +251,19 @@ public:
   }
 
   /**
+   *
+   * @return
+   */
+  std::vector<Adjacency_Graph> partition(std::vector<std::size_t> i_subgraph){
+
+  }
+
+  /**
    * @brief Reorders this graph given a new index numbering.
    * @param[in] permutation The permutation vector, mapping new_index = permutation[old_index].
    * @return The old, permuted, adjacency graph.
    */
-  AdjacencyGraph reorder(const std::vector<std::size_t>& permutation);
+  Adjacency_Graph reorder(const std::vector<std::size_t>& permutation);
 
   //--------------------------------------------------------------------------------------------------------------------
   // Private Members
@@ -308,7 +316,7 @@ private:
  * @param[in] graph The graph to write.
  * @return Returns the ostream, with the graph writen out.
  */
-inline std::ostream& operator<<(std::ostream& ostream, const AdjacencyGraph& graph) {
+inline std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph) {
   FOR(i_vertex, graph.size_vertex()) {
     if(i_vertex != 0) ostream<<"\n";
     FOR_EACH(adjacent_vertex, graph[i_vertex])
@@ -319,6 +327,17 @@ inline std::ostream& operator<<(std::ostream& ostream, const AdjacencyGraph& gra
   return ostream;
 }
 
+
+class Adjacency_Sub_Graph(Adjacency_Graph){
+  /**
+ *
+ * @return
+ */
+  std::vector<AdjacencyGraph> partition(std::vector<std::size_t> i_subgraph){
+
+  }
+
+}
 }
 
 #endif //DISA_ADJACENCY_GRAPH_H

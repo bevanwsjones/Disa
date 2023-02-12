@@ -26,7 +26,7 @@ using namespace Disa;
 
 class test_reorder : public ::testing::Test {
 protected:
-  AdjacencyGraph graph_saad;  // Testing graph taken from Yousef Saad, 2003.
+  Adjacency_Graph graph_saad;  // Testing graph taken from Yousef Saad, 2003.
 
   void SetUp() override {
     graph_saad = AdjacencyGraph({{0, 6}, {0, 8},
@@ -56,8 +56,8 @@ TEST_F(test_reorder, breadth_first) {
   // 3 - 4 - 5
   //  \ / \ /
   //   6 - 7
-  AdjacencyGraph graph({{0, 1}, {0, 3}, {1, 2}, {1, 4}, {2, 5}, {3, 4}, {3, 6}, {4, 5}, {4, 6}, {4, 7}, {5, 7},
-                        {6, 7}});
+  Adjacency_Graph graph({{0, 1}, {0, 3}, {1, 2}, {1, 4}, {2, 5}, {3, 4}, {3, 6}, {4, 5}, {4, 6}, {4, 7}, {5, 7},
+                         {6, 7}});
 
   // Reorder with a new root of index 5.
   std::vector<std::size_t> reorder = breadth_first(graph, 5);

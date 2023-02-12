@@ -24,7 +24,7 @@
 set(SOURCES
         edge.h
         adjacency_graph.h
-        partitioning.h
+        partition.h
         reorder.h
         adjacency_graph.cpp
         reorder.cpp)
@@ -54,6 +54,10 @@ if(ENABLE_TEST)
   add_executable(test_edge tests/test_edge.cpp)
   target_link_libraries(test_edge GTest::gtest_main graphing)
   gtest_discover_tests(test_edge)
+
+  add_executable(test_partition tests/test_partition.cpp)
+  target_link_libraries(test_partition GTest::gtest_main graphing)
+  gtest_discover_tests(test_partition)
 
   add_executable(test_reorder tests/test_reorder.cpp)
   target_link_libraries(test_reorder GTest::gtest_main graphing)
