@@ -34,6 +34,14 @@ namespace Disa {
 // Utility Functions
 // ---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * @brief
+ * @tparam _graph
+ * @param graph
+ * @param start_vertex
+ * @param end_level
+ * @return
+ */
 template<class _graph>
 std::vector<std::size_t> level_traversal(const _graph& graph, const std::size_t start_vertex,
                                          const std::size_t end_level = std::numeric_limits<std::size_t>::max()) {
@@ -44,6 +52,14 @@ std::vector<std::size_t> level_traversal(const _graph& graph, const std::size_t 
   return vertex_level;
 }
 
+/**
+ * @brief
+ * @tparam _graph
+ * @param graph
+ * @param vertex_queue
+ * @param vertex_level
+ * @param end_level
+ */
 template<class _graph>
 void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue, std::vector<std::size_t>& vertex_level,
                      const std::size_t end_level = std::numeric_limits<std::size_t>::max()) {
@@ -64,8 +80,8 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
   FOR_EACH_REF(level, vertex_level) --level;
 }
 
-std::size_t pseudo_peripheral_vertex(const Adjacency_Graph& graph,
-                                     const std::vector<std::vector<std::size_t> >& adjacency_list,
+template<class _graph>
+std::size_t pseudo_peripheral_vertex(const _graph& graph, const std::vector<std::vector<std::size_t> >& adjacency_list,
                                      std::size_t start_vertex) {
 
 
