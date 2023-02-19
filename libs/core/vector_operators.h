@@ -1,4 +1,4 @@
-//----------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 // MIT License
 // Copyright (c) 2022 Bevan W.S. Jones
 //
@@ -14,12 +14,12 @@
 // WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//----------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 // File Name: vector_operator.h
 // Description: Contains the declaration and definition of mathematical vector operations. File will only define
 //              operations which either reduce or maintain vector dimensionality. I.e. An outer product, for example,
 //              would be defined in matrix_operators.
-//----------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_VECTOR_OPERATORS_H
 #define DISA_VECTOR_OPERATORS_H
