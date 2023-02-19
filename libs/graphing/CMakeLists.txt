@@ -22,12 +22,14 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 set(SOURCES
-        edge.h
         adjacency_graph.h
         adjacency_subgraph.h
+        edge.h
+        graph_utilities.h
         partition.h
         reorder.h
         adjacency_graph.cpp
+        adjacency_subgraph.cpp
         reorder.cpp)
 
 set(LIBRARIES
@@ -67,5 +69,9 @@ if(ENABLE_TEST)
   add_executable(test_reorder tests/test_reorder.cpp)
   target_link_libraries(test_reorder GTest::gtest_main graphing)
   gtest_discover_tests(test_reorder)
+
+  add_executable(test_graph_utilities tests/test_graph_utilities.cpp)
+  target_link_libraries(test_graph_utilities GTest::gtest_main graphing)
+  gtest_discover_tests(test_graph_utilities)
 
 endif ()

@@ -15,56 +15,34 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: partition.h
-// Description: todo
+// File Name:
+// Description:
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_PARTITION_H
-#define DISA_PARTITION_H
+#include "gtest/gtest.h"
 
-#include "adjacency_graph.h"
+#include "graph_utilities.h"
 
-#include <numeric>
-#include <vector>
-#include <queue>
+using namespace Disa;
 
-namespace Disa {
+// Unit test for LevelTraversal using Google Test
+TEST(LevelTraversalTest, SimpleTest) {
+  Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
+                                               {1, 7}, {1, 8}, {1, 10}, {1, 12},
+                                               {2, 6}, {2, 7}, {2, 9},
+                                               {3, 11}, {3, 12}, {3, 14},
+                                               {4, 9}, {4, 10}, {4, 11}, {4, 13},
+                                               {5, 13}, {5, 14},
+                                               {6, 7}, {6, 8},
+                                               {7, 8}, {7, 9}, {7, 10},
+                                               {9, 10},
+                                               {10, 11}, {10, 12},
+                                               {11, 12}, {11, 13}, {11, 14},
+                                               {13, 14}});
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Level-Set Partitioning
-// ---------------------------------------------------------------------------------------------------------------------
+    std::vector<std::size_t> expected_levels = {0, 1, 2, 1, 2, 3, 2, 3};
+    EXPECT_EQ(expected_levels, level_traversal(graph_saad, 0));
 
-void multinode_level_set_expansion();
-
-/**
- * todo: not more used as a cheap start for MLSE
- */
-void recursive_graph_bisection(std::size_t number_domains){
-  ASSERT_DEBUG(number_domains > 0, "Cannot split a graph into zero domains.");
-//
-//  int pseudo_peripheral = pseudo_peripheral_node(graph);
-//  std::vector<int> levels = level_traversal(graph, pseudo_peripheral);
-//
-//  std::vector<std::size_t> i_sub_graph;
-//
-//  int num_nodes = graph.num_nodes;
-//  int mid = ceil(num_nodes / 2.0);
-//
-//  std::vector<int> left_partition, right_partition;
-//  for (int i = 0; i < num_nodes; i++) {
-//    if (levels[i] < mid) {
-//      left_partition.push_back(i);
-//    } else {
-//      right_partition.push_back(i);
-//    }
-//  }
-//
-//  while(number_domains != 0){
-//
-//    --number_domains;
-//  }
-};
-
+    expected_levels = std::vector<std::size_t>({2, 1, 2, 1, 0, 1, 1, 1});
+    EXPECT_EQ(expected_levels, level_traversal(graph_saad, 4));
 }
-
-#endif //DISA_PARTITION_H
