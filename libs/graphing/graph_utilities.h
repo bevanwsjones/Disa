@@ -80,29 +80,38 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
   FOR_EACH_REF(level, vertex_level) --level;
 }
 
+/**
+ * @brief
+ * @tparam _graph
+ * @param graph
+ * @param start_vertex
+ * @return
+ */
 template<class _graph>
-std::size_t pseudo_peripheral_vertex(const _graph& graph, const std::vector<std::vector<std::size_t> >& adjacency_list,
-                                     std::size_t start_vertex) {
+std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t start_vertex) {
 
 
   // Calculate the distance of each vertex from the starting vertex
-  std::vector<std::size_t> distance = level_traversal(graph, start_vertex);
+  bool found = false;
+  std::size_t max_distance = 0;
+  std::size_t pseudo_peripheral_node = start_vertex;
+  std::vector<std::size_t> distance;
 
   // Calculate the eccentricity of each vertex
-  std::size_t max_distance = -1;
-  std::size_t pseudo_peripheral_node = start_vertex;
-
-  for(std::size_t i = 0; i < graph.size_vertex(); i++) {
-    if (distance[i] > max_distance
-        || (distance[i] == max_distance && graph.degree(i) > graph.degree(pseudo_peripheral_node))) {
-      max_distance = distance[i];
-      pseudo_peripheral_node = i;
+  while(!found) {
+    found = true;
+    distance = level_traversal(graph, pseudo_peripheral_node);
+    FOR(i_vertex, graph.size_vertex()) {
+      if(distance[i_vertex] > max_distance || (distance[i_vertex] == max_distance
+                                               && graph.degree(i_vertex) < graph.degree(pseudo_peripheral_node))) {
+        max_distance = distance[i_vertex];
+        pseudo_peripheral_node = i_vertex;
+        found = false;
+      }
     }
   }
-
   return pseudo_peripheral_node;
 }
-
 
 }
 

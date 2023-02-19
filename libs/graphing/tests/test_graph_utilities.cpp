@@ -73,7 +73,7 @@ TEST(test_graph_utilities, level_traversal_multi_start_vertex) {
 }
 
 TEST(test_graph_utilities, level_traversal_end_at_level){
-
+  EXPECT_TRUE(false);
 }
 
 TEST(test_graph_utilities, pseudo_peripheral_vertex) {
@@ -90,12 +90,7 @@ TEST(test_graph_utilities, pseudo_peripheral_vertex) {
                                                 {11, 12}, {11, 13}, {11, 14},
                                                 {13, 14}});
 
-  std::vector<std::size_t> levels(graph_saad.size_vertex(), std::numeric_limits<std::size_t>::max());
-  levels[0] = 0;
-  levels[1] = 0;
-  levels[3] = 0;
-  std::queue<size_t> queue({0, 1, 3});
-  level_traversal(graph_saad, queue, levels);
-  std::vector<std::size_t> expected_levels = {0, 0, 2, 0, 2, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1};
-  EXPECT_EQ(expected_levels, levels);
+  std::cout<<"\n"<<pseudo_peripheral_vertex(graph_saad, 11);
+  std::cout<<"\n";
+  EXPECT_TRUE(false);
 }
