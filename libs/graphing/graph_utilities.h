@@ -69,6 +69,7 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
   while(!vertex_queue.empty()) {
     const std::size_t front = vertex_queue.front();
     vertex_queue.pop();
+    if(vertex_level[front] == end_level + 1) continue; // Do not add new vertices, +1 because of above increment.
     FOR_EACH(vertex, graph[front]) {
       if(!static_cast<bool>(vertex_level[vertex])) {
         vertex_queue.push(vertex);
