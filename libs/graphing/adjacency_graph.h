@@ -261,7 +261,7 @@ public:
   // Private Members
   //--------------------------------------------------------------------------------------------------------------------
 
-private:
+protected:
   std::vector<std::size_t> vertex_adjacent_list;    //!< Single contiguous list of all vertex adjacency for the graph.
   std::vector<std::size_t> offset;                  //!< List pointing to the start of each vertex's adjacency graph.
 
@@ -317,12 +317,6 @@ inline std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& gr
   }
   return ostream;
 }
-
-//
-//class Adjacency_Sub_Graph : public Adjacency_Graph {
-//
-//
-//};
 
 }
 

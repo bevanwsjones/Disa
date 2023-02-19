@@ -24,6 +24,7 @@
 set(SOURCES
         edge.h
         adjacency_graph.h
+        adjacency_subgraph.h
         partition.h
         reorder.h
         adjacency_graph.cpp
@@ -50,6 +51,10 @@ if(ENABLE_TEST)
   add_executable(test_adjacency_graph tests/test_adjacency_graph.cpp)
   target_link_libraries(test_adjacency_graph GTest::gtest_main graphing)
   gtest_discover_tests(test_adjacency_graph)
+
+  add_executable(test_adjacency_subgraph tests/test_adjacency_subgraph.cpp)
+  target_link_libraries(test_adjacency_subgraph GTest::gtest_main graphing)
+  gtest_discover_tests(test_adjacency_subgraph)
 
   add_executable(test_edge tests/test_edge.cpp)
   target_link_libraries(test_edge GTest::gtest_main graphing)
