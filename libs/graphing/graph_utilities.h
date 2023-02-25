@@ -49,7 +49,7 @@ std::vector<std::size_t> level_traversal(const _graph& graph, const std::size_t 
 
   ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
   ASSERT_DEBUG(start_vertex < graph.size_vertex(),
-               "Start vertex not in range (0, "+ std::to_string(graph.size_vertex()) + " ].");
+               "Start vertex not in range (0, "+ std::to_string(graph.size_vertex()) + "].");
 
   std::vector<std::size_t> vertex_level(graph.size_vertex(), std::numeric_limits<std::size_t>::max());
   std::queue<std::size_t> vertex_queue({start_vertex});
@@ -73,10 +73,11 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
 
   ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
   ASSERT_DEBUG(vertex_level.size() == graph.size_vertex(), "Vertex level and graph size_vertex do not match.");
-  ASSERT_DEBUG(std::max(vertex_level.begin(), vertex_level.end()) < graph.size_vertex(),
-               "Vertices in level vertex not in range (0, "+ std::to_string(graph.size_vertex()) + " ].");
 
+  // roll the vector over, before checking max.
   FOR_EACH_REF(level, vertex_level) ++level;
+  ASSERT_DEBUG(*std::max_element(vertex_level.begin(), vertex_level.end()) < graph.size_vertex(),
+               "A vertex in vertex level not in graph range (0, "+ std::to_string(graph.size_vertex()) + "].");
 
   while(!vertex_queue.empty()) {
     const std::size_t front = vertex_queue.front();
@@ -89,7 +90,6 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
       }
     }
   }
-
   FOR_EACH_REF(level, vertex_level) --level;
 }
 
@@ -103,9 +103,9 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
 template<class _graph>
 std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t start_vertex = 0) {
 
-  ASSERT_DEBUG(graph.empty(), "The parsed graph is empty.");
-  ASSERT_DEBUG(start_vertex < graph.size(), "The parsed start vertex is not in the graph.");
-  if(graph.degree(start_vertex) > 0)
+  ASSERT_DEBUG(!graph.empty(), "The parsed graph is empty.");
+  ASSERT_DEBUG(start_vertex < graph.size_vertex(), "The parsed start vertex is not in the graph.");
+  if(graph.degree(start_vertex) == 0)
   {
     WARNING("The parsed start vertex has a 0 degree.");
     return start_vertex;

@@ -70,9 +70,11 @@ TEST(test_graph_utilities, level_traversal_multi_start_vertex) {
   level_traversal(graph_saad, queue, levels);
   std::vector<std::size_t> expected_levels = {0, 0, 2, 0, 2, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1};
   EXPECT_EQ(expected_levels, levels);
+
+
 }
 
-TEST(test_graph_utilities, level_traversal_end_at_level){
+TEST(test_graph_utilities, level_traversal_end_at_level) {
   Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
                                                 {1, 7}, {1, 8}, {1, 10}, {1, 12},
                                                 {2, 6}, {2, 7}, {2, 9},
@@ -101,6 +103,36 @@ TEST(test_graph_utilities, level_traversal_end_at_level){
   EXPECT_EQ(expected_levels, levels);
 }
 
+TEST(test_graph_utilities, level_traversal_death){
+
+  Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
+                                                {1, 7}, {1, 8}, {1, 10}, {1, 12},
+                                                {2, 6}, {2, 7}, {2, 9},
+                                                {3, 11}, {3, 12}, {3, 14},
+                                                {4, 9}, {4, 10}, {4, 11}, {4, 13},
+                                                {5, 13}, {5, 14},
+                                                {6, 7}, {6, 8},
+                                                {7, 8}, {7, 9}, {7, 10},
+                                                {9, 10},
+                                                {10, 11}, {10, 12},
+                                                {11, 12}, {11, 13}, {11, 14},
+                                                {13, 14}});
+
+  // Single Vertex starts
+  EXPECT_DEATH(level_traversal(Adjacency_Graph(), 1), "./*");
+  EXPECT_DEATH(level_traversal(graph_saad, 50), "./*");
+
+  // Multi Vertex Starts
+  std::queue<size_t> queue;
+  std::vector<std::size_t> levels_death(graph_saad.size_vertex(), std::numeric_limits<std::size_t>::max());
+  EXPECT_DEATH(level_traversal(Adjacency_Graph(), queue, levels_death), "./*");
+  levels_death.pop_back();
+  EXPECT_DEATH(level_traversal(graph_saad, queue, levels_death), "./*");
+  levels_death = std::vector<std::size_t>(graph_saad.size_vertex(), std::numeric_limits<std::size_t>::max());
+  levels_death[0] -= 1;
+  EXPECT_DEATH(level_traversal(graph_saad, queue, levels_death), "./*");
+}
+
 TEST(test_graph_utilities, pseudo_peripheral_vertex) {
   Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
                                                 {1, 7}, {1, 8}, {1, 10}, {1, 12},
@@ -115,7 +147,15 @@ TEST(test_graph_utilities, pseudo_peripheral_vertex) {
                                                 {11, 12}, {11, 13}, {11, 14},
                                                 {13, 14}});
 
-  std::cout<<"\n"<<pseudo_peripheral_vertex(graph_saad, 11);
-  std::cout<<"\n";
-  EXPECT_TRUE(false);
+  // Check to get the end vertices.
+  EXPECT_EQ(pseudo_peripheral_vertex(graph_saad, 11), 5);
+  EXPECT_EQ(pseudo_peripheral_vertex(graph_saad, 2), 0);
+
+  // Insert a new edge, then search from the otheside of the graph, this should be the new peripheral vertex.
+  graph_saad.insert({0, 15});
+  EXPECT_EQ(pseudo_peripheral_vertex(graph_saad, 5), 15);
+
+  // Death test.
+  EXPECT_DEATH(pseudo_peripheral_vertex(Adjacency_Graph()), "./*");
+  EXPECT_DEATH(pseudo_peripheral_vertex(graph_saad, 16), "./*");
 }
