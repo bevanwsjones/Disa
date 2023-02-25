@@ -15,8 +15,8 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name:
-// Description:
+// File Name: graph_utilities.h
+// Description: Contains several supporting functions for various graph operations.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_GRAPH_UTILITIES_H
@@ -35,16 +35,22 @@ namespace Disa {
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @brief
- * @tparam _graph
- * @param graph
- * @param start_vertex
- * @param end_level
- * @return
+ * @brief Performs level traversal on a given graph starting from a specified vertex and returns a vector that stores
+ *        the level of each vertex.
+ * @tparam _graph The type of the graph.
+ * @param[in] graph The graph on which level traversal is to be performed.
+ * @param[in] start_vertex The vertex from which level traversal is to start.
+ * @param[in] end_level The maximum level to be considered during traversal (default is maximum value of std::size_t).
+ * @return A vector that stores the level of each vertex after level traversal.
  */
 template<class _graph>
 std::vector<std::size_t> level_traversal(const _graph& graph, const std::size_t start_vertex,
                                          const std::size_t end_level = std::numeric_limits<std::size_t>::max()) {
+
+  ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
+  ASSERT_DEBUG(start_vertex < graph.size_vertex(),
+               "Start vertex not in range (0, "+ std::to_string(graph.size_vertex()) + " ].");
+
   std::vector<std::size_t> vertex_level(graph.size_vertex(), std::numeric_limits<std::size_t>::max());
   std::queue<std::size_t> vertex_queue({start_vertex});
   vertex_level[start_vertex] = 0;
@@ -53,16 +59,22 @@ std::vector<std::size_t> level_traversal(const _graph& graph, const std::size_t 
 }
 
 /**
- * @brief
- * @tparam _graph
- * @param graph
- * @param vertex_queue
- * @param vertex_level
- * @param end_level
+ * @brief Perform level traversal on a given graph starting from a given vertex queue and stores the level of each
+ *        vertex in a vector.
+ * @tparam _graph The type of the graph.
+ * @param[in] graph  The graph on which level traversal is to be performed.
+ * @param[in] vertex_queue The queue of vertices from which level traversal is to start.
+ * @param[out] vertex_level A vector to store the level of each vertex.
+ * @param[in] end_level The maximum level to be considered during traversal (default is maximum value of std::size_t).
  */
 template<class _graph>
 void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue, std::vector<std::size_t>& vertex_level,
                      const std::size_t end_level = std::numeric_limits<std::size_t>::max()) {
+
+  ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
+  ASSERT_DEBUG(vertex_level.size() == graph.size_vertex(), "Vertex level and graph size_vertex do not match.");
+  ASSERT_DEBUG(std::max(vertex_level.begin(), vertex_level.end()) < graph.size_vertex(),
+               "Vertices in level vertex not in range (0, "+ std::to_string(graph.size_vertex()) + " ].");
 
   FOR_EACH_REF(level, vertex_level) ++level;
 
@@ -82,20 +94,27 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
 }
 
 /**
- * @brief
- * @tparam _graph
- * @param graph
- * @param start_vertex
- * @return
+ * @brief Finds a pseudo peripheral vertex in the parsed graph.
+ * @tparam _graph  The type of the graph.
+ * @param[in] graph A non-empty graph to search for a peripheral vertex.
+ * @param[in] start_vertex Because the algorithm is path dependent a starting vertex can be specified, defaults to 0.
+ * @return The index of te pseudo peripheral vertex.
  */
 template<class _graph>
-std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t start_vertex) {
+std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t start_vertex = 0) {
 
+  ASSERT_DEBUG(graph.empty(), "The parsed graph is empty.");
+  ASSERT_DEBUG(start_vertex < graph.size(), "The parsed start vertex is not in the graph.");
+  if(graph.degree(start_vertex) > 0)
+  {
+    WARNING("The parsed start vertex has a 0 degree.");
+    return start_vertex;
+  }
 
   // Calculate the distance of each vertex from the starting vertex
   bool found = false;
   std::size_t max_distance = 0;
-  std::size_t pseudo_peripheral_node = start_vertex;
+  std::size_t& pseudo_peripheral_node = start_vertex;
   std::vector<std::size_t> distance;
 
   // Calculate the eccentricity of each vertex
