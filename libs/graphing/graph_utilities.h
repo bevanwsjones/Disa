@@ -27,6 +27,7 @@
 #include <numeric>
 #include <vector>
 #include <queue>
+#include <cmath>
 
 namespace Disa {
 
@@ -94,6 +95,53 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
 }
 
 /**
+ *
+ * @tparam _graph
+ * @param graph
+ * @param seed_vertices
+ */
+template<class _graph>
+void level_expansion(_graph graph, const std::vector<std::size_t>& seed_vertices,
+                     std::vector<std::size_t>& vertex_color) {
+//  ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
+//  ASSERT_DEBUG(vertex_level.size() == graph.size_vertex(), "Vertex level and graph size_vertex do not match.");
+//
+//  // roll the vector over, before checking max.
+//  FOR_EACH_REF(level, vertex_level) ++level;
+//  ASSERT_DEBUG(*std::max_element(vertex_level.begin(), vertex_level.end()) < graph.size_vertex(),
+//               "A vertex in vertex level not in graph range (0, "+ std::to_string(graph.size_vertex()) + "].");
+// todo:  disjoint check?
+
+  vertex_color.resize(graph.size_vertex());
+  FOR_EACH_REF(color, vertex_color) color = std::numeric_limits<std::size_t>::max();
+  std::vector<std::queue<std::size_t> > vertex_queues;
+
+  std::size_t i_color = 0;
+  FOR_EACH(seed, seed_vertices) {
+    vertex_queues[i_color].push({seed});
+    vertex_color[seed] = i_color++;
+  }
+
+  std::size_t iteration = 0;
+  while(std::any_of(vertex_queues.begin(), vertex_queues.end(), [](const auto& queue){return !queue.empty();})) {
+    FOR(i_queue, vertex_queues.size()){
+      // ensures we do a forward's and backwards sweep to try and keep expansion 'unbiased'.
+      auto& vertex_queue = i_queue%2 == 0 ? vertex_queues[i_queue] : vertex_queues[vertex_queues.size() - i_queue];
+      if(vertex_queue.empty()) continue;
+      const std::size_t front = vertex_queue.front();
+      vertex_queue.pop();
+      FOR_EACH(vertex, graph[front]) {
+        if(vertex_color[vertex] != std::numeric_limits<std::size_t>::max()) {
+          vertex_queue.push(vertex);
+          vertex_color[vertex] = vertex_color[front];
+        }
+      }
+    }
+    ASSERT(iteration++ < graph.size_vertex(), "SAFTEY"); // todo write
+  }
+}
+
+/**
  * @brief Finds a pseudo peripheral vertex in the parsed graph.
  * @tparam _graph  The type of the graph.
  * @param[in] graph A non-empty graph to search for a peripheral vertex.
@@ -131,6 +179,33 @@ std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t start_vert
     }
   }
   return pseudo_peripheral_node;
+}
+
+/**
+ *
+ * @tparam _graph
+ * @return
+ */
+template<class _graph>
+std::size_t eigen_vector_centrality(_graph graph){
+  std::vector<std::size_t> centrality_0(graph.size_vertex(), 0);
+  std::vector<std::size_t> centrality_1(graph.size_vertex(), 0);
+
+  std::size_t max_iter = std::ceil(level_traversal(graph, pseudo_peripheral_vertex(graph)).back()/2);
+
+  FOR(i_vertex, graph.size_vertex()) centrality_0[i_vertex] = graph[i_vertex].size();
+
+  FOR(iter, max_iter) {
+    FOR(i_vertex, graph.size_vertex()){
+      centrality_1[i_vertex] = centrality_0[i_vertex];
+      FOR_EACH(i_adjacent, graph[i_vertex]){
+          centrality_1[i_vertex] += centrality_0[i_adjacent];
+        }
+    }
+    std::swap(centrality_0, centrality_1);
+  }
+
+  return *std::max_element(centrality_0.begin(), centrality_0.end()); //todo - what happens where there is more than one max?
 }
 
 }

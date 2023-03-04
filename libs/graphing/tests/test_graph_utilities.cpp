@@ -22,45 +22,23 @@
 #include "gtest/gtest.h"
 
 #include "graph_utilities.h"
+#include "test_graph.h"
 
 using namespace Disa;
 
 // Unit test for LevelTraversal using Google Test
 TEST(test_graph_utilities, level_traversal_single_start_vertex) {
-  Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
-                                               {1, 7}, {1, 8}, {1, 10}, {1, 12},
-                                               {2, 6}, {2, 7}, {2, 9},
-                                               {3, 11}, {3, 12}, {3, 14},
-                                               {4, 9}, {4, 10}, {4, 11}, {4, 13},
-                                               {5, 13}, {5, 14},
-                                               {6, 7}, {6, 8},
-                                               {7, 8}, {7, 9}, {7, 10},
-                                               {9, 10},
-                                               {10, 11}, {10, 12},
-                                               {11, 12}, {11, 13}, {11, 14},
-                                               {13, 14}});
+  Adjacency_Graph graph_saad = create_graph_saad();
 
+  std::vector<std::size_t> expected_levels = {0, 2, 2, 4, 4, 6, 1, 2, 1, 3, 3, 4, 3, 5, 5};
+  EXPECT_EQ(expected_levels, level_traversal(graph_saad, 0));
 
-    std::vector<std::size_t> expected_levels = {0, 2, 2, 4, 4, 6, 1, 2, 1, 3, 3, 4, 3, 5, 5};
-    EXPECT_EQ(expected_levels, level_traversal(graph_saad, 0));
-
-    expected_levels = std::vector<std::size_t>({3, 1, 3, 1, 2, 3, 3, 2, 2, 2, 1, 1, 0, 2, 2});
-    EXPECT_EQ(expected_levels, level_traversal(graph_saad, 12));
+  expected_levels = std::vector<std::size_t>({3, 1, 3, 1, 2, 3, 3, 2, 2, 2, 1, 1, 0, 2, 2});
+  EXPECT_EQ(expected_levels, level_traversal(graph_saad, 12));
 }
 
 TEST(test_graph_utilities, level_traversal_multi_start_vertex) {
-  Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
-                                                {1, 7}, {1, 8}, {1, 10}, {1, 12},
-                                                {2, 6}, {2, 7}, {2, 9},
-                                                {3, 11}, {3, 12}, {3, 14},
-                                                {4, 9}, {4, 10}, {4, 11}, {4, 13},
-                                                {5, 13}, {5, 14},
-                                                {6, 7}, {6, 8},
-                                                {7, 8}, {7, 9}, {7, 10},
-                                                {9, 10},
-                                                {10, 11}, {10, 12},
-                                                {11, 12}, {11, 13}, {11, 14},
-                                                {13, 14}});
+  Adjacency_Graph graph_saad = create_graph_saad();
 
   std::vector<std::size_t> levels(graph_saad.size_vertex(), std::numeric_limits<std::size_t>::max());
   levels[0] = 0;
@@ -70,23 +48,10 @@ TEST(test_graph_utilities, level_traversal_multi_start_vertex) {
   level_traversal(graph_saad, queue, levels);
   std::vector<std::size_t> expected_levels = {0, 0, 2, 0, 2, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1};
   EXPECT_EQ(expected_levels, levels);
-
-
 }
 
 TEST(test_graph_utilities, level_traversal_end_at_level) {
-  Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
-                                                {1, 7}, {1, 8}, {1, 10}, {1, 12},
-                                                {2, 6}, {2, 7}, {2, 9},
-                                                {3, 11}, {3, 12}, {3, 14},
-                                                {4, 9}, {4, 10}, {4, 11}, {4, 13},
-                                                {5, 13}, {5, 14},
-                                                {6, 7}, {6, 8},
-                                                {7, 8}, {7, 9}, {7, 10},
-                                                {9, 10},
-                                                {10, 11}, {10, 12},
-                                                {11, 12}, {11, 13}, {11, 14},
-                                                {13, 14}});
+  Adjacency_Graph graph_saad = create_graph_saad();
 
   const std::size_t& size_t_max = std::numeric_limits<std::size_t>::max();
   std::vector<std::size_t> expected_levels = {0, 2, 2, 4, 4, size_t_max, 1, 2, 1, 3, 3, 4, 3, 5, 5};
@@ -105,18 +70,7 @@ TEST(test_graph_utilities, level_traversal_end_at_level) {
 
 TEST(test_graph_utilities, level_traversal_death){
 
-  Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
-                                                {1, 7}, {1, 8}, {1, 10}, {1, 12},
-                                                {2, 6}, {2, 7}, {2, 9},
-                                                {3, 11}, {3, 12}, {3, 14},
-                                                {4, 9}, {4, 10}, {4, 11}, {4, 13},
-                                                {5, 13}, {5, 14},
-                                                {6, 7}, {6, 8},
-                                                {7, 8}, {7, 9}, {7, 10},
-                                                {9, 10},
-                                                {10, 11}, {10, 12},
-                                                {11, 12}, {11, 13}, {11, 14},
-                                                {13, 14}});
+  Adjacency_Graph graph_saad = create_graph_saad();
 
   // Single Vertex starts
   EXPECT_DEATH(level_traversal(Adjacency_Graph(), 1), "./*");
@@ -134,18 +88,8 @@ TEST(test_graph_utilities, level_traversal_death){
 }
 
 TEST(test_graph_utilities, pseudo_peripheral_vertex) {
-  Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
-                                                {1, 7}, {1, 8}, {1, 10}, {1, 12},
-                                                {2, 6}, {2, 7}, {2, 9},
-                                                {3, 11}, {3, 12}, {3, 14},
-                                                {4, 9}, {4, 10}, {4, 11}, {4, 13},
-                                                {5, 13}, {5, 14},
-                                                {6, 7}, {6, 8},
-                                                {7, 8}, {7, 9}, {7, 10},
-                                                {9, 10},
-                                                {10, 11}, {10, 12},
-                                                {11, 12}, {11, 13}, {11, 14},
-                                                {13, 14}});
+
+  Adjacency_Graph graph_saad = create_graph_saad();
 
   // Check to get the end vertices.
   EXPECT_EQ(pseudo_peripheral_vertex(graph_saad, 11), 5);

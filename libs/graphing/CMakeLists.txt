@@ -30,6 +30,7 @@ set(SOURCES
         reorder.h
         adjacency_graph.cpp
         adjacency_subgraph.cpp
+        partition.cpp
         reorder.cpp)
 
 set(LIBRARIES

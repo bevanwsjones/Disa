@@ -19,26 +19,16 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
-#include "partition.h"
+
 #include "adjacency_graph.h"
 #include "adjacency_subgraph.h"
+#include "partition.h"
+#include "test_graph.h"
 
 using namespace Disa;
 
 // Unit test for LevelTraversal using Google Test
 TEST(LevelTraversalTest, SimpleTest) {
-  Adjacency_Graph graph_saad({{0, 6}, {0, 8},
-                              {1, 7}, {1, 8}, {1, 10}, {1, 12},
-                              {2, 6}, {2, 7}, {2, 9},
-                              {3, 11}, {3, 12}, {3, 14},
-                              {4, 9}, {4, 10}, {4, 11}, {4, 13},
-                              {5, 13}, {5, 14},
-                              {6, 7}, {6, 8},
-                              {7, 8}, {7, 9}, {7, 10},
-                              {9, 10},
-                              {10, 11}, {10, 12},
-                              {11, 12}, {11, 13}, {11, 14},
-                              {13, 14}});
 
   auto sub_graphs = recursive_graph_bisection(graph_saad, 3);
   FOR_EACH(graph, sub_graphs){

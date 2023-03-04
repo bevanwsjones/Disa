@@ -40,8 +40,15 @@ public:
    *
    * // todo - i_global_local should make sparse vector
    */
-  Adjacency_Subgraph(const Adjacency_Graph& graph, const std::vector<std::size_t>& i_sub_graph_vertex,
-                     std::size_t extra_levels = 0);
+  template<class _graph>
+  Adjacency_Subgraph(const _graph& graph, const std::vector<std::size_t>& i_sub_graph_vertex,
+                               std::size_t extra_levels = 0);
+
+//  Adjacency_Subgraph(const Adjacency_Subgraph& graph, const std::vector<std::size_t>& i_sub_graph_vertex,
+//                     std::size_t extra_levels = 0){ Adjacency_Subgraph_Test(graph, i_sub_graph_vertex, extra_levels); };
+//
+//  Adjacency_Subgraph(const Adjacency_Graph& graph, const std::vector<std::size_t>& i_sub_graph_vertex,
+//                     std::size_t extra_levels = 0) { Adjacency_Subgraph_Test(graph, i_sub_graph_vertex, extra_levels);};
 
 
   //--------------------------------------------------------------------------------------------------------------------
