@@ -87,6 +87,36 @@ TEST(test_graph_utilities, level_traversal_death){
   EXPECT_DEATH(level_traversal(graph_saad, queue, levels_death), "./*");
 }
 
+TEST(test_graph_utilities, level_expansion) {
+
+  // Square grid, with 4 seed points.
+  Adjacency_Graph graph = create_graph_structured(5);
+  std::vector<std::size_t> colors;
+  level_expansion(graph, {6, 8, 16, 18}, colors);
+  std::vector<std::size_t> hand_computed_answer({0, 0, 1, 1, 1,
+                                                 0, 0, 0, 1, 1,
+                                                 2, 0, 2, 1, 3,
+                                                 2, 2, 2, 3, 3,
+                                                 2, 2, 3, 3, 3});
+  EXPECT_EQ(colors, hand_computed_answer);
+
+  // Second grid, with 3 'reverse' seed points.
+  Adjacency_Subgraph subgraph(graph, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                      15, 16, 17, 18, 19, 20, 21, 22, 23, 24});
+  level_expansion(subgraph, {20, 12, 4}, colors);
+  hand_computed_answer = std::vector<std::size_t>({1, 1, 2, 2, 2,
+                                                   1, 1, 1, 2, 2,
+                                                   1, 1, 1, 1, 2,
+                                                   0, 1, 1, 1, 1,
+                                                   0, 0, 1, 1, 1});
+  EXPECT_EQ(colors, hand_computed_answer);
+
+  // Death test.
+  EXPECT_DEATH(level_expansion(Adjacency_Graph(), {6, 8, 16, 18}, colors), "./*");
+  EXPECT_DEATH(level_expansion(graph, {}, colors), "./*");
+  EXPECT_DEATH(level_expansion(graph, {36}, colors), "./*");
+}
+
 TEST(test_graph_utilities, pseudo_peripheral_vertex) {
 
   Adjacency_Graph graph_saad = create_graph_saad();

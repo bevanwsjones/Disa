@@ -23,6 +23,7 @@
 #define DISA_GRAPH_UTILITIES_H
 
 #include "adjacency_graph.h"
+#include "adjacency_subgraph.h"
 
 #include <numeric>
 #include <vector>
@@ -95,49 +96,54 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
 }
 
 /**
- *
- * @tparam _graph
- * @param graph
- * @param seed_vertices
+ * @brief Applies a level-set expansion to color a parsed graph from a set of seed vertices, where the color of each
+ *        vertex is associated with the 'closest' seed vertex.
+ * @tparam _graph The type of the graph.
+ * @param[in] graph  The graph on which level expansion is to be performed.
+ * @param[in] i_seeds Indices of seed vertices from which expansion will occur (No. colors = size of this vector).
+ * @param[out] vertex_color Of graph vertex size, and containing the color of each vertex after the level expansion.
  */
 template<class _graph>
-void level_expansion(_graph graph, const std::vector<std::size_t>& seed_vertices,
+void level_expansion(const _graph& graph, const std::vector<std::size_t>& seeds,
                      std::vector<std::size_t>& vertex_color) {
-//  ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
-//  ASSERT_DEBUG(vertex_level.size() == graph.size_vertex(), "Vertex level and graph size_vertex do not match.");
-//
-//  // roll the vector over, before checking max.
-//  FOR_EACH_REF(level, vertex_level) ++level;
-//  ASSERT_DEBUG(*std::max_element(vertex_level.begin(), vertex_level.end()) < graph.size_vertex(),
-//               "A vertex in vertex level not in graph range (0, "+ std::to_string(graph.size_vertex()) + "].");
-// todo:  disjoint check?
+  ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
+  ASSERT_DEBUG(!seeds.empty(), "There are no seeds to begin expansion.");
+  ASSERT_DEBUG(*std::max_element(seeds.begin(), seeds.end()) < graph.size_vertex(),
+               "A seed index is no in graph range [0, " + std::to_string(graph.size_vertex()) + ").");
 
+  // Setup memory, and seed the queues and colors.
   vertex_color.resize(graph.size_vertex());
+  std::vector<std::queue<std::size_t> > vertex_queues(seeds.size());
   FOR_EACH_REF(color, vertex_color) color = std::numeric_limits<std::size_t>::max();
-  std::vector<std::queue<std::size_t> > vertex_queues;
-
-  std::size_t i_color = 0;
-  FOR_EACH(seed, seed_vertices) {
-    vertex_queues[i_color].push({seed});
-    vertex_color[seed] = i_color++;
+  FOR(i_seed, seeds.size()) {
+    vertex_queues[i_seed].push({seeds[i_seed]});
+    vertex_color[seeds[i_seed]] = i_seed;
   }
 
+  // Color vertices.
   std::size_t iteration = 0;
   while(std::any_of(vertex_queues.begin(), vertex_queues.end(), [](const auto& queue){return !queue.empty();})) {
-    FOR(i_queue, vertex_queues.size()){
+    FOR(i_queue, vertex_queues.size()) {
       // ensures we do a forward's and backwards sweep to try and keep expansion 'unbiased'.
-      auto& vertex_queue = i_queue%2 == 0 ? vertex_queues[i_queue] : vertex_queues[vertex_queues.size() - i_queue];
-      if(vertex_queue.empty()) continue;
-      const std::size_t front = vertex_queue.front();
-      vertex_queue.pop();
-      FOR_EACH(vertex, graph[front]) {
-        if(vertex_color[vertex] != std::numeric_limits<std::size_t>::max()) {
-          vertex_queue.push(vertex);
-          vertex_color[vertex] = vertex_color[front];
+      auto& vertex_queue = iteration%2 == 0 ? vertex_queues[i_queue]
+                                            : vertex_queues[vertex_queues.size() - i_queue - 1];
+
+      // Perform a level expansion for this color.
+      std::queue<std::size_t> new_queue;
+      while(!vertex_queue.empty()) {
+        const std::size_t front = vertex_queue.front();
+        vertex_queue.pop();
+        FOR_EACH(vertex, graph[front]) {
+          if(vertex_color[vertex] == std::numeric_limits<std::size_t>::max()) {
+            new_queue.push(vertex);
+            vertex_color[vertex] = vertex_color[front];
+          }
         }
       }
+      std::swap(new_queue, vertex_queue);
     }
-    ASSERT(iteration++ < graph.size_vertex(), "SAFTEY"); // todo write
+    ASSERT(iteration++ < graph.size_vertex(), "Number of iterations have exceeded, "
+                                               + std::to_string(iteration) + ". Is the graph disjoint?");
   }
 }
 
@@ -207,6 +213,7 @@ std::size_t eigen_vector_centrality(_graph graph){
 
   return *std::max_element(centrality_0.begin(), centrality_0.end()); //todo - what happens where there is more than one max?
 }
+
 
 }
 
