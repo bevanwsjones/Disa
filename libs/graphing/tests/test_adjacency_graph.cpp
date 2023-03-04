@@ -368,7 +368,7 @@ TEST(test_adjacency_graph, degree) {
   EXPECT_EQ(graph.degree(0), 2);
   EXPECT_EQ(graph.degree(3), 3);
   EXPECT_EQ(graph.degree(4), 5);
-  EXPECT_DEATH(graph.degree(50), "./*");
+  EXPECT_DEATH(1 == graph.degree(50), "./*");
 }
 
 TEST(test_adjacency_graph, reorder) {

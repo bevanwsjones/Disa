@@ -29,7 +29,7 @@ protected:
   Adjacency_Graph graph_saad;  // Testing graph taken from Yousef Saad, 2003.
 
   void SetUp() override {
-    graph_saad = AdjacencyGraph({{0, 6}, {0, 8},
+    graph_saad = Adjacency_Graph({{0, 6}, {0, 8},
                                  {1, 7}, {1, 8}, {1, 10}, {1, 12},
                                  {2, 6}, {2, 7}, {2, 9},
                                  {3, 11}, {3, 12}, {3, 14},
@@ -73,7 +73,7 @@ TEST_F(test_reorder, breadth_first) {
   EXPECT_EQ(reorder[7], 3);
 
   EXPECT_DEATH(breadth_first(graph, 10), "./*");
-  EXPECT_TRUE(breadth_first(AdjacencyGraph()).empty()); // ensure empty graphs returns empty reorder.
+  EXPECT_TRUE(breadth_first(Adjacency_Graph()).empty()); // ensure empty graphs returns empty reorder.
 }
 
 TEST_F(test_reorder, cuthill_mckee) {
@@ -121,7 +121,7 @@ TEST_F(test_reorder, cuthill_mckee) {
   EXPECT_EQ(reorder[14], 13);
 
   EXPECT_DEATH(cuthill_mckee_reverse(graph_saad, 36), "./*");
-  EXPECT_TRUE(cuthill_mckee_reverse(AdjacencyGraph()).empty()); // ensure empty graphs returns empty reorder.
+  EXPECT_TRUE(cuthill_mckee_reverse(Adjacency_Graph()).empty()); // ensure empty graphs returns empty reorder.
 }
 
 TEST_F(test_reorder, cuthill_mckee_reverse) {
@@ -169,7 +169,7 @@ TEST_F(test_reorder, cuthill_mckee_reverse) {
   EXPECT_EQ(reorder[14], 1);
 
   EXPECT_DEATH(cuthill_mckee_reverse(graph_saad, 36), "./*");
-  EXPECT_TRUE(greedy_multicolouring(AdjacencyGraph()).empty()); // ensure empty graphs returns empty reorder.
+  EXPECT_TRUE(greedy_multicolouring(Adjacency_Graph()).empty()); // ensure empty graphs returns empty reorder.
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -199,7 +199,7 @@ TEST_F(test_reorder, greedy_multicolouring) {
   EXPECT_EQ(reorder[13], 11);
   EXPECT_EQ(reorder[14], 14);
 
-  EXPECT_TRUE(greedy_multicolouring(AdjacencyGraph()).empty()); // ensure empty graphs returns empty reorder.
+  EXPECT_TRUE(greedy_multicolouring(Adjacency_Graph()).empty()); // ensure empty graphs returns empty reorder.
 }
 
 

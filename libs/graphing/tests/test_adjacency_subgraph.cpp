@@ -26,7 +26,7 @@ using namespace Disa;
 
 TEST(Adjacency_Subgraph, constructor) {
 
-  Adjacency_Graph graph_saad = Adjacency_Graph({{0, 6}, {0, 8}, {0, 13}, {0, 14},
+  Adjacency_Graph graph_saad({{0, 6}, {0, 8}, {0, 13}, {0, 14},
                                                 {1, 7}, {1, 8}, {1, 10}, {1, 12},
                                                 {2, 6}, {2, 7}, {2, 9},
                                                 {3, 11}, {3, 12}, {3, 14},
@@ -42,7 +42,7 @@ TEST(Adjacency_Subgraph, constructor) {
 
   std::vector<std::size_t> subgraph_indexes({0, 8, 6, 1, 2});
 
-  Adjacency_Subgraph test(graph_saad, subgraph_indexes, 1);
+  Adjacency_Subgraph test(graph_saad, subgraph_indexes, 0);
 
 
   std::cout<<"\nstart ";
