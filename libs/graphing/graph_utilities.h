@@ -41,21 +41,21 @@ namespace Disa {
  *        the level of each vertex.
  * @tparam _graph The type of the graph.
  * @param[in] graph The graph on which level traversal is to be performed.
- * @param[in] start_vertex The vertex from which level traversal is to start.
+ * @param[in] i_start The vertex from which level traversal is to start.
  * @param[in] end_level The maximum level to be considered during traversal (default is maximum value of std::size_t).
  * @return A vector that stores the level of each vertex after level traversal.
  */
 template<class _graph>
-std::vector<std::size_t> level_traversal(const _graph& graph, const std::size_t start_vertex,
+std::vector<std::size_t> level_traversal(const _graph& graph, const std::size_t i_start,
                                          const std::size_t end_level = std::numeric_limits<std::size_t>::max()) {
 
   ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
-  ASSERT_DEBUG(start_vertex < graph.size_vertex(),
-               "Start vertex not in range (0, "+ std::to_string(graph.size_vertex()) + "].");
+  ASSERT_DEBUG(i_start < graph.size_vertex(),
+               "Starting vertex not in range (0, "+ std::to_string(graph.size_vertex()) + "].");
 
   std::vector<std::size_t> vertex_level(graph.size_vertex(), std::numeric_limits<std::size_t>::max());
-  std::queue<std::size_t> vertex_queue({start_vertex});
-  vertex_level[start_vertex] = 0;
+  std::queue<std::size_t> vertex_queue({i_start});
+  vertex_level[i_start] = 0;
   level_traversal(graph, vertex_queue, vertex_level, end_level);
   return vertex_level;
 }
@@ -151,24 +151,24 @@ void level_expansion(const _graph& graph, const std::vector<std::size_t>& seeds,
  * @brief Finds a pseudo peripheral vertex in the parsed graph.
  * @tparam _graph  The type of the graph.
  * @param[in] graph A non-empty graph to search for a peripheral vertex.
- * @param[in] start_vertex Because the algorithm is path dependent a starting vertex can be specified, defaults to 0.
+ * @param[in] i_start Because the algorithm is path dependent a starting vertex can be specified, defaults to 0.
  * @return The index of te pseudo peripheral vertex.
  */
 template<class _graph>
-std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t start_vertex = 0) {
+std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t i_start = 0) {
 
   ASSERT_DEBUG(!graph.empty(), "The parsed graph is empty.");
-  ASSERT_DEBUG(start_vertex < graph.size_vertex(), "The parsed start vertex is not in the graph.");
-  if(graph.degree(start_vertex) == 0)
+  ASSERT_DEBUG(i_start < graph.size_vertex(), "The parsed start vertex is not in the graph.");
+  if(graph.degree(i_start) == 0)
   {
     WARNING("The parsed start vertex has a 0 degree.");
-    return start_vertex;
+    return i_start;
   }
 
   // Calculate the distance of each vertex from the starting vertex
   bool found = false;
   std::size_t max_distance = 0;
-  std::size_t& pseudo_peripheral_node = start_vertex;
+  std::size_t& pseudo_peripheral_node = i_start;
   std::vector<std::size_t> distance;
 
   // Calculate the eccentricity of each vertex

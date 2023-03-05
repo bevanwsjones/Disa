@@ -133,3 +133,32 @@ TEST(test_graph_utilities, pseudo_peripheral_vertex) {
   EXPECT_DEATH(pseudo_peripheral_vertex(Adjacency_Graph()), "./*");
   EXPECT_DEATH(pseudo_peripheral_vertex(graph_saad, 16), "./*");
 }
+
+TEST(test_graph_utilities, breadth_first_eccentricity) {
+
+  // Perform a test on a graph, and starting at 0.
+  Adjacency_Graph graph = create_graph_structured(5);
+  std::vector<std::size_t> distances;
+  breadth_first_eccentricity(graph, 0, distances);
+  std::vector<std::size_t> hand_computed_answer({0, 1, 2, 3, 4,
+                                                 1, 2, 3, 4, 5,
+                                                 2, 3, 4, 5, 6,
+                                                 3, 4, 5, 6, 7,
+                                                 4, 5, 6, 7, 8});
+  EXPECT_EQ(distances, hand_computed_answer);
+
+  // Perform a test on a subgraph, capping the max vertex, and starting at a different vertex to the above.
+  Adjacency_Subgraph subgraph(graph, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                                      15, 16, 17, 18, 19, 20, 21, 22, 23, 24});
+  breadth_first_eccentricity(graph, 12, distances, 15);
+  hand_computed_answer = std::vector<std::size_t> ({4, 3, 2, 3, 4,
+                                                    3, 2, 1, 2, 3,
+                                                    2, 1, 0, 1, 2});
+  EXPECT_EQ(distances, hand_computed_answer);
+
+  // Death test.
+  EXPECT_DEATH(breadth_first_eccentricity(Adjacency_Graph(), 0, distances), "./*");
+  EXPECT_DEATH(breadth_first_eccentricity(subgraph, 1500, distances), "./*");
+  EXPECT_DEATH(breadth_first_eccentricity(subgraph, 2, distances, 900), "./*");
+  EXPECT_DEATH(breadth_first_eccentricity(subgraph, 10, distances, 1), "./*");
+}
