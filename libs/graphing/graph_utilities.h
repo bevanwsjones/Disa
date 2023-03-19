@@ -109,7 +109,7 @@ void level_expansion(const _graph& graph, const std::vector<std::size_t>& seeds,
   ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
   ASSERT_DEBUG(!seeds.empty(), "There are no seeds to begin expansion.");
   ASSERT_DEBUG(*std::max_element(seeds.begin(), seeds.end()) < graph.size_vertex(),
-               "A seed index is no in graph range [0, " + std::to_string(graph.size_vertex()) + ").");
+               "A seed index is not in graph range [0, " + std::to_string(graph.size_vertex()) + ").");
 
   // Setup memory, and seed the queues and colors.
   vertex_color.resize(graph.size_vertex());
@@ -188,32 +188,65 @@ std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t i_start = 
 }
 
 /**
- *
- * @tparam _graph
- * @return
+ * @brief Computes the eccentricity of all vertices in the graph using the breadth-first search algorithm.
+ * @tparam _graph Type of the input graph.
+ * @param[in] graph A graph containing the vertices for which the eccentricity is to be computed.
+ * @param[out] eccentricity Output vector of vectors containing the eccentricity of each vertex in the graph.
  */
 template<class _graph>
-std::size_t eigen_vector_centrality(_graph graph){
-  std::vector<std::size_t> centrality_0(graph.size_vertex(), 0);
-  std::vector<std::size_t> centrality_1(graph.size_vertex(), 0);
-
-  std::size_t max_iter = std::ceil(level_traversal(graph, pseudo_peripheral_vertex(graph)).back()/2);
-
-  FOR(i_vertex, graph.size_vertex()) centrality_0[i_vertex] = graph[i_vertex].size();
-
-  FOR(iter, max_iter) {
+void eccentricity_graph(const _graph& graph, std::vector<std::vector<std::size_t> >& eccentricity) {
+  eccentricity.resize(graph.size_vertex());
     FOR(i_vertex, graph.size_vertex()){
-      centrality_1[i_vertex] = centrality_0[i_vertex];
-      FOR_EACH(i_adjacent, graph[i_vertex]){
-          centrality_1[i_vertex] += centrality_0[i_adjacent];
-        }
-    }
-    std::swap(centrality_0, centrality_1);
+    const std::size_t start_vertex = graph.size_vertex() - i_vertex - 1;
+    eccentricity_vertex_breadth_first(graph, start_vertex, eccentricity[start_vertex], start_vertex + 1);
   }
-
-  return *std::max_element(centrality_0.begin(), centrality_0.end()); //todo - what happens where there is more than one max?
 }
 
+/**
+ * @brief Perform breadth-first search to compute the eccentricity of each vertex in a graph from a given vertex.
+ * @tparam _graph  The type of the graph.
+ * @param[in] graph A non-empty graph to search for a peripheral vertex.
+ * @param[in]  i_start The index of the starting vertex, i.e. computed distance will be from this vertex to all others.
+ * @param[out] distance Vector to store the distances between the starting vertex and each vertex in the graph.
+ * @param[in] i_stop The index of a stopping vertex, defaults to max. See details.
+ *
+ * @details The function uses a queue to store the vertices to be visited and updates the distance vector as it performs
+ * a breath first search. If the index of the vertex at the front of the queue is greater than or equal to i_stop it is
+ * not visited, this can improve performance when building full eccentricities which are symmetric.
+ */
+template<class _graph>
+void eccentricity_vertex_breadth_first(const _graph& graph, const std::size_t i_start,
+                                       std::vector<std::size_t>& distance,
+                                       const std::size_t i_stop = std::numeric_limits<std::size_t>::max()) {
+  ASSERT_DEBUG(!graph.empty(), "The parsed graph is empty.");
+  ASSERT_DEBUG(i_start < graph.size_vertex(), "The parsed start vertex is not in the graph.");
+  ASSERT_DEBUG(i_start <= i_stop, "The parsed start vertex is greater than the parsed stop vertex.");
+  ASSERT_DEBUG(i_stop == std::numeric_limits<std::size_t>::max() || i_stop <= graph.size_vertex(),
+               "The stopping vertex is not in the graph size range [0, " + std::to_string(graph.size_vertex())
+               + "] and not set to a default.");
+
+  // Initialise the distance vector.
+  std::fill(distance.begin(), distance.end(), std::numeric_limits<std::size_t>::max());
+  distance.resize(graph.size_vertex() <= i_stop ? graph.size_vertex() : i_stop,
+                  std::numeric_limits<std::size_t>::max());
+
+  // Create a priority queue to store the vertices to be visited
+  std::queue<std::size_t> queue({i_start});
+  distance[i_start] = 0;
+
+  // Visit each vertex in the graph
+  while(!queue.empty()) {
+    const std::size_t front = queue.front();
+    queue.pop();
+    if(front >= i_stop) continue; // we don't search.
+    FOR_EACH(vertex, graph[front]) {
+      if(distance[vertex] == std::numeric_limits<std::size_t>::max()) {
+        distance[vertex] = distance[front] + 1;
+        queue.push(vertex);
+        }
+    }
+  }
+}
 
 }
 
