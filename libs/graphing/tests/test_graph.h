@@ -28,6 +28,21 @@
  *
  * @param number_vertices
  * @return
+ *
+ * 5
+ * |  \
+ * 14 - 13
+ * |  \ |  \
+ * 3  - 11 - 4
+ * |  / |  / |
+ * 12 - 10 - 9
+ * |  / |  / |
+ * 1  - 7  - 2
+ * |  / |  /
+ * 8 - 6
+ * |  /
+ * 0
+ *
  */
 Disa::Adjacency_Graph create_graph_saad() {
 
@@ -63,6 +78,23 @@ Disa::Adjacency_Graph  create_graph_structured(std::size_t number_vertices) {
   return structured;
 }
 
+/**
+ *
+ * @param number_vertices
+ * @return
+ *
+ * test problem
+ * 0 - 1 - 2
+ * |   |   |
+ * 3 - 4 - 5
+ *  \ / \ /
+ *   6 - 7
+ */
+Disa::Adjacency_Graph  create_graph_hybrid() {
+  return Disa::Adjacency_Graph({{3, 0}, {0, 1}, {7, 4}, {6, 7}, {2, 5}, {3, 4}, {6, 3}, {4, 5}, {4, 6}, {7, 4}, {5, 7}, {2, 1},
+                                {1, 4}}) ;
+
+}
 
 
 

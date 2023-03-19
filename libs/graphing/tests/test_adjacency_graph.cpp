@@ -21,6 +21,7 @@
 
 #include "gtest/gtest.h"
 #include "adjacency_graph.h"
+#include "test_graph.h"
 
 using namespace Disa;
 
@@ -32,14 +33,7 @@ using namespace Disa;
 
 TEST(test_adjacency_graph, edge_list_construction) {
 
-  // test problem
-  // 0 - 1 - 2
-  // |   |   |
-  // 3 - 4 - 5
-  //  \ / \ /
-  //   6 - 7
-  Adjacency_Graph graph({{3, 0}, {0, 1}, {7, 4}, {6, 7}, {2, 5}, {3, 4}, {6, 3}, {4, 5}, {4, 6}, {7, 4}, {5, 7}, {2, 1},
-                         {1, 4}});
+  Adjacency_Graph graph = create_graph_hybrid();
 
   EXPECT_EQ(graph.size_vertex(), 8);
   EXPECT_EQ(graph.size_edge(), 12);
@@ -134,6 +128,20 @@ TEST(test_adjacency_graph, data) {
   graph.insert(std::make_pair(0, 1));
   EXPECT_NE(graph.data().first, nullptr);
   EXPECT_NE(graph.data().second, nullptr);
+}
+
+TEST(test_adjacency_graph, front){
+  Adjacency_Graph graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}});
+  EXPECT_EQ(graph.front().size(), 2);
+  EXPECT_EQ(graph.front()[0], graph[0][0]);
+  EXPECT_EQ(graph.front()[1], graph[0][1]);
+}
+
+TEST(test_adjacency_graph, back){
+  Adjacency_Graph graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}});
+  EXPECT_EQ(graph.back().size(), 2);
+  EXPECT_EQ(graph.back()[0], graph[3][0]);
+  EXPECT_EQ(graph.back()[1], graph[3][1]);
 }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -279,6 +287,18 @@ TEST(test_adjacency_graph, insert) {
   EXPECT_DEATH(graph.insert({1, 1}), ".*");
 }
 
+TEST(test_adjacency_graph, erase_if) {
+  Adjacency_Graph saad = create_graph_saad();
+  auto erase_if_odd = [](const auto& i_vertex){return i_vertex%2 != 0;};
+  Adjacency_Graph answer({{0, 3}, {0, 4}, {1, 3}, {2, 5}, {3, 4}, {5, 6}});
+  answer.resize(7);
+
+  saad.erase_if(erase_if_odd);
+  FOR(i_vertex, answer.size_vertex())
+    FOR(i_adjacent, answer[i_vertex].size())
+      EXPECT_EQ(answer[i_vertex][i_adjacent], saad[i_vertex][i_adjacent]);
+}
+
 TEST(test_adjacency_graph, resize) {
 
   // Test sizing up.
@@ -356,14 +376,7 @@ TEST(test_adjacency_graph, contains) {
 
 TEST(test_adjacency_graph, degree) {
 
-  // test problem
-  // 0 - 1 - 2
-  // |   |   |
-  // 3 - 4 - 5
-  //  \ / \ /
-  //   6 - 7
-  Adjacency_Graph graph({{3, 0}, {0, 1}, {7, 4}, {6, 7}, {2, 5}, {3, 4}, {6, 3}, {4, 5}, {4, 6}, {7, 4}, {5, 7}, {2, 1},
-                         {1, 4}});
+  Adjacency_Graph graph = create_graph_hybrid();
 
   EXPECT_EQ(graph.degree(0), 2);
   EXPECT_EQ(graph.degree(3), 3);
