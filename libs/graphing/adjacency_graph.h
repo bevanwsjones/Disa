@@ -264,7 +264,7 @@ public:
    * @note Can cause the graph to become disjoint.
    */
   template<class _unary_predicate>
-  void erase_if(_unary_predicate delete_vertex){
+  void erase_if(_unary_predicate delete_vertex) {
 
     std::size_t removed = 0;
     std::size_t i_vertex = 0;

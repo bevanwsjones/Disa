@@ -28,11 +28,30 @@
 using namespace Disa;
 
 // Unit test for LevelTraversal using Google Test
+TEST(test_partition, multinode_level_set_expansion) {
+
+  Adjacency_Graph graph = create_graph_structured(10);
+
+  std::cout<<graph;
+  auto sub_graphs = multinode_level_set_expansion(graph, 3, 4);
+
+  FOR_EACH(sgraph, sub_graphs){
+    std::cout<<"\n------------------";
+    std::cout<<sgraph;
+  }
+
+  //  auto sub_graphs = recursive_graph_bisection(create_graph_saad(), 3);
+}
+
+// Unit test for LevelTraversal using Google Test
 TEST(LevelTraversalTest, SimpleTest) {
 
-  auto sub_graphs = recursive_graph_bisection(graph_saad, 3);
+  auto sub_graphs = recursive_graph_bisection(create_graph_structured(4), 3);
+  std::cout<<"\n------------------";
   FOR_EACH(graph, sub_graphs){
     std::cout<<"\n"<<graph;
     std::cout<<"\n------------------";
   }
+
+//  auto sub_graphs = recursive_graph_bisection(create_graph_saad(), 3);
 }
