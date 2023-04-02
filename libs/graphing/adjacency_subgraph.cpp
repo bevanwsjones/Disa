@@ -29,9 +29,11 @@ namespace Disa {
 
 /**
  * @details
+ * This constructor creates a subgraph object that stores adjacency lists for the vertices in the parent graph with
+ * indices specified by the vector i_sub_graph_vertex.
  */
 Adjacency_Subgraph::Adjacency_Subgraph(Adjacency_Graph& parent_graph,
-                                       const std::vector<std::size_t>& i_sub_graph_vertex,
+                                       const std::vector<std::size_t>& i_partition_local_global,
                                        std::size_t extra_levels) {
 
   // TODO: there is a pointer error here, probably the deque?
@@ -42,7 +44,7 @@ Adjacency_Subgraph::Adjacency_Subgraph(Adjacency_Graph& parent_graph,
 //    level_traversal(graph, vertex_queue, vertex_level, extra_levels);
 //  }
 #ifdef DISA_DEBUG
-  bool is_in_range = std::any_of(i_sub_graph_vertex.begin(), i_sub_graph_vertex.end(),
+  bool is_in_range = std::any_of(i_partition_local_global.begin(), i_partition_local_global.end(),
                 [&](const auto& iter){return iter < parent_graph.size_vertex();});
   ASSERT_DEBUG(is_in_range, "Global vertex is not in parent graph range [0, "
                             + std::to_string(parent_graph.size_vertex()) + ").");
@@ -50,12 +52,12 @@ Adjacency_Subgraph::Adjacency_Subgraph(Adjacency_Graph& parent_graph,
 
   hash_parent = std::hash<Adjacency_Graph>{}(parent_graph);
   graph = parent_graph;
-  reserve(i_sub_graph_vertex.size());
+  reserve(i_partition_local_global.size());
 
   // Copy the contents of the graph into the sub-graph and set up axillary containers.
   std::size_t i_local_vertex = 0;
   std::vector<std::size_t> i_global_local(parent_graph.size_vertex(), std::numeric_limits<std::size_t>::max());
-  FOR_EACH(i_global_vertex, i_sub_graph_vertex) {
+  FOR_EACH(i_global_vertex, i_partition_local_global) {
     i_local_global.push_back(i_global_vertex);
     i_global_local[i_global_vertex] = i_local_vertex;
     ++i_local_vertex;
@@ -97,7 +99,7 @@ Adjacency_Subgraph Adjacency_Subgraph::reorder(const std::vector<std::size_t>& p
 /**
  * @details
  */
-void Adjacency_Subgraph::update_levels(const Adjacency_Graph& parent_graph, std::size_t& max_level,
+void Adjacency_Subgraph::update_levels(const Adjacency_Graph& parent_graph, const std::size_t max_level,
                                        std::shared_ptr<std::vector<std::size_t> > i_global_local) {
 
   ASSERT(hash_parent == std::hash<Adjacency_Graph>{}(parent_graph), "");
@@ -140,7 +142,7 @@ void Adjacency_Subgraph::add_levels(const Adjacency_Graph& parent_graph, std::si
       i_local_global.push_back(i_vertex);
     }
 
-  // Inert
+  // Insert
   FOR(i_vertex, levels.size()) {
     if(current_max < level_set_value[i_vertex] <= max_level) {
       FOR_EACH(i_adjacency, parent_graph[i_vertex]) {
@@ -165,10 +167,12 @@ void Adjacency_Subgraph::remove_levels(std::size_t& max_level) {
   i_local_global.erase(std::remove_if(i_local_global.begin(), i_local_global.end(),
                                       [&](const auto){return not_in_subgraph(i_vertex++);}), i_local_global.end());
 
-  level_set_value.erase(std::remove_if(level_set_value.begin(), level_set_value.end(),
-                                       [&](const std::size_t level){return level > max_level;}), level_set_value.end());
-
-
+  if(max_level != 0) {
+    level_set_value.erase(std::remove_if(level_set_value.begin(), level_set_value.end(),
+                                         [&](const std::size_t level) { return level > max_level; }),
+                          level_set_value.end());
+  }
+  else level_set_value.clear();
 }
 
 }

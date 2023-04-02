@@ -33,22 +33,53 @@
 namespace Disa {
 
 /**
+ * @class AdjacencySubgraph
+ * @brief Represents a subgraph G' that is a subset of a parent adjacency graph G.
+ *
+ * @details
+ * The Adjacency Subgraph class is used to represent a subgraph that is a subset of a parent graph. It functions
+ * similarly to a standard graph, but also stores additional data that describes its relationship with the parent graph.
+ * This includes a hash of the parent graph to ensure its integrity, global vertex indices of local vertices, and the
+ * ability to add additional levels to the graph.
+ *
+ * Levels in this context refer to 'level traversal', and form a halo around the primary partition. This allows the
+ * subgraph to store overlapping (with other subgraphs) vertices. All vertices in the primary partition are have a level
+ * value of 0, and then each successive level after this increases the level by 1.
+ *
  * @warning
- * 1. CANNOT CHANGE THE TOPOLOGY OF THE GRAPH!
- * 2. Contains (edge) -> will not be complete at edge. fully defined within the subgraph. Also degree
+ * 1. The relationship between the parent graph and the subgraph is logical, and not enforced. Any update to the
+ *    topology of the parent or subgraph will invalidate their correlation.
+ * 2. Some edge and vertex operations may produce different results in the subgraph compared to the parent graph. For
+ *    example, checking the degree of a peripheral vertex in the subgraph will most likely give a different value than
+ *    checking the same vertex in the parent graph. Similarly, the "contains" method may give different results since
+ *    it uses edge data.
+ *
+ * Future:
+ * 1. Add iterators (e.g., begin(), end()).
+ * 2. Create arithmetic operators (+, -, etc.) for unions and intersections.
+ * 3. Consider creating a base graph class from which this class can inherit.
  */
 class Adjacency_Subgraph {
 
 public:
 
+  /**
+   * @brief Default constructor.
+   * @return An empty Adjacency_Subgraph.
+   */
   Adjacency_Subgraph() = default;
+
+  /**
+   * @brief Default destructor.
+   */
   ~Adjacency_Subgraph() = default;
 
   /**
-   * @breif
-   * @param[in] parent_graph
-   * @param[in] i_sub_graph_vertex
-   * @param[in] extra_levels
+   * @breif Constructor for creating a subgraph from a parent graph.
+   * @param[in] parent_graph The parent graph upon which this subgraph will be constructed.
+   * @param[in] i_partition_local_global For this partition of the parent graph, the local to global index mapping.
+   * @param[in] extra_levels Additional levels to add to the primary partition.
+   * @return Constructed Adjacency_Subgraph
    */
   Adjacency_Subgraph(Adjacency_Graph& parent_graph, const std::vector<std::size_t>& i_sub_graph_vertex,
                      std::size_t extra_levels = 0);
@@ -257,11 +288,11 @@ public:
   }
 
   /**
-   * @brief todo
-   * @param[in] i_vertex
-   * @return
+   * @brief Get the global index of a local vertex.
+   * @param[in] i_vertex The local vertex index.
+   * @return The global vertex index.
    */
-  [[nodiscard]] std::size_t local_global(const std::size_t& i_vertex) const {
+  [[nodiscard]] inline std::size_t local_global(const std::size_t& i_vertex) const {
     ASSERT_DEBUG(i_vertex < size_vertex(), "Local vertex index " + std::to_string(i_vertex) + " not in range [0, "
                                            + std::to_string(i_vertex) + ").");
     return i_local_global[i_vertex];
@@ -275,41 +306,47 @@ public:
   Adjacency_Subgraph reorder(const std::vector<std::size_t>& permutation);
 
   /**
-   * @brief todo
-   * @param i_vertex
-   * @return
+   * @brief Changes the number of 'halo' levels/vertices around the primary sub-graph.
+   * @param[in] parent_graph The parent graph of this subgraph.
+   * @param[in] max_level The new number of levels the subgraph must have.
+   * @param[in,out] i_global_local A global to local mapping of all vertices in the parent graph.
+   *                               Will be populated if empty.
    */
-  void update_levels(const Adjacency_Graph& parent_graph, std::size_t& max_level,
+  void update_levels(const Adjacency_Graph& parent_graph, std::size_t max_level,
                      std::shared_ptr<std::vector<std::size_t> > i_global_local);
 
   /**
-   * @brief todo
-   * @param i_vertex
-   * @return
+   * @brief Returns the level of a given vertex in the graph.
+   * @param[in] i_vertex The local index of the vertex whose level is to be returned.
+   * @return The level of the vertex at the specified local index.
    */
-  [[nodiscard]] std::size_t vertex_level(const std::size_t& i_vertex) const {
+  [[nodiscard]] inline std::size_t vertex_level(const std::size_t& i_vertex) const {
     ASSERT_DEBUG(i_vertex < size_vertex(), "Local vertex index " + std::to_string(i_vertex) + " not in range [0, "
                                            + std::to_string(i_vertex) + ").");
     return level_set_value.empty() ? 0 : level_set_value[i_vertex];
   }
 
 private:
-  std::size_t hash_parent{0};                /**<! */
-  Adjacency_Graph graph;                     /**<! */
-  std::vector<std::size_t> i_local_global;   /**<! */
-  std::vector<std::size_t> level_set_value;  /**<! */
+  std::size_t hash_parent{std::hash<Adjacency_Graph>{}(Adjacency_Graph())};    /**< The hash of a the parent graph, defaults to empty parent. */
+  Adjacency_Graph graph;                     /**< This graph's connectivity structure */
+  std::vector<std::size_t> i_local_global;   /**< For each local vertex, its global index in the parent graph. */
+  std::vector<std::size_t> level_set_value;  /**< For each local vertex, its level traversal value in this subgraph - 0 indicates the primary partition. */
 
 
   /**
-   * @breief
-   * @param parent_graph
-   * @param max_level
-   * @param current_max
-   * @param i_global_local
+   * @breief Adds further levels to the subgraph, using the parent graph.
+   * @param[in] parent_graph The parent graph
+   * @param[in] max_level The new number of levels the sub graph must contain.
+   * @param[in] current_max The current number of levels the subgraph contains.
+   * @param[in] i_global_local Global to local vertex index map.
    */
   void add_levels(const Adjacency_Graph& parent_graph, std::size_t& max_level, std::size_t& current_max,
                   std::shared_ptr<std::vector<std::size_t> > i_global_local);
 
+  /**
+   * @breif Removes levels from the subgraph.
+   * @param[in] max_level The new number of levels in the subgraph.
+   */
   void remove_levels(std::size_t& max_level);
 };
 

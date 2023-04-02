@@ -63,6 +63,7 @@ namespace Disa {
  * Future:
  * 1. Add iterators, begin(), end() etc.
  * 2. Create arithmetic operators +,-, etc for unions and intersections.
+ * 3. Possible base graph class from which this class can inherit.
  */
 class Adjacency_Graph {
 public:
