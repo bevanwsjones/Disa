@@ -34,20 +34,17 @@ namespace Disa {
  */
 Adjacency_Subgraph::Adjacency_Subgraph(Adjacency_Graph& parent_graph,
                                        const std::vector<std::size_t>& i_partition_local_global,
-                                       std::size_t extra_levels) {
-
-  // TODO: there is a pointer error here, probably the deque?
-//  if(extra_levels != 0) {
-//    std::vector<std::size_t> vertex_level(graph.size_vertex(), std::numeric_limits<std::size_t>::max());
-//    std::queue<std::size_t> vertex_queue(std::deque(i_sub_graph_vertex.begin(), i_sub_graph_vertex.end()));
-//    FOR_EACH(global_vertex, vertex_level) vertex_level[global_vertex] = 0;
-//    level_traversal(graph, vertex_queue, vertex_level, extra_levels);
-//  }
+                                       const std::size_t extra_levels) {
 #ifdef DISA_DEBUG
-  bool is_in_range = std::any_of(i_partition_local_global.begin(), i_partition_local_global.end(),
-                                 [&](const std::size_t iter){return iter >= parent_graph.size_vertex();});
-  ASSERT_DEBUG(!is_in_range, "A global vertex is not in the parsed parent graph range [0, "
-                             + std::to_string(parent_graph.size_vertex()) + ").");
+  std::vector<std::size_t> unique_check;
+  std::unique_copy(i_partition_local_global.begin(), i_partition_local_global.end(), std::back_inserter(unique_check));
+  ASSERT(unique_check.size() == i_partition_local_global.size(), "Partition vertices are not unique.");
+  ASSERT(i_partition_local_global.size() <= parent_graph.size_vertex(),
+         "Partition size is bigger than graph vertex size.");
+  ASSERT(!std::any_of(i_partition_local_global.begin(), i_partition_local_global.end(),
+                            [&](const std::size_t i_global){return i_global >= parent_graph.size_vertex();}),
+               "A global vertex is not in the parsed parent graph range [0, "
+               + std::to_string(parent_graph.size_vertex()) + ").");
 #endif
 
   hash_parent = std::hash<Adjacency_Graph>{}(parent_graph);
@@ -63,7 +60,7 @@ Adjacency_Subgraph::Adjacency_Subgraph(Adjacency_Graph& parent_graph,
     ++i_local_vertex;
   }
 
-  // Remove vertices not in this sub grap h.
+  // Remove vertices not in this subgraph.
   auto not_in_subgraph =
     [&](const std::size_t& vertex){return i_global_local[vertex] == std::numeric_limits<std::size_t>::max();};
   graph.erase_if(not_in_subgraph);

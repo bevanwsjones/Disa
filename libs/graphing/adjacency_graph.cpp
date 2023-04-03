@@ -129,7 +129,7 @@ Adjacency_Graph Adjacency_Graph::reorder(const std::vector<std::size_t>& permuta
   ASSERT_DEBUG(permutation.size() == size_vertex(), "Incorrect sizes, " + std::to_string(permutation.size()) + " vs. "
                                                     + std::to_string(size_vertex()) + ".");
   ASSERT_DEBUG(std::accumulate(permutation.begin(), permutation.end(), 0.0) == (size_vertex() - 1)*size_vertex()/2.0,
-               "Checksum for parsed re_ordering, are the elements unique?");
+               "Checksum for parsed re_ordering failed, are the elements unique?");
 
   // Allocate memory.
   Adjacency_Graph graph;

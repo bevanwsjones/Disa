@@ -44,7 +44,8 @@ namespace Disa {
  *
  * Levels in this context refer to 'level traversal', and form a halo around the primary partition. This allows the
  * subgraph to store overlapping (with other subgraphs) vertices. All vertices in the primary partition are have a level
- * value of 0, and then each successive level after this increases the level by 1.
+ * value of 0, and then each successive level after this increases the level by 1. Note while level nodes are stored in
+ * the data structure they are not considered local to the graph, only the primary partition is local.
  *
  * @warning
  * 1. The relationship between the parent graph and the subgraph is logical, and not enforced. Any update to the
@@ -80,6 +81,8 @@ public:
    * @param[in] i_partition_local_global For this partition of the parent graph, the local to global index mapping.
    * @param[in] extra_levels Additional levels to add to the primary partition.
    * @return Constructed Adjacency_Subgraph
+   *
+   * @note There are no guarantees placed on the resulting local partition ordering.
    */
   Adjacency_Subgraph(Adjacency_Graph& parent_graph, const std::vector<std::size_t>& i_sub_graph_vertex,
                      std::size_t extra_levels = 0);
@@ -137,11 +140,11 @@ public:
 
   /**
     * @brief Direct access to the underlying vectors of the graph.
-    * @return pair [pointer to vertex start, pointer to offset start].
+    * @return pair [pointer to vertex start, pointer to offset start, pointer to local to global, pointer to levels].
     *
-    * @note If empty all pointers returned pointers will be nullptrs. if the only the vertex list is empty a nullptr is
-    *       returned for, while the pointer to the offset vector is returned. Finally populated pointers to both vectors
-    *       are returned.
+    * @note If empty all pointers returned pointers will be nullptrs. If there the vertex list is empty then the only
+    *       non-nullptr will be for the offset vector. Finally, a nullptr will be return if the subgraph does not
+    *       contain additional levels.
     */
   [[nodiscard]] inline std::tuple<std::size_t*, std::size_t*, std::size_t*, std::size_t*> data() noexcept {
     const std::pair<std::size_t*, std::size_t*> graph_data = graph.data();
