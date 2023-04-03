@@ -111,12 +111,68 @@ TEST(Adjacency_Subgraph, clear) {
 }
 
 TEST(Adjacency_Subgraph, resize) {
+  Adjacency_Graph graph = create_graph_saad();
+  Adjacency_Subgraph subgraph(graph, {0, 6, 8, 13, 14});
+  std::size_t size_edge = subgraph.size_edge();
 
-  EXPECT_TRUE(false);
+  // Expand the graph
+  subgraph.resize(7);
+  EXPECT_FALSE(subgraph.is_parent(graph));
+  EXPECT_EQ(subgraph.size_vertex(), 7);
+  EXPECT_EQ(subgraph.size_edge(), size_edge);
+  EXPECT_EQ(subgraph.local_global(0), 0);
+  EXPECT_EQ(subgraph.local_global(1), 6);
+  EXPECT_EQ(subgraph.local_global(2), 8);
+  EXPECT_EQ(subgraph.local_global(3), 13);
+  EXPECT_EQ(subgraph.local_global(4), 14);
+  // Vertices after are in an uninitialised state.
+
+  subgraph = Adjacency_Subgraph(graph, {0, 6, 8, 13, 14});
+
+  // Keep the subgraph the same size.
+  subgraph.resize(5);
+  EXPECT_TRUE(subgraph.is_parent(graph));
+  EXPECT_EQ(subgraph.size_vertex(), 5);
+  EXPECT_EQ(subgraph.size_edge(), size_edge);
+  EXPECT_EQ(subgraph.local_global(0), 0);
+  EXPECT_EQ(subgraph.local_global(1), 6);
+  EXPECT_EQ(subgraph.local_global(2), 8);
+  EXPECT_EQ(subgraph.local_global(3), 13);
+  EXPECT_EQ(subgraph.local_global(4), 14);
+
+  // Shrink the subgraph the same size.
+  subgraph.resize(3);
+  EXPECT_TRUE(subgraph.is_parent(graph));
+  EXPECT_EQ(subgraph.size_vertex(), 3);
+  EXPECT_EQ(subgraph.size_edge(), 3);
+  EXPECT_EQ(subgraph.local_global(0), 0);
+  EXPECT_EQ(subgraph.local_global(1), 6);
+  EXPECT_EQ(subgraph.local_global(2), 8);
 }
 
 TEST(Adjacency_Subgraph, swap) {
-  EXPECT_TRUE(false);
+  Adjacency_Graph graph_0 = create_graph_saad();
+  Adjacency_Graph graph_1 = create_graph_structured(3);
+  Adjacency_Subgraph subgraph_0(graph_0, {0, 6, 8, 1, 7});
+  Adjacency_Subgraph subgraph_1(graph_1, {4, 5, 7, 8});
+
+  subgraph_0.swap(subgraph_1);
+  EXPECT_TRUE(subgraph_0.is_parent(graph_1));
+  EXPECT_EQ(subgraph_0.size_vertex(), 4);
+  EXPECT_EQ(subgraph_0.size_edge(), 4);
+  EXPECT_EQ(subgraph_0.local_global(0), 4);
+  EXPECT_EQ(subgraph_0.local_global(1), 5);
+  EXPECT_EQ(subgraph_0.local_global(2), 7);
+  EXPECT_EQ(subgraph_0.local_global(3), 8);
+
+  EXPECT_TRUE(subgraph_1.is_parent(graph_0));
+  EXPECT_EQ(subgraph_1.size_vertex(), 5);
+  EXPECT_EQ(subgraph_1.size_edge(), 7);
+  EXPECT_EQ(subgraph_1.local_global(0), 0);
+  EXPECT_EQ(subgraph_1.local_global(1), 6);
+  EXPECT_EQ(subgraph_1.local_global(2), 8);
+  EXPECT_EQ(subgraph_1.local_global(3), 1);
+  EXPECT_EQ(subgraph_1.local_global(4), 7);
 }
 
 //----------------------------------------------------------------------------------------------------------------------

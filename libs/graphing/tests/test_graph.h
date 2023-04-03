@@ -64,7 +64,7 @@ Disa::Adjacency_Graph create_graph_saad() {
  *
  * @param number_vertices
  */
-Disa::Adjacency_Graph  create_graph_structured(std::size_t number_vertices) {
+Disa::Adjacency_Graph  create_graph_structured(const std::size_t number_vertices) {
   Disa::Adjacency_Graph structured;
   for(std::size_t i_y = 0; i_y < number_vertices; ++i_y) {
     for(std::size_t i_x = 0; i_x < number_vertices; ++i_x) {

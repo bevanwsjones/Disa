@@ -72,7 +72,8 @@ void Adjacency_Graph::resize(const std::size_t& size) {
   // Branch based on expansion or contraction of the graph.
   if(size_vertex() < size) {
     offset.resize(size + 1, offset.empty() ? 0 : offset.back());
-  } else {
+  }
+  else {
     // Resize the containers.
     offset.resize(size + 1);
     vertex_adjacent_list.resize(offset.back());

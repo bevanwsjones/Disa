@@ -226,12 +226,13 @@ public:
    * @size[in] The number of vertices to resize the graph to.
    *
    * @note Edges are removed if the graph size is reduced. And the parent graph is cleared.
+   * @note Invalidates the parent hash if size is increased.
    */
-  inline void resize(const std::size_t& size) {
-    hash_parent = std::hash<Adjacency_Graph>{}(graph);
+  inline void resize(const std::size_t size) {
+    if(size > size_vertex()) hash_parent = std::hash<Adjacency_Graph>{}(Adjacency_Graph());
     graph.resize(size);
     i_local_global.resize(size);
-    level_set_value.resize(size);
+    if(!level_set_value.empty()) level_set_value.resize(size);
   };
 
   /**
@@ -340,14 +341,14 @@ private:
    * @param[in] current_max The current number of levels the subgraph contains.
    * @param[in] i_global_local Global to local vertex index map.
    */
-  void add_levels(const Adjacency_Graph& parent_graph, std::size_t& max_level, std::size_t& current_max,
+  void add_levels(const Adjacency_Graph& parent_graph, std::size_t max_level, std::size_t current_max,
                   std::shared_ptr<std::vector<std::size_t> > i_global_local);
 
   /**
    * @breif Removes levels from the subgraph.
    * @param[in] max_level The new number of levels in the subgraph.
    */
-  void remove_levels(std::size_t& max_level);
+  void remove_levels(std::size_t max_level);
 };
 
 //----------------------------------------------------------------------------------------------------------------------

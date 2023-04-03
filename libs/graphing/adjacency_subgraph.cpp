@@ -45,9 +45,9 @@ Adjacency_Subgraph::Adjacency_Subgraph(Adjacency_Graph& parent_graph,
 //  }
 #ifdef DISA_DEBUG
   bool is_in_range = std::any_of(i_partition_local_global.begin(), i_partition_local_global.end(),
-                [&](const auto& iter){return iter < parent_graph.size_vertex();});
-  ASSERT_DEBUG(is_in_range, "Global vertex is not in parent graph range [0, "
-                            + std::to_string(parent_graph.size_vertex()) + ").");
+                                 [&](const std::size_t iter){return iter >= parent_graph.size_vertex();});
+  ASSERT_DEBUG(!is_in_range, "A global vertex is not in the parsed parent graph range [0, "
+                             + std::to_string(parent_graph.size_vertex()) + ").");
 #endif
 
   hash_parent = std::hash<Adjacency_Graph>{}(parent_graph);
@@ -120,8 +120,8 @@ void Adjacency_Subgraph::update_levels(const Adjacency_Graph& parent_graph, cons
 /**
  * @details
  */
-void Adjacency_Subgraph::add_levels(const Adjacency_Graph& parent_graph, std::size_t& max_level,
-                                    std::size_t& current_max,
+void Adjacency_Subgraph::add_levels(const Adjacency_Graph& parent_graph, const std::size_t max_level,
+                                    const std::size_t current_max,
                                     std::shared_ptr<std::vector<std::size_t> > i_global_local) {
   // Create data for level traversal.
   std::queue<std::size_t> start_vertices;
@@ -159,7 +159,7 @@ void Adjacency_Subgraph::add_levels(const Adjacency_Graph& parent_graph, std::si
 /**
  *
  */
-void Adjacency_Subgraph::remove_levels(std::size_t& max_level) {
+void Adjacency_Subgraph::remove_levels(const std::size_t max_level) {
   auto not_in_subgraph = [&](const std::size_t& vertex){return level_set_value[vertex] > max_level;};
   graph.erase_if(not_in_subgraph);
 
