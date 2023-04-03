@@ -284,7 +284,7 @@ public:
    * @param[in] graph_parent The parent graph to check.
    * @return True if the graph is the parent, else false.
    */
-  [[nodiscard]] bool is_parent(const Adjacency_Graph& graph_parent) const {
+  [[nodiscard]] bool is_parent(const Adjacency_Graph& graph_parent) const noexcept {
     return std::hash<Adjacency_Graph>{}(graph_parent) == hash_parent;
   }
 
@@ -310,11 +310,11 @@ public:
    * @brief Changes the number of 'halo' levels/vertices around the primary sub-graph.
    * @param[in] parent_graph The parent graph of this subgraph.
    * @param[in] max_level The new number of levels the subgraph must have.
-   * @param[in,out] i_global_local A global to local mapping of all vertices in the parent graph.
-   *                               Will be populated if empty.
+   * @param[out] i_global_local A global to local mapping of all vertices in the parent graph.
+   *                            Will be populated if empty.
    */
   void update_levels(const Adjacency_Graph& parent_graph, std::size_t max_level,
-                     std::shared_ptr<std::vector<std::size_t> > i_global_local);
+                     std::shared_ptr<std::vector<std::size_t> > i_global_local = nullptr);
 
   /**
    * @brief Returns the level of a given vertex in the graph.
@@ -339,16 +339,20 @@ private:
    * @param[in] parent_graph The parent graph
    * @param[in] max_level The new number of levels the sub graph must contain.
    * @param[in] current_max The current number of levels the subgraph contains.
-   * @param[in] i_global_local Global to local vertex index map.
+   * @param[out] i_global_local A global to local mapping of all vertices in the parent graph.
+   *                            Will be populated if empty.
    */
   void add_levels(const Adjacency_Graph& parent_graph, std::size_t max_level, std::size_t current_max,
                   std::shared_ptr<std::vector<std::size_t> > i_global_local);
 
   /**
    * @breif Removes levels from the subgraph.
+   * @param[in] parent_graph The parent graph
    * @param[in] max_level The new number of levels in the subgraph.
+   * @param[out] i_global_local
    */
-  void remove_levels(std::size_t max_level);
+  void remove_levels(const Adjacency_Graph& parent_graph, std::size_t max_level,
+                     std::shared_ptr<std::vector<std::size_t> > i_global_local);
 };
 
 //----------------------------------------------------------------------------------------------------------------------

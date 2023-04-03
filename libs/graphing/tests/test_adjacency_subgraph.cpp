@@ -25,7 +25,7 @@
 
 using namespace Disa;
 
-TEST(Adjacency_Subgraph, constructor) {
+TEST(Adjacency_Subgraph, constructor_no_level) {
 
   Adjacency_Graph graph = create_graph_saad();
   Adjacency_Subgraph subgraph(graph, {0, 6, 8, 13, 14});
@@ -187,8 +187,98 @@ TEST(Adjacency_Subgraph, is_local) {
   EXPECT_TRUE(false);
 }
 
+TEST(Adjacency_Subgraph, is_parent) {
+  EXPECT_TRUE(false);
+}
+
 TEST(Adjacency_Subgraph, local_global) {
   EXPECT_TRUE(false);
+}
+
+TEST(Adjacency_Subgraph, reorder) {
+  EXPECT_TRUE(false);
+}
+
+TEST(Adjacency_Subgraph, update_levels_add) {
+  Adjacency_Graph graph = create_graph_structured(3);
+  Adjacency_Subgraph subgraph(graph, {4});
+  std::shared_ptr<std::vector<std::size_t> > i_global_local = std::make_shared<std::vector<std::size_t> >();
+
+  subgraph.update_levels(graph, 1, i_global_local);
+  EXPECT_FALSE(i_global_local == nullptr);
+  EXPECT_FALSE(i_global_local->empty());
+  EXPECT_TRUE(subgraph.is_parent(graph));
+
+  // Check graph details
+  EXPECT_EQ(subgraph.size_vertex(), 5);
+  EXPECT_EQ(subgraph.size_edge(), 4);
+  EXPECT_EQ(subgraph.vertex_level(0), 0);
+  EXPECT_EQ(subgraph.vertex_level(1), 1);
+  EXPECT_EQ(subgraph.vertex_level(2), 1);
+  EXPECT_EQ(subgraph.vertex_level(3), 1);
+  EXPECT_EQ(subgraph.vertex_level(4), 1);
+  FOR(i_vertex, subgraph.size_vertex())
+    EXPECT_EQ((*i_global_local)[subgraph.local_global(i_vertex)], i_vertex);
+  EXPECT_EQ((*i_global_local)[0], std::numeric_limits<std::size_t>::max());
+  EXPECT_EQ((*i_global_local)[2], std::numeric_limits<std::size_t>::max());
+  EXPECT_EQ((*i_global_local)[6], std::numeric_limits<std::size_t>::max());
+  EXPECT_EQ((*i_global_local)[8], std::numeric_limits<std::size_t>::max());
+
+  subgraph.update_levels(graph, 2, i_global_local);
+  EXPECT_TRUE(subgraph.is_parent(graph));
+  EXPECT_EQ(subgraph.size_vertex(), 9);
+  EXPECT_EQ(subgraph.size_edge(), 12);
+
+  // Check graph details
+  EXPECT_EQ(subgraph.vertex_level(0), 0);
+  EXPECT_EQ(subgraph.vertex_level(1), 1);
+  EXPECT_EQ(subgraph.vertex_level(2), 1);
+  EXPECT_EQ(subgraph.vertex_level(3), 1);
+  EXPECT_EQ(subgraph.vertex_level(4), 1);
+  EXPECT_EQ(subgraph.vertex_level(5), 2);
+  EXPECT_EQ(subgraph.vertex_level(6), 2);
+  EXPECT_EQ(subgraph.vertex_level(7), 2);
+  EXPECT_EQ(subgraph.vertex_level(8), 2);
+  FOR(i_vertex, subgraph.size_vertex())
+    EXPECT_EQ((*i_global_local)[subgraph.local_global(i_vertex)], i_vertex);
+
+  EXPECT_DEATH(subgraph.update_levels(Adjacency_Graph(), 1, i_global_local), "./*");
+  EXPECT_NO_THROW(Adjacency_Subgraph(graph, {4}).update_levels(graph, 1);); // ensure default does not throw.
+}
+
+TEST(Adjacency_Subgraph, update_levels_remove) {
+  Adjacency_Graph graph = create_graph_structured(3);
+  Adjacency_Subgraph subgraph(graph, {4}, 2);
+  std::shared_ptr<std::vector<std::size_t> > i_global_local = std::make_shared<std::vector<std::size_t> >();
+
+  subgraph.update_levels(graph, 1, i_global_local);
+  EXPECT_FALSE(i_global_local == nullptr);
+  EXPECT_FALSE(i_global_local->empty());
+  EXPECT_TRUE(subgraph.is_parent(graph));
+
+  // Check graph details
+  EXPECT_EQ(subgraph.size_vertex(), 5);
+  EXPECT_EQ(subgraph.size_edge(), 4);
+  EXPECT_EQ(subgraph.vertex_level(0), 0);
+  EXPECT_EQ(subgraph.vertex_level(1), 1);
+  EXPECT_EQ(subgraph.vertex_level(2), 1);
+  EXPECT_EQ(subgraph.vertex_level(3), 1);
+  EXPECT_EQ(subgraph.vertex_level(4), 1);
+  FOR(i_vertex, subgraph.size_vertex())
+    EXPECT_EQ((*i_global_local)[subgraph.local_global(i_vertex)], i_vertex);
+  EXPECT_EQ((*i_global_local)[0], std::numeric_limits<std::size_t>::max());
+  EXPECT_EQ((*i_global_local)[2], std::numeric_limits<std::size_t>::max());
+  EXPECT_EQ((*i_global_local)[6], std::numeric_limits<std::size_t>::max());
+  EXPECT_EQ((*i_global_local)[8], std::numeric_limits<std::size_t>::max());
+
+  subgraph.update_levels(graph, 0);
+  EXPECT_TRUE(subgraph.is_parent(graph));
+  EXPECT_EQ(subgraph.size_vertex(), 1);
+  EXPECT_EQ(subgraph.size_edge(), 0);
+
+  // Check graph details
+  EXPECT_EQ(subgraph.vertex_level(0), 0);
+  EXPECT_EQ(subgraph.local_global(0), 4);
 }
 
 TEST(Adjacency_Subgraph, vertex_level) {

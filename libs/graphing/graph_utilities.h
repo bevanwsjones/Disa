@@ -75,9 +75,7 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
 
   ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
   ASSERT_DEBUG(vertex_level.size() == graph.size_vertex(), "Vertex level and graph size_vertex do not match.");
-
-  // roll the vector over, before checking max.
-  FOR_EACH_REF(level, vertex_level) ++level;
+  FOR_EACH_REF(level, vertex_level) ++level;   // roll the vector over, before checking max.
   ASSERT_DEBUG(*std::max_element(vertex_level.begin(), vertex_level.end()) < graph.size_vertex(),
                "A vertex in vertex level not in graph range (0, "+ std::to_string(graph.size_vertex()) + "].");
 

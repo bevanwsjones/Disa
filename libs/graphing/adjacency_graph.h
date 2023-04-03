@@ -442,7 +442,7 @@ struct hash<Disa::Adjacency_Graph> {
    * @param graph The graph to be hashed.
    * @returns A std::size_t value representing the hash value of the input graph.
    */
-  std::size_t operator()(const Disa::Adjacency_Graph& graph) const {
+  std::size_t operator()(const Disa::Adjacency_Graph& graph) const noexcept {
     if(graph.empty()) return 0; // All empty graphs are considered identical.
     std::size_t hashValue = 0;
     hashValue ^= std::hash<std::size_t> {}(graph.size_vertex());
