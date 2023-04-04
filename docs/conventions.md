@@ -1,5 +1,7 @@
 # Conventions
 
+Items in _italics_ are still tbd/under consideration.
+
 ## Introduction
 
 Disa follows, as much as possible,
@@ -16,6 +18,10 @@ code.
 - Macros: `SCREAMING_SNAKE_CASE`
 - Line length: 120 characters, however, occasional inline (documentation) commenting may exceed this.
 - Tabs: 2 white space characters
+
+## File Layout Conventions
+
+_- Template definitions must be placed inside a `.hpp` file, unless inlined._
 
 ## Technical Conventions:
 
@@ -44,9 +50,9 @@ Use blocking to separate out sections of code, especially in large files and cla
 comment:
 
 ```cpp
-//---------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // Statically Sized Dense Vector Class
-//----------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 ```
 
 ## Do's and don't

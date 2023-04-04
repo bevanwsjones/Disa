@@ -25,14 +25,31 @@
 
 namespace Disa {
 
-//----------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 // AdjacencyGraph
-//----------------------------------------------------------------------------------------------------------------------
-// Modifiers
-//----------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+// Public Constructors and Destructors
+// ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * \details If the edge is already in the graph the function returns immediately. If the edge contains a vertex index
+ * @details
+ */
+Adjacency_Graph::Adjacency_Graph(std::initializer_list<Edge> edge_graph) {
+  const auto iter = std::max_element(edge_graph.begin(), edge_graph.end(),
+                                     [](const Edge& edge_0, const Edge& edge_1) {
+                                       return order_edge_vertex(&edge_0).second < order_edge_vertex(&edge_1).second;
+                                     });
+  reserve(std::max(iter->first, iter->second), edge_graph.size());
+  FOR_EACH(edge, edge_graph) insert(edge);
+  shrink_to_fit();
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Modifiers
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @details If the edge is already in the graph the function returns immediately. If the edge contains a vertex index
  * greater than the current graph size, the size of the graph is increased to accommodate the insertion. Lower bound is
  * then used to insert the upper index of the edge into the lower index adjacency list. The offset values are then
  * increased by one until the upper index is reached. The lower index is then inserted into the upper index adjacency
@@ -94,9 +111,9 @@ void Adjacency_Graph::resize(const std::size_t& size) {
   }
 }
 
-//--------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 // Lookup
-//--------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 /**
  * @details First ensures that the vertex exists in the graph, then using std::ranges looks for the second vertex of the
@@ -112,9 +129,9 @@ void Adjacency_Graph::resize(const std::size_t& size) {
                              [&](const std::size_t& i_vertex) { return ordered_edge.second == i_vertex; });
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 // Graph Operators
-//----------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 /**
  * @details To begin new memory is allocated for a new graph. First the offsets for the new graph of determined by
@@ -157,6 +174,20 @@ Adjacency_Graph Adjacency_Graph::reorder(const std::vector<std::size_t>& permuta
   // swap class data and return.
   this->swap(graph);
   return graph;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Helper Functions
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @details
+ */
+void Adjacency_Graph::insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex) {
+  const auto& adjacency = vertex_adjacency_iter(vertex);
+  const auto& insert_iter = std::lower_bound(adjacency.first, adjacency.second, insert_vertex);
+  const auto& distance = std::distance(vertex_adjacent_list.begin(), insert_iter);
+  vertex_adjacent_list.insert(vertex_adjacent_list.begin() + distance, insert_vertex);
 }
 
 }

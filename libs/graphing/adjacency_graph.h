@@ -66,11 +66,12 @@ namespace Disa {
  * 3. Possible base graph class from which this class can inherit.
  */
 class Adjacency_Graph {
+
 public:
 
-  //--------------------------------------------------------------------------------------------------------------------
-  // Public Member Functions
-  //--------------------------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
+  // Public Constructors and Destructors
+  // -------------------------------------------------------------------------------------------------------------------
 
   /**
    * @brief Default constructor.
@@ -83,15 +84,12 @@ public:
    *
    * @note At preset this is not writen efficiently, and can be improved, mainly used for testing.
    */
-  Adjacency_Graph(std::initializer_list<Edge> edge_graph) {
-    const auto iter = std::max_element(edge_graph.begin(), edge_graph.end(),
-                                       [](const Edge& edge_0, const Edge& edge_1) {
-                                         return order_edge_vertex(&edge_0).second < order_edge_vertex(&edge_1).second;
-                                       });
-    reserve(std::max(iter->first, iter->second), edge_graph.size());
-    FOR_EACH(edge, edge_graph) insert(edge);
-    shrink_to_fit();
-  }
+  Adjacency_Graph(std::initializer_list<Edge> edge_graph);
+
+  /**
+   * @brief Default destructor.
+   */
+  ~Adjacency_Graph() = default;
 
   //--------------------------------------------------------------------------------------------------------------------
   // Element Access
@@ -265,52 +263,7 @@ public:
    * @note Can cause the graph to become disjoint.
    */
   template<class _unary_predicate>
-  void erase_if(_unary_predicate delete_vertex) {
-
-    std::size_t removed = 0;
-    std::size_t i_vertex = 0;
-    std::vector<bool> adjacency_delete(vertex_adjacent_list.size(), false);
-    std::vector<std::size_t> new_indexes(vertex_adjacent_list.size(), std::numeric_limits<std::size_t>::max());
-
-    // Loop over the data, and determine the new offsets and which entries in vertex_adjacent_list need to be removed.
-    FOR(i_vertex_old, size_vertex()) {
-      const auto& adjacency = vertex_adjacency_iter(i_vertex_old);
-      const auto& begin_delete = adjacency_delete.begin() + std::distance(vertex_adjacent_list.begin(), adjacency.first);
-      const auto& end_delete = adjacency_delete.begin() + std::distance(vertex_adjacent_list.begin(), adjacency.second);
-
-      offset[i_vertex_old] -= removed;
-
-      // Only remove vertices which will be taken out, and record new indexes.
-      if(!delete_vertex(i_vertex_old)) {
-        new_indexes[i_vertex_old] = i_vertex++;
-        removed += std::count_if(adjacency.first, adjacency.second, delete_vertex);
-        std::transform(adjacency.first, adjacency.second, begin_delete, delete_vertex);
-      }
-      else { // All adjacency entries need to be removed, since the vertex is to be removed.
-        removed += std::distance(adjacency.first, adjacency.second);
-        std::transform(begin_delete, end_delete, begin_delete, [](const auto){return true;});
-      }
-    }
-    offset.back() -= removed;
-
-    // Erase offset entries for the removed vertices.
-    i_vertex = 0;
-    offset.erase(std::remove_if(offset.begin(), offset.end(),
-                                [&](const auto){return i_vertex < size_vertex() ? delete_vertex(i_vertex++) : false;}),
-                 offset.end());
-
-    // Erase removed vertices from the adjacency lists, and then relabel.
-    i_vertex = 0;
-    vertex_adjacent_list.erase(std::remove_if(vertex_adjacent_list.begin(), vertex_adjacent_list.end(),
-                                              [&](const auto){return adjacency_delete[i_vertex++];}),
-                               vertex_adjacent_list.end());
-    std::transform(vertex_adjacent_list.begin(), vertex_adjacent_list.end(), vertex_adjacent_list.begin(),
-                   [&](const auto& i_old_vertex){return new_indexes[i_old_vertex];});
-
-    ASSERT(offset.back() == vertex_adjacent_list.size(),
-           "Total offsets no longer match vertex size while reducing to subgraph, " + std::to_string(offset.back())
-           + " vs. " + std::to_string(vertex_adjacent_list.size()) + ".");
-  };
+  void erase_if(_unary_predicate delete_vertex);
   
   /**
    * @brief Resizes the number of vertices in the graph.
@@ -379,7 +332,7 @@ protected:
    * @param[in] i_vertex The vertex index to the adjacency graph being sought.
    * @return pair of iterators, [beginning of the vertex adjacency graph, end of the vertex adjacency graph].
    */
-  [[nodiscard]] std::pair<std::vector<std::size_t>::iterator, std::vector<std::size_t>::iterator>
+  [[nodiscard]] inline std::pair<std::vector<std::size_t>::iterator, std::vector<std::size_t>::iterator>
   vertex_adjacency_iter(const std::size_t& i_vertex) {
     return std::make_pair(std::next(vertex_adjacent_list.begin(), static_cast<s_size_t>(offset[i_vertex])),
                           std::next(vertex_adjacent_list.begin(), static_cast<s_size_t>(offset[i_vertex + 1])));
@@ -393,13 +346,11 @@ protected:
    * @warning This operation breaks the graph if not used correctly, as the offsets are not updated. Further, if the
    *          offset vector is not upto date this operation produces undefined behaviour.
    */
-  void insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex) {
-    const auto& adjacency = vertex_adjacency_iter(vertex);
-    const auto& insert_iter = std::lower_bound(adjacency.first, adjacency.second, insert_vertex);
-    const auto& distance = std::distance(vertex_adjacent_list.begin(), insert_iter);
-    vertex_adjacent_list.insert(vertex_adjacent_list.begin() + distance, insert_vertex);
-  }
+  void insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex);
 };
+
+// Add template definitions
+#include "adjacency_graph.hpp"
 
 //----------------------------------------------------------------------------------------------------------------------
 // Operator Overloading
@@ -452,7 +403,7 @@ struct hash<Disa::Adjacency_Graph> {
     return hashValue;
   }
 };
-}
 
+}
 
 #endif //DISA_ADJACENCY_GRAPH_H

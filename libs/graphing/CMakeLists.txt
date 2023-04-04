@@ -28,6 +28,7 @@ set(SOURCES
         graph_utilities.h
         partition.h
         reorder.h
+        adjacency_graph.hpp
         adjacency_graph.cpp
         adjacency_subgraph.cpp
         partition.cpp
