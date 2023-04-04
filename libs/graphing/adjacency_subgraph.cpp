@@ -28,9 +28,14 @@
 namespace Disa {
 
 /**
- * @details
- * This constructor creates a subgraph object that stores adjacency lists for the vertices in the parent graph with
- * indices specified by the vector i_sub_graph_vertex.
+ * @details Constructs a new subgraph by partitioning the vertices of the given parent graph, using the indices
+ * provided in `i_partition_local_global`. The resulting subgraph includes only the vertices in the partition, and
+ * is indexed starting from 0, with no gaps in the indices. The parameter `extra_levels` indicates the number of levels
+ * to be added to the graph after the partition. The function also initializes auxiliary data structures used in the
+ * implementation of the partition, including `i_local_global` and `i_global_local`, and removes vertices that are not
+ * included in the subgraph. Finally, if extra levels are added, the function calls `update_levels` to update the
+ * levels of the subgraph. If DISA_DEBUG is defined, the function performs several assertions to ensure that the input
+ * data is valid.
  */
 Adjacency_Subgraph::Adjacency_Subgraph(Adjacency_Graph& parent_graph,
                                        const std::vector<std::size_t>& i_partition_local_global,
@@ -75,7 +80,12 @@ Adjacency_Subgraph::Adjacency_Subgraph(Adjacency_Graph& parent_graph,
 //--------------------------------------------------------------------------------------------------------------------
 
 /**
- * @details
+ * @details This function creates a new `Adjacency_Subgraph` instance that is a reordered version of the current
+ * instance. The new `Adjacency_Subgraph` contains the same vertices and edges as the original, but with their order
+ * permuted based on the given permutation vector. The `i_local_global` and `level_set_value` vectors of the new
+ * `Adjacency_Subgraph` instance are also updated to reflect the permutation. The old `i_local_global` and
+ * `level_set_value` vectors are swapped with the corresponding vectors of the new instance, which makes the old
+ * instance empty and the new instance contain all the data.
  */
 Adjacency_Subgraph Adjacency_Subgraph::reorder(const std::vector<std::size_t>& permutation) {
   Adjacency_Subgraph new_graph;
@@ -94,7 +104,13 @@ Adjacency_Subgraph Adjacency_Subgraph::reorder(const std::vector<std::size_t>& p
 }
 
 /**
- * @details
+ * @details This function updates the `level_set_value` vector of the `Adjacency_Subgraph` instance by adding or
+ * removing levels as necessary to achieve a maximum level of `max_level`. If the current maximum level is less than
+ * `max_level`, this function adds levels to the subgraph by updating `level_set_value` for all vertices that are
+ * connected to vertices in the subgraph at the previous maximum level. If the current maximum level is greater than
+ * `max_level`, this function removes levels from the subgraph by updating `level_set_value` for all vertices in the
+ * subgraph at levels greater than `max_level`. The `i_global_local` vector is an optional shared pointer to a vector
+ * that maps global vertex indices to local vertex indices in the subgraph.
  */
 void Adjacency_Subgraph::update_levels(const Adjacency_Graph& parent_graph, const std::size_t max_level,
                                        std::shared_ptr<std::vector<std::size_t> > i_global_local) {
@@ -110,8 +126,17 @@ void Adjacency_Subgraph::update_levels(const Adjacency_Graph& parent_graph, cons
   else remove_levels(parent_graph, max_level, i_global_local);
 }
 
+// ---------------------------------------------------------------------------------------------------------------------
+// Helper Functions
+// ---------------------------------------------------------------------------------------------------------------------
+
 /**
- * @details
+ * @details This function adds new levels to the `Adjacency_Subgraph` instance based on the given `max_level`.
+ * It uses a level traversal algorithm to traverse the parent graph from the vertices of the current instance
+ * that belong to the previous maximum level, and adds all newly visited vertices to the subgraph. The `i_global_local`
+ * vector is updated to reflect the new subgraph, and edge connectivity between the newly added vertices is inserted
+ * into the adjacency graph. This function assumes that the `hash_parent` value of the current subgraph matches the
+ * hash value of the given `parent_graph`.
  */
 void Adjacency_Subgraph::add_levels(const Adjacency_Graph& parent_graph, const std::size_t max_level,
                                     const std::size_t current_max,
@@ -158,7 +183,10 @@ void Adjacency_Subgraph::add_levels(const Adjacency_Graph& parent_graph, const s
 }
 
 /**
- *
+ * @details The graph's adjacency list is updated by removing any edges that are not within the subgraph after the
+ * levels have been updated. The local-global index mapping is also updated by removing any vertices that are no longer
+ * present in the subgraph. If a shared pointer to a global-local index mapping is provided, it is updated to reflect
+ * the changes in the local-global mapping caused by the removal of vertices from the subgraph.
  */
 void Adjacency_Subgraph::remove_levels(const Adjacency_Graph& parent_graph, const std::size_t max_level,
                                        std::shared_ptr<std::vector<std::size_t> > i_global_local) {
@@ -182,6 +210,42 @@ void Adjacency_Subgraph::remove_levels(const Adjacency_Graph& parent_graph, cons
     std::fill(i_global_local->begin(), i_global_local->end(), std::numeric_limits<std::size_t>::max());
     FOR(i_local, size_vertex()) (*i_global_local)[local_global(i_local)] = i_local;
   }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Operator Overloading
+// ---------------------------------------------------------------------------------------------------------------------
+// Stream Operators
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @details The adjacency list of the graph is written to the output stream as follows:
+ * For each vertex in the graph, its adjacent vertices are listed separated by commas. If a vertex has no adjacent
+ * vertices, it is represented by a period ('.'). After the adjacent vertices of each vertex are listed,
+ * the vertex's local index, its corresponding global index, and its level are written in the format
+ * "local_index -> global_index (level)".
+ *
+ * The output format looks like:
+ * 0: 1, 2
+ * 1: 0
+ * 2: 0, 1
+ * 0 -> 3 (0)
+ * 1 -> 1 (1)
+ * 2 -> 2 (1)
+ */
+std::ostream& operator<<(std::ostream& ostream, const Adjacency_Subgraph& graph) {
+
+  FOR(i_vertex, graph.size_vertex()) {
+    if(i_vertex != 0) ostream<<"\n";
+    FOR_EACH(adjacent_vertex, graph[i_vertex])
+      ostream<<adjacent_vertex<<(adjacent_vertex != graph[i_vertex].back() ? ", " : "");
+    if(graph[i_vertex].empty()) ostream<<".";
+  }
+
+  FOR(i_vertex, graph.size_vertex())
+    ostream<<"\n"<<i_vertex<<" -> "<<graph.local_global(i_vertex)<<" ("<<graph.vertex_level(i_vertex)<<")";
+
+  return ostream;
 }
 
 }

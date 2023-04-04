@@ -32,7 +32,9 @@ namespace Disa {
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @details
+ * @details Initializes an Adjacency_Graph object with the edges in the given initializer list. The constructor finds
+ * the vertex with the highest index to determine a suitable reserve for the graph in the provided edge list. Each edge
+ * is then inserted into the edge and any excess reserve memory removed.
  */
 Adjacency_Graph::Adjacency_Graph(std::initializer_list<Edge> edge_graph) {
   const auto iter = std::max_element(edge_graph.begin(), edge_graph.end(),
@@ -181,13 +183,63 @@ Adjacency_Graph Adjacency_Graph::reorder(const std::vector<std::size_t>& permuta
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @details
+ * @details This function inserts a new vertex into the adjacency list of the specified vertex in the graph. If the
+ * inserted vertex is already present in the adjacency list, this function does nothing. It uses a binary search to
+ * find the correct position in the adjacency list to insert the new vertex, and then inserts the new vertex into the
+ * list using the `std::vector::insert()` function.
  */
 void Adjacency_Graph::insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex) {
   const auto& adjacency = vertex_adjacency_iter(vertex);
   const auto& insert_iter = std::lower_bound(adjacency.first, adjacency.second, insert_vertex);
   const auto& distance = std::distance(vertex_adjacent_list.begin(), insert_iter);
   vertex_adjacent_list.insert(vertex_adjacent_list.begin() + distance, insert_vertex);
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// Operator Overloading
+//----------------------------------------------------------------------------------------------------------------------
+// Stream Operators
+//----------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @details This function overloads the `<<` operator to enable printing an adjacency graph to an output stream.
+ * It iterates over each vertex in the graph and prints its adjacent vertices, separated by commas. If a vertex has
+ * no adjacent vertices, a period is printed. Each vertex and its adjacent vertices are printed on a separate line,
+ * with no trailing newline character.
+ */
+
+std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph) {
+  FOR(i_vertex, graph.size_vertex()) {
+    if(i_vertex != 0) ostream<<"\n";
+    FOR_EACH(adjacent_vertex, graph[i_vertex])
+      ostream<<adjacent_vertex<<(adjacent_vertex != graph[i_vertex].back() ? ", " : "");
+    if(graph[i_vertex].empty()) ostream<<".";
+  }
+  return ostream;
+}
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// STL specialisation
+//----------------------------------------------------------------------------------------------------------------------
+
+namespace std {
+
+/**
+ * @details This is a specialization of the `std::hash` template for the `Disa::Adjacency_Graph` class. It calculates
+ * a hash value for the adjacency graph by XORing the hash values of its size, number of edges, and sizes of its first
+ * and last vertices. If the graph is empty, the hash value is set to zero. The function is marked `noexcept` because
+ * it doesn't throw any exceptions.
+ */
+std::size_t hash<Disa::Adjacency_Graph>::operator()(const Disa::Adjacency_Graph& graph) const noexcept {
+  if(graph.empty()) return 0; // All empty graphs are considered identical.
+  std::size_t hashValue = 0;
+  hashValue ^= std::hash<std::size_t> {}(graph.size_vertex());
+  hashValue ^= std::hash<std::size_t> {}(graph.size_edge());
+  hashValue ^= std::hash<std::size_t> {}(graph.front().size());
+  hashValue ^= std::hash<std::size_t> {}(graph.back().size());
+  return hashValue;
 }
 
 }

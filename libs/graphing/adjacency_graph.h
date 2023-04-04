@@ -364,15 +364,7 @@ protected:
  * @param[in] graph The graph to write.
  * @return Returns the ostream, with the graph writen out.
  */
-inline std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph) {
-  FOR(i_vertex, graph.size_vertex()) {
-    if(i_vertex != 0) ostream<<"\n";
-    FOR_EACH(adjacent_vertex, graph[i_vertex])
-      ostream<<adjacent_vertex<<(adjacent_vertex != graph[i_vertex].back() ? ", " : "");
-    if(graph[i_vertex].empty()) ostream<<".";
-  }
-  return ostream;
-}
+std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph);
 
 }
 
@@ -383,6 +375,7 @@ inline std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& gr
 namespace std {
 
 /**
+ * @struct hash<Disa::Adjacency_Graph>
  * @brief Template specialization to provides hash function for the Adjacency_Graph.
  */
 template<>
@@ -393,15 +386,7 @@ struct hash<Disa::Adjacency_Graph> {
    * @param graph The graph to be hashed.
    * @returns A std::size_t value representing the hash value of the input graph.
    */
-  std::size_t operator()(const Disa::Adjacency_Graph& graph) const noexcept {
-    if(graph.empty()) return 0; // All empty graphs are considered identical.
-    std::size_t hashValue = 0;
-    hashValue ^= std::hash<std::size_t> {}(graph.size_vertex());
-    hashValue ^= std::hash<std::size_t> {}(graph.size_edge());
-    hashValue ^= std::hash<std::size_t> {}(graph.front().size());
-    hashValue ^= std::hash<std::size_t> {}(graph.back().size());
-    return hashValue;
-  }
+  std::size_t operator()(const Disa::Adjacency_Graph& graph) const noexcept;
 };
 
 }

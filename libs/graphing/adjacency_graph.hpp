@@ -19,12 +19,15 @@
 //  Description: Contains the template definitions of the Adjacency_Graph Class.
 // ---------------------------------------------------------------------------------------------------------------------
 
-//--------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 // Modifiers
-//--------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @details
+ * @details This function loops over the data and determines the new offsets and which entries in vertex_adjacent_list
+ * need to be removed. It removes vertices which will be taken out, and records new indexes. All adjacency entries need
+ * to be removed if the vertex is to be removed. After the vertices are removed from the adjacency lists, the function
+ * relabels them.
  */
 template<class _unary_predicate>
 void Adjacency_Graph::erase_if(_unary_predicate delete_vertex) {
