@@ -37,15 +37,18 @@ namespace Disa {
  * @brief Represents a subgraph G' that is a subset of a parent adjacency graph G.
  *
  * @details
- * The Adjacency Subgraph class is used to represent a subgraph that is a subset of a parent graph. It functions
- * similarly to a standard graph, but also stores additional data that describes its relationship with the parent graph.
- * This includes a hash of the parent graph to ensure its integrity, global vertex indices of local vertices, and the
- * ability to add additional levels to the graph.
+ * The Adjacency Subgraph class is used to represent a subgraph that is a subset of some parent adjacency graph. It
+ * therefore functions similarly to a graph, but also stores additional data which describes the further relationships
+ * with the parent graph. This includes a hash of the parent graph to ensure its integrity of certain operations, a
+ * local-to-global map to map between the local subgraph and global graph vertex indices, and the level of each vertex
+ * in the sub graph.
  *
- * Levels in this context refer to 'level traversal', and form a halo around the primary partition. This allows the
- * subgraph to store overlapping (with other subgraphs) vertices. All vertices in the primary partition are have a level
- * value of 0, and then each successive level after this increases the level by 1. Note while level nodes are stored in
- * the data structure they are not considered local to the graph, only the primary partition is local.
+ * Levels in this context refers to 'level traversal', which forms a 'halo' like topological structure around the
+ * primary partition. This allows the subgraph to store overlapping (with other subgraphs) vertices. All vertices in the
+ * primary partition will have a level value of 0, and each successive level will increase by 1. While non-zero level
+ * nodes are stored stored in the data structure they are not considered 'local' to the subgraph, as this is reserved
+ * for the primary partition. There is however no constraints placed ordering of vertex indices and their level value,
+ * as such vertex 0 may have a non-zero level.
  *
  * @warning
  * 1. The relationship between the parent graph and the subgraph is logical, and not enforced. Any update to the
@@ -313,8 +316,12 @@ public:
    * @brief Changes the number of 'halo' levels/vertices around the primary sub-graph.
    * @param[in] parent_graph The parent graph of this subgraph.
    * @param[in] max_level The new number of levels the subgraph must have.
-   * @param[out] i_global_local A global to local mapping of all vertices in the parent graph.
-   *                            Will be populated if empty.
+   * @param[out] i_global_local A global to local mapping of all vertices in the parent graph. Defaults to nullptr.
+   *
+   * @note i_global_local may be a nullptr. In this case it will be populated for adding levels, as a working vector is
+   *       needed, but will be left as a nullptr when removing levels. Since no shrink-to-fit is called, multiple calls
+   *       using the same pointer/vector can increase performance by avoiding repeated 'large' memory allocations.
+   *       Finally, and std::numeric_limits<std::size_t>::max() value implies no mapping into this subgraph.
    */
   void update_levels(const Adjacency_Graph& parent_graph, std::size_t max_level,
                      std::shared_ptr<std::vector<std::size_t> > i_global_local = nullptr);
@@ -345,8 +352,8 @@ private:
    * @param[in] parent_graph The parent graph
    * @param[in] max_level The new number of levels the sub graph must contain.
    * @param[in] current_max The current number of levels the subgraph contains.
-   * @param[out] i_global_local A global to local mapping of all vertices in the parent graph.
-   *                            Will be populated if empty.
+   * @param[out] i_global_local The global to local mapping of all vertices in the parent graph. Will be populated if
+   *                            empty.
    */
   void add_levels(const Adjacency_Graph& parent_graph, std::size_t max_level, std::size_t current_max,
                   std::shared_ptr<std::vector<std::size_t> > i_global_local);
@@ -355,7 +362,8 @@ private:
    * @breif Removes levels from the subgraph.
    * @param[in] parent_graph The parent graph
    * @param[in] max_level The new number of levels in the subgraph.
-   * @param[out] i_global_local
+   * @param[out] i_global_local The global to local mapping of all vertices in the parent graph. Will only be populated
+   *                            if parsed as a non-nullptr empty.
    */
   void remove_levels(const Adjacency_Graph& parent_graph, std::size_t max_level,
                      std::shared_ptr<std::vector<std::size_t> > i_global_local);
