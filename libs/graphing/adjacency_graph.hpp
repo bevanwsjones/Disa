@@ -20,14 +20,16 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------------------------------------------------
+// Adjacency_Graph
+// ---------------------------------------------------------------------------------------------------------------------
 // Modifiers
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @details This function loops over the data and determines the new offsets and which entries in vertex_adjacent_list
- * need to be removed. It removes vertices which will be taken out, and records new indexes. All adjacency entries need
- * to be removed if the vertex is to be removed. After the vertices are removed from the adjacency lists, the function
- * relabels them.
+ * @details Loops over the data and determines the new offsets and which entries in vertex adjacent list need to be
+ * removed, updating the offsets and recording the entries to be deleted. After which both the offset vector and the
+ * vertex adjacency list are 'looped' over and all entries flagged for removal are erased. Finally all vertices in the
+ * vertex adjacency list are relabeled.
  */
 template<class _unary_predicate>
 void Adjacency_Graph::erase_if(_unary_predicate delete_vertex) {

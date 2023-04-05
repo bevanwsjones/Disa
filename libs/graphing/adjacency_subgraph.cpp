@@ -27,6 +27,10 @@
 
 namespace Disa {
 
+// ---------------------------------------------------------------------------------------------------------------------
+// Adjacency_Subgraph
+// ---------------------------------------------------------------------------------------------------------------------
+
 /**
  * @details Constructs a new subgraph using the given vertex partitioning of the parent graph. The resulting subgraph
  * will form the primary partition with these vertices. This presently is achieved by copying the parent graph to the
@@ -206,16 +210,19 @@ void Adjacency_Subgraph::remove_levels(const Adjacency_Graph& parent_graph, cons
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @details Outputs the subgraph data to 'screen', each vertex is printed, followed by its adjacent vertices. Following
- * this the local-to-global map is printed with the vertex level value placed in parenthesis.
+ * @details Outputs the subgraph data to 'screen', each vertex is printed, followed by its adjacent vertices. If the
+ * vertex adjacency is empty then a period is placed in the row. Following this the local-to-global map is printed with
+ * the vertex level value placed in parenthesis.
  *
  * The output format looks like:
- * 0: 1, 2
- * 1: 0
- * 2: 0, 1
- * 0 -> 3 (0)
- * 1 -> 1 (1)
- * 2 -> 2 (1)
+ * 1, 3
+ * 0
+ * .
+ * 0, 1
+ * 0 -> 165 (0)
+ * 1 -> 154 (0)
+ * 2 -> 161 (0)
+ * 2 -> 150 (1)
  */
 std::ostream& operator<<(std::ostream& ostream, const Adjacency_Subgraph& graph) {
 

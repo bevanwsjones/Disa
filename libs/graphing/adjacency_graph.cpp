@@ -26,7 +26,7 @@
 namespace Disa {
 
 // ---------------------------------------------------------------------------------------------------------------------
-// AdjacencyGraph
+// Adjacency_Graph
 // ---------------------------------------------------------------------------------------------------------------------
 // Public Constructors and Destructors
 // ---------------------------------------------------------------------------------------------------------------------
@@ -184,9 +184,7 @@ Adjacency_Graph Adjacency_Graph::reorder(const std::vector<std::size_t>& permuta
 
 /**
  * @details This function inserts a new vertex into the adjacency list of the specified vertex in the graph. If the
- * inserted vertex is already present in the adjacency list, this function does nothing. It uses a binary search to
- * find the correct position in the adjacency list to insert the new vertex, and then inserts the new vertex into the
- * list using the `std::vector::insert()` function.
+ * inserted vertex is already present in the adjacency list, this function does nothing.
  */
 void Adjacency_Graph::insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex) {
   const auto& adjacency = vertex_adjacency_iter(vertex);
@@ -202,12 +200,15 @@ void Adjacency_Graph::insert_vertex_adjacent_list(std::size_t vertex, std::size_
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- * @details This function overloads the `<<` operator to enable printing an adjacency graph to an output stream.
- * It iterates over each vertex in the graph and prints its adjacent vertices, separated by commas. If a vertex has
- * no adjacent vertices, a period is printed. Each vertex and its adjacent vertices are printed on a separate line,
- * with no trailing newline character.
+ * @details Outputs the subgraph data to 'screen', each vertex is printed, followed by its adjacent vertices. If the
+ * vertex adjacency is empty then a period is placed in the row.
+ *
+ * The output format looks like:
+ * 1, 3
+ * 0
+ * .
+ * 0, 1
  */
-
 std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph) {
   FOR(i_vertex, graph.size_vertex()) {
     if(i_vertex != 0) ostream<<"\n";
@@ -227,10 +228,9 @@ std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph) {
 namespace std {
 
 /**
- * @details This is a specialization of the `std::hash` template for the `Disa::Adjacency_Graph` class. It calculates
- * a hash value for the adjacency graph by XORing the hash values of its size, number of edges, and sizes of its first
- * and last vertices. If the graph is empty, the hash value is set to zero. The function is marked `noexcept` because
- * it doesn't throw any exceptions.
+ * @details Specialization of the std::hash template for the Disa::Adjacency_Graph class. It calculates a hash value for
+ * the adjacency graph by XORing the hash values of its size, number of edges, and sizes of its first and last vertices.
+ * If the graph is empty, the hash value is set to zero.
  */
 std::size_t hash<Disa::Adjacency_Graph>::operator()(const Disa::Adjacency_Graph& graph) const noexcept {
   if(graph.empty()) return 0; // All empty graphs are considered identical.

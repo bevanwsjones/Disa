@@ -32,6 +32,10 @@
 
 namespace Disa {
 
+// ---------------------------------------------------------------------------------------------------------------------
+// Adjacency_Subgraph
+// ---------------------------------------------------------------------------------------------------------------------
+
 /**
  * @class AdjacencySubgraph
  * @brief Represents a subgraph G' that is a subset of a parent adjacency graph G.
@@ -66,6 +70,10 @@ namespace Disa {
 class Adjacency_Subgraph {
 
 public:
+
+  // -------------------------------------------------------------------------------------------------------------------
+  // Public Constructors and Destructors
+  // -------------------------------------------------------------------------------------------------------------------
 
   /**
    * @brief Default constructor.
@@ -380,6 +388,10 @@ private:
  * @param[in] ostream The out stream to write to.
  * @param[in] graph The graph to write.
  * @return Returns the ostream, with the graph writen out.
+ *
+ * @note Since there is no complete way to fully check if two graphs are identical, other than a brute force approach,
+ * this approach is 'lazy'. It picks out a few properties of the graph and combines them, in the hope that major
+ * topological changes will be caught. However it is possible to 'flip' and edge and for the hash to remain unchanged.
  */
 std::ostream& operator<<(std::ostream& ostream, const Adjacency_Subgraph& graph);
 
