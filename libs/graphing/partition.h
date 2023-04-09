@@ -22,48 +22,32 @@
 #ifndef DISA_PARTITION_H
 #define DISA_PARTITION_H
 
-#include "adjacency_graph.h"
-
-#include <numeric>
-#include <vector>
-#include <queue>
-
 namespace Disa {
+
+class Adjacency_Graph;
+class Adjacency_Subgraph;
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Level-Set Partitioning
 // ---------------------------------------------------------------------------------------------------------------------
 
-void multinode_level_set_expansion();
+/**
+ * todo
+ * @param graph
+ * @param number_partitions
+ * @param iterations
+ * @return
+ */
+std::vector<Adjacency_Subgraph> multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t number_partitions,
+                                                              std::size_t iterations);
 
 /**
- * todo: not more used as a cheap start for MLSE
+ * @brief Recursively bisects a given graph into a specified number of subgraphs.
+ * @param[in] graph The original graph to be bisected.
+ * @param[in] number_partitions The number of subgraphs to be generated.
+ * @return A vector of subgraphs representing the bisected graph.
  */
-void recursive_graph_bisection(std::size_t number_domains){
-  ASSERT_DEBUG(number_domains > 0, "Cannot split a graph into zero domains.");
-//
-//  int pseudo_peripheral = pseudo_peripheral_node(graph);
-//  std::vector<int> levels = level_traversal(graph, pseudo_peripheral);
-//
-//  std::vector<std::size_t> i_sub_graph;
-//
-//  int num_nodes = graph.num_nodes;
-//  int mid = ceil(num_nodes / 2.0);
-//
-//  std::vector<int> left_partition, right_partition;
-//  for (int i = 0; i < num_nodes; i++) {
-//    if (levels[i] < mid) {
-//      left_partition.push_back(i);
-//    } else {
-//      right_partition.push_back(i);
-//    }
-//  }
-//
-//  while(number_domains != 0){
-//
-//    --number_domains;
-//  }
-};
+std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph& graph, std::size_t number_partitions);
 
 }
 
