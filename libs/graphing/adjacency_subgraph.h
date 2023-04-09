@@ -95,7 +95,7 @@ public:
    *
    * @note There are no guarantees placed on the resulting local partition ordering.
    */
-  Adjacency_Subgraph(Adjacency_Graph& parent_graph, const std::vector<std::size_t>& i_sub_graph_vertex,
+  Adjacency_Subgraph(const Adjacency_Graph& parent_graph, const std::vector<std::size_t>& i_sub_graph_vertex,
                      std::size_t extra_levels = 0);
 
   // -------------------------------------------------------------------------------------------------------------------

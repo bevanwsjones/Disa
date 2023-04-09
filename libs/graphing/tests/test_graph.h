@@ -79,6 +79,31 @@ Disa::Adjacency_Graph  create_graph_structured(const std::size_t number_vertices
 }
 
 /**
+ * @brief
+ * @param number_vertices
+ * @return
+ */
+Disa::Adjacency_Graph create_graph_line(const std::size_t number_vertices) {
+  Disa::Adjacency_Graph line;
+    for(std::size_t i_x = 0; i_x < number_vertices - 1; ++i_x)
+      line.insert({i_x, i_x + 1});
+  return line;
+}
+
+/**
+ *
+ * @param number_vertices
+ * @return
+ */
+Disa::Adjacency_Graph create_graph_unstructured(const std::size_t number_vertices) {
+  ASSERT(false, "not implemented");
+  Disa::Adjacency_Graph line;
+  for(std::size_t i_x = 0; i_x < number_vertices - 1; ++i_x)
+    line.insert({i_x, i_x + 1});
+  return line;
+}
+
+/**
  *
  * @param number_vertices
  * @return

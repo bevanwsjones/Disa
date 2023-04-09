@@ -37,7 +37,7 @@ namespace Disa {
  * internal graph representation, and forming the global-local mappings and deleting vertices not in the subgraph.
  * Finally, should extra levels be requested they are added to the subgraph.
  */
-Adjacency_Subgraph::Adjacency_Subgraph(Adjacency_Graph& parent_graph,
+Adjacency_Subgraph::Adjacency_Subgraph(const Adjacency_Graph& parent_graph,
                                        const std::vector<std::size_t>& i_partition_local_global,
                                        const std::size_t extra_levels) {
 #ifdef DISA_DEBUG
