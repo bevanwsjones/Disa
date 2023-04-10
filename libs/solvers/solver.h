@@ -23,6 +23,7 @@
 #define DISA_SOLVERS_H
 
 #include "scalar.h"
+#include "solver_utilities.h"
 
 namespace Disa{
 
@@ -40,15 +41,6 @@ struct SolverConfig {
 };
 
 /**
- * @struct ConvergenceData
- * @brief
- */
-struct ConvergenceData {
-  std::size_t iteration{0}; //!<
-  Scalar residual{scalar_max};       //!<
-};
-
-/**
  * @brief
  */
 class Solver {
@@ -56,7 +48,7 @@ class Solver {
 public:
   explicit Solver(const Matrix_Sparse& a_matrix, const SolverConfig solver_config) : matrix(a_matrix), config(solver_config) {} ;
   virtual void setup() = 0;
-  virtual ConvergenceData solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) = 0;
+  virtual Convergence_Data solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) = 0;
 
 protected:
   const Matrix_Sparse& matrix;

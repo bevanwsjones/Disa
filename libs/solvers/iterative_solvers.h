@@ -53,7 +53,7 @@ public:
    * @param b_vector
    * @return
    */
-  ConvergenceData solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) override;
+  Convergence_Data solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) override;
 
 private:
   Vector_Dense<0> x_working;

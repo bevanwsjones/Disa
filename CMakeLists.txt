@@ -89,4 +89,4 @@ if(ENABLE_TEST)
   include(CTest)
   include(GoogleTest)
 
-endif ()
+endif()

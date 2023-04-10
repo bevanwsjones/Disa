@@ -15,47 +15,63 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: iterative_solvers.cpp
-// Description: Contains the class definitions for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
+// File Name: solver_utilities.h
+// Description: todo
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "iterative_solvers.h"
+#ifndef DISA_SOLVER_UTILITIES_H
+#define DISA_SOLVER_UTILITIES_H
 
+#include "scalar.h"
 #include "matrix_sparse.h"
+#include "vector_dense.h"
 #include "vector_operators.h"
+
+#include <vector>
 
 namespace Disa {
 
-/**
- * @details
- */
-void Iterative_Solver::setup() {
-  x_working.resize(matrix.size_row());
+struct Convergence_Data {
+  std::size_t iteration{0};
+
+  Scalar b_l2_norm{0};
+
+  Scalar residual{0};
+  Scalar residual_0{0};
+  Scalar residual_relative{0};
+
+  Scalar residual_max{0};
+  Scalar residual_max_0{0};
+  Scalar residual_max_relative{0};
+};
+
+template<class _matrix, class _vector>
+std::pair<Scalar, Scalar> residual(const _matrix& A, const _vector& x, const _vector& b) {
+  return {lp_norm<2>(A*x - b), lp_norm<0>(A*x - b)}; // <-- todo: do properly
 }
 
-/**
- * @details basic jacobi
- */
-Convergence_Data Iterative_Solver::solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) {
-
-  Convergence_Data data;
-  ASSERT(false, "update for convergence data.");
-
-  while(data.iteration < config.maximum_iterations && data.residual > config.convergence_tolerance) {
-
-    FOR(i_row, matrix.size_row()) {
-      Scalar offs_row_dot = 0;
-      FOR_ITER(column_iter, matrix[i_row]){
-        if(column_iter.i_column() != i_row) offs_row_dot += *column_iter*x_vector[column_iter.i_column()];
-      }
-      x_working[i_row] = (b_vector[i_row] - offs_row_dot)/matrix[i_row][i_row];
-    }
-    data.iteration++;
-    data.residual = lp_norm<2>(matrix*x_vector - b_vector)/lp_norm<2>(b_vector);
-    std::swap(x_vector, x_working);
+template<class _matrix, class _vector>
+void update_convergence(const _matrix& A, const _vector& x, const _vector& b, Convergence_Data& data) {
+  std::tie(data.residual, data.residual_max) = residual(A,b, x);
+  if(!data.iteration) {
+    data.b_l2_norm = lp_norm<2>(b);
+    data.residual_0 = data.residual/data.b_l2_norm;
+    data.residual_max_0 = data.residual_max/data.b_l2_norm;
   }
 
-  return data;
+  data.residual /= data.b_l2_norm;
+  data.residual_max /= data.b_l2_norm;
+
+  data.residual_relative = data.residual/data.residual_0;
+  data.residual_max_relative = data.residual_max/data.residual_max_0;
+  ++data.iteration;
 }
 
+
+
+
+
 }
+
+
+#endif //DISA_SOLVER_UTILITIES_H
