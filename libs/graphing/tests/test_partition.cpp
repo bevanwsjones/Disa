@@ -22,8 +22,8 @@
 
 #include "adjacency_graph.h"
 #include "adjacency_subgraph.h"
+#include "generator.h"
 #include "partition.h"
-#include "test_graph.h"
 
 using namespace Disa;
 

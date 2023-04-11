@@ -21,8 +21,8 @@
 
 #include "gtest/gtest.h"
 
+#include "generator.h"
 #include "graph_utilities.h"
-#include "test_graph.h"
 
 using namespace Disa;
 

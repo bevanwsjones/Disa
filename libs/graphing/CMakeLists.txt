@@ -25,14 +25,16 @@ set(SOURCES
         adjacency_graph.h
         adjacency_subgraph.h
         edge.h
+        generator.h
         graph_utilities.h
         partition.h
         reorder.h
         adjacency_graph.hpp
         adjacency_graph.cpp
         adjacency_subgraph.cpp
+        generator.cpp
         partition.cpp
-        reorder.cpp)
+        reorder.cpp generator.cpp)
 
 set(LIBRARIES
         core

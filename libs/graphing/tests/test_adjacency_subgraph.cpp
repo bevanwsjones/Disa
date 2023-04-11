@@ -21,7 +21,7 @@
 
 #include "gtest/gtest.h"
 #include "adjacency_subgraph.h"
-#include "test_graph.h"
+#include "generator.h"
 
 using namespace Disa;
 
