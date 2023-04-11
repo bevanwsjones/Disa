@@ -32,119 +32,107 @@
 namespace Disa {
 
 /**
- *
- *
+ * @details This function performs multinode level set expansion on a set of input subgraphs to partition a graph into a
+ * set of disjoint subgraphs. The method works by first computing the global eccentricity of the input graph. A
+ * nucleation seed site is selected within each input subgraph and the level set expansion is performed from these seed
+ * vertices. The process is repeated for the given number of iterations to obtain the final partition.
  */
-std::vector<Adjacency_Subgraph> multinode_level_set_expansion(const Adjacency_Graph& graph,
-                                                              std::size_t number_partitions,
-                                                              std::size_t iterations){
+void multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t max_iter,
+                                   std::vector<Adjacency_Subgraph>& subgraph_list) {
+  ASSERT(!subgraph_list.empty(), "Parsed Subgraph list is empty.");
 
-  std::vector<Adjacency_Subgraph> subgraph_list = recursive_graph_bisection(graph, number_partitions);
-
-  std::vector<std::size_t> subgraph_seed(number_partitions);
+  // Allocate memory.
   std::vector<std::size_t> vertex_colors;
+  std::vector<std::size_t> seed_previous(subgraph_list.size());
+  std::vector<std::size_t> seed(subgraph_list.size());
+  std::vector<std::vector<std::size_t> > vertex_subgraph(subgraph_list.size());
+
+  // compute global eccentricity.
   std::vector<std::vector<std::size_t> > vertex_eccentricity;
   eccentricity_graph(graph, vertex_eccentricity);
-  std::vector<std::vector<std::size_t> > vertex_subgraph(number_partitions);
 
-  FOR_EACH(row, vertex_eccentricity)
-  {
-    FOR_EACH(col, row) {std::cout<<col<<", ";}
-    std::cout<<"\n";
-  }
-
-  FOR(iter, iterations){
-    std::cout<<"\nIter: "<<iter;
-    std::cout<<"\nSubgraph sizes: ";
-    FOR_EACH(sg, subgraph_list) std::cout<<sg.size_vertex()<<", ";
-
+  FOR(iter, max_iter) {
     // find 'nucleation' seed sites.
     FOR(i_subgraph, subgraph_list.size()) {
-
-      // Using the graph eccentricity we search in each graph for 'central vertices.
-//    FOR_EACH(col, row) {std::cout<<col<<", ";}
+      // Using the graph eccentricity we search in each graph for central vertices.
       const auto& subgraph = subgraph_list[i_subgraph];
-      std::size_t minimum_excentricity = std::numeric_limits<std::size_t>::max();
-      subgraph_seed[i_subgraph] = std::numeric_limits<std::size_t>::max();
-      FOR(i_vertex_0, subgraph_list[i_subgraph].size_vertex()){
+      seed[i_subgraph] = std::numeric_limits<std::size_t>::max();
+      std::size_t min_eccentricity = std::numeric_limits<std::size_t>::max();
+      FOR(i_vertex_0, subgraph.size_vertex()){
         std::size_t i_max_eccentricity = 0;
-        FOR(i_vertex_1, subgraph_list[i_subgraph].size_vertex()) {
-          const bool is_verted_lower = subgraph.local_global(i_vertex_0) < subgraph.local_global(i_vertex_1);
-          const std::size_t i_global_lower = is_verted_lower ? subgraph.local_global(i_vertex_0) : subgraph.local_global(i_vertex_1);
-          const std::size_t i_global_upper = is_verted_lower ? subgraph.local_global(i_vertex_1) : subgraph.local_global(i_vertex_0);
+
+        FOR(i_vertex_1, subgraph.size_vertex()) {
+          if(i_vertex_0 == i_vertex_1) continue;
+          const bool is_0_low = subgraph.local_global(i_vertex_0) < subgraph.local_global(i_vertex_1);
+          const std::size_t& i_global_lower = is_0_low ? subgraph.local_global(i_vertex_0) : subgraph.local_global(i_vertex_1);
+          const std::size_t& i_global_upper = is_0_low ? subgraph.local_global(i_vertex_1) : subgraph.local_global(i_vertex_0);
           i_max_eccentricity = std::max(vertex_eccentricity[i_global_upper][i_global_lower], i_max_eccentricity);
         }
 
-        if(minimum_excentricity > i_max_eccentricity){
-          minimum_excentricity = i_max_eccentricity;
-          subgraph_seed[i_subgraph] = subgraph.local_global(i_vertex_0);
+        if(min_eccentricity > i_max_eccentricity) {
+          min_eccentricity = i_max_eccentricity;
+          seed[i_subgraph] = subgraph.local_global(i_vertex_0);
         }
       }
-
     }
 
-    std::cout<<"\nsubgraph seeds: ";
-    FOR_EACH(seed, subgraph_seed) std::cout<<seed<<", ";
+    // Check if the seeds have moved, if not return, we have 'converged'.
+    if(std::ranges::equal(seed_previous, seed)) return;
+    else seed_previous = seed;
 
-    // perform level expention from the 'seeding vertexes'
-    level_expansion(graph, subgraph_seed, vertex_colors);
+    // perform level expansion from the 'seeding vertexes'
+    level_expansion(graph, seed, vertex_colors);
 
     FOR_EACH_REF(vertex_sub, vertex_subgraph) vertex_sub.clear();
     FOR(i_vertex, vertex_colors.size()) vertex_subgraph[vertex_colors[i_vertex]].push_back(i_vertex);
 
-
-    FOR(i_subgraph, subgraph_list.size()){
+    FOR(i_subgraph, subgraph_list.size()) {
       subgraph_list[i_subgraph] = Adjacency_Subgraph(graph, vertex_subgraph[i_subgraph]);
     }
   }
-  return subgraph_list;
 };
 
 /**
- * This function recursively bisects the input graph into a specified number of partitions. The input graph must be an
- * instance of the Adjacency_Graph class. The function returns a vector of Adjacency_Subgraph objects, each representing
- * one of the partitions of the input graph. The algorithm works by iteratively finding the largest partition in the
- * current set of subgraphs, and bisecting it into two partitions. This process continues until the desired number of
- * partitions is reached. The bisection is performed by finding the vertex with the highest eccentricity (distance to
- * the vertex furthest away from it), and splitting the graph into two partitions using the vertices at a distance less
- * than or equal to the midpoint of the eccentricity range as one partition, and the rest as the other partition. The
- * levels vector passed as an argument is hijacked and used to store the vertices of the partition. The left_partition
- * and right_partition vectors store the indices of the vertices that belong to the two new partitions. Note that the
- * function asserts that the number of partitions is greater than zero, and that the input graph must have at least one
- * vertex.
+ * @details This function performs a recursive bisection of a graph into a specified number of partitions. It uses a
+ * level traversal to determine the level at which to split the graph and then splits the graph, forming new subgraphs.
+ * It continues to perform the bisection until the desired number of partitions is achieved. The function returns a
+ * vector of Adjacency_Subgraph objects representing the partitions.
  */
-std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph& graph, std::size_t number_partitions){
-  ASSERT_DEBUG(number_partitions > 0, "Cannot split a graph into zero domains.");
+std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph& graph, std::size_t number_partitions) {
+  ASSERT(number_partitions > 0, "Cannot split a graph into zero domains.");
 
-  std::vector<std::size_t> levels(graph.size_vertex()); // Tricky: hi-jacking this vector of sub-graph initialisation.
+  // Memory allocation.
+  std::vector<std::size_t> left_partition;
+  std::vector<std::size_t> right_partition;
+  std::vector<std::size_t> levels(graph.size_vertex());
+
+  // Tricky: hi-jacking this vector of sub-graph initialisation.
   std::iota(levels.begin(), levels.end(), 0);
   std::vector<Adjacency_Subgraph> subgraph(1, Adjacency_Subgraph(graph, levels));
 
-  std::vector<std::size_t> i_sub_graph;
-
   --number_partitions; // n - 1 partitions
-  while(number_partitions != 0){
-
-    // find domain to split
+  while(number_partitions != 0) {
+    // Determine domain to split
     const auto& split_graph = std::max_element(subgraph.begin(), subgraph.end(),
                                                [](const auto& sg0, const auto& sg1)
                                                {return sg0.size_vertex() < sg1.size_vertex();});
 
+    // Perform a level traversal and determine level to split at.
     levels = level_traversal(*split_graph, pseudo_peripheral_vertex(*split_graph));
-    const std::size_t& max_level = *std::max_element(levels.begin(), levels.end());
-    const std::size_t middle_level = std::ceil(max_level/2);
+    const std::size_t middle_level = std::ceil(*std::max_element(levels.begin(), levels.end())/2);
 
-    std::vector<std::size_t> left_partition, right_partition;
-    FOR(i_vertex, levels.size()) { // and here ------------------
+    // Split the graph, and form new subgraphs.
+    FOR(i_vertex, levels.size())
       if(levels[i_vertex] <= middle_level) left_partition.push_back(split_graph->local_global(i_vertex));
       else right_partition.push_back(split_graph->local_global(i_vertex));
-    }
-
     *split_graph = Adjacency_Subgraph(graph, left_partition, 0);
     subgraph.emplace_back(graph, right_partition, 0);
+
+    // Set for next split.
+    left_partition.clear();
+    right_partition.clear();
     --number_partitions;
   }
-
   return subgraph;
 };
 

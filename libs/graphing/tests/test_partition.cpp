@@ -29,23 +29,43 @@ using namespace Disa;
 
 // Unit test for LevelTraversal using Google Test
 TEST(test_partition, multinode_level_set_expansion) {
-  std::size_t number_vertices = 40;
+  std::size_t number_vertices = 10;
   Adjacency_Graph graph = create_graph_line(number_vertices);
+  std::vector<Adjacency_Subgraph> subgraph;
 
-//  std::cout<<graph;
-  auto sub_graphs = multinode_level_set_expansion(graph, 4, 4);
+  subgraph.push_back(Adjacency_Subgraph(graph, {0, 1, 2, 3, 4, 5, 6}));
+  subgraph.push_back(Adjacency_Subgraph(graph, {7, 8, 9}));
+  std::cout<<graph;
+  multinode_level_set_expansion(graph, 4, subgraph);
 
-  FOR_EACH(sgraph, sub_graphs) {
-    std::cout<<"\n------------------";
+  FOR_EACH(sgraph, subgraph) {
+    std::cout<<"\n------------------\n";
     std::cout<<sgraph.size_vertex();
   }
 
   std::cout<<"\n";
-  FOR_EACH(sgraph, sub_graphs) {
+  FOR_EACH(sgraph, subgraph) {
     std::cout<<" || ";
     FOR(i_vertex, sgraph.size_vertex()) std::cout<<sgraph.local_global(i_vertex)<<", ";
   }
-  //  auto sub_graphs = recursive_graph_bisection(create_graph_saad(), 3);
+
+  subgraph.clear();
+  subgraph.push_back(Adjacency_Subgraph(graph, {0, 1, 2}));
+  subgraph.push_back(Adjacency_Subgraph(graph, {3, 4, 5, 6, 7, 8, 9}));
+  //  std::cout<<graph;
+   multinode_level_set_expansion(graph, 4, subgraph);
+  std::cout<<"\n------------------\n";
+  FOR_EACH(sgraph, subgraph) {
+    std::cout<<"\n------------------\n";
+    std::cout<<sgraph.size_vertex();
+  }
+
+  std::cout<<"\n";
+  FOR_EACH(sgraph, subgraph) {
+    std::cout<<" || ";
+    FOR(i_vertex, sgraph.size_vertex()) std::cout<<sgraph.local_global(i_vertex)<<", ";
+  }
+
 }
 
 TEST(LevelTraversalTest, SimpleTest) {
