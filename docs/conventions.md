@@ -32,13 +32,21 @@ _- Template definitions must be placed inside a `.hpp` file, unless inlined._
 
 In order to keep the project ordered and consistent some conventions regarding naming have been adopted.
 
-| #   | Rule                      | Example                         | Rational                                                                             | 
-|-----|---------------------------|---------------------------------|--------------------------------------------------------------------------------------|
-| 1.  | General-to-specific names | Matrix_Sparse, Matrix_Dense     | Helps keep related concepts close together when  alphabetically sorted.              |
-| 2.  | Avoid short hand names    | `row` rather than `r`           | Helps readability.                                                                   |
-| 3.  | Do not used plural names  | `vector` rather than `vectors`  | Can create bugs when similar objects are only have an 's' different in there names.  |
-| 4.  | Prefix templates with `_` | `template<std::size_t _size>`   | While his is a slight deviation of CG-NL.5, it  allows name reuse for class members. |
-| 5.  | Prefix indexes with `i_`  | `i_row`                         | Helps readability.                                                                   |
+| #   | Rule                       | Example                          | Rational                                                                             | 
+|-----|----------------------------|----------------------------------|--------------------------------------------------------------------------------------|
+| 1.  | General-to-specific names  | Matrix_Sparse, Matrix_Dense      | Helps keep related concepts close together when  alphabetically sorted.              |
+| 2.  | Avoid short hand names*    | `row` rather than `r`            | Helps readability.                                                                   |
+| 3.  | Do not used plural names   | `vector` rather than `vectors`   | Can create bugs when similar objects are only have an 's' different in there names.  |
+| 4.  | Prefix templates with `_`  | `template<std::size_t _size>`    | While his is a slight deviation of CG-NL.5, it  allows name reuse for class members. |
+| 5.  | Prefix indexes with `i_`   | `i_row`                          | Helps readability.                                                                   |
+
+\* subject to know/accepted short hands below:
+
+| Abbreviation | Expanded  |
+|--------------|-----------| 
+| iter         | iteration |
+| min          | minimum   |
+| max          | maximum   |
 
 ## Documentation and Commenting
 
