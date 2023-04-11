@@ -27,23 +27,23 @@
 
 #include <limits>
 
-namespace Disa{
+namespace Disa {
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Aliasing and Definitions
 // ---------------------------------------------------------------------------------------------------------------------
 
 using Scalar = double;
-constexpr const static Scalar& scalar_max_digits10 = std::numeric_limits<Scalar>::max_digits10;   //!< Alias for scalar max_digits10
+inline constexpr Scalar scalar_max_digits10 = std::numeric_limits<Scalar>::max_digits10;   //!< Alias for scalar max_digits10
 
-constexpr const static Scalar& scalar_epsilon = std::numeric_limits<Scalar>::epsilon();     //!< Alias for scalar epsilon
-constexpr const static Scalar& scalar_infinity = std::numeric_limits<Scalar>::infinity();   //!< Alias for scalar infinity
-constexpr const static Scalar& scalar_lowest = std::numeric_limits<Scalar>::lowest();       //!< Alias for scalar lowest
-constexpr const static Scalar& scalar_max = std::numeric_limits<Scalar>::max();             //!< Alias for scalar max
-constexpr const static Scalar& scalar_min = std::numeric_limits<Scalar>::min();             //!< Alias for scalar min
+inline constexpr Scalar scalar_epsilon = std::numeric_limits<Scalar>::epsilon();     //!< Alias for scalar epsilon
+inline constexpr Scalar scalar_infinity = std::numeric_limits<Scalar>::infinity();   //!< Alias for scalar infinity
+inline constexpr Scalar scalar_lowest = std::numeric_limits<Scalar>::lowest();       //!< Alias for scalar lowest
+inline constexpr Scalar scalar_max = std::numeric_limits<Scalar>::max();             //!< Alias for scalar max
+inline constexpr Scalar scalar_min = std::numeric_limits<Scalar>::min();             //!< Alias for scalar min
 
-constexpr const static Scalar default_absolute = static_cast<Scalar>(64)*scalar_epsilon;       //!< Global for default absolute equality check, 'reasonably over 2 orders of epsilon.
-constexpr const static Scalar default_relative = static_cast<Scalar>(65536)*scalar_epsilon;    //!< Global for default relative equality check, 'reasonably over 2 orders of epsilon.
+inline constexpr Scalar default_absolute = static_cast<Scalar>(64)*scalar_epsilon;       //!< Global for default absolute equality check, 'reasonably over 2 orders of epsilon.
+inline constexpr Scalar default_relative = static_cast<Scalar>(65536)*scalar_epsilon;    //!< Global for default relative equality check, 'reasonably over 2 orders of epsilon.
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Equality Checks
@@ -51,10 +51,10 @@ constexpr const static Scalar default_relative = static_cast<Scalar>(65536)*scal
 
 /**
  * @brief Checks if two scalars are 'almost' equal to each other, using tolerancing. I.e. definition of an operator=~.
- * @param scalar_0 The first scalar value, s_0, to compare.
- * @param scalar_1 The second scalar value, s_1, to compare.
- * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
- * @param tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars will be considered equal.
+ * @param[in] scalar_0 The first scalar value, s_0, to compare.
+ * @param[in] scalar_1 The second scalar value, s_1, to compare.
+ * @param[in] tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars are considered equal.
+ * @param[in] tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars are considered equal.
  * @return True if the scalars are nearly equal to each other, s_0 =~ s_1.
  *
  * @details A number of floating point equality check cases are handled by the implementation used here, most
@@ -88,10 +88,10 @@ constexpr const static Scalar default_relative = static_cast<Scalar>(65536)*scal
 
 /**
  * @brief Checks if a first scalar is greater than or nearly equal to a second, could be though of as operator>=~.
- * @param scalar_0 The first scalar value, s_0, to compare.
- * @param scalar_1 The second scalar value, s_1, to compare.
- * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
- * @param tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars will be considered equal.
+ * @param[in] scalar_0 The first scalar value, s_0, to compare.
+ * @param[in] scalar_1 The second scalar value, s_1, to compare.
+ * @param[in] tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars are considered equal.
+ * @param[in] tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars are considered equal.
  * @return True if the s_0 > s_1 or s_0 ~= s_1, i.e. s_0 >=~ s_1.
  */
 [[nodiscard]] constexpr bool is_nearly_greater_equal(const Scalar& scalar_0, const Scalar& scalar_1,
@@ -102,10 +102,10 @@ constexpr const static Scalar default_relative = static_cast<Scalar>(65536)*scal
 
 /**
  * @brief Checks if a first scalar is less than or nearly equal to a second, could be though of as operator<=~.
- * @param scalar_0 The first scalar value, s_0, to compare.
- * @param scalar_1 The second scalar value, s_1, to compare.
- * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
- * @param tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars will be considered equal.
+ * @param[in] scalar_0 The first scalar value, s_0, to compare.
+ * @param[in] scalar_1 The second scalar value, s_1, to compare.
+ * @param[in] tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars are considered equal.
+ * @param[in] tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars are considered equal.
  * @return True if the s_0 < s_1 or s_0 ~= s_1, i.e. s_0 <=~ s_1.
  */
 [[nodiscard]] constexpr bool is_nearly_less_equal(const Scalar& scalar_0, const Scalar& scalar_1,
@@ -116,10 +116,10 @@ constexpr const static Scalar default_relative = static_cast<Scalar>(65536)*scal
 
 /**
  * @brief Checks if a first scalar is not less than or nearly equal to a second, could be though of as operator>~.
- * @param scalar_0 The first scalar value, s_0, to compare.
- * @param scalar_1 The second scalar value, s_1, to compare.
- * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
- * @param tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars will be considered equal.
+ * @param[in] scalar_0 The first scalar value, s_0, to compare.
+ * @param[in] scalar_1 The second scalar value, s_1, to compare.
+ * @param[in] tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars are considered equal.
+ * @param[in] tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars are considered equal.
  * @return True if the s_0 > s_1 and s_0 !~= s_1, i.e. s_0 !<=~ s_1.
  *
  * @warning
@@ -137,10 +137,10 @@ constexpr const static Scalar default_relative = static_cast<Scalar>(65536)*scal
 
 /**
  * @brief Checks if a first scalar is not greater than or nearly equal to a second, could be though of as operator<~.
- * @param scalar_0 The first scalar value, s_0, to compare.
- * @param scalar_1 The second scalar value, s_1, to compare.
- * @param tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars will be considered equal.
- * @param tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars will be considered equal.
+ * @param[in] scalar_0 The first scalar value, s_0, to compare.
+ * @param[in] scalar_1 The second scalar value, s_1, to compare.
+ * @param[in] tolerance_relative Tolerance value, tol_rel, below which two the normalised scalars are considered equal.
+ * @param[in] tolerance_absolute Cutoff tolerance value, tol_abs, below which two the scalars are considered equal.
  * @return True if the s_0 < s_1 and s_0 !~= s_1, i.e. s_0 !>=~ s_1.
  *
  * @warning
