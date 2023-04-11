@@ -1,23 +1,23 @@
-// ----------------------------------------------------------------------------------------------------------------------
-//  MIT License
-//  Copyright (c) 2022 Bevan W.S. Jones
+// ---------------------------------------------------------------------------------------------------------------------
+// MIT License
+// Copyright (c) 2022 Bevan W.S. Jones
 //
-//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-//  documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
-//  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
-//  permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to the following conditions:
 //
-//  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
-//  Software.
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+// Software.
 //
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-//  WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-//  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-//  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-// ----------------------------------------------------------------------------------------------------------------------
-//  File Name:
-//  Description:
-// ----------------------------------------------------------------------------------------------------------------------
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+// WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// ---------------------------------------------------------------------------------------------------------------------
+// File Name: partition.cpp
+// Description: Contains declaration of partitioning methods.
+// ---------------------------------------------------------------------------------------------------------------------
 
 #include "adjacency_graph.h"
 #include "adjacency_subgraph.h"
@@ -27,19 +27,30 @@
 #include <cmath>
 #include <numeric>
 #include <vector>
-#include <queue>
 
 namespace Disa {
 
+// ---------------------------------------------------------------------------------------------------------------------
+// Level-Set Partitioning
+// ---------------------------------------------------------------------------------------------------------------------
+
 /**
- * @details This function performs multinode level set expansion on a set of input subgraphs to partition a graph into a
- * set of disjoint subgraphs. The method works by first computing the global eccentricity of the input graph. A
- * nucleation seed site is selected within each input subgraph and the level set expansion is performed from these seed
- * vertices. The process is repeated for the given number of iterations to obtain the final partition.
+ * @details This function performs multinode level set expansion on a set of input subgraphs to 'improve' partition
+ * topology. The number of output subgraphs is thus the same as the number of input subgraphs. The method works by first
+ * computing the global eccentricity of the input graph. Nucleation seed vertices are then selected for each subgraph by
+ * finding the vertex with the minimum maximal eccentricity in each subgraph. From the nucleation sites a level set
+ * expansion is performed to create the next iteration of partitions. The process is repeated for the given number of
+ * iterations or until the seed vertices do not change between iterations. Once the function returns the update
+ * partition will be contained within the subgraph_list.
  */
-void multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t max_iter,
+void multinode_level_set_expansion(const Adjacency_Graph& graph, const std::size_t max_iter,
                                    std::vector<Adjacency_Subgraph>& subgraph_list) {
   ASSERT(!subgraph_list.empty(), "Parsed Subgraph list is empty.");
+  ASSERT(std::all_of(subgraph_list.begin(), subgraph_list.end(),
+                     [&](auto& subgraph){return subgraph.is_parent(graph);}),
+         "The parsed graph is not a parent of all subgraphs.");
+
+  if(subgraph_list.size() == 1) return; // If its only one partition return.
 
   // Allocate memory.
   std::vector<std::size_t> vertex_colors;
@@ -64,8 +75,10 @@ void multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t max
         FOR(i_vertex_1, subgraph.size_vertex()) {
           if(i_vertex_0 == i_vertex_1) continue;
           const bool is_0_low = subgraph.local_global(i_vertex_0) < subgraph.local_global(i_vertex_1);
-          const std::size_t& i_global_lower = is_0_low ? subgraph.local_global(i_vertex_0) : subgraph.local_global(i_vertex_1);
-          const std::size_t& i_global_upper = is_0_low ? subgraph.local_global(i_vertex_1) : subgraph.local_global(i_vertex_0);
+          const std::size_t& i_global_lower = is_0_low ? subgraph.local_global(i_vertex_0)
+                                                       : subgraph.local_global(i_vertex_1);
+          const std::size_t& i_global_upper = is_0_low ? subgraph.local_global(i_vertex_1)
+                                                       : subgraph.local_global(i_vertex_0);
           i_max_eccentricity = std::max(vertex_eccentricity[i_global_upper][i_global_lower], i_max_eccentricity);
         }
 
@@ -94,9 +107,8 @@ void multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t max
 
 /**
  * @details This function performs a recursive bisection of a graph into a specified number of partitions. It uses a
- * level traversal to determine the level at which to split the graph and then splits the graph, forming new subgraphs.
- * It continues to perform the bisection until the desired number of partitions is achieved. The function returns a
- * vector of Adjacency_Subgraph objects representing the partitions.
+ * level traversal to determine the level at which to split the subgraph with the largest number of vertices, which then
+ * forms two new subgraphs. This process is repeated, until the desired number of partitions is achieved.
  */
 std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph& graph, std::size_t number_partitions) {
   ASSERT(number_partitions > 0, "Cannot split a graph into zero domains.");

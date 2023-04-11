@@ -16,11 +16,13 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
 // File Name: partition.h
-// Description: todo
+// Description: Contains declaration of partitioning methods.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_PARTITION_H
 #define DISA_PARTITION_H
+
+#include <vector>
 
 namespace Disa {
 
@@ -32,10 +34,10 @@ class Adjacency_Subgraph;
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @brief Performs level set expansion on subgraphs to partition a graph.
+ * @brief Performs level set expansion on subgraphs to partition a graph, requires an initial partitioning.
  * @param[in] graph The input graph to partition.
  * @param[in] iterations The number of iterations to perform.
- * @param[in, out] subgraph_list The list of subgraphs.
+ * @param[in, out] subgraph_list The list of initial subgraphs, and on completion, the final partitioning.
  */
 void multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t max_iter,
                                    std::vector<Adjacency_Subgraph>& subgraph_list);

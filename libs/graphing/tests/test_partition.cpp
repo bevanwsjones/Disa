@@ -27,45 +27,52 @@
 
 using namespace Disa;
 
-// Unit test for LevelTraversal using Google Test
 TEST(test_partition, multinode_level_set_expansion) {
   std::size_t number_vertices = 10;
   Adjacency_Graph graph = create_graph_line(number_vertices);
   std::vector<Adjacency_Subgraph> subgraph;
 
+  // Start with a poorly split graph.
   subgraph.push_back(Adjacency_Subgraph(graph, {0, 1, 2, 3, 4, 5, 6}));
   subgraph.push_back(Adjacency_Subgraph(graph, {7, 8, 9}));
-  std::cout<<graph;
-  multinode_level_set_expansion(graph, 4, subgraph);
+  multinode_level_set_expansion(graph, 2, subgraph);
 
-  FOR_EACH(sgraph, subgraph) {
-    std::cout<<"\n------------------\n";
-    std::cout<<sgraph.size_vertex();
-  }
+  // The partitions may be unequal due to the underlying level expansion algorithm, so check acceptable range.
+  EXPECT_TRUE(subgraph[0].size_vertex() == 4 || subgraph[0].size_vertex() == 5 || subgraph[0].size_vertex() == 6);
+  EXPECT_TRUE(subgraph[0].size_edge() == 3 || subgraph[0].size_edge() == 4 || subgraph[0].size_edge() == 5);
+  EXPECT_TRUE(subgraph[1].size_vertex() == 4 || subgraph[1].size_vertex() == 5 || subgraph[1].size_vertex() == 6);
+  EXPECT_TRUE(subgraph[1].size_edge() == 3 || subgraph[1].size_edge() == 4 || subgraph[1].size_edge() == 5);
 
-  std::cout<<"\n";
-  FOR_EACH(sgraph, subgraph) {
-    std::cout<<" || ";
-    FOR(i_vertex, sgraph.size_vertex()) std::cout<<sgraph.local_global(i_vertex)<<", ";
-  }
+  // Check uniqueness
+  std::vector<bool> in_partition(number_vertices, false);
+  FOR_EACH(subgraph, subgraph)
+    FOR(i_local_vertex, subgraph.size_vertex())
+      in_partition[subgraph.local_global(i_local_vertex)] = true;
+  EXPECT_FALSE(std::find(in_partition.begin(), in_partition.end(), true) == in_partition.end());
 
+  // Invert problem and repeat.
   subgraph.clear();
   subgraph.push_back(Adjacency_Subgraph(graph, {0, 1, 2}));
   subgraph.push_back(Adjacency_Subgraph(graph, {3, 4, 5, 6, 7, 8, 9}));
-  //  std::cout<<graph;
-   multinode_level_set_expansion(graph, 4, subgraph);
-  std::cout<<"\n------------------\n";
-  FOR_EACH(sgraph, subgraph) {
-    std::cout<<"\n------------------\n";
-    std::cout<<sgraph.size_vertex();
-  }
+  multinode_level_set_expansion(graph, 2, subgraph);
 
-  std::cout<<"\n";
-  FOR_EACH(sgraph, subgraph) {
-    std::cout<<" || ";
-    FOR(i_vertex, sgraph.size_vertex()) std::cout<<sgraph.local_global(i_vertex)<<", ";
-  }
+  // The partitions may be unequal due to the underlying level expansion algorithm, so check acceptable range.
+  EXPECT_TRUE(subgraph[0].size_vertex() == 4 || subgraph[0].size_vertex() == 5 || subgraph[0].size_vertex() == 6);
+  EXPECT_TRUE(subgraph[0].size_edge() == 3 || subgraph[0].size_edge() == 4 || subgraph[0].size_edge() == 5);
+  EXPECT_TRUE(subgraph[1].size_vertex() == 4 || subgraph[1].size_vertex() == 5 || subgraph[1].size_vertex() == 6);
+  EXPECT_TRUE(subgraph[1].size_edge() == 3 || subgraph[1].size_edge() == 4 || subgraph[1].size_edge() == 5);
 
+  // Check uniqueness
+  std::fill(in_partition.begin(), in_partition.end(), false);
+  FOR_EACH(subgraph, subgraph)
+    FOR(i_local_vertex, subgraph.size_vertex())
+      in_partition[subgraph.local_global(i_local_vertex)] = true;
+  EXPECT_FALSE(std::find(in_partition.begin(), in_partition.end(), true) == in_partition.end());
+
+  // death tests.
+  std::vector<Adjacency_Subgraph> empty;
+  EXPECT_DEATH(multinode_level_set_expansion(graph, 4, empty), "./*");
+  EXPECT_DEATH(multinode_level_set_expansion(Adjacency_Graph(), 4, subgraph), "./*");
 }
 
 TEST(LevelTraversalTest, SimpleTest) {
