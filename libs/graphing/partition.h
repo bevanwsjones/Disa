@@ -15,15 +15,41 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: partitioning.h
-// Description: todo
+// File Name: partition.h
+// Description: Contains declaration of partitioning methods.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_PARTIONING_H
-#define DISA_PARTIONING_H
+#ifndef DISA_PARTITION_H
+#define DISA_PARTITION_H
+
+#include <vector>
 
 namespace Disa {
 
+class Adjacency_Graph;
+class Adjacency_Subgraph;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Level-Set Partitioning
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @brief Performs level set expansion on subgraphs to partition a graph, requires an initial partitioning.
+ * @param[in] graph The input graph to partition.
+ * @param[in] iterations The number of iterations to perform.
+ * @param[in, out] subgraph_list The list of initial subgraphs, and on completion, the final partitioning.
+ */
+void multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t max_iter,
+                                   std::vector<Adjacency_Subgraph>& subgraph_list);
+
+/**
+ * @brief Recursively bisects a given graph into a specified number of subgraphs.
+ * @param[in] graph The original graph to be bisected.
+ * @param[in] number_partitions The number of subgraphs to be generated.
+ * @return A vector of subgraphs representing the bisected graph.
+ */
+std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph& graph, std::size_t number_partitions);
+
 }
 
-#endif //DISA_PARTIONING_H
+#endif //DISA_PARTITION_H

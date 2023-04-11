@@ -26,19 +26,38 @@
 namespace Disa {
 
 // ---------------------------------------------------------------------------------------------------------------------
-// AdjacencyGraph
+// Adjacency_Graph
+// ---------------------------------------------------------------------------------------------------------------------
+// Public Constructors and Destructors
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @details Initializes an Adjacency_Graph object with the edges in the given initializer list. The constructor finds
+ * the vertex with the highest index to determine a suitable reserve for the graph in the provided edge list. Each edge
+ * is then inserted into the edge and any excess reserve memory removed.
+ */
+Adjacency_Graph::Adjacency_Graph(std::initializer_list<Edge> edge_graph) {
+  const auto iter = std::max_element(edge_graph.begin(), edge_graph.end(),
+                                     [](const Edge& edge_0, const Edge& edge_1) {
+                                       return order_edge_vertex(&edge_0).second < order_edge_vertex(&edge_1).second;
+                                     });
+  reserve(std::max(iter->first, iter->second), edge_graph.size());
+  FOR_EACH(edge, edge_graph) insert(edge);
+  shrink_to_fit();
+}
+
 // ---------------------------------------------------------------------------------------------------------------------
 // Modifiers
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * \details If the edge is already in the graph the function returns immediately. If the edge contains a vertex index
+ * @details If the edge is already in the graph the function returns immediately. If the edge contains a vertex index
  * greater than the current graph size, the size of the graph is increased to accommodate the insertion. Lower bound is
  * then used to insert the upper index of the edge into the lower index adjacency list. The offset values are then
  * increased by one until the upper index is reached. The lower index is then inserted into the upper index adjacency
  * list. Finally the offset values are increase by two till the end of the offset vector.
  */
-bool AdjacencyGraph::insert(const Edge& edge) {
+bool Adjacency_Graph::insert(const Edge& edge) {
   ASSERT_DEBUG(edge.first != edge.second, "Edge vertices identical, " + std::to_string(edge.first) + " and "
                                           + std::to_string(edge.second) + ".");
 
@@ -67,12 +86,13 @@ bool AdjacencyGraph::insert(const Edge& edge) {
  * the graph the vertices with an index greater or equal to the new size are removed. The 'edges' connecting the removed
  * vertices from the remaining vertices are sought and removed from the graph.
  */
-void AdjacencyGraph::resize(const std::size_t& size) {
+void Adjacency_Graph::resize(const std::size_t& size) {
 
   // Branch based on expansion or contraction of the graph.
   if(size_vertex() < size) {
     offset.resize(size + 1, offset.empty() ? 0 : offset.back());
-  } else {
+  }
+  else {
     // Resize the containers.
     offset.resize(size + 1);
     vertex_adjacent_list.resize(offset.back());
@@ -101,7 +121,7 @@ void AdjacencyGraph::resize(const std::size_t& size) {
  * @details First ensures that the vertex exists in the graph, then using std::ranges looks for the second vertex of the
  * edge in the adjacency graph of the first.
  */
-[[nodiscard]] bool AdjacencyGraph::contains(const Edge& edge) const {
+[[nodiscard]] bool Adjacency_Graph::contains(const Edge& edge) const {
   ASSERT_DEBUG(edge.first != edge.second, "Edge vertices identical, " + std::to_string(edge.first) + " and "
                                           + std::to_string(edge.second) + ".");
   const Edge ordered_edge = order_edge_vertex(&edge);
@@ -123,15 +143,15 @@ void AdjacencyGraph::resize(const std::size_t& size) {
  * offsets. Each must also be resorted in an ascending fashion. Finally, the new graph is swapped with the current and
  * returned.
  */
-AdjacencyGraph AdjacencyGraph::reorder(const std::vector<std::size_t>& permutation) {
+Adjacency_Graph Adjacency_Graph::reorder(const std::vector<std::size_t>& permutation) {
 
   ASSERT_DEBUG(permutation.size() == size_vertex(), "Incorrect sizes, " + std::to_string(permutation.size()) + " vs. "
                                                     + std::to_string(size_vertex()) + ".");
   ASSERT_DEBUG(std::accumulate(permutation.begin(), permutation.end(), 0.0) == (size_vertex() - 1)*size_vertex()/2.0,
-               "Checksum for parsed re_ordering, are the elements unique?");
+               "Checksum for parsed re_ordering failed, are the elements unique?");
 
   // Allocate memory.
-  AdjacencyGraph graph;
+  Adjacency_Graph graph;
   graph.offset.resize(offset.size());
   graph.vertex_adjacent_list.resize(vertex_adjacent_list.size());
 
@@ -156,6 +176,70 @@ AdjacencyGraph AdjacencyGraph::reorder(const std::vector<std::size_t>& permutati
   // swap class data and return.
   this->swap(graph);
   return graph;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Helper Functions
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @details This function inserts a new vertex into the adjacency list of the specified vertex in the graph. If the
+ * inserted vertex is already present in the adjacency list, this function does nothing.
+ */
+void Adjacency_Graph::insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex) {
+  const auto& adjacency = vertex_adjacency_iter(vertex);
+  const auto& insert_iter = std::lower_bound(adjacency.first, adjacency.second, insert_vertex);
+  const auto& distance = std::distance(vertex_adjacent_list.begin(), insert_iter);
+  vertex_adjacent_list.insert(vertex_adjacent_list.begin() + distance, insert_vertex);
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// Operator Overloading
+//----------------------------------------------------------------------------------------------------------------------
+// Stream Operators
+//----------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @details Outputs the subgraph data to 'screen', each vertex is printed, followed by its adjacent vertices. If the
+ * vertex adjacency is empty then a period is placed in the row.
+ *
+ * The output format looks like:
+ * 1, 3
+ * 0
+ * .
+ * 0, 1
+ */
+std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph) {
+  FOR(i_vertex, graph.size_vertex()) {
+    if(i_vertex != 0) ostream<<"\n";
+    FOR_EACH(adjacent_vertex, graph[i_vertex])
+      ostream<<adjacent_vertex<<(adjacent_vertex != graph[i_vertex].back() ? ", " : "");
+    if(graph[i_vertex].empty()) ostream<<".";
+  }
+  return ostream;
+}
+
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// STL specialisation
+//----------------------------------------------------------------------------------------------------------------------
+
+namespace std {
+
+/**
+ * @details Specialization of the std::hash template for the Disa::Adjacency_Graph class. It calculates a hash value for
+ * the adjacency graph by XORing the hash values of its size, number of edges, and sizes of its first and last vertices.
+ * If the graph is empty, the hash value is set to zero.
+ */
+std::size_t hash<Disa::Adjacency_Graph>::operator()(const Disa::Adjacency_Graph& graph) const noexcept {
+  if(graph.empty()) return 0; // All empty graphs are considered identical.
+  std::size_t hashValue = 0;
+  hashValue ^= std::hash<std::size_t> {}(graph.size_vertex());
+  hashValue ^= std::hash<std::size_t> {}(graph.size_edge());
+  hashValue ^= std::hash<std::size_t> {}(graph.front().size());
+  hashValue ^= std::hash<std::size_t> {}(graph.back().size());
+  return hashValue;
 }
 
 }

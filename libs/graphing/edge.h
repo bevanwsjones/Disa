@@ -39,7 +39,7 @@ using Edge = std::pair<std::size_t, std::size_t>; //! Definition of an edge, ali
  * @param[in] edge The edge to re_order.
  * @return A new 'edge', [reference to lower indexed vertex, reference to upper indexed vertex].
  */
-inline constexpr std::pair<const std::size_t&, const std::size_t&> order_edge_vertex(const Edge* edge) {
+constexpr std::pair<const std::size_t&, const std::size_t&> order_edge_vertex(const Edge* edge) {
   ASSERT_DEBUG(edge != nullptr, "Parsed edge point is null.");
   return edge->first < edge->second ? std::pair<const std::size_t&, const std::size_t&>({edge->first, edge->second})
                                     : std::pair<const std::size_t&, const std::size_t&>({edge->second, edge->first});

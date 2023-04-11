@@ -47,7 +47,7 @@ namespace Disa {
  * https://en.wikipedia.org/wiki/Breadth-first_search
  * https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
  */
-[[nodiscard]] std::vector<std::size_t> breadth_first(const AdjacencyGraph& graph, std::size_t start_vertex) {
+[[nodiscard]] std::vector<std::size_t> breadth_first(const Adjacency_Graph& graph, std::size_t start_vertex) {
 
   // Checking
   if(graph.empty()) return {};
@@ -94,7 +94,7 @@ namespace Disa {
  * References:
  * https://en.wikipedia.org/wiki/Cuthill%E2%80%93McKee_algorithm
  */
-std::vector<std::size_t> cuthill_mckee(const AdjacencyGraph& graph, std::size_t start_vertex) {
+std::vector<std::size_t> cuthill_mckee(const Adjacency_Graph& graph, std::size_t start_vertex) {
 
   // Checking
   if(graph.empty()) return {};
@@ -164,7 +164,7 @@ std::vector<std::size_t> cuthill_mckee(const AdjacencyGraph& graph, std::size_t 
  * https://en.wikipedia.org/wiki/Greedy_coloring#
  * https://www.geeksforgeeks.org/graph-coloring-set-2-greedy-algorithm/
  */
-std::vector<std::size_t> greedy_multicolouring(const AdjacencyGraph& graph) {
+std::vector<std::size_t> greedy_multicolouring(const Adjacency_Graph& graph) {
 
   // Checking
   if(graph.empty()) return {};

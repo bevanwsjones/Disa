@@ -22,12 +22,19 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 set(SOURCES
-        edge.h
         adjacency_graph.h
-        partitioning.h
+        adjacency_subgraph.h
+        edge.h
+        generator.h
+        graph_utilities.h
+        partition.h
         reorder.h
+        adjacency_graph.hpp
         adjacency_graph.cpp
-        reorder.cpp)
+        adjacency_subgraph.cpp
+        generator.cpp
+        partition.cpp
+        reorder.cpp generator.cpp)
 
 set(LIBRARIES
         core
@@ -51,12 +58,24 @@ if(ENABLE_TEST)
   target_link_libraries(test_adjacency_graph GTest::gtest_main graphing)
   gtest_discover_tests(test_adjacency_graph)
 
+  add_executable(test_adjacency_subgraph tests/test_adjacency_subgraph.cpp)
+  target_link_libraries(test_adjacency_subgraph GTest::gtest_main graphing)
+  gtest_discover_tests(test_adjacency_subgraph)
+
   add_executable(test_edge tests/test_edge.cpp)
   target_link_libraries(test_edge GTest::gtest_main graphing)
   gtest_discover_tests(test_edge)
 
+  add_executable(test_partition tests/test_partition.cpp)
+  target_link_libraries(test_partition GTest::gtest_main graphing)
+  gtest_discover_tests(test_partition)
+
   add_executable(test_reorder tests/test_reorder.cpp)
   target_link_libraries(test_reorder GTest::gtest_main graphing)
   gtest_discover_tests(test_reorder)
+
+  add_executable(test_graph_utilities tests/test_graph_utilities.cpp)
+  target_link_libraries(test_graph_utilities GTest::gtest_main graphing)
+  gtest_discover_tests(test_graph_utilities)
 
 endif ()
