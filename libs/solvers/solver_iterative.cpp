@@ -15,50 +15,21 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: iterative_solvers.h
-// Description: Contains the class declarations for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
+// File Name: iterative_solvers.cpp
+// Description: Contains the class definitions for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_ITERATIVE_SOLVERS_H
-#define DISA_ITERATIVE_SOLVERS_H
+#include "solver_iterative.h"
 
-#include "solver.h"
-#include "vector_dense.h"
+#include "matrix_sparse.h"
+#include "vector_operators.h"
 
-namespace Disa{
+namespace Disa {
 
-// Forward declarations
-class Matrix_Sparse;
 
 /**
- * @class
- * @brief
- *
+ * @details basic jacobi
  */
-class Iterative_Solver : public Solver {
-
-public:
-  explicit Iterative_Solver(const Matrix_Sparse& a_matrix, SolverConfig config) : Solver(a_matrix, config) {
-
-  };
-
-  /**
-   * @brief
-   */
-  void setup() override;
-
-  /**
-   * @brief  basic jacobi
-   * @param x_vector
-   * @param b_vector
-   * @return
-   */
-  Convergence_Data solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) override;
-
-private:
-  Vector_Dense<0> x_working;
-};
-
+//const Convergence_Data& Iterative_Solver::solve_system(const Matrix_Sparse& matrix, Vector_Dense<0>& x_vector,
+//                                                       const Vector_Dense<0>& b_vector)
 }
-
-#endif //DISA_ITERATIVE_SOLVERS_H

@@ -22,10 +22,13 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 set(SOURCES
-        iterative_solvers.h
         solver.h
-        solver_utilities.h
-        iterative_solvers.cpp)
+        solver_iterative.h
+        solver_iterative.cpp
+        solver_fixed_point.h
+        solver_fixed_point.hpp
+        solver_type.h
+        solver_utilities.h)
 
 set(LIBRARIES
         core

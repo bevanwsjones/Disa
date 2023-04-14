@@ -15,47 +15,46 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: iterative_solvers.cpp
-// Description: Contains the class definitions for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
+// File Name: iterative_solvers.h
+// Description: Contains the class declarations for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "iterative_solvers.h"
+#ifndef DISA_SOLVER_ITERATIVE_H
+#define DISA_SOLVER_ITERATIVE_H
 
-#include "matrix_sparse.h"
-#include "vector_operators.h"
+#include "solver_type.h"
+#include "solver_utilities.h"
+#include "vector_dense.h"
+
+#include <variant>
 
 namespace Disa {
 
-/**
- * @details
- */
-void Iterative_Solver::setup() {
-  x_working.resize(matrix.size_row());
-}
+// Forward declarations
+class Matrix_Sparse;
 
 /**
- * @details basic jacobi
+ * @brief
  */
-Convergence_Data Iterative_Solver::solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) {
+template<class _solver>
+class Solver_Iterative
+{
 
-  Convergence_Data data;
-  ASSERT(false, "update for convergence data.");
+public:
+  explicit Solver_Iterative(const Solver_Config solver_config) : config(solver_config) {} ;
+  void setup(){};
 
-  while(data.iteration < config.maximum_iterations && data.residual > config.convergence_tolerance) {
+  const Convergence_Data& solve(const Matrix_Sparse& matrix, Vector_Dense<0>& x_vector,
+                                const Vector_Dense<0>& b_vector){
+    return static_cast<_solver*>(this)->solve_system(matrix, x_vector, b_vector);
+  };
 
-    FOR(i_row, matrix.size_row()) {
-      Scalar offs_row_dot = 0;
-      FOR_ITER(column_iter, matrix[i_row]){
-        if(column_iter.i_column() != i_row) offs_row_dot += *column_iter*x_vector[column_iter.i_column()];
-      }
-      x_working[i_row] = (b_vector[i_row] - offs_row_dot)/matrix[i_row][i_row];
-    }
-    data.iteration++;
-    data.residual = lp_norm<2>(matrix*x_vector - b_vector)/lp_norm<2>(b_vector);
-    std::swap(x_vector, x_working);
-  }
+protected:
+  Solver_Config config;
+  Convergence_Data convergence_data;
+};
 
-  return data;
-}
 
 }
+
+#endif //DISA_SOLVER_ITERATIVE_H

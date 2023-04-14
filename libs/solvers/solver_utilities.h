@@ -36,34 +36,52 @@ struct Convergence_Data {
 
   Scalar b_l2_norm{0};
 
-  Scalar residual{0};
-  Scalar residual_0{0};
+  Scalar residual{scalar_max};
+  Scalar residual_0{scalar_max};
   Scalar residual_relative{0};
 
-  Scalar residual_max{0};
-  Scalar residual_max_0{0};
+  Scalar residual_max{scalar_max};
+  Scalar residual_max_0{scalar_max};
   Scalar residual_max_relative{0};
 };
 
+inline void reset_convergence_data(Convergence_Data& data){
+  data.iteration = 0;
+
+  data.b_l2_norm = scalar_max;
+
+  data.residual = scalar_max;
+  data.residual_0 = scalar_max;
+  data.residual_relative = scalar_max;
+
+  data.residual_max = scalar_max;
+  data.residual_max_0 = scalar_max;
+  data.residual_max_relative = scalar_max;
+}
+
 template<class _matrix, class _vector>
-std::pair<Scalar, Scalar> residual(const _matrix& A, const _vector& x, const _vector& b) {
-  return {lp_norm<2>(A*x - b), lp_norm<0>(A*x - b)}; // <-- todo: do properly
+std::pair<Scalar, Scalar> compute_residual(const _matrix& A, const _vector& x, const _vector& b, _vector& residual) {
+  residual = A*x - b;
+  return {lp_norm<2>(residual), lp_norm<0>(residual)}; // <-- todo: do properly
 }
 
 template<class _matrix, class _vector>
 void update_convergence(const _matrix& A, const _vector& x, const _vector& b, Convergence_Data& data) {
-  std::tie(data.residual, data.residual_max) = residual(A,b, x);
+
+  _vector residual;
+  std::tie(data.residual, data.residual_max) = compute_residual(A, x, b, residual);
+
   if(!data.iteration) {
     data.b_l2_norm = lp_norm<2>(b);
-    data.residual_0 = data.residual/data.b_l2_norm;
-    data.residual_max_0 = data.residual_max/data.b_l2_norm;
+    data.residual_0 = data.residual;
+    data.residual_max_0 = data.residual_max;
   }
+  data.residual_relative = data.residual/data.residual_0;
+  data.residual_max_relative = data.residual_max/data.residual_max_0;
 
   data.residual /= data.b_l2_norm;
   data.residual_max /= data.b_l2_norm;
 
-  data.residual_relative = data.residual/data.residual_0;
-  data.residual_max_relative = data.residual_max/data.residual_max_0;
   ++data.iteration;
 }
 

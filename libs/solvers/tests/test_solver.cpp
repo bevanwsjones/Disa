@@ -24,7 +24,9 @@
 #include "matrix_sparse.h"
 #include "matrix_dense.h"
 
-#include "iterative_solvers.h"
+#include "solver.h"
+#include "solver_iterative.h"
+#include "solver_fixed_point.h"
 
 using namespace Disa;
 
@@ -78,7 +80,7 @@ public:
     const int size_xy = size_x*size_x;
     a_matrix.resize(size_xy, size_xy);
     x_vector.resize(size_xy, 0);
-    b_vector.resize(size_xy, std::pow(1.0/(size_x - 1.0), 2.0));
+    b_vector.resize(size_xy, std::pow(1.0/(size_x - 1.0), .0));
 
     // populate
     FOR(node_index, size_xy)
@@ -98,14 +100,23 @@ public:
 
 TEST_F(Laplace2DProblem, iterative_solver_test) {
 
-  Scalar tolerance = 10;
-  uint max_iterations = 10;
+  Scalar tolerance = 1000;
+  uint max_iterations = 1000;
 
-  Iterative_Solver solver(a_matrix, {2000, 1.0e-5});
-  solver.setup();
-  ConvergenceData result = solver.solve(x_vector, b_vector);
+  auto solver = build_solver(Solver_Type::jacobi, {max_iterations, 1.0e-5});
+  //Iterative_Solver solver({max_iterations, 1.0e-5});
 
-  std::cout<<"\n"<<result.iteration<<"\t"<<result.residual;
+  std::fill(x_vector.begin(), x_vector.end(), 10.0);
+  Convergence_Data result = solver.solve(a_matrix, x_vector, b_vector);
+  std::cout<<"\nJ: "<<result.iteration<<"\t"<<result.residual;
+  std::cout<<"\n";
+
+
+  solver = build_solver(Solver_Type::gauss_seidel, {max_iterations, 1.0e-5});
+  std::fill(x_vector.begin(), x_vector.end(), 10.0);
+  result = solver.solve(a_matrix, x_vector, b_vector);
+  std::cout<<"\nG: "<<result.iteration<<"\t"<<result.residual;
+  std::cout<<"\n";
 
   // Solve and check solution.
   EXPECT_LE(result.residual, tolerance);
