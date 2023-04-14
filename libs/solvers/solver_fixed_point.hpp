@@ -22,6 +22,18 @@
 
 namespace Disa {
 
+void forward_sweep(const Matrix_Sparse& a_matrix,
+                   const Vector_Dense<0>& x_vector, Vector_Dense<0>& x_update,
+                   const Vector_Dense<0>& b_vector, const Scalar omega = 1){
+  // forward sweep
+  FOR(i_row, a_matrix.size_row()) {
+    Scalar offs_row_dot = 0;
+    FOR_ITER(column_iter, a_matrix[i_row])
+      if(column_iter.i_column() != i_row)
+        offs_row_dot += *column_iter*x_vector[column_iter.i_column()];
+    x_update[i_row] = omega*(b_vector[i_row] - offs_row_dot)/a_matrix[i_row][i_row] + (1.0 - omega)*x_vector[i_row];
+  }
+}
 
 template<>
 const Convergence_Data& Solver_Fixed_Point<Solver_Type::jacobi>::solve_system(const Matrix_Sparse& a_matrix,
@@ -29,23 +41,12 @@ const Convergence_Data& Solver_Fixed_Point<Solver_Type::jacobi>::solve_system(co
                                                                        const Vector_Dense<0>& b_vector) {
   x_working.resize(a_matrix.size_row());
   reset_convergence_data(convergence_data);
-  auto& update_vector = x_working;
-
   while(convergence_data.iteration < config.maximum_iterations
         && convergence_data.residual > config.convergence_tolerance) {
-
-    // forward sweep
-    FOR(i_row, a_matrix.size_row()) {
-      Scalar offs_row_dot = 0;
-      FOR_ITER(column_iter, a_matrix[i_row])if(column_iter.i_column() != i_row)
-          offs_row_dot += *column_iter*x_vector[column_iter.i_column()];
-      update_vector[i_row] = (b_vector[i_row] - offs_row_dot)/a_matrix[i_row][i_row];
-    }
-
+    forward_sweep(a_matrix, x_vector, x_working, b_vector, 1.0);
     update_convergence(a_matrix, x_vector, b_vector, convergence_data);
     std::swap(x_vector, x_working);
   }
-
   return convergence_data;
 }
 
@@ -53,24 +54,12 @@ template<>
 const Convergence_Data& Solver_Fixed_Point<Solver_Type::gauss_seidel>::solve_system(const Matrix_Sparse& a_matrix,
                                                                                     Vector_Dense<0>& x_vector,
                                                                                     const Vector_Dense<0>& b_vector) {
-
   reset_convergence_data(convergence_data);
-  auto& update_vector =  x_vector ;
-
   while(convergence_data.iteration < config.maximum_iterations
         && convergence_data.residual > config.convergence_tolerance) {
-
-    // forward sweep
-    FOR(i_row, a_matrix.size_row()) {
-      Scalar offs_row_dot = 0;
-      FOR_ITER(column_iter, a_matrix[i_row])if(column_iter.i_column() != i_row)
-          offs_row_dot += *column_iter*x_vector[column_iter.i_column()];
-      update_vector[i_row] = (b_vector[i_row] - offs_row_dot)/a_matrix[i_row][i_row];
-    }
-
+    forward_sweep(a_matrix, x_vector, x_vector, b_vector, 1.0);
     update_convergence(a_matrix, x_vector, b_vector, convergence_data);
   }
-
   return convergence_data;
 }
 
@@ -78,9 +67,12 @@ const Convergence_Data& Solver_Fixed_Point<Solver_Type::gauss_seidel>::solve_sys
 template<>
 const Convergence_Data& Solver_Fixed_Point<Solver_Type::successive_over_relaxation>::solve_system(
   const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) {
-
-  ERROR("not implemented");
-  exit(0);
+  reset_convergence_data(convergence_data);
+  while(convergence_data.iteration < config.maximum_iterations
+        && convergence_data.residual > config.convergence_tolerance) {
+    forward_sweep(a_matrix, x_vector, x_vector, b_vector, 1.5);
+    update_convergence(a_matrix, x_vector, b_vector, convergence_data);
+  }
 
   return convergence_data;
 }
