@@ -349,9 +349,6 @@ protected:
   void insert_vertex_adjacent_list(std::size_t vertex, std::size_t insert_vertex);
 };
 
-// Add template definitions
-#include "adjacency_graph.hpp"
-
 // --------------------------------------------------------------------------------------------------------------------
 // Operator Overloading
 // ---------------------------------------------------------------------------------------------------------------------
@@ -367,6 +364,9 @@ protected:
 std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph);
 
 }
+
+// Add template definitions
+#include "adjacency_graph.hpp"
 
 // ---------------------------------------------------------------------------------------------------------------------
 // STL specialisation
