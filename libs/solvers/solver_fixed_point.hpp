@@ -35,46 +35,81 @@ void forward_sweep(const Matrix_Sparse& a_matrix,
   }
 }
 
-template<>
-const Convergence_Data& Solver_Fixed_Point<Solver_Type::jacobi>::solve_system(const Matrix_Sparse& a_matrix,
-                                                                       Vector_Dense<0>& x_vector,
-                                                                       const Vector_Dense<0>& b_vector) {
-  x_working.resize(a_matrix.size_row());
-  reset_convergence_data(convergence_data);
-  while(convergence_data.iteration < config.maximum_iterations
-        && convergence_data.residual > config.convergence_tolerance) {
-    forward_sweep(a_matrix, x_vector, x_working, b_vector, 1.0);
-    update_convergence(a_matrix, x_vector, b_vector, convergence_data);
-    std::swap(x_vector, x_working);
+void backward_sweep(const Matrix_Sparse& a_matrix,
+                   const Vector_Dense<0>& x_vector, Vector_Dense<0>& x_update,
+                   const Vector_Dense<0>& b_vector, const Scalar omega = 1){
+  // forward sweep
+  for(auto i_row = a_matrix.size_row() - 1; i_row != std::numeric_limits<std::size_t>::max(); --i_row) {
+    Scalar offs_row_dot = 0;
+    FOR_ITER(column_iter, a_matrix[i_row])
+      if(column_iter.i_column() != i_row)
+        offs_row_dot += *column_iter*x_vector[column_iter.i_column()];
+    x_update[i_row] = omega*(b_vector[i_row] - offs_row_dot)/a_matrix[i_row][i_row] + (1.0 - omega)*x_vector[i_row];
   }
-  return convergence_data;
 }
 
 template<>
-const Convergence_Data& Solver_Fixed_Point<Solver_Type::gauss_seidel>::solve_system(const Matrix_Sparse& a_matrix,
+void Solver_Fixed_Point<Solver_Type::jacobi, Solver_Fixed_Point_Jacobi_Data>::initialise_solver(Solver_Config config) {
+  //tpdo assert
+  data.limits.max_iteration = config.maximum_iterations;
+  data.limits.tolerance = config.convergence_tolerance;
+}
+
+template<>
+const Convergence_Data& Solver_Fixed_Point<Solver_Type::jacobi, Solver_Fixed_Point_Jacobi_Data>::solve_system(const Matrix_Sparse& a_matrix,
+                                                                              Vector_Dense<0>& x_vector,
+                                                                              const Vector_Dense<0>& b_vector) {
+  data.working.resize(a_matrix.size_row());
+  reset_convergence_data(data.convergence);
+  while(data.convergence.iteration < data.limits.max_iteration
+        && data.convergence.residual > data.limits.tolerance) {
+    forward_sweep(a_matrix, x_vector, data.working, b_vector, 1.0);
+    update_convergence(a_matrix, x_vector, b_vector, data.convergence);
+    std::swap(x_vector, data.working);
+  }
+  return data.convergence;
+}
+
+template<>
+void Solver_Fixed_Point<Solver_Type::gauss_seidel, Solver_Fixed_Point_Data>::initialise_solver(Solver_Config config) {
+  //tpdo assert
+  data.limits.max_iteration = config.maximum_iterations;
+  data.limits.tolerance = config.convergence_tolerance;
+}
+
+template<>
+const Convergence_Data& Solver_Fixed_Point<Solver_Type::gauss_seidel, Solver_Fixed_Point_Data>::solve_system(const Matrix_Sparse& a_matrix,
                                                                                     Vector_Dense<0>& x_vector,
                                                                                     const Vector_Dense<0>& b_vector) {
-  reset_convergence_data(convergence_data);
-  while(convergence_data.iteration < config.maximum_iterations
-        && convergence_data.residual > config.convergence_tolerance) {
+  reset_convergence_data(data.convergence);
+  while(data.convergence.iteration < data.limits.max_iteration
+        && data.convergence.residual > data.limits.tolerance) {
     forward_sweep(a_matrix, x_vector, x_vector, b_vector, 1.0);
-    update_convergence(a_matrix, x_vector, b_vector, convergence_data);
+    update_convergence(a_matrix, x_vector, b_vector, data.convergence);
   }
-  return convergence_data;
+  return data.convergence;
 }
 
+template<>
+void Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Solver_Fixed_Point_Sor_Data>::initialise_solver(Solver_Config config) {
+  //tpdo assert
+  data.limits.max_iteration = config.maximum_iterations;
+  data.limits.tolerance = config.convergence_tolerance;
+
+  data.relaxation = config.SOR_relaxation;
+}
 
 template<>
-const Convergence_Data& Solver_Fixed_Point<Solver_Type::successive_over_relaxation>::solve_system(
+const Convergence_Data& Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Solver_Fixed_Point_Sor_Data>::solve_system(
   const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) {
-  reset_convergence_data(convergence_data);
-  while(convergence_data.iteration < config.maximum_iterations
-        && convergence_data.residual > config.convergence_tolerance) {
+  reset_convergence_data(data.convergence);
+  while(data.convergence.iteration < data.limits.max_iteration
+        && data.convergence.residual > data.limits.tolerance) {
     forward_sweep(a_matrix, x_vector, x_vector, b_vector, 1.5);
-    update_convergence(a_matrix, x_vector, b_vector, convergence_data);
+    update_convergence(a_matrix, x_vector, b_vector, data.convergence);
   }
 
-  return convergence_data;
+  return data.convergence;
 }
 
 }

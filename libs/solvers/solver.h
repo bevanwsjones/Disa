@@ -37,27 +37,26 @@ class Matrix_Sparse;
 template<std::size_t> class Vector_Dense;
 
 
-
-class Solver : public Solver_Iterative<Solver> {
+class Solver {
 public:
-  explicit Solver(Solver_Config config) : Solver_Iterative<Solver>(config) {};
+
+  explicit Solver() = default;
 
   std::variant<nullptr_t,
-               std::unique_ptr<Solver_Fixed_Point<Solver_Type::jacobi> >,
-               std::unique_ptr<Solver_Fixed_Point<Solver_Type::gauss_seidel> >,
-               std::unique_ptr<Solver_Fixed_Point<Solver_Type::successive_over_relaxation> > > solver{nullptr};
+               std::unique_ptr<Solver_Fixed_Point<Solver_Type::jacobi, Solver_Fixed_Point_Jacobi_Data> >,
+               std::unique_ptr<Solver_Fixed_Point<Solver_Type::gauss_seidel, Solver_Fixed_Point_Data> >,
+               std::unique_ptr<Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Solver_Fixed_Point_Sor_Data> > > solver{nullptr};
 
-  const Convergence_Data& solve_system(const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector,
-                                       const Vector_Dense<0>& b_vector) {
+  const Convergence_Data& solve(const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector,
+                                const Vector_Dense<0>& b_vector) {
 
-    std::cout<<"\n"<<solver.index();
     switch(solver.index()) {
       case 0:
         ERROR("Solver has not been assigned.");
         exit(1);
-      case 1: return std::get<std::unique_ptr<Solver_Fixed_Point<Solver_Type::jacobi> > >(solver)->solve_system(a_matrix, x_vector, b_vector);
-      case 2: return std::get<std::unique_ptr<Solver_Fixed_Point<Solver_Type::gauss_seidel> > >(solver)->solve_system(a_matrix, x_vector, b_vector);
-      case 3: return std::get<std::unique_ptr<Solver_Fixed_Point<Solver_Type::successive_over_relaxation>> >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 1: return std::get<std::unique_ptr<Solver_Fixed_Point<Solver_Type::jacobi, Solver_Fixed_Point_Jacobi_Data> > >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 2: return std::get<std::unique_ptr<Solver_Fixed_Point<Solver_Type::gauss_seidel, Solver_Fixed_Point_Data> > >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 3: return std::get<std::unique_ptr<Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Solver_Fixed_Point_Sor_Data> > >(solver)->solve_system(a_matrix, x_vector, b_vector);
       default:
         ERROR("Unknown solver.");
         exit(1);
@@ -66,17 +65,18 @@ public:
 
 };
 
-inline Solver build_solver(Solver_Type type, Solver_Config config){
-  Solver solver(config);
-  switch(type) {
+
+inline Solver build_solver(Solver_Config config){
+  Solver solver;
+  switch(config.type) {
     case Solver_Type::jacobi:
-      solver.solver = std::make_unique<Solver_Fixed_Point<Solver_Type::jacobi> >(config);
+      solver.solver = std::make_unique<Solver_Fixed_Point<Solver_Type::jacobi, Solver_Fixed_Point_Jacobi_Data> >(config);
       break;
     case Solver_Type::gauss_seidel:
-      solver.solver = std::make_unique<Solver_Fixed_Point<Solver_Type::gauss_seidel> >(config);
+      solver.solver = std::make_unique<Solver_Fixed_Point<Solver_Type::gauss_seidel, Solver_Fixed_Point_Data> >(config);
       break;
     case Solver_Type::successive_over_relaxation:
-      solver.solver = std::make_unique<Solver_Fixed_Point<Solver_Type::successive_over_relaxation> >(config);
+      solver.solver = std::make_unique<Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Solver_Fixed_Point_Sor_Data> >(config);
       break;
     default:
       ERROR("Undefined.");

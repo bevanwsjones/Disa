@@ -28,6 +28,7 @@ namespace Disa{
 
 
 enum class Solver_Type {
+  unknown, // to do - needs to be first because of variant indexing.
   jacobi,
   gauss_seidel,
   successive_over_relaxation
@@ -39,8 +40,10 @@ enum class Solver_Type {
  * @brief
  */
 struct Solver_Config {
+  Solver_Type type{Solver_Type::unknown};
   std::size_t maximum_iterations{0}; //!<
   Scalar convergence_tolerance{0};       //!<
+  Scalar SOR_relaxation{1.5};
 };
 
 }

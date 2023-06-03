@@ -33,16 +33,31 @@ namespace Disa {
 // Forward declarations
 class Matrix_Sparse;
 
+struct Convergence_Limits{
+  std::size_t max_iteration{std::numeric_limits<std::size_t>::max()};
+  Scalar tolerance{scalar_max};
+};
+
+struct Solver_Data {
+  Convergence_Data convergence;
+  Convergence_Limits limits;
+};
+
 /**
  * @brief
  */
-template<class _solver>
+template<class _solver, class _solver_data>
 class Solver_Iterative
 {
 
 public:
-  explicit Solver_Iterative(const Solver_Config solver_config) : config(solver_config) {} ;
-  void setup(){};
+  explicit Solver_Iterative(const Solver_Config solver_config) {
+    initialise(solver_config);
+  };
+
+  void initialise(Solver_Config solver_config){
+    return static_cast<_solver*>(this)->initialise_solver(solver_config);
+  };
 
   const Convergence_Data& solve(const Matrix_Sparse& matrix, Vector_Dense<0>& x_vector,
                                 const Vector_Dense<0>& b_vector){
@@ -50,8 +65,7 @@ public:
   };
 
 protected:
-  Solver_Config config;
-  Convergence_Data convergence_data;
+  _solver_data data;
 };
 
 

@@ -27,17 +27,30 @@
 
 namespace Disa {
 
+struct Solver_Fixed_Point_Data : public Solver_Data{
+};
+
+struct Solver_Fixed_Point_Jacobi_Data : public Solver_Data{
+  Vector_Dense<0> working;
+};
+
+struct Solver_Fixed_Point_Sor_Data : public Solver_Data{
+  Scalar relaxation{1.5};
+};
+
 /**
  * @class
  * @brief
  *
  */
-template<Solver_Type _solver_type>
-class Solver_Fixed_Point : public Solver_Iterative<Solver_Fixed_Point<_solver_type> > {
+template<Solver_Type _solver_type, class _solver_data>
+class Solver_Fixed_Point : public Solver_Iterative<Solver_Fixed_Point<_solver_type, _solver_data>, _solver_data> {
 
 public:
-  explicit Solver_Fixed_Point(Solver_Config config) : Solver_Iterative<Solver_Fixed_Point<_solver_type> >(config) {};
 
+  explicit Solver_Fixed_Point(Solver_Config config) : Solver_Iterative<Solver_Fixed_Point<_solver_type, _solver_data>, _solver_data >(config) {};
+
+  void initialise_solver(Solver_Config config);
 
   /**
    * @brief  basic jacobi
@@ -48,13 +61,12 @@ public:
    */
   const Convergence_Data& solve_system(const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector,
                                        const Vector_Dense<0>& b_vector);
-
-
-protected:
-  Vector_Dense<0> x_working;
 };
 
 }
+
+
+
 
 #include "solver_fixed_point.hpp"
 
