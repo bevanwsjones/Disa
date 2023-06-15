@@ -103,11 +103,12 @@ public:
   }
 
   Scalar source(const std::size_t i_node, const std::size_t size_x) {
+    // -2 [(1 - 6x^2)y^2(y^2 - 1) + (6y^2 - 1)x^2(1 - x^2)]
     const auto [co_ordinate_x, co_ordinate_y] = co_ordinate(i_node, size_x);
     const Scalar squared_x = co_ordinate_x*co_ordinate_x;
     const Scalar squared_y = co_ordinate_y*co_ordinate_y;
-    const Scalar soruce = 0.8*((1.0 - 6.0*squared_x)*squared_y*(1.0 - squared_y)
-                               + (1.0 - 6.0*squared_y)*squared_x*(1.0 - squared_x));
+    const Scalar soruce = -2.0*((1.0 - 6.0*squared_x)*squared_y*(squared_y - 1.0)
+                                + (6.0*squared_y - 1.0)*squared_x*(1.0 - squared_x));
     return soruce;
   }
 
@@ -124,7 +125,7 @@ public:
 
 
 
-    const Scalar k = 4;
+    const Scalar k = 1.0;
     const int size_xy = size_x*size_x;
     a_matrix_0.resize(size_xy, size_xy);
     x_vector.resize(size_xy, 0);
@@ -135,7 +136,7 @@ public:
 
     FOR(i_node, size_xy)
     {
-      b_vector_0[i_node] = delta_x_squared*source(i_node, size_x)/k;
+      b_vector_0[i_node] = source(i_node, size_x)/k;
 
       if((i_node) % size_x == 0 || (i_node + 1) % size_x == 0 || i_node < size_x || i_node >= (size_xy - size_x)) {
         FOR_EACH_REF(column, a_matrix_0[i_node]) column = 0.0;
@@ -144,11 +145,11 @@ public:
         b_vector_0[i_node] = analyitical_solution(i_node, size_x);
       }
       else {
-        if((i_node + size_x) < size_xy) a_matrix_0[i_node][i_node + size_x] = -1.0;
-        if(i_node%size_x != 0) a_matrix_0[i_node][i_node - 1] = -1.0;
-        a_matrix_0[i_node][i_node] = 4.0;
-        if((i_node + 1)%size_x != 0) a_matrix_0[i_node][i_node + 1] = -1.0;
-        if((i_node - size_x) >= 0) a_matrix_0[i_node][i_node - size_x] = -1.0;
+        if((i_node + size_x) < size_xy) a_matrix_0[i_node][i_node + size_x] = -1.0*delta_x_squared;
+        if(i_node%size_x != 0) a_matrix_0[i_node][i_node - 1] = -1.0*delta_x_squared;
+        a_matrix_0[i_node][i_node] = 4.0*delta_x_squared;
+        if((i_node + 1)%size_x != 0) a_matrix_0[i_node][i_node + 1] = -1.0*delta_x_squared;
+        if((i_node - size_x) >= 0) a_matrix_0[i_node][i_node - size_x] = -1.0*delta_x_squared;
 
       }
 
@@ -174,23 +175,32 @@ TEST_F(Laplace2DProblem, heat) {
   data.maximum_iterations = 1000;
   data.convergence_tolerance = 1.0e-11;
 
-  int size = 5;
+  int size = 40;
   const int size_xy = size*size;
   construct_2D_laplace_source(size);
+  FOR(i_node, x_vector.size())  x_vector[i_node] = analyitical_solution(i_node, size);
 
+  // writeout
   FOR(i_row, size_xy) {
-    std::cout <<"\n|";
-    FOR(i_column, size_xy) {
-      if(a_matrix_0.contains(i_row, i_column)) std::cout<<std::setw(7)<<a_matrix_0[i_row][i_column];
-      else std::cout<<"      .";
-    }
-    std::cout <<"|";
-    std::cout<<std::setw(7)<<x_vector[i_row];
+    //std::cout <<"\n|";
+    //FOR(i_column, size_xy) {
+    //  if(a_matrix_0.contains(i_row, i_column)) std::cout<<std::setw(7)<<a_matrix_0[i_row][i_column];
+    //  else std::cout<<"      .";
+    //}
+    //std::cout <<"|";
+    //std::cout<<std::setw(7)<<x_vector[i_row];
     //if(i_row%(i_row/2) == 0) std::cout<<" = ";
-    std::cout<<"   ";
-    std::cout<<std::setw(7)<<b_vector_0[i_row];
+    //std::cout<<"   ";
+    //std::cout<<std::setw(7)<<b_vector_0[i_row];
   }
 
+  //std::cout<<"\n";
+  Vector_Dense<0> residual_0 = a_matrix_0*x_vector - b_vector_0;
+  std::cout<<"\n"<<lp_norm<2>(residual_0);
+  //FOR(i_node, x_vector.size()) {
+  //  std::cout<<" "<<residual_0[i_node];
+  //}
+  exit(0);
 
   Solver solver = build_solver(data);
   Convergence_Data result = solver.solve(a_matrix_0, x_vector, b_vector_0);
@@ -198,7 +208,7 @@ TEST_F(Laplace2DProblem, heat) {
 
   std::cout<<"\n";
   std::vector<Scalar> residual(size_xy, std::numeric_limits<Scalar>::max());
-  std::vector<Scalar> residual_0 = a_matrix_0*x_vector - b_vector_0;
+  residual_0 = a_matrix_0*x_vector - b_vector_0;
   FOR(i_node, x_vector.size()) {
     residual[i_node] = x_vector[i_node] - analyitical_solution(i_node, size);
     std::cout<<x_vector[i_node]<<" | "<<analyitical_solution(i_node, size)<<"\n";

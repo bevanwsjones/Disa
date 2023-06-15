@@ -62,7 +62,32 @@ inline void reset_convergence_data(Convergence_Data& data){
 template<class _matrix, class _vector>
 std::pair<Scalar, Scalar> compute_residual(const _matrix& A, const _vector& x, const _vector& b, _vector& residual) {
   residual = A*x - b;
-  return {lp_norm<2>(residual), lp_norm<0>(residual)}; // <-- todo: do properly
+  Scalar l2_norm = 0.0;
+  Scalar linf_norm = 0.0;
+  uint size_residual = 0;
+
+
+  FOR(i_row, A.size_row()) {
+
+    bool is_diricheley_row = true;
+    Scalar row_residual = 0;
+    Scalar row_residual_squared = 0;
+
+    FOR_ITER(column_iter, A[i_row]) {
+      const auto& i_column = column_iter.i_column();
+      row_residual += *column_iter*x[i_column] - b[i_column];
+      row_residual_squared += std::pow(row_residual, 2);
+      if(is_diricheley_row && (i_row != i_column || *column_iter != 1.0)) is_diricheley_row = false;
+    }
+
+    if(!is_diricheley_row) {
+      l2_norm += row_residual_squared;
+      linf_norm += std::max(linf_norm, row_residual);
+      ++size_residual;
+    }
+  }
+
+  return {std::sqrt(l2_norm), linf_norm}; // <-- todo: do properly
 }
 
 template<class _matrix, class _vector>
