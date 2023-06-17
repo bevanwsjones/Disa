@@ -30,7 +30,7 @@ TEST(test_vector_operators, lp_norm) {
   Vector_Dense<0> dynamic_vector = {1.0, -2.0, 3.0, -4.0};
   Vector_Dense<4> static_vector = {1.0, 2.0, -3.0, 4.0};
 
-  EXPECT_DOUBLE_EQ(lp_norm<0>(dynamic_vector), 3.0);
+  EXPECT_DOUBLE_EQ(lp_norm<0>(dynamic_vector), 4.0);
   EXPECT_DOUBLE_EQ(lp_norm<0>(static_vector), 4.0);
   EXPECT_DOUBLE_EQ(lp_norm<1>(dynamic_vector), 10.0);
   EXPECT_DOUBLE_EQ(lp_norm<1>(static_vector), 10.0);
