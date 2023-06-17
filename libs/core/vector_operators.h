@@ -47,7 +47,8 @@ template<unsigned int _p_value, std::size_t _size>
 constexpr Scalar lp_norm(const Vector_Dense<_size>& vector) {
   switch(_p_value) {
     case 0:
-      return *std::max_element(vector.begin(), vector.end());
+      return std::abs(*std::max_element(vector.begin(), vector.end(),
+                                        [](Scalar a, Scalar b) { return std::abs(a) < std::abs(b); }));
     case 1:
       return std::accumulate(vector.begin(), vector.end(), 0.0, [](Scalar a, Scalar b) { return a + std::abs(b); });
     case 2:
