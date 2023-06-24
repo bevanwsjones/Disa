@@ -21,7 +21,13 @@ code.
 
 ## File Layout Conventions
 
-_- Template definitions must be placed inside a `.hpp` file, unless inlined._
+### hpp Files
+- Template definitions must be placed inside a `.hpp` file, unless inlined.
+- `.hpp` files must only be included in their corresponding `.h` file.
+- `.hpp` files should be included outside all `namespace`s.
+- `using namespace` may not be used globally withing an `.hpp` file.
+- Do not place header guards inside `.hpp` files.
+- Do not include any files inside an `.hpp` file.
 
 ## Technical Conventions:
 
@@ -42,11 +48,12 @@ In order to keep the project ordered and consistent some conventions regarding n
 
 \* subject to know/accepted short hands below:
 
-| Abbreviation | Expanded  |
-|--------------|-----------| 
-| iter         | iteration |
-| min          | minimum   |
-| max          | maximum   |
+| Abbreviation | Expanded    |
+|--------------|-------------| 
+| coef         | coefficient |
+| iter         | iteration   |
+| min          | minimum     |
+| max          | maximum     |
 
 ## Documentation and Commenting
 
