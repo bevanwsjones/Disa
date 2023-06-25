@@ -71,9 +71,15 @@ void Convergence_Data::updated(const _matrix& coef, const _vector& solution, con
 template<class _matrix, class _vector>
 std::pair<Scalar, Scalar> compute_residual(const _matrix& coef, const _vector& solution, const _vector& constant) {
 
+  // Check sizes
+  ASSERT_DEBUG(solution.size() != 0 && constant.size() != 0 , "System size is 0.");
+  ASSERT_DEBUG(coef.size_row() == solution.size(),
+               "Coefficient matrix row size incompatible with solution vector size.");
+  ASSERT_DEBUG(coef.size_column() == constant.size(),
+               "Coefficient matrix column size incompatible with constant vector size.");
+
   Scalar l2_norm = 0.0;
   Scalar linf_norm = 0.0;
-
   for(auto i_row = 0; i_row < coef.size_row(); ++i_row) {
     Scalar matrix_vector_row = 0;
     for(auto column_iter = coef[i_row].cbegin(); column_iter != coef[i_row].cend(); ++column_iter)
@@ -86,7 +92,7 @@ std::pair<Scalar, Scalar> compute_residual(const _matrix& coef, const _vector& s
   }
 
   // 'Weight' the l_2 norm and return both norms.
-  return {std::sqrt(l2_norm/static_cast<Scalar>(solution.size())), linf_norm};
+  return {std::sqrt(l2_norm/static_cast<Scalar>(solution.size())), std::sqrt(linf_norm)};
 }
 
 }
