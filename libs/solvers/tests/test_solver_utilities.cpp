@@ -15,21 +15,20 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: iterative_solvers.cpp
-// Description: Contains the class definitions for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
+// File Name:
+// Description:
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "solver_iterative.h"
+#include "gtest/gtest.h"
 
-#include "matrix_sparse.h"
-#include "vector_operators.h"
+#include "solver_utilities.h"
 
-namespace Disa {
+using namespace Disa;
 
+TEST(solver_utilites, compute_residual) {
 
-/**
- * @details basic jacobi
- */
-//const Convergence_Data& Iterative_Solver::solve_system(const Matrix_Sparse& matrix, Vector_Dense<0>& x_vector,
-//                                                       const Vector_Dense<0>& b_vector)
+}
+
+TEST(solver_utilites, update_convergence) {
+
 }

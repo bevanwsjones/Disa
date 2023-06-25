@@ -23,7 +23,6 @@
 #define DISA_SOLVER_FIXED_POINT_H
 
 #include "solver_iterative.h"
-#include "solver_type.h"
 
 namespace Disa {
 
@@ -59,9 +58,13 @@ public:
    * @param b_vector
    * @return
    */
-  const Convergence_Data& solve_system(const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector,
+  Convergence_Data solve_system(const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector,
                                        const Vector_Dense<0>& b_vector);
 };
+
+typedef Solver_Fixed_Point<Solver_Type::jacobi, Solver_Fixed_Point_Jacobi_Data> Solver_Jacobi;
+typedef Solver_Fixed_Point<Solver_Type::gauss_seidel, Solver_Fixed_Point_Data> Solver_Gauss_Seidel;
+typedef Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Solver_Fixed_Point_Sor_Data> Sover_Sor;
 
 }
 

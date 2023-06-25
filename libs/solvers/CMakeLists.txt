@@ -24,11 +24,10 @@
 set(SOURCES
         solver.h
         solver_iterative.h
-        solver_iterative.cpp
         solver_fixed_point.h
         solver_fixed_point.hpp
-        solver_type.h
-        solver_utilities.h)
+        solver_utilities.h
+        solver_utilities.hpp)
 
 set(LIBRARIES
         core
@@ -51,5 +50,9 @@ if(ENABLE_TEST)
   add_executable(test_solver tests/test_solver.cpp)
   target_link_libraries(test_solver GTest::gtest_main solvers)
   gtest_discover_tests(test_solver)
+
+  add_executable(test_solver_utilities tests/test_solver_utilities.cpp)
+  target_link_libraries(test_solver_utilities GTest::gtest_main solvers)
+  gtest_discover_tests(test_solver_utilities)
 
 endif ()
