@@ -22,7 +22,6 @@
 #ifndef DISA_SOLVER_ITERATIVE_H
 #define DISA_SOLVER_ITERATIVE_H
 
-#include "solver_type.h"
 #include "solver_utilities.h"
 #include "vector_dense.h"
 
@@ -33,14 +32,8 @@ namespace Disa {
 // Forward declarations
 class Matrix_Sparse;
 
-struct Convergence_Limits{
-  std::size_t max_iteration{std::numeric_limits<std::size_t>::max()};
-  Scalar tolerance{scalar_max};
-};
-
 struct Solver_Data {
-  Convergence_Data convergence;
-  Convergence_Limits limits;
+  Convergence_Criteria limits;
 };
 
 /**

@@ -25,8 +25,6 @@
 #include "matrix_dense.h"
 
 #include "solver.h"
-#include "solver_iterative.h"
-#include "solver_fixed_point.h"
 
 using namespace Disa;
 
@@ -228,14 +226,14 @@ TEST_F(Laplace2DProblem, iterative_solver_test) {
 
   std::fill(x_vector.begin(), x_vector.end(), 10.0);
   Convergence_Data result = solver.solve(a_matrix, x_vector, b_vector);
-  std::cout<<"\nJ:  "<<result.iteration<<"\t"<<result.residual;
+  std::cout<<"\nJ:  "<<result.iteration<<"\t"<<result.residual_normalised<<"\t"<<result.duration.count()<<"us";
   std::cout<<"\n";
 
   data.type = Solver_Type::gauss_seidel;
   solver = build_solver(data);
   std::fill(x_vector.begin(), x_vector.end(), 10.0);
   result = solver.solve(a_matrix, x_vector, b_vector);
-  std::cout<<"\nGS:  "<<result.iteration<<"\t"<<result.residual;
+  std::cout<<"\nGS:  "<<result.iteration<<"\t"<<result.residual_normalised<<"\t"<<result.duration.count()<<"us";
   std::cout<<"\n";
 
   data.type = Solver_Type::successive_over_relaxation;
@@ -243,7 +241,7 @@ TEST_F(Laplace2DProblem, iterative_solver_test) {
   solver = build_solver(data);
   std::fill(x_vector.begin(), x_vector.end(), 10.0);
   result = solver.solve(a_matrix, x_vector, b_vector);
-  std::cout<<"\nSOR: "<<result.iteration<<"\t"<<result.residual;
+  std::cout<<"\nSOR: "<<result.iteration<<"\t"<<result.residual_normalised<<"\t"<<result.duration.count()<<"us";
   std::cout<<"\n";
 
 

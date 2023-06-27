@@ -16,7 +16,7 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
 // File Name: solver_utilities.h
-// Description: todo
+// Description: Contains the declarations of common solver related objects and functions.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_SOLVER_UTILITIES_H
@@ -27,94 +27,143 @@
 #include "vector_dense.h"
 #include "vector_operators.h"
 
-#include <vector>
+#include <chrono>
 
 namespace Disa {
 
-struct Convergence_Data {
-  std::size_t iteration{0};
+// ---------------------------------------------------------------------------------------------------------------------
+// Solver Configuration
+// ---------------------------------------------------------------------------------------------------------------------
 
-  Scalar b_l2_norm{0};
-
-  Scalar residual{scalar_max};
-  Scalar residual_0{scalar_max};
-  Scalar residual_relative{0};
-
-  Scalar residual_max{scalar_max};
-  Scalar residual_max_0{scalar_max};
-  Scalar residual_max_relative{0};
+/**
+ * @enum Solver_Type
+ * @brief Enumerated list of all linear solvers in Disa.
+ */
+enum class Solver_Type {
+  jacobi,                       //!< The Jacobi fixed point iterative solver.
+  gauss_seidel,                 //!< The Gauss Seidel fixed point iterative solver.
+  successive_over_relaxation,   //!< The Successive Over Relaxation fixed point iterative solver.
+  unknown                       //!< Uninitialised/Unknown solver.
 };
 
-inline void reset_convergence_data(Convergence_Data& data){
-  data.iteration = 0;
+/**
+ * @struct Solver_Config
+ * @brief Contains all possible configurations for all solvers in Disa.
+ */
+struct Solver_Config {
 
-  data.b_l2_norm = scalar_max;
+  // General Configuration
+  Solver_Type type {Solver_Type::unknown};   //!< The solver to construct.
 
-  data.residual = scalar_max;
-  data.residual_0 = scalar_max;
-  data.residual_relative = scalar_max;
+  // Convergence Configurations
+  std::size_t minimum_iterations {0};        //!< The minimum 'force' number of iterations during for a solve.
+  std::size_t maximum_iterations {0};        //!< The maximum allowable iterations during a solve.
+  Scalar convergence_tolerance {0};          //!< The convergence tolerance below which a solve is considered converged.
 
-  data.residual_max = scalar_max;
-  data.residual_max_0 = scalar_max;
-  data.residual_max_relative = scalar_max;
-}
+  // Iterative
+  Scalar SOR_relaxation {1.5};               //!< The relaxation factor for a  Successive Over Relaxation solver.
+};
 
-template<class _matrix, class _vector>
-std::pair<Scalar, Scalar> compute_residual(const _matrix& A, const _vector& x, const _vector& b, _vector& residual) {
-  residual = A*x - b;
-  Scalar l2_norm = 0.0;
-  Scalar linf_norm = 0.0;
-  uint size_residual = 0;
+// ---------------------------------------------------------------------------------------------------------------------
+// Convergence Tracking
+// ---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * @stuct Convergence_Data
+ * @brief Contains data to track the convergence progress of a solver.
+ *
+ * @details
+ * Typically returned by a solver after it has solved the linear system, and can be used to asses the performance of the
+ * solve. To this end the struct contains details, including the duration, the number of iterations, various scalar
+ * residuals of the solve. Solvers will typically update the struct by calling the update() method, which represents
+ * completion of an iteration.
+ *
+ * @note
+ * While the library remains under construction, the exact computation of the residual may vary. As such the details are
+ * deliberately excluded here and one should consult the update() method and its call stack.
+ */
+struct Convergence_Data {
 
-  FOR(i_row, A.size_row()) {
+  std::chrono::microseconds duration {0};                                              //!< The duration of the solve.
+  std::chrono::steady_clock::time_point start_time {std::chrono::steady_clock::now()}; //!< The time at which the object was created.
 
-    bool is_diricheley_row = true;
-    Scalar row_residual = 0;
-    Scalar row_residual_squared = 0;
+  std::size_t iteration {0};                      //!< The number of iterations performed by the solver
 
-    FOR_ITER(column_iter, A[i_row]) {
-      const auto& i_column = column_iter.i_column();
-      row_residual += *column_iter*x[i_column] - b[i_column];
-      row_residual_squared += std::pow(row_residual, 2);
-      if(is_diricheley_row && (i_row != i_column || *column_iter != 1.0)) is_diricheley_row = false;
-    }
+  Scalar residual {scalar_max};                   //!< The un-normalised weighted l2 norm of the residual vector.
+  Scalar residual_0 {scalar_max};                 //!< The initial l2 norm of the residual vector of the system (before the first solve).
+  Scalar residual_normalised {scalar_max};        //!< The l2 norm of the residual vector normalised to the l2 norm of the initial residual vector.
 
-    if(!is_diricheley_row) {
-      l2_norm += row_residual_squared;
-      linf_norm += std::max(linf_norm, row_residual);
-      ++size_residual;
-    }
+  Scalar residual_max {scalar_max};               //!< The un-normalised linf norm of the residual vector.
+  Scalar residual_max_0 {scalar_max};             //!< The initial l2 norm of the residual vector of the system (before the first solve).
+  Scalar residual_max_normalised {scalar_max};    //!< The linf norm of the residual vector normalised to the l2 norm of the initial residual vector.
+
+  /**
+   * @brief Updates the convergence state of a linear system (Ax = b) by computing various residual norms and data.
+   * @tparam _matrix Matrix type, dense/sparse/dynamic/static/etc, of A.
+   * @tparam _vector Vector type, dynamic/static, of x and b.
+   * @param[in] coef The (sparse) coefficient matrix of the linear system, A.
+   * @param[in] solution The solution vector of the linear system, x.
+   * @param[in] constant The constant vector of the linear system, b.
+   */
+  template<class _matrix, class _vector>
+  void updated(const _matrix& coef, const _vector& solution, const _vector& constant);
+};
+
+/**
+ * @struct Convergence_Criteria
+ * @brief Contains the criteria values against which convergence status can be assessed.
+ *
+ * @details
+ * This struct holds the values need to assess convergence of a solve. It is typically instances are created
+ * in the solvers themselves, and initialised on construction of the solver. The method is_converged is used to
+ * determine if a solve has converged. The criteria to satisfy convergence are as follows:
+ * 1. i > i_min
+ * 2. i < i_max
+ * 3. |r|_{2, n} < epsilon
+ * 4. |r|_inf < 10.0*epsilon
+ *
+ * where
+ * i is the number of iterations
+ * i_min is the minimum number of iterations.
+ * i_max is the maximum number of iterations.
+ * r is the residual vector of the linear system.
+ * epsilon is a user defined scalar tolerance.
+ * n ia the cardinality of the linear system (number of rows).
+ */
+struct Convergence_Criteria {
+
+  std::size_t min_iterations {0};                                         //!< The minimum number of iterations.
+  std::size_t max_iteration {std::numeric_limits<std::size_t>::max()};    //!< The maximum allowable number of iterations.
+  Scalar tolerance {scalar_max};                                          //!< The convergence tolerance.
+
+  /**
+   * @brief Checks the parsed convergence data against the criteria (see struct comment for the criteria).
+   * @param[in] data The convergence data (state) of the system.
+   * @return True if converged, else false.
+   */
+  [[nodiscard]] inline bool is_converged(const Convergence_Data& data) const {
+    if(data.iteration < min_iterations) return false;
+    if(data.iteration > max_iteration) return true;
+    if(data.residual_normalised > tolerance) return false;
+    if(data.residual_max_normalised > 10.0*tolerance) return false;
+    return true;
   }
+};
 
-  return {std::sqrt(l2_norm), linf_norm}; // <-- todo: do properly
-}
-
+/**
+ * @brief Efficiently computes various scalar residual's of a linear system, e.g. |r|= |Ax - b|
+ * @tparam _matrix Matrix type, dense/sparse/dynamic/static/etc, of A.
+ * @tparam _vector Vector type, dynamic/static, of x and b.
+ * @param[in] coef The (sparse) coefficient matrix of the linear system, A.
+ * @param[in] solution The solution vector of the linear system, x.
+ * @param[in] constant The constant vector of the linear system, b.
+ * @return The l2_norm (accounting for the system size, n) and l_inf norms of the residual vector, r.
+ */
 template<class _matrix, class _vector>
-void update_convergence(const _matrix& A, const _vector& x, const _vector& b, Convergence_Data& data) {
-
-  _vector residual;
-  std::tie(data.residual, data.residual_max) = compute_residual(A, x, b, residual);
-
-  if(!data.iteration) {
-    data.b_l2_norm = lp_norm<2>(b);
-    data.residual_0 = data.residual;
-    data.residual_max_0 = data.residual_max;
-  }
-  data.residual_relative = data.residual/data.residual_0;
-  data.residual_max_relative = data.residual_max/data.residual_max_0;
-
-  data.residual /= data.b_l2_norm;
-  data.residual_max /= data.b_l2_norm;
-
-  ++data.iteration;
-}
-
-
-
-
+std::pair<Scalar, Scalar> compute_residual(const _matrix& coef, const _vector& solution, const _vector& constant);
 
 }
 
+#include "solver_utilities.hpp"
 
 #endif //DISA_SOLVER_UTILITIES_H
