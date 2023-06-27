@@ -84,8 +84,8 @@ struct Solver_Config {
  */
 struct Convergence_Data {
 
-  std::chrono::microseconds duration {0};                                              //!< The duration of the solve.
-  std::chrono::steady_clock::time_point start_time {std::chrono::steady_clock::now()}; //!< The time at which the object was created.
+  std::chrono::microseconds duration {0};                                               //!< The duration of the solve.
+  std::chrono::steady_clock::time_point start_time {std::chrono::steady_clock::now()};  //!< The time at which the object was created.
 
   std::size_t iteration {0};                      //!< The number of iterations performed by the solver
 
@@ -106,7 +106,7 @@ struct Convergence_Data {
    * @param[in] constant The constant vector of the linear system, b.
    */
   template<class _matrix, class _vector>
-  void updated(const _matrix& coef, const _vector& solution, const _vector& constant);
+  void update(const _matrix& coef, const _vector& solution, const _vector& constant);
 };
 
 /**

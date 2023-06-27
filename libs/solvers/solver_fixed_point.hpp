@@ -65,7 +65,7 @@ Convergence_Data Solver_Fixed_Point<Solver_Type::jacobi, Solver_Fixed_Point_Jaco
   while(!data.limits.is_converged(convergence_data)) {
     forward_sweep(a_matrix, x_vector, data.working, b_vector, 1.0);
     std::swap(x_vector, data.working);
-    convergence_data.updated(a_matrix, x_vector, b_vector);
+    convergence_data.update(a_matrix, x_vector, b_vector);
   }
   return convergence_data;
 }
@@ -85,7 +85,7 @@ Convergence_Data Solver_Fixed_Point<Solver_Type::gauss_seidel, Solver_Fixed_Poin
   Convergence_Data convergence_data = Convergence_Data();
   while(!data.limits.is_converged(convergence_data)) {
     forward_sweep(a_matrix, x_vector, x_vector, b_vector, 1.0);
-    convergence_data.updated(a_matrix, x_vector, b_vector);
+    convergence_data.update(a_matrix, x_vector, b_vector);
   }
   return convergence_data;
 }
@@ -106,7 +106,7 @@ Convergence_Data Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Sol
   Convergence_Data convergence_data = Convergence_Data();
   while(!data.limits.is_converged(convergence_data)) {
     forward_sweep(a_matrix, x_vector, x_vector, b_vector, 1.5);
-    convergence_data.updated(a_matrix, x_vector, b_vector);
+    convergence_data.update(a_matrix, x_vector, b_vector);
   }
 
   return convergence_data;

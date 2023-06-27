@@ -31,7 +31,7 @@ namespace Disa {
  * iteration. The iteration counter is also incremented and the duration of the solver is updated.
  */
 template<class _matrix, class _vector>
-void Convergence_Data::updated(const _matrix& coef, const _vector& solution, const _vector& constant) {
+void Convergence_Data::update(const _matrix& coef, const _vector& solution, const _vector& constant) {
 
   std::tie(residual, residual_max) = compute_residual(coef, solution, constant);
 

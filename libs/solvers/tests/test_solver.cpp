@@ -93,8 +93,6 @@ public:
     }
   }
 
-
-
   std::pair<Scalar, Scalar> co_ordinate(const std::size_t i_node, const std::size_t size_x) {
     const Scalar delta_x = 1.0/static_cast<Scalar>(size_x - 1);
     return {(i_node % size_x)*delta_x, static_cast<Scalar>(static_cast<int>(i_node / size_x))*delta_x};
@@ -152,7 +150,6 @@ public:
       }
 
     }
-
   }
 
   void construct_1D_advection_diffusion(Scalar lower_bound, Scalar upper_bound, std::size_t max_nodes) {
