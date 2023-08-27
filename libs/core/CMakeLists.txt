@@ -47,9 +47,6 @@ if(ENABLE_TEST)
   set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
   FetchContent_MakeAvailable(googletest)
 
-  include(CTest)
-  include(GoogleTest)
-
   add_executable(test_matrix_dense tests/test_matrix_dense.cpp)
   target_link_libraries(test_matrix_dense GTest::gtest_main disa)
   gtest_discover_tests(test_matrix_dense)

@@ -44,9 +44,6 @@ target_include_directories(solvers INTERFACE .)
 
 if(ENABLE_TEST)
 
-  include(CTest)
-  include(GoogleTest)
-
   add_executable(test_solver tests/test_solver.cpp)
   target_link_libraries(test_solver GTest::gtest_main solvers)
   gtest_discover_tests(test_solver)
