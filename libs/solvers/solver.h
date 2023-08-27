@@ -16,19 +16,70 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
 // File Name: solver.h
-// Description:
+// Description: Contains the base definitions for the solver library.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_SOLVERS_H
 #define DISA_SOLVERS_H
 
+#include "solver_fixed_point.h"
+
+#include "scalar.h"
+#include "solver_utilities.h"
+
+#include "memory"
+
 namespace Disa{
 
-class Solver{
+// Forward declarations
+class Matrix_Sparse;
+template<std::size_t> class Vector_Dense;
 
-  void Solve();
+class Solver {
+public:
+
+  explicit Solver() = default;
+
+  std::variant<std::unique_ptr<Solver_Jacobi>,
+               std::unique_ptr<Solver_Gauss_Seidel>,
+               std::unique_ptr<Sover_Sor>,
+               std::nullptr_t> solver{nullptr};
+
+  Convergence_Data solve(const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector,
+                                const Vector_Dense<0>& b_vector) {
+
+    switch(solver.index()) {
+      case 0: return std::get<std::unique_ptr<Solver_Jacobi> >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 1: return std::get<std::unique_ptr<Solver_Gauss_Seidel> >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 2: return std::get<std::unique_ptr<Sover_Sor> >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      default:
+        ERROR("Unknown or uninitialized solver.");
+        exit(1);
+    }
+  };
 
 };
+
+inline Solver build_solver(Solver_Config config){
+  Solver solver;
+  switch(config.type) {
+    case Solver_Type::jacobi:
+      solver.solver = std::make_unique<Solver_Jacobi>(config);
+      break;
+    case Solver_Type::gauss_seidel:
+      solver.solver = std::make_unique<Solver_Gauss_Seidel>(config);
+      break;
+    case Solver_Type::successive_over_relaxation:
+      solver.solver = std::make_unique<Sover_Sor>(config);
+      break;
+    default:
+      ERROR("Undefined.");
+      exit(0);
+  }
+  return solver;
+}
+
+
 
 }
 

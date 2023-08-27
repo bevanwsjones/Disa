@@ -23,12 +23,20 @@
 
 set(SOURCES
         solver.h
-        solver.cpp
+        solver_iterative.h
+        solver_fixed_point.h
+        solver_fixed_point.hpp
+        solver_utilities.h
+        solver_utilities.hpp)
+
+set(LIBRARIES
+        core
         )
 
 add_library(solvers ${SOURCES})
 set_target_properties(solvers PROPERTIES LINKER_LANGUAGE CXX)
-target_include_directories(solvers PUBLIC .)
+target_link_libraries(solvers PUBLIC ${LIBRARIES})
+target_include_directories(solvers INTERFACE .)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Testing
@@ -39,5 +47,9 @@ if(ENABLE_TEST)
   add_executable(test_solver tests/test_solver.cpp)
   target_link_libraries(test_solver GTest::gtest_main solvers)
   gtest_discover_tests(test_solver)
+
+  add_executable(test_solver_utilities tests/test_solver_utilities.cpp)
+  target_link_libraries(test_solver_utilities GTest::gtest_main solvers)
+  gtest_discover_tests(test_solver_utilities)
 
 endif ()

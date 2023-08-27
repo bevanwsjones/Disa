@@ -25,6 +25,8 @@
 // Modifiers
 // ---------------------------------------------------------------------------------------------------------------------
 
+namespace Disa {
+
 /**
  * @details Loops over the data and determines the new offsets and which entries in vertex adjacent list need to be
  * removed, updating the offsets and recording the entries to be deleted. After which both the offset vector and the
@@ -52,10 +54,9 @@ void Adjacency_Graph::erase_if(_unary_predicate delete_vertex) {
       new_indexes[i_vertex_old] = i_vertex++;
       removed += std::count_if(adjacency.first, adjacency.second, delete_vertex);
       std::transform(adjacency.first, adjacency.second, begin_delete, delete_vertex);
-    }
-    else { // All adjacency entries need to be removed, since the vertex is to be removed.
+    } else { // All adjacency entries need to be removed, since the vertex is to be removed.
       removed += std::distance(adjacency.first, adjacency.second);
-      std::transform(begin_delete, end_delete, begin_delete, [](const auto){return true;});
+      std::transform(begin_delete, end_delete, begin_delete, [](const auto) { return true; });
     }
   }
   offset.back() -= removed;
@@ -63,18 +64,20 @@ void Adjacency_Graph::erase_if(_unary_predicate delete_vertex) {
   // Erase offset entries for the removed vertices.
   i_vertex = 0;
   offset.erase(std::remove_if(offset.begin(), offset.end(),
-                              [&](const auto){return i_vertex < size_vertex() ? delete_vertex(i_vertex++) : false;}),
+                              [&](const auto) { return i_vertex < size_vertex() ? delete_vertex(i_vertex++) : false; }),
                offset.end());
 
   // Erase removed vertices from the adjacency lists, and then relabel.
   i_vertex = 0;
   vertex_adjacent_list.erase(std::remove_if(vertex_adjacent_list.begin(), vertex_adjacent_list.end(),
-                                            [&](const auto){return adjacency_delete[i_vertex++];}),
+                                            [&](const auto) { return adjacency_delete[i_vertex++]; }),
                              vertex_adjacent_list.end());
   std::transform(vertex_adjacent_list.begin(), vertex_adjacent_list.end(), vertex_adjacent_list.begin(),
-                 [&](const auto& i_old_vertex){return new_indexes[i_old_vertex];});
+                 [&](const auto& i_old_vertex) { return new_indexes[i_old_vertex]; });
 
   ASSERT(offset.back() == vertex_adjacent_list.size(),
          "Total offsets no longer match vertex size while reducing to subgraph, " + std::to_string(offset.back())
          + " vs. " + std::to_string(vertex_adjacent_list.size()) + ".");
 };
+
+}
