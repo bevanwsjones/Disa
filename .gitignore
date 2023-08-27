@@ -32,6 +32,6 @@
 *.app
 
 # Directories
-./build
-./.idea
-./.vscode
+build/
+.idea/
+.vscode/
