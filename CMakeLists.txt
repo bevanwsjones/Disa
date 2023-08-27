@@ -37,6 +37,27 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDISA_DEBUG")
 add_compile_definitions("DISA_DEBUG")
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Compiler Setup
+# ----------------------------------------------------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Testing
+# ----------------------------------------------------------------------------------------------------------------------
+
+if(ENABLE_TEST)
+
+  include(FetchContent)
+  FetchContent_Declare(googletest GIT_REPOSITORY https://github.com/google/googletest.git GIT_TAG release-1.12.1)
+  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  FetchContent_MakeAvailable(googletest)
+
+  include(CTest)
+  include(GoogleTest)
+
+endif ()
+
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Project Setup
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -47,10 +68,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(${PROJECT_SOURCE_DIR}/libs/core)
 add_subdirectory(${PROJECT_SOURCE_DIR}/libs/graphing)
 add_subdirectory(${PROJECT_SOURCE_DIR}/libs/solvers)
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Compiler Setup
-# ----------------------------------------------------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Library Recipe
@@ -75,18 +92,3 @@ set_target_properties(disa PROPERTIES LINKER_LANGUAGE CXX)
 add_executable(example src/main.cpp ${SOURCES})
 target_link_libraries(example disa)
 
-# ----------------------------------------------------------------------------------------------------------------------
-# Testing
-# ----------------------------------------------------------------------------------------------------------------------
-
-if(ENABLE_TEST)
-
-  include(FetchContent)
-  FetchContent_Declare(googletest GIT_REPOSITORY https://github.com/google/googletest.git GIT_TAG release-1.12.1)
-  set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-  FetchContent_MakeAvailable(googletest)
-
-  include(CTest)
-  include(GoogleTest)
-
-endif ()
