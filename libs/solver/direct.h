@@ -15,8 +15,8 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: TODO: 
-// Description: TODO:
+// File Name: direct.h
+// Description: Base CRT class for the direct linear solvers. 
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_SOLVER_DIRECT_H
@@ -30,32 +30,47 @@
 
 namespace Disa {
 
-// Forward declarations
-class Matrix_Sparse;
-
 /**
- * @brief
+ * @class Direct
+ * @brief Direct Dense Linear Solver Base Class.
+ * 
+ * @tparam _solver The direct solver type, used to implement CRT. 
+ * @tparam _size The linear system size/dimension, if 0 a dynamically sized system is assumed.
  */
 template<class _solver, std::size_t _size>
 class Direct
 {
 
 public:
-  explicit Direct(const Solver_Config solver_config) {
-    initialise(solver_config);
+  /**
+   * @brief Construct a new Direct object
+   * @param config Configured solver congiguration object, containing parameters for the solver.
+   */
+  explicit Direct(const Solver_Config config) {
+    initialise(config);
   };
 
-  void initialise(Solver_Config solver_config){
-    return static_cast<_solver*>(this)->initialise_solver(solver_config);
+  /**
+   * @brief Initalises the solver, e.g. allocates memory, sets internal variables etc.
+   * @param[in] config Configured solver congiguration object, containing parameters for the solver.
+   */
+  void initialise(Solver_Config config){
+    return static_cast<_solver*>(this)->initialise_solver(config);
   };
 
+  /**
+   * @brief Solves the linear algebra system A*x=b.
+   * @param[in] coef 
+   * @param[out] solution 
+   * @param[in] constant 
+   * @return const Convergence_Data& 
+   */
   const Convergence_Data& solve(const Matrix_Dense<_size, _size>& matrix, Vector_Dense<_size>& x_vector,
                                 const Vector_Dense<_size>& b_vector){
     return static_cast<_solver*>(this)->solve_system(matrix, x_vector, b_vector);
   };
 
 };
-
 
 }
 

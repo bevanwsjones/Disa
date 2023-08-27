@@ -23,6 +23,7 @@
 
 set(SOURCES        
         direct_lower_upper_factorisation.h
+        direct_lower_upper_factorisation.hpp
         direct.h
         solver_fixed_point.h
         solver_fixed_point.cpp

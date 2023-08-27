@@ -296,7 +296,7 @@ TEST_F(Laplace2DProblem, direct_lower_upper_factorisation) {
   FOR(i_row, matrix.size_row()){
     std::cout<<"\n";
     FOR(i_coloumn, matrix.size_column())
-      std::cout<<std::setw(4)<<lu.lu_factorised[i_row][i_coloumn]<<", ";
+      {}//std::cout<<std::setw(4)<<lu.lu_factorised[i_row][i_coloumn]<<", ";
   }
 
 

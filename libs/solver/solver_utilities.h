@@ -40,10 +40,10 @@ namespace Disa {
  * @brief Enumerated list of all linear solvers in Disa.
  */
 enum class Solver_Type {
-  lower_upper_factorisation,                       //!< TODO:
-  jacobi,                       //!< The Jacobi fixed point iterative solver.
-  gauss_seidel,                 //!< The Gauss Seidel fixed point iterative solver.
-  successive_over_relaxation,   //!< The Successive Over Relaxation fixed point iterative solver.
+  lower_upper_factorisation,    //!< The Lower Upper Factorisation solver (Dense Systems).
+  jacobi,                       //!< The Jacobi fixed point iterative solver (Sparse Systems).
+  gauss_seidel,                 //!< The Gauss Seidel fixed point iterative solver (Sparse Systems).
+  successive_over_relaxation,   //!< The Successive Over Relaxation fixed point iterative solver (Sparse Systems).
   unknown                       //!< Uninitialised/Unknown solver.
 };
 
@@ -56,15 +56,16 @@ struct Solver_Config {
   // General Configuration
   Solver_Type type {Solver_Type::unknown};   //!< The solver to construct.
 
-  // ---------------------------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
   // Direct Solver Options
-  // ---------------------------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
 
-  bool pivot{true};
+  bool pivot{true};                           //!< For direct solvers, if pivoting of the system is allowed.
+  Scalar factor_tolerance{default_relative};  //!< The value below which diagonal entires shoud be considered zero.
 
-  // ---------------------------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
   // Iterative Solver Options
-  // ---------------------------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
 
   // Convergence Configurations 
   std::size_t minimum_iterations {0};        //!< The minimum 'force' number of iterations during for a solve.
