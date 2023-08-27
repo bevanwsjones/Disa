@@ -40,6 +40,7 @@ namespace Disa {
  * @brief Enumerated list of all linear solvers in Disa.
  */
 enum class Solver_Type {
+  lower_upper_factorisation,                       //!< TODO:
   jacobi,                       //!< The Jacobi fixed point iterative solver.
   gauss_seidel,                 //!< The Gauss Seidel fixed point iterative solver.
   successive_over_relaxation,   //!< The Successive Over Relaxation fixed point iterative solver.
@@ -55,7 +56,17 @@ struct Solver_Config {
   // General Configuration
   Solver_Type type {Solver_Type::unknown};   //!< The solver to construct.
 
-  // Convergence Configurations
+  // ---------------------------------------------------------------------------------------------------------------------
+  // Direct Solver Options
+  // ---------------------------------------------------------------------------------------------------------------------
+
+  bool pivot{true};
+
+  // ---------------------------------------------------------------------------------------------------------------------
+  // Iterative Solver Options
+  // ---------------------------------------------------------------------------------------------------------------------
+
+  // Convergence Configurations 
   std::size_t minimum_iterations {0};        //!< The minimum 'force' number of iterations during for a solve.
   std::size_t maximum_iterations {0};        //!< The maximum allowable iterations during a solve.
   Scalar convergence_tolerance {0};          //!< The convergence tolerance below which a solve is considered converged.

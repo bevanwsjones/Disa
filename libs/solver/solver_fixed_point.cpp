@@ -19,10 +19,14 @@
 //  Description:
 // ----------------------------------------------------------------------------------------------------------------------
 
+#include "matrix_sparse.h"
+#include "scalar.h"
+#include "solver_fixed_point.h"
+#include "vector_dense.h"
 
 namespace Disa {
 
-void forward_sweep(const Matrix_Sparse& a_matrix,
+inline void forward_sweep(const Matrix_Sparse& a_matrix,
                    const Vector_Dense<0>& x_vector, Vector_Dense<0>& x_update,
                    const Vector_Dense<0>& b_vector, const Scalar omega = 1) {
   // forward sweep
@@ -35,7 +39,7 @@ void forward_sweep(const Matrix_Sparse& a_matrix,
   }
 }
 
-void backward_sweep(const Matrix_Sparse& a_matrix,
+inline void backward_sweep(const Matrix_Sparse& a_matrix,
                    const Vector_Dense<0>& x_vector, Vector_Dense<0>& x_update,
                    const Vector_Dense<0>& b_vector, const Scalar omega = 1){
   // forward sweep
@@ -113,3 +117,4 @@ Convergence_Data Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Sol
 }
 
 }
+

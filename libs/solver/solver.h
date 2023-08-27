@@ -22,12 +22,12 @@
 #ifndef DISA_SOLVERS_H
 #define DISA_SOLVERS_H
 
-#include "solver_fixed_point.h"
-
+#include "direct_lower_upper_factorisation.h"
 #include "scalar.h"
+#include "solver_fixed_point.h"
 #include "solver_utilities.h"
 
-#include "memory"
+#include <memory>
 
 namespace Disa{
 
@@ -40,46 +40,46 @@ public:
 
   explicit Solver() = default;
 
-  std::variant<std::unique_ptr<Solver_Jacobi>,
+  std::variant<std::unique_ptr<Solver_LU<0> >,
+               std::unique_ptr<Solver_LUP<0> >,
+               std::unique_ptr<Solver_Jacobi>,
                std::unique_ptr<Solver_Gauss_Seidel>,
                std::unique_ptr<Sover_Sor>,
                std::nullptr_t> solver{nullptr};
 
   Convergence_Data solve(const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector,
-                                const Vector_Dense<0>& b_vector) {
+                         const Vector_Dense<0>& b_vector) {
 
     switch(solver.index()) {
-      case 0: return std::get<std::unique_ptr<Solver_Jacobi> >(solver)->solve_system(a_matrix, x_vector, b_vector);
-      case 1: return std::get<std::unique_ptr<Solver_Gauss_Seidel> >(solver)->solve_system(a_matrix, x_vector, b_vector);
-      case 2: return std::get<std::unique_ptr<Sover_Sor> >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 0: ERROR("LU solver does not support sparse matrices.");
+      case 1: ERROR("LUP solver does not support sparse matrices.");
+      case 2: return std::get<std::unique_ptr<Solver_Jacobi> >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 3: return std::get<std::unique_ptr<Solver_Gauss_Seidel> >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 4: return std::get<std::unique_ptr<Sover_Sor> >(solver)->solve_system(a_matrix, x_vector, b_vector);
       default:
         ERROR("Unknown or uninitialized solver.");
         exit(1);
-    }
+    }    
+  };
+
+  Convergence_Data solve(const Matrix_Dense<0, 0>& a_matrix, Vector_Dense<0>& x_vector,
+                         const Vector_Dense<0>& b_vector) {
+
+    switch(solver.index()) {
+      case 0: return std::get<std::unique_ptr<Solver_LU<0> > >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 1: return std::get<std::unique_ptr<Solver_LUP<0> > >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 2: ERROR("Jacobi solver does not support sparse matrices.");
+      case 3: ERROR("Gauss Seidel solver does not support sparse matrices.");
+      case 4: ERROR("SOR solver does not support sparse matrices.");
+      default:
+        ERROR("Unknown or uninitialized solver.");
+        exit(1);
+    }    
   };
 
 };
 
-inline Solver build_solver(Solver_Config config){
-  Solver solver;
-  switch(config.type) {
-    case Solver_Type::jacobi:
-      solver.solver = std::make_unique<Solver_Jacobi>(config);
-      break;
-    case Solver_Type::gauss_seidel:
-      solver.solver = std::make_unique<Solver_Gauss_Seidel>(config);
-      break;
-    case Solver_Type::successive_over_relaxation:
-      solver.solver = std::make_unique<Sover_Sor>(config);
-      break;
-    default:
-      ERROR("Undefined.");
-      exit(0);
-  }
-  return solver;
-}
-
-
+Solver build_solver(Solver_Config config);
 
 }
 

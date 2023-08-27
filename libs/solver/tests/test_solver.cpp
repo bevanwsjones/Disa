@@ -38,11 +38,15 @@ using namespace Disa;
 class Laplace2DProblem : public ::testing::Test
 {
 public:
-  Matrix_Sparse a_matrix;      //!< Sparse coefficient matrix of the linear system
-  Matrix_Sparse a_matrix_0;      //!< Sparse coefficient matrix of the linear system
+  Matrix_Sparse a_sparse;      //!< Sparse coefficient matrix of the linear system
+  Matrix_Sparse a_sparse_0;    //!< Sparse coefficient matrix of the linear system
   Vector_Dense<0> x_vector;    //!< Solution vector of the linear system.
   Vector_Dense<0> b_vector;    //!< Constant vector of the linear system.
-  Vector_Dense<0> b_vector_0;    //!< Constant vector of the linear system.
+  Vector_Dense<0> b_vector_0;  //!< Constant vector of the linear system.
+
+
+
+  Matrix_Dense<0,0> a_dense;    //!< Dense coefficient matrix of the linear system
 
   /**
    * @brief Calls below setup function with a mesh size of 100 grid points (10 on each axis).
@@ -78,18 +82,38 @@ public:
     ASSERT_DEBUG(size_x >= 3, "Must be greater than 3.");
 
     const int size_xy = size_x*size_x;
-    a_matrix.resize(size_xy, size_xy);
+    a_dense.resize(size_xy,size_xy);
+    a_sparse.resize(size_xy, size_xy);
     x_vector.resize(size_xy, 0);
     b_vector.resize(size_xy, std::pow(1.0/(size_x - 1.0), .0));
+
+    FOR(i_node_0, size_xy) FOR(i_node_1, size_xy) a_dense[i_node_0][i_node_1] = 0.0;
 
     // populate
     FOR(i_node, size_xy)
     {
-      if((i_node + size_x) < size_xy) a_matrix[i_node][i_node + size_x] = -1.0;
-      if(i_node%size_x != 0) a_matrix[i_node][i_node - 1] = -1.0;
-      a_matrix[i_node][i_node] = 4;
-      if((i_node + 1)%size_x != 0) a_matrix[i_node][i_node + 1] = -1.0;
-      if((i_node - size_x) >= 0) a_matrix[i_node][i_node - size_x] = -1.0;
+      if((i_node + size_x) < size_xy) {
+        a_dense[i_node][i_node + size_x] = -1.0;
+        a_sparse[i_node][i_node + size_x] = -1.0;
+      }
+
+      if(i_node%size_x != 0) {
+        a_dense[i_node][i_node - 1] = -1.0;
+        a_sparse[i_node][i_node - 1] = -1.0;
+      }
+
+      a_dense[i_node][i_node] = 4;
+      a_sparse[i_node][i_node] = 4;
+
+      if((i_node + 1)%size_x != 0) {
+        a_dense[i_node][i_node + 1] = -1.0;
+        a_sparse[i_node][i_node + 1] = -1.0;
+      }
+
+      if((i_node - size_x) >= 0) {
+        a_dense[i_node][i_node - size_x] = -1.0;
+        a_sparse[i_node][i_node - size_x] = -1.0;
+      }
     }
   }
 
@@ -119,11 +143,9 @@ public:
 
     ASSERT_DEBUG(size_x >= 3, "Must be greater than 3.");
 
-
-
     const Scalar k = 1.0;
     const int size_xy = size_x*size_x;
-    a_matrix_0.resize(size_xy, size_xy);
+    a_sparse_0.resize(size_xy, size_xy);
     x_vector.resize(size_xy, 0);
     b_vector_0.resize(size_xy, 0);
 
@@ -135,17 +157,17 @@ public:
       b_vector_0[i_node] = source(i_node, size_x)/k;
 
       if((i_node) % size_x == 0 || (i_node + 1) % size_x == 0 || i_node < size_x || i_node >= (size_xy - size_x)) {
-        FOR_EACH_REF(column, a_matrix_0[i_node]) column = 0.0;
-        a_matrix_0[i_node][i_node] = 1.0;
+        FOR_EACH_REF(column, a_sparse_0[i_node]) column = 0.0;
+        a_sparse_0[i_node][i_node] = 1.0;
         x_vector[i_node] = analyitical_solution(i_node, size_x);
         b_vector_0[i_node] = analyitical_solution(i_node, size_x);
       }
       else {
-        if((i_node + size_x) < size_xy) a_matrix_0[i_node][i_node + size_x] = -1.0*delta_x_squared;
-        if(i_node%size_x != 0) a_matrix_0[i_node][i_node - 1] = -1.0*delta_x_squared;
-        a_matrix_0[i_node][i_node] = 4.0*delta_x_squared;
-        if((i_node + 1)%size_x != 0) a_matrix_0[i_node][i_node + 1] = -1.0*delta_x_squared;
-        if((i_node - size_x) >= 0) a_matrix_0[i_node][i_node - size_x] = -1.0*delta_x_squared;
+        if((i_node + size_x) < size_xy) a_sparse_0[i_node][i_node + size_x] = -1.0*delta_x_squared;
+        if(i_node%size_x != 0) a_sparse_0[i_node][i_node - 1] = -1.0*delta_x_squared;
+        a_sparse_0[i_node][i_node] = 4.0*delta_x_squared;
+        if((i_node + 1)%size_x != 0) a_sparse_0[i_node][i_node + 1] = -1.0*delta_x_squared;
+        if((i_node - size_x) >= 0) a_sparse_0[i_node][i_node - size_x] = -1.0*delta_x_squared;
 
       }
 
@@ -164,51 +186,50 @@ public:
 TEST_F(Laplace2DProblem, heat) {
 
 
-  Solver_Config data;
-  data.type = Solver_Type::jacobi;
+  // Solver_Config data;
+  // data.type = Solver_Type::jacobi;
 
-  data.maximum_iterations = 1000;
-  data.convergence_tolerance = 1.0e-11;
+  // data.maximum_iterations = 1000;
+  // data.convergence_tolerance = 1.0e-11;
 
-  int size = 40;
-  const int size_xy = size*size;
-  construct_2D_laplace_source(size);
-  FOR(i_node, x_vector.size())  x_vector[i_node] = analyitical_solution(i_node, size);
+  // int size = 40;
+  // const int size_xy = size*size;
+  // construct_2D_laplace_source(size);
+  // FOR(i_node, x_vector.size())  x_vector[i_node] = analyitical_solution(i_node, size);
 
-  // writeout
-  FOR(i_row, size_xy) {
-    //std::cout <<"\n|";
-    //FOR(i_column, size_xy) {
-    //  if(a_matrix_0.contains(i_row, i_column)) std::cout<<std::setw(7)<<a_matrix_0[i_row][i_column];
-    //  else std::cout<<"      .";
-    //}
-    //std::cout <<"|";
-    //std::cout<<std::setw(7)<<x_vector[i_row];
-    //if(i_row%(i_row/2) == 0) std::cout<<" = ";
-    //std::cout<<"   ";
-    //std::cout<<std::setw(7)<<b_vector_0[i_row];
-  }
+  // // writeout
+  // FOR(i_row, size_xy) {
+  //   //std::cout <<"\n|";
+  //   //FOR(i_column, size_xy) {
+  //   //  if(a_matrix_0.contains(i_row, i_column)) std::cout<<std::setw(7)<<a_matrix_0[i_row][i_column];
+  //   //  else std::cout<<"      .";
+  //   //}
+  //   //std::cout <<"|";
+  //   //std::cout<<std::setw(7)<<x_vector[i_row];
+  //   //if(i_row%(i_row/2) == 0) std::cout<<" = ";
+  //   //std::cout<<"   ";
+  //   //std::cout<<std::setw(7)<<b_vector_0[i_row];
+  // }
 
-  //std::cout<<"\n";
-  Vector_Dense<0> residual_0 = a_matrix_0*x_vector - b_vector_0;
-  std::cout<<"\n"<<lp_norm<2>(residual_0);
-  //FOR(i_node, x_vector.size()) {
-  //  std::cout<<" "<<residual_0[i_node];
-  //}
-  exit(0);
+  // //std::cout<<"\n";
+  // Vector_Dense<0> residual_0 = a_sparse_0*x_vector - b_vector_0;
+  // std::cout<<"\n"<<lp_norm<2>(residual_0);
+  // //FOR(i_node, x_vector.size()) {
+  // //  std::cout<<" "<<residual_0[i_node];
+  // //}
 
-  Solver solver = build_solver(data);
-  Convergence_Data result = solver.solve(a_matrix_0, x_vector, b_vector_0);
-  std::cout<<"\nSOR: "<<result.iteration<<"\t"<<result.residual;
+  // Solver solver = build_solver(data);
+  // Convergence_Data result = solver.solve(a_sparse_0, x_vector, b_vector_0);
+  // std::cout<<"\nSOR: "<<result.iteration<<"\t"<<result.residual;
 
-  std::cout<<"\n";
-  std::vector<Scalar> residual(size_xy, std::numeric_limits<Scalar>::max());
-  residual_0 = a_matrix_0*x_vector - b_vector_0;
-  FOR(i_node, x_vector.size()) {
-    residual[i_node] = x_vector[i_node] - analyitical_solution(i_node, size);
-    std::cout<<x_vector[i_node]<<" | "<<analyitical_solution(i_node, size)<<"\n";
-  }
-  std::cout<<"\n";
+  // std::cout<<"\n";
+  // std::vector<Scalar> residual(size_xy, std::numeric_limits<Scalar>::max());
+  // residual_0 = a_sparse_0*x_vector - b_vector_0;
+  // FOR(i_node, x_vector.size()) {
+  //   residual[i_node] = x_vector[i_node] - analyitical_solution(i_node, size);
+  //   std::cout<<x_vector[i_node]<<" | "<<analyitical_solution(i_node, size)<<"\n";
+  // }
+  // std::cout<<"\n";
 
 
 }
@@ -222,14 +243,14 @@ TEST_F(Laplace2DProblem, iterative_solver_test) {
   Solver solver = build_solver(data);
 
   std::fill(x_vector.begin(), x_vector.end(), 10.0);
-  Convergence_Data result = solver.solve(a_matrix, x_vector, b_vector);
+  Convergence_Data result = solver.solve(a_sparse, x_vector, b_vector);
   std::cout<<"\nJ:  "<<result.iteration<<"\t"<<result.residual_normalised<<"\t"<<result.duration.count()<<"us";
   std::cout<<"\n";
 
   data.type = Solver_Type::gauss_seidel;
   solver = build_solver(data);
   std::fill(x_vector.begin(), x_vector.end(), 10.0);
-  result = solver.solve(a_matrix, x_vector, b_vector);
+  result = solver.solve(a_sparse, x_vector, b_vector);
   std::cout<<"\nGS:  "<<result.iteration<<"\t"<<result.residual_normalised<<"\t"<<result.duration.count()<<"us";
   std::cout<<"\n";
 
@@ -237,9 +258,54 @@ TEST_F(Laplace2DProblem, iterative_solver_test) {
   data.SOR_relaxation = 1.5;
   solver = build_solver(data);
   std::fill(x_vector.begin(), x_vector.end(), 10.0);
-  result = solver.solve(a_matrix, x_vector, b_vector);
+  result = solver.solve(a_sparse, x_vector, b_vector);
   std::cout<<"\nSOR: "<<result.iteration<<"\t"<<result.residual_normalised<<"\t"<<result.duration.count()<<"us";
   std::cout<<"\n";
 
 
+}
+
+TEST_F(Laplace2DProblem, direct_lower_upper_factorisation) {
+  SetUp(3);
+  Solver_Config data;
+  data.type = Solver_Type::lower_upper_factorisation;
+  data.pivot = true;
+  Solver solver = build_solver(data);
+  Solver_LUP<0> lu(data);
+
+
+
+  Matrix_Dense<0, 0> matrix = {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}};
+  Vector_Dense<0> vector = {6, 2, 7};
+    std::cout<<"\n solve: ";
+  lu.solve_system(matrix, x_vector, vector);
+
+    std::cout<<"\n vector: ";
+  FOR(i_row, a_dense.size_row()) std::cout<<std::setw(2)<<vector[i_row]<<", ";
+  
+  std::cout<<"\n original: ";
+  
+  FOR(i_row, matrix.size_row()){
+    std::cout<<"\n";
+    FOR(i_coloumn, matrix.size_column())
+      std::cout<<std::setw(4)<<matrix[i_row][i_coloumn]<<", ";
+  }
+    std::cout<<"\n factored: ";
+
+
+  FOR(i_row, matrix.size_row()){
+    std::cout<<"\n";
+    FOR(i_coloumn, matrix.size_column())
+      std::cout<<std::setw(4)<<lu.lu_factorised[i_row][i_coloumn]<<", ";
+  }
+
+
+
+  std::cout<<"\n";
+
+  Convergence_Data result = solver.solve(matrix, x_vector, vector);
+  FOR(i_node, x_vector.size()) {
+    std::cout<<x_vector[i_node]<<" | "<<analyitical_solution(i_node, 10)<<"\n";
+  }
+  
 }

@@ -21,22 +21,26 @@
 # Library Definition
 # ----------------------------------------------------------------------------------------------------------------------
 
-set(SOURCES
-        solver.h
-        solver_iterative.h
+set(SOURCES        
+        direct_lower_upper_factorisation.h
+        direct.h
         solver_fixed_point.h
-        solver_fixed_point.hpp
+        solver_fixed_point.cpp
+        solver_iterative.h
         solver_utilities.h
-        solver_utilities.hpp)
+        solver_utilities.hpp
+        solver.h
+        solver.cpp
+        )
 
 set(LIBRARIES
         core
         )
 
-add_library(solvers ${SOURCES})
-set_target_properties(solvers PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(solvers PUBLIC ${LIBRARIES})
-target_include_directories(solvers INTERFACE .)
+add_library(solver ${SOURCES})
+target_link_libraries(solver ${LIBRARIES})
+set_target_properties(solver PROPERTIES LINKER_LANGUAGE CXX)
+target_include_directories(solver PUBLIC .)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Testing
@@ -45,11 +49,11 @@ target_include_directories(solvers INTERFACE .)
 if(ENABLE_TEST)
 
   add_executable(test_solver tests/test_solver.cpp)
-  target_link_libraries(test_solver GTest::gtest_main solvers)
+  target_link_libraries(test_solver GTest::gtest_main solver)
   gtest_discover_tests(test_solver)
 
   add_executable(test_solver_utilities tests/test_solver_utilities.cpp)
-  target_link_libraries(test_solver_utilities GTest::gtest_main solvers)
+  target_link_libraries(test_solver_utilities GTest::gtest_main solver)
   gtest_discover_tests(test_solver_utilities)
 
 endif ()

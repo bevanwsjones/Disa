@@ -15,13 +15,14 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: iterative_solvers.h
-// Description: Contains the class declarations for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
+// File Name: TODO: 
+// Description: TODO:
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_SOLVER_ITERATIVE_H
-#define DISA_SOLVER_ITERATIVE_H
+#ifndef DISA_SOLVER_DIRECT_H
+#define DISA_SOLVER_DIRECT_H
 
+#include "matrix_dense.h"
 #include "solver_utilities.h"
 #include "vector_dense.h"
 
@@ -32,19 +33,15 @@ namespace Disa {
 // Forward declarations
 class Matrix_Sparse;
 
-struct Solver_Data {
-  Convergence_Criteria limits;
-};
-
 /**
  * @brief
  */
-template<class _solver, class _solver_data>
-class Solver_Iterative
+template<class _solver, std::size_t _size>
+class Direct
 {
 
 public:
-  explicit Solver_Iterative(const Solver_Config solver_config) {
+  explicit Direct(const Solver_Config solver_config) {
     initialise(solver_config);
   };
 
@@ -52,16 +49,14 @@ public:
     return static_cast<_solver*>(this)->initialise_solver(solver_config);
   };
 
-  const Convergence_Data& solve(const Matrix_Sparse& matrix, Vector_Dense<0>& x_vector,
-                                const Vector_Dense<0>& b_vector){
+  const Convergence_Data& solve(const Matrix_Dense<_size, _size>& matrix, Vector_Dense<_size>& x_vector,
+                                const Vector_Dense<_size>& b_vector){
     return static_cast<_solver*>(this)->solve_system(matrix, x_vector, b_vector);
   };
 
-protected:
-  _solver_data data;
 };
 
 
 }
 
-#endif //DISA_SOLVER_ITERATIVE_H
+#endif //DISA_SOLVER_DIRECT_H
