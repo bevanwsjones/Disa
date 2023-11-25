@@ -81,7 +81,7 @@ struct Solver_Config {
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @stuct Convergence_Data
+ * @struct Convergence_Data
  * @brief Contains data to track the convergence progress of a solver.
  *
  * @details
