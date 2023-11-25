@@ -35,6 +35,12 @@ namespace Disa{
 class Matrix_Sparse;
 template<std::size_t> class Vector_Dense;
 
+/**
+ * @brief Solver
+ * @brief General Solver Class for all solver types.
+ * 
+ * This class serves at a 'all in one' solver class for both sparse and dense systems. To acheive 
+ */
 class Solver {
 public:
 
@@ -62,12 +68,11 @@ public:
     }    
   };
 
-  Convergence_Data solve(const Matrix_Dense<0, 0>& a_matrix, Vector_Dense<0>& x_vector,
-                         const Vector_Dense<0>& b_vector) {
+  Convergence_Data solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) {
 
     switch(solver.index()) {
-      case 0: return std::get<std::unique_ptr<Solver_LU<0> > >(solver)->solve_system(a_matrix, x_vector, b_vector);
-      case 1: return std::get<std::unique_ptr<Solver_LUP<0> > >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 0: return std::get<std::unique_ptr<Solver_LU<0> > >(solver)->solve_system(x_vector, b_vector);
+      case 1: return std::get<std::unique_ptr<Solver_LUP<0> > >(solver)->solve_system(x_vector, b_vector);
       case 2: ERROR("Jacobi solver does not support sparse matrices.");
       case 3: ERROR("Gauss Seidel solver does not support sparse matrices.");
       case 4: ERROR("SOR solver does not support sparse matrices.");

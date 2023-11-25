@@ -99,7 +99,7 @@ struct Convergence_Data {
   std::chrono::microseconds duration {0};                                               //!< The duration of the solve.
   std::chrono::steady_clock::time_point start_time {std::chrono::steady_clock::now()};  //!< The time at which the object was created.
 
-  std::size_t iteration {0};                      //!< The number of iterations performed by the solver
+  std::size_t iteration {0};                      //!< The number of iterations performed by the solver.
 
   Scalar residual {scalar_max};                   //!< The un-normalised weighted l2 norm of the residual vector.
   Scalar residual_0 {scalar_max};                 //!< The initial l2 norm of the residual vector of the system (before the first solve).

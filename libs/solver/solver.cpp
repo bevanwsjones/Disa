@@ -27,7 +27,7 @@ Solver build_solver(Solver_Config config) {
   Solver solver;
   switch(config.type) {
     case Solver_Type::lower_upper_factorisation:
-      if (config.pivot) solver.solver = std::make_unique<Solver_LUP<0> >(config);
+      if(config.pivot) solver.solver = std::make_unique<Solver_LUP<0> >(config);
       else solver.solver = std::make_unique<Solver_LU<0> >(config);
       break;
     case Solver_Type::jacobi:
