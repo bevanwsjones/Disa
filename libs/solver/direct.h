@@ -42,6 +42,17 @@ class Direct
 {
 
 public:
+
+  /**
+   * @brief Creates a default Direct Solver.
+   */
+  explicit Direct() = default;
+
+  /**
+   * @brief Destroy the Direct Solver.
+   */
+   ~Direct() = default;
+
   /**
    * @brief Construct a new Direct object
    * @param config Configured solver configuration object, containing parameters for the solver.
@@ -77,6 +88,14 @@ public:
   const Convergence_Data& solve(Vector_Dense<_size>& x_vector, const Vector_Dense<_size>& b_vector){
     return static_cast<_solver*>(this)->solve_system(x_vector, b_vector);
   };
+
+  /**
+   * @brief Get the configuration of the solver.
+   * @return A configuration object with the solvers state.
+   */
+  const Solver_Config get_config() {
+    return static_cast<_solver*>(this)->get_config();
+  }
 
 };
 

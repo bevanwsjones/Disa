@@ -46,7 +46,12 @@ class Direct_Lower_Upper_Factorisation
 : public Direct<Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>, _size > {
 
 public:
-
+    /**
+   * @brief Construct a new Direct_Lower_Upper_Factorisation object
+   * @param[in] config The configuration for the LU solver to use.
+   */
+  explicit Direct_Lower_Upper_Factorisation() = default;
+  
   /**
    * @brief Construct a new Direct_Lower_Upper_Factorisation object
    * @param[in] config The configuration for the LU solver to use.
@@ -61,6 +66,7 @@ public:
    * @param[in] config The configuration for the LU solver to use.
    */
   void initialise_solver(Solver_Config config) {
+    ASSERT(config.type == _solver_type, "Miss-match between config tpye and LU/LUP selection.");
     ASSERT(config.pivot == _pivot, "Miss-match between config pivoting and LU/LUP selection.");
     factorisation_tolerance = config.factor_tolerance;
   };
@@ -83,11 +89,23 @@ public:
    */
   Convergence_Data solve_system(Vector_Dense<_size>& x_vector, const Vector_Dense<_size>& b_vector);
 
+  /**
+   * @brief Gets the current configuration of the solver.
+   * @return A configuration object, containing the current solver configuration.
+   */
+  constexpr Solver_Config get_config() {
+    Solver_Config config;
+    config.type = _solver_type;
+    config.pivot = _pivot;
+    config.factor_tolerance = factorisation_tolerance;
+    return config;
+  }
+
   private:
-  bool factorised{false};
-  Scalar factorisation_tolerance;             //<! The value below which diagonal entires should be considered zero.
-  Matrix_Dense<_size, _size> lu_factorised;   //<! The factorised LU coefficient matrix (implicit 1's on diagonal of L).
-  std::vector<std::size_t> pivots;            //<! The pivots indicies, is only sized for LUP solver.
+  bool factorised{false};                             //<! Has factorisation been completed successfully. 
+  Scalar factorisation_tolerance{default_absolute};   //<! The value below which diagonal entires should be considered zero.
+  Matrix_Dense<_size, _size> lu_factorised;           //<! The factorised LU coefficient matrix (implicit 1's on diagonal of L).
+  std::vector<std::size_t> pivots;                    //<! The pivots indicies, is only sized for LUP solver.
 };
 
 template<std::size_t _size>

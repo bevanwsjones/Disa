@@ -70,9 +70,6 @@ public:
     const int x_nodes = sqrt(number_of_nodes);
 
     a_matrix *= 0.0;
-    b_vector *= 0.0;
-    x_vector *= 0.0;
-
     const Disa::Scalar delta_x = static_cast<Disa::Scalar>(1.0/(x_nodes - 1.0));
     const Disa::Scalar delta_x_squared = 1.0/(delta_x*delta_x);
 
@@ -81,7 +78,7 @@ public:
     {
       b_vector[i_node] = source(i_node, x_nodes);
       x_vector[i_node] = analytical_solution(i_node, x_nodes);
-
+      
       if((i_node) % x_nodes == 0 || (i_node + 1) % x_nodes == 0 || i_node < x_nodes || i_node >= (number_of_nodes - x_nodes)) {
         FOR_EACH_REF(column, a_matrix[i_node]) column = 0.0;
         a_matrix[i_node][i_node] = 1.0;

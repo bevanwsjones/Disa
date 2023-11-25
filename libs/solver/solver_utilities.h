@@ -96,6 +96,8 @@ struct Solver_Config {
  */
 struct Convergence_Data {
 
+  bool converged{false};                          //!< Is the system converged.
+
   std::chrono::microseconds duration {0};                                               //!< The duration of the solve.
   std::chrono::steady_clock::time_point start_time {std::chrono::steady_clock::now()};  //!< The time at which the object was created.
 

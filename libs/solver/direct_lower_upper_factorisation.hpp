@@ -126,6 +126,8 @@ Convergence_Data Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>::
             x_vector[i_row] -= lu_factorised[i_row][i_column] * x_vector[i_column];
         x_vector[i_row] /= lu_factorised[i_row][i_row];
     }
+  
+  convergence_data.converged = true;
   return convergence_data;
 }
   
