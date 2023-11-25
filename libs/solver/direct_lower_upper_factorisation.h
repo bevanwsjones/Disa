@@ -16,7 +16,7 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
 // File Name: direct_lower_upper_factorisation.h
-// Description: TODO:
+// Description: Contains the declaration of the direct lower upper factorisation solver.
 // ---------------------------------------------------------------------------------------------------------------------
 
 
@@ -35,11 +35,11 @@ namespace Disa {
 
 /**
  * @class Direct_Lower_Upper_Factorisation
- * @brief Implements the Lower Upper Factoriation Linear Solver for dense linear systems. 
+ * @brief Implements the Lower Upper Factorisation Linear Solver for dense linear systems. 
  * 
  * @tparam _solver_type 
  * @tparam _size Size of the system being solver, if zero assumed dynamically sized system.
- * @tparam _pivot Is the solver allowed to use pivoting when factorising (recommened true).
+ * @tparam _pivot Is the solver allowed to use pivoting when factorising (recommended true).
  */
 template<Solver_Type _solver_type, std::size_t _size, bool _pivot>
 class Direct_Lower_Upper_Factorisation 
@@ -49,7 +49,7 @@ public:
 
   /**
    * @brief Construct a new Direct_Lower_Upper_Factorisation object
-   * @param config 
+   * @param[in] config The configuration for the LU solver to use.
    */
   explicit Direct_Lower_Upper_Factorisation(Solver_Config config) 
   : Direct<Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>, _size >(config) {
@@ -57,37 +57,36 @@ public:
   };
 
   /**
-   * @brief  
-   * @param config 
+   * @brief Initialises the solve, copying in the relevant config data.
+   * @param[in] config The configuration for the LU solver to use.
    */
   void initialise_solver(Solver_Config config) {
     factorisation_tolerance = config.factor_tolerance;
   };
 
   /**
-   * @brief  
-   * @param a_matrix
-   * @param x_vector
-   * @param b_vector
-   * @return
+   * @brief Factorises the coefficient matrix, using LU(P) factorisation.
+   * @param[in] a_matrix The coefficient matrix to factorise.
+   * @return True if the matrix was factorised successfully, else false for singular matrices.
    */
-  Convergence_Data solve_system(const Matrix_Dense<_size, _size>& a_matrix, Vector_Dense<_size>& x_vector, 
-                                const Vector_Dense<_size>& b_vector);
-
-  private:
-
-  Scalar factorisation_tolerance;            
-  Matrix_Dense<_size, _size> lu_factorised;   //<! 
-  std::vector<std::size_t> pivots;            //<!
+  bool factorise(const Matrix_Dense<_size, _size>& a_matrix);
 
   /**
-   * @brief 
-   * @param a_matrix 
-   * @param tolerance 
-   * @return true 
-   * @return false 
+   * @brief Solves the linear system, using the solver's internally stored factorised coefficient matrix. 
+   * @param[out] x_vector The solution vector, will be resized and modified, inital value is irrelevant.
+   * @param[in] b_vector The constant vector, appropriate to the coefficient matrix which was factorised.
+   * @return A Convergence_Data object detailing the solve status.
+   * 
+   * @warning The factorise function must have been called before this function, and returned true for a correct solver 
+   * to occur.
    */
-  bool factorise(const Matrix_Dense<_size, _size>& a_matrix, Scalar tolerance = scalar_epsilon*10000.0);
+  Convergence_Data solve_system(Vector_Dense<_size>& x_vector, const Vector_Dense<_size>& b_vector);
+
+  private:
+  bool factorised{false};
+  Scalar factorisation_tolerance;             //<! The value below which diagonal entires should be considered zero.
+  Matrix_Dense<_size, _size> lu_factorised;   //<! The factorised LU coefficient matrix (implicit 1's on diagonal of L).
+  std::vector<std::size_t> pivots;            //<! The pivots indicies, is only sized for LUP solver.
 };
 
 template<std::size_t _size>

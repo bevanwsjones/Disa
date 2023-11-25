@@ -44,30 +44,38 @@ class Direct
 public:
   /**
    * @brief Construct a new Direct object
-   * @param config Configured solver congiguration object, containing parameters for the solver.
+   * @param config Configured solver configuration object, containing parameters for the solver.
    */
   explicit Direct(const Solver_Config config) {
     initialise(config);
   };
 
   /**
-   * @brief Initalises the solver, e.g. allocates memory, sets internal variables etc.
-   * @param[in] config Configured solver congiguration object, containing parameters for the solver.
+   * @brief Initialises the solver, e.g. allocates memory, sets internal variables etc.
+   * @param[in] config Configured solver configuration object, containing parameters for the solver.
    */
   void initialise(Solver_Config config){
     return static_cast<_solver*>(this)->initialise_solver(config);
   };
 
   /**
-   * @brief Solves the linear algebra system A*x=b.
-   * @param[in] coef 
-   * @param[out] solution 
-   * @param[in] constant 
-   * @return const Convergence_Data& 
+   * @brief Factorises the coefficient matrix. 
+   * @param[in] a_matrix The coefficient matrix to factorise.
+   * @return True if the matrix was factorised successfully, else false.
    */
-  const Convergence_Data& solve(const Matrix_Dense<_size, _size>& matrix, Vector_Dense<_size>& x_vector,
-                                const Vector_Dense<_size>& b_vector){
-    return static_cast<_solver*>(this)->solve_system(matrix, x_vector, b_vector);
+  bool factorise(const Matrix_Dense<_size, _size>& a_matrix);
+
+  /**
+   * @brief Solves the linear system, using the solver's internally stored factorised coefficient matrix. 
+   * @param[out] x_vector The solution vector, will be resized and modified, inital value is irrelevant.
+   * @param[in] b_vector The constant vector, appropriate to the coefficient matrix which was factorised.
+   * @return A Convergence_Data object detailing the solve status.
+   * 
+   * @warning The factorise function must have been called before this function, and returned true for a correct solver 
+   * to occur.
+   */
+  const Convergence_Data& solve(Vector_Dense<_size>& x_vector, const Vector_Dense<_size>& b_vector){
+    return static_cast<_solver*>(this)->solve_system(x_vector, b_vector);
   };
 
 };
