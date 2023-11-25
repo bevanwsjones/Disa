@@ -53,7 +53,7 @@ public:
    */
   explicit Direct_Lower_Upper_Factorisation(Solver_Config config) 
   : Direct<Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>, _size >(config) {
-    initialise_solver(Solver_Config config);
+    initialise_solver(config);
   };
 
   /**
@@ -61,6 +61,7 @@ public:
    * @param[in] config The configuration for the LU solver to use.
    */
   void initialise_solver(Solver_Config config) {
+    ASSERT(config.pivot == _pivot, "Miss-match between config pivoting and LU/LUP selection.");
     factorisation_tolerance = config.factor_tolerance;
   };
 

@@ -50,6 +50,7 @@ In order to keep the project ordered and consistent some conventions regarding n
 
 | Abbreviation | Expanded      |
 |--------------|---------------| 
+| abs          | absolute      |
 | config       | configuration |
 | coef         | coefficient   |
 | i_           | index         |

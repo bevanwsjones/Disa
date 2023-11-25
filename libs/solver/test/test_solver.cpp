@@ -132,7 +132,7 @@ public:
     return soruce;
   }
 
-  Scalar analyitical_solution(const std::size_t i_node, const std::size_t size_x) {
+  Scalar analytical_solution(const std::size_t i_node, const std::size_t size_x) {
     const auto [co_ordinate_x, co_ordinate_y] = co_ordinate(i_node, size_x);
     const Scalar squared_x = co_ordinate_x*co_ordinate_x;
     const Scalar squared_y = co_ordinate_y*co_ordinate_y;
@@ -159,8 +159,8 @@ public:
       if((i_node) % size_x == 0 || (i_node + 1) % size_x == 0 || i_node < size_x || i_node >= (size_xy - size_x)) {
         FOR_EACH_REF(column, a_sparse_0[i_node]) column = 0.0;
         a_sparse_0[i_node][i_node] = 1.0;
-        x_vector[i_node] = analyitical_solution(i_node, size_x);
-        b_vector_0[i_node] = analyitical_solution(i_node, size_x);
+        x_vector[i_node] = analytical_solution(i_node, size_x);
+        b_vector_0[i_node] = analytical_solution(i_node, size_x);
       }
       else {
         if((i_node + size_x) < size_xy) a_sparse_0[i_node][i_node + size_x] = -1.0*delta_x_squared;
@@ -170,12 +170,7 @@ public:
         if((i_node - size_x) >= 0) a_sparse_0[i_node][i_node - size_x] = -1.0*delta_x_squared;
 
       }
-
     }
-  }
-
-  void construct_1D_advection_diffusion(Scalar lower_bound, Scalar upper_bound, std::size_t max_nodes) {
-
   }
 };
 
@@ -195,7 +190,7 @@ TEST_F(Laplace2DProblem, heat) {
   // int size = 40;
   // const int size_xy = size*size;
   // construct_2D_laplace_source(size);
-  // FOR(i_node, x_vector.size())  x_vector[i_node] = analyitical_solution(i_node, size);
+  // FOR(i_node, x_vector.size())  x_vector[i_node] = analytical_solution(i_node, size);
 
   // // writeout
   // FOR(i_row, size_xy) {
@@ -226,8 +221,8 @@ TEST_F(Laplace2DProblem, heat) {
   // std::vector<Scalar> residual(size_xy, std::numeric_limits<Scalar>::max());
   // residual_0 = a_sparse_0*x_vector - b_vector_0;
   // FOR(i_node, x_vector.size()) {
-  //   residual[i_node] = x_vector[i_node] - analyitical_solution(i_node, size);
-  //   std::cout<<x_vector[i_node]<<" | "<<analyitical_solution(i_node, size)<<"\n";
+  //   residual[i_node] = x_vector[i_node] - analytical_solution(i_node, size);
+  //   std::cout<<x_vector[i_node]<<" | "<<analytical_solution(i_node, size)<<"\n";
   // }
   // std::cout<<"\n";
 
@@ -263,49 +258,4 @@ TEST_F(Laplace2DProblem, iterative_solver_test) {
   std::cout<<"\n";
 
 
-}
-
-TEST_F(Laplace2DProblem, direct_lower_upper_factorisation) {
-  SetUp(3);
-  Solver_Config data;
-  data.type = Solver_Type::lower_upper_factorisation;
-  data.pivot = true;
-  Solver solver = build_solver(data);
-  Solver_LUP<0> lu(data);
-
-
-
-  Matrix_Dense<0, 0> matrix = {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}};
-  Vector_Dense<0> vector = {6, 2, 7};
-    std::cout<<"\n solve: ";
-  lu.solve_system(matrix, x_vector, vector);
-
-    std::cout<<"\n vector: ";
-  FOR(i_row, a_dense.size_row()) std::cout<<std::setw(2)<<vector[i_row]<<", ";
-  
-  std::cout<<"\n original: ";
-  
-  FOR(i_row, matrix.size_row()){
-    std::cout<<"\n";
-    FOR(i_coloumn, matrix.size_column())
-      std::cout<<std::setw(4)<<matrix[i_row][i_coloumn]<<", ";
-  }
-    std::cout<<"\n factored: ";
-
-
-  FOR(i_row, matrix.size_row()){
-    std::cout<<"\n";
-    FOR(i_coloumn, matrix.size_column())
-      {}//std::cout<<std::setw(4)<<lu.lu_factorised[i_row][i_coloumn]<<", ";
-  }
-
-
-
-  std::cout<<"\n";
-
-  Convergence_Data result = solver.solve(matrix, x_vector, vector);
-  FOR(i_node, x_vector.size()) {
-    std::cout<<x_vector[i_node]<<" | "<<analyitical_solution(i_node, 10)<<"\n";
-  }
-  
 }

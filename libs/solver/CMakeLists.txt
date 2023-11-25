@@ -22,16 +22,16 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 set(SOURCES        
-        direct_lower_upper_factorisation.h
-        direct_lower_upper_factorisation.hpp
-        direct.h
-        solver_fixed_point.h
-        solver_fixed_point.cpp
-        solver_iterative.h
-        solver_utilities.h
-        solver_utilities.hpp
-        solver.h
-        solver.cpp
+        "direct_lower_upper_factorisation.h"
+        "direct_lower_upper_factorisation.hpp"
+        "direct.h"
+        "solver_fixed_point.h"
+        "solver_fixed_point.cpp"
+        "solver_iterative.h"
+        "solver_utilities.h"
+        "solver_utilities.hpp"
+        "solver.h"
+        "solver.cpp"
         )
 
 set(LIBRARIES
@@ -49,11 +49,19 @@ target_include_directories(solver PUBLIC .)
 
 if(ENABLE_TEST)
 
-  add_executable(test_solver tests/test_solver.cpp)
+set(TEST_PROBLEMS 
+        "test/laplace_2d.h")
+
+  add_executable(test_direct "test/test_direct.cpp" ${TEST_PROBLEMS})
+  target_link_libraries(test_direct GTest::gtest_main solver)
+  gtest_discover_tests(test_direct)
+
+
+  add_executable(test_solver "test/test_solver.cpp")
   target_link_libraries(test_solver GTest::gtest_main solver)
   gtest_discover_tests(test_solver)
 
-  add_executable(test_solver_utilities tests/test_solver_utilities.cpp)
+  add_executable(test_solver_utilities "test/test_solver_utilities.cpp")
   target_link_libraries(test_solver_utilities GTest::gtest_main solver)
   gtest_discover_tests(test_solver_utilities)
 

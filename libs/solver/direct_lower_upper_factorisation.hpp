@@ -75,13 +75,12 @@ bool Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>::factorise(
       if (i_max != i_row) {
           std::swap(pivots[i_row], pivots[i_max]);
           std::swap(lu_factorised[i_row], lu_factorised[i_max]);
-          ++pivots.back();
       }
     }
     
     // Check degeneracy.
-    if(lu_factorised[i_row][i_row] < factorisation_tolerance) return false; 
-
+    if(std::abs(lu_factorised[i_row][i_row]) < factorisation_tolerance) return false; 
+    
     // Decomposition, actual factorisation to compute L and U.
     for(std::size_t i_row_sweep = i_row + 1; i_row_sweep < lu_factorised.size_row(); ++i_row_sweep) {
         lu_factorised[i_row_sweep][i_row] /= lu_factorised[i_row][i_row];
