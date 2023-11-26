@@ -23,17 +23,9 @@
 
 #include "matrix_sparse.h"
 #include "matrix_dense.h"
-
 #include "solver.h"
 
-#include "laplace_2d.h"
-
 using namespace Disa;
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Testing Fixture Setup
-// ---------------------------------------------------------------------------------------------------------------------
-
 class direct_solvers : public ::testing::Test {
 
   public: 
@@ -52,39 +44,7 @@ class direct_solvers : public ::testing::Test {
     data.pivot = true;
     lup_solver.initialise(data);
   }
-
 };
-
-TEST_F(direct_solvers, lower_upper_factorisation_laplace_2d) {
-
-  Vector_Dense<0> b_vector;
-  Vector_Dense<0> x_analytical;
-  Vector_Dense<0> x_vector;
-  Matrix_Dense<0, 0> a_matrix;
-
-  std::size_t m_node = 100;
-  b_vector.resize(m_node);
-  x_analytical.resize(m_node);
-  x_vector.resize(m_node);
-  a_matrix.resize(m_node, m_node);
-  Solver_Config data;
-  data.type = Solver_Type::lower_upper_factorisation;
-  data.pivot = false;  
-  Solver_LU<0> lup(data);
-  Laplace_2D builder; 
-  builder.construct_laplace_2d(a_matrix, b_vector, x_analytical);
-
-  lup.factorise(a_matrix);
-  lup.solve_system(x_vector, b_vector);
- 
-
-
-  // FOR(i_row, matrix.size_row()){
-  //   std::cout<<"\n";
-  //   FOR(i_coloumn, matrix.size_column())
-  //     {}std::cout<<std::setw(4)<<lup.lu_factorised[i_row][i_coloumn]<<", ";
-  // }
-}
 
 TEST_F(direct_solvers, lower_upper_factorisation_initialise) {
 
@@ -147,7 +107,7 @@ TEST_F(direct_solvers, lower_upper_factorisation_not_factorised) {
   EXPECT_FALSE(lup_solver.solve_system(x_vector, b_vector).converged);  
 }
 
-TEST_F(direct_solvers, lower_upper_factorisation) {
+TEST_F(direct_solvers, lower_upper_factorise_solve) {
 
   // Setup linear system (source https://lampx.tugraz.at/~hadley/num/ch2/2.3a.php)
   Matrix_Dense<0, 0> matrix = {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}};
