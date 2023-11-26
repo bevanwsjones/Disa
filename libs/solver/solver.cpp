@@ -15,53 +15,36 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: iterative_solvers.h
-// Description: Contains the class declarations for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
+// File Name: solver.cpp
+// Description: Contains the base definitions for the solver library.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_SOLVER_ITERATIVE_H
-#define DISA_SOLVER_ITERATIVE_H
-
-#include "solver_utilities.h"
-#include "vector_dense.h"
-
-#include <variant>
+#include "solver.h"
 
 namespace Disa {
-
-// Forward declarations
-class Matrix_Sparse;
-
-struct Solver_Data {
-  Convergence_Criteria limits;
-};
-
-/**
- * @brief
- */
-template<class _solver, class _solver_data>
-class Solver_Iterative
-{
-
-public:
-  explicit Solver_Iterative(const Solver_Config solver_config) {
-    initialise(solver_config);
-  };
-
-  void initialise(Solver_Config solver_config){
-    return static_cast<_solver*>(this)->initialise_solver(solver_config);
-  };
-
-  const Convergence_Data& solve(const Matrix_Sparse& matrix, Vector_Dense<0>& x_vector,
-                                const Vector_Dense<0>& b_vector){
-    return static_cast<_solver*>(this)->solve_system(matrix, x_vector, b_vector);
-  };
-
-protected:
-  _solver_data data;
-};
-
-
+    
+Solver build_solver(Solver_Config config) {
+  Solver solver;
+  switch(config.type) {
+    case Solver_Type::lower_upper_factorisation:
+      if(config.pivot) solver.solver = std::make_unique<Solver_LUP<0> >(config);
+      else solver.solver = std::make_unique<Solver_LU<0> >(config);
+      break;
+    case Solver_Type::jacobi:
+      solver.solver = std::make_unique<Solver_Jacobi>(config);
+      break;
+    case Solver_Type::gauss_seidel:
+      solver.solver = std::make_unique<Solver_Gauss_Seidel>(config);
+      break;
+    case Solver_Type::successive_over_relaxation:
+      solver.solver = std::make_unique<Sover_Sor>(config);
+      break;
+    default:
+      ERROR("Undefined.");
+      exit(0);
+  }
+  return solver;
 }
 
-#endif //DISA_SOLVER_ITERATIVE_H
+
+} // namespace Disa

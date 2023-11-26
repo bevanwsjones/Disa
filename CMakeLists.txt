@@ -68,7 +68,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/libs/core)
 add_subdirectory(${PROJECT_SOURCE_DIR}/libs/graphing)
-add_subdirectory(${PROJECT_SOURCE_DIR}/libs/solvers)
+add_subdirectory(${PROJECT_SOURCE_DIR}/libs/solver)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Library Recipe
@@ -83,7 +83,7 @@ set(SOURCES
 set(LIBRARIES
         core
         graphing
-        solvers
+        solver
         )
 
 add_library(disa ${SOURCES})

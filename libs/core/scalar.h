@@ -43,7 +43,7 @@ inline constexpr Scalar scalar_max = std::numeric_limits<Scalar>::max();        
 inline constexpr Scalar scalar_min = std::numeric_limits<Scalar>::min();             //!< Alias for scalar min
 
 inline constexpr Scalar default_absolute = static_cast<Scalar>(64)*scalar_epsilon;       //!< Global for default absolute equality check, 'reasonably over 2 orders of epsilon.
-inline constexpr Scalar default_relative = static_cast<Scalar>(65536)*scalar_epsilon;    //!< Global for default relative equality check, 'reasonably over 2 orders of epsilon.
+inline constexpr Scalar default_relative = static_cast<Scalar>(65536)*scalar_epsilon;    //!< Global for default relative equality check, 'reasonably over 4 orders of epsilon.
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Equality Checks

@@ -68,9 +68,4 @@ typedef Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Solver_Fixed
 
 }
 
-
-
-
-#include "solver_fixed_point.hpp"
-
 #endif //DISA_SOLVER_FIXED_POINT_H

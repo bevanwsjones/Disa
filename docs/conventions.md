@@ -48,12 +48,15 @@ In order to keep the project ordered and consistent some conventions regarding n
 
 \* subject to know/accepted short hands below:
 
-| Abbreviation | Expanded    |
-|--------------|-------------| 
-| coef         | coefficient |
-| iter         | iteration   |
-| min          | minimum     |
-| max          | maximum     |
+| Abbreviation | Expanded      |
+|--------------|---------------| 
+| abs          | absolute      |
+| config       | configuration |
+| coef         | coefficient   |
+| i_           | index         |
+| iter         | iteration     |
+| min          | minimum       |
+| max          | maximum       |
 
 ## Documentation and Commenting
 

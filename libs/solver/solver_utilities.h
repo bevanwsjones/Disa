@@ -40,9 +40,10 @@ namespace Disa {
  * @brief Enumerated list of all linear solvers in Disa.
  */
 enum class Solver_Type {
-  jacobi,                       //!< The Jacobi fixed point iterative solver.
-  gauss_seidel,                 //!< The Gauss Seidel fixed point iterative solver.
-  successive_over_relaxation,   //!< The Successive Over Relaxation fixed point iterative solver.
+  lower_upper_factorisation,    //!< The Lower Upper Factorisation solver (Dense Systems).
+  jacobi,                       //!< The Jacobi fixed point iterative solver (Sparse Systems).
+  gauss_seidel,                 //!< The Gauss Seidel fixed point iterative solver (Sparse Systems).
+  successive_over_relaxation,   //!< The Successive Over Relaxation fixed point iterative solver (Sparse Systems).
   unknown                       //!< Uninitialised/Unknown solver.
 };
 
@@ -55,7 +56,18 @@ struct Solver_Config {
   // General Configuration
   Solver_Type type {Solver_Type::unknown};   //!< The solver to construct.
 
-  // Convergence Configurations
+  // -------------------------------------------------------------------------------------------------------------------
+  // Direct Solver Options
+  // -------------------------------------------------------------------------------------------------------------------
+
+  bool pivot{true};                           //!< For direct solvers, if pivoting of the system is allowed.
+  Scalar factor_tolerance{default_relative};  //!< The value below which diagonal entires shoud be considered zero.
+
+  // -------------------------------------------------------------------------------------------------------------------
+  // Iterative Solver Options
+  // -------------------------------------------------------------------------------------------------------------------
+
+  // Convergence Configurations 
   std::size_t minimum_iterations {0};        //!< The minimum 'force' number of iterations during for a solve.
   std::size_t maximum_iterations {0};        //!< The maximum allowable iterations during a solve.
   Scalar convergence_tolerance {0};          //!< The convergence tolerance below which a solve is considered converged.
@@ -69,7 +81,7 @@ struct Solver_Config {
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @stuct Convergence_Data
+ * @struct Convergence_Data
  * @brief Contains data to track the convergence progress of a solver.
  *
  * @details
@@ -84,10 +96,12 @@ struct Solver_Config {
  */
 struct Convergence_Data {
 
+  bool converged{false};                          //!< Is the system converged.
+
   std::chrono::microseconds duration {0};                                               //!< The duration of the solve.
   std::chrono::steady_clock::time_point start_time {std::chrono::steady_clock::now()};  //!< The time at which the object was created.
 
-  std::size_t iteration {0};                      //!< The number of iterations performed by the solver
+  std::size_t iteration {0};                      //!< The number of iterations performed by the solver.
 
   Scalar residual {scalar_max};                   //!< The un-normalised weighted l2 norm of the residual vector.
   Scalar residual_0 {scalar_max};                 //!< The initial l2 norm of the residual vector of the system (before the first solve).

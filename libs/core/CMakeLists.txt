@@ -48,23 +48,23 @@ if(ENABLE_TEST)
   FetchContent_MakeAvailable(googletest)
 
   add_executable(test_matrix_dense tests/test_matrix_dense.cpp)
-  target_link_libraries(test_matrix_dense GTest::gtest_main disa)
+  target_link_libraries(test_matrix_dense GTest::gtest_main core)
   gtest_discover_tests(test_matrix_dense)
 
   add_executable(test_matrix_sparse tests/test_matrix_sparse.cpp)
-  target_link_libraries(test_matrix_sparse GTest::gtest_main disa)
+  target_link_libraries(test_matrix_sparse GTest::gtest_main core)
   gtest_discover_tests(test_matrix_sparse)
 
   add_executable(test_scalar tests/test_scalar.cpp)
-  target_link_libraries(test_scalar GTest::gtest_main disa)
+  target_link_libraries(test_scalar GTest::gtest_main core)
   gtest_discover_tests(test_scalar)
 
   add_executable(test_vector_dense tests/test_vector_dense.cpp)
-  target_link_libraries(test_vector_dense GTest::gtest_main disa)
+  target_link_libraries(test_vector_dense GTest::gtest_main core)
   gtest_discover_tests(test_vector_dense)
 
   add_executable(test_vector_operators tests/test_vector_operators.cpp)
-  target_link_libraries(test_vector_operators GTest::gtest_main disa)
+  target_link_libraries(test_vector_operators GTest::gtest_main core)
   gtest_discover_tests(test_vector_operators)
 
 endif ()
