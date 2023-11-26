@@ -74,7 +74,7 @@ public:
   /**
    * @brief Factorises the coefficient matrix, using LU(P) factorisation.
    * @param[in] a_matrix The coefficient matrix to factorise.
-   * @return True if the matrix was factorised successfully, else false for singular matrices.
+   * @return True if the matrix was factorised successfully, else false for degenerate/singular matrices.
    */
   bool factorise(const Matrix_Dense<_size, _size>& a_matrix);
 
