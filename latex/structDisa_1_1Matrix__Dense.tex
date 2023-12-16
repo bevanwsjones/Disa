@@ -1,4 +1,4 @@
-\hypertarget{structDisa_1_1Matrix__Dense}{}\doxysection{Disa\+::Matrix\+\_\+\+Dense\texorpdfstring{$<$}{<} \+\_\+row, \+\_\+col \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structDisa_1_1Matrix__Dense}{}\doxysection{Disa\+::Matrix\+\_\+\+Dense$<$ \+\_\+row, \+\_\+col $>$ Struct Template Reference}
 \label{structDisa_1_1Matrix__Dense}\index{Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}}
 
 
@@ -9,23 +9,37 @@ Mathematical matrix, of dimension \+\_\+row x \+\_\+col, where every matrix elem
 
 {\ttfamily \#include $<$matrix\+\_\+dense.\+h$>$}
 
-Inheritance diagram for Disa\+::Matrix\+\_\+\+Dense\texorpdfstring{$<$}{<} \+\_\+row, \+\_\+col \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+
+
+Inheritance diagram for Disa\+::Matrix\+\_\+\+Dense$<$ \+\_\+row, \+\_\+col $>$\+:
+\nopagebreak
+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{structDisa_1_1Matrix__Dense}
+\includegraphics[width=215pt]{structDisa_1_1Matrix__Dense__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Disa\+::Matrix\+\_\+\+Dense$<$ \+\_\+row, \+\_\+col $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{structDisa_1_1Matrix__Dense__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}\label{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}} 
-using {\bfseries \+\_\+matrix} = \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$
+using \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} = \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$
 \begin{DoxyCompactList}\small\item\em Short hand for this matrix type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structDisa_1_1Matrix__Dense_ae4a1dd898406cda4ecf5effc369734f3}\label{structDisa_1_1Matrix__Dense_ae4a1dd898406cda4ecf5effc369734f3}} 
-{\bfseries Matrix\+\_\+\+Dense} ()
+\mbox{\hyperlink{structDisa_1_1Matrix__Dense_ae4a1dd898406cda4ecf5effc369734f3}{Matrix\+\_\+\+Dense}} ()
 \begin{DoxyCompactList}\small\item\em Initialise empty matrix. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structDisa_1_1Matrix__Dense_acf829b1ca069663aa02e69b4aab459e1}{Matrix\+\_\+\+Dense}} (const std\+::initializer\+\_\+list$<$ \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+col $>$ $>$ \&list)
 \begin{DoxyCompactList}\small\item\em Constructor to construct from initializer of vectors list, list and matrix must be of the same dimensions. \end{DoxyCompactList}\item 
@@ -35,29 +49,30 @@ constexpr std\+::size\+\_\+t \mbox{\hyperlink{structDisa_1_1Matrix__Dense_afe6c7
 \begin{DoxyCompactList}\small\item\em Returns the number of rows in the matrix. \end{DoxyCompactList}\item 
 constexpr std\+::size\+\_\+t \mbox{\hyperlink{structDisa_1_1Matrix__Dense_ae9a843a950949a96e47e6f31e7311e2f}{size\+\_\+column}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the number of columns in the matrix. \end{DoxyCompactList}\item 
-constexpr std\+::pair$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ \mbox{\hyperlink{structDisa_1_1Matrix__Dense_a4e9dbacdb8a470c806c20120c0a5f97b}{size}} () const noexcept
+constexpr std\+::pair$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ \mbox{\hyperlink{structDisa_1_1Matrix__Dense_ae96be719199b9d5f9b5778b062cf66e5}{size}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the number of rows and columns in the matrix. \end{DoxyCompactList}\item 
-constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_a6b0fa8ffe65912afb108f95511ee02b4}{operator$\ast$=}} (const Scalar \&scalar)
+constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_ae7fb57c2af2c4c279dea20ff7794b411}{operator$\ast$=}} (const Scalar \&scalar)
 \begin{DoxyCompactList}\small\item\em Multiplies the matrix by a scalar, A\textquotesingle{} = A$\ast$b, where A is the matrix and b is the scalar. \end{DoxyCompactList}\item 
-constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_af6cd74b703a3ce26133a6c77a94968bd}{operator/=}} (const Scalar \&scalar)
+constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_a06f51e6525100bcf20815afea35ed9fd}{operator/=}} (const Scalar \&scalar)
 \begin{DoxyCompactList}\small\item\em Divides the matrix by a scalar, A\textquotesingle{} = A/b, where A is the matrix and b is a scalar. \end{DoxyCompactList}\item 
-{\footnotesize template$<$std\+::size\+\_\+t \+\_\+row\+\_\+other, std\+::size\+\_\+t \+\_\+col\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_ae0c4ae323f5c035ff824156bb0029649}{operator+=}} (const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&matrix)
+{\footnotesize template$<$std\+::size\+\_\+t \+\_\+row\+\_\+other, std\+::size\+\_\+t \+\_\+col\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_a57a5f3aae2e0878ee19affb8714ebd84}{operator+=}} (const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&matrix)
 \begin{DoxyCompactList}\small\item\em Addition of a second matrix, A\textquotesingle{} = A + B, where A and B are matrices. \end{DoxyCompactList}\item 
-{\footnotesize template$<$std\+::size\+\_\+t \+\_\+row\+\_\+other, std\+::size\+\_\+t \+\_\+col\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_a166393f2ac80fdb59ad186436dda80e0}{operator-\/=}} (const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&matrix)
+{\footnotesize template$<$std\+::size\+\_\+t \+\_\+row\+\_\+other, std\+::size\+\_\+t \+\_\+col\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_a86c2d29f161e61cd03912b590733899b}{operator-\/=}} (const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&matrix)
 \begin{DoxyCompactList}\small\item\em Subtraction by a second matrix, A\textquotesingle{} = A -\/ B, where A and B are matrices. \end{DoxyCompactList}\item 
-{\footnotesize template$<$std\+::size\+\_\+t \+\_\+row\+\_\+other, std\+::size\+\_\+t \+\_\+col\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_a425b219b5199b57b9299643e7ab5ad1a}{operator$\ast$=}} (const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&matrix)
+{\footnotesize template$<$std\+::size\+\_\+t \+\_\+row\+\_\+other, std\+::size\+\_\+t \+\_\+col\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense_add1bc7a32b3b5bd0fce7e468b7aba4ea}{operator$\ast$=}} (const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&matrix)
 \begin{DoxyCompactList}\small\item\em Multiplies the matrix by another matrix, A\textquotesingle{} = A$\ast$B, where A and B are matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structDisa_1_1Matrix__Dense_ad02d6f80a23df340cf79466a113baf0b}\label{structDisa_1_1Matrix__Dense_ad02d6f80a23df340cf79466a113baf0b}} 
-static const bool {\bfseries is\+\_\+dynamic} = false
+static const bool \mbox{\hyperlink{structDisa_1_1Matrix__Dense_ad02d6f80a23df340cf79466a113baf0b}{is\+\_\+dynamic}} = false
 \begin{DoxyCompactList}\small\item\em Indicates the matrix is compile time sized. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 \subsubsection*{template$<$std\+::size\+\_\+t \+\_\+row, std\+::size\+\_\+t \+\_\+col$>$\newline
 struct Disa\+::\+Matrix\+\_\+\+Dense$<$ \+\_\+row, \+\_\+col $>$}
+
 Mathematical matrix, of dimension \+\_\+row x \+\_\+col, where every matrix element has allocated has memory. 
 
 
@@ -77,7 +92,7 @@ To avoid massive boiler plate the matrix inherits from std\+::array, which impli
 \index{Matrix\_Dense@{Matrix\_Dense}!Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}}
 \doxysubsubsection{\texorpdfstring{Matrix\_Dense()}{Matrix\_Dense()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+row, std\+::size\+\_\+t \+\_\+col$>$ \\
-\mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::\+Matrix\+\_\+\+Dense (\begin{DoxyParamCaption}\item[{const std\+::initializer\+\_\+list$<$ \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+col $>$ $>$ \&}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::\mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}} (\begin{DoxyParamCaption}\item[{const std\+::initializer\+\_\+list$<$ \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+col $>$ $>$ \&}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -93,7 +108,7 @@ Constructor to construct from initializer of vectors list, list and matrix must 
 \index{Matrix\_Dense@{Matrix\_Dense}!Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}}
 \doxysubsubsection{\texorpdfstring{Matrix\_Dense()}{Matrix\_Dense()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+row, std\+::size\+\_\+t \+\_\+col$>$ \\
-\mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::\+Matrix\+\_\+\+Dense (\begin{DoxyParamCaption}\item[{const std\+::function$<$ Scalar(std\+::size\+\_\+t, std\+::size\+\_\+t)$>$ \&}]{lambda,  }\item[{std\+::size\+\_\+t}]{row = {\ttfamily \+\_\+row},  }\item[{std\+::size\+\_\+t}]{column = {\ttfamily \+\_\+col} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+\mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::\mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}} (\begin{DoxyParamCaption}\item[{const std\+::function$<$ Scalar(std\+::size\+\_\+t, std\+::size\+\_\+t)$>$ \&}]{lambda,  }\item[{std\+::size\+\_\+t}]{row = {\ttfamily \+\_\+row},  }\item[{std\+::size\+\_\+t}]{column = {\ttfamily \+\_\+col} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
 
 
 
@@ -111,13 +126,13 @@ Constructor to construct a matrix from a lambda expression.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{structDisa_1_1Matrix__Dense_a425b219b5199b57b9299643e7ab5ad1a}\label{structDisa_1_1Matrix__Dense_a425b219b5199b57b9299643e7ab5ad1a}} 
+\mbox{\Hypertarget{structDisa_1_1Matrix__Dense_add1bc7a32b3b5bd0fce7e468b7aba4ea}\label{structDisa_1_1Matrix__Dense_add1bc7a32b3b5bd0fce7e468b7aba4ea}} 
 \index{Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}!operator$\ast$=@{operator$\ast$=}}
 \index{operator$\ast$=@{operator$\ast$=}!Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}}
 \doxysubsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+row, std\+::size\+\_\+t \+\_\+col$>$ \\
 template$<$std\+::size\+\_\+t \+\_\+row\+\_\+other, std\+::size\+\_\+t \+\_\+col\+\_\+other$>$ \\
-constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}}\& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -138,12 +153,12 @@ Multiplies the matrix by another matrix, A\textquotesingle{} = A$\ast$B, where A
 \begin{DoxyReturn}{Returns}
 Updated matrix (A\textquotesingle{}).
 \end{DoxyReturn}
-Note\+: Due to the static nature of the size of rows and columns it is only possible to multiply by square matrices. \mbox{\Hypertarget{structDisa_1_1Matrix__Dense_a6b0fa8ffe65912afb108f95511ee02b4}\label{structDisa_1_1Matrix__Dense_a6b0fa8ffe65912afb108f95511ee02b4}} 
+Note\+: Due to the static nature of the size of rows and columns it is only possible to multiply by square matrices. \mbox{\Hypertarget{structDisa_1_1Matrix__Dense_ae7fb57c2af2c4c279dea20ff7794b411}\label{structDisa_1_1Matrix__Dense_ae7fb57c2af2c4c279dea20ff7794b411}} 
 \index{Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}!operator$\ast$=@{operator$\ast$=}}
 \index{operator$\ast$=@{operator$\ast$=}!Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}}
 \doxysubsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+row, std\+::size\+\_\+t \+\_\+col$>$ \\
-constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}}\& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -157,13 +172,13 @@ Multiplies the matrix by a scalar, A\textquotesingle{} = A$\ast$b, where A is th
 \begin{DoxyReturn}{Returns}
 Updated matrix (A\textquotesingle{}). 
 \end{DoxyReturn}
-\mbox{\Hypertarget{structDisa_1_1Matrix__Dense_ae0c4ae323f5c035ff824156bb0029649}\label{structDisa_1_1Matrix__Dense_ae0c4ae323f5c035ff824156bb0029649}} 
+\mbox{\Hypertarget{structDisa_1_1Matrix__Dense_a57a5f3aae2e0878ee19affb8714ebd84}\label{structDisa_1_1Matrix__Dense_a57a5f3aae2e0878ee19affb8714ebd84}} 
 \index{Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}!operator+=@{operator+=}}
 \index{operator+=@{operator+=}!Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}}
 \doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+row, std\+::size\+\_\+t \+\_\+col$>$ \\
 template$<$std\+::size\+\_\+t \+\_\+row\+\_\+other, std\+::size\+\_\+t \+\_\+col\+\_\+other$>$ \\
-constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}}\& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -184,13 +199,13 @@ Addition of a second matrix, A\textquotesingle{} = A + B, where A and B are matr
 \begin{DoxyReturn}{Returns}
 Updated matrix (A\textquotesingle{}). 
 \end{DoxyReturn}
-\mbox{\Hypertarget{structDisa_1_1Matrix__Dense_a166393f2ac80fdb59ad186436dda80e0}\label{structDisa_1_1Matrix__Dense_a166393f2ac80fdb59ad186436dda80e0}} 
+\mbox{\Hypertarget{structDisa_1_1Matrix__Dense_a86c2d29f161e61cd03912b590733899b}\label{structDisa_1_1Matrix__Dense_a86c2d29f161e61cd03912b590733899b}} 
 \index{Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}!operator-\/=@{operator-\/=}}
 \index{operator-\/=@{operator-\/=}!Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}}
 \doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+row, std\+::size\+\_\+t \+\_\+col$>$ \\
 template$<$std\+::size\+\_\+t \+\_\+row\+\_\+other, std\+::size\+\_\+t \+\_\+col\+\_\+other$>$ \\
-constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}}\& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+row\+\_\+other, \+\_\+col\+\_\+other $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -211,12 +226,12 @@ Subtraction by a second matrix, A\textquotesingle{} = A -\/ B, where A and B are
 \begin{DoxyReturn}{Returns}
 Updated matrix (A\textquotesingle{}). 
 \end{DoxyReturn}
-\mbox{\Hypertarget{structDisa_1_1Matrix__Dense_af6cd74b703a3ce26133a6c77a94968bd}\label{structDisa_1_1Matrix__Dense_af6cd74b703a3ce26133a6c77a94968bd}} 
+\mbox{\Hypertarget{structDisa_1_1Matrix__Dense_a06f51e6525100bcf20815afea35ed9fd}\label{structDisa_1_1Matrix__Dense_a06f51e6525100bcf20815afea35ed9fd}} 
 \index{Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}!operator/=@{operator/=}}
 \index{operator/=@{operator/=}!Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}}
 \doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+row, std\+::size\+\_\+t \+\_\+col$>$ \\
-constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}} \& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator/= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+constexpr \mbox{\hyperlink{structDisa_1_1Matrix__Dense_aedbb439201e095be173b5e587fd847f3}{\+\_\+matrix}}\& \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::operator/= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -230,12 +245,12 @@ Divides the matrix by a scalar, A\textquotesingle{} = A/b, where A is the matrix
 \begin{DoxyReturn}{Returns}
 Updated matrix (A\textquotesingle{}).
 \end{DoxyReturn}
-Note\+: Division by zero is left to the user to handle. \mbox{\Hypertarget{structDisa_1_1Matrix__Dense_a4e9dbacdb8a470c806c20120c0a5f97b}\label{structDisa_1_1Matrix__Dense_a4e9dbacdb8a470c806c20120c0a5f97b}} 
+Note\+: Division by zero is left to the user to handle. \mbox{\Hypertarget{structDisa_1_1Matrix__Dense_ae96be719199b9d5f9b5778b062cf66e5}\label{structDisa_1_1Matrix__Dense_ae96be719199b9d5f9b5778b062cf66e5}} 
 \index{Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}!size@{size}}
 \index{size@{size}!Disa::Matrix\_Dense$<$ \_row, \_col $>$@{Disa::Matrix\_Dense$<$ \_row, \_col $>$}}
 \doxysubsubsection{\texorpdfstring{size()}{size()}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+row, std\+::size\+\_\+t \+\_\+col$>$ \\
-constexpr std\+::pair$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+constexpr std\+::pair$<$std\+::size\+\_\+t, std\+::size\+\_\+t$>$ \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Disa\+::\+Matrix\+\_\+\+Dense}}$<$ \+\_\+row, \+\_\+col $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
 
 
 

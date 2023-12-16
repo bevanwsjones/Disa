@@ -1,4 +1,4 @@
-\hypertarget{structDisa_1_1Vector__Dense_3_010_01_4}{}\doxysection{Disa\+::Vector\+\_\+\+Dense\texorpdfstring{$<$}{<} 0 \texorpdfstring{$>$}{>} Struct Reference}
+\hypertarget{structDisa_1_1Vector__Dense_3_010_01_4}{}\doxysection{Disa\+::Vector\+\_\+\+Dense$<$ 0 $>$ Struct Reference}
 \label{structDisa_1_1Vector__Dense_3_010_01_4}\index{Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}}
 
 
@@ -9,41 +9,55 @@ Mathematical Vector, of dimension \+\_\+size, where every vector element has all
 
 {\ttfamily \#include $<$vector\+\_\+dense.\+h$>$}
 
-Inheritance diagram for Disa\+::Vector\+\_\+\+Dense\texorpdfstring{$<$}{<} 0 \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+
+
+Inheritance diagram for Disa\+::Vector\+\_\+\+Dense$<$ 0 $>$\+:
+\nopagebreak
+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{structDisa_1_1Vector__Dense_3_010_01_4}
+\includegraphics[width=220pt]{structDisa_1_1Vector__Dense_3_010_01_4__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Disa\+::Vector\+\_\+\+Dense$<$ 0 $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{structDisa_1_1Vector__Dense_3_010_01_4__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}\label{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}} 
-typedef \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ 0 $>$ {\bfseries \+\_\+vector}
+typedef \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ 0 $>$ \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}}
 \begin{DoxyCompactList}\small\item\em Short hand for this vector type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_afe317658b267510e970fc0d55063d4d2}\label{structDisa_1_1Vector__Dense_3_010_01_4_afe317658b267510e970fc0d55063d4d2}} 
-{\bfseries Vector\+\_\+\+Dense} ()
+\mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_afe317658b267510e970fc0d55063d4d2}{Vector\+\_\+\+Dense}} ()
 \begin{DoxyCompactList}\small\item\em Initialise empty vector. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a681c05640042f3d64970b93503dc6e5d}{Vector\+\_\+\+Dense}} (const std\+::initializer\+\_\+list$<$ Scalar $>$ \&list)
 \begin{DoxyCompactList}\small\item\em Constructor to construct from initializer list, vector is resized to list size. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_ad14f6e6139fd0e8478a4d0752586a0cf}{Vector\+\_\+\+Dense}} (const std\+::function$<$ Scalar(std\+::size\+\_\+t)$>$ \&lambda, std\+::size\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em Constructor to construct a vector from a lambda. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a94c602b7a0eb362505be614e90f3cfa3}{operator$\ast$=}} (const Scalar \&scalar)
+\mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a8d5ece5a61bb3b4d7df4643f2e8c5e22}{operator$\ast$=}} (const Scalar \&scalar)
 \begin{DoxyCompactList}\small\item\em Multiplies the vector by a scalar, a\textquotesingle{} = a$\ast$b, where a is the vectors and b is a scalar. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a2110f6fd203b70b9ccdb81686dfd0e27}{operator/=}} (const Scalar \&scalar)
+\mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_aff4fbc14d749532340a11bf012a354bd}{operator/=}} (const Scalar \&scalar)
 \begin{DoxyCompactList}\small\item\em Divides the vector by a scalar, a\textquotesingle{} = a/b, where a is the vectors and b is a scalar. \end{DoxyCompactList}\item 
-{\footnotesize template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_aff6d84433157921874a441d44b8b52be}{operator+=}} (const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&vector)
+{\footnotesize template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a655c706f6aec30bb7dcf94637c828992}{operator+=}} (const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&vector)
 \begin{DoxyCompactList}\small\item\em Addition of a second vector, a\textquotesingle{} = a + b, where a and b are vectors. \end{DoxyCompactList}\item 
-{\footnotesize template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_afc41dbdb97ea5ea8f64f474006d38e23}{operator-\/=}} (const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&vector)
+{\footnotesize template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_ad7e33556f7df657d15a927ce7e4af06f}{operator-\/=}} (const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&vector)
 \begin{DoxyCompactList}\small\item\em Subtraction by a second vector, a\textquotesingle{} = a -\/ b, where a and b are vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_aed23705119d3afb26c594b5d80a5bd83}\label{structDisa_1_1Vector__Dense_3_010_01_4_aed23705119d3afb26c594b5d80a5bd83}} 
-static const bool {\bfseries is\+\_\+dynamic} = true
+static const bool \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_aed23705119d3afb26c594b5d80a5bd83}{is\+\_\+dynamic}} = true
 \begin{DoxyCompactList}\small\item\em Indicates the vector is runtime resizable. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -59,7 +73,7 @@ To avoid massive boiler plate the vector inherits from std\+::array, which impli
 \index{Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}!Vector\_Dense@{Vector\_Dense}}
 \index{Vector\_Dense@{Vector\_Dense}!Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}}
 \doxysubsubsection{\texorpdfstring{Vector\_Dense()}{Vector\_Dense()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::\+Vector\+\_\+\+Dense (\begin{DoxyParamCaption}\item[{const std\+::initializer\+\_\+list$<$ Scalar $>$ \&}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::\mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}} (\begin{DoxyParamCaption}\item[{const std\+::initializer\+\_\+list$<$ Scalar $>$ \&}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -74,7 +88,7 @@ Constructor to construct from initializer list, vector is resized to list size.
 \index{Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}!Vector\_Dense@{Vector\_Dense}}
 \index{Vector\_Dense@{Vector\_Dense}!Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}}
 \doxysubsubsection{\texorpdfstring{Vector\_Dense()}{Vector\_Dense()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::\+Vector\+\_\+\+Dense (\begin{DoxyParamCaption}\item[{const std\+::function$<$ Scalar(std\+::size\+\_\+t)$>$ \&}]{lambda,  }\item[{std\+::size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::\mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}} (\begin{DoxyParamCaption}\item[{const std\+::function$<$ Scalar(std\+::size\+\_\+t)$>$ \&}]{lambda,  }\item[{std\+::size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
 
 
 
@@ -95,11 +109,11 @@ Constructor to construct a vector from a lambda.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_a94c602b7a0eb362505be614e90f3cfa3}\label{structDisa_1_1Vector__Dense_3_010_01_4_a94c602b7a0eb362505be614e90f3cfa3}} 
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_a8d5ece5a61bb3b4d7df4643f2e8c5e22}\label{structDisa_1_1Vector__Dense_3_010_01_4_a8d5ece5a61bb3b4d7df4643f2e8c5e22}} 
 \index{Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}!operator$\ast$=@{operator$\ast$=}}
 \index{operator$\ast$=@{operator$\ast$=}!Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}}
 \doxysubsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}}\& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -113,12 +127,12 @@ Multiplies the vector by a scalar, a\textquotesingle{} = a$\ast$b, where a is th
 \begin{DoxyReturn}{Returns}
 Updated vector (a). 
 \end{DoxyReturn}
-\mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_aff6d84433157921874a441d44b8b52be}\label{structDisa_1_1Vector__Dense_3_010_01_4_aff6d84433157921874a441d44b8b52be}} 
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_a655c706f6aec30bb7dcf94637c828992}\label{structDisa_1_1Vector__Dense_3_010_01_4_a655c706f6aec30bb7dcf94637c828992}} 
 \index{Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}!operator+=@{operator+=}}
 \index{operator+=@{operator+=}!Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}}
 \doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ \\
-constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}}\& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -137,12 +151,12 @@ Addition of a second vector, a\textquotesingle{} = a + b, where a and b are vect
 \begin{DoxyReturn}{Returns}
 Updated vector (a\textquotesingle{}). 
 \end{DoxyReturn}
-\mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_afc41dbdb97ea5ea8f64f474006d38e23}\label{structDisa_1_1Vector__Dense_3_010_01_4_afc41dbdb97ea5ea8f64f474006d38e23}} 
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_ad7e33556f7df657d15a927ce7e4af06f}\label{structDisa_1_1Vector__Dense_3_010_01_4_ad7e33556f7df657d15a927ce7e4af06f}} 
 \index{Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}!operator-\/=@{operator-\/=}}
 \index{operator-\/=@{operator-\/=}!Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}}
 \doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
 {\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ \\
-constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}}\& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -161,11 +175,11 @@ Subtraction by a second vector, a\textquotesingle{} = a -\/ b, where a and b are
 \begin{DoxyReturn}{Returns}
 Updated vector (a\textquotesingle{}). 
 \end{DoxyReturn}
-\mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_a2110f6fd203b70b9ccdb81686dfd0e27}\label{structDisa_1_1Vector__Dense_3_010_01_4_a2110f6fd203b70b9ccdb81686dfd0e27}} 
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_3_010_01_4_aff4fbc14d749532340a11bf012a354bd}\label{structDisa_1_1Vector__Dense_3_010_01_4_aff4fbc14d749532340a11bf012a354bd}} 
 \index{Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}!operator/=@{operator/=}}
 \index{operator/=@{operator/=}!Disa::Vector\_Dense$<$ 0 $>$@{Disa::Vector\_Dense$<$ 0 $>$}}
 \doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::operator/= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Vector__Dense_3_010_01_4_a978fca3419de39f114c22b57782d15ba}{\+\_\+vector}}\& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ 0 $>$\+::operator/= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

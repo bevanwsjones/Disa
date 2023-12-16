@@ -18,13 +18,13 @@ bool \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_afcd0343cf1972ad705fe0
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structDisa_1_1Convergence__Criteria_a858541591631f85ba929b937319798e3}\label{structDisa_1_1Convergence__Criteria_a858541591631f85ba929b937319798e3}} 
-std\+::size\+\_\+t {\bfseries min\+\_\+iterations} \{0\}
+std\+::size\+\_\+t \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_a858541591631f85ba929b937319798e3}{min\+\_\+iterations}} \{0\}
 \begin{DoxyCompactList}\small\item\em The minimum number of iterations. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structDisa_1_1Convergence__Criteria_af577cae884e868ce0e36276bc2da22d6}\label{structDisa_1_1Convergence__Criteria_af577cae884e868ce0e36276bc2da22d6}} 
-std\+::size\+\_\+t {\bfseries max\+\_\+iteration} \{std\+::numeric\+\_\+limits$<$std\+::size\+\_\+t$>$\+::max()\}
+std\+::size\+\_\+t \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_af577cae884e868ce0e36276bc2da22d6}{max\+\_\+iteration}} \{std\+::numeric\+\_\+limits$<$std\+::size\+\_\+t$>$\+::max()\}
 \begin{DoxyCompactList}\small\item\em The maximum allowable number of iterations. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structDisa_1_1Convergence__Criteria_a50e5b162b182fec00f4ea547c0ef6e5f}\label{structDisa_1_1Convergence__Criteria_a50e5b162b182fec00f4ea547c0ef6e5f}} 
-Scalar {\bfseries tolerance} \{scalar\+\_\+max\}
+Scalar \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_a50e5b162b182fec00f4ea547c0ef6e5f}{tolerance}} \{scalar\+\_\+max\}
 \begin{DoxyCompactList}\small\item\em The convergence tolerance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -33,10 +33,10 @@ Contains the criteria values against which convergence status can be assessed.
 
 This struct holds the values need to assess convergence of a solve. It is typically instances are created in the solvers themselves, and initialised on construction of the solver. The method is\+\_\+converged is used to determine if a solve has converged. The criteria to satisfy convergence are as follows\+:
 \begin{DoxyEnumerate}
-\item i \texorpdfstring{$>$}{>} i\+\_\+min
-\item i \texorpdfstring{$<$}{<} i\+\_\+max
-\item $\vert$r$\vert$\+\_\+\{2, n\} \texorpdfstring{$<$}{<} epsilon
-\item $\vert$r$\vert$\+\_\+inf \texorpdfstring{$<$}{<} 10.\+0$\ast$epsilon
+\item i $>$ i\+\_\+min
+\item i $<$ i\+\_\+max
+\item $\vert$r$\vert$\+\_\+\{2, n\} $<$ epsilon
+\item $\vert$r$\vert$\+\_\+inf $<$ 10.\+0$\ast$epsilon
 \end{DoxyEnumerate}
 
 where i is the number of iterations i\+\_\+min is the minimum number of iterations. i\+\_\+max is the maximum number of iterations. r is the residual vector of the linear system. epsilon is a user defined scalar tolerance. n ia the cardinality of the linear system (number of rows). 
