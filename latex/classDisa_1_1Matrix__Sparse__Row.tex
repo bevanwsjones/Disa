@@ -1,0 +1,271 @@
+\hypertarget{classDisa_1_1Matrix__Sparse__Row}{}\doxysection{Disa\+::Matrix\+\_\+\+Sparse\+\_\+\+Row\texorpdfstring{$<$}{<} \+\_\+matrix\+\_\+type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classDisa_1_1Matrix__Sparse__Row}\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+
+
+Helper class, enables column iteration support.  
+
+
+
+
+{\ttfamily \#include $<$matrix\+\_\+sparse.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_aa2a7f3075ee145a7006898c32c0a3c00}\label{classDisa_1_1Matrix__Sparse__Row_aa2a7f3075ee145a7006898c32c0a3c00}} 
+using {\bfseries matrix\+\_\+type} = \+\_\+matrix\+\_\+type
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a3152c5810a846430ecb7251a77ef6bf4}\label{classDisa_1_1Matrix__Sparse__Row_a3152c5810a846430ecb7251a77ef6bf4}} 
+using {\bfseries iterator} = \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element}}$<$ \+\_\+matrix\+\_\+type $>$
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a5b6d5442b83e334e8bd113fac344816f}\label{classDisa_1_1Matrix__Sparse__Row_a5b6d5442b83e334e8bd113fac344816f}} 
+using {\bfseries const\+\_\+iterator} = \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename \+\_\+matrix , typename std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ }\\constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_a87c35615b34a23e44bcd8dac3126853b}{Matrix\+\_\+\+Sparse\+\_\+\+Row}} (const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_abccd982936e83b1a44c1ff31f7575f90}{Matrix\+\_\+\+Sparse\+\_\+\+Row}} (const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Copy/\+Converter constructor from non-\/const. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_aa6482eb203900392e06850ba3c8b6428}{Matrix\+\_\+\+Sparse\+\_\+\+Row}} (std\+::size\+\_\+t i\+\_\+row, matrix\+\_\+type $\ast$sparse\+\_\+matrix) noexcept
+\begin{DoxyCompactList}\small\item\em Raw constructor, directly constructs private data. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename \+\_\+matrix  = \+\_\+matrix\+\_\+type, typename std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ }\\constexpr Scalar \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_a7bffbe27ced68192a7bcd9ac77b1d2d4}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::size\+\_\+t \&i\+\_\+column)
+\begin{DoxyCompactList}\small\item\em Subscript operator to access specified matrix element. \end{DoxyCompactList}\item 
+constexpr const Scalar \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_a71acb9f28685fd9f0347177f7370646c}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::size\+\_\+t \&i\+\_\+column) const
+\begin{DoxyCompactList}\small\item\em Subscript operator to access specified matrix const element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_aecd1e0df36cc8b3b6e10afbdde4df836}{begin}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the beginning of the row\textquotesingle{}s elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_a191b3e3c03cb6d609f5817e469e666a1}{end}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the end of the row\textquotesingle{}s elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{const\+\_\+iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_a8e1195e6ce085c7b539991482852f6b5}{begin}} () const
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the beginning of the row\textquotesingle{}s elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{const\+\_\+iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_a222dc4ee589c62dab70ac5e559706ba8}{end}} () const
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the end of the row\textquotesingle{}s elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{const\+\_\+iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_aaebef01a7a12ba36ffa11d9019704833}{cbegin}} () const
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the beginning of the row\textquotesingle{}s elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{const\+\_\+iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row_a3609bc413c253df9a317f0244de9f389}{cend}} () const
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the end of the row\textquotesingle{}s elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a6cbf7a76c0d2c79e26ae6852bc3bb5a8}\label{classDisa_1_1Matrix__Sparse__Row_a6cbf7a76c0d2c79e26ae6852bc3bb5a8}} 
+class {\bfseries Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ Matrix\+\_\+\+Sparse $>$}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a53da3aabe46e7036a1e0f49ca5647e8a}\label{classDisa_1_1Matrix__Sparse__Row_a53da3aabe46e7036a1e0f49ca5647e8a}} 
+class {\bfseries Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ const Matrix\+\_\+\+Sparse $>$}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a9245d51d36e284a41879baea7ce24133}\label{classDisa_1_1Matrix__Sparse__Row_a9245d51d36e284a41879baea7ce24133}} 
+struct {\bfseries Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ Matrix\+\_\+\+Sparse $>$}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a91dace2b3afc2a421691fc6d87a9eea4}\label{classDisa_1_1Matrix__Sparse__Row_a91dace2b3afc2a421691fc6d87a9eea4}} 
+struct {\bfseries Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ const Matrix\+\_\+\+Sparse $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename \+\_\+matrix\+\_\+type$>$\newline
+class Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ \+\_\+matrix\+\_\+type $>$}
+Helper class, enables column iteration support. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+matrix\+\_\+type} & const or non-\/const sparse matrix. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a87c35615b34a23e44bcd8dac3126853b}\label{classDisa_1_1Matrix__Sparse__Row_a87c35615b34a23e44bcd8dac3126853b}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!Matrix\_Sparse\_Row@{Matrix\_Sparse\_Row}}
+\index{Matrix\_Sparse\_Row@{Matrix\_Sparse\_Row}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_Sparse\_Row()}{Matrix\_Sparse\_Row()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+template$<$typename \+\_\+matrix , typename std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ \\
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [constexpr]}}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+matrix} & Only enabled if this helper is const. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & The other const helper. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_abccd982936e83b1a44c1ff31f7575f90}\label{classDisa_1_1Matrix__Sparse__Row_abccd982936e83b1a44c1ff31f7575f90}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!Matrix\_Sparse\_Row@{Matrix\_Sparse\_Row}}
+\index{Matrix\_Sparse\_Row@{Matrix\_Sparse\_Row}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_Sparse\_Row()}{Matrix\_Sparse\_Row()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [constexpr]}}
+
+
+
+Copy/\+Converter constructor from non-\/const. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & The other non-\/const helper. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_aa6482eb203900392e06850ba3c8b6428}\label{classDisa_1_1Matrix__Sparse__Row_aa6482eb203900392e06850ba3c8b6428}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!Matrix\_Sparse\_Row@{Matrix\_Sparse\_Row}}
+\index{Matrix\_Sparse\_Row@{Matrix\_Sparse\_Row}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{Matrix\_Sparse\_Row()}{Matrix\_Sparse\_Row()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{i\+\_\+row,  }\item[{matrix\+\_\+type $\ast$}]{sparse\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Raw constructor, directly constructs private data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & Row index of the matrix the helper is to \textquotesingle{}pointing to\textquotesingle{}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em sparse\+\_\+matrix} & Pointer to the underlying sparse matrix. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_aecd1e0df36cc8b3b6e10afbdde4df836}\label{classDisa_1_1Matrix__Sparse__Row_aecd1e0df36cc8b3b6e10afbdde4df836}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!begin@{begin}}
+\index{begin@{begin}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::iterator \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::begin}
+
+
+
+Returns an iterator to the beginning of the row\textquotesingle{}s elements. 
+
+\begin{DoxyReturn}{Returns}
+An Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element$<$\+Matrix\+\_\+\+Sparse$>$ iterator.
+\end{DoxyReturn}
+Construct a new element iterator using the current row index. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a8e1195e6ce085c7b539991482852f6b5}\label{classDisa_1_1Matrix__Sparse__Row_a8e1195e6ce085c7b539991482852f6b5}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!begin@{begin}}
+\index{begin@{begin}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::const\+\_\+iterator \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::begin}
+
+
+
+Returns a const iterator to the beginning of the row\textquotesingle{}s elements. 
+
+\begin{DoxyReturn}{Returns}
+An Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element$<$const Matrix\+\_\+\+Sparse$>$ iterator.
+\end{DoxyReturn}
+Construct a new constant element iterator using the current row index. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_aaebef01a7a12ba36ffa11d9019704833}\label{classDisa_1_1Matrix__Sparse__Row_aaebef01a7a12ba36ffa11d9019704833}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!cbegin@{cbegin}}
+\index{cbegin@{cbegin}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{cbegin()}{cbegin()}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::const\+\_\+iterator \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::cbegin}
+
+
+
+Returns a const iterator to the beginning of the row\textquotesingle{}s elements. 
+
+\begin{DoxyReturn}{Returns}
+An Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element$<$const Matrix\+\_\+\+Sparse$>$ iterator.
+\end{DoxyReturn}
+Construct a new constant element iterator using the current row index. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a3609bc413c253df9a317f0244de9f389}\label{classDisa_1_1Matrix__Sparse__Row_a3609bc413c253df9a317f0244de9f389}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!cend@{cend}}
+\index{cend@{cend}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{cend()}{cend()}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::const\+\_\+iterator \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::cend}
+
+
+
+Returns a const iterator to the end of the row\textquotesingle{}s elements. 
+
+\begin{DoxyReturn}{Returns}
+An Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element$<$const Matrix\+\_\+\+Sparse$>$ iterator.
+\end{DoxyReturn}
+Construct a new constant element iterator, to one past the last column element, using the current row index. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a191b3e3c03cb6d609f5817e469e666a1}\label{classDisa_1_1Matrix__Sparse__Row_a191b3e3c03cb6d609f5817e469e666a1}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!end@{end}}
+\index{end@{end}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::iterator \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::end}
+
+
+
+Returns an iterator to the end of the row\textquotesingle{}s elements. 
+
+\begin{DoxyReturn}{Returns}
+An Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element$<$\+Matrix\+\_\+\+Sparse$>$ iterator.
+\end{DoxyReturn}
+Construct a new element iterator, to one past the last column element, using the current row index. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a222dc4ee589c62dab70ac5e559706ba8}\label{classDisa_1_1Matrix__Sparse__Row_a222dc4ee589c62dab70ac5e559706ba8}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!end@{end}}
+\index{end@{end}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::const\+\_\+iterator \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::end}
+
+
+
+Returns a const iterator to the end of the row\textquotesingle{}s elements. 
+
+\begin{DoxyReturn}{Returns}
+An Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element$<$const Matrix\+\_\+\+Sparse$>$ iterator.
+\end{DoxyReturn}
+Construct a constant new element iterator, to one past the last column element, using the current row index. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a7bffbe27ced68192a7bcd9ac77b1d2d4}\label{classDisa_1_1Matrix__Sparse__Row_a7bffbe27ced68192a7bcd9ac77b1d2d4}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+template$<$typename \+\_\+matrix  = \+\_\+matrix\+\_\+type, typename std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ \\
+constexpr Scalar \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Subscript operator to access specified matrix element. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+matrix} & Only enabled if this helper is non-\/const. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The column index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sparse matrix element.
+\end{DoxyReturn}
+Note if the element does not exist it is inserted. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse__Row_a71acb9f28685fd9f0347177f7370646c}\label{classDisa_1_1Matrix__Sparse__Row_a71acb9f28685fd9f0347177f7370646c}} 
+\index{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr const Scalar \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Disa\+::\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Subscript operator to access specified matrix const element. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The column index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The const sparse matrix element.
+\end{DoxyReturn}
+Note if the element does not exist undefined behaviour occurs (caught in debug). 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+libs/core/matrix\+\_\+sparse.\+h\item 
+libs/core/matrix\+\_\+sparse.\+cpp\end{DoxyCompactItemize}

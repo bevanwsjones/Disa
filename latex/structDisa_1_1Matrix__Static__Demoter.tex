@@ -1,0 +1,52 @@
+\hypertarget{structDisa_1_1Matrix__Static__Demoter}{}\doxysection{Disa\+::Matrix\+\_\+\+Static\+\_\+\+Demoter\texorpdfstring{$<$}{<} \+\_\+row\+\_\+0, \+\_\+colu\+\_\+0, \+\_\+row\+\_\+1, \+\_\+colu\+\_\+1 \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{structDisa_1_1Matrix__Static__Demoter}\index{Disa::Matrix\_Static\_Demoter$<$ \_row\_0, \_colu\_0, \_row\_1, \_colu\_1 $>$@{Disa::Matrix\_Static\_Demoter$<$ \_row\_0, \_colu\_0, \_row\_1, \_colu\_1 $>$}}
+
+
+Used for matrix multiplication, where the static nature of matrices must decay to dynamic.  
+
+
+
+
+{\ttfamily \#include $<$matrix\+\_\+dense.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structDisa_1_1Matrix__Static__Demoter_ac77e2b1e167f02c9bc00c39a6e403ca2}\label{structDisa_1_1Matrix__Static__Demoter_ac77e2b1e167f02c9bc00c39a6e403ca2}} 
+typedef \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ row\+\_\+new, colu\+\_\+new $>$ {\bfseries type}
+\begin{DoxyCompactList}\small\item\em Static Matrix type if either \+\_\+row\+\_\+0/\+\_\+colu\+\_\+0 or \+\_\+row\+\_\+1/\+\_\+colu\+\_\+1 is static else dynamic. $\ast$/. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structDisa_1_1Matrix__Static__Demoter_ad74ab904a53975bea09c3b06e9a79e99}\label{structDisa_1_1Matrix__Static__Demoter_ad74ab904a53975bea09c3b06e9a79e99}} 
+static const bool {\bfseries is\+\_\+dynamic} = \+\_\+row\+\_\+0 == 0 $\vert$$\vert$ \+\_\+colu\+\_\+1 == 0
+\item 
+\mbox{\Hypertarget{structDisa_1_1Matrix__Static__Demoter_aab45806b35e6f7bebcfd0d16eddf94c3}\label{structDisa_1_1Matrix__Static__Demoter_aab45806b35e6f7bebcfd0d16eddf94c3}} 
+static const std\+::size\+\_\+t {\bfseries row\+\_\+new} = is\+\_\+dynamic ? 0 \+: \+\_\+row\+\_\+0
+\item 
+\mbox{\Hypertarget{structDisa_1_1Matrix__Static__Demoter_a6398806195d434bd1cb76ffcb3eeced5}\label{structDisa_1_1Matrix__Static__Demoter_a6398806195d434bd1cb76ffcb3eeced5}} 
+static const std\+::size\+\_\+t {\bfseries colu\+\_\+new} = is\+\_\+dynamic ? 0 \+: \+\_\+colu\+\_\+1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std\+::size\+\_\+t \+\_\+row\+\_\+0, std\+::size\+\_\+t \+\_\+colu\+\_\+0, std\+::size\+\_\+t \+\_\+row\+\_\+1, std\+::size\+\_\+t \+\_\+colu\+\_\+1$>$\newline
+struct Disa\+::\+Matrix\+\_\+\+Static\+\_\+\+Demoter$<$ \+\_\+row\+\_\+0, \+\_\+colu\+\_\+0, \+\_\+row\+\_\+1, \+\_\+colu\+\_\+1 $>$}
+Used for matrix multiplication, where the static nature of matrices must decay to dynamic. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+row\+\_\+0} & The number of rows of the A matrix, dynamic/static. \\
+\hline
+{\em \+\_\+col\+\_\+0} & The number of column of the A matrix, dynamic/static. \\
+\hline
+{\em \+\_\+row\+\_\+1} & The number of rows of the B matrix, dynamic/static. \\
+\hline
+{\em \+\_\+col\+\_\+1} & The number of column of the B matrix, dynamic/static. \\
+\hline
+\end{DoxyTemplParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/core/matrix\+\_\+dense.\+h\end{DoxyCompactItemize}

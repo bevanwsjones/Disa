@@ -1,0 +1,38 @@
+\hypertarget{classDisa_1_1Solver}{}\doxysection{Disa\+::Solver Class Reference}
+\label{classDisa_1_1Solver}\index{Disa::Solver@{Disa::Solver}}
+
+
+\mbox{\hyperlink{classDisa_1_1Solver}{Solver}}.  
+
+
+
+
+{\ttfamily \#include $<$solver.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Solver_a6dff2e8bfec696023d47dfddedc547a2}\label{classDisa_1_1Solver_a6dff2e8bfec696023d47dfddedc547a2}} 
+\mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\+\_\+\+Data}} {\bfseries solve} (const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} \&a\+\_\+matrix, \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ 0 $>$ \&x\+\_\+vector, const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ 0 $>$ \&b\+\_\+vector)
+\item 
+\mbox{\Hypertarget{classDisa_1_1Solver_a86336984308f6173d44168ae7820581b}\label{classDisa_1_1Solver_a86336984308f6173d44168ae7820581b}} 
+\mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\+\_\+\+Data}} {\bfseries solve} (\mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ 0 $>$ \&x\+\_\+vector, const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ 0 $>$ \&b\+\_\+vector)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Solver_a036be4db6507d8e716375b0804c474c6}\label{classDisa_1_1Solver_a036be4db6507d8e716375b0804c474c6}} 
+std\+::variant$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Solver\+\_\+\+LU}}$<$ 0 $>$ $>$, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Solver\+\_\+\+LUP}}$<$ 0 $>$ $>$, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Solver\+\_\+\+Jacobi}} $>$, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Solver\+\_\+\+Gauss\+\_\+\+Seidel}} $>$, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Sover\+\_\+\+Sor}} $>$, std\+::nullptr\+\_\+t $>$ {\bfseries solver} \{nullptr\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classDisa_1_1Solver}{Solver}}. 
+
+General \mbox{\hyperlink{classDisa_1_1Solver}{Solver}} Class for all solver types.
+
+This class serves at a \textquotesingle{}all in one\textquotesingle{} solver class for both sparse and dense systems. To acheive 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/solver/solver.\+h\end{DoxyCompactItemize}

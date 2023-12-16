@@ -1,0 +1,206 @@
+\hypertarget{adjacency__subgraph_8h_source}{}\doxysection{adjacency\+\_\+subgraph.\+h}
+\label{adjacency__subgraph_8h_source}\index{libs/graphing/adjacency\_subgraph.h@{libs/graphing/adjacency\_subgraph.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// MIT License}}
+\DoxyCodeLine{3 \textcolor{comment}{// Copyright (c) 2022 Bevan W.S. Jones}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated}}
+\DoxyCodeLine{6 \textcolor{comment}{// documentation files (the "{}Software"{}), to deal in the Software without restriction, including without limitation the}}
+\DoxyCodeLine{7 \textcolor{comment}{// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to}}
+\DoxyCodeLine{8 \textcolor{comment}{// permit persons to whom the Software is furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the}}
+\DoxyCodeLine{11 \textcolor{comment}{// Software.}}
+\DoxyCodeLine{12 \textcolor{comment}{//}}
+\DoxyCodeLine{13 \textcolor{comment}{// THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE}}
+\DoxyCodeLine{14 \textcolor{comment}{// WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR}}
+\DoxyCodeLine{16 \textcolor{comment}{// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}}
+\DoxyCodeLine{17 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{18 \textcolor{comment}{// File Name: adjacency\_subgraph.h}}
+\DoxyCodeLine{19 \textcolor{comment}{// Description: Declarations of the adjacency subgraph class.}}
+\DoxyCodeLine{20 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#ifndef DISA\_ADJACENCY\_SUB\_GRAPH\_H}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define DISA\_ADJACENCY\_SUB\_GRAPH\_H}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include "{}adjacency\_graph.h"{}}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include "{}graph\_utilities.h"{}}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keyword}{namespace }Disa \{}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{36 \textcolor{comment}{// Adjacency\_Subgraph}}
+\DoxyCodeLine{37 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{70 \textcolor{keyword}{class }\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph}{Adjacency\_Subgraph}} \{}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{keyword}{public}:}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{75   \textcolor{comment}{// Public Constructors and Destructors}}
+\DoxyCodeLine{76   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{82   \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a997bf736f2e8af03f0295820d13805a3}{Adjacency\_Subgraph}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{87   \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a4b5622d136638b15b760ab3f17b59888}{\string~Adjacency\_Subgraph}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{98   \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a997bf736f2e8af03f0295820d13805a3}{Adjacency\_Subgraph}}(\textcolor{keyword}{const} \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\_Graph}}\& parent\_graph, \textcolor{keyword}{const} std::vector<std::size\_t>\& i\_sub\_graph\_vertex,}
+\DoxyCodeLine{99                      std::size\_t extra\_levels = 0);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{102   \textcolor{comment}{// Element Access}}
+\DoxyCodeLine{103   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{110   [[nodiscard]] \textcolor{keyword}{inline} std::span<const size\_t> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a8a2d2689e6479f840a0f3e7e38bb5458}{at}}(\textcolor{keyword}{const} std::size\_t\& i\_vertex)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} graph[i\_vertex]; \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{117   [[nodiscard]] \textcolor{keyword}{inline} std::span<const std::size\_t> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_af74adca1d853368844e78e85d8bd910c}{operator[]}}(\textcolor{keyword}{const} std::size\_t\& i\_vertex)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{118     \textcolor{keywordflow}{return} graph[i\_vertex];}
+\DoxyCodeLine{119   \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{126   [[nodiscard]] \textcolor{keyword}{inline} std::span<std::size\_t> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a27873be7c712e4d442c6b402e515cde8}{operator[]}}(\textcolor{keyword}{const} std::size\_t\& i\_vertex) \{ \textcolor{keywordflow}{return} graph[i\_vertex]; \}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{132   [[nodiscard]] \textcolor{keyword}{inline} std::span<const std::size\_t> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_acedb63bd7bc1909725387e89b6a715d7}{front}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_aa7cb2c921039a5ed33e2e586472ff639}{front}}(); \}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{138   [[nodiscard]] \textcolor{keyword}{inline} std::span<std::size\_t> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab62e7fc9475f98ebdbc7ddf8f52d6dfa}{front}}() \{ \textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_aa7cb2c921039a5ed33e2e586472ff639}{front}}(); \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{144   [[nodiscard]] \textcolor{keyword}{inline} std::span<const std::size\_t> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a1a9e4e85daf6ecd086bc3c2c4b502060}{back}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_a09006b4828d165e463f6f51df0d35f84}{back}}(); \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{150   [[nodiscard]] \textcolor{keyword}{inline} std::span<std::size\_t> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a9863bf593e2c2f0e160520c5f547c5ec}{back}}() \{ \textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_a09006b4828d165e463f6f51df0d35f84}{back}}(); \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{160   [[nodiscard]] \textcolor{keyword}{inline} std::tuple<std::size\_t*, std::size\_t*, std::size\_t*, std::size\_t*> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a7f3ea9501e0943468af9fb28ede2a822}{data}}() noexcept \{}
+\DoxyCodeLine{161     \textcolor{keyword}{const} std::pair<std::size\_t*, std::size\_t*> graph\_data = graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_a5d140784c9d193caaef69e9769f34734}{data}}();}
+\DoxyCodeLine{162     \textcolor{keywordflow}{return} std::make\_tuple(graph\_data.first, graph\_data.second,}
+\DoxyCodeLine{163                            i\_local\_global.empty() ? \textcolor{keyword}{nullptr} : i\_local\_global.data(),}
+\DoxyCodeLine{164                            level\_set\_value.empty() ? \textcolor{keyword}{nullptr} : level\_set\_value.data());}
+\DoxyCodeLine{165   \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{168   \textcolor{comment}{// Capacity}}
+\DoxyCodeLine{169   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{175   [[nodiscard]] \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a42104eb81f93f56e858844a64003aae3}{empty}}() const noexcept \{ \textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_a7bac93efcd2e1d6e49c03432507a631b}{empty}}(); \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{181   [[nodiscard]] \textcolor{keyword}{inline} std::size\_t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\_vertex}}() const noexcept \{ \textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_af0a99181c595852b84e1d469fa6c3002}{size\_vertex}}(); \}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{187   [[nodiscard]] \textcolor{keyword}{inline} std::size\_t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_aa234815e65ebf4311e74584874823237}{size\_edge}}() const noexcept \{ \textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_aa7c060fb3cf25653d1f0babe3607eba3}{size\_edge}}(); \}}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{193   [[nodiscard]] \textcolor{keyword}{inline} std::pair<std::size\_t, std::size\_t> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}{size}}() const noexcept \{ \textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_a532ab58be7a032a100d87d25f4d9a3dd}{size}}(); \}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{200   \textcolor{keywordtype}{void} \textcolor{keyword}{inline} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_aae6aa5376bf70b1e2a6bf89664aca615}{reserve}}(std::size\_t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\_vertex}}, std::size\_t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_aa234815e65ebf4311e74584874823237}{size\_edge}} = 0) noexcept \{}
+\DoxyCodeLine{201     graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_af05a3c57026a764c655480b38c8c0884}{reserve}}(\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\_vertex}}, \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_aa234815e65ebf4311e74584874823237}{size\_edge}});}
+\DoxyCodeLine{202     i\_local\_global.reserve(\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\_vertex}});}
+\DoxyCodeLine{203     level\_set\_value.reserve(\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\_vertex}});}
+\DoxyCodeLine{204   \}}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{210   [[nodiscard]] \textcolor{keyword}{inline} std::tuple<std::size\_t, std::size\_t, std::size\_t, std::size\_t> \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a9809be7c8b5d5045687e3c5ba99b5421}{capacity}}() const noexcept \{}
+\DoxyCodeLine{211     \textcolor{keywordflow}{return} \{graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_abb12e5837a6f55471962d984040ccaa7}{capacity}}().first, graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_abb12e5837a6f55471962d984040ccaa7}{capacity}}().second, i\_local\_global.capacity(),}
+\DoxyCodeLine{212             level\_set\_value.capacity()\};}
+\DoxyCodeLine{213   \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{218   \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a376f966ee75d82627d64d4b63c242c83}{shrink\_to\_fit}}() noexcept \{}
+\DoxyCodeLine{219     graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_a0ab4019ee8e924dca5293e37504654b1}{shrink\_to\_fit}}();}
+\DoxyCodeLine{220     i\_local\_global.shrink\_to\_fit();}
+\DoxyCodeLine{221     level\_set\_value.shrink\_to\_fit();}
+\DoxyCodeLine{222   \}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{225   \textcolor{comment}{// Modifiers}}
+\DoxyCodeLine{226   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{231   \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a066c8175a8be0d0d82710b81d2c026e4}{clear}}() \{}
+\DoxyCodeLine{232     graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_a1a657ad3b19b684b0319ce9310fcac06}{clear}}();}
+\DoxyCodeLine{233     hash\_parent = std::hash<Adjacency\_Graph>\{\}(graph);}
+\DoxyCodeLine{234     i\_local\_global.clear();}
+\DoxyCodeLine{235     level\_set\_value.clear();}
+\DoxyCodeLine{236   \}}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{245   \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a3a72ace359daa8d1533f077e0f36be34}{resize}}(\textcolor{keyword}{const} std::size\_t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}{size}}) \{}
+\DoxyCodeLine{246     \textcolor{keywordflow}{if}(\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}{size}} > \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\_vertex}}()) hash\_parent = std::hash<Adjacency\_Graph>\{\}(\mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\_Graph}}());}
+\DoxyCodeLine{247     graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_a81b74e16b94a049cee99c500d577140b}{resize}}(\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}{size}});}
+\DoxyCodeLine{248     i\_local\_global.resize(\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}{size}});}
+\DoxyCodeLine{249     \textcolor{keywordflow}{if}(!level\_set\_value.empty()) level\_set\_value.resize(\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}{size}});}
+\DoxyCodeLine{250   \};}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{256   \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a03afe26015ba499fdf74c8a876ff859b}{swap}}(\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph}{Adjacency\_Subgraph}}\& graph\_other) \{}
+\DoxyCodeLine{257     graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_ad07b702f1a7be9b27c800aadbbb77f26}{swap}}(graph\_other.graph);}
+\DoxyCodeLine{258     i\_local\_global.swap(graph\_other.i\_local\_global);}
+\DoxyCodeLine{259     level\_set\_value.swap(graph\_other.level\_set\_value);}
+\DoxyCodeLine{260     std::swap(hash\_parent, graph\_other.hash\_parent);}
+\DoxyCodeLine{261   \}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{264   \textcolor{comment}{// Lookup}}
+\DoxyCodeLine{265   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{272   [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_af1991aa75e586dd8d32db3a461625805}{contains}}(\textcolor{keyword}{const} Edge\& edge)\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_aef720d518834ff0203dd919b9f66e727}{contains}}(edge); \};}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{275   \textcolor{comment}{// Graph Operators}}
+\DoxyCodeLine{276   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{283   [[nodiscard]] \textcolor{keyword}{inline} std::size\_t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a0791defd95d467ed724d063238675549}{degree}}(\textcolor{keyword}{const} std::size\_t\& i\_vertex)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} graph.\mbox{\hyperlink{classDisa_1_1Adjacency__Graph_ad975a996166533c3ded1d528c0911330}{degree}}(i\_vertex); \}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{290   [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a6d15d4e89b7a37fea4027b0c6a18e372}{is\_local}}(\textcolor{keyword}{const} std::size\_t\& i\_vertex)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{291     ASSERT\_DEBUG(i\_vertex < \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\_vertex}}(), \textcolor{stringliteral}{"{}Local vertex index "{}} + std::to\_string(i\_vertex) + \textcolor{stringliteral}{"{} not in range [0, "{}}}
+\DoxyCodeLine{292                                            + std::to\_string(i\_vertex) + \textcolor{stringliteral}{"{})."{}});}
+\DoxyCodeLine{293     \textcolor{keywordflow}{return} level\_set\_value.empty() ? true : level\_set\_value[i\_vertex] == 0;}
+\DoxyCodeLine{294   \}}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{301   [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a062169d99cc73edc4650a8a008626537}{is\_parent}}(\textcolor{keyword}{const} \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\_Graph}}\& graph\_parent) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \{}
+\DoxyCodeLine{302     \textcolor{keywordflow}{return} std::hash<Adjacency\_Graph>\{\}(graph\_parent) == hash\_parent;}
+\DoxyCodeLine{303   \}}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{310   [[nodiscard]] \textcolor{keyword}{inline} std::size\_t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a7004f2c967b6b5c5ad39fafacb482dab}{local\_global}}(\textcolor{keyword}{const} std::size\_t\& i\_vertex)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{311     ASSERT\_DEBUG(i\_vertex < \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\_vertex}}(), \textcolor{stringliteral}{"{}Local vertex index "{}} + std::to\_string(i\_vertex) + \textcolor{stringliteral}{"{} not in range [0, "{}}}
+\DoxyCodeLine{312                                            + std::to\_string(i\_vertex) + \textcolor{stringliteral}{"{})."{}});}
+\DoxyCodeLine{313     \textcolor{keywordflow}{return} i\_local\_global[i\_vertex];}
+\DoxyCodeLine{314   \}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{321   \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph}{Adjacency\_Subgraph}} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a5082f032b04e3fd68e1a610434a7e92a}{reorder}}(\textcolor{keyword}{const} std::vector<std::size\_t>\& permutation);}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{334   \textcolor{keywordtype}{void} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_aa1009aeb107c8fe5803157286e98d329}{update\_levels}}(\textcolor{keyword}{const} \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\_Graph}}\& parent\_graph, std::size\_t max\_level,}
+\DoxyCodeLine{335                      std::shared\_ptr<std::vector<std::size\_t> > i\_global\_local = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{342   [[nodiscard]] \textcolor{keyword}{inline} std::size\_t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_abe21f3519ae2817d5b0f4db56908e6cd}{vertex\_level}}(\textcolor{keyword}{const} std::size\_t\& i\_vertex)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{343     ASSERT\_DEBUG(i\_vertex < \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\_vertex}}(), \textcolor{stringliteral}{"{}Local vertex index "{}} + std::to\_string(i\_vertex) + \textcolor{stringliteral}{"{} not in range [0, "{}}}
+\DoxyCodeLine{344                                            + std::to\_string(i\_vertex) + \textcolor{stringliteral}{"{})."{}});}
+\DoxyCodeLine{345     \textcolor{keywordflow}{return} level\_set\_value.empty() ? 0 : level\_set\_value[i\_vertex];}
+\DoxyCodeLine{346   \}}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348 \textcolor{keyword}{private}:}
+\DoxyCodeLine{349   std::size\_t hash\_parent\{std::hash<Adjacency\_Graph>\{\}(Adjacency\_Graph())\};    }
+\DoxyCodeLine{350   Adjacency\_Graph graph;                     }
+\DoxyCodeLine{351   std::vector<std::size\_t> i\_local\_global;   }
+\DoxyCodeLine{352   std::vector<std::size\_t> level\_set\_value;  }
+\DoxyCodeLine{354   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{355   \textcolor{comment}{// Helper Functions}}
+\DoxyCodeLine{356   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{366   \textcolor{keywordtype}{void} add\_levels(\textcolor{keyword}{const} Adjacency\_Graph\& parent\_graph, std::size\_t max\_level, std::size\_t current\_max,}
+\DoxyCodeLine{367                   std::shared\_ptr<std::vector<std::size\_t> > i\_global\_local);}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{376   \textcolor{keywordtype}{void} remove\_levels(\textcolor{keyword}{const} Adjacency\_Graph\& parent\_graph, std::size\_t max\_level,}
+\DoxyCodeLine{377                      std::shared\_ptr<std::vector<std::size\_t> > i\_global\_local);}
+\DoxyCodeLine{378 \};}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{380 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{381 \textcolor{comment}{// Operator Overloading}}
+\DoxyCodeLine{382 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{383 \textcolor{comment}{// Stream Operators}}
+\DoxyCodeLine{384 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{396 std::ostream\& operator<<(std::ostream\& ostream, \textcolor{keyword}{const} Adjacency\_Subgraph\& graph);}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{398 \}}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{400 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//DISA\_ADJACENCY\_SUB\_GRAPH\_H}}
+
+\end{DoxyCode}

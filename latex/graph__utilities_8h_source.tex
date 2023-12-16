@@ -1,0 +1,206 @@
+\hypertarget{graph__utilities_8h_source}{}\doxysection{graph\+\_\+utilities.\+h}
+\label{graph__utilities_8h_source}\index{libs/graphing/graph\_utilities.h@{libs/graphing/graph\_utilities.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// MIT License}}
+\DoxyCodeLine{3 \textcolor{comment}{// Copyright (c) 2022 Bevan W.S. Jones}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated}}
+\DoxyCodeLine{6 \textcolor{comment}{// documentation files (the "{}Software"{}), to deal in the Software without restriction, including without limitation the}}
+\DoxyCodeLine{7 \textcolor{comment}{// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to}}
+\DoxyCodeLine{8 \textcolor{comment}{// permit persons to whom the Software is furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the}}
+\DoxyCodeLine{11 \textcolor{comment}{// Software.}}
+\DoxyCodeLine{12 \textcolor{comment}{//}}
+\DoxyCodeLine{13 \textcolor{comment}{// THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE}}
+\DoxyCodeLine{14 \textcolor{comment}{// WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR}}
+\DoxyCodeLine{16 \textcolor{comment}{// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}}
+\DoxyCodeLine{17 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{18 \textcolor{comment}{// File Name: graph\_utilities.h}}
+\DoxyCodeLine{19 \textcolor{comment}{// Description: Contains several supporting functions for various graph operations.}}
+\DoxyCodeLine{20 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#ifndef DISA\_GRAPH\_UTILITIES\_H}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define DISA\_GRAPH\_UTILITIES\_H}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include "{}adjacency\_graph.h"{}}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include "{}adjacency\_subgraph.h"{}}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include <numeric>}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <queue>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keyword}{namespace }Disa \{}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{36 \textcolor{comment}{// Utility Functions}}
+\DoxyCodeLine{37 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{48 \textcolor{keyword}{template}<\textcolor{keyword}{class} \_graph>}
+\DoxyCodeLine{49 std::vector<std::size\_t> level\_traversal(\textcolor{keyword}{const} \_graph\& graph, \textcolor{keyword}{const} std::size\_t i\_start,}
+\DoxyCodeLine{50                                          \textcolor{keyword}{const} std::size\_t end\_level = std::numeric\_limits<std::size\_t>::max()) \{}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52   ASSERT\_DEBUG(!graph.empty(), \textcolor{stringliteral}{"{}Graph is empty."{}});}
+\DoxyCodeLine{53   ASSERT\_DEBUG(i\_start < graph.size\_vertex(),}
+\DoxyCodeLine{54                \textcolor{stringliteral}{"{}Starting vertex not in range (0, "{}}+ std::to\_string(graph.size\_vertex()) + \textcolor{stringliteral}{"{}]."{}});}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56   std::vector<std::size\_t> vertex\_level(graph.size\_vertex(), std::numeric\_limits<std::size\_t>::max());}
+\DoxyCodeLine{57   std::queue<std::size\_t> vertex\_queue(\{i\_start\});}
+\DoxyCodeLine{58   vertex\_level[i\_start] = 0;}
+\DoxyCodeLine{59   level\_traversal(graph, vertex\_queue, vertex\_level, end\_level);}
+\DoxyCodeLine{60   \textcolor{keywordflow}{return} vertex\_level;}
+\DoxyCodeLine{61 \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{72 \textcolor{keyword}{template}<\textcolor{keyword}{class} \_graph>}
+\DoxyCodeLine{73 \textcolor{keywordtype}{void} level\_traversal(\textcolor{keyword}{const} \_graph\& graph, std::queue<std::size\_t>\& vertex\_queue, std::vector<std::size\_t>\& vertex\_level,}
+\DoxyCodeLine{74                      \textcolor{keyword}{const} std::size\_t end\_level = std::numeric\_limits<std::size\_t>::max()) \{}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76   ASSERT\_DEBUG(!graph.empty(), \textcolor{stringliteral}{"{}Graph is empty."{}});}
+\DoxyCodeLine{77   ASSERT\_DEBUG(vertex\_level.size() == graph.size\_vertex(), \textcolor{stringliteral}{"{}Vertex level and graph size\_vertex do not match."{}});}
+\DoxyCodeLine{78   FOR\_EACH\_REF(level, vertex\_level) ++level;   \textcolor{comment}{// roll the vector over, before checking max.}}
+\DoxyCodeLine{79   ASSERT\_DEBUG(*std::max\_element(vertex\_level.begin(), vertex\_level.end()) < graph.size\_vertex(),}
+\DoxyCodeLine{80                \textcolor{stringliteral}{"{}A vertex in vertex level not in graph range (0, "{}}+ std::to\_string(graph.size\_vertex()) + \textcolor{stringliteral}{"{}]."{}});}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82   \textcolor{keywordflow}{while}(!vertex\_queue.empty()) \{}
+\DoxyCodeLine{83     \textcolor{keyword}{const} std::size\_t front = vertex\_queue.front();}
+\DoxyCodeLine{84     vertex\_queue.pop();}
+\DoxyCodeLine{85     \textcolor{keywordflow}{if}(vertex\_level[front] == end\_level + 1) \textcolor{keywordflow}{continue}; \textcolor{comment}{// Do not add new vertices, +1 because of above increment.}}
+\DoxyCodeLine{86     FOR\_EACH(vertex, graph[front]) \{}
+\DoxyCodeLine{87       \textcolor{keywordflow}{if}(!\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{bool}\textcolor{keyword}{>}(vertex\_level[vertex])) \{}
+\DoxyCodeLine{88         vertex\_queue.push(vertex);}
+\DoxyCodeLine{89         vertex\_level[vertex] = vertex\_level[front] + 1;}
+\DoxyCodeLine{90       \}}
+\DoxyCodeLine{91     \}}
+\DoxyCodeLine{92   \}}
+\DoxyCodeLine{93   FOR\_EACH\_REF(level, vertex\_level) -\/-\/level;}
+\DoxyCodeLine{94 \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{104 \textcolor{keyword}{template}<\textcolor{keyword}{class} \_graph>}
+\DoxyCodeLine{105 \textcolor{keywordtype}{void} level\_expansion(\textcolor{keyword}{const} \_graph\& graph, \textcolor{keyword}{const} std::vector<std::size\_t>\& seeds,}
+\DoxyCodeLine{106                      std::vector<std::size\_t>\& vertex\_color) \{}
+\DoxyCodeLine{107   ASSERT\_DEBUG(!graph.empty(), \textcolor{stringliteral}{"{}Graph is empty."{}});}
+\DoxyCodeLine{108   ASSERT\_DEBUG(!seeds.empty(), \textcolor{stringliteral}{"{}There are no seeds to begin expansion."{}});}
+\DoxyCodeLine{109   ASSERT\_DEBUG(*std::max\_element(seeds.begin(), seeds.end()) < graph.size\_vertex(),}
+\DoxyCodeLine{110                \textcolor{stringliteral}{"{}A seed index is not in graph range [0, "{}} + std::to\_string(graph.size\_vertex()) + \textcolor{stringliteral}{"{})."{}});}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112   \textcolor{comment}{// Setup memory, and seed the queues and colors.}}
+\DoxyCodeLine{113   vertex\_color.resize(graph.size\_vertex());}
+\DoxyCodeLine{114   std::vector<std::queue<std::size\_t> > vertex\_queues(seeds.size());}
+\DoxyCodeLine{115   FOR\_EACH\_REF(color, vertex\_color) color = std::numeric\_limits<std::size\_t>::max();}
+\DoxyCodeLine{116   FOR(i\_seed, seeds.size()) \{}
+\DoxyCodeLine{117     vertex\_queues[i\_seed].push(\{seeds[i\_seed]\});}
+\DoxyCodeLine{118     vertex\_color[seeds[i\_seed]] = i\_seed;}
+\DoxyCodeLine{119   \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121   \textcolor{comment}{// Color vertices.}}
+\DoxyCodeLine{122   std::size\_t iteration = 0;}
+\DoxyCodeLine{123   \textcolor{keywordflow}{while}(std::any\_of(vertex\_queues.begin(), vertex\_queues.end(), [](\textcolor{keyword}{const} \textcolor{keyword}{auto}\& queue)\{return !queue.empty();\})) \{}
+\DoxyCodeLine{124     FOR(i\_queue, vertex\_queues.size()) \{}
+\DoxyCodeLine{125       \textcolor{comment}{// ensures we do a forward's and backwards sweep to try and keep expansion 'unbiased'.}}
+\DoxyCodeLine{126       \textcolor{keyword}{auto}\& vertex\_queue = iteration\%2 == 0 ? vertex\_queues[i\_queue]}
+\DoxyCodeLine{127                                             : vertex\_queues[vertex\_queues.size() -\/ i\_queue -\/ 1];}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129       \textcolor{comment}{// Perform a level expansion for this color.}}
+\DoxyCodeLine{130       std::queue<std::size\_t> new\_queue;}
+\DoxyCodeLine{131       \textcolor{keywordflow}{while}(!vertex\_queue.empty()) \{}
+\DoxyCodeLine{132         \textcolor{keyword}{const} std::size\_t front = vertex\_queue.front();}
+\DoxyCodeLine{133         vertex\_queue.pop();}
+\DoxyCodeLine{134         FOR\_EACH(vertex, graph[front]) \{}
+\DoxyCodeLine{135           \textcolor{keywordflow}{if}(vertex\_color[vertex] == std::numeric\_limits<std::size\_t>::max()) \{}
+\DoxyCodeLine{136             new\_queue.push(vertex);}
+\DoxyCodeLine{137             vertex\_color[vertex] = vertex\_color[front];}
+\DoxyCodeLine{138           \}}
+\DoxyCodeLine{139         \}}
+\DoxyCodeLine{140       \}}
+\DoxyCodeLine{141       std::swap(new\_queue, vertex\_queue);}
+\DoxyCodeLine{142     \}}
+\DoxyCodeLine{143     ASSERT(iteration++ < graph.size\_vertex(), \textcolor{stringliteral}{"{}Number of iterations have exceeded, "{}}}
+\DoxyCodeLine{144                                                + std::to\_string(iteration) + \textcolor{stringliteral}{"{}. Is the graph disjoint?"{}});}
+\DoxyCodeLine{145   \}}
+\DoxyCodeLine{146 \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{155 \textcolor{keyword}{template}<\textcolor{keyword}{class} \_graph>}
+\DoxyCodeLine{156 std::size\_t pseudo\_peripheral\_vertex(\textcolor{keyword}{const} \_graph\& graph, std::size\_t i\_start = 0) \{}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158   ASSERT\_DEBUG(!graph.empty(), \textcolor{stringliteral}{"{}The parsed graph is empty."{}});}
+\DoxyCodeLine{159   ASSERT\_DEBUG(i\_start < graph.size\_vertex(), \textcolor{stringliteral}{"{}The parsed start vertex is not in the graph."{}});}
+\DoxyCodeLine{160   \textcolor{keywordflow}{if}(graph.degree(i\_start) == 0)}
+\DoxyCodeLine{161   \{}
+\DoxyCodeLine{162     WARNING(\textcolor{stringliteral}{"{}The parsed start vertex has a 0 degree."{}});}
+\DoxyCodeLine{163     \textcolor{keywordflow}{return} i\_start;}
+\DoxyCodeLine{164   \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166   \textcolor{comment}{// Calculate the distance of each vertex from the starting vertex}}
+\DoxyCodeLine{167   \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};}
+\DoxyCodeLine{168   std::size\_t max\_distance = 0;}
+\DoxyCodeLine{169   std::size\_t\& pseudo\_peripheral\_node = i\_start;}
+\DoxyCodeLine{170   std::vector<std::size\_t> distance;}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172   \textcolor{comment}{// Calculate the eccentricity of each vertex}}
+\DoxyCodeLine{173   \textcolor{keywordflow}{while}(!found) \{}
+\DoxyCodeLine{174     found = \textcolor{keyword}{true};}
+\DoxyCodeLine{175     distance = level\_traversal(graph, pseudo\_peripheral\_node);}
+\DoxyCodeLine{176     FOR(i\_vertex, graph.size\_vertex()) \{}
+\DoxyCodeLine{177       \textcolor{keywordflow}{if}(distance[i\_vertex] > max\_distance || (distance[i\_vertex] == max\_distance}
+\DoxyCodeLine{178                                                \&\& graph.degree(i\_vertex) < graph.degree(pseudo\_peripheral\_node))) \{}
+\DoxyCodeLine{179         max\_distance = distance[i\_vertex];}
+\DoxyCodeLine{180         pseudo\_peripheral\_node = i\_vertex;}
+\DoxyCodeLine{181         found = \textcolor{keyword}{false};}
+\DoxyCodeLine{182       \}}
+\DoxyCodeLine{183     \}}
+\DoxyCodeLine{184   \}}
+\DoxyCodeLine{185   \textcolor{keywordflow}{return} pseudo\_peripheral\_node;}
+\DoxyCodeLine{186 \}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{194 \textcolor{keyword}{template}<\textcolor{keyword}{class} \_graph>}
+\DoxyCodeLine{195 \textcolor{keywordtype}{void} eccentricity\_graph(\textcolor{keyword}{const} \_graph\& graph, std::vector<std::vector<std::size\_t> >\& eccentricity) \{}
+\DoxyCodeLine{196   eccentricity.resize(graph.size\_vertex());}
+\DoxyCodeLine{197     FOR(i\_vertex, graph.size\_vertex())\{}
+\DoxyCodeLine{198     \textcolor{keyword}{const} std::size\_t start\_vertex = graph.size\_vertex() -\/ i\_vertex -\/ 1;}
+\DoxyCodeLine{199     eccentricity\_vertex\_breadth\_first(graph, start\_vertex, eccentricity[start\_vertex], start\_vertex + 1);}
+\DoxyCodeLine{200   \}}
+\DoxyCodeLine{201 \}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{215 \textcolor{keyword}{template}<\textcolor{keyword}{class} \_graph>}
+\DoxyCodeLine{216 \textcolor{keywordtype}{void} eccentricity\_vertex\_breadth\_first(\textcolor{keyword}{const} \_graph\& graph, \textcolor{keyword}{const} std::size\_t i\_start,}
+\DoxyCodeLine{217                                        std::vector<std::size\_t>\& distance,}
+\DoxyCodeLine{218                                        \textcolor{keyword}{const} std::size\_t i\_stop = std::numeric\_limits<std::size\_t>::max()) \{}
+\DoxyCodeLine{219   ASSERT\_DEBUG(!graph.empty(), \textcolor{stringliteral}{"{}The parsed graph is empty."{}});}
+\DoxyCodeLine{220   ASSERT\_DEBUG(i\_start < graph.size\_vertex(), \textcolor{stringliteral}{"{}The parsed start vertex is not in the graph."{}});}
+\DoxyCodeLine{221   ASSERT\_DEBUG(i\_start <= i\_stop, \textcolor{stringliteral}{"{}The parsed start vertex is greater than the parsed stop vertex."{}});}
+\DoxyCodeLine{222   ASSERT\_DEBUG(i\_stop == std::numeric\_limits<std::size\_t>::max() || i\_stop <= graph.size\_vertex(),}
+\DoxyCodeLine{223                \textcolor{stringliteral}{"{}The stopping vertex is not in the graph size range [0, "{}} + std::to\_string(graph.size\_vertex())}
+\DoxyCodeLine{224                + \textcolor{stringliteral}{"{}] and not set to a default."{}});}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226   \textcolor{comment}{// Initialise the distance vector.}}
+\DoxyCodeLine{227   std::fill(distance.begin(), distance.end(), std::numeric\_limits<std::size\_t>::max());}
+\DoxyCodeLine{228   distance.resize(graph.size\_vertex() <= i\_stop ? graph.size\_vertex() : i\_stop,}
+\DoxyCodeLine{229                   std::numeric\_limits<std::size\_t>::max());}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231   \textcolor{comment}{// Create a priority queue to store the vertices to be visited}}
+\DoxyCodeLine{232   std::queue<std::size\_t> queue(\{i\_start\});}
+\DoxyCodeLine{233   distance[i\_start] = 0;}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235   \textcolor{comment}{// Visit each vertex in the graph}}
+\DoxyCodeLine{236   \textcolor{keywordflow}{while}(!queue.empty()) \{}
+\DoxyCodeLine{237     \textcolor{keyword}{const} std::size\_t front = queue.front();}
+\DoxyCodeLine{238     queue.pop();}
+\DoxyCodeLine{239     \textcolor{keywordflow}{if}(front >= i\_stop) \textcolor{keywordflow}{continue}; \textcolor{comment}{// we don't search.}}
+\DoxyCodeLine{240     FOR\_EACH(vertex, graph[front]) \{}
+\DoxyCodeLine{241       \textcolor{keywordflow}{if}(distance[vertex] == std::numeric\_limits<std::size\_t>::max()) \{}
+\DoxyCodeLine{242         distance[vertex] = distance[front] + 1;}
+\DoxyCodeLine{243         queue.push(vertex);}
+\DoxyCodeLine{244         \}}
+\DoxyCodeLine{245     \}}
+\DoxyCodeLine{246   \}}
+\DoxyCodeLine{247 \}}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249 \}}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//DISA\_GRAPH\_UTILITIES\_H}}
+
+\end{DoxyCode}

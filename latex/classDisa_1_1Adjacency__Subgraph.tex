@@ -1,0 +1,494 @@
+\hypertarget{classDisa_1_1Adjacency__Subgraph}{}\doxysection{Disa\+::Adjacency\+\_\+\+Subgraph Class Reference}
+\label{classDisa_1_1Adjacency__Subgraph}\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a997bf736f2e8af03f0295820d13805a3}{Adjacency\+\_\+\+Subgraph}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a4b5622d136638b15b760ab3f17b59888}\label{classDisa_1_1Adjacency__Subgraph_a4b5622d136638b15b760ab3f17b59888}} 
+{\bfseries $\sim$\+Adjacency\+\_\+\+Subgraph} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a7d52a7d2d83572beab7c01745a8c3fb1}{Adjacency\+\_\+\+Subgraph}} (const \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\+\_\+\+Graph}} \&parent\+\_\+graph, const std\+::vector$<$ std\+::size\+\_\+t $>$ \&i\+\_\+sub\+\_\+graph\+\_\+vertex, std\+::size\+\_\+t extra\+\_\+levels=0)
+\item 
+std\+::span$<$ const size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a8a2d2689e6479f840a0f3e7e38bb5458}{at}} (const std\+::size\+\_\+t \&i\+\_\+vertex) const
+\begin{DoxyCompactList}\small\item\em Subscript operator for access to a specified graph vertex\textquotesingle{}s adjacency, with range checking. \end{DoxyCompactList}\item 
+std\+::span$<$ const std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_af74adca1d853368844e78e85d8bd910c}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::size\+\_\+t \&i\+\_\+vertex) const
+\begin{DoxyCompactList}\small\item\em Subscript operator for access to a specified graph vertex\textquotesingle{}s adjacency. \end{DoxyCompactList}\item 
+std\+::span$<$ std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a27873be7c712e4d442c6b402e515cde8}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::size\+\_\+t \&i\+\_\+vertex)
+\begin{DoxyCompactList}\small\item\em Subscript operator for access to a specified graph vertex\textquotesingle{}s adjacency. \end{DoxyCompactList}\item 
+std\+::span$<$ const std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_acedb63bd7bc1909725387e89b6a715d7}{front}} () const
+\begin{DoxyCompactList}\small\item\em Returns the first vertex\textquotesingle{}s adjacency. \end{DoxyCompactList}\item 
+std\+::span$<$ std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab62e7fc9475f98ebdbc7ddf8f52d6dfa}{front}} ()
+\begin{DoxyCompactList}\small\item\em Returns the first vertex\textquotesingle{}s adjacency. \end{DoxyCompactList}\item 
+std\+::span$<$ const std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a1a9e4e85daf6ecd086bc3c2c4b502060}{back}} () const
+\begin{DoxyCompactList}\small\item\em Returns the last vertex\textquotesingle{}s adjacency. \end{DoxyCompactList}\item 
+std\+::span$<$ std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a9863bf593e2c2f0e160520c5f547c5ec}{back}} ()
+\begin{DoxyCompactList}\small\item\em Returns the last vertex\textquotesingle{}s adjacency. \end{DoxyCompactList}\item 
+std\+::tuple$<$ std\+::size\+\_\+t $\ast$, std\+::size\+\_\+t $\ast$, std\+::size\+\_\+t $\ast$, std\+::size\+\_\+t $\ast$ $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a7f3ea9501e0943468af9fb28ede2a822}{data}} () noexcept
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classDisa_1_1Direct}{Direct}} access to the underlying vectors of the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a42104eb81f93f56e858844a64003aae3}{empty}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks whether the graph is empty. An empty graph is considered where there are no vertices. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\+\_\+vertex}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of vertices in the graph. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_aa234815e65ebf4311e74584874823237}{size\+\_\+edge}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of edge in the graph. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}{size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of vertices and edges in the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_aae6aa5376bf70b1e2a6bf89664aca615}{reserve}} (std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}{size\+\_\+vertex}}, std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_aa234815e65ebf4311e74584874823237}{size\+\_\+edge}}=0) noexcept
+\begin{DoxyCompactList}\small\item\em Reserves enough memory such that the data structure can be filled with the parsed vertices and/or edges. \end{DoxyCompactList}\item 
+std\+::tuple$<$ std\+::size\+\_\+t, std\+::size\+\_\+t, std\+::size\+\_\+t, std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a9809be7c8b5d5045687e3c5ba99b5421}{capacity}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the current number of vertices and edges the graph has capacity (memory for). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a376f966ee75d82627d64d4b63c242c83}\label{classDisa_1_1Adjacency__Subgraph_a376f966ee75d82627d64d4b63c242c83}} 
+void {\bfseries shrink\+\_\+to\+\_\+fit} () noexcept
+\begin{DoxyCompactList}\small\item\em reduces memory usage of the graph by freeing unused memory for both vertices and edges. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a066c8175a8be0d0d82710b81d2c026e4}\label{classDisa_1_1Adjacency__Subgraph_a066c8175a8be0d0d82710b81d2c026e4}} 
+void {\bfseries clear} ()
+\begin{DoxyCompactList}\small\item\em Clears the contents of the graph, removing all vertices and edges. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a3a72ace359daa8d1533f077e0f36be34}{resize}} (const std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}{size}})
+\begin{DoxyCompactList}\small\item\em Resizes the number of vertices in the graph. @size\mbox{[}in\mbox{]} The number of vertices to resize the graph to. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a03afe26015ba499fdf74c8a876ff859b}{swap}} (\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph}{Adjacency\+\_\+\+Subgraph}} \&graph\+\_\+other)
+\begin{DoxyCompactList}\small\item\em Swaps the contents of the graph with the parsed graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_af1991aa75e586dd8d32db3a461625805}{contains}} (const Edge \&edge) const
+\begin{DoxyCompactList}\small\item\em Checks if the edge exists in the graph. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a0791defd95d467ed724d063238675549}{degree}} (const std\+::size\+\_\+t \&i\+\_\+vertex) const
+\begin{DoxyCompactList}\small\item\em Computes the degree of a vertex\+: defined as the number of vertices it adjacent (connected) to. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a6d15d4e89b7a37fea4027b0c6a18e372}{is\+\_\+local}} (const std\+::size\+\_\+t \&i\+\_\+vertex) const
+\begin{DoxyCompactList}\small\item\em Is the vertex local to this subgraph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a062169d99cc73edc4650a8a008626537}{is\+\_\+parent}} (const \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\+\_\+\+Graph}} \&graph\+\_\+parent) const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the parsed graph is the parent of this sub-\/graph. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a7004f2c967b6b5c5ad39fafacb482dab}{local\+\_\+global}} (const std\+::size\+\_\+t \&i\+\_\+vertex) const
+\begin{DoxyCompactList}\small\item\em Get the global index of a local vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph}{Adjacency\+\_\+\+Subgraph}} \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_a5082f032b04e3fd68e1a610434a7e92a}{reorder}} (const std\+::vector$<$ std\+::size\+\_\+t $>$ \&permutation)
+\begin{DoxyCompactList}\small\item\em Reorders this graph given a new index numbering. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_aa1009aeb107c8fe5803157286e98d329}{update\+\_\+levels}} (const \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\+\_\+\+Graph}} \&parent\+\_\+graph, std\+::size\+\_\+t max\+\_\+level, std\+::shared\+\_\+ptr$<$ std\+::vector$<$ std\+::size\+\_\+t $>$ $>$ i\+\_\+global\+\_\+local=nullptr)
+\begin{DoxyCompactList}\small\item\em Changes the number of \textquotesingle{}halo\textquotesingle{} levels/vertices around the primary sub-\/graph. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph_abe21f3519ae2817d5b0f4db56908e6cd}{vertex\+\_\+level}} (const std\+::size\+\_\+t \&i\+\_\+vertex) const
+\begin{DoxyCompactList}\small\item\em Returns the level of a given vertex in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a997bf736f2e8af03f0295820d13805a3}\label{classDisa_1_1Adjacency__Subgraph_a997bf736f2e8af03f0295820d13805a3}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!Adjacency\_Subgraph@{Adjacency\_Subgraph}}
+\index{Adjacency\_Subgraph@{Adjacency\_Subgraph}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{Adjacency\_Subgraph()}{Adjacency\_Subgraph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Disa\+::\+Adjacency\+\_\+\+Subgraph\+::\+Adjacency\+\_\+\+Subgraph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\begin{DoxyReturn}{Returns}
+An empty \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph}{Adjacency\+\_\+\+Subgraph}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a7d52a7d2d83572beab7c01745a8c3fb1}\label{classDisa_1_1Adjacency__Subgraph_a7d52a7d2d83572beab7c01745a8c3fb1}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!Adjacency\_Subgraph@{Adjacency\_Subgraph}}
+\index{Adjacency\_Subgraph@{Adjacency\_Subgraph}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{Adjacency\_Subgraph()}{Adjacency\_Subgraph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Disa\+::\+Adjacency\+\_\+\+Subgraph\+::\+Adjacency\+\_\+\+Subgraph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\+\_\+\+Graph}} \&}]{parent\+\_\+graph,  }\item[{const std\+::vector$<$ std\+::size\+\_\+t $>$ \&}]{i\+\_\+partition\+\_\+local\+\_\+global,  }\item[{std\+::size\+\_\+t}]{extra\+\_\+levels = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+@breif Constructor for creating a subgraph from a parent graph. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em parent\+\_\+graph} & The parent graph upon which this subgraph will be constructed. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+partition\+\_\+local\+\_\+global} & For this partition of the parent graph, the local to global index mapping. \\
+\hline
+\mbox{\texttt{ in}}  & {\em extra\+\_\+levels} & Additional levels to add to the primary partition. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Constructed \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph}{Adjacency\+\_\+\+Subgraph}}
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+There are no guarantees placed on the resulting local partition ordering.
+\end{DoxyNote}
+Constructs a new subgraph using the given vertex partitioning of the parent graph. The resulting subgraph will form the primary partition with these vertices. This presently is achieved by copying the parent graph to the internal graph representation, and forming the global-\/local mappings and deleting vertices not in the subgraph. Finally, should extra levels be requested they are added to the subgraph. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a8a2d2689e6479f840a0f3e7e38bb5458}\label{classDisa_1_1Adjacency__Subgraph_a8a2d2689e6479f840a0f3e7e38bb5458}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!at@{at}}
+\index{at@{at}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}}
+{\footnotesize\ttfamily std\+::span$<$ const size\+\_\+t $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::at (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+vertex }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Subscript operator for access to a specified graph vertex\textquotesingle{}s adjacency, with range checking. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+vertex} & The vertex index to the adjacency graph being sought. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A span of a single vertex adjacency in the graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a9863bf593e2c2f0e160520c5f547c5ec}\label{classDisa_1_1Adjacency__Subgraph_a9863bf593e2c2f0e160520c5f547c5ec}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!back@{back}}
+\index{back@{back}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{back()}{back()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::span$<$ std\+::size\+\_\+t $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the last vertex\textquotesingle{}s adjacency. 
+
+\begin{DoxyReturn}{Returns}
+A span of a the last vertex adjacency in the graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a1a9e4e85daf6ecd086bc3c2c4b502060}\label{classDisa_1_1Adjacency__Subgraph_a1a9e4e85daf6ecd086bc3c2c4b502060}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!back@{back}}
+\index{back@{back}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{back()}{back()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::span$<$ const std\+::size\+\_\+t $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the last vertex\textquotesingle{}s adjacency. 
+
+\begin{DoxyReturn}{Returns}
+A span of a the last vertex adjacency in the graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a9809be7c8b5d5045687e3c5ba99b5421}\label{classDisa_1_1Adjacency__Subgraph_a9809be7c8b5d5045687e3c5ba99b5421}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!capacity@{capacity}}
+\index{capacity@{capacity}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::size\+\_\+t, std\+::size\+\_\+t, std\+::size\+\_\+t, std\+::size\+\_\+t $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the current number of vertices and edges the graph has capacity (memory for). 
+
+\begin{DoxyReturn}{Returns}
+tuple containing capacities for \mbox{[}vertices, edges\mbox{]}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_af1991aa75e586dd8d32db3a461625805}\label{classDisa_1_1Adjacency__Subgraph_af1991aa75e586dd8d32db3a461625805}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!contains@{contains}}
+\index{contains@{contains}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily bool Disa\+::\+Adjacency\+\_\+\+Subgraph\+::contains (\begin{DoxyParamCaption}\item[{const Edge \&}]{edge }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the edge exists in the graph. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em edge} & The edge to check for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the graph contains the edge, else false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a7f3ea9501e0943468af9fb28ede2a822}\label{classDisa_1_1Adjacency__Subgraph_a7f3ea9501e0943468af9fb28ede2a822}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!data@{data}}
+\index{data@{data}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::size\+\_\+t $\ast$, std\+::size\+\_\+t $\ast$, std\+::size\+\_\+t $\ast$, std\+::size\+\_\+t $\ast$ $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+\mbox{\hyperlink{classDisa_1_1Direct}{Direct}} access to the underlying vectors of the graph. 
+
+\begin{DoxyReturn}{Returns}
+pair \mbox{[}pointer to vertex start, pointer to offset start, pointer to local to global, pointer to levels\mbox{]}.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+If empty all pointers returned pointers will be nullptrs. If there the vertex list is empty then the only non-\/nullptr will be for the offset vector. Finally, a nullptr will be return if the subgraph does not contain additional levels. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a0791defd95d467ed724d063238675549}\label{classDisa_1_1Adjacency__Subgraph_a0791defd95d467ed724d063238675549}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!degree@{degree}}
+\index{degree@{degree}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{degree()}{degree()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Disa\+::\+Adjacency\+\_\+\+Subgraph\+::degree (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+vertex }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Computes the degree of a vertex\+: defined as the number of vertices it adjacent (connected) to. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+vertex} & The vertex index for which to compute the degree. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The degree of the vertex. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a42104eb81f93f56e858844a64003aae3}\label{classDisa_1_1Adjacency__Subgraph_a42104eb81f93f56e858844a64003aae3}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!empty@{empty}}
+\index{empty@{empty}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool Disa\+::\+Adjacency\+\_\+\+Subgraph\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Checks whether the graph is empty. An empty graph is considered where there are no vertices. 
+
+\begin{DoxyReturn}{Returns}
+True if the graph is empty, else false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_ab62e7fc9475f98ebdbc7ddf8f52d6dfa}\label{classDisa_1_1Adjacency__Subgraph_ab62e7fc9475f98ebdbc7ddf8f52d6dfa}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!front@{front}}
+\index{front@{front}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{front()}{front()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::span$<$ std\+::size\+\_\+t $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::front (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the first vertex\textquotesingle{}s adjacency. 
+
+\begin{DoxyReturn}{Returns}
+A span of a the first vertex adjacency in the graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_acedb63bd7bc1909725387e89b6a715d7}\label{classDisa_1_1Adjacency__Subgraph_acedb63bd7bc1909725387e89b6a715d7}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!front@{front}}
+\index{front@{front}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{front()}{front()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::span$<$ const std\+::size\+\_\+t $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::front (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the first vertex\textquotesingle{}s adjacency. 
+
+\begin{DoxyReturn}{Returns}
+A const span of a the first vertex adjacency in the graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a6d15d4e89b7a37fea4027b0c6a18e372}\label{classDisa_1_1Adjacency__Subgraph_a6d15d4e89b7a37fea4027b0c6a18e372}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!is\_local@{is\_local}}
+\index{is\_local@{is\_local}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{is\_local()}{is\_local()}}
+{\footnotesize\ttfamily bool Disa\+::\+Adjacency\+\_\+\+Subgraph\+::is\+\_\+local (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+vertex }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Is the vertex local to this subgraph. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+vertex} & The vertex to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the vertex is part of this subgraph, else false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a062169d99cc73edc4650a8a008626537}\label{classDisa_1_1Adjacency__Subgraph_a062169d99cc73edc4650a8a008626537}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!is\_parent@{is\_parent}}
+\index{is\_parent@{is\_parent}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{is\_parent()}{is\_parent()}}
+{\footnotesize\ttfamily bool Disa\+::\+Adjacency\+\_\+\+Subgraph\+::is\+\_\+parent (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\+\_\+\+Graph}} \&}]{graph\+\_\+parent }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Checks if the parsed graph is the parent of this sub-\/graph. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em graph\+\_\+parent} & The parent graph to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the graph is the parent, else false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a7004f2c967b6b5c5ad39fafacb482dab}\label{classDisa_1_1Adjacency__Subgraph_a7004f2c967b6b5c5ad39fafacb482dab}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!local\_global@{local\_global}}
+\index{local\_global@{local\_global}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{local\_global()}{local\_global()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Disa\+::\+Adjacency\+\_\+\+Subgraph\+::local\+\_\+global (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+vertex }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the global index of a local vertex. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+vertex} & The local vertex index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The global vertex index. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a27873be7c712e4d442c6b402e515cde8}\label{classDisa_1_1Adjacency__Subgraph_a27873be7c712e4d442c6b402e515cde8}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::span$<$ std\+::size\+\_\+t $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Subscript operator for access to a specified graph vertex\textquotesingle{}s adjacency. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+vertex} & The vertex index to the adjacency graph being sought. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A span of a single vertex adjacency in the graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_af74adca1d853368844e78e85d8bd910c}\label{classDisa_1_1Adjacency__Subgraph_af74adca1d853368844e78e85d8bd910c}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::span$<$ const std\+::size\+\_\+t $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+vertex }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Subscript operator for access to a specified graph vertex\textquotesingle{}s adjacency. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+vertex} & The vertex index to the adjacency graph being sought. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A span of a single vertex adjacency in the graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a5082f032b04e3fd68e1a610434a7e92a}\label{classDisa_1_1Adjacency__Subgraph_a5082f032b04e3fd68e1a610434a7e92a}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!reorder@{reorder}}
+\index{reorder@{reorder}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{reorder()}{reorder()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph}{Adjacency\+\_\+\+Subgraph}} Disa\+::\+Adjacency\+\_\+\+Subgraph\+::reorder (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::size\+\_\+t $>$ \&}]{permutation }\end{DoxyParamCaption})}
+
+
+
+Reorders this graph given a new index numbering. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em permutation} & The permutation vector, mapping new\+\_\+index = permutation\mbox{[}old\+\_\+index\mbox{]}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The old, un-\/permuted, adjacency graph.
+\end{DoxyReturn}
+Creates a new subgraph instance that is a reordered version of the current instance. The new subgraph contains the same vertices and edges as the original, but with their local indexes permuted based on the given permutation vector. Finally the new instance and this instance are swapped, with the now old instance returned. \mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_aae6aa5376bf70b1e2a6bf89664aca615}\label{classDisa_1_1Adjacency__Subgraph_aae6aa5376bf70b1e2a6bf89664aca615}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!reserve@{reserve}}
+\index{reserve@{reserve}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{reserve()}{reserve()}}
+{\footnotesize\ttfamily void Disa\+::\+Adjacency\+\_\+\+Subgraph\+::reserve (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{size\+\_\+vertex,  }\item[{std\+::size\+\_\+t}]{size\+\_\+edge = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Reserves enough memory such that the data structure can be filled with the parsed vertices and/or edges. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em size\+\_\+vertex} & The total number of vertices to reserve for. \\
+\hline
+\mbox{\texttt{ in}}  & {\em size\+\_\+edge} & The total number of edge to reserve for (defaults to zero). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a3a72ace359daa8d1533f077e0f36be34}\label{classDisa_1_1Adjacency__Subgraph_a3a72ace359daa8d1533f077e0f36be34}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!resize@{resize}}
+\index{resize@{resize}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void Disa\+::\+Adjacency\+\_\+\+Subgraph\+::resize (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resizes the number of vertices in the graph. @size\mbox{[}in\mbox{]} The number of vertices to resize the graph to. 
+
+\begin{DoxyNote}{Note}
+Edges are removed if the graph size is reduced. And the parent graph is cleared. 
+
+Invalidates the parent hash if size is increased. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}\label{classDisa_1_1Adjacency__Subgraph_a44abfc1485b9f70f517b27b491cd5648}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!size@{size}}
+\index{size@{size}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ Disa\+::\+Adjacency\+\_\+\+Subgraph\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of vertices and edges in the graph. 
+
+\begin{DoxyReturn}{Returns}
+Pair containing \mbox{[}vertices, edges\mbox{]}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_aa234815e65ebf4311e74584874823237}\label{classDisa_1_1Adjacency__Subgraph_aa234815e65ebf4311e74584874823237}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!size\_edge@{size\_edge}}
+\index{size\_edge@{size\_edge}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{size\_edge()}{size\_edge()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Disa\+::\+Adjacency\+\_\+\+Subgraph\+::size\+\_\+edge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of edge in the graph. 
+
+\begin{DoxyReturn}{Returns}
+The number of edge. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}\label{classDisa_1_1Adjacency__Subgraph_ab8b4ac0a40ddda5bf7503bedd66f2c34}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!size\_vertex@{size\_vertex}}
+\index{size\_vertex@{size\_vertex}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{size\_vertex()}{size\_vertex()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Disa\+::\+Adjacency\+\_\+\+Subgraph\+::size\+\_\+vertex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of vertices in the graph. 
+
+\begin{DoxyReturn}{Returns}
+The number of vertices. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_a03afe26015ba499fdf74c8a876ff859b}\label{classDisa_1_1Adjacency__Subgraph_a03afe26015ba499fdf74c8a876ff859b}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!swap@{swap}}
+\index{swap@{swap}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{swap()}{swap()}}
+{\footnotesize\ttfamily void Disa\+::\+Adjacency\+\_\+\+Subgraph\+::swap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDisa_1_1Adjacency__Subgraph}{Adjacency\+\_\+\+Subgraph}} \&}]{graph\+\_\+other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Swaps the contents of the graph with the parsed graph. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em other} & The other graph, this graph will obtain the other\textquotesingle{}s vertices and edges, and visa versa. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_aa1009aeb107c8fe5803157286e98d329}\label{classDisa_1_1Adjacency__Subgraph_aa1009aeb107c8fe5803157286e98d329}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!update\_levels@{update\_levels}}
+\index{update\_levels@{update\_levels}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{update\_levels()}{update\_levels()}}
+{\footnotesize\ttfamily void Disa\+::\+Adjacency\+\_\+\+Subgraph\+::update\+\_\+levels (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Adjacency\+\_\+\+Graph}} \&}]{parent\+\_\+graph,  }\item[{std\+::size\+\_\+t}]{max\+\_\+level,  }\item[{std\+::shared\+\_\+ptr$<$ std\+::vector$<$ std\+::size\+\_\+t $>$ $>$}]{i\+\_\+global\+\_\+local = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Changes the number of \textquotesingle{}halo\textquotesingle{} levels/vertices around the primary sub-\/graph. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em parent\+\_\+graph} & The parent graph of this subgraph. \\
+\hline
+\mbox{\texttt{ in}}  & {\em max\+\_\+level} & The new number of levels the subgraph must have. \\
+\hline
+\mbox{\texttt{ out}}  & {\em i\+\_\+global\+\_\+local} & A global to local mapping of all vertices in the parent graph. Defaults to nullptr.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+i\+\_\+global\+\_\+local may be a nullptr. In this case it will be populated for adding levels, as a working vector is needed, but will be left as a nullptr when removing levels. Since no shrink-\/to-\/fit is called, multiple calls using the same pointer/vector can increase performance by avoiding repeated \textquotesingle{}large\textquotesingle{} memory allocations. Finally, and std\+::numeric\+\_\+limits$<$std\+::size\+\_\+t$>$\+::max() value implies no mapping into this subgraph.
+\end{DoxyNote}
+Updates the levels of the subgraph by either adding or removing levels from the parent graph depending on the current size vs the requested new size of the levels, max\+\_\+level. Where adding occurs when max level is greater than the current levels, and removing when less than current. The new global to local mapping is returned through the i\+\_\+global\+\_\+local shared pointer. \mbox{\Hypertarget{classDisa_1_1Adjacency__Subgraph_abe21f3519ae2817d5b0f4db56908e6cd}\label{classDisa_1_1Adjacency__Subgraph_abe21f3519ae2817d5b0f4db56908e6cd}} 
+\index{Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}!vertex\_level@{vertex\_level}}
+\index{vertex\_level@{vertex\_level}!Disa::Adjacency\_Subgraph@{Disa::Adjacency\_Subgraph}}
+\doxysubsubsection{\texorpdfstring{vertex\_level()}{vertex\_level()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Disa\+::\+Adjacency\+\_\+\+Subgraph\+::vertex\+\_\+level (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+vertex }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the level of a given vertex in the graph. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+vertex} & The local index of the vertex whose level is to be returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The level of the vertex at the specified local index. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+libs/graphing/adjacency\+\_\+subgraph.\+h\item 
+libs/graphing/adjacency\+\_\+subgraph.\+cpp\end{DoxyCompactItemize}

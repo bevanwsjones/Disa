@@ -1,0 +1,843 @@
+\hypertarget{classDisa_1_1Matrix__Sparse}{}\doxysection{Disa\+::Matrix\+\_\+\+Sparse Class Reference}
+\label{classDisa_1_1Matrix__Sparse}\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+
+
+A efficient data structure which represents a matrix comprised of mostly zero entries. Follows compact storage row (CSR) approach.  
+
+
+
+
+{\ttfamily \#include $<$matrix\+\_\+sparse.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a1084799691795b304d0eb1359e7595b2}\label{classDisa_1_1Matrix__Sparse_a1084799691795b304d0eb1359e7595b2}} 
+using {\bfseries matrix} = \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a1d40a2c2d41c2257cd9d4fca1523834e}\label{classDisa_1_1Matrix__Sparse_a1d40a2c2d41c2257cd9d4fca1523834e}} 
+using {\bfseries iterator} = \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} $>$
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a6e848cf0fb558c98565917f69ef6a564}\label{classDisa_1_1Matrix__Sparse_a6e848cf0fb558c98565917f69ef6a564}} 
+using {\bfseries const\+\_\+iterator} = \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} $>$
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_aee4e34ef357af2042210f13d80cf78df}\label{classDisa_1_1Matrix__Sparse_aee4e34ef357af2042210f13d80cf78df}} 
+using {\bfseries iterator\+\_\+element} = \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element}}$<$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} $>$
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_ab684b20d3aa301ae9415a7a339f6079f}\label{classDisa_1_1Matrix__Sparse_ab684b20d3aa301ae9415a7a339f6079f}} 
+using {\bfseries const\+\_\+iterator\+\_\+element} = \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a746c43a0df4f6c969cb2775c419d7e2d}\label{classDisa_1_1Matrix__Sparse_a746c43a0df4f6c969cb2775c419d7e2d}} 
+{\bfseries Matrix\+\_\+\+Sparse} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse_aa382150da0d7ea1b72bc06ed219215a3}{Matrix\+\_\+\+Sparse}} (std\+::size\+\_\+t row, std\+::size\+\_\+t column)
+\begin{DoxyCompactList}\small\item\em Constructs a sparse matrix with a set number of rows and columns. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a0cff83464b43fe9569f140e9a1130d6b}{Matrix\+\_\+\+Sparse}} (std\+::initializer\+\_\+list$<$ std\+::size\+\_\+t $>$ non\+\_\+zero, std\+::initializer\+\_\+list$<$ std\+::size\+\_\+t $>$ index, std\+::initializer\+\_\+list$<$ Scalar $>$ value, std\+::size\+\_\+t column)
+\begin{DoxyCompactList}\small\item\em Initializer list based on the \textquotesingle{}raw\textquotesingle{} data structure of a sparse matrix. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_aa10098fd0bfc69d30fd406c8f97dc262}\label{classDisa_1_1Matrix__Sparse_aa10098fd0bfc69d30fd406c8f97dc262}} 
+{\bfseries $\sim$\+Matrix\+\_\+\+Sparse} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_ae5e9352bab07ef7ed4780f2c1041bf59}{operator=}} (const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&other)=default
+\begin{DoxyCompactList}\small\item\em Performs a trivial deep copy of the assigned matrix. \end{DoxyCompactList}\item 
+Scalar \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a91b8307cbd125de4afe193208a9168b0}{at}} (const std\+::size\+\_\+t \&i\+\_\+row, const std\+::size\+\_\+t \&i\+\_\+column)
+\begin{DoxyCompactList}\small\item\em Access specified element with bounds checking. \end{DoxyCompactList}\item 
+const Scalar \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a8d0a1744629534509e385c1e0edc1135}{at}} (const std\+::size\+\_\+t \&i\+\_\+row, const std\+::size\+\_\+t \&i\+\_\+column) const
+\begin{DoxyCompactList}\small\item\em Access specified element with bounds checking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} $>$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a4dd6f303a93389d16e069cf7c1493952}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::size\+\_\+t \&i\+\_\+row)
+\begin{DoxyCompactList}\small\item\em Subscript operator for access to a specified matrix row. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} $>$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_acf2c0e3d3e20e46f5230f7485ff37d82}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::size\+\_\+t \&i\+\_\+row) const
+\begin{DoxyCompactList}\small\item\em Subscript operator for access to a specified matrix row. \end{DoxyCompactList}\item 
+std\+::tuple$<$ std\+::size\+\_\+t $\ast$, std\+::size\+\_\+t $\ast$, Scalar $\ast$ $>$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a191b6c57c900c92e9eeeb06dd959704d}{data}} () noexcept
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classDisa_1_1Direct}{Direct}} access to the underlying array of the sparse matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_acbbfaa8f2d019ac0cdc544209da88dea}{begin}} () noexcept
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the beginning row of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{const\+\_\+iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_ac469863648160c38e3c56e7d81a7ae0e}{begin}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the beginning row of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{const\+\_\+iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_ae46849cea10ff98c6bc40713ae4fbb58}{cbegin}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the beginning row of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end}} () noexcept
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the end row (i.\+e. 1 past the last row) of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{const\+\_\+iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_aca05793b24448cf4e9552eade5ab477c}{end}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a constant iterator to the end row (i.\+e. 1 past the last row) of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{const\+\_\+iterator}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_aab8a3f9795d9dab326cd45755c8fda09}{cend}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a constant iterator to the end row (i.\+e. 1 past the last row) of the matrix. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a707bc4a0afb01e76a9afa98226d6c1f9}{empty}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks whether the matrix is empty. An empty matrix is considered where the number of rows is 0. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a2e20cba0ddb4dcde4d02058168b50cdc}{size\+\_\+row}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of rows in the matrix. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_aed3a2fd59ab0ffc8b2911ebf4465e377}{size\+\_\+column}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of columns in the matrix. \end{DoxyCompactList}\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a23f3cba86a8796d8996b2d401410550e}{size\+\_\+non\+\_\+zero}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of non-\/zeros in the matrix. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a6bc017a21bb48701c6d7fd3fd1e74d76}{size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of rows and columns in the matrix. If rows are 0, columns are 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_abb2ca51fadda30ae1963f861d2aaa3b4}{reserve}} (const std\+::size\+\_\+t \&row, const std\+::size\+\_\+t \&non\+\_\+zero) noexcept
+\begin{DoxyCompactList}\small\item\em Reserves storage for the matrix. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a7cf098c5c8afd5683405c9c3dd05b664}{capacity}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of row offsets and non-\/zeros entries that can be held in currently allocated storage. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a585fdf3e065bf35ba5d4f786b4b4d531}\label{classDisa_1_1Matrix__Sparse_a585fdf3e065bf35ba5d4f786b4b4d531}} 
+void {\bfseries shrink\+\_\+to\+\_\+fit} () noexcept
+\begin{DoxyCompactList}\small\item\em reduces memory usage by the matrix by freeing unused memory for both rows and non-\/zeros \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a6d2df61b470b5f35b4f1852e7d0cb683}\label{classDisa_1_1Matrix__Sparse_a6d2df61b470b5f35b4f1852e7d0cb683}} 
+void {\bfseries clear} () noexcept
+\begin{DoxyCompactList}\small\item\em Clears the contents of the matrix, sets the column size to zero. \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{iterator\+\_\+element}}, bool $>$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1db3c11fd4d31fd9b3f7754f3954bccd}{insert}} (const std\+::size\+\_\+t \&i\+\_\+row, const std\+::size\+\_\+t \&i\+\_\+column, const Scalar \&value)
+\begin{DoxyCompactList}\small\item\em Inserts an value with the parsed value at \mbox{[}i\+\_\+row, i\+\_\+column\mbox{]}, if an value exists nothing occurs. \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{iterator\+\_\+element}}, bool $>$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a3f048f42cc4229c9ceb47d42557aa185}{insert\+\_\+or\+\_\+assign}} (const std\+::size\+\_\+t \&i\+\_\+row, const std\+::size\+\_\+t \&i\+\_\+column, const Scalar \&value)
+\begin{DoxyCompactList}\small\item\em Inserts or updates an value with the parsed value at \mbox{[}i\+\_\+row, i\+\_\+column\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{iterator\+\_\+element}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a6679eaabb10d4be6a5e0d85ebcc9b97e}{erase}} (const \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element}}$<$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} $>$ \&iter\+\_\+element)
+\begin{DoxyCompactList}\small\item\em Erases a value at the specified row and column, using an element iterator. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a8cbed30634d3e1b28566c2581af03896}{resize}} (const std\+::size\+\_\+t \&row, const std\+::size\+\_\+t \&column)
+\begin{DoxyCompactList}\small\item\em Changes the number of rows and columns of the matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a9167eef9bae2398d3857db8b68b79dfb}{swap}} (\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&other) noexcept
+\begin{DoxyCompactList}\small\item\em Swaps the contents of the matrix with the parsed matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{iterator\+\_\+element}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_ac8ad3d410781a3f505a4d2cf0dcb997e}{find}} (const std\+::size\+\_\+t \&i\+\_\+row, const std\+::size\+\_\+t \&i\+\_\+column)
+\begin{DoxyCompactList}\small\item\em Finds the value iterator to the matrix value at a row and column. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{const\+\_\+iterator\+\_\+element}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_ae893703db2a63335c1f43c3be08bc687}{find}} (const std\+::size\+\_\+t \&i\+\_\+row, const std\+::size\+\_\+t \&i\+\_\+column) const
+\begin{DoxyCompactList}\small\item\em Finds the value iterator to the matrix value at a row and column. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_aca5937c136cd9f470c56dc431e7d1e21}{contains}} (const std\+::size\+\_\+t \&i\+\_\+row, const std\+::size\+\_\+t \&i\+\_\+column) const
+\begin{DoxyCompactList}\small\item\em Checks if the element at a row and column are non-\/zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{iterator\+\_\+element}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_ac457fb034cdd0ca3b1f732cd76354ead}{lower\+\_\+bound}} (const std\+::size\+\_\+t \&i\+\_\+row, const std\+::size\+\_\+t \&i\+\_\+column)
+\begin{DoxyCompactList}\small\item\em Returns an element iterator to the first element not less than the given key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{const\+\_\+iterator\+\_\+element}} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_af77685121fab9302dd42f0f0ad6c4e63}{lower\+\_\+bound}} (const std\+::size\+\_\+t \&i\+\_\+row, const std\+::size\+\_\+t \&i\+\_\+column) const
+\begin{DoxyCompactList}\small\item\em Returns an element iterator to the first element not less than the given key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a93839da27fad6a1162e34a6c72ec2af3}{operator$\ast$=}} (const Scalar \&scalar)
+\begin{DoxyCompactList}\small\item\em Multiplies the matrix by a scalar, A\textquotesingle{} = A$\ast$b, where A is the matrix and b is the scalar. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a43ff1630e174662e2ad1c59aa303cc90}{operator/=}} (const Scalar \&scalar)
+\begin{DoxyCompactList}\small\item\em Divides the matrix by a scalar, A\textquotesingle{} = A/b, where A is the matrix and b is a scalar. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a4d8dc7d58ae426db3564805963be34f6}{operator+=}} (const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&other)
+\begin{DoxyCompactList}\small\item\em Addition of a second matrix, A\textquotesingle{} = A + B, where A and B are matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a3f43906d741a4e699cefd53421f1d19e}{operator-\/=}} (const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&other)
+\begin{DoxyCompactList}\small\item\em Subtraction by a second matrix, A\textquotesingle{} = A -\/ B, where A and B are matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a124ba6fbcc1ca4f174fd6bef91bd3dd3}{operator$\ast$=}} (const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&other)
+\begin{DoxyCompactList}\small\item\em Multiplies this matrix by another, A\textquotesingle{} = A$\ast$B, where A and B are matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a41c4e3fa9135d804fb2888e7bfeb9f0e}\label{classDisa_1_1Matrix__Sparse_a41c4e3fa9135d804fb2888e7bfeb9f0e}} 
+class {\bfseries Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ matrix $>$}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_ad89fccf341087359afc46b9f433623a9}\label{classDisa_1_1Matrix__Sparse_ad89fccf341087359afc46b9f433623a9}} 
+class {\bfseries Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ const matrix $>$}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_ae0790bcffa36816f5707b2912cd612e3}\label{classDisa_1_1Matrix__Sparse_ae0790bcffa36816f5707b2912cd612e3}} 
+struct {\bfseries Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ matrix $>$}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a95f0ba020da860e1f378766f6ad46f5d}\label{classDisa_1_1Matrix__Sparse_a95f0ba020da860e1f378766f6ad46f5d}} 
+struct {\bfseries Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ const matrix $>$}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a0460d096615183dab76c16a1529cdaff}\label{classDisa_1_1Matrix__Sparse_a0460d096615183dab76c16a1529cdaff}} 
+struct {\bfseries Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element$<$ matrix $>$}
+\item 
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a558a8a6d1c026d9ddafad0c8801fcd30}\label{classDisa_1_1Matrix__Sparse_a558a8a6d1c026d9ddafad0c8801fcd30}} 
+struct {\bfseries Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element$<$ const matrix $>$}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_aea918dac3cb471b0436a1712c37d3c15}{operator$<$$<$}} (std\+::ostream \&stream, \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}})
+\begin{DoxyCompactList}\small\item\em Output shift operator -\/ to write to console. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A efficient data structure which represents a matrix comprised of mostly zero entries. Follows compact storage row (CSR) approach. 
+
+The \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} struct implements a mathematical matrix of nxm real numbers, but only stores memory for non-\/zero entries.
+
+A CSR matrix stores three vectors; the first indicates the number of non-\/zeros per row (row\+\_\+non\+\_\+zero), this is achieved by recording, for each element (row) in the row\+\_\+non\+\_\+zero vector the accumulated non-\/zeros upto that row. With the last element being one greater than n, the number of rows, and recording the total number of non-\/zeros in the matrix. The next vector stores the column indexes (column\+\_\+index) for each non-\/zero matrix element, and for each row the indexes are sorted in an ascending manner. The start of each row\textquotesingle{}s columns in the column index vector is given by the value in row\+\_\+non\+\_\+zero for that row. Finally, the last vector contains the values of each non-\/zero element (element\+\_\+value) and has a one-\/to-\/one correspondence with column\+\_\+index vector. The last piece of data stored is the number of columns in the matrix, this ensures correctness of mathematical operations.
+
+From a design perspective the class has two goals. The first is for the class to have a behaviour similar to that of a dense matrix for sub-\/script operators and class iterators. This is achieved via a helper class and two iterator classes which allow (range) loops over rows and then columns, further non-\/const subscript operators are fully able to add non-\/zero entries to the matrix (just be aware this may invalidate iterators). Finally, the use of iterators (when) accessed sequentially allows for efficient caching, the use of the element\+\_\+iterator\+::i\+\_\+row() and element\+\_\+iterator\+::i\+\_\+column() functions also allow for the iterator to provide use for information about the dereferenceable matrix entry.
+
+The second goal is to have have the class have a behaviour similar to a std\+::map structure, where the \textquotesingle{}key\textquotesingle{} is the row-\/column index pair for an entry. Thus functions, not normally associated with continuous structures (eg find, contains, lower\+\_\+bound, etc), are supported by the matrix.
+
+\begin{DoxyNote}{Note}
+The user should be aware of the following\+:
+\begin{DoxyEnumerate}
+\item Iterators advance over non-\/zero data -\/ i.\+e. an iterator will not be dereferenceable to a zero entry (when defined behaviour is expected).
+\item Unlike map or vector erasure functions do not effect the size of the matrix only the number of non-\/zeroes.
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Unlike map or vector insertion functions, size is only changed if the row or column index exceeds the matrix row or column size respectively, the number of non-\/zeroes will however always change.
+\item Non-\/const sub-\/script operators behave like a map in terms of overflow, i.\+e. the matrix is resized to accommodate entries added past the last row or column.
+\item As with all \textquotesingle{}\mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} iterators\textquotesingle{}, dereferencing should be considered undefined behaviour, with particular focus on a row \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} iterator, which may dereference to the first entry on the next row (you have been warned).
+\end{DoxyEnumerate}
+\end{DoxyNote}
+Future\+:
+\begin{DoxyEnumerate}
+\item If further sparse matrices are added to Disa then this class should be renamed to Matrix\+\_\+\+Sparse\+\_\+\+CSR 
+\end{DoxyEnumerate}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_aa382150da0d7ea1b72bc06ed219215a3}\label{classDisa_1_1Matrix__Sparse_aa382150da0d7ea1b72bc06ed219215a3}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!Matrix\_Sparse@{Matrix\_Sparse}}
+\index{Matrix\_Sparse@{Matrix\_Sparse}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{Matrix\_Sparse()}{Matrix\_Sparse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Disa\+::\+Matrix\+\_\+\+Sparse\+::\+Matrix\+\_\+\+Sparse (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{row,  }\item[{std\+::size\+\_\+t}]{column }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a sparse matrix with a set number of rows and columns. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em row} & Number of rows to construct. \\
+\hline
+\mbox{\texttt{ in}}  & {\em column} & Number of columns to construct. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a0cff83464b43fe9569f140e9a1130d6b}\label{classDisa_1_1Matrix__Sparse_a0cff83464b43fe9569f140e9a1130d6b}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!Matrix\_Sparse@{Matrix\_Sparse}}
+\index{Matrix\_Sparse@{Matrix\_Sparse}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{Matrix\_Sparse()}{Matrix\_Sparse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Disa\+::\+Matrix\+\_\+\+Sparse\+::\+Matrix\+\_\+\+Sparse (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ std\+::size\+\_\+t $>$}]{non\+\_\+zero,  }\item[{std\+::initializer\+\_\+list$<$ std\+::size\+\_\+t $>$}]{index,  }\item[{std\+::initializer\+\_\+list$<$ Scalar $>$}]{value,  }\item[{std\+::size\+\_\+t}]{column }\end{DoxyParamCaption})}
+
+
+
+Initializer list based on the \textquotesingle{}raw\textquotesingle{} data structure of a sparse matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em non\+\_\+zero} & The non-\/zero offsets per row, must be sized to number of rows + 1, and the first index should be 0. \\
+\hline
+\mbox{\texttt{ in}}  & {\em index} & The column index of the non-\/zero value in each row, size must correspond to value, need not be be sorted. \\
+\hline
+\mbox{\texttt{ in}}  & {\em value} & The value at each non-\/zero position in the matrix, corresponds to index. \\
+\hline
+\mbox{\texttt{ in}}  & {\em column} & The absolute number of columns per row.\\
+\hline
+\end{DoxyParams}
+A number of checks are performed to ensure that the parsed initializer lists are consistent. The checks include\+:
+
+
+\begin{DoxyEnumerate}
+\item The first value in the non-\/zero offset vector is 0.
+\item Making sure the number of non-\/zeros matches the last offset value in the parsed non-\/zero vector.
+\item The non-\/zero offsets or sorted in an ascending manner.
+\item The column index size matches the value size.
+\item For each row of column indexes the indexes are unique and within the parsed column size. 
+\end{DoxyEnumerate}
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a91b8307cbd125de4afe193208a9168b0}\label{classDisa_1_1Matrix__Sparse_a91b8307cbd125de4afe193208a9168b0}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!at@{at}}
+\index{at@{at}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double \& Disa\+::\+Matrix\+\_\+\+Sparse\+::at (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row,  }\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column }\end{DoxyParamCaption})}
+
+
+
+Access specified element with bounds checking. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The row index of the element. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The column index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the element.
+\end{DoxyReturn}
+Using lower bound, finds and returns the element value at the requested row and column index. If it does not exist an error is thrown. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a8d0a1744629534509e385c1e0edc1135}\label{classDisa_1_1Matrix__Sparse_a8d0a1744629534509e385c1e0edc1135}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!at@{at}}
+\index{at@{at}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const double \& Disa\+::\+Matrix\+\_\+\+Sparse\+::at (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row,  }\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column }\end{DoxyParamCaption}) const}
+
+
+
+Access specified element with bounds checking. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The row index of the element. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The column index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the element.
+\end{DoxyReturn}
+Using lower bound, finds and returns the element value, as a const, at the requested row and column index. If it does not exist an error is thrown. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_ac469863648160c38e3c56e7d81a7ae0e}\label{classDisa_1_1Matrix__Sparse_ac469863648160c38e3c56e7d81a7ae0e}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!begin@{begin}}
+\index{begin@{begin}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+::const\+\_\+iterator}} Disa\+::\+Matrix\+\_\+\+Sparse\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Returns a const iterator to the beginning row of the matrix. 
+
+\begin{DoxyReturn}{Returns}
+A constant row iterator.
+\end{DoxyReturn}
+Constructs and returns a constant sparse matrix row iterator for the first row. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_acbbfaa8f2d019ac0cdc544209da88dea}\label{classDisa_1_1Matrix__Sparse_acbbfaa8f2d019ac0cdc544209da88dea}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!begin@{begin}}
+\index{begin@{begin}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+::iterator}} Disa\+::\+Matrix\+\_\+\+Sparse\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Returns an iterator to the beginning row of the matrix. 
+
+\begin{DoxyReturn}{Returns}
+A row iterator.
+\end{DoxyReturn}
+Constructs and returns a sparse matrix row iterator for the first row. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a7cf098c5c8afd5683405c9c3dd05b664}\label{classDisa_1_1Matrix__Sparse_a7cf098c5c8afd5683405c9c3dd05b664}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!capacity@{capacity}}
+\index{capacity@{capacity}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ Disa\+::\+Matrix\+\_\+\+Sparse\+::capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of row offsets and non-\/zeros entries that can be held in currently allocated storage. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{[}number of rows offsets, number of non-\/zeros entries.\mbox{]}
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The number of row offsets (for CSR matrices) is always one greater than the actual matrix row size. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_ae46849cea10ff98c6bc40713ae4fbb58}\label{classDisa_1_1Matrix__Sparse_ae46849cea10ff98c6bc40713ae4fbb58}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!cbegin@{cbegin}}
+\index{cbegin@{cbegin}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{cbegin()}{cbegin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+::const\+\_\+iterator}} Disa\+::\+Matrix\+\_\+\+Sparse\+::cbegin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Returns a const iterator to the beginning row of the matrix. 
+
+\begin{DoxyReturn}{Returns}
+A constant row iterator.
+\end{DoxyReturn}
+Constructs and returns a constant sparse matrix row iterator for the first row. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_aab8a3f9795d9dab326cd45755c8fda09}\label{classDisa_1_1Matrix__Sparse_aab8a3f9795d9dab326cd45755c8fda09}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!cend@{cend}}
+\index{cend@{cend}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{cend()}{cend()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+::const\+\_\+iterator}} Disa\+::\+Matrix\+\_\+\+Sparse\+::cend (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Returns a constant iterator to the end row (i.\+e. 1 past the last row) of the matrix. 
+
+\begin{DoxyReturn}{Returns}
+A row iterator.
+\end{DoxyReturn}
+Constructs and returns a constant sparse matrix row iterator for \textquotesingle{}a row\textquotesingle{} past the last row. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_aca5937c136cd9f470c56dc431e7d1e21}\label{classDisa_1_1Matrix__Sparse_aca5937c136cd9f470c56dc431e7d1e21}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!contains@{contains}}
+\index{contains@{contains}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily bool Disa\+::\+Matrix\+\_\+\+Sparse\+::contains (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row,  }\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column }\end{DoxyParamCaption}) const}
+
+
+
+Checks if the element at a row and column are non-\/zero. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The row index to the element. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The column index to the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if non-\/zero, else false.
+\end{DoxyReturn}
+Calls find, if the iterator is referencable true is returned, else false. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a191b6c57c900c92e9eeeb06dd959704d}\label{classDisa_1_1Matrix__Sparse_a191b6c57c900c92e9eeeb06dd959704d}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!data@{data}}
+\index{data@{data}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::size\+\_\+t $\ast$, std\+::size\+\_\+t $\ast$, Scalar $\ast$ $>$ Disa\+::\+Matrix\+\_\+\+Sparse\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+\mbox{\hyperlink{classDisa_1_1Direct}{Direct}} access to the underlying array of the sparse matrix. 
+
+\begin{DoxyReturn}{Returns}
+tuple \mbox{[}pointer to non zero offset start, pointer to column index start, pointer to Scalar start\mbox{]}.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+If empty all pointers will be nullptrs, if the size\+\_\+non\+\_\+zero is 0 the element and column index will be nullptrs.
+\end{DoxyNote}
+todo\+: Add test for function. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a707bc4a0afb01e76a9afa98226d6c1f9}\label{classDisa_1_1Matrix__Sparse_a707bc4a0afb01e76a9afa98226d6c1f9}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!empty@{empty}}
+\index{empty@{empty}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool Disa\+::\+Matrix\+\_\+\+Sparse\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Checks whether the matrix is empty. An empty matrix is considered where the number of rows is 0. 
+
+\begin{DoxyReturn}{Returns}
+True if the matrix is empty, else false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_aca05793b24448cf4e9552eade5ab477c}\label{classDisa_1_1Matrix__Sparse_aca05793b24448cf4e9552eade5ab477c}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!end@{end}}
+\index{end@{end}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+::const\+\_\+iterator}} Disa\+::\+Matrix\+\_\+\+Sparse\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Returns a constant iterator to the end row (i.\+e. 1 past the last row) of the matrix. 
+
+\begin{DoxyReturn}{Returns}
+A row iterator.
+\end{DoxyReturn}
+Constructs and returns a constant sparse matrix row iterator for \textquotesingle{}a row\textquotesingle{} past the last row. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}\label{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!end@{end}}
+\index{end@{end}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+::iterator}} Disa\+::\+Matrix\+\_\+\+Sparse\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Returns an iterator to the end row (i.\+e. 1 past the last row) of the matrix. 
+
+\begin{DoxyReturn}{Returns}
+A row iterator.
+\end{DoxyReturn}
+Constructs and returns a sparse matrix row iterator for \textquotesingle{}a row\textquotesingle{} past the last row. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a6679eaabb10d4be6a5e0d85ebcc9b97e}\label{classDisa_1_1Matrix__Sparse_a6679eaabb10d4be6a5e0d85ebcc9b97e}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!erase@{erase}}
+\index{erase@{erase}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Matrix\+\_\+\+Sparse\+::iterator\+\_\+element}} Disa\+::\+Matrix\+\_\+\+Sparse\+::erase (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Element}}$<$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} $>$ \&}]{iter\+\_\+element }\end{DoxyParamCaption})}
+
+
+
+Erases a value at the specified row and column, using an element iterator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em iter\+\_\+element} & The iterator to the value to delete. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The iterator to the value after the deleted value.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Undefined behaviour exists if the element does not exist, i.\+e. the iterator must be dereferenceable.
+\end{DoxyNote}
+Erases a element from the matrix, if the element does not exist and error is thrown in debug. The number of row non-\/zeros at the row is decremented for the \textquotesingle{}next row\textquotesingle{} and propagated to the rest of the row non-\/zero vector. The value and column index vectors have the associated matrix entry data erased (reducing their size by 1). \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_ac8ad3d410781a3f505a4d2cf0dcb997e}\label{classDisa_1_1Matrix__Sparse_ac8ad3d410781a3f505a4d2cf0dcb997e}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!find@{find}}
+\index{find@{find}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Matrix\+\_\+\+Sparse\+::iterator\+\_\+element}} Disa\+::\+Matrix\+\_\+\+Sparse\+::find (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row,  }\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column }\end{DoxyParamCaption})}
+
+
+
+Finds the value iterator to the matrix value at a row and column. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The row index to the element. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The column index to the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Element iterator.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+If i\+\_\+row \texorpdfstring{$>$}{>}= row\+\_\+size() \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} is returned, if no element is found $\ast$(begin + i\+\_\+row).\mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} is returned.
+\end{DoxyNote}
+If the parsed row is in range, the column index is searched using std\+::find in the given sparse matrix row. An iterator to the found matrix entry is constructed and returned. If the entry is not contained in the sparse matrix, an \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} or $\ast$(begin + i\+\_\+row).\mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} iterator is constructed. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_ae893703db2a63335c1f43c3be08bc687}\label{classDisa_1_1Matrix__Sparse_ae893703db2a63335c1f43c3be08bc687}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!find@{find}}
+\index{find@{find}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Matrix\+\_\+\+Sparse\+::const\+\_\+iterator\+\_\+element}} Disa\+::\+Matrix\+\_\+\+Sparse\+::find (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row,  }\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column }\end{DoxyParamCaption}) const}
+
+
+
+Finds the value iterator to the matrix value at a row and column. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The row index to the element. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The column index to the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+constant element iterator.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+If i\+\_\+row \texorpdfstring{$>$}{>}= row\+\_\+size() \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} is returned, if no element is found $\ast$(begin + i\+\_\+row).\mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} is returned.
+\end{DoxyNote}
+If the parsed row is in range, the column index is searched using std\+::find in the given sparse matrix row. A const iterator to the found matrix entry is constructed and returned. If the entry is not contained in the sparse matrix, an \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} or $\ast$(begin + i\+\_\+row).\mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} iterator is constructed. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a1db3c11fd4d31fd9b3f7754f3954bccd}\label{classDisa_1_1Matrix__Sparse_a1db3c11fd4d31fd9b3f7754f3954bccd}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!insert@{insert}}
+\index{insert@{insert}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Matrix\+\_\+\+Sparse\+::iterator\+\_\+element}}, bool $>$ Disa\+::\+Matrix\+\_\+\+Sparse\+::insert (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row,  }\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column,  }\item[{const Scalar \&}]{value }\end{DoxyParamCaption})}
+
+
+
+Inserts an value with the parsed value at \mbox{[}i\+\_\+row, i\+\_\+column\mbox{]}, if an value exists nothing occurs. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The i\+\_\+row index to the insert value. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The i\+\_\+column index to the insert value. \\
+\hline
+\mbox{\texttt{ in}}  & {\em value} & The value to insert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}iterator to the inserted or existing element, true if insertion took place, else false\mbox{]}.
+\end{DoxyReturn}
+If the value to be inserted has a row or column index greater than the current size of the matrix, the matrix is resized to accommodate the insertion. Lower bound is then used to find the iterator to the position where the new value is to be inserted. If there is a value already present at the position the function \textquotesingle{}aborts\textquotesingle{} reporting this as false in the second value of the pair. Otherwise the row non-\/zero vector us updated indicating the new non-\/zero in the row by propagating the offset incrementation to the remaining parts of the vector. The column index and element value vectors are appropriately updated. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a3f048f42cc4229c9ceb47d42557aa185}\label{classDisa_1_1Matrix__Sparse_a3f048f42cc4229c9ceb47d42557aa185}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!insert\_or\_assign@{insert\_or\_assign}}
+\index{insert\_or\_assign@{insert\_or\_assign}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{insert\_or\_assign()}{insert\_or\_assign()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Matrix\+\_\+\+Sparse\+::iterator\+\_\+element}}, bool $>$ Disa\+::\+Matrix\+\_\+\+Sparse\+::insert\+\_\+or\+\_\+assign (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row,  }\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column,  }\item[{const Scalar \&}]{value }\end{DoxyParamCaption})}
+
+
+
+Inserts or updates an value with the parsed value at \mbox{[}i\+\_\+row, i\+\_\+column\mbox{]}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The i\+\_\+row index to the insert value. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The i\+\_\+column index to the insert value. \\
+\hline
+\mbox{\texttt{ in}}  & {\em value} & The value to insert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}iterator to the inserted or existing element, true if insertion took place, else false\mbox{]}.
+\end{DoxyReturn}
+First the function will attempt to insert with the parsed value. If this fails the value will be assigned to the existing matrix element. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_ac457fb034cdd0ca3b1f732cd76354ead}\label{classDisa_1_1Matrix__Sparse_ac457fb034cdd0ca3b1f732cd76354ead}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!lower\_bound@{lower\_bound}}
+\index{lower\_bound@{lower\_bound}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{lower\_bound()}{lower\_bound()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Matrix\+\_\+\+Sparse\+::iterator\+\_\+element}} Disa\+::\+Matrix\+\_\+\+Sparse\+::lower\+\_\+bound (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row,  }\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column }\end{DoxyParamCaption})}
+
+
+
+Returns an element iterator to the first element not less than the given key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The row index to the element. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The column index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Iterator pointing to the first element that is not less than key.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+If i\+\_\+row \texorpdfstring{$>$}{>}= row\+\_\+size() \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} is returned, if no element is found $\ast$(begin + i\+\_\+row).\mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} is returned.
+\end{DoxyNote}
+If the parsed row is in range, the column index is searched using std\+::lower\+\_\+bound in the given sparse matrix row. An iterator is then constructed from the first column index not less than the parsed column index. If the row is greater than the number of rows an \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} iterator is constructed. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_af77685121fab9302dd42f0f0ad6c4e63}\label{classDisa_1_1Matrix__Sparse_af77685121fab9302dd42f0f0ad6c4e63}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!lower\_bound@{lower\_bound}}
+\index{lower\_bound@{lower\_bound}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{lower\_bound()}{lower\_bound()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Element}{Matrix\+\_\+\+Sparse\+::const\+\_\+iterator\+\_\+element}} Disa\+::\+Matrix\+\_\+\+Sparse\+::lower\+\_\+bound (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row,  }\item[{const std\+::size\+\_\+t \&}]{i\+\_\+column }\end{DoxyParamCaption}) const}
+
+
+
+Returns an element iterator to the first element not less than the given key. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The row index to the element. \\
+\hline
+\mbox{\texttt{ in}}  & {\em i\+\_\+column} & The column index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Const iterator pointing to the first element that is not less than key.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+If i\+\_\+row \texorpdfstring{$>$}{>}= row\+\_\+size() \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} is returned, if no element is found $\ast$(begin + i\+\_\+row).\mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} is returned.
+\end{DoxyNote}
+If the parsed row is in range, the column index is searched using std\+::lower\+\_\+bound in the given sparse matrix row. A const iterator is then constructed from the first column index not less than the parsed column index. If the row is greater than the number of rows an \mbox{\hyperlink{classDisa_1_1Matrix__Sparse_a1c17a55f0b505c9e8a84898b98d6c9df}{end()}} iterator is constructed. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a124ba6fbcc1ca4f174fd6bef91bd3dd3}\label{classDisa_1_1Matrix__Sparse_a124ba6fbcc1ca4f174fd6bef91bd3dd3}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} \& Disa\+::\+Matrix\+\_\+\+Sparse\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Multiplies this matrix by another, A\textquotesingle{} = A$\ast$B, where A and B are matrices. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & The second other, B, to multiply by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated matrix (A\textquotesingle{}).
+\end{DoxyReturn}
+A very basic Sp\+GEMM algorithm, a simple loop through the rows and columns of each matrix looking for non-\/zero entries to multiply and construct and return the resulting matrix. In debug the matrix sizes are checked for compatibility. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a93839da27fad6a1162e34a6c72ec2af3}\label{classDisa_1_1Matrix__Sparse_a93839da27fad6a1162e34a6c72ec2af3}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& Disa\+::\+Matrix\+\_\+\+Sparse\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiplies the matrix by a scalar, A\textquotesingle{} = A$\ast$b, where A is the matrix and b is the scalar. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em scalar} & Scalar value, b, to multiply the matrix by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated matrix (A\textquotesingle{}). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a4d8dc7d58ae426db3564805963be34f6}\label{classDisa_1_1Matrix__Sparse_a4d8dc7d58ae426db3564805963be34f6}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& Disa\+::\+Matrix\+\_\+\+Sparse\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Addition of a second matrix, A\textquotesingle{} = A + B, where A and B are matrices. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & The second matrix, B, to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated matrix (A\textquotesingle{}). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a3f43906d741a4e699cefd53421f1d19e}\label{classDisa_1_1Matrix__Sparse_a3f43906d741a4e699cefd53421f1d19e}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& Disa\+::\+Matrix\+\_\+\+Sparse\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Subtraction by a second matrix, A\textquotesingle{} = A -\/ B, where A and B are matrices. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & The second matrix, B, to subtract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated matrix (A\textquotesingle{}). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a43ff1630e174662e2ad1c59aa303cc90}\label{classDisa_1_1Matrix__Sparse_a43ff1630e174662e2ad1c59aa303cc90}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& Disa\+::\+Matrix\+\_\+\+Sparse\+::operator/= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Divides the matrix by a scalar, A\textquotesingle{} = A/b, where A is the matrix and b is a scalar. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em scalar} & Scalar value, b, to multiply the vector by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated matrix (A\textquotesingle{}).
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Division by zero is left to the user to handle. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_ae5e9352bab07ef7ed4780f2c1041bf59}\label{classDisa_1_1Matrix__Sparse_ae5e9352bab07ef7ed4780f2c1041bf59}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!operator=@{operator=}}
+\index{operator=@{operator=}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \& Disa\+::\+Matrix\+\_\+\+Sparse\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Performs a trivial deep copy of the assigned matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & The other sparse matrix. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated copy of this matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a4dd6f303a93389d16e069cf7c1493952}\label{classDisa_1_1Matrix__Sparse_a4dd6f303a93389d16e069cf7c1493952}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ Disa\+::\+Matrix\+\_\+\+Sparse\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row }\end{DoxyParamCaption})}
+
+
+
+Subscript operator for access to a specified matrix row. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The row index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A sparse matrix row helper class, providing further operators for column access.
+\end{DoxyReturn}
+Constructs and returns a sparse matrix row object for the given row. In debug range checking is performed. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_acf2c0e3d3e20e46f5230f7485ff37d82}\label{classDisa_1_1Matrix__Sparse_acf2c0e3d3e20e46f5230f7485ff37d82}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ Disa\+::\+Matrix\+\_\+\+Sparse\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{i\+\_\+row }\end{DoxyParamCaption}) const}
+
+
+
+Subscript operator for access to a specified matrix row. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & The row index of the element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A constant sparse matrix row helper class, providing further operators for column access.
+\end{DoxyReturn}
+Constructs and returns a sparse matrix row object for the given row. In debug range checking is performed. \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_abb2ca51fadda30ae1963f861d2aaa3b4}\label{classDisa_1_1Matrix__Sparse_abb2ca51fadda30ae1963f861d2aaa3b4}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!reserve@{reserve}}
+\index{reserve@{reserve}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{reserve()}{reserve()}}
+{\footnotesize\ttfamily void Disa\+::\+Matrix\+\_\+\+Sparse\+::reserve (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{row,  }\item[{const std\+::size\+\_\+t \&}]{non\+\_\+zero }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Reserves storage for the matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em row} & The number of rows to reserve for. \\
+\hline
+\mbox{\texttt{ in}}  & {\em non\+\_\+zero} & The number of non-\/zeros to reserve. Note this is not the column size.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The number of row offsets which are reserved will be one greater than the row size passed. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a8cbed30634d3e1b28566c2581af03896}\label{classDisa_1_1Matrix__Sparse_a8cbed30634d3e1b28566c2581af03896}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!resize@{resize}}
+\index{resize@{resize}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void Disa\+::\+Matrix\+\_\+\+Sparse\+::resize (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t \&}]{row,  }\item[{const std\+::size\+\_\+t \&}]{column }\end{DoxyParamCaption})}
+
+
+
+Changes the number of rows and columns of the matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em row} & Number of rows to resized the matrix to. \\
+\hline
+\mbox{\texttt{ in}}  & {\em column} & Number of columns to resized the matrix to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Does not effect number of non-\/zeros, unless the new row and column sizes reduce the size of the matrix.
+\end{DoxyNote}
+For general increase in size the row non-\/zero vector is resized, with the new entries containing the current row non-\/zero back() value. For column size increase the column\+\_\+size member is updated. If the rows are to be reduced, however, all the column indexes and element values greater than the row non-\/zero value at the new row size are erased. Finally, a column reduction requires looping over all rows to determine which column indexes and element values have \textquotesingle{}fallen away\textquotesingle{}. These entries are removed from the vector and the total update of non-\/zeros is then propagated through the remainder of the row non-\/zero vector (in an efficient way). \mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a6bc017a21bb48701c6d7fd3fd1e74d76}\label{classDisa_1_1Matrix__Sparse_a6bc017a21bb48701c6d7fd3fd1e74d76}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!size@{size}}
+\index{size@{size}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::size\+\_\+t, std\+::size\+\_\+t $>$ Disa\+::\+Matrix\+\_\+\+Sparse\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of rows and columns in the matrix. If rows are 0, columns are 0. 
+
+\begin{DoxyReturn}{Returns}
+Pair containing \mbox{[}rows, columns\mbox{]}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_aed3a2fd59ab0ffc8b2911ebf4465e377}\label{classDisa_1_1Matrix__Sparse_aed3a2fd59ab0ffc8b2911ebf4465e377}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!size\_column@{size\_column}}
+\index{size\_column@{size\_column}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{size\_column()}{size\_column()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Disa\+::\+Matrix\+\_\+\+Sparse\+::size\+\_\+column (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of columns in the matrix. 
+
+\begin{DoxyReturn}{Returns}
+The number of columns. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a23f3cba86a8796d8996b2d401410550e}\label{classDisa_1_1Matrix__Sparse_a23f3cba86a8796d8996b2d401410550e}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!size\_non\_zero@{size\_non\_zero}}
+\index{size\_non\_zero@{size\_non\_zero}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{size\_non\_zero()}{size\_non\_zero()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Disa\+::\+Matrix\+\_\+\+Sparse\+::size\+\_\+non\+\_\+zero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of non-\/zeros in the matrix. 
+
+\begin{DoxyReturn}{Returns}
+The number of non-\/zeros. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a2e20cba0ddb4dcde4d02058168b50cdc}\label{classDisa_1_1Matrix__Sparse_a2e20cba0ddb4dcde4d02058168b50cdc}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!size\_row@{size\_row}}
+\index{size\_row@{size\_row}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{size\_row()}{size\_row()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Disa\+::\+Matrix\+\_\+\+Sparse\+::size\+\_\+row (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of rows in the matrix. 
+
+\begin{DoxyReturn}{Returns}
+The number of rows. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_a9167eef9bae2398d3857db8b68b79dfb}\label{classDisa_1_1Matrix__Sparse_a9167eef9bae2398d3857db8b68b79dfb}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!swap@{swap}}
+\index{swap@{swap}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{swap()}{swap()}}
+{\footnotesize\ttfamily void Disa\+::\+Matrix\+\_\+\+Sparse\+::swap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Swaps the contents of the matrix with the parsed matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em other} & The other matrix, this matrix will obtain the other\textquotesingle{}s value and visa versa. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classDisa_1_1Matrix__Sparse_aea918dac3cb471b0436a1712c37d3c15}\label{classDisa_1_1Matrix__Sparse_aea918dac3cb471b0436a1712c37d3c15}} 
+\index{Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Disa::Matrix\_Sparse@{Disa::Matrix\_Sparse}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{stream,  }\item[{\mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{matrix}} \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output shift operator -\/ to write to console. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em stream} & Stream object to write to. \\
+\hline
+\mbox{\texttt{ in}}  & {\em matrix} & The sparse matrix to write out. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The inputted stream.
+\end{DoxyReturn}
+todo\+: properly format -\/ this is just here to help occasional debugging. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+libs/core/matrix\+\_\+sparse.\+h\item 
+libs/core/matrix\+\_\+sparse.\+cpp\end{DoxyCompactItemize}

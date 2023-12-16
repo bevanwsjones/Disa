@@ -1,0 +1,177 @@
+\hypertarget{classDisa_1_1Direct__Lower__Upper__Factorisation}{}\doxysection{Disa\+::Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation\texorpdfstring{$<$}{<} \+\_\+solver\+\_\+type, \+\_\+size, \+\_\+pivot \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classDisa_1_1Direct__Lower__Upper__Factorisation}\index{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}}
+
+
+Implements the Lower Upper Factorisation Linear \mbox{\hyperlink{classDisa_1_1Solver}{Solver}} for dense linear systems.  
+
+
+
+
+{\ttfamily \#include $<$direct\+\_\+lower\+\_\+upper\+\_\+factorisation.\+h$>$}
+
+Inheritance diagram for Disa\+::Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation\texorpdfstring{$<$}{<} \+\_\+solver\+\_\+type, \+\_\+size, \+\_\+pivot \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDisa_1_1Direct__Lower__Upper__Factorisation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a9063154454bb37fb591c0c74f0f82f4b}{Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}} ()=default
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_ae441929536cf874c41337d9ea32332dc}{Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}} (\mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\+\_\+\+Config}} config)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a6bd39357dcb6f02bcf1fa181fc4e7c65}{initialise\+\_\+solver}} (\mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\+\_\+\+Config}} config)
+\begin{DoxyCompactList}\small\item\em Initialises the solve, copying in the relevant config data. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a14e91d05154a232286186a263be19d36}{factorise}} (const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+size, \+\_\+size $>$ \&a\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Factorises the coefficient matrix, using LU(\+P) factorisation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\+\_\+\+Data}} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a4714f7fee084d09a20d6212bc74d56b8}{solve\+\_\+system}} (\mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$ \&x\+\_\+vector, const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$ \&b\+\_\+vector)
+\begin{DoxyCompactList}\small\item\em Solves the linear system, using the solver\textquotesingle{}s internally stored factorised coefficient matrix. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\+\_\+\+Config}} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a3c14544b7a2e6047cbbcd30f221afef5}{get\+\_\+config}} ()
+\begin{DoxyCompactList}\small\item\em Gets the current configuration of the solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$Solver\+\_\+\+Type \+\_\+solver\+\_\+type, std\+::size\+\_\+t \+\_\+size, bool \+\_\+pivot$>$\newline
+class Disa\+::\+Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation$<$ \+\_\+solver\+\_\+type, \+\_\+size, \+\_\+pivot $>$}
+Implements the Lower Upper Factorisation Linear \mbox{\hyperlink{classDisa_1_1Solver}{Solver}} for dense linear systems. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+solver\+\_\+type} & \\
+\hline
+{\em \+\_\+size} & Size of the system being solver, if zero assumed dynamically sized system. \\
+\hline
+{\em \+\_\+pivot} & Is the solver allowed to use pivoting when factorising (recommended true). \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDisa_1_1Direct__Lower__Upper__Factorisation_a9063154454bb37fb591c0c74f0f82f4b}\label{classDisa_1_1Direct__Lower__Upper__Factorisation_a9063154454bb37fb591c0c74f0f82f4b}} 
+\index{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}!Direct\_Lower\_Upper\_Factorisation@{Direct\_Lower\_Upper\_Factorisation}}
+\index{Direct\_Lower\_Upper\_Factorisation@{Direct\_Lower\_Upper\_Factorisation}!Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}}
+\doxysubsubsection{\texorpdfstring{Direct\_Lower\_Upper\_Factorisation()}{Direct\_Lower\_Upper\_Factorisation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$Solver\+\_\+\+Type \+\_\+solver\+\_\+type, std\+::size\+\_\+t \+\_\+size, bool \+\_\+pivot$>$ \\
+\mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Disa\+::\+Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}}$<$ \+\_\+solver\+\_\+type, \+\_\+size, \+\_\+pivot $>$\+::\+Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [default]}}
+
+
+
+Construct a new \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}} object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em config} & The configuration for the LU solver to use. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDisa_1_1Direct__Lower__Upper__Factorisation_ae441929536cf874c41337d9ea32332dc}\label{classDisa_1_1Direct__Lower__Upper__Factorisation_ae441929536cf874c41337d9ea32332dc}} 
+\index{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}!Direct\_Lower\_Upper\_Factorisation@{Direct\_Lower\_Upper\_Factorisation}}
+\index{Direct\_Lower\_Upper\_Factorisation@{Direct\_Lower\_Upper\_Factorisation}!Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}}
+\doxysubsubsection{\texorpdfstring{Direct\_Lower\_Upper\_Factorisation()}{Direct\_Lower\_Upper\_Factorisation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$Solver\+\_\+\+Type \+\_\+solver\+\_\+type, std\+::size\+\_\+t \+\_\+size, bool \+\_\+pivot$>$ \\
+\mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Disa\+::\+Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}}$<$ \+\_\+solver\+\_\+type, \+\_\+size, \+\_\+pivot $>$\+::\+Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\+\_\+\+Config}}}]{config }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}} object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em config} & The configuration for the LU solver to use. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDisa_1_1Direct__Lower__Upper__Factorisation_a14e91d05154a232286186a263be19d36}\label{classDisa_1_1Direct__Lower__Upper__Factorisation_a14e91d05154a232286186a263be19d36}} 
+\index{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}!factorise@{factorise}}
+\index{factorise@{factorise}!Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}}
+\doxysubsubsection{\texorpdfstring{factorise()}{factorise()}}
+{\footnotesize\ttfamily template$<$Solver\+\_\+\+Type \+\_\+solver\+\_\+type, std\+::size\+\_\+t \+\_\+size, bool \+\_\+pivot$>$ \\
+bool \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Disa\+::\+Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}}$<$ \+\_\+solver\+\_\+type, \+\_\+size, \+\_\+pivot $>$\+::factorise (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\+\_\+\+Dense}}$<$ \+\_\+size, \+\_\+size $>$ \&}]{a\+\_\+matrix }\end{DoxyParamCaption})}
+
+
+
+Factorises the coefficient matrix, using LU(\+P) factorisation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em a\+\_\+matrix} & The coefficient matrix to factorise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the matrix was factorised successfully, else false for degenerate/singular matrices.
+\end{DoxyReturn}
+This function performs LU (Lower-\/\+Upper) factorization on a given dense matrix, resulting in a decomposition of the matrix into a product of lower and upper triangular matrices. The LU factorization is utilized to solve linear systems of equations more efficiently.
+
+The LU factorization process involves the following steps\+:
+
+
+\begin{DoxyEnumerate}
+\item Initialization\+: The input matrix {\ttfamily a\+\_\+matrix} is copied into the {\ttfamily lu\+\_\+factorised} matrix. If {\ttfamily \+\_\+pivot} is {\ttfamily true}, the pivots and permutation vector are initialized.
+\item Partial Pivoting (if enabled)\+: If pivoting is used, the function identifies the maximum element in the current column, ensuring numerical stability and better conditioning.
+\item Row Reduction\+: For each row in the matrix, the factorization process eliminates the entries below the diagonal to create the lower triangular matrix.
+\item Matrix Decomposition\+: The factorized matrix is formed with the lower triangular part holding the multipliers used in the row reduction, and the upper triangular part containing the modified row values.
+\end{DoxyEnumerate}
+
+The {\ttfamily factorise} function returns {\ttfamily true} upon successful factorization. If the matrix is degenerate/singular, indicated by an entry on the diagonal below the specified tolerance ({\ttfamily factorisation\+\_\+tolerance}), the function returns {\ttfamily false}, signifying failure. \mbox{\Hypertarget{classDisa_1_1Direct__Lower__Upper__Factorisation_a3c14544b7a2e6047cbbcd30f221afef5}\label{classDisa_1_1Direct__Lower__Upper__Factorisation_a3c14544b7a2e6047cbbcd30f221afef5}} 
+\index{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}!get\_config@{get\_config}}
+\index{get\_config@{get\_config}!Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}}
+\doxysubsubsection{\texorpdfstring{get\_config()}{get\_config()}}
+{\footnotesize\ttfamily template$<$Solver\+\_\+\+Type \+\_\+solver\+\_\+type, std\+::size\+\_\+t \+\_\+size, bool \+\_\+pivot$>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\+\_\+\+Config}} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Disa\+::\+Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}}$<$ \+\_\+solver\+\_\+type, \+\_\+size, \+\_\+pivot $>$\+::get\+\_\+config (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Gets the current configuration of the solver. 
+
+\begin{DoxyReturn}{Returns}
+A configuration object, containing the current solver configuration. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDisa_1_1Direct__Lower__Upper__Factorisation_a6bd39357dcb6f02bcf1fa181fc4e7c65}\label{classDisa_1_1Direct__Lower__Upper__Factorisation_a6bd39357dcb6f02bcf1fa181fc4e7c65}} 
+\index{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}!initialise\_solver@{initialise\_solver}}
+\index{initialise\_solver@{initialise\_solver}!Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}}
+\doxysubsubsection{\texorpdfstring{initialise\_solver()}{initialise\_solver()}}
+{\footnotesize\ttfamily template$<$Solver\+\_\+\+Type \+\_\+solver\+\_\+type, std\+::size\+\_\+t \+\_\+size, bool \+\_\+pivot$>$ \\
+void \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Disa\+::\+Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}}$<$ \+\_\+solver\+\_\+type, \+\_\+size, \+\_\+pivot $>$\+::initialise\+\_\+solver (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\+\_\+\+Config}}}]{config }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialises the solve, copying in the relevant config data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em config} & The configuration for the LU solver to use. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDisa_1_1Direct__Lower__Upper__Factorisation_a4714f7fee084d09a20d6212bc74d56b8}\label{classDisa_1_1Direct__Lower__Upper__Factorisation_a4714f7fee084d09a20d6212bc74d56b8}} 
+\index{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}!solve\_system@{solve\_system}}
+\index{solve\_system@{solve\_system}!Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$@{Disa::Direct\_Lower\_Upper\_Factorisation$<$ \_solver\_type, \_size, \_pivot $>$}}
+\doxysubsubsection{\texorpdfstring{solve\_system()}{solve\_system()}}
+{\footnotesize\ttfamily template$<$Solver\+\_\+\+Type \+\_\+solver\+\_\+type, std\+::size\+\_\+t \+\_\+size, bool \+\_\+pivot$>$ \\
+\mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\+\_\+\+Data}} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Disa\+::\+Direct\+\_\+\+Lower\+\_\+\+Upper\+\_\+\+Factorisation}}$<$ \+\_\+solver\+\_\+type, \+\_\+size, \+\_\+pivot $>$\+::solve\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$ \&}]{x\+\_\+vector,  }\item[{const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$ \&}]{b\+\_\+vector }\end{DoxyParamCaption})}
+
+
+
+Solves the linear system, using the solver\textquotesingle{}s internally stored factorised coefficient matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em x\+\_\+vector} & The solution vector, will be resized and modified, inital value is irrelevant. \\
+\hline
+\mbox{\texttt{ in}}  & {\em b\+\_\+vector} & The constant vector, appropriate to the coefficient matrix which was factorised. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\+\_\+\+Data}} object detailing the solve status.
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+The factorise function must have been called before this function, and returned true for a correct solver to occur.
+\end{DoxyWarning}
+This function solves a linear system of equations using direct lower-\/upper factorization. It takes an input dense vector {\ttfamily b\+\_\+vector} representing the right-\/hand side of constants, and solves for the solution vector {\ttfamily x\+\_\+vector}. A forward and backward sweep are performed with the LU factorised matrix to compute the solution. The x vector will be resized appropriately to solve, while the b-\/vector must be sized appropriately to the lu-\/factored matrix. Should no factorisation have been completed the solver returns an \textquotesingle{}un-\/converged state\textquotesingle{}. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+libs/solver/direct\+\_\+lower\+\_\+upper\+\_\+factorisation.\+h\item 
+libs/solver/direct\+\_\+lower\+\_\+upper\+\_\+factorisation.\+hpp\end{DoxyCompactItemize}

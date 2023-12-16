@@ -1,0 +1,46 @@
+\hypertarget{structstd_1_1hash_3_01Disa_1_1Adjacency__Graph_01_4}{}\doxysection{std\+::hash\texorpdfstring{$<$}{<} Disa\+::Adjacency\+\_\+\+Graph \texorpdfstring{$>$}{>} Struct Reference}
+\label{structstd_1_1hash_3_01Disa_1_1Adjacency__Graph_01_4}\index{std::hash$<$ Disa::Adjacency\_Graph $>$@{std::hash$<$ Disa::Adjacency\_Graph $>$}}
+
+
+Template specialization to provides hash function for the Adjacency\+\_\+\+Graph.  
+
+
+
+
+{\ttfamily \#include $<$adjacency\+\_\+graph.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{structstd_1_1hash_3_01Disa_1_1Adjacency__Graph_01_4_af75a16a635f809c6a8d6aef39cad6033}{operator()}} (const \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Disa\+::\+Adjacency\+\_\+\+Graph}} \&graph) const noexcept
+\begin{DoxyCompactList}\small\item\em Computes the hash value of a given \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Disa\+::\+Adjacency\+\_\+\+Graph}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Template specialization to provides hash function for the Adjacency\+\_\+\+Graph. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structstd_1_1hash_3_01Disa_1_1Adjacency__Graph_01_4_af75a16a635f809c6a8d6aef39cad6033}\label{structstd_1_1hash_3_01Disa_1_1Adjacency__Graph_01_4_af75a16a635f809c6a8d6aef39cad6033}} 
+\index{std::hash$<$ Disa::Adjacency\_Graph $>$@{std::hash$<$ Disa::Adjacency\_Graph $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!std::hash$<$ Disa::Adjacency\_Graph $>$@{std::hash$<$ Disa::Adjacency\_Graph $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t std\+::hash$<$ \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Disa\+::\+Adjacency\+\_\+\+Graph}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Disa\+::\+Adjacency\+\_\+\+Graph}} \&}]{graph }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Computes the hash value of a given \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Disa\+::\+Adjacency\+\_\+\+Graph}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to be hashed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A std\+::size\+\_\+t value representing the hash value of the input graph.
+\end{DoxyReturn}
+Specialization of the std\+::hash template for the \mbox{\hyperlink{classDisa_1_1Adjacency__Graph}{Disa\+::\+Adjacency\+\_\+\+Graph}} class. It calculates a hash value for the adjacency graph by XORing the hash values of its size, number of edges, and sizes of its first and last vertices. If the graph is empty, the hash value is set to zero. 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+libs/graphing/adjacency\+\_\+graph.\+h\item 
+libs/graphing/adjacency\+\_\+graph.\+cpp\end{DoxyCompactItemize}

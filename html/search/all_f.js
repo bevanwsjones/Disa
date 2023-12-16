@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['setup_0',['SetUp',['../classLaplace2DProblem.html#accb99e8971a2c694bcb53ac7bd97b624',1,'Laplace2DProblem::SetUp(const int size_x)'],['../classLaplace2DProblem.html#a037ee98201aecafa209b1d0ca5ecdfd8',1,'Laplace2DProblem::SetUp() override'],['../classdirect__solvers.html#af15eb5e656b16372b36e24de32c06e93',1,'direct_solvers::SetUp()']]],
+  ['shrink_5fto_5ffit_1',['shrink_to_fit',['../classDisa_1_1Adjacency__Subgraph.html#a376f966ee75d82627d64d4b63c242c83',1,'Disa::Adjacency_Subgraph::shrink_to_fit()'],['../classDisa_1_1Adjacency__Graph.html#a0ab4019ee8e924dca5293e37504654b1',1,'Disa::Adjacency_Graph::shrink_to_fit()'],['../classDisa_1_1Matrix__Sparse.html#a585fdf3e065bf35ba5d4f786b4b4d531',1,'Disa::Matrix_Sparse::shrink_to_fit() noexcept']]],
+  ['size_2',['size',['../classDisa_1_1Matrix__Sparse.html#a6bc017a21bb48701c6d7fd3fd1e74d76',1,'Disa::Matrix_Sparse::size()'],['../structDisa_1_1Matrix__Dense.html#a4e9dbacdb8a470c806c20120c0a5f97b',1,'Disa::Matrix_Dense::size()'],['../structDisa_1_1Matrix__Dense_3_010_00_010_01_4.html#ae65b5dffae757a365755a6e918213ea2',1,'Disa::Matrix_Dense&lt; 0, 0 &gt;::size()'],['../classDisa_1_1Adjacency__Graph.html#a532ab58be7a032a100d87d25f4d9a3dd',1,'Disa::Adjacency_Graph::size()'],['../classDisa_1_1Adjacency__Subgraph.html#a44abfc1485b9f70f517b27b491cd5648',1,'Disa::Adjacency_Subgraph::size()']]],
+  ['size_5fcolumn_3',['size_column',['../structDisa_1_1Matrix__Dense.html#ae9a843a950949a96e47e6f31e7311e2f',1,'Disa::Matrix_Dense::size_column()'],['../structDisa_1_1Matrix__Dense_3_010_00_010_01_4.html#a30879735c202f08b2bcf75aedf4a74c6',1,'Disa::Matrix_Dense&lt; 0, 0 &gt;::size_column()'],['../classDisa_1_1Matrix__Sparse.html#aed3a2fd59ab0ffc8b2911ebf4465e377',1,'Disa::Matrix_Sparse::size_column()']]],
+  ['size_5fedge_4',['size_edge',['../classDisa_1_1Adjacency__Graph.html#aa7c060fb3cf25653d1f0babe3607eba3',1,'Disa::Adjacency_Graph::size_edge()'],['../classDisa_1_1Adjacency__Subgraph.html#aa234815e65ebf4311e74584874823237',1,'Disa::Adjacency_Subgraph::size_edge()']]],
+  ['size_5fnon_5fzero_5',['size_non_zero',['../classDisa_1_1Matrix__Sparse.html#a23f3cba86a8796d8996b2d401410550e',1,'Disa::Matrix_Sparse']]],
+  ['size_5frow_6',['size_row',['../structDisa_1_1Matrix__Dense.html#afe6c73eca3699cd196c493b7044feadd',1,'Disa::Matrix_Dense::size_row()'],['../structDisa_1_1Matrix__Dense_3_010_00_010_01_4.html#a5394c1e5b408a6c8493b665214e13372',1,'Disa::Matrix_Dense&lt; 0, 0 &gt;::size_row()'],['../classDisa_1_1Matrix__Sparse.html#a2e20cba0ddb4dcde4d02058168b50cdc',1,'Disa::Matrix_Sparse::size_row()']]],
+  ['size_5fvertex_7',['size_vertex',['../classDisa_1_1Adjacency__Graph.html#af0a99181c595852b84e1d469fa6c3002',1,'Disa::Adjacency_Graph::size_vertex()'],['../classDisa_1_1Adjacency__Subgraph.html#ab8b4ac0a40ddda5bf7503bedd66f2c34',1,'Disa::Adjacency_Subgraph::size_vertex()']]],
+  ['solve_8',['solve',['../classDisa_1_1Direct.html#a52b5271afed3158443f3f864bdbbcb51',1,'Disa::Direct']]],
+  ['solve_5fsystem_9',['solve_system',['../classDisa_1_1Direct__Lower__Upper__Factorisation.html#a4714f7fee084d09a20d6212bc74d56b8',1,'Disa::Direct_Lower_Upper_Factorisation::solve_system()'],['../classDisa_1_1Solver__Fixed__Point.html#a556ec4ea588618c48b2b2a2e26f31280',1,'Disa::Solver_Fixed_Point::solve_system()']]],
+  ['solver_10',['Solver',['../classDisa_1_1Solver.html',1,'Disa']]],
+  ['solver_5fconfig_11',['Solver_Config',['../structDisa_1_1Solver__Config.html',1,'Disa']]],
+  ['solver_5fdata_12',['Solver_Data',['../structDisa_1_1Solver__Data.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_13',['Solver_Fixed_Point',['../classDisa_1_1Solver__Fixed__Point.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_5fdata_14',['Solver_Fixed_Point_Data',['../structDisa_1_1Solver__Fixed__Point__Data.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_5fjacobi_5fdata_15',['Solver_Fixed_Point_Jacobi_Data',['../structDisa_1_1Solver__Fixed__Point__Jacobi__Data.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_5fsor_5fdata_16',['Solver_Fixed_Point_Sor_Data',['../structDisa_1_1Solver__Fixed__Point__Sor__Data.html',1,'Disa']]],
+  ['solver_5fiterative_17',['Solver_Iterative',['../classDisa_1_1Solver__Iterative.html',1,'Disa']]],
+  ['solver_5fiterative_3c_20solver_5ffixed_5fpoint_3c_20_5fsolver_5ftype_2c_20_5fsolver_5fdata_20_3e_2c_20_5fsolver_5fdata_20_3e_18',['Solver_Iterative&lt; Solver_Fixed_Point&lt; _solver_type, _solver_data &gt;, _solver_data &gt;',['../classDisa_1_1Solver__Iterative.html',1,'Disa']]],
+  ['sor_5frelaxation_19',['SOR_relaxation',['../structDisa_1_1Solver__Config.html#a6f5309125ab0d6763515cdf13ec58698',1,'Disa::Solver_Config']]],
+  ['source_20',['source',['../classLaplace__2D.html#a8a106fd4f816fba2579aa2e3103b769e',1,'Laplace_2D']]],
+  ['start_5ftime_21',['start_time',['../structDisa_1_1Convergence__Data.html#ac8f96574eb15a045993a6bd7e5cb8353',1,'Disa::Convergence_Data']]],
+  ['staticpromoter_22',['StaticPromoter',['../structDisa_1_1StaticPromoter.html',1,'Disa']]],
+  ['swap_23',['swap',['../classDisa_1_1Matrix__Sparse.html#a9167eef9bae2398d3857db8b68b79dfb',1,'Disa::Matrix_Sparse::swap()'],['../classDisa_1_1Adjacency__Graph.html#ad07b702f1a7be9b27c800aadbbb77f26',1,'Disa::Adjacency_Graph::swap()'],['../classDisa_1_1Adjacency__Subgraph.html#a03afe26015ba499fdf74c8a876ff859b',1,'Disa::Adjacency_Subgraph::swap()']]]
+];

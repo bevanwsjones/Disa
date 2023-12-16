@@ -1,0 +1,199 @@
+\hypertarget{structDisa_1_1Vector__Dense}{}\doxysection{Disa\+::Vector\+\_\+\+Dense\texorpdfstring{$<$}{<} \+\_\+size \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{structDisa_1_1Vector__Dense}\index{Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}}
+
+
+Mathematical Vector, of dimension \+\_\+size, where every vector element has allocated has memory.  
+
+
+
+
+{\ttfamily \#include $<$vector\+\_\+dense.\+h$>$}
+
+Inheritance diagram for Disa\+::Vector\+\_\+\+Dense\texorpdfstring{$<$}{<} \+\_\+size \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structDisa_1_1Vector__Dense}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}\label{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}} 
+typedef \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$ {\bfseries \+\_\+vector}
+\begin{DoxyCompactList}\small\item\em Short hand for this vector type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_a5c7ddd594181f9802e7ba337521437c7}\label{structDisa_1_1Vector__Dense_a5c7ddd594181f9802e7ba337521437c7}} 
+{\bfseries Vector\+\_\+\+Dense} ()
+\begin{DoxyCompactList}\small\item\em Initialise empty vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Vector__Dense_ab68b37fb0ff6ae9da1efb20a08284811}{Vector\+\_\+\+Dense}} (const std\+::initializer\+\_\+list$<$ Scalar $>$ \&list)
+\begin{DoxyCompactList}\small\item\em Constructor to construct from initializer list, list and vector must be of the same size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Vector__Dense_a7d85a69dc357e2e199067a4b01e0b0f3}{Vector\+\_\+\+Dense}} (const std\+::function$<$ Scalar(const std\+::size\+\_\+t)$>$ \&lambda, std\+::size\+\_\+t size=\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Constructor to construct a vector from a lambda. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_a8f8a3b6803deceabafa811994dc95993}{operator$\ast$=}} (const Scalar \&scalar)
+\begin{DoxyCompactList}\small\item\em Multiplies the vector by a scalar, a\textquotesingle{} = a$\ast$b, where a is the vectors and b is a scalar. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_ab3f420d4346e0b52bab1d96f0acfe16e}{operator/=}} (const Scalar \&scalar)
+\begin{DoxyCompactList}\small\item\em Divides the vector by a scalar, a\textquotesingle{} = a/b, where a is the vectors and b is a scalar. \end{DoxyCompactList}\item 
+{\footnotesize template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_a48f9d24e05f2c8537be507f5919f787a}{operator+=}} (const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&vector)
+\begin{DoxyCompactList}\small\item\em Addition of a second vector, a\textquotesingle{} = a + b, where a and b are vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ }\\constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense_a4074fe5aa1ddc085ee009641d8617419}{operator-\/=}} (const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&vector)
+\begin{DoxyCompactList}\small\item\em Subtraction by a second vector, a\textquotesingle{} = a -\/ b, where a and b are vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_a1aa20530c2b0cb2645ae4f6737796104}\label{structDisa_1_1Vector__Dense_a1aa20530c2b0cb2645ae4f6737796104}} 
+static const bool {\bfseries is\+\_\+dynamic} = false
+\begin{DoxyCompactList}\small\item\em Indicates the vector is compile time sized. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std\+::size\+\_\+t \+\_\+size$>$\newline
+struct Disa\+::\+Vector\+\_\+\+Dense$<$ \+\_\+size $>$}
+Mathematical Vector, of dimension \+\_\+size, where every vector element has allocated has memory. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+size} & The size of the vector, if 0 a specialisation of the class is created.\\
+\hline
+\end{DoxyTemplParams}
+The \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}} struct implements a mathematical vector of real numbers. Disa does not make distinctions row and column vectors, as such this information is not stored.
+
+To avoid massive boiler plate the vector inherits from std\+::array, which implies the vector\textquotesingle{}s dimension is fixed at compile time. To obtain a dynamically allocated dense vector the \+\_\+size value can be set to 0. In which case std\+::vector is inherited, see below specialisation. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_ab68b37fb0ff6ae9da1efb20a08284811}\label{structDisa_1_1Vector__Dense_ab68b37fb0ff6ae9da1efb20a08284811}} 
+\index{Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}!Vector\_Dense@{Vector\_Dense}}
+\index{Vector\_Dense@{Vector\_Dense}!Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}}
+\doxysubsubsection{\texorpdfstring{Vector\_Dense()}{Vector\_Dense()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+size$>$ \\
+\mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$\+::\+Vector\+\_\+\+Dense (\begin{DoxyParamCaption}\item[{const std\+::initializer\+\_\+list$<$ Scalar $>$ \&}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor to construct from initializer list, list and vector must be of the same size. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em list} & The list of Scalars to initialised the vector. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_a7d85a69dc357e2e199067a4b01e0b0f3}\label{structDisa_1_1Vector__Dense_a7d85a69dc357e2e199067a4b01e0b0f3}} 
+\index{Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}!Vector\_Dense@{Vector\_Dense}}
+\index{Vector\_Dense@{Vector\_Dense}!Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}}
+\doxysubsubsection{\texorpdfstring{Vector\_Dense()}{Vector\_Dense()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+size$>$ \\
+\mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$\+::\+Vector\+\_\+\+Dense (\begin{DoxyParamCaption}\item[{const std\+::function$<$ Scalar(const std\+::size\+\_\+t)$>$ \&}]{lambda,  }\item[{std\+::size\+\_\+t}]{size = {\ttfamily \+\_\+size} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor to construct a vector from a lambda. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+lambda} & Template lambda function Scalar(std\+::size\+\_\+t). \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em lambda} & Lambda expression. \\
+\hline
+\mbox{\texttt{ in}}  & {\em size} & Desired size of the vector. Added for interoperability with dynamic vectors. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_a8f8a3b6803deceabafa811994dc95993}\label{structDisa_1_1Vector__Dense_a8f8a3b6803deceabafa811994dc95993}} 
+\index{Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$=()}{operator*=()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+size$>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Multiplies the vector by a scalar, a\textquotesingle{} = a$\ast$b, where a is the vectors and b is a scalar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & Scalar value, b, to multiply the vector by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated vector (a\textquotesingle{}). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_a48f9d24e05f2c8537be507f5919f787a}\label{structDisa_1_1Vector__Dense_a48f9d24e05f2c8537be507f5919f787a}} 
+\index{Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+size$>$ \\
+template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Addition of a second vector, a\textquotesingle{} = a + b, where a and b are vectors. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+size\+\_\+other} & Vector size of b, dynamic/static. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The second vector, b, to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated vector (a\textquotesingle{}). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_a4074fe5aa1ddc085ee009641d8617419}\label{structDisa_1_1Vector__Dense_a4074fe5aa1ddc085ee009641d8617419}} 
+\index{Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+size$>$ \\
+template$<$std\+::size\+\_\+t \+\_\+size\+\_\+other$>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\+\_\+\+Dense}}$<$ \+\_\+size\+\_\+other $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Subtraction by a second vector, a\textquotesingle{} = a -\/ b, where a and b are vectors. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+size\+\_\+other} & Vector size of b, dynamic/static. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The second vector, b, to subtract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated vector (a\textquotesingle{}). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Vector__Dense_ab3f420d4346e0b52bab1d96f0acfe16e}\label{structDisa_1_1Vector__Dense_ab3f420d4346e0b52bab1d96f0acfe16e}} 
+\index{Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!Disa::Vector\_Dense$<$ \_size $>$@{Disa::Vector\_Dense$<$ \_size $>$}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
+{\footnotesize\ttfamily template$<$std\+::size\+\_\+t \+\_\+size$>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Vector__Dense_a8ec376daf44072ee81c535ff15f1a9b1}{\+\_\+vector}} \& \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Disa\+::\+Vector\+\_\+\+Dense}}$<$ \+\_\+size $>$\+::operator/= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Divides the vector by a scalar, a\textquotesingle{} = a/b, where a is the vectors and b is a scalar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & Scalar value, b, to multiply the vector by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated vector (a\textquotesingle{}).
+\end{DoxyReturn}
+Note\+: Division by zero is left to the user to handle. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/core/vector\+\_\+dense.\+h\end{DoxyCompactItemize}

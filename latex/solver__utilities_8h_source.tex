@@ -1,0 +1,124 @@
+\hypertarget{solver__utilities_8h_source}{}\doxysection{solver\+\_\+utilities.\+h}
+\label{solver__utilities_8h_source}\index{libs/solver/solver\_utilities.h@{libs/solver/solver\_utilities.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// MIT License}}
+\DoxyCodeLine{3 \textcolor{comment}{// Copyright (c) 2022 Bevan W.S. Jones}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated}}
+\DoxyCodeLine{6 \textcolor{comment}{// documentation files (the "{}Software"{}), to deal in the Software without restriction, including without limitation the}}
+\DoxyCodeLine{7 \textcolor{comment}{// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to}}
+\DoxyCodeLine{8 \textcolor{comment}{// permit persons to whom the Software is furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the}}
+\DoxyCodeLine{11 \textcolor{comment}{// Software.}}
+\DoxyCodeLine{12 \textcolor{comment}{//}}
+\DoxyCodeLine{13 \textcolor{comment}{// THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE}}
+\DoxyCodeLine{14 \textcolor{comment}{// WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR}}
+\DoxyCodeLine{16 \textcolor{comment}{// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}}
+\DoxyCodeLine{17 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{18 \textcolor{comment}{// File Name: solver\_utilities.h}}
+\DoxyCodeLine{19 \textcolor{comment}{// Description: Contains the declarations of common solver related objects and functions.}}
+\DoxyCodeLine{20 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#ifndef DISA\_SOLVER\_UTILITIES\_H}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define DISA\_SOLVER\_UTILITIES\_H}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include "{}scalar.h"{}}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include "{}matrix\_sparse.h"{}}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include "{}vector\_dense.h"{}}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include "{}vector\_operators.h"{}}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{namespace }Disa \{}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{35 \textcolor{comment}{// Solver Configuration}}
+\DoxyCodeLine{36 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{42 \textcolor{keyword}{enum class} Solver\_Type \{}
+\DoxyCodeLine{43   lower\_upper\_factorisation,    }
+\DoxyCodeLine{44   jacobi,                       }
+\DoxyCodeLine{45   gauss\_seidel,                 }
+\DoxyCodeLine{46   successive\_over\_relaxation,   }
+\DoxyCodeLine{47   unknown                       }
+\DoxyCodeLine{48 \};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{54 \textcolor{keyword}{struct }\mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\_Config}} \{}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56   \textcolor{comment}{// General Configuration}}
+\DoxyCodeLine{57   Solver\_Type \mbox{\hyperlink{structDisa_1_1Solver__Config_acb8de83945d3a2d6fc764b07b241b2da}{type}} \{Solver\_Type::unknown\};   }
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{60   \textcolor{comment}{// Direct Solver Options}}
+\DoxyCodeLine{61   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63   \textcolor{keywordtype}{bool} \mbox{\hyperlink{structDisa_1_1Solver__Config_ae25807809dfc212ef1ff31085202fede}{pivot}}\{\textcolor{keyword}{true}\};                           }
+\DoxyCodeLine{64   Scalar \mbox{\hyperlink{structDisa_1_1Solver__Config_a020cd96ae17b3a9d81a3d3178e2e37df}{factor\_tolerance}}\{default\_relative\};  }
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{67   \textcolor{comment}{// Iterative Solver Options}}
+\DoxyCodeLine{68   \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70   \textcolor{comment}{// Convergence Configurations }}
+\DoxyCodeLine{71   std::size\_t \mbox{\hyperlink{structDisa_1_1Solver__Config_a9c7afc739354f8db1be52e9653cc5e10}{minimum\_iterations}} \{0\};        }
+\DoxyCodeLine{72   std::size\_t \mbox{\hyperlink{structDisa_1_1Solver__Config_a11719db6e231ac8c683ba30c3829574d}{maximum\_iterations}} \{0\};        }
+\DoxyCodeLine{73   Scalar \mbox{\hyperlink{structDisa_1_1Solver__Config_a9aca8fc53e00a31c92d3b06945fd6404}{convergence\_tolerance}} \{0\};          }
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75   \textcolor{comment}{// Iterative}}
+\DoxyCodeLine{76   Scalar \mbox{\hyperlink{structDisa_1_1Solver__Config_a6f5309125ab0d6763515cdf13ec58698}{SOR\_relaxation}} \{1.5\};               }
+\DoxyCodeLine{77 \};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{80 \textcolor{comment}{// Convergence Tracking}}
+\DoxyCodeLine{81 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{97 \textcolor{keyword}{struct }\mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\_Data}} \{}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99   \textcolor{keywordtype}{bool} \mbox{\hyperlink{structDisa_1_1Convergence__Data_af03aba8ebd023253df2e97046a8852c0}{converged}}\{\textcolor{keyword}{false}\};                          }
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101   std::chrono::microseconds \mbox{\hyperlink{structDisa_1_1Convergence__Data_a4f7f81998bd5025c28047f48a15a3171}{duration}} \{0\};                                               }
+\DoxyCodeLine{102   std::chrono::steady\_clock::time\_point \mbox{\hyperlink{structDisa_1_1Convergence__Data_ac8f96574eb15a045993a6bd7e5cb8353}{start\_time}} \{std::chrono::steady\_clock::now()\};  }
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104   std::size\_t \mbox{\hyperlink{structDisa_1_1Convergence__Data_a798c863e81503627ea641eb011d66240}{iteration}} \{0\};                      }
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106   Scalar \mbox{\hyperlink{structDisa_1_1Convergence__Data_aec9e5851bec19408cd0079250c09cc26}{residual}} \{scalar\_max\};                   }
+\DoxyCodeLine{107   Scalar \mbox{\hyperlink{structDisa_1_1Convergence__Data_afb72d30b5e616e7c69330536e0ccd323}{residual\_0}} \{scalar\_max\};                 }
+\DoxyCodeLine{108   Scalar \mbox{\hyperlink{structDisa_1_1Convergence__Data_a4bc9df68fc8876eb1bacb8d2be901756}{residual\_normalised}} \{scalar\_max\};        }
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110   Scalar \mbox{\hyperlink{structDisa_1_1Convergence__Data_af9ef4a3f1d8f63e8b2dd6c373c07d5f9}{residual\_max}} \{scalar\_max\};               }
+\DoxyCodeLine{111   Scalar \mbox{\hyperlink{structDisa_1_1Convergence__Data_a345f281a6bdd28f1d1695e747f0c616a}{residual\_max\_0}} \{scalar\_max\};             }
+\DoxyCodeLine{112   Scalar \mbox{\hyperlink{structDisa_1_1Convergence__Data_a915dcb3cab85336f35b6793b7e9bc9ba}{residual\_max\_normalised}} \{scalar\_max\};    }
+\DoxyCodeLine{113 }
+\DoxyCodeLine{122   \textcolor{keyword}{template}<\textcolor{keyword}{class} \_matrix, \textcolor{keyword}{class} \_vector>}
+\DoxyCodeLine{123   \textcolor{keywordtype}{void} \mbox{\hyperlink{structDisa_1_1Convergence__Data_a304464209574de33a58f913ac0c63e98}{update}}(\textcolor{keyword}{const} \_matrix\& coef, \textcolor{keyword}{const} \_vector\& solution, \textcolor{keyword}{const} \_vector\& constant);}
+\DoxyCodeLine{124 \};}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{147 \textcolor{keyword}{struct }\mbox{\hyperlink{structDisa_1_1Convergence__Criteria}{Convergence\_Criteria}} \{}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149   std::size\_t \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_a858541591631f85ba929b937319798e3}{min\_iterations}} \{0\};                                         }
+\DoxyCodeLine{150   std::size\_t \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_af577cae884e868ce0e36276bc2da22d6}{max\_iteration}} \{std::numeric\_limits<std::size\_t>::max()\};    }
+\DoxyCodeLine{151   Scalar \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_a50e5b162b182fec00f4ea547c0ef6e5f}{tolerance}} \{scalar\_max\};                                          }
+\DoxyCodeLine{152 }
+\DoxyCodeLine{158   [[nodiscard]] \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_afcd0343cf1972ad705fe0a72c446fdb2}{is\_converged}}(\textcolor{keyword}{const} \mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\_Data}}\& data)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{159     \textcolor{keywordflow}{if}(data.\mbox{\hyperlink{structDisa_1_1Convergence__Data_a798c863e81503627ea641eb011d66240}{iteration}} < \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_a858541591631f85ba929b937319798e3}{min\_iterations}}) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{160     \textcolor{keywordflow}{if}(data.\mbox{\hyperlink{structDisa_1_1Convergence__Data_a798c863e81503627ea641eb011d66240}{iteration}} > \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_af577cae884e868ce0e36276bc2da22d6}{max\_iteration}}) \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{161     \textcolor{keywordflow}{if}(data.\mbox{\hyperlink{structDisa_1_1Convergence__Data_a4bc9df68fc8876eb1bacb8d2be901756}{residual\_normalised}} > \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_a50e5b162b182fec00f4ea547c0ef6e5f}{tolerance}}) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{162     \textcolor{keywordflow}{if}(data.\mbox{\hyperlink{structDisa_1_1Convergence__Data_a915dcb3cab85336f35b6793b7e9bc9ba}{residual\_max\_normalised}} > 10.0*\mbox{\hyperlink{structDisa_1_1Convergence__Criteria_a50e5b162b182fec00f4ea547c0ef6e5f}{tolerance}}) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{163     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{164   \}}
+\DoxyCodeLine{165 \};}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{176 \textcolor{keyword}{template}<\textcolor{keyword}{class} \_matrix, \textcolor{keyword}{class} \_vector>}
+\DoxyCodeLine{177 std::pair<Scalar, Scalar> compute\_residual(\textcolor{keyword}{const} \_matrix\& coef, \textcolor{keyword}{const} \_vector\& solution, \textcolor{keyword}{const} \_vector\& constant);}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181 \textcolor{preprocessor}{\#include "{}solver\_utilities.hpp"{}}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//DISA\_SOLVER\_UTILITIES\_H}}
+
+\end{DoxyCode}

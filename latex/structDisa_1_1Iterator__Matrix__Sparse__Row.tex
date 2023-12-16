@@ -1,0 +1,399 @@
+\hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row}{}\doxysection{Disa\+::Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row\texorpdfstring{$<$}{<} \+\_\+matrix\+\_\+type \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{structDisa_1_1Iterator__Matrix__Sparse__Row}\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+
+
+Iterator to advance over rows of a CSR sparse matrix.  
+
+
+
+
+{\ttfamily \#include $<$matrix\+\_\+sparse.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a51e340a983865d04d5e50f6fa10dd7e5}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a51e340a983865d04d5e50f6fa10dd7e5}} 
+using {\bfseries iterator\+\_\+category} = std\+::random\+\_\+access\+\_\+iterator\+\_\+tag
+\item 
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a77ca750b33c94fc8e13e5d8a08658f5d}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a77ca750b33c94fc8e13e5d8a08658f5d}} 
+using {\bfseries difference\+\_\+type} = std\+::ptrdiff\+\_\+t
+\item 
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_acb34f8f234d732d9106bde38b4996d98}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_acb34f8f234d732d9106bde38b4996d98}} 
+using {\bfseries matrix\+\_\+type} = \+\_\+matrix\+\_\+type
+\item 
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a1de02530dc435fea9559601bcf900ae3}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a1de02530dc435fea9559601bcf900ae3}} 
+using {\bfseries value\+\_\+type} = \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$
+\item 
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_ab44187b78e22b3fb072af87234ce9620}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_ab44187b78e22b3fb072af87234ce9620}} 
+using {\bfseries pointer} = \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{value\+\_\+type}} $\ast$
+\item 
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_aac25b56616dc5317519b7bf47be703a2}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_aac25b56616dc5317519b7bf47be703a2}} 
+using {\bfseries reference} = \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{value\+\_\+type}} \&
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_ab2753dfff59daa3e0077f8b02a0f7ac5}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} (const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{value\+\_\+type}} \&row)
+\begin{DoxyCompactList}\small\item\em Constructor from helper class. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a98deff447991361cff78da7c6ff3999d}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} (std\+::size\+\_\+t i\+\_\+row, matrix\+\_\+type $\ast$sparse\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Raw constructor, directly constructs the Sparse Matrix Row helper private data. \end{DoxyCompactList}\item 
+constexpr bool \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a03f3a53ee5959e45cb9f23c5cff47727}{operator==}} (const \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \&other) const
+\begin{DoxyCompactList}\small\item\em Iterator equal to comparison operator. \end{DoxyCompactList}\item 
+constexpr bool \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_af9aeddca10c71093a848f15ecd033530}{operator!=}} (const \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \&other) const
+\begin{DoxyCompactList}\small\item\em Iterator not equal to comparison operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename \+\_\+matrix  = \+\_\+matrix\+\_\+type, typename std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ }\\constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{reference}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a08ce91c14f8cb228984a063172e4cbc2}{operator$\ast$}} ()
+\begin{DoxyCompactList}\small\item\em Iterator indirection member access operator. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_acd4554e1fa1d1ad0eaecd2833950382a}{operator$\ast$}} () const
+\begin{DoxyCompactList}\small\item\em Iterator indirection member access operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename \+\_\+matrix  = \+\_\+matrix\+\_\+type, typename std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ }\\constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{pointer}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a3e7d64d48a60525dcc6a9ee2b5a2b30f}{operator-\/$>$}} ()
+\begin{DoxyCompactList}\small\item\em Iterator member of pointer member access operator. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \& \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_ac3d8a8277e1aeae49911190a60b75dab}{operator++}} ()
+\begin{DoxyCompactList}\small\item\em Iterator pre-\/increment operator. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_ae755d51b767f78d1d31b7fa50f5f7312}{operator++}} (int)
+\begin{DoxyCompactList}\small\item\em Iterator post-\/increment operator. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \& \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a2dd415adc9b96d16fe3fa169e917fa84}{operator-\/-\/}} ()
+\begin{DoxyCompactList}\small\item\em Iterator pre-\/decrement operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a7453a5752c43734220fff30fcec4ac96}{operator-\/-\/}} (int)
+\begin{DoxyCompactList}\small\item\em Iterator post-\/decrement operator. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a519c95f1a8c84efacc04510cf3e9f3fc}{operator+}} (difference\+\_\+type offset)
+\begin{DoxyCompactList}\small\item\em Iterator addition arithmetic operator. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_aa3b9b1a77d68411953abe6759f7ddcfd}{operator-\/}} (difference\+\_\+type offset)
+\begin{DoxyCompactList}\small\item\em Iterator subtraction arithmetic operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \& \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a67ecabeb5efeb6c2c5fb49391b89b772}{operator+=}} (difference\+\_\+type offset)
+\begin{DoxyCompactList}\small\item\em Iterator addition assignment operator. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \& \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a480ff9302c886ef81b6cde0c41bda169}{operator-\/=}} (difference\+\_\+type offset)
+\begin{DoxyCompactList}\small\item\em Iterator subtraction assignment operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename \+\_\+matrix  = \+\_\+matrix\+\_\+type, typename std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ }\\constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{value\+\_\+type}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a364266d20c090e348157bf955daa8dea}{operator\mbox{[}$\,$\mbox{]}}} (const difference\+\_\+type \&offset)
+\begin{DoxyCompactList}\small\item\em Iterator subscript operator. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row_a3012a7be1c415da10d58e370085ef988}{operator\mbox{[}$\,$\mbox{]}}} (const difference\+\_\+type \&offset) const
+\begin{DoxyCompactList}\small\item\em Iterator subscript operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename \+\_\+matrix\+\_\+type$>$\newline
+struct Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row$<$ \+\_\+matrix\+\_\+type $>$}
+Iterator to advance over rows of a CSR sparse matrix. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+matrix\+\_\+type} & const or non-\/const sparse matrix. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_ab2753dfff59daa3e0077f8b02a0f7ac5}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_ab2753dfff59daa3e0077f8b02a0f7ac5}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!Iterator\_Matrix\_Sparse\_Row@{Iterator\_Matrix\_Sparse\_Row}}
+\index{Iterator\_Matrix\_Sparse\_Row@{Iterator\_Matrix\_Sparse\_Row}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{Iterator\_Matrix\_Sparse\_Row()}{Iterator\_Matrix\_Sparse\_Row()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{value\+\_\+type}} \&}]{row }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [constexpr]}}
+
+
+
+Constructor from helper class. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em row} & Sparse Matrix Row helper to initialise from. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a98deff447991361cff78da7c6ff3999d}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a98deff447991361cff78da7c6ff3999d}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!Iterator\_Matrix\_Sparse\_Row@{Iterator\_Matrix\_Sparse\_Row}}
+\index{Iterator\_Matrix\_Sparse\_Row@{Iterator\_Matrix\_Sparse\_Row}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{Iterator\_Matrix\_Sparse\_Row()}{Iterator\_Matrix\_Sparse\_Row()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{i\+\_\+row,  }\item[{matrix\+\_\+type $\ast$}]{sparse\+\_\+matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Raw constructor, directly constructs the Sparse Matrix Row helper private data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em i\+\_\+row} & Row index of the matrix the helper is to \textquotesingle{}pointing to\textquotesingle{}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em sparse\+\_\+matrix} & Pointer to the underlying sparse matrix. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_af9aeddca10c71093a848f15ecd033530}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_af9aeddca10c71093a848f15ecd033530}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr bool \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator not equal to comparison operator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & The other iterator to compare against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the iterators are not equal, else false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a08ce91c14f8cb228984a063172e4cbc2}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a08ce91c14f8cb228984a063172e4cbc2}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+template$<$typename \+\_\+matrix  = \+\_\+matrix\+\_\+type, typename std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ \\
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{reference}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator indirection member access operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+matrix} & Only enabled if this iterator is for a non-\/const helper. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The underlying non-\/const sparse matrix row helper class. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_acd4554e1fa1d1ad0eaecd2833950382a}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_acd4554e1fa1d1ad0eaecd2833950382a}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator indirection member access operator. 
+
+\begin{DoxyReturn}{Returns}
+The underlying const sparse matrix row helper class. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a519c95f1a8c84efacc04510cf3e9f3fc}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a519c95f1a8c84efacc04510cf3e9f3fc}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator+ (\begin{DoxyParamCaption}\item[{difference\+\_\+type}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator addition arithmetic operator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em offset} & The amount to advance the iterator by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated iterator, row index advanced by the offset amount. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_ac3d8a8277e1aeae49911190a60b75dab}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_ac3d8a8277e1aeae49911190a60b75dab}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator++@{operator++}}
+\index{operator++@{operator++}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \& \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator pre-\/increment operator. 
+
+\begin{DoxyReturn}{Returns}
+Updated iterator, row index advanced by one. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_ae755d51b767f78d1d31b7fa50f5f7312}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_ae755d51b767f78d1d31b7fa50f5f7312}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator++@{operator++}}
+\index{operator++@{operator++}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator++ (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator post-\/increment operator. 
+
+\begin{DoxyReturn}{Returns}
+Iterator \textquotesingle{}state\textquotesingle{} prior to the row index being advanced by one. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a67ecabeb5efeb6c2c5fb49391b89b772}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a67ecabeb5efeb6c2c5fb49391b89b772}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \& \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator+= (\begin{DoxyParamCaption}\item[{difference\+\_\+type}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterator addition assignment operator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em offset} & The amount to advance the iterator by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated iterator, row index advanced by the offset amount. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_aa3b9b1a77d68411953abe6759f7ddcfd}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_aa3b9b1a77d68411953abe6759f7ddcfd}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator-\/ (\begin{DoxyParamCaption}\item[{difference\+\_\+type}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator subtraction arithmetic operator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em offset} & The amount to reduce the iterator by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated iterator, row index reduced by the offset amount. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a2dd415adc9b96d16fe3fa169e917fa84}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a2dd415adc9b96d16fe3fa169e917fa84}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/-\/()}{operator--()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \& \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator-\/-\/ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator pre-\/decrement operator. 
+
+\begin{DoxyReturn}{Returns}
+Updated iterator, row index reduced by one. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a7453a5752c43734220fff30fcec4ac96}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a7453a5752c43734220fff30fcec4ac96}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/-\/()}{operator--()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+\mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator-\/-\/ (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterator post-\/decrement operator. 
+
+\begin{DoxyReturn}{Returns}
+Iterator \textquotesingle{}state\textquotesingle{} prior to the row index being reduced by one. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a480ff9302c886ef81b6cde0c41bda169}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a480ff9302c886ef81b6cde0c41bda169}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}} \& \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{difference\+\_\+type}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator subtraction assignment operator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em offset} & The amount to reduce the iterator by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Updated iterator, row index reduced by the offset amount. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a3e7d64d48a60525dcc6a9ee2b5a2b30f}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a3e7d64d48a60525dcc6a9ee2b5a2b30f}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+template$<$typename \+\_\+matrix  = \+\_\+matrix\+\_\+type, typename std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ \\
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{pointer}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator member of pointer member access operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+matrix} & Only enabled if this iterator is for a non-\/const helper. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the helper class. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a03f3a53ee5959e45cb9f23c5cff47727}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a03f3a53ee5959e45cb9f23c5cff47727}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr bool \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator equal to comparison operator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em other} & The other iterator to compare against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the iterators are equal, else false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a364266d20c090e348157bf955daa8dea}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a364266d20c090e348157bf955daa8dea}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+template$<$typename \+\_\+matrix  = \+\_\+matrix\+\_\+type, typename std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+const\+\_\+v$<$ \+\_\+matrix $>$, bool $>$  = true$>$ \\
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{value\+\_\+type}} \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const difference\+\_\+type \&}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator subscript operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+matrix} & Only enabled if this iterator is for a non-\/const helper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em offset} & The relative amount to advance the iterator by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A non-\/const sparse matrix row helper with a row index advanced by the offset (relative to this iterator). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structDisa_1_1Iterator__Matrix__Sparse__Row_a3012a7be1c415da10d58e370085ef988}\label{structDisa_1_1Iterator__Matrix__Sparse__Row_a3012a7be1c415da10d58e370085ef988}} 
+\index{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$@{Disa::Iterator\_Matrix\_Sparse\_Row$<$ \_matrix\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename \+\_\+matrix\+\_\+type $>$ \\
+constexpr \mbox{\hyperlink{classDisa_1_1Matrix__Sparse__Row}{Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ const \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\+\_\+\+Sparse}} $>$ \mbox{\hyperlink{structDisa_1_1Iterator__Matrix__Sparse__Row}{Disa\+::\+Iterator\+\_\+\+Matrix\+\_\+\+Sparse\+\_\+\+Row}}$<$ \+\_\+matrix\+\_\+type $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const difference\+\_\+type \&}]{offset }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Iterator subscript operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em \+\_\+matrix} & Only enabled if this iterator is for a non-\/const helper. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em offset} & The relative amount to advance the iterator by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A const sparse matrix row helper with a row index advanced by the offset (relative to this iterator). 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/core/matrix\+\_\+sparse.\+h\end{DoxyCompactItemize}

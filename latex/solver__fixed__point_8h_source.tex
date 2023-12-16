@@ -1,0 +1,65 @@
+\hypertarget{solver__fixed__point_8h_source}{}\doxysection{solver\+\_\+fixed\+\_\+point.\+h}
+\label{solver__fixed__point_8h_source}\index{libs/solver/solver\_fixed\_point.h@{libs/solver/solver\_fixed\_point.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{//  MIT License}}
+\DoxyCodeLine{3 \textcolor{comment}{//  Copyright (c) 2022 Bevan W.S. Jones}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{//  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated}}
+\DoxyCodeLine{6 \textcolor{comment}{//  documentation files (the "{}Software"{}), to deal in the Software without restriction, including without limitation the}}
+\DoxyCodeLine{7 \textcolor{comment}{//  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to}}
+\DoxyCodeLine{8 \textcolor{comment}{//  permit persons to whom the Software is furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{//  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the}}
+\DoxyCodeLine{11 \textcolor{comment}{//  Software.}}
+\DoxyCodeLine{12 \textcolor{comment}{//}}
+\DoxyCodeLine{13 \textcolor{comment}{//  THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE}}
+\DoxyCodeLine{14 \textcolor{comment}{//  WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{//  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR}}
+\DoxyCodeLine{16 \textcolor{comment}{//  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}}
+\DoxyCodeLine{17 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{18 \textcolor{comment}{//  File Name:}}
+\DoxyCodeLine{19 \textcolor{comment}{//  Description:}}
+\DoxyCodeLine{20 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#ifndef DISA\_SOLVER\_FIXED\_POINT\_H}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define DISA\_SOLVER\_FIXED\_POINT\_H}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include "{}solver\_iterative.h"{}}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{namespace }Disa \{}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{struct }\mbox{\hyperlink{structDisa_1_1Solver__Fixed__Point__Data}{Solver\_Fixed\_Point\_Data}} : \textcolor{keyword}{public} \mbox{\hyperlink{structDisa_1_1Solver__Data}{Solver\_Data}}\{}
+\DoxyCodeLine{30 \};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{struct }\mbox{\hyperlink{structDisa_1_1Solver__Fixed__Point__Jacobi__Data}{Solver\_Fixed\_Point\_Jacobi\_Data}} : \textcolor{keyword}{public} \mbox{\hyperlink{structDisa_1_1Solver__Data}{Solver\_Data}}\{}
+\DoxyCodeLine{33   \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\_Dense<0>}} working;}
+\DoxyCodeLine{34 \};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keyword}{struct }\mbox{\hyperlink{structDisa_1_1Solver__Fixed__Point__Sor__Data}{Solver\_Fixed\_Point\_Sor\_Data}} : \textcolor{keyword}{public} \mbox{\hyperlink{structDisa_1_1Solver__Data}{Solver\_Data}}\{}
+\DoxyCodeLine{37   Scalar relaxation\{1.5\};}
+\DoxyCodeLine{38 \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{45 \textcolor{keyword}{template}<Solver\_Type \_solver\_type, \textcolor{keyword}{class} \_solver\_data>}
+\DoxyCodeLine{46 \textcolor{keyword}{class }\mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Solver\_Fixed\_Point}} : \textcolor{keyword}{public} \mbox{\hyperlink{classDisa_1_1Solver__Iterative}{Solver\_Iterative}}<Solver\_Fixed\_Point<\_solver\_type, \_solver\_data>, \_solver\_data> \{}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{keyword}{public}:}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50   \textcolor{keyword}{explicit} \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Solver\_Fixed\_Point}}(\mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\_Config}} config) : \mbox{\hyperlink{classDisa_1_1Solver__Iterative}{Solver\_Iterative<Solver\_Fixed\_Point<\_solver\_type, \_solver\_data>}}, \_solver\_data >(config) \{\};}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52   \textcolor{keywordtype}{void} initialise\_solver(\mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\_Config}} config);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{61   \mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\_Data}} \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point_a556ec4ea588618c48b2b2a2e26f31280}{solve\_system}}(\textcolor{keyword}{const} \mbox{\hyperlink{classDisa_1_1Matrix__Sparse}{Matrix\_Sparse}}\& a\_matrix, \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\_Dense<0>}}\& x\_vector,}
+\DoxyCodeLine{62                                        \textcolor{keyword}{const} \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\_Dense<0>}}\& b\_vector);}
+\DoxyCodeLine{63 \};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{keyword}{typedef} \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Solver\_Fixed\_Point<Solver\_Type::jacobi, Solver\_Fixed\_Point\_Jacobi\_Data>}} \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Solver\_Jacobi}};}
+\DoxyCodeLine{66 \textcolor{keyword}{typedef} \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Solver\_Fixed\_Point<Solver\_Type::gauss\_seidel, Solver\_Fixed\_Point\_Data>}} \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Solver\_Gauss\_Seidel}};}
+\DoxyCodeLine{67 \textcolor{keyword}{typedef} \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Solver\_Fixed\_Point<Solver\_Type::successive\_over\_relaxation, Solver\_Fixed\_Point\_Sor\_Data>}} \mbox{\hyperlink{classDisa_1_1Solver__Fixed__Point}{Sover\_Sor}};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//DISA\_SOLVER\_FIXED\_POINT\_H}}
+
+\end{DoxyCode}

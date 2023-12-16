@@ -1,0 +1,67 @@
+\hypertarget{structDisa_1_1Convergence__Criteria}{}\doxysection{Disa\+::Convergence\+\_\+\+Criteria Struct Reference}
+\label{structDisa_1_1Convergence__Criteria}\index{Disa::Convergence\_Criteria@{Disa::Convergence\_Criteria}}
+
+
+Contains the criteria values against which convergence status can be assessed.  
+
+
+
+
+{\ttfamily \#include $<$solver\+\_\+utilities.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structDisa_1_1Convergence__Criteria_afcd0343cf1972ad705fe0a72c446fdb2}{is\+\_\+converged}} (const \mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\+\_\+\+Data}} \&data) const
+\begin{DoxyCompactList}\small\item\em Checks the parsed convergence data against the criteria (see struct comment for the criteria). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structDisa_1_1Convergence__Criteria_a858541591631f85ba929b937319798e3}\label{structDisa_1_1Convergence__Criteria_a858541591631f85ba929b937319798e3}} 
+std\+::size\+\_\+t {\bfseries min\+\_\+iterations} \{0\}
+\begin{DoxyCompactList}\small\item\em The minimum number of iterations. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structDisa_1_1Convergence__Criteria_af577cae884e868ce0e36276bc2da22d6}\label{structDisa_1_1Convergence__Criteria_af577cae884e868ce0e36276bc2da22d6}} 
+std\+::size\+\_\+t {\bfseries max\+\_\+iteration} \{std\+::numeric\+\_\+limits$<$std\+::size\+\_\+t$>$\+::max()\}
+\begin{DoxyCompactList}\small\item\em The maximum allowable number of iterations. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structDisa_1_1Convergence__Criteria_a50e5b162b182fec00f4ea547c0ef6e5f}\label{structDisa_1_1Convergence__Criteria_a50e5b162b182fec00f4ea547c0ef6e5f}} 
+Scalar {\bfseries tolerance} \{scalar\+\_\+max\}
+\begin{DoxyCompactList}\small\item\em The convergence tolerance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains the criteria values against which convergence status can be assessed. 
+
+This struct holds the values need to assess convergence of a solve. It is typically instances are created in the solvers themselves, and initialised on construction of the solver. The method is\+\_\+converged is used to determine if a solve has converged. The criteria to satisfy convergence are as follows\+:
+\begin{DoxyEnumerate}
+\item i \texorpdfstring{$>$}{>} i\+\_\+min
+\item i \texorpdfstring{$<$}{<} i\+\_\+max
+\item $\vert$r$\vert$\+\_\+\{2, n\} \texorpdfstring{$<$}{<} epsilon
+\item $\vert$r$\vert$\+\_\+inf \texorpdfstring{$<$}{<} 10.\+0$\ast$epsilon
+\end{DoxyEnumerate}
+
+where i is the number of iterations i\+\_\+min is the minimum number of iterations. i\+\_\+max is the maximum number of iterations. r is the residual vector of the linear system. epsilon is a user defined scalar tolerance. n ia the cardinality of the linear system (number of rows). 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structDisa_1_1Convergence__Criteria_afcd0343cf1972ad705fe0a72c446fdb2}\label{structDisa_1_1Convergence__Criteria_afcd0343cf1972ad705fe0a72c446fdb2}} 
+\index{Disa::Convergence\_Criteria@{Disa::Convergence\_Criteria}!is\_converged@{is\_converged}}
+\index{is\_converged@{is\_converged}!Disa::Convergence\_Criteria@{Disa::Convergence\_Criteria}}
+\doxysubsubsection{\texorpdfstring{is\_converged()}{is\_converged()}}
+{\footnotesize\ttfamily bool Disa\+::\+Convergence\+\_\+\+Criteria\+::is\+\_\+converged (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\+\_\+\+Data}} \&}]{data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks the parsed convergence data against the criteria (see struct comment for the criteria). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em data} & The convergence data (state) of the system. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if converged, else false. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/solver/solver\+\_\+utilities.\+h\end{DoxyCompactItemize}

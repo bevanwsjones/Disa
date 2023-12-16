@@ -1,0 +1,88 @@
+\hypertarget{direct__lower__upper__factorisation_8h_source}{}\doxysection{direct\+\_\+lower\+\_\+upper\+\_\+factorisation.\+h}
+\label{direct__lower__upper__factorisation_8h_source}\index{libs/solver/direct\_lower\_upper\_factorisation.h@{libs/solver/direct\_lower\_upper\_factorisation.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// MIT License}}
+\DoxyCodeLine{3 \textcolor{comment}{// Copyright (c) 2022 Bevan W.S. Jones}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated}}
+\DoxyCodeLine{6 \textcolor{comment}{// documentation files (the "{}Software"{}), to deal in the Software without restriction, including without limitation the}}
+\DoxyCodeLine{7 \textcolor{comment}{// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to}}
+\DoxyCodeLine{8 \textcolor{comment}{// permit persons to whom the Software is furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the}}
+\DoxyCodeLine{11 \textcolor{comment}{// Software.}}
+\DoxyCodeLine{12 \textcolor{comment}{//}}
+\DoxyCodeLine{13 \textcolor{comment}{// THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE}}
+\DoxyCodeLine{14 \textcolor{comment}{// WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR}}
+\DoxyCodeLine{16 \textcolor{comment}{// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}}
+\DoxyCodeLine{17 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{18 \textcolor{comment}{// File Name: direct\_lower\_upper\_factorisation.h}}
+\DoxyCodeLine{19 \textcolor{comment}{// Description: Contains the declaration of the direct lower upper factorisation solver.}}
+\DoxyCodeLine{20 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef DISA\_DIRECT\_UPPER\_LOWER\_FACTORISATION\_H}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define DISA\_DIRECT\_UPPER\_LOWER\_FACTORISATION\_H}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include "{}direct.h"{}}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include "{}matrix\_dense.h"{}}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include "{}solver\_utilities.h"{}}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include "{}vector\_dense.h"{}}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{keyword}{namespace }Disa \{}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{44 \textcolor{keyword}{template}<Solver\_Type \_solver\_type, std::\textcolor{keywordtype}{size\_t} \_size, \textcolor{keywordtype}{bool} \_pivot>}
+\DoxyCodeLine{45 \textcolor{keyword}{class }\mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Direct\_Lower\_Upper\_Factorisation}} }
+\DoxyCodeLine{46 : \textcolor{keyword}{public} \mbox{\hyperlink{classDisa_1_1Direct}{Direct}}<Direct\_Lower\_Upper\_Factorisation<\_solver\_type, \_size, \_pivot>, \_size > \{}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{keyword}{public}:}
+\DoxyCodeLine{53   \textcolor{keyword}{explicit} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a9063154454bb37fb591c0c74f0f82f4b}{Direct\_Lower\_Upper\_Factorisation}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{54   }
+\DoxyCodeLine{59   \textcolor{keyword}{explicit} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_ae441929536cf874c41337d9ea32332dc}{Direct\_Lower\_Upper\_Factorisation}}(\mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\_Config}} config) }
+\DoxyCodeLine{60   : \mbox{\hyperlink{classDisa_1_1Direct}{Direct}}<\mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation}{Direct\_Lower\_Upper\_Factorisation}}<\_solver\_type, \_size, \_pivot>, \_size >(config) \{}
+\DoxyCodeLine{61     \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a6bd39357dcb6f02bcf1fa181fc4e7c65}{initialise\_solver}}(config);}
+\DoxyCodeLine{62   \};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{68   \textcolor{keywordtype}{void} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a6bd39357dcb6f02bcf1fa181fc4e7c65}{initialise\_solver}}(\mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\_Config}} config) \{}
+\DoxyCodeLine{69     ASSERT(config.\mbox{\hyperlink{structDisa_1_1Solver__Config_acb8de83945d3a2d6fc764b07b241b2da}{type}} == \_solver\_type, \textcolor{stringliteral}{"{}Miss-\/match between config tpye and LU/LUP selection."{}});}
+\DoxyCodeLine{70     ASSERT(config.\mbox{\hyperlink{structDisa_1_1Solver__Config_ae25807809dfc212ef1ff31085202fede}{pivot}} == \_pivot, \textcolor{stringliteral}{"{}Miss-\/match between config pivoting and LU/LUP selection."{}});}
+\DoxyCodeLine{71     factorisation\_tolerance = config.\mbox{\hyperlink{structDisa_1_1Solver__Config_a020cd96ae17b3a9d81a3d3178e2e37df}{factor\_tolerance}};}
+\DoxyCodeLine{72   \};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{79   \textcolor{keywordtype}{bool} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a14e91d05154a232286186a263be19d36}{factorise}}(\textcolor{keyword}{const} \mbox{\hyperlink{structDisa_1_1Matrix__Dense}{Matrix\_Dense<\_size, \_size>}}\& a\_matrix);}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{90   \mbox{\hyperlink{structDisa_1_1Convergence__Data}{Convergence\_Data}} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a4714f7fee084d09a20d6212bc74d56b8}{solve\_system}}(\mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\_Dense<\_size>}}\& x\_vector, \textcolor{keyword}{const} \mbox{\hyperlink{structDisa_1_1Vector__Dense}{Vector\_Dense<\_size>}}\& b\_vector);}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{96   \textcolor{keyword}{constexpr} \mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\_Config}} \mbox{\hyperlink{classDisa_1_1Direct__Lower__Upper__Factorisation_a3c14544b7a2e6047cbbcd30f221afef5}{get\_config}}() \{}
+\DoxyCodeLine{97     \mbox{\hyperlink{structDisa_1_1Solver__Config}{Solver\_Config}} config;}
+\DoxyCodeLine{98     config.\mbox{\hyperlink{structDisa_1_1Solver__Config_acb8de83945d3a2d6fc764b07b241b2da}{type}} = \_solver\_type;}
+\DoxyCodeLine{99     config.\mbox{\hyperlink{structDisa_1_1Solver__Config_ae25807809dfc212ef1ff31085202fede}{pivot}} = \_pivot;}
+\DoxyCodeLine{100     config.\mbox{\hyperlink{structDisa_1_1Solver__Config_a020cd96ae17b3a9d81a3d3178e2e37df}{factor\_tolerance}} = factorisation\_tolerance;}
+\DoxyCodeLine{101     \textcolor{keywordflow}{return} config;}
+\DoxyCodeLine{102   \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104   \textcolor{keyword}{private}:}
+\DoxyCodeLine{105   \textcolor{keywordtype}{bool} factorised\{\textcolor{keyword}{false}\};                             \textcolor{comment}{//<! Has factorisation been completed successfully. }}
+\DoxyCodeLine{106   Scalar factorisation\_tolerance\{default\_absolute\};   \textcolor{comment}{//<! The value below which diagonal entires should be considered zero.}}
+\DoxyCodeLine{107   Matrix\_Dense<\_size, \_size> lu\_factorised;           \textcolor{comment}{//<! The factorised LU coefficient matrix (implicit 1's on diagonal of L).}}
+\DoxyCodeLine{108   std::vector<std::size\_t> pivots;                    \textcolor{comment}{//<! The pivots indicies, is only sized for LUP solver.}}
+\DoxyCodeLine{109 \};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{keyword}{template}<std::\textcolor{keywordtype}{size\_t} \_size>}
+\DoxyCodeLine{112 \textcolor{keyword}{using }Solver\_LUP = Direct\_Lower\_Upper\_Factorisation<Solver\_Type::lower\_upper\_factorisation, \_size, true>;}
+\DoxyCodeLine{113 \textcolor{keyword}{template}<std::\textcolor{keywordtype}{size\_t} \_size>}
+\DoxyCodeLine{114 \textcolor{keyword}{using }Solver\_LU = Direct\_Lower\_Upper\_Factorisation<Solver\_Type::lower\_upper\_factorisation, \_size, false> ;}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#include "{}direct\_lower\_upper\_factorisation.hpp"{}}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//DISA\_DIRECT\_UPPER\_LOWER\_FACTORISATION\_H}}
+
+\end{DoxyCode}

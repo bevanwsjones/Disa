@@ -1,0 +1,43 @@
+\hypertarget{structDisa_1_1Solver__Config}{}\doxysection{Disa\+::Solver\+\_\+\+Config Struct Reference}
+\label{structDisa_1_1Solver__Config}\index{Disa::Solver\_Config@{Disa::Solver\_Config}}
+
+
+Contains all possible configurations for all solvers in Disa.  
+
+
+
+
+{\ttfamily \#include $<$solver\+\_\+utilities.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structDisa_1_1Solver__Config_acb8de83945d3a2d6fc764b07b241b2da}\label{structDisa_1_1Solver__Config_acb8de83945d3a2d6fc764b07b241b2da}} 
+Solver\+\_\+\+Type {\bfseries type} \{Solver\+\_\+\+Type\+::unknown\}
+\begin{DoxyCompactList}\small\item\em The solver to construct. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structDisa_1_1Solver__Config_ae25807809dfc212ef1ff31085202fede}\label{structDisa_1_1Solver__Config_ae25807809dfc212ef1ff31085202fede}} 
+bool {\bfseries pivot} \{true\}
+\begin{DoxyCompactList}\small\item\em For direct solvers, if pivoting of the system is allowed. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structDisa_1_1Solver__Config_a020cd96ae17b3a9d81a3d3178e2e37df}\label{structDisa_1_1Solver__Config_a020cd96ae17b3a9d81a3d3178e2e37df}} 
+Scalar {\bfseries factor\+\_\+tolerance} \{default\+\_\+relative\}
+\begin{DoxyCompactList}\small\item\em The value below which diagonal entires shoud be considered zero. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structDisa_1_1Solver__Config_a9c7afc739354f8db1be52e9653cc5e10}\label{structDisa_1_1Solver__Config_a9c7afc739354f8db1be52e9653cc5e10}} 
+std\+::size\+\_\+t {\bfseries minimum\+\_\+iterations} \{0\}
+\begin{DoxyCompactList}\small\item\em The minimum \textquotesingle{}force\textquotesingle{} number of iterations during for a solve. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structDisa_1_1Solver__Config_a11719db6e231ac8c683ba30c3829574d}\label{structDisa_1_1Solver__Config_a11719db6e231ac8c683ba30c3829574d}} 
+std\+::size\+\_\+t {\bfseries maximum\+\_\+iterations} \{0\}
+\begin{DoxyCompactList}\small\item\em The maximum allowable iterations during a solve. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structDisa_1_1Solver__Config_a9aca8fc53e00a31c92d3b06945fd6404}\label{structDisa_1_1Solver__Config_a9aca8fc53e00a31c92d3b06945fd6404}} 
+Scalar {\bfseries convergence\+\_\+tolerance} \{0\}
+\begin{DoxyCompactList}\small\item\em The convergence tolerance below which a solve is considered converged. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structDisa_1_1Solver__Config_a6f5309125ab0d6763515cdf13ec58698}\label{structDisa_1_1Solver__Config_a6f5309125ab0d6763515cdf13ec58698}} 
+Scalar {\bfseries SOR\+\_\+relaxation} \{1.\+5\}
+\begin{DoxyCompactList}\small\item\em The relaxation factor for a Successive Over Relaxation solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains all possible configurations for all solvers in Disa. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+libs/solver/solver\+\_\+utilities.\+h\end{DoxyCompactItemize}
