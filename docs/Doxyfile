@@ -9,7 +9,7 @@ INPUT                  = src \
                          include \
                          libs 
 RECURSIVE              = YES
-OUTPUT_DIRECTORY       = ./html
+OUTPUT_DIRECTORY       = docs/html
 CREATE_SUBDIRS         = NO
 ALLOW_UNICODE_NAMES    = NO
 OUTPUT_LANGUAGE        = English
