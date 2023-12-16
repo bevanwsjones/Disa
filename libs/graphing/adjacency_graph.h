@@ -53,7 +53,7 @@ namespace Disa {
  * std::vector paradigms, except that each 'element' is dynamically sized and an ordered set of unsigned adjacency
  * values.
  *
- * @notes:
+ * @note:
  * 1. Edges are undirected, and thus the edge connecting vertex i to j is the same as the edge connecting j to i.
  * 2. Currently the graph does not support self connected edges i.e. edges i to i.
  * 3. Once populated, no information about the edge indexing is stored.
@@ -275,7 +275,7 @@ public:
 
   /**
    * @brief Swaps the contents of the graph with the parsed graph
-   * @param[in,out] other The other graph, this graph will obtain the other's vertices and edges, and visa versa.
+   * @param[in,out] graph_other The other graph, this graph will obtain the other's vertices and edges, and visa versa.
    */
   inline void swap(Adjacency_Graph& graph_other) {
     vertex_adjacent_list.swap(graph_other.vertex_adjacent_list);

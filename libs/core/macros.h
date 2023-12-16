@@ -141,8 +141,8 @@ typedef std::make_signed<std::size_t>::type s_size_t;    //!< Signed type for si
 /**
  * \brief Traditional integer type for loop, by loops between two values either incrementally or decrementally .
  * \param[in, out] index The for loop index.
- * \param[in] start_index Starting value of the index.
- * \param[in] end_index One past the last index.
+ * \param[in] start Starting value of the index.
+ * \param[in] end One past the last index.
  *
  * Note if the start < end the loop will increment, else decrement.
  */

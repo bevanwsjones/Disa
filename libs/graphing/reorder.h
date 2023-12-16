@@ -52,7 +52,7 @@ std::vector<std::size_t> cuthill_mckee(const Adjacency_Graph& graph,
 /**
  * @brief Constructs a permutation vector given non-disjoint graph using the Reverse Cuthill-Mckee algorithm.
  * @param[in] graph The graph to reorder.
- * @param[in] start_vertex The new graph root vertex, if default a periphery node will be search for. Defaults to max().
+ * @param[in] root_vertex The new graph root vertex, if default a periphery node will be search for. Defaults to max().
  * @return The permutation vector mapping the old to new graph, i.e. new_index = permutation[old_index].
  */
 inline std::vector<std::size_t> cuthill_mckee_reverse(const Adjacency_Graph& graph,

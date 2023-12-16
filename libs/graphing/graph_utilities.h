@@ -98,7 +98,7 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
  *        vertex is associated with the 'closest' seed vertex.
  * @tparam _graph The type of the graph.
  * @param[in] graph  The graph on which level expansion is to be performed.
- * @param[in] i_seeds Indices of seed vertices from which expansion will occur (No. colors = size of this vector).
+ * @param[in] seeds Indices of seed vertices from which expansion will occur (No. colors = size of this vector).
  * @param[out] vertex_color Of graph vertex size, and containing the color of each vertex after the level expansion.
  */
 template<class _graph>

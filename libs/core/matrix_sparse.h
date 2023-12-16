@@ -995,7 +995,7 @@ struct Iterator_Matrix_Sparse_Element {
 
   /**
    * @brief Iterator addition arithmetic operator.
-   * @param[in] offset The amount to advance the iterator by.
+   * @param[in] other The amount to advance the iterator by.
    * @return Updated iterator, column index of non-zero elements advanced by the offset amount.
    */
   constexpr difference_type operator-(const Iterator_Matrix_Sparse_Element other) {
@@ -1036,7 +1036,7 @@ struct Iterator_Matrix_Sparse_Element {
   /**
    * @brief Iterator subscript operator
    * @tparam _matrix Only enabled if this iterator is for a non-const spare matrix.
-   * @param[in] offset The relative amount to advance the iterator by.
+   * @param[in] i_advance The relative amount to advance the iterator by.
    * @return A non-const sparse matrix element with a non-zero column index advanced by the offset (relative to this iterator).
    */
   template<typename _matrix = _matrix_type, typename std::enable_if_t<!std::is_const_v<_matrix>, bool> = true>
@@ -1045,7 +1045,7 @@ struct Iterator_Matrix_Sparse_Element {
 
   /**
    * @brief Iterator subscript operator
-   * @param[in] offset The relative amount to advance the iterator by.
+   * @param[in] i_advance The relative amount to advance the iterator by.
    * @return A const sparse matrix element with a non-zero column index advanced by the offset (relative to this iterator).
    */
   constexpr const Scalar& operator[](const difference_type& i_advance) const { return *(value + i_advance); }
