@@ -5,9 +5,9 @@ PROJECT_NAME           = "Disa"
 PROJECT_NUMBER         =
 PROJECT_BRIEF          =
 PROJECT_LOGO           =
-INPUT                  = ../src \
-                         ../include \
-                         ../libs 
+INPUT                  = /src \
+                         /include \
+                         /libs 
 RECURSIVE              = YES
 OUTPUT_DIRECTORY       = ./html
 CREATE_SUBDIRS         = NO
