@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['test_467',['TEST',['../test__solver__utilities_8cpp.html#a2048171e2ffa9a98cd883b1ff33a9307',1,'TEST(solver_utilites, update_convergence):&#160;test_solver_utilities.cpp'],['../test__solver__utilities_8cpp.html#a59e70565cd5433a6be34e526eb14abf4',1,'TEST(solver_utilites, is_converged):&#160;test_solver_utilities.cpp'],['../test__solver__utilities_8cpp.html#afb1d57c8361b6931752d4e4fdaecc4f4',1,'TEST(solver_utilites, compute_residual):&#160;test_solver_utilities.cpp']]],
-  ['test_5ff_468',['TEST_F',['../test__direct_8cpp.html#a6b3e901bcdb57e68f36648c2a6cb98db',1,'TEST_F(direct_solvers, lower_upper_factorisation_initialise):&#160;test_direct.cpp'],['../test__direct_8cpp.html#a3d63539c32831c9d9d42548eacd59686',1,'TEST_F(direct_solvers, lower_upper_factorisation_death_test):&#160;test_direct.cpp'],['../test__direct_8cpp.html#ab967a3ccac4a7bb739038d307372f166',1,'TEST_F(direct_solvers, lower_upper_factorisation_not_factorised):&#160;test_direct.cpp'],['../test__direct_8cpp.html#af458a3b7c63e9e7f3b63d83dcbcce49f',1,'TEST_F(direct_solvers, lower_upper_factorise_solve):&#160;test_direct.cpp'],['../test__solver_8cpp.html#abdc8bf81feaefab9d83894b67da1297b',1,'TEST_F(Laplace2DProblem, heat):&#160;test_solver.cpp'],['../test__solver_8cpp.html#a5b86be9d53c4c62b73f9b354221b7472',1,'TEST_F(Laplace2DProblem, iterative_solver_test):&#160;test_solver.cpp']]]
+  ['unit_429',['unit',['../namespace_disa.html#abaf8a70ae2341d547d122981e63c8b29',1,'Disa']]],
+  ['update_430',['update',['../struct_disa_1_1_convergence___data.html#a1fd142225ed489aa05a10955d4531b4a',1,'Disa::Convergence_Data']]],
+  ['update_5flevels_431',['update_levels',['../class_disa_1_1_adjacency___subgraph.html#a7d0d325a5b24ec16077a4153a3c78a9a',1,'Disa::Adjacency_Subgraph']]]
 ];

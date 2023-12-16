@@ -29,8 +29,5 @@ var annotated_dup =
     [ "std", "namespacestd.html", [
       [ "hash< Disa::Adjacency_Graph >", "structstd_1_1hash_3_01_disa_1_1_adjacency___graph_01_4.html", "structstd_1_1hash_3_01_disa_1_1_adjacency___graph_01_4" ]
     ] ],
-    [ "AdjacencySubgraph", "class_adjacency_subgraph.html", null ],
-    [ "direct_solvers", "classdirect__solvers.html", "classdirect__solvers" ],
-    [ "Laplace2DProblem", "class_laplace2_d_problem.html", "class_laplace2_d_problem" ],
-    [ "Laplace_2D", "class_laplace__2_d.html", "class_laplace__2_d" ]
+    [ "AdjacencySubgraph", "class_adjacency_subgraph.html", null ]
 ];

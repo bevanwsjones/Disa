@@ -1,6 +1,5 @@
 var dir_6de032d0d9a654666bd4023108850d60 =
 [
-    [ "test", "dir_106854fe8521c53cb1be122466f8e90d.html", "dir_106854fe8521c53cb1be122466f8e90d" ],
     [ "direct.h", "direct_8h.html", [
       [ "Direct", "class_disa_1_1_direct.html", "class_disa_1_1_direct" ]
     ] ],

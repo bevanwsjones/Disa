@@ -1126,7 +1126,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">graph</td><td>The graph to reorder. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">start_vertex</td><td>The new graph root vertex, if default a periphery node will be search for. Defaults to max(). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">root_vertex</td><td>The new graph root vertex, if default a periphery node will be search for. Defaults to max(). </td></tr>
   </table>
   </dd>
 </dl>
@@ -1726,7 +1726,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">graph</td><td>The graph on which level expansion is to be performed. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">i_seeds</td><td>Indices of seed vertices from which expansion will occur (No. colors = size of this vector). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">seeds</td><td>Indices of seed vertices from which expansion will occur (No. colors = size of this vector). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">vertex_color</td><td>Of graph vertex size, and containing the color of each vertex after the level expansion. </td></tr>
   </table>
   </dd>
@@ -1962,7 +1962,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">graph</td><td>The input graph to partition. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">iterations</td><td>The number of iterations to perform. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">max_iter</td><td>The number of iterations to perform. </td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">subgraph_list</td><td>The list of initial subgraphs, and on completion, the final partitioning. </td></tr>
   </table>
   </dd>

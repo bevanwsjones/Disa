@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['unit_469',['unit',['../namespace_disa.html#abaf8a70ae2341d547d122981e63c8b29',1,'Disa']]],
-  ['update_470',['update',['../struct_disa_1_1_convergence___data.html#a1fd142225ed489aa05a10955d4531b4a',1,'Disa::Convergence_Data']]],
-  ['update_5flevels_471',['update_levels',['../class_disa_1_1_adjacency___subgraph.html#a7d0d325a5b24ec16077a4153a3c78a9a',1,'Disa::Adjacency_Subgraph']]]
+  ['vector_5fdense_432',['Vector_Dense',['../struct_disa_1_1_vector___dense.html#a21910d0736adceeb43f7a9caac7aaf0f',1,'Disa::Vector_Dense::Vector_Dense()'],['../struct_disa_1_1_vector___dense.html#a01927766c096376975d3d305b790209c',1,'Disa::Vector_Dense::Vector_Dense(const std::initializer_list&lt; Scalar &gt; &amp;list)'],['../struct_disa_1_1_vector___dense.html#ac8fef8a8c1cae506913d1e2d6b21bece',1,'Disa::Vector_Dense::Vector_Dense(const std::function&lt; Scalar(const std::size_t)&gt; &amp;lambda, std::size_t size=_size)'],['../struct_disa_1_1_vector___dense_3_010_01_4.html#a21910d0736adceeb43f7a9caac7aaf0f',1,'Disa::Vector_Dense&lt; 0 &gt;::Vector_Dense()'],['../struct_disa_1_1_vector___dense_3_010_01_4.html#a01927766c096376975d3d305b790209c',1,'Disa::Vector_Dense&lt; 0 &gt;::Vector_Dense(const std::initializer_list&lt; Scalar &gt; &amp;list)'],['../struct_disa_1_1_vector___dense_3_010_01_4.html#a448fc348be032626cab20c17a4302138',1,'Disa::Vector_Dense&lt; 0 &gt;::Vector_Dense(const std::function&lt; Scalar(std::size_t)&gt; &amp;lambda, std::size_t size)']]],
+  ['vertex_5fadjacency_5fiter_433',['vertex_adjacency_iter',['../class_disa_1_1_adjacency___graph.html#ac24b67143fc80b11153ae39bcaed50ce',1,'Disa::Adjacency_Graph']]],
+  ['vertex_5flevel_434',['vertex_level',['../class_disa_1_1_adjacency___subgraph.html#ae74963d1838b37a9db0a64a3bfb2813a',1,'Disa::Adjacency_Subgraph']]]
 ];

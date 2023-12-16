@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['b_5fvector_482',['b_vector',['../class_laplace2_d_problem.html#aad270551021ab001e39991337729d7a4',1,'Laplace2DProblem']]],
-  ['b_5fvector_5f0_483',['b_vector_0',['../class_laplace2_d_problem.html#a4fd41cfd513bf922b8a7ffb198438d8f',1,'Laplace2DProblem']]]
+  ['data_442',['data',['../class_disa_1_1_solver___iterative.html#ae2f4ee5ba00123a5898f68b3ecca06de',1,'Disa::Solver_Iterative']]],
+  ['default_5fabsolute_443',['default_absolute',['../namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7',1,'Disa']]],
+  ['default_5frelative_444',['default_relative',['../namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996',1,'Disa']]],
+  ['duration_445',['duration',['../struct_disa_1_1_convergence___data.html#a2847cf1300ebd1dbb6deb5a200a46faf',1,'Disa::Convergence_Data']]]
 ];

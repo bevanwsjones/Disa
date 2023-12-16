@@ -200,12 +200,13 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>An graph G(V, E), where V is a set of vertex indices and E is a set of undirected edges connecting the vertices in V. </p>
 <p>An adjacency graph G stores a pair of integer sets, V and E. V represents a list of vertex/point/node labels and E contains a set (list) of pairs, each containing two unsigned integers which are elements of V. If V is an ordered continuous set of unsigned integers it can be represented implicitly. This class thus represents G by storing the connectivity, of each vertex, to its connected neighbours rather than V and E directly. This allowing for single faster search times, similar to other 'sparse' containers.</p>
 <p>From a design point of view this class is similar to that of a sparse vector, and thus follows most of the std::vector paradigms, except that each 'element' is dynamically sized and an ordered set of unsigned adjacency values.</p>
-<p>@notes:</p><ol type="1">
+<dl class="section note"><dt>Note</dt><dd>:<ol type="1">
 <li>Edges are undirected, and thus the edge connecting vertex i to j is the same as the edge connecting j to i.</li>
 <li>Currently the graph does not support self connected edges i.e. edges i to i.</li>
 <li>Once populated, no information about the edge indexing is stored.</li>
 <li>The graph cannot contain information for connectivity between two types of vertices (i.e. a red set and a blue set where each set begins indexing at 0).</li>
 </ol>
+</dd></dl>
 <p>Future:</p><ol type="1">
 <li>Add iterators, begin(), end() etc.</li>
 <li>Create arithmetic operators +,-, etc for unions and intersections.</li>
@@ -1030,7 +1031,7 @@ Protected Attributes</h2></td></tr>
 <p>Swaps the contents of the graph with the parsed graph. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">other</td><td>The other graph, this graph will obtain the other's vertices and edges, and visa versa. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">graph_other</td><td>The other graph, this graph will obtain the other's vertices and edges, and visa versa. </td></tr>
   </table>
   </dd>
 </dl>

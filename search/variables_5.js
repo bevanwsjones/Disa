@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['is_5fdynamic_492',['is_dynamic',['../struct_disa_1_1_matrix___dense.html#ab96eca623728389006cfa013da781e1e',1,'Disa::Matrix_Dense::is_dynamic()'],['../struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html#ab96eca623728389006cfa013da781e1e',1,'Disa::Matrix_Dense&lt; 0, 0 &gt;::is_dynamic()'],['../struct_disa_1_1_matrix___static___demoter.html#ab96eca623728389006cfa013da781e1e',1,'Disa::Matrix_Static_Demoter::is_dynamic()'],['../struct_disa_1_1_vector___dense.html#ab96eca623728389006cfa013da781e1e',1,'Disa::Vector_Dense::is_dynamic()'],['../struct_disa_1_1_vector___dense_3_010_01_4.html#ab96eca623728389006cfa013da781e1e',1,'Disa::Vector_Dense&lt; 0 &gt;::is_dynamic()']]],
-  ['iteration_493',['iteration',['../struct_disa_1_1_convergence___data.html#af8224d8758a534fe4c1b8c3ef4ae4e35',1,'Disa::Convergence_Data']]]
+  ['max_5fiteration_450',['max_iteration',['../struct_disa_1_1_convergence___criteria.html#a3cfa7d162932251c62a2ad68b0262b39',1,'Disa::Convergence_Criteria']]],
+  ['maximum_5fiterations_451',['maximum_iterations',['../struct_disa_1_1_solver___config.html#a2fe642424bd2bf0077df9976a0ad4f5f',1,'Disa::Solver_Config']]],
+  ['min_5fiterations_452',['min_iterations',['../struct_disa_1_1_convergence___criteria.html#a95cee8e5c25db99a4bae0fb2d774e47a',1,'Disa::Convergence_Criteria']]],
+  ['minimum_5fiterations_453',['minimum_iterations',['../struct_disa_1_1_solver___config.html#ab7a53b5d56f20483a1bde18f8ef93357',1,'Disa::Solver_Config']]]
 ];

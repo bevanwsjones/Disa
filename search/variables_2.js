@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['colu_5fnew_484',['colu_new',['../struct_disa_1_1_matrix___static___demoter.html#ac283d36195510b8011767e3e5e2160ee',1,'Disa::Matrix_Static_Demoter']]],
-  ['converged_485',['converged',['../struct_disa_1_1_convergence___data.html#afcd780f72325f856f84ec1de84464211',1,'Disa::Convergence_Data']]],
-  ['convergence_5ftolerance_486',['convergence_tolerance',['../struct_disa_1_1_solver___config.html#ad542bb389be35c369e6cad3b743b944a',1,'Disa::Solver_Config']]]
+  ['factor_5ftolerance_446',['factor_tolerance',['../struct_disa_1_1_solver___config.html#a1faab2e419378f956cbda7861ef3710f',1,'Disa::Solver_Config']]]
 ];

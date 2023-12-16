@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['vector_5fdense_472',['Vector_Dense',['../struct_disa_1_1_vector___dense.html#a21910d0736adceeb43f7a9caac7aaf0f',1,'Disa::Vector_Dense::Vector_Dense()'],['../struct_disa_1_1_vector___dense.html#a01927766c096376975d3d305b790209c',1,'Disa::Vector_Dense::Vector_Dense(const std::initializer_list&lt; Scalar &gt; &amp;list)'],['../struct_disa_1_1_vector___dense.html#ac8fef8a8c1cae506913d1e2d6b21bece',1,'Disa::Vector_Dense::Vector_Dense(const std::function&lt; Scalar(const std::size_t)&gt; &amp;lambda, std::size_t size=_size)'],['../struct_disa_1_1_vector___dense_3_010_01_4.html#a21910d0736adceeb43f7a9caac7aaf0f',1,'Disa::Vector_Dense&lt; 0 &gt;::Vector_Dense()'],['../struct_disa_1_1_vector___dense_3_010_01_4.html#a01927766c096376975d3d305b790209c',1,'Disa::Vector_Dense&lt; 0 &gt;::Vector_Dense(const std::initializer_list&lt; Scalar &gt; &amp;list)'],['../struct_disa_1_1_vector___dense_3_010_01_4.html#a448fc348be032626cab20c17a4302138',1,'Disa::Vector_Dense&lt; 0 &gt;::Vector_Dense(const std::function&lt; Scalar(std::size_t)&gt; &amp;lambda, std::size_t size)']]],
-  ['vertex_5fadjacency_5fiter_473',['vertex_adjacency_iter',['../class_disa_1_1_adjacency___graph.html#ac24b67143fc80b11153ae39bcaed50ce',1,'Disa::Adjacency_Graph']]],
-  ['vertex_5flevel_474',['vertex_level',['../class_disa_1_1_adjacency___subgraph.html#ae74963d1838b37a9db0a64a3bfb2813a',1,'Disa::Adjacency_Subgraph']]]
+  ['_7eadjacency_5fgraph_435',['~Adjacency_Graph',['../class_disa_1_1_adjacency___graph.html#afc378210b6ca44ccaddb93dd1faab93c',1,'Disa::Adjacency_Graph']]],
+  ['_7eadjacency_5fsubgraph_436',['~Adjacency_Subgraph',['../class_disa_1_1_adjacency___subgraph.html#a0eb8041b5ac201610be65864fbce4da5',1,'Disa::Adjacency_Subgraph']]],
+  ['_7edirect_437',['~Direct',['../class_disa_1_1_direct.html#acddfef7cb35e1191647e4bc710cb36fe',1,'Disa::Direct']]],
+  ['_7ematrix_5fsparse_438',['~Matrix_Sparse',['../class_disa_1_1_matrix___sparse.html#a452907bb3c0351872a60effa2f46d2aa',1,'Disa::Matrix_Sparse']]]
 ];

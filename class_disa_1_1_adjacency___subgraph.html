@@ -100,7 +100,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a0eb8041b5ac201610be65864fbce4da5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="class_disa_1_1_adjacency___subgraph.html#a0eb8041b5ac201610be65864fbce4da5">More...</a><br /></td></tr>
 <tr class="separator:a0eb8041b5ac201610be65864fbce4da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d125c03c34d17ff12018825d171deae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a2d125c03c34d17ff12018825d171deae">Adjacency_Subgraph</a> (const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a> &amp;parent_graph, const std::vector&lt; std::size_t &gt; &amp;i_sub_graph_vertex, std::size_t extra_levels=0)</td></tr>
-<tr class="memdesc:a2d125c03c34d17ff12018825d171deae"><td class="mdescLeft">&#160;</td><td class="mdescRight">@breif Constructor for creating a subgraph from a parent graph.  <a href="class_disa_1_1_adjacency___subgraph.html#a2d125c03c34d17ff12018825d171deae">More...</a><br /></td></tr>
+<tr class="memdesc:a2d125c03c34d17ff12018825d171deae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for creating a subgraph from a parent graph.  <a href="class_disa_1_1_adjacency___subgraph.html#a2d125c03c34d17ff12018825d171deae">More...</a><br /></td></tr>
 <tr class="separator:a2d125c03c34d17ff12018825d171deae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ef9de02b4c8ec387321aaa3eefe6a30"><td class="memItemLeft" align="right" valign="top">std::span&lt; const size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a2ef9de02b4c8ec387321aaa3eefe6a30">at</a> (const std::size_t &amp;i_vertex) const</td></tr>
 <tr class="memdesc:a2ef9de02b4c8ec387321aaa3eefe6a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscript operator for access to a specified graph vertex's adjacency, with range checking.  <a href="class_disa_1_1_adjacency___subgraph.html#a2ef9de02b4c8ec387321aaa3eefe6a30">More...</a><br /></td></tr>
@@ -269,7 +269,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>@breif Constructor for creating a subgraph from a parent graph. </p>
+<p>Constructor for creating a subgraph from a parent graph. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">parent_graph</td><td>The parent graph upon which this subgraph will be constructed. </td></tr>
@@ -887,7 +887,12 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Resizes the number of vertices in the graph. </p>
-<p>@size[in] The number of vertices to resize the graph to.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>The number of vertices to resize the graph to.</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section note"><dt>Note</dt><dd>Edges are removed if the graph size is reduced. And the parent graph is cleared. </dd>
 <dd>
 Invalidates the parent hash if size is increased. </dd></dl>
@@ -1032,7 +1037,7 @@ Invalidates the parent hash if size is increased. </dd></dl>
 <p>Swaps the contents of the graph with the parsed graph. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">other</td><td>The other graph, this graph will obtain the other's vertices and edges, and visa versa. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">graph_other</td><td>The other graph, this graph will obtain the other's vertices and edges, and visa versa. </td></tr>
   </table>
   </dd>
 </dl>

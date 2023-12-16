@@ -1,18 +1,18 @@
 var searchData=
 [
-  ['recursive_5fgraph_5fbisection_192',['recursive_graph_bisection',['../namespace_disa.html#afe0cec247626f1277f4bd8937c0feefa',1,'Disa']]],
-  ['reference_193',['reference',['../struct_disa_1_1_iterator___matrix___sparse___row.html#a74202cdd96628bc49a756e5fc87d22de',1,'Disa::Iterator_Matrix_Sparse_Row::reference()'],['../struct_disa_1_1_iterator___matrix___sparse___element.html#a74202cdd96628bc49a756e5fc87d22de',1,'Disa::Iterator_Matrix_Sparse_Element::reference()']]],
-  ['relaxation_194',['relaxation',['../struct_disa_1_1_solver___fixed___point___sor___data.html#a2ec4968c86d8111028f47e69dc181465',1,'Disa::Solver_Fixed_Point_Sor_Data']]],
-  ['reorder_195',['reorder',['../class_disa_1_1_adjacency___graph.html#a223803400f7584e4bfab5ded0e5b92bf',1,'Disa::Adjacency_Graph::reorder()'],['../class_disa_1_1_adjacency___subgraph.html#a1fcf16cce1cc2fa5f4b7d96646e33221',1,'Disa::Adjacency_Subgraph::reorder()']]],
-  ['reorder_2ecpp_196',['reorder.cpp',['../reorder_8cpp.html',1,'']]],
-  ['reorder_2eh_197',['reorder.h',['../reorder_8h.html',1,'']]],
-  ['reserve_198',['reserve',['../class_disa_1_1_adjacency___graph.html#acaee28b4b5bc819b62e8a676b85f17a1',1,'Disa::Adjacency_Graph::reserve()'],['../class_disa_1_1_adjacency___subgraph.html#acaee28b4b5bc819b62e8a676b85f17a1',1,'Disa::Adjacency_Subgraph::reserve()'],['../class_disa_1_1_matrix___sparse.html#aa0b96fc2d748fea0d8b0a74c9d2d2f54',1,'Disa::Matrix_Sparse::reserve()']]],
-  ['residual_199',['residual',['../struct_disa_1_1_convergence___data.html#a2bc41e9bd3655f8f70a3676825d1d1af',1,'Disa::Convergence_Data']]],
-  ['residual_5f0_200',['residual_0',['../struct_disa_1_1_convergence___data.html#a18234427cdbff299f4e7c4d0a0dbeb3b',1,'Disa::Convergence_Data']]],
-  ['residual_5fmax_201',['residual_max',['../struct_disa_1_1_convergence___data.html#a1a3097080187b5e0770a7ebb12a3f649',1,'Disa::Convergence_Data']]],
-  ['residual_5fmax_5f0_202',['residual_max_0',['../struct_disa_1_1_convergence___data.html#a2dabd7af3f9905f7204a898e5cd806bf',1,'Disa::Convergence_Data']]],
-  ['residual_5fmax_5fnormalised_203',['residual_max_normalised',['../struct_disa_1_1_convergence___data.html#a5960f4329d1badf81b56426410efacb5',1,'Disa::Convergence_Data']]],
-  ['residual_5fnormalised_204',['residual_normalised',['../struct_disa_1_1_convergence___data.html#ab963296c2688eea0e8efe9a58966b6d0',1,'Disa::Convergence_Data']]],
-  ['resize_205',['resize',['../struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html#afb2df1d9af47b2f11034b65034155933',1,'Disa::Matrix_Dense&lt; 0, 0 &gt;::resize()'],['../class_disa_1_1_matrix___sparse.html#a7c9eda05d8a173891ce9b6e82fcad507',1,'Disa::Matrix_Sparse::resize()'],['../class_disa_1_1_adjacency___graph.html#aecb75771fd0988bb4e6fa3c1dd5a1d3f',1,'Disa::Adjacency_Graph::resize()'],['../class_disa_1_1_adjacency___subgraph.html#a4ac470d793633cd0a95d58589b561d8d',1,'Disa::Adjacency_Subgraph::resize()']]],
-  ['row_5fnew_206',['row_new',['../struct_disa_1_1_matrix___static___demoter.html#a3470d5b57f6c1eeef6e9813c586ac02e',1,'Disa::Matrix_Static_Demoter']]]
+  ['recursive_5fgraph_5fbisection_176',['recursive_graph_bisection',['../namespace_disa.html#afe0cec247626f1277f4bd8937c0feefa',1,'Disa']]],
+  ['reference_177',['reference',['../struct_disa_1_1_iterator___matrix___sparse___row.html#a74202cdd96628bc49a756e5fc87d22de',1,'Disa::Iterator_Matrix_Sparse_Row::reference()'],['../struct_disa_1_1_iterator___matrix___sparse___element.html#a74202cdd96628bc49a756e5fc87d22de',1,'Disa::Iterator_Matrix_Sparse_Element::reference()']]],
+  ['relaxation_178',['relaxation',['../struct_disa_1_1_solver___fixed___point___sor___data.html#a2ec4968c86d8111028f47e69dc181465',1,'Disa::Solver_Fixed_Point_Sor_Data']]],
+  ['reorder_179',['reorder',['../class_disa_1_1_adjacency___graph.html#a223803400f7584e4bfab5ded0e5b92bf',1,'Disa::Adjacency_Graph::reorder()'],['../class_disa_1_1_adjacency___subgraph.html#a1fcf16cce1cc2fa5f4b7d96646e33221',1,'Disa::Adjacency_Subgraph::reorder()']]],
+  ['reorder_2ecpp_180',['reorder.cpp',['../reorder_8cpp.html',1,'']]],
+  ['reorder_2eh_181',['reorder.h',['../reorder_8h.html',1,'']]],
+  ['reserve_182',['reserve',['../class_disa_1_1_adjacency___graph.html#acaee28b4b5bc819b62e8a676b85f17a1',1,'Disa::Adjacency_Graph::reserve()'],['../class_disa_1_1_adjacency___subgraph.html#acaee28b4b5bc819b62e8a676b85f17a1',1,'Disa::Adjacency_Subgraph::reserve()'],['../class_disa_1_1_matrix___sparse.html#aa0b96fc2d748fea0d8b0a74c9d2d2f54',1,'Disa::Matrix_Sparse::reserve()']]],
+  ['residual_183',['residual',['../struct_disa_1_1_convergence___data.html#a2bc41e9bd3655f8f70a3676825d1d1af',1,'Disa::Convergence_Data']]],
+  ['residual_5f0_184',['residual_0',['../struct_disa_1_1_convergence___data.html#a18234427cdbff299f4e7c4d0a0dbeb3b',1,'Disa::Convergence_Data']]],
+  ['residual_5fmax_185',['residual_max',['../struct_disa_1_1_convergence___data.html#a1a3097080187b5e0770a7ebb12a3f649',1,'Disa::Convergence_Data']]],
+  ['residual_5fmax_5f0_186',['residual_max_0',['../struct_disa_1_1_convergence___data.html#a2dabd7af3f9905f7204a898e5cd806bf',1,'Disa::Convergence_Data']]],
+  ['residual_5fmax_5fnormalised_187',['residual_max_normalised',['../struct_disa_1_1_convergence___data.html#a5960f4329d1badf81b56426410efacb5',1,'Disa::Convergence_Data']]],
+  ['residual_5fnormalised_188',['residual_normalised',['../struct_disa_1_1_convergence___data.html#ab963296c2688eea0e8efe9a58966b6d0',1,'Disa::Convergence_Data']]],
+  ['resize_189',['resize',['../struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html#afb2df1d9af47b2f11034b65034155933',1,'Disa::Matrix_Dense&lt; 0, 0 &gt;::resize()'],['../class_disa_1_1_matrix___sparse.html#a7c9eda05d8a173891ce9b6e82fcad507',1,'Disa::Matrix_Sparse::resize()'],['../class_disa_1_1_adjacency___graph.html#aecb75771fd0988bb4e6fa3c1dd5a1d3f',1,'Disa::Adjacency_Graph::resize()'],['../class_disa_1_1_adjacency___subgraph.html#a4ac470d793633cd0a95d58589b561d8d',1,'Disa::Adjacency_Subgraph::resize()']]],
+  ['row_5fnew_190',['row_new',['../struct_disa_1_1_matrix___static___demoter.html#a3470d5b57f6c1eeef6e9813c586ac02e',1,'Disa::Matrix_Static_Demoter']]]
 ];

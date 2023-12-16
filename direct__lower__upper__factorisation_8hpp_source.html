@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('direct__lower__upper__factorisation_8h
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;          std::swap(pivots[i_row], pivots[i_max]);</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;          std::swap(lu_factorised[i_row], lu_factorised[i_max]);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      }</div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct___lower___upper___factorisation.html#a3f51df61f8f3cab6bf419565eccbecc5">   79</a></span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">// Check degeneracy.</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">if</span>(std::abs(lu_factorised[i_row][i_row]) &lt; factorisation_tolerance) <span class="keywordflow">return</span> <span class="keyword">false</span>; </div>
@@ -154,7 +154,7 @@ $(document).ready(function(){initNavTree('direct__lower__upper__factorisation_8h
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">for</span> (std::size_t i_column_sweep = i_row + 1; i_column_sweep &lt; lu_factorised.size_column(); ++i_column_sweep)</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            lu_factorised[i_row_sweep][i_column_sweep] -= </div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct___lower___upper___factorisation.html#a21cc727fedb288c86967115a46d6d369">   90</a></span>&#160;              lu_factorised[i_row_sweep][i_row] * lu_factorised[i_row][i_column_sweep];</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;              lu_factorised[i_row_sweep][i_row] * lu_factorised[i_row][i_column_sweep];</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }   </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>

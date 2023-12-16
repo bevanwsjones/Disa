@@ -12,13 +12,11 @@ var hierarchy =
     [ "Convergence_Data", "struct_disa_1_1_convergence___data.html", null ],
     [ "Direct< _solver, _size >", "class_disa_1_1_direct.html", null ],
     [ "Direct< Direct_Lower_Upper_Factorisation< _solver_type, _size, _pivot >, _size >", "class_disa_1_1_direct.html", [
-      [ "Direct_Lower_Upper_Factorisation< 0 >", "class_disa_1_1_direct___lower___upper___factorisation.html", null ],
       [ "Direct_Lower_Upper_Factorisation< _solver_type, _size, _pivot >", "class_disa_1_1_direct___lower___upper___factorisation.html", null ]
     ] ],
     [ "hash< Disa::Adjacency_Graph >", "structstd_1_1hash_3_01_disa_1_1_adjacency___graph_01_4.html", null ],
     [ "Iterator_Matrix_Sparse_Element< _matrix_type >", "struct_disa_1_1_iterator___matrix___sparse___element.html", null ],
     [ "Iterator_Matrix_Sparse_Row< _matrix_type >", "struct_disa_1_1_iterator___matrix___sparse___row.html", null ],
-    [ "Laplace_2D", "class_laplace__2_d.html", null ],
     [ "Matrix_Sparse", "class_disa_1_1_matrix___sparse.html", null ],
     [ "Matrix_Sparse_Row< _matrix_type >", "class_disa_1_1_matrix___sparse___row.html", null ],
     [ "Matrix_Static_Demoter< _row_0, _colu_0, _row_1, _colu_1 >", "struct_disa_1_1_matrix___static___demoter.html", null ],
@@ -34,10 +32,6 @@ var hierarchy =
       [ "Solver_Fixed_Point< _solver_type, _solver_data >", "class_disa_1_1_solver___fixed___point.html", null ]
     ] ],
     [ "StaticPromoter< _vector0, _vector1 >", "struct_disa_1_1_static_promoter.html", null ],
-    [ "Test", null, [
-      [ "Laplace2DProblem", "class_laplace2_d_problem.html", null ],
-      [ "direct_solvers", "classdirect__solvers.html", null ]
-    ] ],
     [ "vector", null, [
       [ "Matrix_Dense< 0, 0 >", "struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html", null ],
       [ "Vector_Dense< 0 >", "struct_disa_1_1_vector___dense_3_010_01_4.html", null ]

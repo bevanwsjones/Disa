@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['matrix_5fdense_299',['Matrix_Dense',['../struct_disa_1_1_matrix___dense.html',1,'Disa']]],
-  ['matrix_5fdense_3c_200_2c_200_20_3e_300',['Matrix_Dense&lt; 0, 0 &gt;',['../struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html',1,'Disa']]],
-  ['matrix_5fdense_3c_20_5fsize_2c_20_5fsize_20_3e_301',['Matrix_Dense&lt; _size, _size &gt;',['../struct_disa_1_1_matrix___dense.html',1,'Disa']]],
-  ['matrix_5fsparse_302',['Matrix_Sparse',['../class_disa_1_1_matrix___sparse.html',1,'Disa']]],
-  ['matrix_5fsparse_5frow_303',['Matrix_Sparse_Row',['../class_disa_1_1_matrix___sparse___row.html',1,'Disa']]],
-  ['matrix_5fstatic_5fdemoter_304',['Matrix_Static_Demoter',['../struct_disa_1_1_matrix___static___demoter.html',1,'Disa']]]
+  ['solver_277',['Solver',['../class_disa_1_1_solver.html',1,'Disa']]],
+  ['solver_5fconfig_278',['Solver_Config',['../struct_disa_1_1_solver___config.html',1,'Disa']]],
+  ['solver_5fdata_279',['Solver_Data',['../struct_disa_1_1_solver___data.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_280',['Solver_Fixed_Point',['../class_disa_1_1_solver___fixed___point.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_5fdata_281',['Solver_Fixed_Point_Data',['../struct_disa_1_1_solver___fixed___point___data.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_5fjacobi_5fdata_282',['Solver_Fixed_Point_Jacobi_Data',['../struct_disa_1_1_solver___fixed___point___jacobi___data.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_5fsor_5fdata_283',['Solver_Fixed_Point_Sor_Data',['../struct_disa_1_1_solver___fixed___point___sor___data.html',1,'Disa']]],
+  ['solver_5fiterative_284',['Solver_Iterative',['../class_disa_1_1_solver___iterative.html',1,'Disa']]],
+  ['solver_5fiterative_3c_20solver_5ffixed_5fpoint_3c_20_5fsolver_5ftype_2c_20_5fsolver_5fdata_20_3e_2c_20_5fsolver_5fdata_20_3e_285',['Solver_Iterative&lt; Solver_Fixed_Point&lt; _solver_type, _solver_data &gt;, _solver_data &gt;',['../class_disa_1_1_solver___iterative.html',1,'Disa']]],
+  ['staticpromoter_286',['StaticPromoter',['../struct_disa_1_1_static_promoter.html',1,'Disa']]]
 ];

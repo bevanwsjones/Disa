@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['factor_5ftolerance_491',['factor_tolerance',['../struct_disa_1_1_solver___config.html#a1faab2e419378f956cbda7861ef3710f',1,'Disa::Solver_Config']]]
+  ['limits_449',['limits',['../struct_disa_1_1_solver___data.html#a8018534259041b7edb92c8aba6b0c24e',1,'Disa::Solver_Data']]]
 ];

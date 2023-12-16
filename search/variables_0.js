@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['a_5fdense_479',['a_dense',['../class_laplace2_d_problem.html#a91b04e5c778117758bae059b7cf41692',1,'Laplace2DProblem']]],
-  ['a_5fsparse_480',['a_sparse',['../class_laplace2_d_problem.html#a4f4b303bd798c3280c8af0b940af928e',1,'Laplace2DProblem']]],
-  ['a_5fsparse_5f0_481',['a_sparse_0',['../class_laplace2_d_problem.html#aac18fda0a80a20a0f0091fec687c2900',1,'Laplace2DProblem']]]
+  ['colu_5fnew_439',['colu_new',['../struct_disa_1_1_matrix___static___demoter.html#ac283d36195510b8011767e3e5e2160ee',1,'Disa::Matrix_Static_Demoter']]],
+  ['converged_440',['converged',['../struct_disa_1_1_convergence___data.html#afcd780f72325f856f84ec1de84464211',1,'Disa::Convergence_Data']]],
+  ['convergence_5ftolerance_441',['convergence_tolerance',['../struct_disa_1_1_solver___config.html#ad542bb389be35c369e6cad3b743b944a',1,'Disa::Solver_Config']]]
 ];
