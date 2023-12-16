@@ -3,7 +3,7 @@ name: Generate and Deploy Documentation
 on:
   push:
     branches:
-      - main
+      - 44-documentation-hosting
 
 jobs:
   build-and-deploy:
