@@ -58,3 +58,28 @@ LOOKUP_CACHE_SIZE      = 0
 FILE_PATTERNS          = *.h \
                          *.hpp \
                          *.cpp
+GENERATE_LEGEND        = YES
+DOT_CLEANUP            = YES
+ENABLE_PREPROCESSING   = YES
+EXTERNAL_PAGES         = YES
+
+# html settings
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+HTML_HEADER            =
+HTML_FOOTER            =
+HTML_STYLESHEET        =
+HTML_EXTRA_STYLESHEET  = .github/doxygen-awesome-css/doxygen-awesome.css
+HTML_COLORSTYLE_HUE    = 220
+HTML_COLORSTYLE_SAT    = 100
+HTML_COLORSTYLE_GAMMA  = 80
+HTML_TIMESTAMP         = NO
+HTML_DYNAMIC_MENUS     = YES
+HTML_DYNAMIC_SECTIONS  = NO
+HTML_INDEX_NUM_ENTRIES = 100
+GENERATE_DOCSET        = NO
+DOCSET_FEEDNAME        = "Doxygen generated docs"
+DOCSET_BUNDLE_ID       = org.doxygen.Project
+DOCSET_PUBLISHER_ID    = org.doxygen.Publisher
+DOCSET_PUBLISHER_NAME  = Publisher
