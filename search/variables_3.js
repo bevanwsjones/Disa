@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['duration_257',['duration',['../structDisa_1_1Convergence__Data.html#a4f7f81998bd5025c28047f48a15a3171',1,'Disa::Convergence_Data']]]
+  ['data_487',['data',['../class_disa_1_1_solver___iterative.html#ae2f4ee5ba00123a5898f68b3ecca06de',1,'Disa::Solver_Iterative']]],
+  ['default_5fabsolute_488',['default_absolute',['../namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7',1,'Disa']]],
+  ['default_5frelative_489',['default_relative',['../namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996',1,'Disa']]],
+  ['duration_490',['duration',['../struct_disa_1_1_convergence___data.html#a2847cf1300ebd1dbb6deb5a200a46faf',1,'Disa::Convergence_Data']]]
 ];

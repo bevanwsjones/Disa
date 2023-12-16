@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -45,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('adjacency__graph_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,17 +81,12 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_850602a6872696a6d7cfee8e16501370.html">graphing</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">adjacency_graph.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
+<a href="adjacency__graph_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// MIT License</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright (c) 2022 Bevan W.S. Jones</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
@@ -96,23 +113,23 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// Modifiers</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span>Disa {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_disa.html">Disa</a> {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> _unary_predicate&gt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classDisa_1_1Adjacency__Graph.html#aa92d806a5f63b67476df6351b315ad55">   37</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classDisa_1_1Adjacency__Graph.html#aa92d806a5f63b67476df6351b315ad55">Adjacency_Graph::erase_if</a>(_unary_predicate delete_vertex) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_disa_1_1_adjacency___graph.html#a5afd7e3050e4addca0b428def0c02aba">   37</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_disa_1_1_adjacency___graph.html#a5afd7e3050e4addca0b428def0c02aba">Adjacency_Graph::erase_if</a>(_unary_predicate delete_vertex) {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  std::size_t removed = 0;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  std::size_t i_vertex = 0;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  std::vector&lt;bool&gt; adjacency_delete(<a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.size(), <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  std::vector&lt;std::size_t&gt; new_indexes(<a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.size(), std::numeric_limits&lt;std::size_t&gt;::max());</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  std::vector&lt;bool&gt; adjacency_delete(<a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.size(), <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  std::vector&lt;std::size_t&gt; new_indexes(<a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.size(), std::numeric_limits&lt;std::size_t&gt;::max());</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="comment">// Loop over the data, and determine the new offsets and which entries in vertex_adjacent_list need to be removed.</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  FOR(i_vertex_old, <a class="code" href="classDisa_1_1Adjacency__Graph.html#af0a99181c595852b84e1d469fa6c3002">size_vertex</a>()) {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; adjacency = <a class="code" href="classDisa_1_1Adjacency__Graph.html#a48ff93354b0c0df64f7a0e4bf84ea873">vertex_adjacency_iter</a>(i_vertex_old);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; begin_delete = adjacency_delete.begin() + std::distance(<a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.begin(), adjacency.first);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; end_delete = adjacency_delete.begin() + std::distance(<a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.begin(), adjacency.second);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="macros_8h.html#a2ace046866a89995cbafe2f3f7754ddd">FOR</a>(i_vertex_old, <a class="code" href="class_disa_1_1_adjacency___graph.html#a6278cc8407882022d4790eadf867860c">size_vertex</a>()) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; adjacency = <a class="code" href="class_disa_1_1_adjacency___graph.html#ac24b67143fc80b11153ae39bcaed50ce">vertex_adjacency_iter</a>(i_vertex_old);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; begin_delete = adjacency_delete.begin() + std::distance(<a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.begin(), adjacency.first);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; end_delete = adjacency_delete.begin() + std::distance(<a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.begin(), adjacency.second);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="classDisa_1_1Adjacency__Graph.html#a84695f5669958dc3b2dedcfb01863800">offset</a>[i_vertex_old] -= removed;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d">offset</a>[i_vertex_old] -= removed;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Only remove vertices which will be taken out, and record new indexes.</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span>(!delete_vertex(i_vertex_old)) {</div>
@@ -124,37 +141,44 @@ $(function() {
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      std::transform(begin_delete, end_delete, begin_delete, [](<span class="keyword">const</span> <span class="keyword">auto</span>) { <span class="keywordflow">return</span> <span class="keyword">true</span>; });</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="classDisa_1_1Adjacency__Graph.html#a84695f5669958dc3b2dedcfb01863800">offset</a>.back() -= removed;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d">offset</a>.back() -= removed;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="comment">// Erase offset entries for the removed vertices.</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  i_vertex = 0;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="classDisa_1_1Adjacency__Graph.html#a84695f5669958dc3b2dedcfb01863800">offset</a>.erase(std::remove_if(<a class="code" href="classDisa_1_1Adjacency__Graph.html#a84695f5669958dc3b2dedcfb01863800">offset</a>.begin(), <a class="code" href="classDisa_1_1Adjacency__Graph.html#a84695f5669958dc3b2dedcfb01863800">offset</a>.end(),</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d">offset</a>.erase(std::remove_if(<a class="code" href="class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d">offset</a>.begin(), <a class="code" href="class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d">offset</a>.end(),</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                              [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span>) { return i_vertex &lt; size_vertex() ? delete_vertex(i_vertex++) : false; }),</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;               <a class="code" href="classDisa_1_1Adjacency__Graph.html#a84695f5669958dc3b2dedcfb01863800">offset</a>.end());</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;               <a class="code" href="class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d">offset</a>.end());</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// Erase removed vertices from the adjacency lists, and then relabel.</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  i_vertex = 0;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.erase(std::remove_if(<a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.begin(), <a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.end(),</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.erase(std::remove_if(<a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.begin(), <a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.end(),</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                            [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span>) { return adjacency_delete[i_vertex++]; }),</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                             <a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.end());</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  std::transform(<a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.begin(), <a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.end(), <a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.begin(),</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                             <a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.end());</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  std::transform(<a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.begin(), <a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.end(), <a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.begin(),</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                 [&amp;](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; i_old_vertex) { return new_indexes[i_old_vertex]; });</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  ASSERT(<a class="code" href="classDisa_1_1Adjacency__Graph.html#a84695f5669958dc3b2dedcfb01863800">offset</a>.back() == <a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.size(),</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;         <span class="stringliteral">&quot;Total offsets no longer match vertex size while reducing to subgraph, &quot;</span> + std::to_string(<a class="code" href="classDisa_1_1Adjacency__Graph.html#a84695f5669958dc3b2dedcfb01863800">offset</a>.back())</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;         + <span class="stringliteral">&quot; vs. &quot;</span> + std::to_string(<a class="code" href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">vertex_adjacent_list</a>.size()) + <span class="stringliteral">&quot;.&quot;</span>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <a class="code" href="macros_8h.html#aa06eedd6f738a415870e97a375337d51">ASSERT</a>(<a class="code" href="class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d">offset</a>.back() == <a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.size(),</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;         <span class="stringliteral">&quot;Total offsets no longer match vertex size while reducing to subgraph, &quot;</span> + std::to_string(<a class="code" href="class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d">offset</a>.back())</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;         + <span class="stringliteral">&quot; vs. &quot;</span> + std::to_string(<a class="code" href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">vertex_adjacent_list</a>.size()) + <span class="stringliteral">&quot;.&quot;</span>);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
-<div class="ttc" id="aclassDisa_1_1Adjacency__Graph_html_a48ff93354b0c0df64f7a0e4bf84ea873"><div class="ttname"><a href="classDisa_1_1Adjacency__Graph.html#a48ff93354b0c0df64f7a0e4bf84ea873">Disa::Adjacency_Graph::vertex_adjacency_iter</a></div><div class="ttdeci">std::pair&lt; std::vector&lt; std::size_t &gt;::iterator, std::vector&lt; std::size_t &gt;::iterator &gt; vertex_adjacency_iter(const std::size_t &amp;i_vertex)</div><div class="ttdoc">Returns iterators to the beginning and end of a vertex adjacency graph.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:336</div></div>
-<div class="ttc" id="aclassDisa_1_1Adjacency__Graph_html_a84695f5669958dc3b2dedcfb01863800"><div class="ttname"><a href="classDisa_1_1Adjacency__Graph.html#a84695f5669958dc3b2dedcfb01863800">Disa::Adjacency_Graph::offset</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; offset</div><div class="ttdoc">List pointing to the start of each vertex's adjacency graph.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:324</div></div>
-<div class="ttc" id="aclassDisa_1_1Adjacency__Graph_html_aa92d806a5f63b67476df6351b315ad55"><div class="ttname"><a href="classDisa_1_1Adjacency__Graph.html#aa92d806a5f63b67476df6351b315ad55">Disa::Adjacency_Graph::erase_if</a></div><div class="ttdeci">void erase_if(_unary_predicate delete_vertex)</div><div class="ttdoc">Erase function, for deleting/erase multiple vertices at the same time.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.hpp:37</div></div>
-<div class="ttc" id="aclassDisa_1_1Adjacency__Graph_html_af0a99181c595852b84e1d469fa6c3002"><div class="ttname"><a href="classDisa_1_1Adjacency__Graph.html#af0a99181c595852b84e1d469fa6c3002">Disa::Adjacency_Graph::size_vertex</a></div><div class="ttdeci">std::size_t size_vertex() const noexcept</div><div class="ttdoc">Returns the number of vertices in the graph.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:197</div></div>
-<div class="ttc" id="aclassDisa_1_1Adjacency__Graph_html_afd5348b92f357a0c1f7ae242cf0eefdd"><div class="ttname"><a href="classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd">Disa::Adjacency_Graph::vertex_adjacent_list</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; vertex_adjacent_list</div><div class="ttdoc">Single contiguous list of all vertex adjacency for the graph.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:323</div></div>
+<div class="ttc" id="aclass_disa_1_1_adjacency___graph_html_a42a9ca141195563377732b946682cd7d"><div class="ttname"><a href="class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d">Disa::Adjacency_Graph::offset</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; offset</div><div class="ttdoc">List pointing to the start of each vertex's adjacency graph.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:324</div></div>
+<div class="ttc" id="aclass_disa_1_1_adjacency___graph_html_a5afd7e3050e4addca0b428def0c02aba"><div class="ttname"><a href="class_disa_1_1_adjacency___graph.html#a5afd7e3050e4addca0b428def0c02aba">Disa::Adjacency_Graph::erase_if</a></div><div class="ttdeci">void erase_if(_unary_predicate delete_vertex)</div><div class="ttdoc">Erase function, for deleting/erase multiple vertices at the same time.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.hpp:37</div></div>
+<div class="ttc" id="aclass_disa_1_1_adjacency___graph_html_a6278cc8407882022d4790eadf867860c"><div class="ttname"><a href="class_disa_1_1_adjacency___graph.html#a6278cc8407882022d4790eadf867860c">Disa::Adjacency_Graph::size_vertex</a></div><div class="ttdeci">std::size_t size_vertex() const noexcept</div><div class="ttdoc">Returns the number of vertices in the graph.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:197</div></div>
+<div class="ttc" id="aclass_disa_1_1_adjacency___graph_html_ac24b67143fc80b11153ae39bcaed50ce"><div class="ttname"><a href="class_disa_1_1_adjacency___graph.html#ac24b67143fc80b11153ae39bcaed50ce">Disa::Adjacency_Graph::vertex_adjacency_iter</a></div><div class="ttdeci">std::pair&lt; std::vector&lt; std::size_t &gt;::iterator, std::vector&lt; std::size_t &gt;::iterator &gt; vertex_adjacency_iter(const std::size_t &amp;i_vertex)</div><div class="ttdoc">Returns iterators to the beginning and end of a vertex adjacency graph.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:336</div></div>
+<div class="ttc" id="aclass_disa_1_1_adjacency___graph_html_ada1d193b23e67a018ee5987607f93eb9"><div class="ttname"><a href="class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9">Disa::Adjacency_Graph::vertex_adjacent_list</a></div><div class="ttdeci">std::vector&lt; std::size_t &gt; vertex_adjacent_list</div><div class="ttdoc">Single contiguous list of all vertex adjacency for the graph.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:323</div></div>
+<div class="ttc" id="amacros_8h_html_a2ace046866a89995cbafe2f3f7754ddd"><div class="ttname"><a href="macros_8h.html#a2ace046866a89995cbafe2f3f7754ddd">FOR</a></div><div class="ttdeci">#define FOR(...)</div><div class="ttdoc">Selects either the index or ranged index for loop macros, see descriptions.</div><div class="ttdef"><b>Definition:</b> macros.h:154</div></div>
+<div class="ttc" id="amacros_8h_html_aa06eedd6f738a415870e97a375337d51"><div class="ttname"><a href="macros_8h.html#aa06eedd6f738a415870e97a375337d51">ASSERT</a></div><div class="ttdeci">#define ASSERT(condition, message)</div><div class="ttdoc">Checks for a true condition, if not, writes an error message to screen and exits the program.</div><div class="ttdef"><b>Definition:</b> macros.h:106</div></div>
+<div class="ttc" id="anamespace_disa_html"><div class="ttname"><a href="namespace_disa.html">Disa</a></div><div class="ttdef"><b>Definition:</b> macros.h:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_850602a6872696a6d7cfee8e16501370.html">graphing</a></li><li class="navelem"><a class="el" href="adjacency__graph_8hpp.html">adjacency_graph.hpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

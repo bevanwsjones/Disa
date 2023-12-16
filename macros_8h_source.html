@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -45,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('macros_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,17 +81,12 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6f77a39b07c019ccd7492ea87272f732.html">core</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">macros.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
+<a href="macros_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// MIT License</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright (c) 2022 Bevan W.S. Jones</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
@@ -99,31 +116,31 @@ $(function() {
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span>Disa {</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespace_disa.html">   31</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_disa.html">Disa</a> {</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// Logging and Error handling</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">enum class</span> Log_Level : uint8_t {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  Error,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  Warning,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  Info,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  Debug,</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0e">   41</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0e">Log_Level</a> : uint8_t {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea902b0d55fddef6f8d651fe1035b7d4bd">Error</a>,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea0eaadb4fcb48a0a0ed7bc9868be9fbaa">Warning</a>,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea4059b0251f66a18cb56f544728796875">Info</a>,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0eaa603905470e2a5b8c13e96b579ef0dba">Debug</a>,</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};<span class="comment">//Log_Level</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">inline</span> std::basic_string&lt;char&gt; console_format(<span class="keyword">const</span> Log_Level level, <span class="keyword">const</span> std::source_location&amp; location) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="namespace_disa.html#a313943c669dbb0d1eff816585b62c881">   54</a></span>&#160;<span class="keyword">inline</span> std::basic_string&lt;char&gt; <a class="code" href="namespace_disa.html#a313943c669dbb0d1eff816585b62c881">console_format</a>(<span class="keyword">const</span> <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0e">Log_Level</a> level, <span class="keyword">const</span> std::source_location&amp; location) {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keyword">auto</span> <span class="keyword">const</span> iter = std::basic_string_view&lt;char&gt;(location.file_name()).find_last_of(<span class="charliteral">&#39;/&#39;</span>);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">const</span> <span class="keyword">auto</span> suffix = std::basic_string&lt;char&gt;(location.file_name()).substr(iter + 1) + <span class="stringliteral">&quot;::&quot;</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                      + std::to_string(location.line()) + <span class="stringliteral">&quot;]: &quot;</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordflow">switch</span> (level) {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">case</span> Log_Level::Debug:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0eaa603905470e2a5b8c13e96b579ef0dba">Log_Level::Debug</a>:</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;[Debug|&quot;</span> + std::basic_string(suffix);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">case</span> Log_Level::Info:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea4059b0251f66a18cb56f544728796875">Log_Level::Info</a>:</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;[Info |&quot;</span> + std::basic_string(suffix);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">case</span> Log_Level::Warning:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea0eaadb4fcb48a0a0ed7bc9868be9fbaa">Log_Level::Warning</a>:</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;[Warn |&quot;</span> + std::basic_string(suffix);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">case</span> Log_Level::Error:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea902b0d55fddef6f8d651fe1035b7d4bd">Log_Level::Error</a>:</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;[Error|&quot;</span> + std::basic_string(suffix);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">default</span>:</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      std::cout&lt;&lt;<span class="stringliteral">&quot;[Error|&quot;</span> + std::basic_string(suffix) + <span class="stringliteral">&quot; Unrecognised log level parsed.&quot;</span>;</div>
@@ -134,57 +151,69 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#ifdef DISA_DEBUG</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#define DEBUG(message) std::cout&lt;&lt;&quot;\n&quot;</span>&lt;&lt;console_format(Disa::Log_Level::Debug, std::source_location::current())&lt;&lt;(message)&lt;&lt;std::flush</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#define DEBUG(message) {}</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="macros_8h.html#ab94a24f0a37b3963eb64f201cebf60a9">   80</a></span>&#160;<span class="preprocessor">#define DEBUG(message) {}</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#define INFO(message) std::cout&lt;&lt;&quot;\n&quot;</span>&lt;&lt;console_format(Disa::Log_Level::Info, std::source_location::current())&lt;&lt;(message)&lt;&lt;std::flush</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="macros_8h.html#a809f816dd6df4e17499413cff1926fd4">   87</a></span>&#160;<span class="preprocessor">#define INFO(message) std::cout&lt;&lt;&quot;\n&quot;</span>&lt;&lt;console_format(Disa::Log_Level::Info, std::source_location::current())&lt;&lt;(message)&lt;&lt;std::flush</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#define WARNING(message) std::cout&lt;&lt;&quot;\n&quot;</span>&lt;&lt;console_format(Disa::Log_Level::Warning, std::source_location::current())&lt;&lt;(message)&lt;&lt;std::flush</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="macros_8h.html#aaf99b8fcaa4b837f684ea0505ed34487">   93</a></span>&#160;<span class="preprocessor">#define WARNING(message) std::cout&lt;&lt;&quot;\n&quot;</span>&lt;&lt;console_format(Disa::Log_Level::Warning, std::source_location::current())&lt;&lt;(message)&lt;&lt;std::flush</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#define ERROR(message) std::cerr&lt;&lt;&quot;\n&quot;</span>&lt;&lt;console_format(Disa::Log_Level::Error, std::source_location::current())&lt;&lt;(message)&lt;&lt;std::endl</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="macros_8h.html#ae225ab718bd4f5e2221129f026d3d8f1">   99</a></span>&#160;<span class="preprocessor">#define ERROR(message) std::cerr&lt;&lt;&quot;\n&quot;</span>&lt;&lt;console_format(Disa::Log_Level::Error, std::source_location::current())&lt;&lt;(message)&lt;&lt;std::endl</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#define ASSERT(condition, message) do {if(!(condition)) {ERROR((message)); exit(1);} } while(0)</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="macros_8h.html#aa06eedd6f738a415870e97a375337d51">  106</a></span>&#160;<span class="preprocessor">#define ASSERT(condition, message) do {if(!(condition)) {ERROR((message)); exit(1);} } while(0)</span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#ifdef DISA_DEBUG</span></div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#define ASSERT_DEBUG(condition, message) ASSERT(condition, message)</span></div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#define ASSERT_DEBUG(condition, exception) {}</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">  116</a></span>&#160;<span class="preprocessor">#define ASSERT_DEBUG(condition, exception) {}</span></div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">// Types</span></div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">typedef</span> std::make_signed&lt;std::size_t&gt;::type s_size_t;    </div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="namespace_disa.html#a0ba6342ec1af226ef99781cde1070757">  123</a></span>&#160;<span class="keyword">typedef</span> std::make_signed&lt;std::size_t&gt;::type <a class="code" href="namespace_disa.html#a0ba6342ec1af226ef99781cde1070757">s_size_t</a>;    </div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">// Looping Macros</span></div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#define GET_MACRO(_1, _2, _3, NAME,...) NAME</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="macros_8h.html#a857fa4baf727f64fa21f32da2b6c0468">  132</a></span>&#160;<span class="preprocessor">#define GET_MACRO(_1, _2, _3, NAME,...) NAME</span></div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">#define FOR_INDEX(index, max_iter) for(auto (index) = static_cast&lt;decltype(max_iter)&gt;(0); (index) &lt; (max_iter); ++(index))</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="macros_8h.html#aee428df1290d8834745c2e2a8c32fb2f">  139</a></span>&#160;<span class="preprocessor">#define FOR_INDEX(index, max_iter) for(auto (index) = static_cast&lt;decltype(max_iter)&gt;(0); (index) &lt; (max_iter); ++(index))</span></div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#define FOR_INDEX_RANGE(index, start, end) for(auto (index) = (start); (index) != (end); (start) &lt; (end) ? ++(index) : --(index))</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="macros_8h.html#ac20414af3327c5a82dd26bf72bffc8be">  149</a></span>&#160;<span class="preprocessor">#define FOR_INDEX_RANGE(index, start, end) for(auto (index) = (start); (index) != (end); (start) &lt; (end) ? ++(index) : --(index))</span></div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">#define FOR(...) GET_MACRO(__VA_ARGS__, FOR_INDEX_RANGE, FOR_INDEX)(__VA_ARGS__)</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="macros_8h.html#a2ace046866a89995cbafe2f3f7754ddd">  154</a></span>&#160;<span class="preprocessor">#define FOR(...) GET_MACRO(__VA_ARGS__, FOR_INDEX_RANGE, FOR_INDEX)(__VA_ARGS__)</span></div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">#define FOR_EACH(element, container) for(const auto&amp; (element) : (container))</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="macros_8h.html#a4696a0e7ed4a326e910994b255a6094e">  161</a></span>&#160;<span class="preprocessor">#define FOR_EACH(element, container) for(const auto&amp; (element) : (container))</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#define FOR_EACH_REF(element, container) for(auto&amp; (element) : (container))</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="macros_8h.html#a43352361264efc4f4846e0aee1eb9afd">  168</a></span>&#160;<span class="preprocessor">#define FOR_EACH_REF(element, container) for(auto&amp; (element) : (container))</span></div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">#define FOR_ITER(iter, container) for(auto (iter) = (container).cbegin(); (iter) != (container).cend(); ++(iter))</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="macros_8h.html#a37c1943622f839f10d05795fc62180dd">  175</a></span>&#160;<span class="preprocessor">#define FOR_ITER(iter, container) for(auto (iter) = (container).cbegin(); (iter) != (container).cend(); ++(iter))</span></div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">#define FOR_ITER_REF(iter, container) for(auto (iter) = (container).begin(); (iter) != (container).end(); ++(iter))</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="macros_8h.html#a2b282a5f22fb3369cd4dc05a8d8cee52">  182</a></span>&#160;<span class="preprocessor">#define FOR_ITER_REF(iter, container) for(auto (iter) = (container).begin(); (iter) != (container).end(); ++(iter))</span></div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;}<span class="comment">//Disa</span></div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//DISA_MACROS_H</span></div>
+<div class="ttc" id="anamespace_disa_html"><div class="ttname"><a href="namespace_disa.html">Disa</a></div><div class="ttdef"><b>Definition:</b> macros.h:31</div></div>
+<div class="ttc" id="anamespace_disa_html_a0ba6342ec1af226ef99781cde1070757"><div class="ttname"><a href="namespace_disa.html#a0ba6342ec1af226ef99781cde1070757">Disa::s_size_t</a></div><div class="ttdeci">std::make_signed&lt; std::size_t &gt;::type s_size_t</div><div class="ttdoc">Signed type for size type, used for conversion.</div><div class="ttdef"><b>Definition:</b> macros.h:123</div></div>
+<div class="ttc" id="anamespace_disa_html_a313943c669dbb0d1eff816585b62c881"><div class="ttname"><a href="namespace_disa.html#a313943c669dbb0d1eff816585b62c881">Disa::console_format</a></div><div class="ttdeci">std::basic_string&lt; char &gt; console_format(const Log_Level level, const std::source_location &amp;location)</div><div class="ttdoc">Adds additional information to messages about to be printed to screen, such as file and line numbers.</div><div class="ttdef"><b>Definition:</b> macros.h:54</div></div>
+<div class="ttc" id="anamespace_disa_html_a6ad351ea7d2afe4c8726f1e0fd6a0b0e"><div class="ttname"><a href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0e">Disa::Log_Level</a></div><div class="ttdeci">Log_Level</div><div class="ttdoc">Logging Level, used to defines the severity of messages to the console.</div><div class="ttdef"><b>Definition:</b> macros.h:41</div></div>
+<div class="ttc" id="anamespace_disa_html_a6ad351ea7d2afe4c8726f1e0fd6a0b0ea0eaadb4fcb48a0a0ed7bc9868be9fbaa"><div class="ttname"><a href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea0eaadb4fcb48a0a0ed7bc9868be9fbaa">Disa::Log_Level::Warning</a></div><div class="ttdeci">@ Warning</div></div>
+<div class="ttc" id="anamespace_disa_html_a6ad351ea7d2afe4c8726f1e0fd6a0b0ea4059b0251f66a18cb56f544728796875"><div class="ttname"><a href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea4059b0251f66a18cb56f544728796875">Disa::Log_Level::Info</a></div><div class="ttdeci">@ Info</div></div>
+<div class="ttc" id="anamespace_disa_html_a6ad351ea7d2afe4c8726f1e0fd6a0b0ea902b0d55fddef6f8d651fe1035b7d4bd"><div class="ttname"><a href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea902b0d55fddef6f8d651fe1035b7d4bd">Disa::Log_Level::Error</a></div><div class="ttdeci">@ Error</div></div>
+<div class="ttc" id="anamespace_disa_html_a6ad351ea7d2afe4c8726f1e0fd6a0b0eaa603905470e2a5b8c13e96b579ef0dba"><div class="ttname"><a href="namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0eaa603905470e2a5b8c13e96b579ef0dba">Disa::Log_Level::Debug</a></div><div class="ttdeci">@ Debug</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6f77a39b07c019ccd7492ea87272f732.html">core</a></li><li class="navelem"><a class="el" href="macros_8h.html">macros.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

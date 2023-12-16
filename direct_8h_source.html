@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -45,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('direct_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,17 +81,12 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6de032d0d9a654666bd4023108850d60.html">solver</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">direct.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
+<a href="direct_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// MIT License</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright (c) 2022 Bevan W.S. Jones</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
@@ -93,40 +110,40 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef DISA_SOLVER_DIRECT_H</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define DISA_SOLVER_DIRECT_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;matrix_dense.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;solver_utilities.h&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;vector_dense.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="matrix__dense_8h.html">matrix_dense.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="solver__utilities_8h.html">solver_utilities.h</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vector__dense_8h.html">vector_dense.h</a>&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span>Disa {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_disa.html">Disa</a> {</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> _solver, std::<span class="keywordtype">size_t</span> _size&gt;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classDisa_1_1Direct.html">   41</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDisa_1_1Direct.html">Direct</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct.html">   41</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_disa_1_1_direct.html">Direct</a></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classDisa_1_1Direct.html#af28b63d29a8dd3b03f4caeb84588d768">   49</a></span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classDisa_1_1Direct.html#af28b63d29a8dd3b03f4caeb84588d768">Direct</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct.html#acc12d059576f86d0a3cfd7999a54e287">   49</a></span>&#160;  <span class="keyword">explicit</span> <a class="code" href="class_disa_1_1_direct.html#acc12d059576f86d0a3cfd7999a54e287">Direct</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classDisa_1_1Direct.html#a9a8eb74fa016ab62468428a3442df594">   54</a></span>&#160;   <a class="code" href="classDisa_1_1Direct.html#a9a8eb74fa016ab62468428a3442df594">~Direct</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct.html#acddfef7cb35e1191647e4bc710cb36fe">   54</a></span>&#160;   <a class="code" href="class_disa_1_1_direct.html#acddfef7cb35e1191647e4bc710cb36fe">~Direct</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classDisa_1_1Direct.html#a355cb67b3a7e6ed96b6981c353284e67">   60</a></span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classDisa_1_1Direct.html#a355cb67b3a7e6ed96b6981c353284e67">Direct</a>(<span class="keyword">const</span> <a class="code" href="structDisa_1_1Solver__Config.html">Solver_Config</a> config) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="classDisa_1_1Direct.html#a89c611c174bd0c75b32a272e1ee5c4a9">initialise</a>(config);</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct.html#afc7b42067f86d5334b64168c624c14bf">   60</a></span>&#160;  <span class="keyword">explicit</span> <a class="code" href="class_disa_1_1_direct.html#afc7b42067f86d5334b64168c624c14bf">Direct</a>(<span class="keyword">const</span> <a class="code" href="struct_disa_1_1_solver___config.html">Solver_Config</a> config) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_disa_1_1_direct.html#a144e1092069bfb6d21a3defe761002d4">initialise</a>(config);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  };</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classDisa_1_1Direct.html#a89c611c174bd0c75b32a272e1ee5c4a9">   68</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classDisa_1_1Direct.html#a89c611c174bd0c75b32a272e1ee5c4a9">initialise</a>(<a class="code" href="structDisa_1_1Solver__Config.html">Solver_Config</a> config){</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct.html#a144e1092069bfb6d21a3defe761002d4">   68</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_disa_1_1_direct.html#a144e1092069bfb6d21a3defe761002d4">initialise</a>(<a class="code" href="struct_disa_1_1_solver___config.html">Solver_Config</a> config){</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_solver*<span class="keyword">&gt;</span>(<span class="keyword">this</span>)-&gt;initialise_solver(config);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  };</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classDisa_1_1Direct.html#a546d2fe3b72eb5ec438cad844f828f59">   77</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classDisa_1_1Direct.html#a546d2fe3b72eb5ec438cad844f828f59">factorise</a>(<span class="keyword">const</span> <a class="code" href="structDisa_1_1Matrix__Dense.html">Matrix_Dense&lt;_size, _size&gt;</a>&amp; a_matrix);</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct.html#a3f51df61f8f3cab6bf419565eccbecc5">   77</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="class_disa_1_1_direct.html#a3f51df61f8f3cab6bf419565eccbecc5">factorise</a>(<span class="keyword">const</span> <a class="code" href="struct_disa_1_1_matrix___dense.html">Matrix_Dense&lt;_size, _size&gt;</a>&amp; a_matrix);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classDisa_1_1Direct.html#adfc85cd09eae460b531c89e7f79de5e6">   88</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="structDisa_1_1Convergence__Data.html">Convergence_Data</a>&amp; <a class="code" href="classDisa_1_1Direct.html#adfc85cd09eae460b531c89e7f79de5e6">solve</a>(<a class="code" href="structDisa_1_1Vector__Dense.html">Vector_Dense&lt;_size&gt;</a>&amp; x_vector, <span class="keyword">const</span> <a class="code" href="structDisa_1_1Vector__Dense.html">Vector_Dense&lt;_size&gt;</a>&amp; b_vector){</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct.html#a9d13d23cfe113de492db3c82ba742936">   88</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="struct_disa_1_1_convergence___data.html">Convergence_Data</a>&amp; <a class="code" href="class_disa_1_1_direct.html#a9d13d23cfe113de492db3c82ba742936">solve</a>(<a class="code" href="struct_disa_1_1_vector___dense.html">Vector_Dense&lt;_size&gt;</a>&amp; x_vector, <span class="keyword">const</span> <a class="code" href="struct_disa_1_1_vector___dense.html">Vector_Dense&lt;_size&gt;</a>&amp; b_vector){</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_solver*<span class="keyword">&gt;</span>(<span class="keyword">this</span>)-&gt;solve_system(x_vector, b_vector);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  };</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classDisa_1_1Direct.html#ab9854d13a52ae4d3e5aa0c951952c020">   96</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="structDisa_1_1Solver__Config.html">Solver_Config</a> <a class="code" href="classDisa_1_1Direct.html#ab9854d13a52ae4d3e5aa0c951952c020">get_config</a>() {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_solver*<span class="keyword">&gt;</span>(<span class="keyword">this</span>)-&gt;<a class="code" href="classDisa_1_1Direct.html#ab9854d13a52ae4d3e5aa0c951952c020">get_config</a>();</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="class_disa_1_1_direct.html#a708f8f61a293a32749811f0340ca6c39">   96</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="struct_disa_1_1_solver___config.html">Solver_Config</a> <a class="code" href="class_disa_1_1_direct.html#a708f8f61a293a32749811f0340ca6c39">get_config</a>() {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>_solver*<span class="keyword">&gt;</span>(<span class="keyword">this</span>)-&gt;<a class="code" href="class_disa_1_1_direct.html#a708f8f61a293a32749811f0340ca6c39">get_config</a>();</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  }</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>
@@ -134,22 +151,30 @@ $(function() {
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//DISA_SOLVER_DIRECT_H</span></div>
-<div class="ttc" id="aclassDisa_1_1Direct_html"><div class="ttname"><a href="classDisa_1_1Direct.html">Disa::Direct</a></div><div class="ttdoc">Direct Dense Linear Solver Base Class.</div><div class="ttdef"><b>Definition:</b> direct.h:42</div></div>
-<div class="ttc" id="aclassDisa_1_1Direct_html_a355cb67b3a7e6ed96b6981c353284e67"><div class="ttname"><a href="classDisa_1_1Direct.html#a355cb67b3a7e6ed96b6981c353284e67">Disa::Direct::Direct</a></div><div class="ttdeci">Direct(const Solver_Config config)</div><div class="ttdoc">Construct a new Direct object.</div><div class="ttdef"><b>Definition:</b> direct.h:60</div></div>
-<div class="ttc" id="aclassDisa_1_1Direct_html_a546d2fe3b72eb5ec438cad844f828f59"><div class="ttname"><a href="classDisa_1_1Direct.html#a546d2fe3b72eb5ec438cad844f828f59">Disa::Direct::factorise</a></div><div class="ttdeci">bool factorise(const Matrix_Dense&lt; _size, _size &gt; &amp;a_matrix)</div><div class="ttdoc">Factorises the coefficient matrix.</div></div>
-<div class="ttc" id="aclassDisa_1_1Direct_html_a89c611c174bd0c75b32a272e1ee5c4a9"><div class="ttname"><a href="classDisa_1_1Direct.html#a89c611c174bd0c75b32a272e1ee5c4a9">Disa::Direct::initialise</a></div><div class="ttdeci">void initialise(Solver_Config config)</div><div class="ttdoc">Initialises the solver, e.g. allocates memory, sets internal variables etc.</div><div class="ttdef"><b>Definition:</b> direct.h:68</div></div>
-<div class="ttc" id="aclassDisa_1_1Direct_html_a9a8eb74fa016ab62468428a3442df594"><div class="ttname"><a href="classDisa_1_1Direct.html#a9a8eb74fa016ab62468428a3442df594">Disa::Direct::~Direct</a></div><div class="ttdeci">~Direct()=default</div><div class="ttdoc">Destroy the Direct Solver.</div></div>
-<div class="ttc" id="aclassDisa_1_1Direct_html_ab9854d13a52ae4d3e5aa0c951952c020"><div class="ttname"><a href="classDisa_1_1Direct.html#ab9854d13a52ae4d3e5aa0c951952c020">Disa::Direct::get_config</a></div><div class="ttdeci">const Solver_Config get_config()</div><div class="ttdoc">Get the configuration of the solver.</div><div class="ttdef"><b>Definition:</b> direct.h:96</div></div>
-<div class="ttc" id="aclassDisa_1_1Direct_html_adfc85cd09eae460b531c89e7f79de5e6"><div class="ttname"><a href="classDisa_1_1Direct.html#adfc85cd09eae460b531c89e7f79de5e6">Disa::Direct::solve</a></div><div class="ttdeci">const Convergence_Data &amp; solve(Vector_Dense&lt; _size &gt; &amp;x_vector, const Vector_Dense&lt; _size &gt; &amp;b_vector)</div><div class="ttdoc">Solves the linear system, using the solver's internally stored factorised coefficient matrix.</div><div class="ttdef"><b>Definition:</b> direct.h:88</div></div>
-<div class="ttc" id="aclassDisa_1_1Direct_html_af28b63d29a8dd3b03f4caeb84588d768"><div class="ttname"><a href="classDisa_1_1Direct.html#af28b63d29a8dd3b03f4caeb84588d768">Disa::Direct::Direct</a></div><div class="ttdeci">Direct()=default</div><div class="ttdoc">Creates a default Direct Solver.</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html">Disa::Convergence_Data</a></div><div class="ttdoc">Contains data to track the convergence progress of a solver.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:97</div></div>
-<div class="ttc" id="astructDisa_1_1Matrix__Dense_html"><div class="ttname"><a href="structDisa_1_1Matrix__Dense.html">Disa::Matrix_Dense&lt; _size, _size &gt;</a></div></div>
-<div class="ttc" id="astructDisa_1_1Solver__Config_html"><div class="ttname"><a href="structDisa_1_1Solver__Config.html">Disa::Solver_Config</a></div><div class="ttdoc">Contains all possible configurations for all solvers in Disa.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:54</div></div>
-<div class="ttc" id="astructDisa_1_1Vector__Dense_html"><div class="ttname"><a href="structDisa_1_1Vector__Dense.html">Disa::Vector_Dense</a></div><div class="ttdoc">Mathematical Vector, of dimension _size, where every vector element has allocated has memory.</div><div class="ttdef"><b>Definition:</b> vector_dense.h:58</div></div>
+<div class="ttc" id="aclass_disa_1_1_direct_html"><div class="ttname"><a href="class_disa_1_1_direct.html">Disa::Direct</a></div><div class="ttdoc">Direct Dense Linear Solver Base Class.</div><div class="ttdef"><b>Definition:</b> direct.h:42</div></div>
+<div class="ttc" id="aclass_disa_1_1_direct_html_a144e1092069bfb6d21a3defe761002d4"><div class="ttname"><a href="class_disa_1_1_direct.html#a144e1092069bfb6d21a3defe761002d4">Disa::Direct::initialise</a></div><div class="ttdeci">void initialise(Solver_Config config)</div><div class="ttdoc">Initialises the solver, e.g.</div><div class="ttdef"><b>Definition:</b> direct.h:68</div></div>
+<div class="ttc" id="aclass_disa_1_1_direct_html_a3f51df61f8f3cab6bf419565eccbecc5"><div class="ttname"><a href="class_disa_1_1_direct.html#a3f51df61f8f3cab6bf419565eccbecc5">Disa::Direct::factorise</a></div><div class="ttdeci">bool factorise(const Matrix_Dense&lt; _size, _size &gt; &amp;a_matrix)</div><div class="ttdoc">Factorises the coefficient matrix.</div></div>
+<div class="ttc" id="aclass_disa_1_1_direct_html_a708f8f61a293a32749811f0340ca6c39"><div class="ttname"><a href="class_disa_1_1_direct.html#a708f8f61a293a32749811f0340ca6c39">Disa::Direct::get_config</a></div><div class="ttdeci">const Solver_Config get_config()</div><div class="ttdoc">Get the configuration of the solver.</div><div class="ttdef"><b>Definition:</b> direct.h:96</div></div>
+<div class="ttc" id="aclass_disa_1_1_direct_html_a9d13d23cfe113de492db3c82ba742936"><div class="ttname"><a href="class_disa_1_1_direct.html#a9d13d23cfe113de492db3c82ba742936">Disa::Direct::solve</a></div><div class="ttdeci">const Convergence_Data &amp; solve(Vector_Dense&lt; _size &gt; &amp;x_vector, const Vector_Dense&lt; _size &gt; &amp;b_vector)</div><div class="ttdoc">Solves the linear system, using the solver's internally stored factorised coefficient matrix.</div><div class="ttdef"><b>Definition:</b> direct.h:88</div></div>
+<div class="ttc" id="aclass_disa_1_1_direct_html_acc12d059576f86d0a3cfd7999a54e287"><div class="ttname"><a href="class_disa_1_1_direct.html#acc12d059576f86d0a3cfd7999a54e287">Disa::Direct::Direct</a></div><div class="ttdeci">Direct()=default</div><div class="ttdoc">Creates a default Direct Solver.</div></div>
+<div class="ttc" id="aclass_disa_1_1_direct_html_acddfef7cb35e1191647e4bc710cb36fe"><div class="ttname"><a href="class_disa_1_1_direct.html#acddfef7cb35e1191647e4bc710cb36fe">Disa::Direct::~Direct</a></div><div class="ttdeci">~Direct()=default</div><div class="ttdoc">Destroy the Direct Solver.</div></div>
+<div class="ttc" id="aclass_disa_1_1_direct_html_afc7b42067f86d5334b64168c624c14bf"><div class="ttname"><a href="class_disa_1_1_direct.html#afc7b42067f86d5334b64168c624c14bf">Disa::Direct::Direct</a></div><div class="ttdeci">Direct(const Solver_Config config)</div><div class="ttdoc">Construct a new Direct object.</div><div class="ttdef"><b>Definition:</b> direct.h:60</div></div>
+<div class="ttc" id="amatrix__dense_8h_html"><div class="ttname"><a href="matrix__dense_8h.html">matrix_dense.h</a></div></div>
+<div class="ttc" id="anamespace_disa_html"><div class="ttname"><a href="namespace_disa.html">Disa</a></div><div class="ttdef"><b>Definition:</b> macros.h:31</div></div>
+<div class="ttc" id="asolver__utilities_8h_html"><div class="ttname"><a href="solver__utilities_8h.html">solver_utilities.h</a></div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html">Disa::Convergence_Data</a></div><div class="ttdoc">Contains data to track the convergence progress of a solver.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:97</div></div>
+<div class="ttc" id="astruct_disa_1_1_matrix___dense_html"><div class="ttname"><a href="struct_disa_1_1_matrix___dense.html">Disa::Matrix_Dense&lt; _size, _size &gt;</a></div></div>
+<div class="ttc" id="astruct_disa_1_1_solver___config_html"><div class="ttname"><a href="struct_disa_1_1_solver___config.html">Disa::Solver_Config</a></div><div class="ttdoc">Contains all possible configurations for all solvers in Disa.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:54</div></div>
+<div class="ttc" id="astruct_disa_1_1_vector___dense_html"><div class="ttname"><a href="struct_disa_1_1_vector___dense.html">Disa::Vector_Dense</a></div><div class="ttdoc">Mathematical Vector, of dimension _size, where every vector element has allocated has memory.</div><div class="ttdef"><b>Definition:</b> vector_dense.h:58</div></div>
+<div class="ttc" id="avector__dense_8h_html"><div class="ttname"><a href="vector__dense_8h.html">vector_dense.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6de032d0d9a654666bd4023108850d60.html">solver</a></li><li class="navelem"><a class="el" href="direct_8h.html">direct.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

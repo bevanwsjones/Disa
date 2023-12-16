@@ -1,5 +1,0 @@
-<map id="Disa::Solver_Fixed_Point_Sor_Data" name="Disa::Solver_Fixed_Point_Sor_Data">
-<area shape="rect" id="node1" title=" " alt="" coords="34,171,175,212"/>
-<area shape="rect" id="node2" href="$structDisa_1_1Solver__Data.html" title=" " alt="" coords="35,95,174,121"/>
-<area shape="rect" id="node3" href="$structDisa_1_1Convergence__Criteria.html" title="Contains the criteria values against which convergence status can be assessed." alt="" coords="5,5,204,32"/>
-</map>

@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -45,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('scalar_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,17 +81,12 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6f77a39b07c019ccd7492ea87272f732.html">core</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">scalar.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
+<a href="scalar_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// MIT License</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright (c) 2022 Bevan W.S. Jones</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
@@ -94,77 +111,98 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef DISA_SCALAR_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define DISA_SCALAR_H</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;macros.h&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="macros_8h.html">macros.h</a>&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;limits&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span>Disa {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_disa.html">Disa</a> {</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// Aliasing and Definitions</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using</span> Scalar = double;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">inline</span> constexpr Scalar scalar_max_digits10 = std::numeric_limits&lt;Scalar&gt;::max_digits10;   </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">   36</a></span>&#160;<span class="keyword">using</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> = double;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="namespace_disa.html#a1c49faaab8fc3e11899afcaf065ebd1d">   37</a></span>&#160;<span class="keyword">inline</span> constexpr <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> <a class="code" href="namespace_disa.html#a1c49faaab8fc3e11899afcaf065ebd1d">scalar_max_digits10</a> = std::numeric_limits&lt;Scalar&gt;::max_digits10;   </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">inline</span> constexpr Scalar scalar_epsilon = std::numeric_limits&lt;Scalar&gt;::epsilon();     </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">inline</span> constexpr Scalar scalar_infinity = std::numeric_limits&lt;Scalar&gt;::infinity();   </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">inline</span> constexpr Scalar scalar_lowest = std::numeric_limits&lt;Scalar&gt;::lowest();       </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">inline</span> constexpr Scalar scalar_max = std::numeric_limits&lt;Scalar&gt;::max();             </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">inline</span> constexpr Scalar scalar_min = std::numeric_limits&lt;Scalar&gt;::min();             </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="namespace_disa.html#a7ba5e5cba5f93f1f374fde90b8004f33">   39</a></span>&#160;<span class="keyword">inline</span> constexpr <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> <a class="code" href="namespace_disa.html#a7ba5e5cba5f93f1f374fde90b8004f33">scalar_epsilon</a> = std::numeric_limits&lt;Scalar&gt;::epsilon();     </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="namespace_disa.html#af36831b38dd18e0850fdbf66cc411589">   40</a></span>&#160;<span class="keyword">inline</span> constexpr <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> <a class="code" href="namespace_disa.html#af36831b38dd18e0850fdbf66cc411589">scalar_infinity</a> = std::numeric_limits&lt;Scalar&gt;::infinity();   </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="namespace_disa.html#aaa4606e08e37c5f0788bed13690b590f">   41</a></span>&#160;<span class="keyword">inline</span> constexpr <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> <a class="code" href="namespace_disa.html#aaa4606e08e37c5f0788bed13690b590f">scalar_lowest</a> = std::numeric_limits&lt;Scalar&gt;::lowest();       </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="namespace_disa.html#a02f0e41a0d2a61294284a230df8dde39">   42</a></span>&#160;<span class="keyword">inline</span> constexpr <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> <a class="code" href="namespace_disa.html#a02f0e41a0d2a61294284a230df8dde39">scalar_max</a> = std::numeric_limits&lt;Scalar&gt;::max();             </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="namespace_disa.html#a12f2f0b7a88ef69ff7f5b3d4b6d7a7ac">   43</a></span>&#160;<span class="keyword">inline</span> constexpr <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> <a class="code" href="namespace_disa.html#a12f2f0b7a88ef69ff7f5b3d4b6d7a7ac">scalar_min</a> = std::numeric_limits&lt;Scalar&gt;::min();             </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">inline</span> constexpr Scalar default_absolute = <span class="keyword">static_cast&lt;</span>Scalar<span class="keyword">&gt;</span>(64)*scalar_epsilon;       </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">inline</span> constexpr Scalar default_relative = <span class="keyword">static_cast&lt;</span>Scalar<span class="keyword">&gt;</span>(65536)*scalar_epsilon;    </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7">   45</a></span>&#160;<span class="keyword">inline</span> constexpr <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> <a class="code" href="namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7">default_absolute</a> = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a><span class="keyword">&gt;</span>(64)*<a class="code" href="namespace_disa.html#a7ba5e5cba5f93f1f374fde90b8004f33">scalar_epsilon</a>;       </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996">   46</a></span>&#160;<span class="keyword">inline</span> constexpr <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> <a class="code" href="namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996">default_relative</a> = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a><span class="keyword">&gt;</span>(65536)*<a class="code" href="namespace_disa.html#a7ba5e5cba5f93f1f374fde90b8004f33">scalar_epsilon</a>;    </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// Equality Checks</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> is_nearly_equal(<span class="keyword">const</span> Scalar&amp; scalar_0, <span class="keyword">const</span> Scalar&amp; scalar_1,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                                             <span class="keyword">const</span> Scalar&amp; tolerance_relative = default_relative,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                                             <span class="keyword">const</span> Scalar&amp; tolerance_absolute = default_absolute) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  ASSERT_DEBUG(scalar_epsilon &lt;= tolerance_relative,</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="namespace_disa.html#a4a2e6c44ba8374882573d628b743271d">   75</a></span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> <a class="code" href="namespace_disa.html#a4a2e6c44ba8374882573d628b743271d">is_nearly_equal</a>(<span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_0, <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_1,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                                             <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_relative = <a class="code" href="namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996">default_relative</a>,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                                             <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_absolute = <a class="code" href="namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7">default_absolute</a>) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <a class="code" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a>(<a class="code" href="namespace_disa.html#a7ba5e5cba5f93f1f374fde90b8004f33">scalar_epsilon</a> &lt;= tolerance_relative,</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;               <span class="stringliteral">&quot;Relative tolerance &quot;</span> + std::to_string(tolerance_relative) + <span class="stringliteral">&quot; must be greater than scalar epsilon, &quot;</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;               + std::to_string(scalar_epsilon) + <span class="stringliteral">&quot;.&quot;</span>);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  ASSERT_DEBUG(tolerance_relative &lt;= <span class="keyword">static_cast&lt;</span>Scalar<span class="keyword">&gt;</span>(1),</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;               + std::to_string(<a class="code" href="namespace_disa.html#a7ba5e5cba5f93f1f374fde90b8004f33">scalar_epsilon</a>) + <span class="stringliteral">&quot;.&quot;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <a class="code" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a>(tolerance_relative &lt;= <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a><span class="keyword">&gt;</span>(1),</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;               <span class="stringliteral">&quot;Relative tolerance &quot;</span> + std::to_string(tolerance_relative) + <span class="stringliteral">&quot;  greater than 1, will magnify the norm.&quot;</span>);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordflow">if</span>(scalar_0 == scalar_1) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">return</span> std::abs(scalar_0 - scalar_1) &lt;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;         std::max(tolerance_absolute, tolerance_relative*std::min(std::abs(scalar_0) + std::abs(scalar_1),</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                                                                  scalar_max));</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                                                                  <a class="code" href="namespace_disa.html#a02f0e41a0d2a61294284a230df8dde39">scalar_max</a>));</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> is_nearly_greater_equal(<span class="keyword">const</span> Scalar&amp; scalar_0, <span class="keyword">const</span> Scalar&amp; scalar_1,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                                                     <span class="keyword">const</span> Scalar&amp; tolerance_relative = default_relative,</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                                     <span class="keyword">const</span> Scalar&amp; tolerance_absolute = default_absolute) {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">return</span> scalar_0 &gt; scalar_1 || is_nearly_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="namespace_disa.html#ac79b4c22b2251a16b4ce10ab35754083">   97</a></span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> <a class="code" href="namespace_disa.html#ac79b4c22b2251a16b4ce10ab35754083">is_nearly_greater_equal</a>(<span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_0, <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_1,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                                                     <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_relative = <a class="code" href="namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996">default_relative</a>,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                                     <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_absolute = <a class="code" href="namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7">default_absolute</a>) {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">return</span> scalar_0 &gt; scalar_1 || <a class="code" href="namespace_disa.html#a4a2e6c44ba8374882573d628b743271d">is_nearly_equal</a>(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> is_nearly_less_equal(<span class="keyword">const</span> Scalar&amp; scalar_0, <span class="keyword">const</span> Scalar&amp; scalar_1,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                                                  <span class="keyword">const</span> Scalar&amp; tolerance_relative = default_relative,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                                                  <span class="keyword">const</span> Scalar&amp; tolerance_absolute = default_absolute) {</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordflow">return</span> scalar_0 &lt; scalar_1 || is_nearly_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="namespace_disa.html#a169f81a587880e04bd2bab802b3de310">  111</a></span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> <a class="code" href="namespace_disa.html#a169f81a587880e04bd2bab802b3de310">is_nearly_less_equal</a>(<span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_0, <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_1,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                                                  <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_relative = <a class="code" href="namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996">default_relative</a>,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                                                  <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_absolute = <a class="code" href="namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7">default_absolute</a>) {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordflow">return</span> scalar_0 &lt; scalar_1 || <a class="code" href="namespace_disa.html#a4a2e6c44ba8374882573d628b743271d">is_nearly_equal</a>(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> is_nearly_greater(<span class="keyword">const</span> Scalar&amp; scalar_0, <span class="keyword">const</span> Scalar&amp; scalar_1,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                                              <span class="keyword">const</span> Scalar&amp; tolerance_relative = default_relative,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                                              <span class="keyword">const</span> Scalar&amp; tolerance_absolute = default_absolute) {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordflow">return</span> !is_nearly_less_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);</div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="namespace_disa.html#aa779399caa791454283aac3a9627a869">  132</a></span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> <a class="code" href="namespace_disa.html#aa779399caa791454283aac3a9627a869">is_nearly_greater</a>(<span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_0, <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_1,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                                              <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_relative = <a class="code" href="namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996">default_relative</a>,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                                              <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_absolute = <a class="code" href="namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7">default_absolute</a>) {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordflow">return</span> !<a class="code" href="namespace_disa.html#a169f81a587880e04bd2bab802b3de310">is_nearly_less_equal</a>(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> is_nearly_less(<span class="keyword">const</span> Scalar&amp; scalar_0, <span class="keyword">const</span> Scalar&amp; scalar_1,</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                                        <span class="keyword">const</span> Scalar&amp; tolerance_relative = default_relative,</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                                        <span class="keyword">const</span> Scalar&amp; tolerance_absolute = default_absolute) {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordflow">return</span> !is_nearly_greater_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);</div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="namespace_disa.html#ac30c55fc1693e9407d06d204a86b28aa">  153</a></span>&#160;[[nodiscard]] constexpr <span class="keywordtype">bool</span> <a class="code" href="namespace_disa.html#ac30c55fc1693e9407d06d204a86b28aa">is_nearly_less</a>(<span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_0, <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; scalar_1,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                                        <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_relative = <a class="code" href="namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996">default_relative</a>,</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                                        <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; tolerance_absolute = <a class="code" href="namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7">default_absolute</a>) {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordflow">return</span> !<a class="code" href="namespace_disa.html#ac79b4c22b2251a16b4ce10ab35754083">is_nearly_greater_equal</a>(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;}</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;}</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//DISA_SCALAR_H</span></div>
+<div class="ttc" id="amacros_8h_html"><div class="ttname"><a href="macros_8h.html">macros.h</a></div></div>
+<div class="ttc" id="amacros_8h_html_aa43468426b5b5a5e19a1f40f8118a6b3"><div class="ttname"><a href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a></div><div class="ttdeci">#define ASSERT_DEBUG(condition, exception)</div><div class="ttdef"><b>Definition:</b> macros.h:116</div></div>
+<div class="ttc" id="anamespace_disa_html"><div class="ttname"><a href="namespace_disa.html">Disa</a></div><div class="ttdef"><b>Definition:</b> macros.h:31</div></div>
+<div class="ttc" id="anamespace_disa_html_a02f0e41a0d2a61294284a230df8dde39"><div class="ttname"><a href="namespace_disa.html#a02f0e41a0d2a61294284a230df8dde39">Disa::scalar_max</a></div><div class="ttdeci">constexpr Scalar scalar_max</div><div class="ttdoc">Alias for scalar max.</div><div class="ttdef"><b>Definition:</b> scalar.h:42</div></div>
+<div class="ttc" id="anamespace_disa_html_a0f0e38acec7e979eee6eaddf423d93b7"><div class="ttname"><a href="namespace_disa.html#a0f0e38acec7e979eee6eaddf423d93b7">Disa::default_absolute</a></div><div class="ttdeci">constexpr Scalar default_absolute</div><div class="ttdoc">Global for default absolute equality check, 'reasonably over 2 orders of epsilon.</div><div class="ttdef"><b>Definition:</b> scalar.h:45</div></div>
+<div class="ttc" id="anamespace_disa_html_a12f2f0b7a88ef69ff7f5b3d4b6d7a7ac"><div class="ttname"><a href="namespace_disa.html#a12f2f0b7a88ef69ff7f5b3d4b6d7a7ac">Disa::scalar_min</a></div><div class="ttdeci">constexpr Scalar scalar_min</div><div class="ttdoc">Alias for scalar min.</div><div class="ttdef"><b>Definition:</b> scalar.h:43</div></div>
+<div class="ttc" id="anamespace_disa_html_a169f81a587880e04bd2bab802b3de310"><div class="ttname"><a href="namespace_disa.html#a169f81a587880e04bd2bab802b3de310">Disa::is_nearly_less_equal</a></div><div class="ttdeci">constexpr bool is_nearly_less_equal(const Scalar &amp;scalar_0, const Scalar &amp;scalar_1, const Scalar &amp;tolerance_relative=default_relative, const Scalar &amp;tolerance_absolute=default_absolute)</div><div class="ttdoc">Checks if a first scalar is less than or nearly equal to a second, could be though of as operator&lt;=~.</div><div class="ttdef"><b>Definition:</b> scalar.h:111</div></div>
+<div class="ttc" id="anamespace_disa_html_a1c49faaab8fc3e11899afcaf065ebd1d"><div class="ttname"><a href="namespace_disa.html#a1c49faaab8fc3e11899afcaf065ebd1d">Disa::scalar_max_digits10</a></div><div class="ttdeci">constexpr Scalar scalar_max_digits10</div><div class="ttdoc">Alias for scalar max_digits10.</div><div class="ttdef"><b>Definition:</b> scalar.h:37</div></div>
+<div class="ttc" id="anamespace_disa_html_a4a2e6c44ba8374882573d628b743271d"><div class="ttname"><a href="namespace_disa.html#a4a2e6c44ba8374882573d628b743271d">Disa::is_nearly_equal</a></div><div class="ttdeci">constexpr bool is_nearly_equal(const Scalar &amp;scalar_0, const Scalar &amp;scalar_1, const Scalar &amp;tolerance_relative=default_relative, const Scalar &amp;tolerance_absolute=default_absolute)</div><div class="ttdoc">Checks if two scalars are 'almost' equal to each other, using tolerancing.</div><div class="ttdef"><b>Definition:</b> scalar.h:75</div></div>
+<div class="ttc" id="anamespace_disa_html_a7ba5e5cba5f93f1f374fde90b8004f33"><div class="ttname"><a href="namespace_disa.html#a7ba5e5cba5f93f1f374fde90b8004f33">Disa::scalar_epsilon</a></div><div class="ttdeci">constexpr Scalar scalar_epsilon</div><div class="ttdoc">Alias for scalar epsilon.</div><div class="ttdef"><b>Definition:</b> scalar.h:39</div></div>
+<div class="ttc" id="anamespace_disa_html_a8c2981f3f834be9448a6ab06c28748eb"><div class="ttname"><a href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a></div><div class="ttdeci">double Scalar</div><div class="ttdef"><b>Definition:</b> scalar.h:36</div></div>
+<div class="ttc" id="anamespace_disa_html_aa779399caa791454283aac3a9627a869"><div class="ttname"><a href="namespace_disa.html#aa779399caa791454283aac3a9627a869">Disa::is_nearly_greater</a></div><div class="ttdeci">constexpr bool is_nearly_greater(const Scalar &amp;scalar_0, const Scalar &amp;scalar_1, const Scalar &amp;tolerance_relative=default_relative, const Scalar &amp;tolerance_absolute=default_absolute)</div><div class="ttdoc">Checks if a first scalar is not less than or nearly equal to a second, could be though of as operator...</div><div class="ttdef"><b>Definition:</b> scalar.h:132</div></div>
+<div class="ttc" id="anamespace_disa_html_aaa4606e08e37c5f0788bed13690b590f"><div class="ttname"><a href="namespace_disa.html#aaa4606e08e37c5f0788bed13690b590f">Disa::scalar_lowest</a></div><div class="ttdeci">constexpr Scalar scalar_lowest</div><div class="ttdoc">Alias for scalar lowest.</div><div class="ttdef"><b>Definition:</b> scalar.h:41</div></div>
+<div class="ttc" id="anamespace_disa_html_ac30c55fc1693e9407d06d204a86b28aa"><div class="ttname"><a href="namespace_disa.html#ac30c55fc1693e9407d06d204a86b28aa">Disa::is_nearly_less</a></div><div class="ttdeci">constexpr bool is_nearly_less(const Scalar &amp;scalar_0, const Scalar &amp;scalar_1, const Scalar &amp;tolerance_relative=default_relative, const Scalar &amp;tolerance_absolute=default_absolute)</div><div class="ttdoc">Checks if a first scalar is not greater than or nearly equal to a second, could be though of as opera...</div><div class="ttdef"><b>Definition:</b> scalar.h:153</div></div>
+<div class="ttc" id="anamespace_disa_html_ac79b4c22b2251a16b4ce10ab35754083"><div class="ttname"><a href="namespace_disa.html#ac79b4c22b2251a16b4ce10ab35754083">Disa::is_nearly_greater_equal</a></div><div class="ttdeci">constexpr bool is_nearly_greater_equal(const Scalar &amp;scalar_0, const Scalar &amp;scalar_1, const Scalar &amp;tolerance_relative=default_relative, const Scalar &amp;tolerance_absolute=default_absolute)</div><div class="ttdoc">Checks if a first scalar is greater than or nearly equal to a second, could be though of as operator&gt;...</div><div class="ttdef"><b>Definition:</b> scalar.h:97</div></div>
+<div class="ttc" id="anamespace_disa_html_acbf188d2f52238f11ae72c35ff61d996"><div class="ttname"><a href="namespace_disa.html#acbf188d2f52238f11ae72c35ff61d996">Disa::default_relative</a></div><div class="ttdeci">constexpr Scalar default_relative</div><div class="ttdoc">Global for default relative equality check, 'reasonably over 4 orders of epsilon.</div><div class="ttdef"><b>Definition:</b> scalar.h:46</div></div>
+<div class="ttc" id="anamespace_disa_html_af36831b38dd18e0850fdbf66cc411589"><div class="ttname"><a href="namespace_disa.html#af36831b38dd18e0850fdbf66cc411589">Disa::scalar_infinity</a></div><div class="ttdeci">constexpr Scalar scalar_infinity</div><div class="ttdoc">Alias for scalar infinity.</div><div class="ttdef"><b>Definition:</b> scalar.h:40</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6f77a39b07c019ccd7492ea87272f732.html">core</a></li><li class="navelem"><a class="el" href="scalar_8h.html">scalar.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

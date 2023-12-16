@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -45,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('solver__utilities_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,17 +81,12 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6de032d0d9a654666bd4023108850d60.html">solver</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">solver_utilities.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
+<a href="solver__utilities_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// MIT License</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright (c) 2022 Bevan W.S. Jones</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
@@ -90,70 +107,78 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// Description: Contains the definitions of the template functions for solver utility functions.</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span>Disa {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_disa.html">Disa</a> {</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// Convergence Tracking</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> _matrix, <span class="keyword">class</span> _vector&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structDisa_1_1Convergence__Data.html#a304464209574de33a58f913ac0c63e98">   34</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="structDisa_1_1Convergence__Data.html#a304464209574de33a58f913ac0c63e98">Convergence_Data::update</a>(<span class="keyword">const</span> _matrix&amp; coef, <span class="keyword">const</span> _vector&amp; solution, <span class="keyword">const</span> _vector&amp; constant) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="struct_disa_1_1_convergence___data.html#a1fd142225ed489aa05a10955d4531b4a">   34</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="struct_disa_1_1_convergence___data.html#a1fd142225ed489aa05a10955d4531b4a">Convergence_Data::update</a>(<span class="keyword">const</span> _matrix&amp; coef, <span class="keyword">const</span> _vector&amp; solution, <span class="keyword">const</span> _vector&amp; constant) {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  std::tie(<a class="code" href="structDisa_1_1Convergence__Data.html#aec9e5851bec19408cd0079250c09cc26">residual</a>, <a class="code" href="structDisa_1_1Convergence__Data.html#af9ef4a3f1d8f63e8b2dd6c373c07d5f9">residual_max</a>) = compute_residual(coef, solution, constant);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  std::tie(<a class="code" href="struct_disa_1_1_convergence___data.html#a2bc41e9bd3655f8f70a3676825d1d1af">residual</a>, <a class="code" href="struct_disa_1_1_convergence___data.html#a1a3097080187b5e0770a7ebb12a3f649">residual_max</a>) = <a class="code" href="namespace_disa.html#a989af41b535128aecf8d0680d86f6ae8">compute_residual</a>(coef, solution, constant);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordflow">if</span>(!<a class="code" href="structDisa_1_1Convergence__Data.html#a798c863e81503627ea641eb011d66240">iteration</a>) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="structDisa_1_1Convergence__Data.html#afb72d30b5e616e7c69330536e0ccd323">residual_0</a> = <a class="code" href="structDisa_1_1Convergence__Data.html#aec9e5851bec19408cd0079250c09cc26">residual</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="structDisa_1_1Convergence__Data.html#a345f281a6bdd28f1d1695e747f0c616a">residual_max_0</a> = <a class="code" href="structDisa_1_1Convergence__Data.html#af9ef4a3f1d8f63e8b2dd6c373c07d5f9">residual_max</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordflow">if</span>(!<a class="code" href="struct_disa_1_1_convergence___data.html#af8224d8758a534fe4c1b8c3ef4ae4e35">iteration</a>) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="struct_disa_1_1_convergence___data.html#a18234427cdbff299f4e7c4d0a0dbeb3b">residual_0</a> = <a class="code" href="struct_disa_1_1_convergence___data.html#a2bc41e9bd3655f8f70a3676825d1d1af">residual</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="struct_disa_1_1_convergence___data.html#a2dabd7af3f9905f7204a898e5cd806bf">residual_max_0</a> = <a class="code" href="struct_disa_1_1_convergence___data.html#a1a3097080187b5e0770a7ebb12a3f649">residual_max</a>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="structDisa_1_1Convergence__Data.html#a4bc9df68fc8876eb1bacb8d2be901756">residual_normalised</a> = <a class="code" href="structDisa_1_1Convergence__Data.html#aec9e5851bec19408cd0079250c09cc26">residual</a>/<a class="code" href="structDisa_1_1Convergence__Data.html#afb72d30b5e616e7c69330536e0ccd323">residual_0</a>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="structDisa_1_1Convergence__Data.html#a915dcb3cab85336f35b6793b7e9bc9ba">residual_max_normalised</a> = <a class="code" href="structDisa_1_1Convergence__Data.html#af9ef4a3f1d8f63e8b2dd6c373c07d5f9">residual_max</a>/<a class="code" href="structDisa_1_1Convergence__Data.html#a345f281a6bdd28f1d1695e747f0c616a">residual_max_0</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="struct_disa_1_1_convergence___data.html#ab963296c2688eea0e8efe9a58966b6d0">residual_normalised</a> = <a class="code" href="struct_disa_1_1_convergence___data.html#a2bc41e9bd3655f8f70a3676825d1d1af">residual</a>/<a class="code" href="struct_disa_1_1_convergence___data.html#a18234427cdbff299f4e7c4d0a0dbeb3b">residual_0</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="struct_disa_1_1_convergence___data.html#a5960f4329d1badf81b56426410efacb5">residual_max_normalised</a> = <a class="code" href="struct_disa_1_1_convergence___data.html#a1a3097080187b5e0770a7ebb12a3f649">residual_max</a>/<a class="code" href="struct_disa_1_1_convergence___data.html#a2dabd7af3f9905f7204a898e5cd806bf">residual_max_0</a>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  ++<a class="code" href="structDisa_1_1Convergence__Data.html#a798c863e81503627ea641eb011d66240">iteration</a>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="structDisa_1_1Convergence__Data.html#a4f7f81998bd5025c28047f48a15a3171">duration</a> = std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(std::chrono::steady_clock::now() - <a class="code" href="structDisa_1_1Convergence__Data.html#ac8f96574eb15a045993a6bd7e5cb8353">start_time</a>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  ++<a class="code" href="struct_disa_1_1_convergence___data.html#af8224d8758a534fe4c1b8c3ef4ae4e35">iteration</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="struct_disa_1_1_convergence___data.html#a2847cf1300ebd1dbb6deb5a200a46faf">duration</a> = std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(std::chrono::steady_clock::now() - <a class="code" href="struct_disa_1_1_convergence___data.html#a0a0e77a7e7923e4b7a458d3776340575">start_time</a>);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> _matrix, <span class="keyword">class</span> _vector&gt;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;std::pair&lt;Scalar, Scalar&gt; compute_residual(<span class="keyword">const</span> _matrix&amp; coef, <span class="keyword">const</span> _vector&amp; solution, <span class="keyword">const</span> _vector&amp; constant) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="namespace_disa.html#a989af41b535128aecf8d0680d86f6ae8">   72</a></span>&#160;std::pair&lt;Scalar, Scalar&gt; <a class="code" href="namespace_disa.html#a989af41b535128aecf8d0680d86f6ae8">compute_residual</a>(<span class="keyword">const</span> _matrix&amp; coef, <span class="keyword">const</span> _vector&amp; solution, <span class="keyword">const</span> _vector&amp; constant) {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment">// Check sizes</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  ASSERT_DEBUG(solution.size() != 0 &amp;&amp; constant.size() != 0 , <span class="stringliteral">&quot;System size is 0.&quot;</span>);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  ASSERT_DEBUG(coef.size_row() == solution.size(),</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <a class="code" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a>(solution.size() != 0 &amp;&amp; constant.size() != 0 , <span class="stringliteral">&quot;System size is 0.&quot;</span>);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <a class="code" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a>(coef.size_row() == solution.size(),</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;               <span class="stringliteral">&quot;Coefficient matrix row size incompatible with solution vector size.&quot;</span>);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  ASSERT_DEBUG(coef.size_column() == constant.size(),</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <a class="code" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a>(coef.size_column() == constant.size(),</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;               <span class="stringliteral">&quot;Coefficient matrix column size incompatible with constant vector size.&quot;</span>);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  Scalar l2_norm = 0.0;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  Scalar linf_norm = 0.0;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> l2_norm = 0.0;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> linf_norm = 0.0;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">auto</span> i_row = 0; i_row &lt; coef.size_row(); ++i_row) {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    Scalar matrix_vector_row = 0;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> matrix_vector_row = 0;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">for</span>(<span class="keyword">auto</span> column_iter = coef[i_row].cbegin(); column_iter != coef[i_row].cend(); ++column_iter)</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      matrix_vector_row += *column_iter*solution[column_iter.i_column()];</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="comment">// Compute the l2_norm and l_inf norm.</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">const</span> Scalar&amp; row_residual_squared = std::pow(matrix_vector_row - constant[i_row], 2);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&amp; row_residual_squared = std::pow(matrix_vector_row - constant[i_row], 2);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    l2_norm += row_residual_squared;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    linf_norm = std::max(linf_norm, row_residual_squared);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="comment">// &#39;Weight&#39; the l_2 norm and return both norms.</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">return</span> {std::sqrt(l2_norm/<span class="keyword">static_cast&lt;</span>Scalar<span class="keyword">&gt;</span>(solution.size())), std::sqrt(linf_norm)};</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">return</span> {std::sqrt(l2_norm/<span class="keyword">static_cast&lt;</span><a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a><span class="keyword">&gt;</span>(solution.size())), std::sqrt(linf_norm)};</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_a304464209574de33a58f913ac0c63e98"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#a304464209574de33a58f913ac0c63e98">Disa::Convergence_Data::update</a></div><div class="ttdeci">void update(const _matrix &amp;coef, const _vector &amp;solution, const _vector &amp;constant)</div><div class="ttdoc">Updates the convergence state of a linear system (Ax = b) by computing various residual norms and dat...</div><div class="ttdef"><b>Definition:</b> solver_utilities.hpp:34</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_a345f281a6bdd28f1d1695e747f0c616a"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#a345f281a6bdd28f1d1695e747f0c616a">Disa::Convergence_Data::residual_max_0</a></div><div class="ttdeci">Scalar residual_max_0</div><div class="ttdoc">The initial l2 norm of the residual vector of the system (before the first solve).</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:111</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_a4bc9df68fc8876eb1bacb8d2be901756"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#a4bc9df68fc8876eb1bacb8d2be901756">Disa::Convergence_Data::residual_normalised</a></div><div class="ttdeci">Scalar residual_normalised</div><div class="ttdoc">The l2 norm of the residual vector normalised to the l2 norm of the initial residual vector.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:108</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_a4f7f81998bd5025c28047f48a15a3171"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#a4f7f81998bd5025c28047f48a15a3171">Disa::Convergence_Data::duration</a></div><div class="ttdeci">std::chrono::microseconds duration</div><div class="ttdoc">The duration of the solve.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:101</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_a798c863e81503627ea641eb011d66240"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#a798c863e81503627ea641eb011d66240">Disa::Convergence_Data::iteration</a></div><div class="ttdeci">std::size_t iteration</div><div class="ttdoc">The number of iterations performed by the solver.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:104</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_a915dcb3cab85336f35b6793b7e9bc9ba"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#a915dcb3cab85336f35b6793b7e9bc9ba">Disa::Convergence_Data::residual_max_normalised</a></div><div class="ttdeci">Scalar residual_max_normalised</div><div class="ttdoc">The linf norm of the residual vector normalised to the l2 norm of the initial residual vector.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:112</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_ac8f96574eb15a045993a6bd7e5cb8353"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#ac8f96574eb15a045993a6bd7e5cb8353">Disa::Convergence_Data::start_time</a></div><div class="ttdeci">std::chrono::steady_clock::time_point start_time</div><div class="ttdoc">The time at which the object was created.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:102</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_aec9e5851bec19408cd0079250c09cc26"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#aec9e5851bec19408cd0079250c09cc26">Disa::Convergence_Data::residual</a></div><div class="ttdeci">Scalar residual</div><div class="ttdoc">The un-normalised weighted l2 norm of the residual vector.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:106</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_af9ef4a3f1d8f63e8b2dd6c373c07d5f9"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#af9ef4a3f1d8f63e8b2dd6c373c07d5f9">Disa::Convergence_Data::residual_max</a></div><div class="ttdeci">Scalar residual_max</div><div class="ttdoc">The un-normalised linf norm of the residual vector.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:110</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html_afb72d30b5e616e7c69330536e0ccd323"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html#afb72d30b5e616e7c69330536e0ccd323">Disa::Convergence_Data::residual_0</a></div><div class="ttdeci">Scalar residual_0</div><div class="ttdoc">The initial l2 norm of the residual vector of the system (before the first solve).</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:107</div></div>
+<div class="ttc" id="amacros_8h_html_aa43468426b5b5a5e19a1f40f8118a6b3"><div class="ttname"><a href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a></div><div class="ttdeci">#define ASSERT_DEBUG(condition, exception)</div><div class="ttdef"><b>Definition:</b> macros.h:116</div></div>
+<div class="ttc" id="anamespace_disa_html"><div class="ttname"><a href="namespace_disa.html">Disa</a></div><div class="ttdef"><b>Definition:</b> macros.h:31</div></div>
+<div class="ttc" id="anamespace_disa_html_a8c2981f3f834be9448a6ab06c28748eb"><div class="ttname"><a href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a></div><div class="ttdeci">double Scalar</div><div class="ttdef"><b>Definition:</b> scalar.h:36</div></div>
+<div class="ttc" id="anamespace_disa_html_a989af41b535128aecf8d0680d86f6ae8"><div class="ttname"><a href="namespace_disa.html#a989af41b535128aecf8d0680d86f6ae8">Disa::compute_residual</a></div><div class="ttdeci">std::pair&lt; Scalar, Scalar &gt; compute_residual(const _matrix &amp;coef, const _vector &amp;solution, const _vector &amp;constant)</div><div class="ttdoc">Efficiently computes various scalar residual's of a linear system, e.g.</div><div class="ttdef"><b>Definition:</b> solver_utilities.hpp:72</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_a0a0e77a7e7923e4b7a458d3776340575"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#a0a0e77a7e7923e4b7a458d3776340575">Disa::Convergence_Data::start_time</a></div><div class="ttdeci">std::chrono::steady_clock::time_point start_time</div><div class="ttdoc">The time at which the object was created.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:102</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_a18234427cdbff299f4e7c4d0a0dbeb3b"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#a18234427cdbff299f4e7c4d0a0dbeb3b">Disa::Convergence_Data::residual_0</a></div><div class="ttdeci">Scalar residual_0</div><div class="ttdoc">The initial l2 norm of the residual vector of the system (before the first solve).</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:107</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_a1a3097080187b5e0770a7ebb12a3f649"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#a1a3097080187b5e0770a7ebb12a3f649">Disa::Convergence_Data::residual_max</a></div><div class="ttdeci">Scalar residual_max</div><div class="ttdoc">The un-normalised linf norm of the residual vector.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:110</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_a1fd142225ed489aa05a10955d4531b4a"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#a1fd142225ed489aa05a10955d4531b4a">Disa::Convergence_Data::update</a></div><div class="ttdeci">void update(const _matrix &amp;coef, const _vector &amp;solution, const _vector &amp;constant)</div><div class="ttdoc">Updates the convergence state of a linear system (Ax = b) by computing various residual norms and dat...</div><div class="ttdef"><b>Definition:</b> solver_utilities.hpp:34</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_a2847cf1300ebd1dbb6deb5a200a46faf"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#a2847cf1300ebd1dbb6deb5a200a46faf">Disa::Convergence_Data::duration</a></div><div class="ttdeci">std::chrono::microseconds duration</div><div class="ttdoc">The duration of the solve.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:101</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_a2bc41e9bd3655f8f70a3676825d1d1af"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#a2bc41e9bd3655f8f70a3676825d1d1af">Disa::Convergence_Data::residual</a></div><div class="ttdeci">Scalar residual</div><div class="ttdoc">The un-normalised weighted l2 norm of the residual vector.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:106</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_a2dabd7af3f9905f7204a898e5cd806bf"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#a2dabd7af3f9905f7204a898e5cd806bf">Disa::Convergence_Data::residual_max_0</a></div><div class="ttdeci">Scalar residual_max_0</div><div class="ttdoc">The initial l2 norm of the residual vector of the system (before the first solve).</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:111</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_a5960f4329d1badf81b56426410efacb5"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#a5960f4329d1badf81b56426410efacb5">Disa::Convergence_Data::residual_max_normalised</a></div><div class="ttdeci">Scalar residual_max_normalised</div><div class="ttdoc">The linf norm of the residual vector normalised to the l2 norm of the initial residual vector.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:112</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_ab963296c2688eea0e8efe9a58966b6d0"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#ab963296c2688eea0e8efe9a58966b6d0">Disa::Convergence_Data::residual_normalised</a></div><div class="ttdeci">Scalar residual_normalised</div><div class="ttdoc">The l2 norm of the residual vector normalised to the l2 norm of the initial residual vector.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:108</div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html_af8224d8758a534fe4c1b8c3ef4ae4e35"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html#af8224d8758a534fe4c1b8c3ef4ae4e35">Disa::Convergence_Data::iteration</a></div><div class="ttdeci">std::size_t iteration</div><div class="ttdoc">The number of iterations performed by the solver.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:104</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6de032d0d9a654666bd4023108850d60.html">solver</a></li><li class="navelem"><a class="el" href="solver__utilities_8hpp.html">solver_utilities.hpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

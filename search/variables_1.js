@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['b_5fvector_253',['b_vector',['../classLaplace2DProblem.html#acf8544ecc33aac1b0c43411517d2e903',1,'Laplace2DProblem']]],
-  ['b_5fvector_5f0_254',['b_vector_0',['../classLaplace2DProblem.html#a24ee3794646499c44d6f2939f3e0cb57',1,'Laplace2DProblem']]]
+  ['b_5fvector_482',['b_vector',['../class_laplace2_d_problem.html#aad270551021ab001e39991337729d7a4',1,'Laplace2DProblem']]],
+  ['b_5fvector_5f0_483',['b_vector_0',['../class_laplace2_d_problem.html#a4fd41cfd513bf922b8a7ffb198438d8f',1,'Laplace2DProblem']]]
 ];

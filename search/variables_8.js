@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pivot_266',['pivot',['../structDisa_1_1Solver__Config.html#ae25807809dfc212ef1ff31085202fede',1,'Disa::Solver_Config']]]
+  ['offset_501',['offset',['../class_disa_1_1_adjacency___graph.html#a42a9ca141195563377732b946682cd7d',1,'Disa::Adjacency_Graph']]]
 ];

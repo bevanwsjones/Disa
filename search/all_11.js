@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['update_124',['update',['../structDisa_1_1Convergence__Data.html#a304464209574de33a58f913ac0c63e98',1,'Disa::Convergence_Data']]],
-  ['update_5flevels_125',['update_levels',['../classDisa_1_1Adjacency__Subgraph.html#aa1009aeb107c8fe5803157286e98d329',1,'Disa::Adjacency_Subgraph']]]
+  ['test_257',['TEST',['../test__solver__utilities_8cpp.html#a2048171e2ffa9a98cd883b1ff33a9307',1,'TEST(solver_utilites, update_convergence):&#160;test_solver_utilities.cpp'],['../test__solver__utilities_8cpp.html#a59e70565cd5433a6be34e526eb14abf4',1,'TEST(solver_utilites, is_converged):&#160;test_solver_utilities.cpp'],['../test__solver__utilities_8cpp.html#afb1d57c8361b6931752d4e4fdaecc4f4',1,'TEST(solver_utilites, compute_residual):&#160;test_solver_utilities.cpp']]],
+  ['test_5fdirect_2ecpp_258',['test_direct.cpp',['../test__direct_8cpp.html',1,'']]],
+  ['test_5ff_259',['TEST_F',['../test__direct_8cpp.html#a6b3e901bcdb57e68f36648c2a6cb98db',1,'TEST_F(direct_solvers, lower_upper_factorisation_initialise):&#160;test_direct.cpp'],['../test__direct_8cpp.html#a3d63539c32831c9d9d42548eacd59686',1,'TEST_F(direct_solvers, lower_upper_factorisation_death_test):&#160;test_direct.cpp'],['../test__direct_8cpp.html#ab967a3ccac4a7bb739038d307372f166',1,'TEST_F(direct_solvers, lower_upper_factorisation_not_factorised):&#160;test_direct.cpp'],['../test__direct_8cpp.html#af458a3b7c63e9e7f3b63d83dcbcce49f',1,'TEST_F(direct_solvers, lower_upper_factorise_solve):&#160;test_direct.cpp'],['../test__solver_8cpp.html#abdc8bf81feaefab9d83894b67da1297b',1,'TEST_F(Laplace2DProblem, heat):&#160;test_solver.cpp'],['../test__solver_8cpp.html#a5b86be9d53c4c62b73f9b354221b7472',1,'TEST_F(Laplace2DProblem, iterative_solver_test):&#160;test_solver.cpp']]],
+  ['test_5fsolver_2ecpp_260',['test_solver.cpp',['../test__solver_8cpp.html',1,'']]],
+  ['test_5fsolver_5futilities_2ecpp_261',['test_solver_utilities.cpp',['../test__solver__utilities_8cpp.html',1,'']]],
+  ['tolerance_262',['tolerance',['../struct_disa_1_1_convergence___criteria.html#a8889da0166e70ae86c6747d6eadba5a4',1,'Disa::Convergence_Criteria']]],
+  ['type_263',['type',['../struct_disa_1_1_matrix___static___demoter.html#a43eff1b453b923585ab85d96ee24d754',1,'Disa::Matrix_Static_Demoter::type()'],['../struct_disa_1_1_static_promoter.html#a054882c3694eb962f3107567a2c18625',1,'Disa::StaticPromoter::type()'],['../struct_disa_1_1_solver___config.html#a3c7b6f477ea78a9fd5b1a8a8bc410cd7',1,'Disa::Solver_Config::type()']]]
 ];

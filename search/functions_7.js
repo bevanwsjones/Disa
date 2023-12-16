@@ -1,15 +1,20 @@
 var searchData=
 [
-  ['i_5fcolumn_194',['i_column',['../structDisa_1_1Iterator__Matrix__Sparse__Element.html#a390a48e01a93522e79a1e601422368df',1,'Disa::Iterator_Matrix_Sparse_Element']]],
-  ['i_5frow_195',['i_row',['../structDisa_1_1Iterator__Matrix__Sparse__Element.html#a4c4797ae309f67861cb9bc9999702927',1,'Disa::Iterator_Matrix_Sparse_Element']]],
-  ['initialise_196',['initialise',['../classDisa_1_1Direct.html#a89c611c174bd0c75b32a272e1ee5c4a9',1,'Disa::Direct']]],
-  ['initialise_5fsolver_197',['initialise_solver',['../classDisa_1_1Direct__Lower__Upper__Factorisation.html#a6bd39357dcb6f02bcf1fa181fc4e7c65',1,'Disa::Direct_Lower_Upper_Factorisation']]],
-  ['insert_198',['insert',['../classDisa_1_1Matrix__Sparse.html#a1db3c11fd4d31fd9b3f7754f3954bccd',1,'Disa::Matrix_Sparse::insert()'],['../classDisa_1_1Adjacency__Graph.html#a0f93e3ff87323ad22a1a8c66f1f642a7',1,'Disa::Adjacency_Graph::insert()']]],
-  ['insert_5for_5fassign_199',['insert_or_assign',['../classDisa_1_1Matrix__Sparse.html#a3f048f42cc4229c9ceb47d42557aa185',1,'Disa::Matrix_Sparse']]],
-  ['insert_5fvertex_5fadjacent_5flist_200',['insert_vertex_adjacent_list',['../classDisa_1_1Adjacency__Graph.html#ac163fa97b8a0060338c4c9fa3e18d900',1,'Disa::Adjacency_Graph']]],
-  ['is_5fconverged_201',['is_converged',['../structDisa_1_1Convergence__Criteria.html#afcd0343cf1972ad705fe0a72c446fdb2',1,'Disa::Convergence_Criteria']]],
-  ['is_5flocal_202',['is_local',['../classDisa_1_1Adjacency__Subgraph.html#a6d15d4e89b7a37fea4027b0c6a18e372',1,'Disa::Adjacency_Subgraph']]],
-  ['is_5fparent_203',['is_parent',['../classDisa_1_1Adjacency__Subgraph.html#a062169d99cc73edc4650a8a008626537',1,'Disa::Adjacency_Subgraph']]],
-  ['iterator_5fmatrix_5fsparse_5felement_204',['Iterator_Matrix_Sparse_Element',['../structDisa_1_1Iterator__Matrix__Sparse__Element.html#aadd1b6c17a7faf44afb982ddb48ab386',1,'Disa::Iterator_Matrix_Sparse_Element']]],
-  ['iterator_5fmatrix_5fsparse_5frow_205',['Iterator_Matrix_Sparse_Row',['../structDisa_1_1Iterator__Matrix__Sparse__Row.html#ab2753dfff59daa3e0077f8b02a0f7ac5',1,'Disa::Iterator_Matrix_Sparse_Row::Iterator_Matrix_Sparse_Row(const value_type &amp;row)'],['../structDisa_1_1Iterator__Matrix__Sparse__Row.html#a98deff447991361cff78da7c6ff3999d',1,'Disa::Iterator_Matrix_Sparse_Row::Iterator_Matrix_Sparse_Row(std::size_t i_row, matrix_type *sparse_matrix)']]]
+  ['i_5fcolumn_399',['i_column',['../struct_disa_1_1_iterator___matrix___sparse___element.html#aeac2992660f159aa2b41c11783ae05ed',1,'Disa::Iterator_Matrix_Sparse_Element']]],
+  ['i_5frow_400',['i_row',['../struct_disa_1_1_iterator___matrix___sparse___element.html#aa5bd8037fb505363928aeee50e72e8d1',1,'Disa::Iterator_Matrix_Sparse_Element']]],
+  ['initialise_401',['initialise',['../class_disa_1_1_direct.html#a144e1092069bfb6d21a3defe761002d4',1,'Disa::Direct::initialise()'],['../class_disa_1_1_solver___iterative.html#a0b013e4299f3b16744c35be776401c78',1,'Disa::Solver_Iterative::initialise()']]],
+  ['initialise_5fsolver_402',['initialise_solver',['../class_disa_1_1_direct___lower___upper___factorisation.html#a7b0780abbe343701e1d0e5bb3d032567',1,'Disa::Direct_Lower_Upper_Factorisation::initialise_solver()'],['../class_disa_1_1_solver___fixed___point.html#a7b0780abbe343701e1d0e5bb3d032567',1,'Disa::Solver_Fixed_Point::initialise_solver(Solver_Config config)'],['../class_disa_1_1_solver___fixed___point.html#a7b0780abbe343701e1d0e5bb3d032567',1,'Disa::Solver_Fixed_Point::initialise_solver(Solver_Config config)'],['../class_disa_1_1_solver___fixed___point.html#a7b0780abbe343701e1d0e5bb3d032567',1,'Disa::Solver_Fixed_Point::initialise_solver(Solver_Config config)'],['../class_disa_1_1_solver___fixed___point.html#a7b0780abbe343701e1d0e5bb3d032567',1,'Disa::Solver_Fixed_Point::initialise_solver(Solver_Config config)']]],
+  ['insert_403',['insert',['../class_disa_1_1_matrix___sparse.html#a35d31891e547486e917f20e92d375e01',1,'Disa::Matrix_Sparse::insert()'],['../class_disa_1_1_adjacency___graph.html#a08db0782bce16b125d8db05fd5d060ed',1,'Disa::Adjacency_Graph::insert()']]],
+  ['insert_5for_5fassign_404',['insert_or_assign',['../class_disa_1_1_matrix___sparse.html#a25dc3504e24bfa0722b05b99547836e3',1,'Disa::Matrix_Sparse']]],
+  ['insert_5fvertex_5fadjacent_5flist_405',['insert_vertex_adjacent_list',['../class_disa_1_1_adjacency___graph.html#a719e65b36024dab62f4a5e05293721e6',1,'Disa::Adjacency_Graph']]],
+  ['is_5fconverged_406',['is_converged',['../struct_disa_1_1_convergence___criteria.html#a812bb735b0a262c56f5646d2f358f193',1,'Disa::Convergence_Criteria']]],
+  ['is_5flocal_407',['is_local',['../class_disa_1_1_adjacency___subgraph.html#af7ce524d1e4bd721d28d6d8903d91382',1,'Disa::Adjacency_Subgraph']]],
+  ['is_5fnearly_5fequal_408',['is_nearly_equal',['../namespace_disa.html#a4a2e6c44ba8374882573d628b743271d',1,'Disa']]],
+  ['is_5fnearly_5fgreater_409',['is_nearly_greater',['../namespace_disa.html#aa779399caa791454283aac3a9627a869',1,'Disa']]],
+  ['is_5fnearly_5fgreater_5fequal_410',['is_nearly_greater_equal',['../namespace_disa.html#ac79b4c22b2251a16b4ce10ab35754083',1,'Disa']]],
+  ['is_5fnearly_5fless_411',['is_nearly_less',['../namespace_disa.html#ac30c55fc1693e9407d06d204a86b28aa',1,'Disa']]],
+  ['is_5fnearly_5fless_5fequal_412',['is_nearly_less_equal',['../namespace_disa.html#a169f81a587880e04bd2bab802b3de310',1,'Disa']]],
+  ['is_5fparent_413',['is_parent',['../class_disa_1_1_adjacency___subgraph.html#a8e1a5d13aa8ecfb23105b54b92359ff1',1,'Disa::Adjacency_Subgraph']]],
+  ['iterator_5fmatrix_5fsparse_5felement_414',['Iterator_Matrix_Sparse_Element',['../struct_disa_1_1_iterator___matrix___sparse___element.html#a91859176069c836374f31531985ea7fb',1,'Disa::Iterator_Matrix_Sparse_Element']]],
+  ['iterator_5fmatrix_5fsparse_5frow_415',['Iterator_Matrix_Sparse_Row',['../struct_disa_1_1_iterator___matrix___sparse___row.html#a766649e42cc35ff00c120a0697b79dd0',1,'Disa::Iterator_Matrix_Sparse_Row::Iterator_Matrix_Sparse_Row(const value_type &amp;row)'],['../struct_disa_1_1_iterator___matrix___sparse___row.html#a1b9f4792e03384df7bee9e8403a13d30',1,'Disa::Iterator_Matrix_Sparse_Row::Iterator_Matrix_Sparse_Row(std::size_t i_row, matrix_type *sparse_matrix)']]]
 ];

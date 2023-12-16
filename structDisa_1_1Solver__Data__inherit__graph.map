@@ -1,6 +1,0 @@
-<map id="Disa::Solver_Data" name="Disa::Solver_Data">
-<area shape="rect" id="node1" title=" " alt="" coords="5,78,144,105"/>
-<area shape="rect" id="node2" href="$structDisa_1_1Solver__Fixed__Point__Data.html" title=" " alt="" coords="195,5,336,47"/>
-<area shape="rect" id="node3" href="$structDisa_1_1Solver__Fixed__Point__Jacobi__Data.html" title=" " alt="" coords="192,71,339,112"/>
-<area shape="rect" id="node4" href="$structDisa_1_1Solver__Fixed__Point__Sor__Data.html" title=" " alt="" coords="195,136,336,177"/>
-</map>

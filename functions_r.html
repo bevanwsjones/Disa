@@ -5,14 +5,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Disa: Class Members</title>
+<title>Disa: Data Fields</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -46,6 +51,22 @@ $(function() {
 /* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('functions_r.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,47 +82,60 @@ $(function() {
 </div>
 
 <div class="contents">
-<div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
+<div class="textblock">Here is a list of all struct and union fields with links to the structures/unions they belong to:</div>
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>reference
+: <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html#a74202cdd96628bc49a756e5fc87d22de">Iterator_Matrix_Sparse_Element&lt; _matrix_type &gt;</a>
+, <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___row.html#a74202cdd96628bc49a756e5fc87d22de">Iterator_Matrix_Sparse_Row&lt; _matrix_type &gt;</a>
+</li>
+<li>relaxation
+: <a class="el" href="struct_disa_1_1_solver___fixed___point___sor___data.html#a2ec4968c86d8111028f47e69dc181465">Solver_Fixed_Point_Sor_Data</a>
+</li>
 <li>reorder()
-: <a class="el" href="classDisa_1_1Adjacency__Graph.html#afdfa512398defcdeaf0ab538f21064f1">Disa::Adjacency_Graph</a>
-, <a class="el" href="classDisa_1_1Adjacency__Subgraph.html#a5082f032b04e3fd68e1a610434a7e92a">Disa::Adjacency_Subgraph</a>
+: <a class="el" href="class_disa_1_1_adjacency___graph.html#a223803400f7584e4bfab5ded0e5b92bf">Adjacency_Graph</a>
+, <a class="el" href="class_disa_1_1_adjacency___subgraph.html#a1fcf16cce1cc2fa5f4b7d96646e33221">Adjacency_Subgraph</a>
 </li>
 <li>reserve()
-: <a class="el" href="classDisa_1_1Adjacency__Graph.html#af05a3c57026a764c655480b38c8c0884">Disa::Adjacency_Graph</a>
-, <a class="el" href="classDisa_1_1Adjacency__Subgraph.html#aae6aa5376bf70b1e2a6bf89664aca615">Disa::Adjacency_Subgraph</a>
-, <a class="el" href="classDisa_1_1Matrix__Sparse.html#abb2ca51fadda30ae1963f861d2aaa3b4">Disa::Matrix_Sparse</a>
+: <a class="el" href="class_disa_1_1_adjacency___graph.html#acaee28b4b5bc819b62e8a676b85f17a1">Adjacency_Graph</a>
+, <a class="el" href="class_disa_1_1_adjacency___subgraph.html#acaee28b4b5bc819b62e8a676b85f17a1">Adjacency_Subgraph</a>
+, <a class="el" href="class_disa_1_1_matrix___sparse.html#aa0b96fc2d748fea0d8b0a74c9d2d2f54">Matrix_Sparse</a>
 </li>
 <li>residual
-: <a class="el" href="structDisa_1_1Convergence__Data.html#aec9e5851bec19408cd0079250c09cc26">Disa::Convergence_Data</a>
+: <a class="el" href="struct_disa_1_1_convergence___data.html#a2bc41e9bd3655f8f70a3676825d1d1af">Convergence_Data</a>
 </li>
 <li>residual_0
-: <a class="el" href="structDisa_1_1Convergence__Data.html#afb72d30b5e616e7c69330536e0ccd323">Disa::Convergence_Data</a>
+: <a class="el" href="struct_disa_1_1_convergence___data.html#a18234427cdbff299f4e7c4d0a0dbeb3b">Convergence_Data</a>
 </li>
 <li>residual_max
-: <a class="el" href="structDisa_1_1Convergence__Data.html#af9ef4a3f1d8f63e8b2dd6c373c07d5f9">Disa::Convergence_Data</a>
+: <a class="el" href="struct_disa_1_1_convergence___data.html#a1a3097080187b5e0770a7ebb12a3f649">Convergence_Data</a>
 </li>
 <li>residual_max_0
-: <a class="el" href="structDisa_1_1Convergence__Data.html#a345f281a6bdd28f1d1695e747f0c616a">Disa::Convergence_Data</a>
+: <a class="el" href="struct_disa_1_1_convergence___data.html#a2dabd7af3f9905f7204a898e5cd806bf">Convergence_Data</a>
 </li>
 <li>residual_max_normalised
-: <a class="el" href="structDisa_1_1Convergence__Data.html#a915dcb3cab85336f35b6793b7e9bc9ba">Disa::Convergence_Data</a>
+: <a class="el" href="struct_disa_1_1_convergence___data.html#a5960f4329d1badf81b56426410efacb5">Convergence_Data</a>
 </li>
 <li>residual_normalised
-: <a class="el" href="structDisa_1_1Convergence__Data.html#a4bc9df68fc8876eb1bacb8d2be901756">Disa::Convergence_Data</a>
+: <a class="el" href="struct_disa_1_1_convergence___data.html#ab963296c2688eea0e8efe9a58966b6d0">Convergence_Data</a>
 </li>
 <li>resize()
-: <a class="el" href="classDisa_1_1Adjacency__Graph.html#a81b74e16b94a049cee99c500d577140b">Disa::Adjacency_Graph</a>
-, <a class="el" href="classDisa_1_1Adjacency__Subgraph.html#a3a72ace359daa8d1533f077e0f36be34">Disa::Adjacency_Subgraph</a>
-, <a class="el" href="structDisa_1_1Matrix__Dense_3_010_00_010_01_4.html#a1d3b74d151d44187f2cc133e4e2dff57">Disa::Matrix_Dense&lt; 0, 0 &gt;</a>
-, <a class="el" href="classDisa_1_1Matrix__Sparse.html#a8cbed30634d3e1b28566c2581af03896">Disa::Matrix_Sparse</a>
+: <a class="el" href="class_disa_1_1_adjacency___graph.html#aecb75771fd0988bb4e6fa3c1dd5a1d3f">Adjacency_Graph</a>
+, <a class="el" href="class_disa_1_1_adjacency___subgraph.html#a4ac470d793633cd0a95d58589b561d8d">Adjacency_Subgraph</a>
+, <a class="el" href="struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html#afb2df1d9af47b2f11034b65034155933">Matrix_Dense&lt; 0, 0 &gt;</a>
+, <a class="el" href="class_disa_1_1_matrix___sparse.html#a7c9eda05d8a173891ce9b6e82fcad507">Matrix_Sparse</a>
+</li>
+<li>row_new
+: <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a3470d5b57f6c1eeef6e9813c586ac02e">Matrix_Static_Demoter&lt; _row_0, _colu_0, _row_1, _colu_1 &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

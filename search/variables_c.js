@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['vertex_5fadjacent_5flist_277',['vertex_adjacent_list',['../classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd',1,'Disa::Adjacency_Graph']]]
+  ['tolerance_520',['tolerance',['../struct_disa_1_1_convergence___criteria.html#a8889da0166e70ae86c6747d6eadba5a4',1,'Disa::Convergence_Criteria']]],
+  ['type_521',['type',['../struct_disa_1_1_solver___config.html#a3c7b6f477ea78a9fd5b1a8a8bc410cd7',1,'Disa::Solver_Config']]]
 ];

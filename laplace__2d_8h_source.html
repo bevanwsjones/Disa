@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -45,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('laplace__2d_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,17 +81,12 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6de032d0d9a654666bd4023108850d60.html">solver</a></li><li class="navelem"><a class="el" href="dir_106854fe8521c53cb1be122466f8e90d.html">test</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">laplace_2d.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
+<a href="laplace__2d_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// MIT License</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright (c) 2022 Bevan W.S. Jones</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
@@ -93,40 +110,40 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef DISA_LAPLACE_2D_H</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define DISA_LAPLACE_2D_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;matrix_dense.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;matrix_sparse.h&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;scalar.h&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;vector_dense.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="matrix__dense_8h.html">matrix_dense.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="matrix__sparse_8h.html">matrix_sparse.h</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="scalar_8h.html">scalar.h</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="vector__dense_8h.html">vector_dense.h</a>&quot;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classLaplace__2D.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLaplace__2D.html">Laplace_2D</a> </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_laplace__2_d.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_laplace__2_d.html">Laplace_2D</a> </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">class</span> _matrix_type, <span class="keyword">class</span> _vector_type&gt;</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classLaplace__2D.html#ac59c4bf18174406ac8b8ae85dac6dca5">   63</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classLaplace__2D.html#ac59c4bf18174406ac8b8ae85dac6dca5">construct_laplace_2d</a>(_matrix_type&amp; a_matrix, _vector_type&amp; b_vector, _vector_type&amp; x_vector) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_laplace__2_d.html#afc4c6a383d6d79f8124d21f1a4e0062a">   63</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_laplace__2_d.html#afc4c6a383d6d79f8124d21f1a4e0062a">construct_laplace_2d</a>(_matrix_type&amp; a_matrix, _vector_type&amp; b_vector, _vector_type&amp; x_vector) {</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    ASSERT_DEBUG(a_matrix.size_row() == a_matrix.size_column(), <span class="stringliteral">&quot;Matrix must be square.&quot;</span>);   </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    ASSERT_DEBUG(a_matrix.size_row() == b_vector.size(), <span class="stringliteral">&quot;Matrix-vector size mismatch, b-vector.&quot;</span>);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    ASSERT_DEBUG(a_matrix.size_row() == x_vector.size(), <span class="stringliteral">&quot;Matrix-vector size mismatch, x-vector.&quot;</span>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a>(a_matrix.size_row() == a_matrix.size_column(), <span class="stringliteral">&quot;Matrix must be square.&quot;</span>);   </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a>(a_matrix.size_row() == b_vector.size(), <span class="stringliteral">&quot;Matrix-vector size mismatch, b-vector.&quot;</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a>(a_matrix.size_row() == x_vector.size(), <span class="stringliteral">&quot;Matrix-vector size mismatch, x-vector.&quot;</span>);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> number_of_nodes = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(b_vector.size());</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    ASSERT_DEBUG(number_of_nodes &gt;= 9, <span class="stringliteral">&quot;Must be greater equal than 9.&quot;</span>);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a>(number_of_nodes &gt;= 9, <span class="stringliteral">&quot;Must be greater equal than 9.&quot;</span>);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> x_nodes = sqrt(number_of_nodes);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    a_matrix *= 0.0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">const</span> Disa::Scalar delta_x = <span class="keyword">static_cast&lt;</span>Disa::Scalar<span class="keyword">&gt;</span>(1.0/(x_nodes - 1.0));</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">const</span> Disa::Scalar delta_x_squared = 1.0/(delta_x*delta_x);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> delta_x = <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a><span class="keyword">&gt;</span>(1.0/(x_nodes - 1.0));</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> delta_x_squared = 1.0/(delta_x*delta_x);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// populate</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    FOR(i_node, number_of_nodes)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="macros_8h.html#a2ace046866a89995cbafe2f3f7754ddd">FOR</a>(i_node, number_of_nodes)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      b_vector[i_node] = <a class="code" href="classLaplace__2D.html#a8a106fd4f816fba2579aa2e3103b769e">source</a>(i_node, x_nodes);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      x_vector[i_node] = <a class="code" href="classLaplace__2D.html#a9a99c57063fc339ca23491f7acdfc871">analytical_solution</a>(i_node, x_nodes);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      b_vector[i_node] = <a class="code" href="class_laplace__2_d.html#a0a070e86f11e0478fc9d9eb7fe9e0307">source</a>(i_node, x_nodes);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      x_vector[i_node] = <a class="code" href="class_laplace__2_d.html#a1e8d9a6c8e1a5b6f7c8157baf9887f80">analytical_solution</a>(i_node, x_nodes);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      <span class="keywordflow">if</span>((i_node) % x_nodes == 0 || (i_node + 1) % x_nodes == 0 || i_node &lt; x_nodes || i_node &gt;= (number_of_nodes - x_nodes)) {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        FOR_EACH_REF(column, a_matrix[i_node]) column = 0.0;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <a class="code" href="macros_8h.html#a43352361264efc4f4846e0aee1eb9afd">FOR_EACH_REF</a>(column, a_matrix[i_node]) column = 0.0;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        a_matrix[i_node][i_node] = 1.0;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        b_vector[i_node] = <a class="code" href="classLaplace__2D.html#a9a99c57063fc339ca23491f7acdfc871">analytical_solution</a>(i_node, x_nodes);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        b_vector[i_node] = <a class="code" href="class_laplace__2_d.html#a1e8d9a6c8e1a5b6f7c8157baf9887f80">analytical_solution</a>(i_node, x_nodes);</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      }</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span>((i_node + x_nodes) &lt; number_of_nodes) a_matrix[i_node][i_node + x_nodes] = -1.0*delta_x_squared;</div>
@@ -139,41 +156,54 @@ $(function() {
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  }</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  std::pair&lt;Disa::Scalar, Disa::Scalar&gt; co_ordinate(<span class="keyword">const</span> std::size_t i_node, <span class="keyword">const</span> std::size_t size_x) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keyword">const</span> Disa::Scalar delta_x = 1.0/<span class="keyword">static_cast&lt;</span>Disa::Scalar<span class="keyword">&gt;</span>(size_x - 1.0);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">return</span> {<span class="keyword">static_cast&lt;</span>Disa::Scalar<span class="keyword">&gt;</span>((i_node % size_x)*delta_x), </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;          <span class="keyword">static_cast&lt;</span>Disa::Scalar<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(i_node / size_x))*delta_x};</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="class_laplace__2_d.html#a19694f0cbc7f92623cec4b25028e310a">   98</a></span>&#160;  std::pair&lt;Disa::Scalar, Disa::Scalar&gt; <a class="code" href="class_laplace__2_d.html#a19694f0cbc7f92623cec4b25028e310a">co_ordinate</a>(<span class="keyword">const</span> std::size_t i_node, <span class="keyword">const</span> std::size_t size_x) {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> delta_x = 1.0/<span class="keyword">static_cast&lt;</span><a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a><span class="keyword">&gt;</span>(size_x - 1.0);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">return</span> {<span class="keyword">static_cast&lt;</span><a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a><span class="keyword">&gt;</span>((i_node % size_x)*delta_x), </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;          <span class="keyword">static_cast&lt;</span><a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(i_node / size_x))*delta_x};</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classLaplace__2D.html#a8a106fd4f816fba2579aa2e3103b769e">  111</a></span>&#160;  Disa::Scalar <a class="code" href="classLaplace__2D.html#a8a106fd4f816fba2579aa2e3103b769e">source</a>(<span class="keyword">const</span> std::size_t i_node, <span class="keyword">const</span> std::size_t size_x) {</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="class_laplace__2_d.html#a0a070e86f11e0478fc9d9eb7fe9e0307">  111</a></span>&#160;  <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> <a class="code" href="class_laplace__2_d.html#a0a070e86f11e0478fc9d9eb7fe9e0307">source</a>(<span class="keyword">const</span> std::size_t i_node, <span class="keyword">const</span> std::size_t size_x) {</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="comment">// -2 [(1 - 6x^2)y^2(y^2 - 1) + (6y^2 - 1)x^2(1 - x^2)]</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> [co_ordinate_x, co_ordinate_y] = co_ordinate(i_node, size_x);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">const</span> Disa::Scalar squared_x = co_ordinate_x*co_ordinate_x;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">const</span> Disa::Scalar squared_y = co_ordinate_y*co_ordinate_y;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">const</span> Disa::Scalar value = -2.0*((1.0 - 6.0*squared_x)*squared_y*(squared_y - 1.0)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> [co_ordinate_x, co_ordinate_y] = <a class="code" href="class_laplace__2_d.html#a19694f0cbc7f92623cec4b25028e310a">co_ordinate</a>(i_node, size_x);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> squared_x = co_ordinate_x*co_ordinate_x;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> squared_y = co_ordinate_y*co_ordinate_y;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> value = -2.0*((1.0 - 6.0*squared_x)*squared_y*(squared_y - 1.0)</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                                    + (6.0*squared_y - 1.0)*squared_x*(1.0 - squared_x));</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">return</span> value;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  }</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classLaplace__2D.html#a9a99c57063fc339ca23491f7acdfc871">  128</a></span>&#160;  Disa::Scalar <a class="code" href="classLaplace__2D.html#a9a99c57063fc339ca23491f7acdfc871">analytical_solution</a>(<span class="keyword">const</span> std::size_t i_node, <span class="keyword">const</span> std::size_t size_x) {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> [co_ordinate_x, co_ordinate_y] = co_ordinate(i_node, size_x);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keyword">const</span> Disa::Scalar squared_x = co_ordinate_x*co_ordinate_x;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">const</span> Disa::Scalar squared_y = co_ordinate_y*co_ordinate_y;</div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="class_laplace__2_d.html#a1e8d9a6c8e1a5b6f7c8157baf9887f80">  128</a></span>&#160;  <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> <a class="code" href="class_laplace__2_d.html#a1e8d9a6c8e1a5b6f7c8157baf9887f80">analytical_solution</a>(<span class="keyword">const</span> std::size_t i_node, <span class="keyword">const</span> std::size_t size_x) {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> [co_ordinate_x, co_ordinate_y] = <a class="code" href="class_laplace__2_d.html#a19694f0cbc7f92623cec4b25028e310a">co_ordinate</a>(i_node, size_x);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> squared_x = co_ordinate_x*co_ordinate_x;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">const</span> <a class="code" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a> squared_y = co_ordinate_y*co_ordinate_y;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">return</span> (squared_x - squared_x*squared_x)*(squared_y*squared_y - squared_y);</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  }</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;};</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//DISA_LAPLACE_2D_H</span></div>
-<div class="ttc" id="aclassLaplace__2D_html"><div class="ttname"><a href="classLaplace__2D.html">Laplace_2D</a></div><div class="ttdoc">`</div><div class="ttdef"><b>Definition:</b> laplace_2d.h:35</div></div>
-<div class="ttc" id="aclassLaplace__2D_html_a8a106fd4f816fba2579aa2e3103b769e"><div class="ttname"><a href="classLaplace__2D.html#a8a106fd4f816fba2579aa2e3103b769e">Laplace_2D::source</a></div><div class="ttdeci">Disa::Scalar source(const std::size_t i_node, const std::size_t size_x)</div><div class="ttdoc">Creates the source term.</div><div class="ttdef"><b>Definition:</b> laplace_2d.h:111</div></div>
-<div class="ttc" id="aclassLaplace__2D_html_a9a99c57063fc339ca23491f7acdfc871"><div class="ttname"><a href="classLaplace__2D.html#a9a99c57063fc339ca23491f7acdfc871">Laplace_2D::analytical_solution</a></div><div class="ttdeci">Disa::Scalar analytical_solution(const std::size_t i_node, const std::size_t size_x)</div><div class="ttdef"><b>Definition:</b> laplace_2d.h:128</div></div>
-<div class="ttc" id="aclassLaplace__2D_html_ac59c4bf18174406ac8b8ae85dac6dca5"><div class="ttname"><a href="classLaplace__2D.html#ac59c4bf18174406ac8b8ae85dac6dca5">Laplace_2D::construct_laplace_2d</a></div><div class="ttdeci">void construct_laplace_2d(_matrix_type &amp;a_matrix, _vector_type &amp;b_vector, _vector_type &amp;x_vector)</div><div class="ttdoc">Constructs a linear system to solve a 2D Laplace problem on a unit equi-spaced domain.</div><div class="ttdef"><b>Definition:</b> laplace_2d.h:63</div></div>
+<div class="ttc" id="aclass_laplace__2_d_html"><div class="ttname"><a href="class_laplace__2_d.html">Laplace_2D</a></div><div class="ttdoc">`</div><div class="ttdef"><b>Definition:</b> laplace_2d.h:35</div></div>
+<div class="ttc" id="aclass_laplace__2_d_html_a0a070e86f11e0478fc9d9eb7fe9e0307"><div class="ttname"><a href="class_laplace__2_d.html#a0a070e86f11e0478fc9d9eb7fe9e0307">Laplace_2D::source</a></div><div class="ttdeci">Disa::Scalar source(const std::size_t i_node, const std::size_t size_x)</div><div class="ttdoc">Creates the source term.</div><div class="ttdef"><b>Definition:</b> laplace_2d.h:111</div></div>
+<div class="ttc" id="aclass_laplace__2_d_html_a19694f0cbc7f92623cec4b25028e310a"><div class="ttname"><a href="class_laplace__2_d.html#a19694f0cbc7f92623cec4b25028e310a">Laplace_2D::co_ordinate</a></div><div class="ttdeci">std::pair&lt; Disa::Scalar, Disa::Scalar &gt; co_ordinate(const std::size_t i_node, const std::size_t size_x)</div><div class="ttdef"><b>Definition:</b> laplace_2d.h:98</div></div>
+<div class="ttc" id="aclass_laplace__2_d_html_a1e8d9a6c8e1a5b6f7c8157baf9887f80"><div class="ttname"><a href="class_laplace__2_d.html#a1e8d9a6c8e1a5b6f7c8157baf9887f80">Laplace_2D::analytical_solution</a></div><div class="ttdeci">Disa::Scalar analytical_solution(const std::size_t i_node, const std::size_t size_x)</div><div class="ttdef"><b>Definition:</b> laplace_2d.h:128</div></div>
+<div class="ttc" id="aclass_laplace__2_d_html_afc4c6a383d6d79f8124d21f1a4e0062a"><div class="ttname"><a href="class_laplace__2_d.html#afc4c6a383d6d79f8124d21f1a4e0062a">Laplace_2D::construct_laplace_2d</a></div><div class="ttdeci">void construct_laplace_2d(_matrix_type &amp;a_matrix, _vector_type &amp;b_vector, _vector_type &amp;x_vector)</div><div class="ttdoc">Constructs a linear system to solve a 2D Laplace problem on a unit equi-spaced domain.</div><div class="ttdef"><b>Definition:</b> laplace_2d.h:63</div></div>
+<div class="ttc" id="amacros_8h_html_a2ace046866a89995cbafe2f3f7754ddd"><div class="ttname"><a href="macros_8h.html#a2ace046866a89995cbafe2f3f7754ddd">FOR</a></div><div class="ttdeci">#define FOR(...)</div><div class="ttdoc">Selects either the index or ranged index for loop macros, see descriptions.</div><div class="ttdef"><b>Definition:</b> macros.h:154</div></div>
+<div class="ttc" id="amacros_8h_html_a43352361264efc4f4846e0aee1eb9afd"><div class="ttname"><a href="macros_8h.html#a43352361264efc4f4846e0aee1eb9afd">FOR_EACH_REF</a></div><div class="ttdeci">#define FOR_EACH_REF(element, container)</div><div class="ttdoc">Range based for-loop macro.</div><div class="ttdef"><b>Definition:</b> macros.h:168</div></div>
+<div class="ttc" id="amacros_8h_html_aa43468426b5b5a5e19a1f40f8118a6b3"><div class="ttname"><a href="macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3">ASSERT_DEBUG</a></div><div class="ttdeci">#define ASSERT_DEBUG(condition, exception)</div><div class="ttdef"><b>Definition:</b> macros.h:116</div></div>
+<div class="ttc" id="amatrix__dense_8h_html"><div class="ttname"><a href="matrix__dense_8h.html">matrix_dense.h</a></div></div>
+<div class="ttc" id="amatrix__sparse_8h_html"><div class="ttname"><a href="matrix__sparse_8h.html">matrix_sparse.h</a></div></div>
+<div class="ttc" id="anamespace_disa_html_a8c2981f3f834be9448a6ab06c28748eb"><div class="ttname"><a href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Disa::Scalar</a></div><div class="ttdeci">double Scalar</div><div class="ttdef"><b>Definition:</b> scalar.h:36</div></div>
+<div class="ttc" id="ascalar_8h_html"><div class="ttname"><a href="scalar_8h.html">scalar.h</a></div></div>
+<div class="ttc" id="avector__dense_8h_html"><div class="ttname"><a href="vector__dense_8h.html">vector_dense.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6de032d0d9a654666bd4023108850d60.html">solver</a></li><li class="navelem"><a class="el" href="dir_106854fe8521c53cb1be122466f8e90d.html">test</a></li><li class="navelem"><a class="el" href="laplace__2d_8h.html">laplace_2d.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

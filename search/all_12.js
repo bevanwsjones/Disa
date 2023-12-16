@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['vector_5fdense_126',['Vector_Dense',['../structDisa_1_1Vector__Dense.html',1,'Disa::Vector_Dense&lt; _size &gt;'],['../structDisa_1_1Vector__Dense.html#a5c7ddd594181f9802e7ba337521437c7',1,'Disa::Vector_Dense::Vector_Dense()'],['../structDisa_1_1Vector__Dense.html#ab68b37fb0ff6ae9da1efb20a08284811',1,'Disa::Vector_Dense::Vector_Dense(const std::initializer_list&lt; Scalar &gt; &amp;list)'],['../structDisa_1_1Vector__Dense.html#a7d85a69dc357e2e199067a4b01e0b0f3',1,'Disa::Vector_Dense::Vector_Dense(const std::function&lt; Scalar(const std::size_t)&gt; &amp;lambda, std::size_t size=_size)'],['../structDisa_1_1Vector__Dense_3_010_01_4.html#afe317658b267510e970fc0d55063d4d2',1,'Disa::Vector_Dense&lt; 0 &gt;::Vector_Dense()'],['../structDisa_1_1Vector__Dense_3_010_01_4.html#a681c05640042f3d64970b93503dc6e5d',1,'Disa::Vector_Dense&lt; 0 &gt;::Vector_Dense(const std::initializer_list&lt; Scalar &gt; &amp;list)'],['../structDisa_1_1Vector__Dense_3_010_01_4.html#ad14f6e6139fd0e8478a4d0752586a0cf',1,'Disa::Vector_Dense&lt; 0 &gt;::Vector_Dense(const std::function&lt; Scalar(std::size_t)&gt; &amp;lambda, std::size_t size)']]],
-  ['vector_5fdense_3c_200_20_3e_127',['Vector_Dense&lt; 0 &gt;',['../structDisa_1_1Vector__Dense_3_010_01_4.html',1,'Disa']]],
-  ['vertex_5fadjacency_5fiter_128',['vertex_adjacency_iter',['../classDisa_1_1Adjacency__Graph.html#a48ff93354b0c0df64f7a0e4bf84ea873',1,'Disa::Adjacency_Graph']]],
-  ['vertex_5fadjacent_5flist_129',['vertex_adjacent_list',['../classDisa_1_1Adjacency__Graph.html#afd5348b92f357a0c1f7ae242cf0eefdd',1,'Disa::Adjacency_Graph']]],
-  ['vertex_5flevel_130',['vertex_level',['../classDisa_1_1Adjacency__Subgraph.html#abe21f3519ae2817d5b0f4db56908e6cd',1,'Disa::Adjacency_Subgraph']]]
+  ['unit_264',['unit',['../namespace_disa.html#abaf8a70ae2341d547d122981e63c8b29',1,'Disa']]],
+  ['unknown_265',['unknown',['../namespace_disa.html#a5cc27b15a9dee0ad91cc0f746fcd987baad921d60486366258809553a3db49a4a',1,'Disa']]],
+  ['update_266',['update',['../struct_disa_1_1_convergence___data.html#a1fd142225ed489aa05a10955d4531b4a',1,'Disa::Convergence_Data']]],
+  ['update_5flevels_267',['update_levels',['../class_disa_1_1_adjacency___subgraph.html#a7d0d325a5b24ec16077a4153a3c78a9a',1,'Disa::Adjacency_Subgraph']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_5fmatrix_279',['_matrix',['../structDisa_1_1Matrix__Dense.html#aedbb439201e095be173b5e587fd847f3',1,'Disa::Matrix_Dense::_matrix()'],['../structDisa_1_1Matrix__Dense_3_010_00_010_01_4.html#aadc5946fbaf6ea5678ece0e81b9566dd',1,'Disa::Matrix_Dense&lt; 0, 0 &gt;::_matrix()']]],
-  ['_5fvector_280',['_vector',['../structDisa_1_1Vector__Dense.html#a8ec376daf44072ee81c535ff15f1a9b1',1,'Disa::Vector_Dense::_vector()'],['../structDisa_1_1Vector__Dense_3_010_01_4.html#a978fca3419de39f114c22b57782d15ba',1,'Disa::Vector_Dense&lt; 0 &gt;::_vector()']]]
+  ['_5fmatrix_525',['_matrix',['../struct_disa_1_1_matrix___dense.html#a635ced80f5e72066aa85e2236a3083f5',1,'Disa::Matrix_Dense::_matrix()'],['../struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html#af5b3c02e2fc2815882169f40a07349c0',1,'Disa::Matrix_Dense&lt; 0, 0 &gt;::_matrix()']]],
+  ['_5fvector_526',['_vector',['../struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a',1,'Disa::Vector_Dense::_vector()'],['../struct_disa_1_1_vector___dense_3_010_01_4.html#a8adaa45a2ee29bd7c0b45ebb2dd793a3',1,'Disa::Vector_Dense&lt; 0 &gt;::_vector()']]]
 ];

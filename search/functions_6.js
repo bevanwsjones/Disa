@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['get_5fconfig_193',['get_config',['../classDisa_1_1Direct.html#ab9854d13a52ae4d3e5aa0c951952c020',1,'Disa::Direct::get_config()'],['../classDisa_1_1Direct__Lower__Upper__Factorisation.html#a3c14544b7a2e6047cbbcd30f221afef5',1,'Disa::Direct_Lower_Upper_Factorisation::get_config()']]]
+  ['get_5fconfig_397',['get_config',['../class_disa_1_1_direct.html#a708f8f61a293a32749811f0340ca6c39',1,'Disa::Direct::get_config()'],['../class_disa_1_1_direct___lower___upper___factorisation.html#a82066c4dc6350b31803f6f45f22e1f7c',1,'Disa::Direct_Lower_Upper_Factorisation::get_config()']]],
+  ['greedy_5fmulticolouring_398',['greedy_multicolouring',['../namespace_disa.html#a67dd1bf443731d00b774623d28891657',1,'Disa']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['a_5fdense_250',['a_dense',['../classLaplace2DProblem.html#a5582b295c38203239cae5e1d6303b8cc',1,'Laplace2DProblem']]],
-  ['a_5fsparse_251',['a_sparse',['../classLaplace2DProblem.html#ab82efcd8c7a85c10305ddd89932d4479',1,'Laplace2DProblem']]],
-  ['a_5fsparse_5f0_252',['a_sparse_0',['../classLaplace2DProblem.html#a409e00b2694a72266ce19b514e9d3995',1,'Laplace2DProblem']]]
+  ['a_5fdense_479',['a_dense',['../class_laplace2_d_problem.html#a91b04e5c778117758bae059b7cf41692',1,'Laplace2DProblem']]],
+  ['a_5fsparse_480',['a_sparse',['../class_laplace2_d_problem.html#a4f4b303bd798c3280c8af0b940af928e',1,'Laplace2DProblem']]],
+  ['a_5fsparse_5f0_481',['a_sparse_0',['../class_laplace2_d_problem.html#aac18fda0a80a20a0f0091fec687c2900',1,'Laplace2DProblem']]]
 ];

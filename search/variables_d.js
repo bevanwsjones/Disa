@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x_5fvector_278',['x_vector',['../classLaplace2DProblem.html#aa828414631200fa92515978da2174abd',1,'Laplace2DProblem']]]
+  ['vertex_5fadjacent_5flist_522',['vertex_adjacent_list',['../class_disa_1_1_adjacency___graph.html#ada1d193b23e67a018ee5987607f93eb9',1,'Disa::Adjacency_Graph']]]
 ];

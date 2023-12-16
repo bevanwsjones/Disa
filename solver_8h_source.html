@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -45,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('solver_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,17 +81,12 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6de032d0d9a654666bd4023108850d60.html">solver</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">solver.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
+<a href="solver_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// MIT License</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright (c) 2022 Bevan W.S. Jones</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
@@ -93,76 +110,90 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef DISA_SOLVERS_H</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define DISA_SOLVERS_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;direct_lower_upper_factorisation.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;scalar.h&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;solver_fixed_point.h&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;solver_utilities.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="direct__lower__upper__factorisation_8h.html">direct_lower_upper_factorisation.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="scalar_8h.html">scalar.h</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="solver__fixed__point_8h.html">solver_fixed_point.h</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="solver__utilities_8h.html">solver_utilities.h</a>&quot;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">namespace </span>Disa{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_disa.html">Disa</a>{</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// Forward declarations</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">class </span>Matrix_Sparse;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span>&gt; <span class="keyword">class </span>Vector_Dense;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classDisa_1_1Solver.html">   44</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDisa_1_1Solver.html">Solver</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_disa_1_1_solver.html">   44</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_disa_1_1_solver.html">Solver</a> {</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="classDisa_1_1Solver.html">Solver</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_disa_1_1_solver.html#af90ed19133f4d09a9d655b3f62da5e68">   47</a></span>&#160;  <span class="keyword">explicit</span> <a class="code" href="class_disa_1_1_solver.html#af90ed19133f4d09a9d655b3f62da5e68">Solver</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  std::variant&lt;std::unique_ptr&lt;Solver_LU&lt;0&gt; &gt;,</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;               std::unique_ptr&lt;Solver_LUP&lt;0&gt; &gt;,</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;               std::unique_ptr&lt;Solver_Jacobi&gt;,</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;               std::unique_ptr&lt;Solver_Gauss_Seidel&gt;,</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;               std::unique_ptr&lt;Sover_Sor&gt;,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;               std::nullptr_t&gt; solver{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">   54</a></span>&#160;               std::nullptr_t&gt; <a class="code" href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">solver</a>{<span class="keyword">nullptr</span>};</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="structDisa_1_1Convergence__Data.html">Convergence_Data</a> solve(<span class="keyword">const</span> <a class="code" href="classDisa_1_1Matrix__Sparse.html">Matrix_Sparse</a>&amp; a_matrix, <a class="code" href="structDisa_1_1Vector__Dense_3_010_01_4.html">Vector_Dense&lt;0&gt;</a>&amp; x_vector,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                         <span class="keyword">const</span> <a class="code" href="structDisa_1_1Vector__Dense_3_010_01_4.html">Vector_Dense&lt;0&gt;</a>&amp; b_vector) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_disa_1_1_solver.html#a3bc0e8af8ecb32476b2fa60f62c88a84">   56</a></span>&#160;  <a class="code" href="struct_disa_1_1_convergence___data.html">Convergence_Data</a> <a class="code" href="class_disa_1_1_solver.html#a3bc0e8af8ecb32476b2fa60f62c88a84">solve</a>(<span class="keyword">const</span> <a class="code" href="class_disa_1_1_matrix___sparse.html">Matrix_Sparse</a>&amp; a_matrix, <a class="code" href="struct_disa_1_1_vector___dense_3_010_01_4.html">Vector_Dense&lt;0&gt;</a>&amp; x_vector,</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                         <span class="keyword">const</span> <a class="code" href="struct_disa_1_1_vector___dense_3_010_01_4.html">Vector_Dense&lt;0&gt;</a>&amp; b_vector) {</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">switch</span>(solver.index()) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordflow">case</span> 0: ERROR(<span class="stringliteral">&quot;LU solver does not support sparse matrices.&quot;</span>);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keywordflow">case</span> 1: ERROR(<span class="stringliteral">&quot;LUP solver does not support sparse matrices.&quot;</span>);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keywordflow">case</span> 2: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Solver_Jacobi&gt; &gt;(solver)-&gt;solve_system(a_matrix, x_vector, b_vector);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keywordflow">case</span> 3: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Solver_Gauss_Seidel&gt; &gt;(solver)-&gt;solve_system(a_matrix, x_vector, b_vector);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">case</span> 4: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Sover_Sor&gt; &gt;(solver)-&gt;solve_system(a_matrix, x_vector, b_vector);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">switch</span>(<a class="code" href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">solver</a>.index()) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordflow">case</span> 0: <a class="code" href="macros_8h.html#ae225ab718bd4f5e2221129f026d3d8f1">ERROR</a>(<span class="stringliteral">&quot;LU solver does not support sparse matrices.&quot;</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keywordflow">case</span> 1: <a class="code" href="macros_8h.html#ae225ab718bd4f5e2221129f026d3d8f1">ERROR</a>(<span class="stringliteral">&quot;LUP solver does not support sparse matrices.&quot;</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keywordflow">case</span> 2: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Solver_Jacobi&gt; &gt;(<a class="code" href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">solver</a>)-&gt;solve_system(a_matrix, x_vector, b_vector);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keywordflow">case</span> 3: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Solver_Gauss_Seidel&gt; &gt;(<a class="code" href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">solver</a>)-&gt;solve_system(a_matrix, x_vector, b_vector);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">case</span> 4: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Sover_Sor&gt; &gt;(<a class="code" href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">solver</a>)-&gt;solve_system(a_matrix, x_vector, b_vector);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        ERROR(<span class="stringliteral">&quot;Unknown or uninitialized solver.&quot;</span>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="macros_8h.html#ae225ab718bd4f5e2221129f026d3d8f1">ERROR</a>(<span class="stringliteral">&quot;Unknown or uninitialized solver.&quot;</span>);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        exit(1);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }    </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  };</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <a class="code" href="structDisa_1_1Convergence__Data.html">Convergence_Data</a> solve(<a class="code" href="structDisa_1_1Vector__Dense_3_010_01_4.html">Vector_Dense&lt;0&gt;</a>&amp; x_vector, <span class="keyword">const</span> <a class="code" href="structDisa_1_1Vector__Dense_3_010_01_4.html">Vector_Dense&lt;0&gt;</a>&amp; b_vector) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_disa_1_1_solver.html#a9f71ae19e8481448a8205bee99b537aa">   71</a></span>&#160;  <a class="code" href="struct_disa_1_1_convergence___data.html">Convergence_Data</a> <a class="code" href="class_disa_1_1_solver.html#a9f71ae19e8481448a8205bee99b537aa">solve</a>(<a class="code" href="struct_disa_1_1_vector___dense_3_010_01_4.html">Vector_Dense&lt;0&gt;</a>&amp; x_vector, <span class="keyword">const</span> <a class="code" href="struct_disa_1_1_vector___dense_3_010_01_4.html">Vector_Dense&lt;0&gt;</a>&amp; b_vector) {</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">switch</span>(solver.index()) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keywordflow">case</span> 0: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Solver_LU&lt;0&gt; &gt; &gt;(solver)-&gt;solve_system(x_vector, b_vector);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordflow">case</span> 1: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Solver_LUP&lt;0&gt; &gt; &gt;(solver)-&gt;solve_system(x_vector, b_vector);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">case</span> 2: ERROR(<span class="stringliteral">&quot;Jacobi solver does not support sparse matrices.&quot;</span>);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keywordflow">case</span> 3: ERROR(<span class="stringliteral">&quot;Gauss Seidel solver does not support sparse matrices.&quot;</span>);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <span class="keywordflow">case</span> 4: ERROR(<span class="stringliteral">&quot;SOR solver does not support sparse matrices.&quot;</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">switch</span>(<a class="code" href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">solver</a>.index()) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keywordflow">case</span> 0: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Solver_LU&lt;0&gt; &gt; &gt;(<a class="code" href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">solver</a>)-&gt;solve_system(x_vector, b_vector);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordflow">case</span> 1: <span class="keywordflow">return</span> std::get&lt;std::unique_ptr&lt;Solver_LUP&lt;0&gt; &gt; &gt;(<a class="code" href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">solver</a>)-&gt;solve_system(x_vector, b_vector);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">case</span> 2: <a class="code" href="macros_8h.html#ae225ab718bd4f5e2221129f026d3d8f1">ERROR</a>(<span class="stringliteral">&quot;Jacobi solver does not support sparse matrices.&quot;</span>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keywordflow">case</span> 3: <a class="code" href="macros_8h.html#ae225ab718bd4f5e2221129f026d3d8f1">ERROR</a>(<span class="stringliteral">&quot;Gauss Seidel solver does not support sparse matrices.&quot;</span>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <span class="keywordflow">case</span> 4: <a class="code" href="macros_8h.html#ae225ab718bd4f5e2221129f026d3d8f1">ERROR</a>(<span class="stringliteral">&quot;SOR solver does not support sparse matrices.&quot;</span>);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        ERROR(<span class="stringliteral">&quot;Unknown or uninitialized solver.&quot;</span>);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <a class="code" href="macros_8h.html#ae225ab718bd4f5e2221129f026d3d8f1">ERROR</a>(<span class="stringliteral">&quot;Unknown or uninitialized solver.&quot;</span>);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        exit(1);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }    </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  };</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<a class="code" href="classDisa_1_1Solver.html">Solver</a> build_solver(<a class="code" href="structDisa_1_1Solver__Config.html">Solver_Config</a> config);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;Solver <a class="code" href="namespace_disa.html#aefb94f81769534f4e368f72f9f7c2721">build_solver</a>(Solver_Config config);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//DISA_SOLVERS_H</span></div>
-<div class="ttc" id="aclassDisa_1_1Matrix__Sparse_html"><div class="ttname"><a href="classDisa_1_1Matrix__Sparse.html">Disa::Matrix_Sparse</a></div><div class="ttdoc">A efficient data structure which represents a matrix comprised of mostly zero entries....</div><div class="ttdef"><b>Definition:</b> matrix_sparse.h:92</div></div>
-<div class="ttc" id="aclassDisa_1_1Solver_html"><div class="ttname"><a href="classDisa_1_1Solver.html">Disa::Solver</a></div><div class="ttdoc">Solver.</div><div class="ttdef"><b>Definition:</b> solver.h:44</div></div>
-<div class="ttc" id="astructDisa_1_1Convergence__Data_html"><div class="ttname"><a href="structDisa_1_1Convergence__Data.html">Disa::Convergence_Data</a></div><div class="ttdoc">Contains data to track the convergence progress of a solver.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:97</div></div>
-<div class="ttc" id="astructDisa_1_1Solver__Config_html"><div class="ttname"><a href="structDisa_1_1Solver__Config.html">Disa::Solver_Config</a></div><div class="ttdoc">Contains all possible configurations for all solvers in Disa.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:54</div></div>
-<div class="ttc" id="astructDisa_1_1Vector__Dense_3_010_01_4_html"><div class="ttname"><a href="structDisa_1_1Vector__Dense_3_010_01_4.html">Disa::Vector_Dense&lt; 0 &gt;</a></div><div class="ttdoc">Mathematical Vector, of dimension _size, where every vector element has allocated has memory.</div><div class="ttdef"><b>Definition:</b> vector_dense.h:164</div></div>
+<div class="ttc" id="aclass_disa_1_1_matrix___sparse_html"><div class="ttname"><a href="class_disa_1_1_matrix___sparse.html">Disa::Matrix_Sparse</a></div><div class="ttdoc">A efficient data structure which represents a matrix comprised of mostly zero entries.</div><div class="ttdef"><b>Definition:</b> matrix_sparse.h:92</div></div>
+<div class="ttc" id="aclass_disa_1_1_solver_html"><div class="ttname"><a href="class_disa_1_1_solver.html">Disa::Solver</a></div><div class="ttdoc">Solver.</div><div class="ttdef"><b>Definition:</b> solver.h:44</div></div>
+<div class="ttc" id="aclass_disa_1_1_solver_html_a3bc0e8af8ecb32476b2fa60f62c88a84"><div class="ttname"><a href="class_disa_1_1_solver.html#a3bc0e8af8ecb32476b2fa60f62c88a84">Disa::Solver::solve</a></div><div class="ttdeci">Convergence_Data solve(const Matrix_Sparse &amp;a_matrix, Vector_Dense&lt; 0 &gt; &amp;x_vector, const Vector_Dense&lt; 0 &gt; &amp;b_vector)</div><div class="ttdef"><b>Definition:</b> solver.h:56</div></div>
+<div class="ttc" id="aclass_disa_1_1_solver_html_a9f71ae19e8481448a8205bee99b537aa"><div class="ttname"><a href="class_disa_1_1_solver.html#a9f71ae19e8481448a8205bee99b537aa">Disa::Solver::solve</a></div><div class="ttdeci">Convergence_Data solve(Vector_Dense&lt; 0 &gt; &amp;x_vector, const Vector_Dense&lt; 0 &gt; &amp;b_vector)</div><div class="ttdef"><b>Definition:</b> solver.h:71</div></div>
+<div class="ttc" id="aclass_disa_1_1_solver_html_ab8b75f885809444d0e1e4aca0dd9fde4"><div class="ttname"><a href="class_disa_1_1_solver.html#ab8b75f885809444d0e1e4aca0dd9fde4">Disa::Solver::solver</a></div><div class="ttdeci">std::variant&lt; std::unique_ptr&lt; Solver_LU&lt; 0 &gt; &gt;, std::unique_ptr&lt; Solver_LUP&lt; 0 &gt; &gt;, std::unique_ptr&lt; Solver_Jacobi &gt;, std::unique_ptr&lt; Solver_Gauss_Seidel &gt;, std::unique_ptr&lt; Sover_Sor &gt;, std::nullptr_t &gt; solver</div><div class="ttdef"><b>Definition:</b> solver.h:54</div></div>
+<div class="ttc" id="aclass_disa_1_1_solver_html_af90ed19133f4d09a9d655b3f62da5e68"><div class="ttname"><a href="class_disa_1_1_solver.html#af90ed19133f4d09a9d655b3f62da5e68">Disa::Solver::Solver</a></div><div class="ttdeci">Solver()=default</div></div>
+<div class="ttc" id="adirect__lower__upper__factorisation_8h_html"><div class="ttname"><a href="direct__lower__upper__factorisation_8h.html">direct_lower_upper_factorisation.h</a></div></div>
+<div class="ttc" id="amacros_8h_html_ae225ab718bd4f5e2221129f026d3d8f1"><div class="ttname"><a href="macros_8h.html#ae225ab718bd4f5e2221129f026d3d8f1">ERROR</a></div><div class="ttdeci">#define ERROR(message)</div><div class="ttdoc">Error level console write out, writes to std::cerr.</div><div class="ttdef"><b>Definition:</b> macros.h:99</div></div>
+<div class="ttc" id="anamespace_disa_html"><div class="ttname"><a href="namespace_disa.html">Disa</a></div><div class="ttdef"><b>Definition:</b> macros.h:31</div></div>
+<div class="ttc" id="anamespace_disa_html_aefb94f81769534f4e368f72f9f7c2721"><div class="ttname"><a href="namespace_disa.html#aefb94f81769534f4e368f72f9f7c2721">Disa::build_solver</a></div><div class="ttdeci">Solver build_solver(Solver_Config config)</div><div class="ttdef"><b>Definition:</b> solver.cpp:26</div></div>
+<div class="ttc" id="ascalar_8h_html"><div class="ttname"><a href="scalar_8h.html">scalar.h</a></div></div>
+<div class="ttc" id="asolver__fixed__point_8h_html"><div class="ttname"><a href="solver__fixed__point_8h.html">solver_fixed_point.h</a></div></div>
+<div class="ttc" id="asolver__utilities_8h_html"><div class="ttname"><a href="solver__utilities_8h.html">solver_utilities.h</a></div></div>
+<div class="ttc" id="astruct_disa_1_1_convergence___data_html"><div class="ttname"><a href="struct_disa_1_1_convergence___data.html">Disa::Convergence_Data</a></div><div class="ttdoc">Contains data to track the convergence progress of a solver.</div><div class="ttdef"><b>Definition:</b> solver_utilities.h:97</div></div>
+<div class="ttc" id="astruct_disa_1_1_vector___dense_3_010_01_4_html"><div class="ttname"><a href="struct_disa_1_1_vector___dense_3_010_01_4.html">Disa::Vector_Dense&lt; 0 &gt;</a></div><div class="ttdoc">Mathematical Vector, of dimension _size, where every vector element has allocated has memory.</div><div class="ttdef"><b>Definition:</b> vector_dense.h:164</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6de032d0d9a654666bd4023108850d60.html">solver</a></li><li class="navelem"><a class="el" href="solver_8h.html">solver.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

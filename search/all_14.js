@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['_7eadjacency_5fgraph_132',['~Adjacency_Graph',['../classDisa_1_1Adjacency__Graph.html#ac3f754ea6c4af7049448da890d6c23c2',1,'Disa::Adjacency_Graph']]],
-  ['_7eadjacency_5fsubgraph_133',['~Adjacency_Subgraph',['../classDisa_1_1Adjacency__Subgraph.html#a4b5622d136638b15b760ab3f17b59888',1,'Disa::Adjacency_Subgraph']]],
-  ['_7edirect_134',['~Direct',['../classDisa_1_1Direct.html#a9a8eb74fa016ab62468428a3442df594',1,'Disa::Direct']]],
-  ['_7ematrix_5fsparse_135',['~Matrix_Sparse',['../classDisa_1_1Matrix__Sparse.html#aa10098fd0bfc69d30fd406c8f97dc262',1,'Disa::Matrix_Sparse']]]
+  ['warning_276',['WARNING',['../macros_8h.html#aaf99b8fcaa4b837f684ea0505ed34487',1,'macros.h']]],
+  ['warning_277',['Warning',['../namespace_disa.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea0eaadb4fcb48a0a0ed7bc9868be9fbaa',1,'Disa']]],
+  ['working_278',['working',['../struct_disa_1_1_solver___fixed___point___jacobi___data.html#a02a15ee181104a8c845ae9c9e0c7dfe3',1,'Disa::Solver_Fixed_Point_Jacobi_Data']]]
 ];
