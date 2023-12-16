@@ -33,6 +33,7 @@
 
 # Directories
 docs/html
+docs/latex
 build/
 .idea/
 .vscode/

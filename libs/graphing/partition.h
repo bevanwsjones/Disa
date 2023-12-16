@@ -36,7 +36,7 @@ class Adjacency_Subgraph;
 /**
  * @brief Performs level set expansion on subgraphs to partition a graph, requires an initial partitioning.
  * @param[in] graph The input graph to partition.
- * @param[in] iterations The number of iterations to perform.
+ * @param[in] max_iter The number of iterations to perform.
  * @param[in, out] subgraph_list The list of initial subgraphs, and on completion, the final partitioning.
  */
 void multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t max_iter,

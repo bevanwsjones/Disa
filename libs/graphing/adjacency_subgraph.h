@@ -87,7 +87,7 @@ public:
   ~Adjacency_Subgraph() = default;
 
   /**
-   * @breif Constructor for creating a subgraph from a parent graph.
+   * @brief Constructor for creating a subgraph from a parent graph.
    * @param[in] parent_graph The parent graph upon which this subgraph will be constructed.
    * @param[in] i_partition_local_global For this partition of the parent graph, the local to global index mapping.
    * @param[in] extra_levels Additional levels to add to the primary partition.
@@ -237,7 +237,7 @@ public:
 
   /**
    * @brief Resizes the number of vertices in the graph.
-   * @size[in] The number of vertices to resize the graph to.
+   * @param[in] size The number of vertices to resize the graph to.
    *
    * @note Edges are removed if the graph size is reduced. And the parent graph is cleared.
    * @note Invalidates the parent hash if size is increased.
@@ -251,7 +251,7 @@ public:
 
   /**
    * @brief Swaps the contents of the graph with the parsed graph
-   * @param[in,out] other The other graph, this graph will obtain the other's vertices and edges, and visa versa.
+   * @param[in,out] graph_other The other graph, this graph will obtain the other's vertices and edges, and visa versa.
    */
   inline void swap(Adjacency_Subgraph& graph_other) {
     graph.swap(graph_other.graph);
@@ -356,7 +356,7 @@ private:
   // -------------------------------------------------------------------------------------------------------------------
 
   /**
-   * @breief Adds further levels to the subgraph, using the parent graph.
+   * @brief Adds further levels to the subgraph, using the parent graph.
    * @param[in] parent_graph The parent graph
    * @param[in] max_level The new number of levels the sub graph must contain.
    * @param[in] current_max The current number of levels the subgraph contains.
@@ -367,7 +367,7 @@ private:
                   std::shared_ptr<std::vector<std::size_t> > i_global_local);
 
   /**
-   * @breif Removes levels from the subgraph.
+   * @brief Removes levels from the subgraph.
    * @param[in] parent_graph The parent graph
    * @param[in] max_level The new number of levels in the subgraph.
    * @param[out] i_global_local The global to local mapping of all vertices in the parent graph. Will only be populated

@@ -2,6 +2,7 @@
 layout: default
 title: Project Documentation
 ---
+theme: jekyll-theme-dinky
 
 # Welcome to Our Project Documentation
 

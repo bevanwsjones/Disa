@@ -50,18 +50,18 @@ target_include_directories(solver PUBLIC .)
 if(ENABLE_TEST)
 
 set(TEST_PROBLEMS 
-        "test/laplace_2d.h")
+        "tests/laplace_2d.h")
 
-  add_executable(test_direct "test/test_direct.cpp" ${TEST_PROBLEMS})
+  add_executable(test_direct "tests/test_direct.cpp" ${TEST_PROBLEMS})
   target_link_libraries(test_direct GTest::gtest_main solver)
   gtest_discover_tests(test_direct)
 
 
-  add_executable(test_solver "test/test_solver.cpp")
+  add_executable(test_solver "tests/test_solver.cpp")
   target_link_libraries(test_solver GTest::gtest_main solver)
   gtest_discover_tests(test_solver)
 
-  add_executable(test_solver_utilities "test/test_solver_utilities.cpp")
+  add_executable(test_solver_utilities "tests/test_solver_utilities.cpp")
   target_link_libraries(test_solver_utilities GTest::gtest_main solver)
   gtest_discover_tests(test_solver_utilities)
 
