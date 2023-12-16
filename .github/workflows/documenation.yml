@@ -13,9 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Doxygen
-        run: sudo apt-get install doxygen
-
       - name: Generate documentation
         uses: mattnotmitt/doxygen-action@v1.9.5
         with: 
