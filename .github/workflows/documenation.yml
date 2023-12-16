@@ -11,16 +11,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Doxygen
         run: sudo apt-get install doxygen
 
       - name: Generate documentation
-        run: doxygen Doxyfile
+        run: doxygen ${{github.workspace}}/Doxyfile
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./html
+          publish_dir: ${{github.workspace}}/docs/html
