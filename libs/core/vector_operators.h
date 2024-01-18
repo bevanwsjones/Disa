@@ -43,8 +43,8 @@ namespace Disa {
  * @param vector The vector for which the norm is being computed.
  * @return The computed L_p-norm.
  */
-template<unsigned int _p_value, std::size_t _size>
-constexpr Scalar lp_norm(const Vector_Dense<_size>& vector) {
+template<unsigned int _p_value, typename _data, std::size_t _size>
+constexpr Scalar lp_norm(const Vector_Dense<_data, _size>& vector) {
   switch(_p_value) {
     case 0:
       return std::abs(*std::max_element(vector.begin(), vector.end(),
@@ -71,8 +71,8 @@ constexpr Scalar lp_norm(const Vector_Dense<_size>& vector) {
  * @param[in] vector The vector to compute the mean value.
  * @return The arithmetic mean value of the vector.
  */
-template<std::size_t _size>
-constexpr Scalar mean(const Vector_Dense<_size>& vector) {
+template<typename _data, std::size_t _size>
+constexpr Scalar mean(const Vector_Dense<_data, _size>& vector) {
   ASSERT_DEBUG(_size != 0 || !vector.empty(), "Dynamic vector is empty.");
   return std::accumulate(vector.begin(), vector.end(), 0.0)/static_cast<Scalar>(vector.size());
 }
@@ -85,8 +85,9 @@ constexpr Scalar mean(const Vector_Dense<_size>& vector) {
  * @param vector_1 The second vector to be dotted.
  * @return The scalar result.
  */
-template<std::size_t _size_0, std::size_t _size_1>
-constexpr Scalar dot_product(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
+template<typename _data, std::size_t _size_0, std::size_t _size_1>
+constexpr Scalar dot_product(const Vector_Dense<_data, _size_0>& vector_0,
+                             const Vector_Dense<_data, _size_1>& vector_1) {
   ASSERT_DEBUG(vector_0.size() == vector_1.size(),
                "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
                std::to_string(vector_1.size()) + ".");
@@ -99,8 +100,8 @@ constexpr Scalar dot_product(const Vector_Dense<_size_0>& vector_0, const Vector
  * @param[in] vector The vector to be normalised.
  * @return A unit vector if the vector has size, else the zero vector.
  */
-template<std::size_t _size>
-constexpr Vector_Dense<_size> unit(Vector_Dense<_size> vector) {
+template<typename _data, std::size_t _size>
+constexpr Vector_Dense<_data, _size> unit(Vector_Dense<_data, _size> vector) {
   const Scalar inverse_l_2 = 1.0/lp_norm<2>(vector);
   vector *= std::isinf(inverse_l_2) ? 0.0 : inverse_l_2; // properly zero, zero vectors.
   return vector;
@@ -108,15 +109,15 @@ constexpr Vector_Dense<_size> unit(Vector_Dense<_size> vector) {
 
 /**
  * @brief Computes the (smaller/included) angle between two vectors, computed theta = arccos (a.b/|a||b|).
+ * @tparam _is_radians Must the returned angle be computed in radians or degrees.
  * @tparam _size_0 Size of the first vector if static, else 0.
  * @tparam _size_1 Size of the second vector if static, else 0.
- * @tparam _is_radians Must the returned angle be computed in radians (default) or degrees.
  * @param vector_0 The first vector, a.
  * @param vector_1 The second vector, b.
  * @return The angle between the vectors.
  */
-template<std::size_t _size_0, std::size_t _size_1, bool _is_radians = true>
-constexpr Scalar angle(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
+template<bool _is_radians, typename _data, std::size_t _size_0, std::size_t _size_1>
+constexpr _data angle(const Vector_Dense<_data, _size_0>& vector_0, const Vector_Dense<_data, _size_1>& vector_1) {
   ASSERT_DEBUG(vector_0.size() == vector_1.size(),
                "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
                std::to_string(vector_1.size()) + ".");
@@ -134,15 +135,15 @@ constexpr Scalar angle(const Vector_Dense<_size_0>& vector_0, const Vector_Dense
  * @param[in] vector_1 The second vector, a, of the cross product.
  * @return The vector orthogonal (to a and b) vector c.
  */
-template<std::size_t _size_0, std::size_t _size_1>
-constexpr typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type
-cross_product(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
+template<typename _data, std::size_t _size_0, std::size_t _size_1>
+constexpr typename StaticPromoter<Vector_Dense<_data, _size_0>, Vector_Dense<_data, _size_1>>::type
+cross_product(const Vector_Dense<_data, _size_0>& vector_0, const Vector_Dense<_data, _size_1>& vector_1) {
   ASSERT_DEBUG(vector_0.size() == vector_1.size(),
                "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
                std::to_string(vector_1.size()) + ".");
   ASSERT_DEBUG(vector_0.size() == 2 || vector_0.size() == 3,
                "Incompatible vector size, " + std::to_string(vector_0.size()) + ", must be 2 or 3.");
-  typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type _return_vector;
+  typedef typename StaticPromoter<Vector_Dense<_data, _size_0>, Vector_Dense<_data, _size_1>>::type _return_vector;
   if (vector_0.size() == 2) return {0.0, 0.0, vector_0[0]*vector_1[1] - vector_0[1]*vector_1[0]};
   else
     return {vector_0[1]*vector_1[2] - vector_0[2]*vector_1[1],
@@ -159,14 +160,14 @@ cross_product(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>
  * @param[in] vector_1 The direction of the projection, must be a unit vector.
  * @return The projected vector.
  */
-template<std::size_t _size_0, std::size_t _size_1>
-constexpr typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type
-projection_tangent(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
+template<typename _data, std::size_t _size_0, std::size_t _size_1>
+constexpr typename StaticPromoter<Vector_Dense<_data, _size_0>, Vector_Dense<_data, _size_1>>::type
+projection_tangent(const Vector_Dense<_data, _size_0>& vector_0, const Vector_Dense<_data, _size_1>& vector_1) {
   ASSERT_DEBUG(lp_norm<2>(vector_1), "Second vector is not a unit vector.");
   ASSERT_DEBUG(vector_0.size() == vector_1.size(),
                "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
                std::to_string(vector_1.size()) + ".");
-  typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type _return_vector;
+  typedef typename StaticPromoter<Vector_Dense<_data, _size_0>, Vector_Dense<_data, _size_1>>::type _return_vector;
   return dot_product(vector_0, vector_1)*
          _return_vector([&](const std::size_t i_element) { return vector_1[i_element]; }, vector_1.size());
 }
@@ -179,13 +180,13 @@ projection_tangent(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_si
  * @param[in] vector_1 The 'orthogonal' direction of the projection, must be a unit vector.
  * @return The projected vector.
  */
-template<std::size_t _size_0, std::size_t _size_1>
-constexpr typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type
-projection_orthogonal(const Vector_Dense<_size_0>& vector_0, const Vector_Dense<_size_1>& vector_1) {
+template<typename _data, std::size_t _size_0, std::size_t _size_1>
+constexpr typename StaticPromoter<Vector_Dense<_data, _size_0>, Vector_Dense<_data, _size_1>>::type
+projection_orthogonal(const Vector_Dense<_data, _size_0>& vector_0, const Vector_Dense<_data, _size_1>& vector_1) {
   ASSERT_DEBUG(vector_0.size() == vector_1.size(),
                "Incompatible vector sizes, " + std::to_string(vector_0.size()) + " vs. " +
                std::to_string(vector_1.size()) + ".");
-  typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1>>::type _return_vector;
+  typedef typename StaticPromoter<Vector_Dense<_data, _size_0>, Vector_Dense<_data, _size_1>>::type _return_vector;
   _return_vector vector([&](const std::size_t index) { return vector_0[index]; }, vector_1.size());
   return vector - projection_tangent(vector_0, vector_1);
 }
