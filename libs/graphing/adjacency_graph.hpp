@@ -61,19 +61,24 @@ bool Adjacency_Graph<_directed>::insert(const Edge& edge) {
 
   // Preliminaries check if the edge exists, then determine if we need to resize.
   if(contains(edge)) return false;
-  const auto& [i_lower_vertex, i_upper_vertex] = order_edge_vertex(&edge);
-  if(i_upper_vertex >= size_vertex()) resize(i_upper_vertex + 1);
+  const auto& [i_first_vertex, i_second_vertex] =
+   !_directed ? order_edge_vertex(&edge) : std::pair<const std::size_t&, const std::size_t&>({edge.first, edge.second});
+  if(std::max(i_first_vertex, i_second_vertex)  >= size_vertex()) resize(std::max(i_first_vertex, i_second_vertex) + 1);
 
   // Insert lower vertex.
-  insert_vertex_adjacent_list(i_lower_vertex, i_upper_vertex);
-  std::for_each(std::next(offset.begin(), static_cast<s_size_t>(i_lower_vertex + 1)),
-                std::next(offset.begin(), static_cast<s_size_t>(i_upper_vertex + 2)), [](std::size_t& off){off++;});
+  insert_vertex_adjacent_list(i_first_vertex, i_second_vertex);
+  std::for_each(std::next(offset.begin(), static_cast<s_size_t>(i_first_vertex + 1)),
+                !_directed ? std::next(offset.begin(), static_cast<s_size_t>(i_second_vertex + 2)) : offset.end(),
+                [](std::size_t& off){off++;}); 
+  if(_directed) return true;
 
   // Insert upper vertex (tricky: last for loop is safe -> The highest vertex + 1 (for size) + 1 (for offset) <= end()).
-  insert_vertex_adjacent_list(i_upper_vertex, i_lower_vertex);
-  ++(*std::next(offset.begin(), static_cast<s_size_t>(i_upper_vertex + 1)));
-  std::for_each(std::next(offset.begin(), static_cast<s_size_t>(i_upper_vertex + 2)), offset.end(),
+  insert_vertex_adjacent_list(i_second_vertex, i_first_vertex);
+  ++(*std::next(offset.begin(), static_cast<s_size_t>(i_second_vertex + 1)));
+  std::for_each(std::next(offset.begin(), static_cast<s_size_t>(i_second_vertex + 2)), offset.end(),
                 [](std::size_t& off){off += 2;});
+
+  
 
   return true;
 }
@@ -178,13 +183,12 @@ template<bool _directed>
 [[nodiscard]] bool Adjacency_Graph<_directed>::contains(const Edge& edge) const {
   ASSERT_DEBUG(edge.first != edge.second, "Edge vertices identical, " + std::to_string(edge.first) + " and "
                                           + std::to_string(edge.second) + ".");
-  const Edge ordered_edge = order_edge_vertex(&edge);
-  if(ordered_edge.second >= size_vertex() || empty()) return false;
-  auto adjacency = (*this)[ordered_edge.first];
-  return std::ranges::any_of(adjacency.begin(), adjacency.end(),
-                             [&](const std::size_t& i_vertex) { return ordered_edge.second == i_vertex; });
-}
 
+  if(empty()) return false;
+  if(std::max(edge.first, edge.second) >= size_vertex()) return false;
+  auto iter = std::lower_bound((*this)[edge.first].begin(), (*this)[edge.first].end(), edge.second);
+  return iter != (*this)[edge.first].end() && *iter == edge.second;
+}
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Graph Operators

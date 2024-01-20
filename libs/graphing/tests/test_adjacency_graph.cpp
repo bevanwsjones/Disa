@@ -228,7 +228,7 @@ TEST(test_adjacency_graph, clear) {
   EXPECT_EQ(graph.capacity().second, std::make_pair(4, 4).second); // make sure we have not lost capacity.
 }
 
-TEST(test_adjacency_graph, insert) {
+TEST(test_adjacency_graph, insert_undirected) {
   Adjacency_Graph<false> graph;
 
   // insert a pentagram out of order, with some edges flipped
@@ -283,6 +283,58 @@ TEST(test_adjacency_graph, insert) {
   EXPECT_EQ(graph[6][0], 3);
   EXPECT_EQ(graph[6][1], 5);
 
+  // death test - invalid edge
+  EXPECT_DEATH(graph.insert({1, 1}), ".*");
+}
+
+TEST(test_adjacency_graph, insert_directed) {
+  Adjacency_Graph<true> graph;
+
+  // insert a pentagram out of order, with some edges flipped
+  EXPECT_TRUE(graph.insert({0, 1}));
+  EXPECT_TRUE(graph.insert({3, 4}));
+  EXPECT_TRUE(graph.insert({0, 4}));
+  EXPECT_TRUE(graph.insert({2, 3}));
+  EXPECT_TRUE(graph.insert({1, 2}));
+
+  // Add three additional vertices, as an 'appendage'.
+  EXPECT_TRUE(graph.insert({3, 6}));
+  EXPECT_TRUE(graph.insert({5, 6}));
+  EXPECT_TRUE(graph.insert({6, 0}));
+
+  // check ascending order has been maintained.
+  EXPECT_EQ(graph.size_edge(), 8);
+  EXPECT_EQ(graph.size_vertex(), 7);
+
+  // Attempt to insert an existing edge
+  EXPECT_FALSE(graph.insert({1, 2}));
+ 
+  // Connect across
+  EXPECT_TRUE(graph.insert({0, 3}));
+  EXPECT_TRUE(graph.insert({0, 2}));
+
+  // Check graph
+  EXPECT_EQ(graph.size_edge(), 10);
+  EXPECT_EQ(graph.size_vertex(), 7);
+ 
+  EXPECT_EQ(graph[0].size(), 4);
+  EXPECT_EQ(graph[1].size(), 1);
+  EXPECT_EQ(graph[2].size(), 1);
+  EXPECT_EQ(graph[3].size(), 2);
+  EXPECT_EQ(graph[4].size(), 0);
+  EXPECT_EQ(graph[5].size(), 1);
+  EXPECT_EQ(graph[6].size(), 1);
+  EXPECT_EQ(graph[0][0], 1); 
+  EXPECT_EQ(graph[0][1], 2);
+  EXPECT_EQ(graph[0][2], 3);
+  EXPECT_EQ(graph[0][3], 4);
+  EXPECT_EQ(graph[1][0], 2);
+  EXPECT_EQ(graph[2][0], 3);
+  EXPECT_EQ(graph[3][0], 4);
+  EXPECT_EQ(graph[3][1], 6); 
+  EXPECT_EQ(graph[5][0], 6);
+  EXPECT_EQ(graph[6][0], 0);
+  
   // death test - invalid edge
   EXPECT_DEATH(graph.insert({1, 1}), ".*");
 }
@@ -359,16 +411,40 @@ TEST(test_adjacency_graph, swap) {
 // Lookup
 // ---------------------------------------------------------------------------------------------------------------------
 
-TEST(test_adjacency_graph, contains) {
+TEST(test_adjacency_graph, contains_directed) {
+  Adjacency_Graph<true> graph({{0, 1}, {1, 0}, {2, 1}, {2, 3}, {0, 3}, {3, 1}});
+
+  EXPECT_TRUE(graph.contains({0, 1}));
+  EXPECT_TRUE(graph.contains({1, 0}));
+  EXPECT_FALSE(graph.contains({1, 2}));
+  EXPECT_TRUE(graph.contains({2, 1}));
+  EXPECT_TRUE(graph.contains({2, 3}));
+  EXPECT_FALSE(graph.contains({3, 2}));
+  EXPECT_TRUE(graph.contains({0, 3}));
+  EXPECT_FALSE(graph.contains({3, 0}));
+  EXPECT_FALSE(graph.contains({1, 3}));
+  EXPECT_TRUE(graph.contains({3, 1}));
+  EXPECT_FALSE(graph.contains({0, 2}));
+  EXPECT_FALSE(graph.contains({2, 0}));
+}
+
+TEST(test_adjacency_graph, contains_undirected) {
   Adjacency_Graph<false> graph({{0, 1}, {1, 2}, {2, 3}, {0, 3}, {1, 3}});
 
   EXPECT_TRUE(graph.contains({0, 1}));
+  EXPECT_TRUE(graph.contains({1, 0}));
   EXPECT_TRUE(graph.contains({1, 2}));
+  EXPECT_TRUE(graph.contains({2, 1}));
   EXPECT_TRUE(graph.contains({2, 3}));
+  EXPECT_TRUE(graph.contains({3, 2}));
   EXPECT_TRUE(graph.contains({0, 3}));
+  EXPECT_TRUE(graph.contains({3, 0}));
   EXPECT_TRUE(graph.contains({1, 3}));
+  EXPECT_TRUE(graph.contains({3, 1}));
   EXPECT_FALSE(graph.contains({0, 2}));
+  EXPECT_FALSE(graph.contains({2, 0}));
 }
+
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Graph Operators

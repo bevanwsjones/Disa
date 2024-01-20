@@ -65,9 +65,10 @@ namespace Disa {
  * 6. The class will assume that all vertices, with an index <size_vertex() exist, independet of their connectivity.
  *
  * Future:
- * 1. Add iterators, begin(), end() etc.
- * 2. Create arithmetic operators +,-, etc for unions and intersections.
- * 3. Possible base graph class from which this class can inherit.
+ * 1. Look into optimising memory for directed graphs (in terms of max number of nodes, vs elements in adjacency list).
+ * 2. Add iterators, begin(), end() etc.
+ * 3. Create arithmetic operators +,-, etc for unions and intersections.
+ * 4. Possible base graph class from which this class can inherit.
  */
 template<bool _directed>
 class Adjacency_Graph {
@@ -205,7 +206,7 @@ public:
    * @brief Returns the number of edge in the graph.
    * @return The number of edge.
    */
-  [[nodiscard]] inline std::size_t size_edge() const noexcept { return vertex_adjacent_list.size()/2; }
+  [[nodiscard]] inline std::size_t size_edge() const noexcept { return !_directed ? vertex_adjacent_list.size()/2 : vertex_adjacent_list.size() ; }
 
   /**
    * @brief Returns the number of vertices and edges in the graph.

@@ -32,17 +32,66 @@ namespace Disa {
 
 /**
  * @brief Creates a line Adjacency Graph consisting of n vertices.
- * @param[in] number_vertices The number of vertices n  to create.
+ * @tparam _directed Whether the graph is directed or not, directed graphs point in an ascending fashion.
+ * @param[in] number_vertices The number of vertices n to create.
  * @return The created Adjacency Graph.
+ * 
+ * @details The topology of the Adjacency Graph is depicted below, with the ordering of the vertex indices.
+ *
+ *  directed:  
+ *  0 > 1 > ... > n-2 > n-1
+ *
+ *  undirected:
+ *  0 - 1 - ... - n-2 - n-1
  */
-Adjacency_Graph<false> create_graph_line(std::size_t number_vertices);
+template<bool _directed>
+Adjacency_Graph<_directed> create_graph_line(std::size_t number_vertices) {
+  Adjacency_Graph<_directed> line;
+  for(std::size_t i_x = 0; i_x < number_vertices - 1; ++i_x)
+    line.insert({i_x, i_x + 1});
+  return line;
+};
 
 /**
  * @brief Creates a structured grid Adjacency Graph consisting of n^2 vertices.
+ * @tparam _directed Whether the graph is directed or not, directed graphs point in an ascending fashion.
  * @param[in] number_vertices The number of vertices n along one of the 'axis'.
  * @return The created Adjacency Graph.
+ * 
+ * @details The topology of the Adjacency Graph is depicted below, with the ordering of the vertex indices.
+ *
+ * directed:
+ *   n^2-n   > n^2-(n+1) >   ...     >  n^2-2    >  n^2-1
+ *    ^           ^           ^           ^           ^
+ *   ...     >           >   ...     >   ...     >   ...
+ *    ^           ^           ^           ^           ^
+ *    n      >   n+1     >   ...     >   2n-2    >   2n-1
+ *    ^           ^           ^           ^           ^
+ *    0      >    1      >   ...     >    n-2    >   n-1
+ * 
+ * undirected:
+ *  n^2-n    - n^2-(n+1) -   ...     -  n^2-2    -  n^2-1
+ *    |           |           |           |           |
+ *   ...     -           -   ...     -   ...     -   ...
+ *    |           |           |           |           |
+ *    n      -   n+1     -   ...     -   2n-2    -   2n-1
+ *    |           |           |           |           |
+ *    0      -    1      -   ...     -    n-2    -   n-1
  */
-Adjacency_Graph<false> create_graph_structured(std::size_t number_vertices);
+template<bool _directed>
+Adjacency_Graph<_directed> create_graph_structured(std::size_t number_vertices) {
+  Adjacency_Graph<_directed> structured;
+  for(std::size_t i_y = 0; i_y < number_vertices; ++i_y) {
+    for(std::size_t i_x = 0; i_x < number_vertices; ++i_x) {
+      const std::size_t i_vertex = i_y*(number_vertices) + i_x;
+      if(!_directed && i_x != 0) structured.insert({i_vertex - 1, i_vertex});
+      if(i_x != number_vertices - 1) structured.insert({i_vertex, i_vertex + 1});
+      if(!_directed && i_y != 0) structured.insert({i_vertex - number_vertices, i_vertex});
+      if(i_y < number_vertices - 1) structured.insert({i_vertex, i_vertex + number_vertices});
+    }
+  }
+  return structured;
+}
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Static Graphs
