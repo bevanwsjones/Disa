@@ -46,20 +46,23 @@ namespace Disa {
  * @details
  * An adjacency graph G stores a pair of integer sets, V and E. V represents a list of vertex/point/node labels and E
  * contains a set (list) of pairs, each containing two unsigned integers which are elements of V. If V is an ordered
- * continuous set of unsigned integers it can be represented implicitly. This class thus represents G by storing the
- * connectivity, of each vertex, to its connected neighbours rather than V and E directly. This allowing for single
- * faster search times, similar to other 'sparse' containers.
+ * continuous set of unsigned integers it can be represented implicitly. An edge E is said to be directed if the order 
+ * of the pair matters, i.e. (i, j) != (j, i), else the edge is undirected. Note: in the undirected case the resulting 
+ * graph is symmetric. This class thus represents G by storing the connectivity, of each vertex, to its connected 
+ * neighbours (rather than the pairs of E directly). This allows for faster search times, similar to other 'sparse' 
+ * containers.
  *
  * From a design point of view this class is similar to that of a sparse vector, and thus follows most of the
  * std::vector paradigms, except that each 'element' is dynamically sized and an ordered set of unsigned adjacency
  * values.
  *
  * @note:
- * 1. Edges are undirected, and thus the edge connecting vertex i to j is the same as the edge connecting j to i.
- * 2. Currently the graph does not support self connected edges i.e. edges i to i.
- * 3. Once populated, no information about the edge indexing is stored.
- * 4. The graph cannot contain information for connectivity between two types of vertices (i.e. a red set and a blue
- *    set where each set begins indexing at 0).
+ * 1. Where _directed == false edges are undirected, and thus the edge (i, j) == (j, i).
+ * 2. Where _directed == true edges are undirected, and thus the edge (i, j) != (j, i). 
+ * 3. Currently the graph does not support self connected edges i.e. edges for the form (i, i).
+ * 4. Once populated, no information about the edge indexing is stored.
+ * 5. The class assumes there is no difference between vertex types (red or blue colourings for example).
+ * 6. The class will assume that all vertices, with an index <size_vertex() exist, independet of their connectivity.
  *
  * Future:
  * 1. Add iterators, begin(), end() etc.

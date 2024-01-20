@@ -30,7 +30,6 @@ set(SOURCES
         partition.h
         reorder.h
         adjacency_graph.hpp
-        adjacency_graph.cpp
         adjacency_subgraph.cpp
         generator.cpp
         partition.cpp
