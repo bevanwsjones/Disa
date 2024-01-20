@@ -35,14 +35,14 @@ namespace Disa {
  * @param[in] number_vertices The number of vertices n  to create.
  * @return The created Adjacency Graph.
  */
-Adjacency_Graph create_graph_line(std::size_t number_vertices);
+Adjacency_Graph<false> create_graph_line(std::size_t number_vertices);
 
 /**
  * @brief Creates a structured grid Adjacency Graph consisting of n^2 vertices.
  * @param[in] number_vertices The number of vertices n along one of the 'axis'.
  * @return The created Adjacency Graph.
  */
-Adjacency_Graph create_graph_structured(std::size_t number_vertices);
+Adjacency_Graph<false> create_graph_structured(std::size_t number_vertices);
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Static Graphs
@@ -60,9 +60,9 @@ Adjacency_Graph create_graph_structured(std::size_t number_vertices);
  *  \ / \ /
  *   6 - 7
  */
-inline Adjacency_Graph create_graph_hybrid() {
-  return Adjacency_Graph({{3, 0}, {0, 1}, {7, 4}, {6, 7}, {2, 5}, {3, 4}, {6, 3}, {4, 5}, {4, 6}, {7, 4}, {5, 7},
-                                {2, 1}, {1, 4}});
+inline Adjacency_Graph<false> create_graph_hybrid() {
+  return Adjacency_Graph<false> ({{3, 0}, {0, 1}, {7, 4}, {6, 7}, {2, 5}, {3, 4}, {6, 3}, {4, 5}, {4, 6}, {7, 4}, 
+                                  {5, 7}, {2, 1}, {1, 4}});
 
 }
 
@@ -86,19 +86,19 @@ inline Adjacency_Graph create_graph_hybrid() {
  *
  * @note: Reference DOI: https://doi.org/10.1137/1.9780898718003
  */
-inline Adjacency_Graph create_graph_saad() {
-  return Adjacency_Graph({{0, 6}, {0, 8},
-                          {1, 7}, {1, 8}, {1, 10}, {1, 12},
-                          {2, 6}, {2, 7}, {2, 9},
-                          {3, 11}, {3, 12}, {3, 14},
-                          {4, 9}, {4, 10}, {4, 11}, {4, 13},
-                          {5, 13}, {5, 14},
-                          {6, 7}, {6, 8},
-                          {7, 8}, {7, 9}, {7, 10},
-                          {9, 10},
-                          {10, 11}, {10, 12},
-                          {11, 12}, {11, 13}, {11, 14},
-                          {13, 14}});
+inline Adjacency_Graph<false> create_graph_saad() {
+  return Adjacency_Graph<false> ({{0, 6}, {0, 8},
+                                  {1, 7}, {1, 8}, {1, 10}, {1, 12},
+                                  {2, 6}, {2, 7}, {2, 9},
+                                  {3, 11}, {3, 12}, {3, 14},
+                                  {4, 9}, {4, 10}, {4, 11}, {4, 13},
+                                  {5, 13}, {5, 14},
+                                  {6, 7}, {6, 8},
+                                  {7, 8}, {7, 9}, {7, 10},
+                                  {9, 10},
+                                  {10, 11}, {10, 12},
+                                  {11, 12}, {11, 13}, {11, 14},
+                                  {13, 14}});
 }
 
 }

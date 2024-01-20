@@ -26,6 +26,7 @@
 
 namespace Disa {
 
+template<bool _directed>
 class Adjacency_Graph;
 class Adjacency_Subgraph;
 
@@ -39,7 +40,7 @@ class Adjacency_Subgraph;
  * @param[in] max_iter The number of iterations to perform.
  * @param[in, out] subgraph_list The list of initial subgraphs, and on completion, the final partitioning.
  */
-void multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t max_iter,
+void multinode_level_set_expansion(const Adjacency_Graph<false>& graph, std::size_t max_iter,
                                    std::vector<Adjacency_Subgraph>& subgraph_list);
 
 /**
@@ -48,7 +49,8 @@ void multinode_level_set_expansion(const Adjacency_Graph& graph, std::size_t max
  * @param[in] number_partitions The number of subgraphs to be generated.
  * @return A vector of subgraphs representing the bisected graph.
  */
-std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph& graph, std::size_t number_partitions);
+std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph<false>& graph, 
+                                                          std::size_t number_partitions);
 
 }
 

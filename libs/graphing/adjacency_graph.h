@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <functional>
 #include <limits>
+#include <numeric>
 #include <span>
 #include <vector>
 
@@ -65,6 +66,7 @@ namespace Disa {
  * 2. Create arithmetic operators +,-, etc for unions and intersections.
  * 3. Possible base graph class from which this class can inherit.
  */
+template<bool _directed>
 class Adjacency_Graph {
 
 public:
@@ -361,12 +363,10 @@ protected:
  * @param[in] graph The graph to write.
  * @return Returns the ostream, with the graph writen out.
  */
-std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph);
+template<bool _directed>
+std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph<_directed>& graph);
 
 }
-
-// Add template definitions
-#include "adjacency_graph.hpp"
 
 // ---------------------------------------------------------------------------------------------------------------------
 // STL specialisation
@@ -378,17 +378,20 @@ namespace std {
  * @struct hash<Disa::Adjacency_Graph>
  * @brief Template specialization to provides hash function for the Adjacency_Graph.
  */
-template<>
-struct hash<Disa::Adjacency_Graph> {
+template<bool _directed>
+struct hash<Disa::Adjacency_Graph<_directed> > {
 
   /**
    * @brief Computes the hash value of a given Disa::Adjacency_Graph object.
    * @param graph The graph to be hashed.
    * @returns A std::size_t value representing the hash value of the input graph.
    */
-  std::size_t operator()(const Disa::Adjacency_Graph& graph) const noexcept;
+  std::size_t operator()(const Disa::Adjacency_Graph<_directed>& graph) const noexcept;
 };
 
 }
+
+// Add template definitions
+#include "adjacency_graph.hpp"
 
 #endif //DISA_ADJACENCY_GRAPH_H

@@ -28,8 +28,8 @@ namespace Disa{
  *
  *  0  - 1 -  ... - n-2 - n-1
  */
-Adjacency_Graph create_graph_line(const std::size_t number_vertices) {
-  Adjacency_Graph line;
+Adjacency_Graph<false> create_graph_line(const std::size_t number_vertices) {
+  Adjacency_Graph<false> line;
   for(std::size_t i_x = 0; i_x < number_vertices - 1; ++i_x)
     line.insert({i_x, i_x + 1});
   return line;
@@ -46,8 +46,8 @@ Adjacency_Graph create_graph_line(const std::size_t number_vertices) {
  *    |           |           |            |          |
  *    0      -    1      -   ...     -    n-2    -   n-1
  */
-Adjacency_Graph create_graph_structured(const std::size_t number_vertices) {
-  Adjacency_Graph structured;
+Adjacency_Graph<false> create_graph_structured(const std::size_t number_vertices) {
+  Adjacency_Graph<false> structured;
   for(std::size_t i_y = 0; i_y < number_vertices; ++i_y) {
     for(std::size_t i_x = 0; i_x < number_vertices; ++i_x) {
       const std::size_t i_vertex = i_y*(number_vertices) + i_x;

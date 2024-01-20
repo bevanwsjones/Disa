@@ -38,7 +38,7 @@ namespace Disa {
  * @param[in] start_vertex The new graph root vertex, or starting vertex for the reordering. Defaults to 0.
  * @return The permutation vector mapping the old to new graph, i.e. new_index = permutation[old_index].
  */
-[[nodiscard]] std::vector<std::size_t> breadth_first(const Adjacency_Graph& graph, std::size_t start_vertex = 0);
+[[nodiscard]] std::vector<std::size_t> breadth_first(const Adjacency_Graph<false>& graph, std::size_t start_vertex = 0);
 
 /**
  * @brief Constructs a permutation vector given non-disjoint graph using the Cuthill-Mckee algorithm.
@@ -46,7 +46,7 @@ namespace Disa {
  * @param[in] start_vertex The new graph root vertex, if default a periphery node will be search for. Defaults to max().
  * @return The permutation vector mapping the old to new graph, i.e. new_index = re_order[old_index].
  */
-std::vector<std::size_t> cuthill_mckee(const Adjacency_Graph& graph,
+std::vector<std::size_t> cuthill_mckee(const Adjacency_Graph<false>& graph,
                                        std::size_t start_vertex = std::numeric_limits<std::size_t>::max());
 
 /**
@@ -55,7 +55,7 @@ std::vector<std::size_t> cuthill_mckee(const Adjacency_Graph& graph,
  * @param[in] root_vertex The new graph root vertex, if default a periphery node will be search for. Defaults to max().
  * @return The permutation vector mapping the old to new graph, i.e. new_index = permutation[old_index].
  */
-inline std::vector<std::size_t> cuthill_mckee_reverse(const Adjacency_Graph& graph,
+inline std::vector<std::size_t> cuthill_mckee_reverse(const Adjacency_Graph<false>& graph,
                                                       std::size_t root_vertex = std::numeric_limits<std::size_t>::max())
                                                       {
   std::vector permutation = cuthill_mckee(graph, root_vertex);
@@ -72,7 +72,7 @@ inline std::vector<std::size_t> cuthill_mckee_reverse(const Adjacency_Graph& gra
  * @param[in] graph The graph to reorder.
  * @return The permutation vector mapping the old to new graph, i.e. new_index = permutation[old_index].
  */
-std::vector<std::size_t> greedy_multicolouring(const Adjacency_Graph& graph);
+std::vector<std::size_t> greedy_multicolouring(const Adjacency_Graph<false>& graph);
 
 }
 #endif //DISA_REORDER_H

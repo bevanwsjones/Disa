@@ -37,7 +37,7 @@ namespace Disa {
  * internal graph representation, and forming the global-local mappings and deleting vertices not in the subgraph.
  * Finally, should extra levels be requested they are added to the subgraph.
  */
-Adjacency_Subgraph::Adjacency_Subgraph(const Adjacency_Graph& parent_graph,
+Adjacency_Subgraph::Adjacency_Subgraph(const Adjacency_Graph<false>& parent_graph,
                                        const std::vector<std::size_t>& i_partition_local_global,
                                        const std::size_t extra_levels) {
 #ifdef DISA_DEBUG
@@ -52,7 +52,7 @@ Adjacency_Subgraph::Adjacency_Subgraph(const Adjacency_Graph& parent_graph,
                + std::to_string(parent_graph.size_vertex()) + ").");
 #endif
 
-  hash_parent = std::hash<Adjacency_Graph>{}(parent_graph);
+  hash_parent = std::hash<Adjacency_Graph<false> >{}(parent_graph);
   graph = parent_graph;
   reserve(i_partition_local_global.size());
 
@@ -106,10 +106,10 @@ Adjacency_Subgraph Adjacency_Subgraph::reorder(const std::vector<std::size_t>& p
  * than the current levels, and removing when less than current. The new global to local mapping is returned through the
  * i_global_local shared pointer.
  */
-void Adjacency_Subgraph::update_levels(const Adjacency_Graph& parent_graph, const std::size_t max_level,
+void Adjacency_Subgraph::update_levels(const Adjacency_Graph<false>& parent_graph, const std::size_t max_level,
                                        std::shared_ptr<std::vector<std::size_t> > i_global_local) {
 
-  ASSERT(hash_parent == std::hash<Adjacency_Graph>{}(parent_graph), "Parsed graph is not the parent to this subgraph.");
+  ASSERT(hash_parent == std::hash<Adjacency_Graph<false> >{}(parent_graph), "Parsed graph is not the parent to this subgraph.");
 
   // Determine if we are adding or removing levels
   std::size_t current_max = 0;
@@ -131,7 +131,7 @@ void Adjacency_Subgraph::update_levels(const Adjacency_Graph& parent_graph, cons
  * maximum requested level. The added vertices are then added into the subgraph, with the local-to-global mappings and
  * level stored.
  */
-void Adjacency_Subgraph::add_levels(const Adjacency_Graph& parent_graph, const std::size_t max_level,
+void Adjacency_Subgraph::add_levels(const Adjacency_Graph<false>& parent_graph, const std::size_t max_level,
                                     const std::size_t current_max,
                                     std::shared_ptr<std::vector<std::size_t> > i_global_local) {
 
@@ -179,7 +179,7 @@ void Adjacency_Subgraph::add_levels(const Adjacency_Graph& parent_graph, const s
  * @details Removes vertices in the subgraph's graph whose level is greater than that of the new requested maximum. The
  * local-to-global map and levels are updated. If the global-to-local map is not a nullptr it is (re)populated.
  */
-void Adjacency_Subgraph::remove_levels(const Adjacency_Graph& parent_graph, const std::size_t max_level,
+void Adjacency_Subgraph::remove_levels(const Adjacency_Graph<false>& parent_graph, const std::size_t max_level,
                                        std::shared_ptr<std::vector<std::size_t> > i_global_local) {
   auto not_in_subgraph = [&](const std::size_t& vertex){return level_set_value[vertex] > max_level;};
   graph.erase_if(not_in_subgraph);
