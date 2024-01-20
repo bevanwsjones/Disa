@@ -178,10 +178,8 @@ template<bool _directed>
 [[nodiscard]] bool Adjacency_Graph<_directed>::contains(const Edge& edge) const {
   ASSERT_DEBUG(edge.first != edge.second, "Edge vertices identical, " + std::to_string(edge.first) + " and "
                                           + std::to_string(edge.second) + ".");
-  if(empty()) return false;
-  const Edge ordered_edge = _directed ? order_edge_vertex(&edge) : edge;
-  if(edge.first >= size_vertex()) return false; // the first vertex is not in the graph.
-  if(ordered_edge.second >= size_vertex()) return false;
+  const Edge ordered_edge = order_edge_vertex(&edge);
+  if(ordered_edge.second >= size_vertex() || empty()) return false;
   auto adjacency = (*this)[ordered_edge.first];
   return std::ranges::any_of(adjacency.begin(), adjacency.end(),
                              [&](const std::size_t& i_vertex) { return ordered_edge.second == i_vertex; });
