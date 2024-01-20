@@ -206,7 +206,9 @@ public:
    * @brief Returns the number of edge in the graph.
    * @return The number of edge.
    */
-  [[nodiscard]] inline std::size_t size_edge() const noexcept { return !_directed ? vertex_adjacent_list.size()/2 : vertex_adjacent_list.size() ; }
+  [[nodiscard]] inline std::size_t size_edge() const noexcept { 
+    return !_directed ? vertex_adjacent_list.size()/2 : vertex_adjacent_list.size(); 
+  }
 
   /**
    * @brief Returns the number of vertices and edges in the graph.
@@ -223,7 +225,7 @@ public:
    */
   inline void reserve(std::size_t size_vertex, std::size_t size_edge = 0) noexcept {
     offset.reserve(size_vertex + 1);
-    vertex_adjacent_list.reserve(size_edge*2);
+    vertex_adjacent_list.reserve(size_edge*(!_directed ? 2 : 1));
   }
 
   /**
@@ -231,7 +233,8 @@ public:
    * @return Pair containing [vertices, edges].
    */
   [[nodiscard]] inline std::pair<std::size_t, std::size_t> capacity() const noexcept {
-    return std::make_pair(!offset.capacity() ? 0 : offset.capacity() - 1, vertex_adjacent_list.capacity()/2);
+    return std::make_pair(!offset.capacity() ? 0 : offset.capacity() - 1, 
+                          !_directed ? vertex_adjacent_list.capacity()/2 : vertex_adjacent_list.capacity());
   }
 
   /**

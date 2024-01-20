@@ -131,10 +131,9 @@ TEST(test_adjacency_graph, data) {
 }
 
 TEST(test_adjacency_graph, front){
-  Adjacency_Graph<false> graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}});
-  EXPECT_EQ(graph.front().size(), 2);
+  Adjacency_Graph<true> graph({{0, 1}, {1, 2}, {3, 2}, {3, 0}});
+  EXPECT_EQ(graph.front().size(), 1);
   EXPECT_EQ(graph.front()[0], graph[0][0]);
-  EXPECT_EQ(graph.front()[1], graph[0][1]);
 }
 
 TEST(test_adjacency_graph, back){
@@ -153,13 +152,18 @@ TEST(test_adjacency_graph, back){
 // ---------------------------------------------------------------------------------------------------------------------
 
 TEST(test_adjacency_graph, empty) {
-  Adjacency_Graph<false> graph;
-  EXPECT_TRUE(graph.empty());
-  graph.insert(std::make_pair(0, 1));
-  EXPECT_FALSE(graph.empty());
+  Adjacency_Graph<false> undirected_graph;
+  EXPECT_TRUE(undirected_graph.empty());
+  undirected_graph.insert(std::make_pair(0, 1));
+  EXPECT_FALSE(undirected_graph.empty());
+
+  Adjacency_Graph<true> directed_graph;
+  EXPECT_TRUE(directed_graph.empty());
+  directed_graph.insert(std::make_pair(0, 1));
+  EXPECT_FALSE(directed_graph.empty());
 }
 
-TEST(test_adjacency_graph, size) {
+TEST(test_adjacency_graph, size_undirected) {
   Adjacency_Graph<false> graph;
   EXPECT_EQ(graph.size_vertex(), 0);
   EXPECT_EQ(graph.size_edge(), 0);
@@ -185,8 +189,48 @@ TEST(test_adjacency_graph, size) {
   EXPECT_EQ(graph.size().second, std::make_pair(7, 3).second);
 }
 
-TEST(test_adjacency_graph, reserve_capacity) {
+TEST(test_adjacency_graph, size_directed) {
+  Adjacency_Graph<true> graph;
+  EXPECT_EQ(graph.size_vertex(), 0);
+  EXPECT_EQ(graph.size_edge(), 0);
+  EXPECT_EQ(graph.size().first, std::make_pair(0, 0).first);
+  EXPECT_EQ(graph.size().second, std::make_pair(0, 0).second);
+
+  graph.insert(std::make_pair(0, 1));
+  EXPECT_EQ(graph.size_vertex(), 2);
+  EXPECT_EQ(graph.size_edge(), 1);
+  EXPECT_EQ(graph.size().first, std::make_pair(2, 1).first);
+  EXPECT_EQ(graph.size().second, std::make_pair(2, 1).second);
+
+  graph.insert(std::make_pair(1, 2));
+  EXPECT_EQ(graph.size_vertex(), 3);
+  EXPECT_EQ(graph.size_edge(), 2);
+  EXPECT_EQ(graph.size().first, std::make_pair(3, 2).first);
+  EXPECT_EQ(graph.size().second, std::make_pair(3, 2).second);
+
+  graph.insert(std::make_pair(5, 6)); // Creates a set of unconnected vertices, total vertices 7.
+  EXPECT_EQ(graph.size_vertex(), 7);
+  EXPECT_EQ(graph.size_edge(), 3);
+  EXPECT_EQ(graph.size().first, std::make_pair(7, 3).first);
+  EXPECT_EQ(graph.size().second, std::make_pair(7, 3).second);
+}
+
+TEST(test_adjacency_graph, reserve_capacity_undirected) {
   Adjacency_Graph<false> graph;
+  EXPECT_EQ(graph.capacity().first, 0);
+  EXPECT_EQ(graph.capacity().second, 0);
+
+  graph.reserve(5);
+  EXPECT_EQ(graph.capacity().first, 5);
+  EXPECT_EQ(graph.capacity().second, 0);
+
+  graph.reserve(10, 40);
+  EXPECT_EQ(graph.capacity().first, 10);
+  EXPECT_EQ(graph.capacity().second, 40);
+}
+
+TEST(test_adjacency_graph, reserve_capacity_directed) {
+  Adjacency_Graph<true> graph;
   EXPECT_EQ(graph.capacity().first, 0);
   EXPECT_EQ(graph.capacity().second, 0);
 
@@ -208,16 +252,27 @@ TEST(test_adjacency_graph, shrink_to_fit) {
   EXPECT_EQ(graph.capacity().first, 5);
   EXPECT_EQ(graph.capacity().second, 0);
 
-  graph.reserve(10, 40);
-  EXPECT_EQ(graph.capacity().first, 10);
-  EXPECT_EQ(graph.capacity().second, 40);
+  graph.shrink_to_fit();
+  EXPECT_EQ(graph.capacity().first, 0);
+  EXPECT_EQ(graph.capacity().second, 0);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Modifiers
 // ---------------------------------------------------------------------------------------------------------------------
 
-TEST(test_adjacency_graph, clear) {
+TEST(test_adjacency_graph, clear_undirected) {
+  Adjacency_Graph<false> graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}});
+
+  graph.clear();
+  EXPECT_TRUE(graph.empty());
+  EXPECT_EQ(graph.size_edge(), 0);
+  EXPECT_EQ(graph.size_vertex(), 0);
+  EXPECT_EQ(graph.capacity().first, std::make_pair(4, 4).first);   // make sure we have not lost capacity.
+  EXPECT_EQ(graph.capacity().second, std::make_pair(4, 4).second); // make sure we have not lost capacity.
+}
+
+TEST(test_adjacency_graph, clear_directed) {
   Adjacency_Graph<false> graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}});
 
   graph.clear();

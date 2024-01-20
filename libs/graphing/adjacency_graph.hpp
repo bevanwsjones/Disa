@@ -35,10 +35,14 @@ namespace Disa {
 template<bool _directed>
 Adjacency_Graph<_directed>::Adjacency_Graph(std::initializer_list<Edge> edge_graph) {
   const auto iter = std::max_element(edge_graph.begin(), edge_graph.end(),
-                                     [](const Edge& edge_0, const Edge& edge_1) {
-                                       return order_edge_vertex(&edge_0).second < order_edge_vertex(&edge_1).second;
-                                     });
-  reserve(std::max(iter->first, iter->second), edge_graph.size());
+                                     !_directed ?
+                                      [](const Edge& edge_0, const Edge& edge_1) {
+                                          return order_edge_vertex(&edge_0).second < order_edge_vertex(&edge_1).second;
+                                        } :
+                                      [](const Edge& edge_0, const Edge& edge_1) {
+                                          return edge_0.second < edge_1.second;
+                                        });
+  reserve(!_directed ? std::max(iter->first, iter->second) : iter->first, edge_graph.size());
   FOR_EACH(edge, edge_graph) insert(edge);
   shrink_to_fit();
 }
