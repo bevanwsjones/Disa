@@ -133,6 +133,7 @@ void Adjacency_Graph<_directed>::erase_if(_unary_predicate delete_vertex) {
   vertex_adjacent_list.erase(std::remove_if(vertex_adjacent_list.begin(), vertex_adjacent_list.end(),
                                             [&](const auto) { return adjacency_delete[i_vertex++]; }),
                              vertex_adjacent_list.end());
+
   std::transform(vertex_adjacent_list.begin(), vertex_adjacent_list.end(), vertex_adjacent_list.begin(),
                  [&](const auto& i_old_vertex) { return new_indexes[i_old_vertex]; });
 

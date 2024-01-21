@@ -394,7 +394,7 @@ TEST(test_adjacency_graph, insert_directed) {
   EXPECT_DEATH(graph.insert({1, 1}), ".*");
 }
 
-TEST(test_adjacency_graph, erase_if) {
+TEST(test_adjacency_graph, erase_if_undirected) {
   Adjacency_Graph<false> saad = create_graph_saad();
   auto erase_if_odd = [](const auto& i_vertex){return i_vertex%2 != 0;};
   Adjacency_Graph<false> answer({{0, 3}, {0, 4}, {1, 3}, {2, 5}, {3, 4}, {5, 6}});
@@ -405,6 +405,21 @@ TEST(test_adjacency_graph, erase_if) {
     FOR(i_adjacent, answer[i_vertex].size())
       EXPECT_EQ(answer[i_vertex][i_adjacent], saad[i_vertex][i_adjacent]);
 }
+
+TEST(test_adjacency_graph, erase_if_directed) {
+  Adjacency_Graph<true> square_graph = create_graph_structured<true>(4);
+  
+  // remap 1 -> 0, 3 -> 1, 5 -> 2, 7 -> 3, 9 -> 4, 11 -> 5, 13 -> 6, 15 -> 7
+  auto erase_if_even = [](const auto& i_vertex){return i_vertex%2 == 0;};
+  Adjacency_Graph<true> answer({{0, 2}, {1, 3}, {2, 4}, {3, 5}, {4, 6}, {5, 7}}); // only up connection survive
+  answer.resize(8); // should be one extra vertex which is not connected to anything. 
+
+  square_graph.erase_if(erase_if_even);
+  FOR(i_vertex, answer.size_vertex())
+    FOR(i_adjacent, answer[i_vertex].size())
+      EXPECT_EQ(answer[i_vertex][i_adjacent], square_graph[i_vertex][i_adjacent]);
+}
+
 
 TEST(test_adjacency_graph, resize) {
 
