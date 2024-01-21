@@ -118,46 +118,66 @@ $(document).ready(function(){initNavTree('generator_8h_source.html',''); initRes
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// Dynamically Sized Graphs</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;Adjacency_Graph <a class="code" href="namespace_disa.html#a70deecb2803a0ba57d7fbf6237aea382">create_graph_line</a>(std::size_t number_vertices);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;Adjacency_Graph <a class="code" href="namespace_disa.html#a081e79667398f190cadf6f363f50b327">create_graph_structured</a>(std::size_t number_vertices);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// Static Graphs</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="namespace_disa.html#ae78338a4218ff9706dced4decc848792">   63</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a> <a class="code" href="namespace_disa.html#ae78338a4218ff9706dced4decc848792">create_graph_hybrid</a>() {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>({{3, 0}, {0, 1}, {7, 4}, {6, 7}, {2, 5}, {3, 4}, {6, 3}, {4, 5}, {4, 6}, {7, 4}, {5, 7},</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                {2, 1}, {1, 4}});</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="namespace_disa.html#a08c0625ab3ab76703aed79dc4fa7b8fb">   89</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a> <a class="code" href="namespace_disa.html#a08c0625ab3ab76703aed79dc4fa7b8fb">create_graph_saad</a>() {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>({{0, 6}, {0, 8},</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                          {1, 7}, {1, 8}, {1, 10}, {1, 12},</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                          {2, 6}, {2, 7}, {2, 9},</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                          {3, 11}, {3, 12}, {3, 14},</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                          {4, 9}, {4, 10}, {4, 11}, {4, 13},</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                          {5, 13}, {5, 14},</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                          {6, 7}, {6, 8},</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                          {7, 8}, {7, 9}, {7, 10},</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                          {9, 10},</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                          {10, 11}, {10, 12},</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                          {11, 12}, {11, 13}, {11, 14},</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                          {13, 14}});</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//DISA_GENERATOR_H</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">bool</span> _directed&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="namespace_disa.html#a11a859298aab9e256762d7ee0ddda55a">   48</a></span>&#160;<a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph&lt;_directed&gt;</a> <a class="code" href="namespace_disa.html#a11a859298aab9e256762d7ee0ddda55a">create_graph_line</a>(std::size_t number_vertices) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph&lt;_directed&gt;</a> line;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">for</span>(std::size_t i_x = 0; i_x &lt; number_vertices - 1; ++i_x)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    line.<a class="code" href="class_disa_1_1_adjacency___graph.html#a08db0782bce16b125d8db05fd5d060ed">insert</a>({i_x, i_x + 1});</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">return</span> line;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">bool</span> _directed&gt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="namespace_disa.html#ae70f63660d821d097cabfa65d2f15020">   82</a></span>&#160;<a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph&lt;_directed&gt;</a> <a class="code" href="namespace_disa.html#ae70f63660d821d097cabfa65d2f15020">create_graph_structured</a>(std::size_t number_vertices) {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph&lt;_directed&gt;</a> structured;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">for</span>(std::size_t i_y = 0; i_y &lt; number_vertices; ++i_y) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">for</span>(std::size_t i_x = 0; i_x &lt; number_vertices; ++i_x) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="keyword">const</span> std::size_t i_vertex = i_y*(number_vertices) + i_x;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keywordflow">if</span>(!_directed &amp;&amp; i_x != 0) structured.<a class="code" href="class_disa_1_1_adjacency___graph.html#a08db0782bce16b125d8db05fd5d060ed">insert</a>({i_vertex - 1, i_vertex});</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keywordflow">if</span>(i_x != number_vertices - 1) structured.<a class="code" href="class_disa_1_1_adjacency___graph.html#a08db0782bce16b125d8db05fd5d060ed">insert</a>({i_vertex, i_vertex + 1});</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keywordflow">if</span>(!_directed &amp;&amp; i_y != 0) structured.<a class="code" href="class_disa_1_1_adjacency___graph.html#a08db0782bce16b125d8db05fd5d060ed">insert</a>({i_vertex - number_vertices, i_vertex});</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="keywordflow">if</span>(i_y &lt; number_vertices - 1) structured.<a class="code" href="class_disa_1_1_adjacency___graph.html#a08db0782bce16b125d8db05fd5d060ed">insert</a>({i_vertex, i_vertex + number_vertices});</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordflow">return</span> structured;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">// Static Graphs</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">// ---------------------------------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="namespace_disa.html#a7bf8e949e818de5895404f8d77e3efc7">  112</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph&lt;false&gt;</a> <a class="code" href="namespace_disa.html#a7bf8e949e818de5895404f8d77e3efc7">create_graph_hybrid</a>() {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph&lt;false&gt;</a> ({{3, 0}, {0, 1}, {7, 4}, {6, 7}, {2, 5}, {3, 4}, {6, 3}, {4, 5}, {4, 6}, {7, 4}, </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                                  {5, 7}, {2, 1}, {1, 4}});</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="namespace_disa.html#a07ee8784ce19eea1db6ab8b243d106a6">  138</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph&lt;false&gt;</a> <a class="code" href="namespace_disa.html#a07ee8784ce19eea1db6ab8b243d106a6">create_graph_saad</a>() {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph&lt;false&gt;</a> ({{0, 6}, {0, 8},</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                                  {1, 7}, {1, 8}, {1, 10}, {1, 12},</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                                  {2, 6}, {2, 7}, {2, 9},</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                                  {3, 11}, {3, 12}, {3, 14},</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                                  {4, 9}, {4, 10}, {4, 11}, {4, 13},</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                                  {5, 13}, {5, 14},</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                                  {6, 7}, {6, 8},</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                                  {7, 8}, {7, 9}, {7, 10},</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                                  {9, 10},</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                                  {10, 11}, {10, 12},</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                                  {11, 12}, {11, 13}, {11, 14},</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                                  {13, 14}});</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;}</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//DISA_GENERATOR_H</span></div>
 <div class="ttc" id="aadjacency__graph_8h_html"><div class="ttname"><a href="adjacency__graph_8h.html">adjacency_graph.h</a></div></div>
-<div class="ttc" id="aclass_disa_1_1_adjacency___graph_html"><div class="ttname"><a href="class_disa_1_1_adjacency___graph.html">Disa::Adjacency_Graph</a></div><div class="ttdoc">An graph G(V, E), where V is a set of vertex indices and E is a set of undirected edges connecting th...</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:68</div></div>
+<div class="ttc" id="aclass_disa_1_1_adjacency___graph_html"><div class="ttname"><a href="class_disa_1_1_adjacency___graph.html">Disa::Adjacency_Graph</a></div><div class="ttdoc">An graph G(V, E), where V is a set of vertex indices and E is a set of undirected edges connecting th...</div><div class="ttdef"><b>Definition:</b> adjacency_graph.h:74</div></div>
+<div class="ttc" id="aclass_disa_1_1_adjacency___graph_html_a08db0782bce16b125d8db05fd5d060ed"><div class="ttname"><a href="class_disa_1_1_adjacency___graph.html#a08db0782bce16b125d8db05fd5d060ed">Disa::Adjacency_Graph::insert</a></div><div class="ttdeci">bool insert(const Edge &amp;edge)</div><div class="ttdoc">Inserts an edge into the graph, if the edges exists nothing occurs.</div><div class="ttdef"><b>Definition:</b> adjacency_graph.hpp:62</div></div>
 <div class="ttc" id="anamespace_disa_html"><div class="ttname"><a href="namespace_disa.html">Disa</a></div><div class="ttdef"><b>Definition:</b> macros.h:31</div></div>
-<div class="ttc" id="anamespace_disa_html_a081e79667398f190cadf6f363f50b327"><div class="ttname"><a href="namespace_disa.html#a081e79667398f190cadf6f363f50b327">Disa::create_graph_structured</a></div><div class="ttdeci">Adjacency_Graph create_graph_structured(const std::size_t number_vertices)</div><div class="ttdoc">Creates a structured grid Adjacency Graph consisting of n^2 vertices.</div><div class="ttdef"><b>Definition:</b> generator.cpp:49</div></div>
-<div class="ttc" id="anamespace_disa_html_a08c0625ab3ab76703aed79dc4fa7b8fb"><div class="ttname"><a href="namespace_disa.html#a08c0625ab3ab76703aed79dc4fa7b8fb">Disa::create_graph_saad</a></div><div class="ttdeci">Adjacency_Graph create_graph_saad()</div><div class="ttdoc">Creates one of the example graphs from the text book Iterative Methods for Sparse Linear Systems.</div><div class="ttdef"><b>Definition:</b> generator.h:89</div></div>
-<div class="ttc" id="anamespace_disa_html_a70deecb2803a0ba57d7fbf6237aea382"><div class="ttname"><a href="namespace_disa.html#a70deecb2803a0ba57d7fbf6237aea382">Disa::create_graph_line</a></div><div class="ttdeci">Adjacency_Graph create_graph_line(const std::size_t number_vertices)</div><div class="ttdoc">Creates a line Adjacency Graph consisting of n vertices.</div><div class="ttdef"><b>Definition:</b> generator.cpp:31</div></div>
-<div class="ttc" id="anamespace_disa_html_ae78338a4218ff9706dced4decc848792"><div class="ttname"><a href="namespace_disa.html#ae78338a4218ff9706dced4decc848792">Disa::create_graph_hybrid</a></div><div class="ttdeci">Adjacency_Graph create_graph_hybrid()</div><div class="ttdoc">Forms an Adjacency Graph with both 'triangular' and 'quadrilateral' type connectivity.</div><div class="ttdef"><b>Definition:</b> generator.h:63</div></div>
+<div class="ttc" id="anamespace_disa_html_a07ee8784ce19eea1db6ab8b243d106a6"><div class="ttname"><a href="namespace_disa.html#a07ee8784ce19eea1db6ab8b243d106a6">Disa::create_graph_saad</a></div><div class="ttdeci">Adjacency_Graph&lt; false &gt; create_graph_saad()</div><div class="ttdoc">Creates one of the example graphs from the text book Iterative Methods for Sparse Linear Systems.</div><div class="ttdef"><b>Definition:</b> generator.h:138</div></div>
+<div class="ttc" id="anamespace_disa_html_a11a859298aab9e256762d7ee0ddda55a"><div class="ttname"><a href="namespace_disa.html#a11a859298aab9e256762d7ee0ddda55a">Disa::create_graph_line</a></div><div class="ttdeci">Adjacency_Graph&lt; _directed &gt; create_graph_line(std::size_t number_vertices)</div><div class="ttdoc">Creates a line Adjacency Graph consisting of n vertices.</div><div class="ttdef"><b>Definition:</b> generator.h:48</div></div>
+<div class="ttc" id="anamespace_disa_html_a7bf8e949e818de5895404f8d77e3efc7"><div class="ttname"><a href="namespace_disa.html#a7bf8e949e818de5895404f8d77e3efc7">Disa::create_graph_hybrid</a></div><div class="ttdeci">Adjacency_Graph&lt; false &gt; create_graph_hybrid()</div><div class="ttdoc">Forms an Adjacency Graph with both 'triangular' and 'quadrilateral' type connectivity.</div><div class="ttdef"><b>Definition:</b> generator.h:112</div></div>
+<div class="ttc" id="anamespace_disa_html_ae70f63660d821d097cabfa65d2f15020"><div class="ttname"><a href="namespace_disa.html#ae70f63660d821d097cabfa65d2f15020">Disa::create_graph_structured</a></div><div class="ttdeci">Adjacency_Graph&lt; _directed &gt; create_graph_structured(std::size_t number_vertices)</div><div class="ttdoc">Creates a structured grid Adjacency Graph consisting of n^2 vertices.</div><div class="ttdef"><b>Definition:</b> generator.h:82</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

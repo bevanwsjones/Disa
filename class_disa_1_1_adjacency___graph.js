@@ -19,7 +19,7 @@ var class_disa_1_1_adjacency___graph =
     [ "insert_vertex_adjacent_list", "class_disa_1_1_adjacency___graph.html#a719e65b36024dab62f4a5e05293721e6", null ],
     [ "operator[]", "class_disa_1_1_adjacency___graph.html#ad7bda48d930c6060c12bb296148ed46c", null ],
     [ "operator[]", "class_disa_1_1_adjacency___graph.html#afffd3889c5d38a1a8ab86abcadc98070", null ],
-    [ "reorder", "class_disa_1_1_adjacency___graph.html#a223803400f7584e4bfab5ded0e5b92bf", null ],
+    [ "reorder", "class_disa_1_1_adjacency___graph.html#a908cc98dc8cb1a4d689ff9def67cffa7", null ],
     [ "reserve", "class_disa_1_1_adjacency___graph.html#acaee28b4b5bc819b62e8a676b85f17a1", null ],
     [ "resize", "class_disa_1_1_adjacency___graph.html#aecb75771fd0988bb4e6fa3c1dd5a1d3f", null ],
     [ "shrink_to_fit", "class_disa_1_1_adjacency___graph.html#ad9e4af5032d71179d3abf04db463f791", null ],

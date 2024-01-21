@@ -2,7 +2,7 @@ var class_disa_1_1_adjacency___subgraph =
 [
     [ "Adjacency_Subgraph", "class_disa_1_1_adjacency___subgraph.html#af246354bc15091bc83bf59495a3ca2e1", null ],
     [ "~Adjacency_Subgraph", "class_disa_1_1_adjacency___subgraph.html#a0eb8041b5ac201610be65864fbce4da5", null ],
-    [ "Adjacency_Subgraph", "class_disa_1_1_adjacency___subgraph.html#a2d125c03c34d17ff12018825d171deae", null ],
+    [ "Adjacency_Subgraph", "class_disa_1_1_adjacency___subgraph.html#a4ad31be06fab9f2b6d42ecee3592ce81", null ],
     [ "at", "class_disa_1_1_adjacency___subgraph.html#a2ef9de02b4c8ec387321aaa3eefe6a30", null ],
     [ "back", "class_disa_1_1_adjacency___subgraph.html#ae7c9139690af084bde55f3188900a8e9", null ],
     [ "back", "class_disa_1_1_adjacency___subgraph.html#affd668ce0bc9f0c652923b9fbc10241d", null ],
@@ -15,7 +15,7 @@ var class_disa_1_1_adjacency___subgraph =
     [ "front", "class_disa_1_1_adjacency___subgraph.html#a19e607af4c860098f9ca9ac314c6c38c", null ],
     [ "front", "class_disa_1_1_adjacency___subgraph.html#a4e5c1633e9bffac331b9ac49e51fddd9", null ],
     [ "is_local", "class_disa_1_1_adjacency___subgraph.html#af7ce524d1e4bd721d28d6d8903d91382", null ],
-    [ "is_parent", "class_disa_1_1_adjacency___subgraph.html#a8e1a5d13aa8ecfb23105b54b92359ff1", null ],
+    [ "is_parent", "class_disa_1_1_adjacency___subgraph.html#af69152179929d2cdec924fd0d80d28b6", null ],
     [ "local_global", "class_disa_1_1_adjacency___subgraph.html#abfadd9095e0098019b0f28bfd1162b96", null ],
     [ "operator[]", "class_disa_1_1_adjacency___subgraph.html#ad7bda48d930c6060c12bb296148ed46c", null ],
     [ "operator[]", "class_disa_1_1_adjacency___subgraph.html#afffd3889c5d38a1a8ab86abcadc98070", null ],
@@ -27,6 +27,6 @@ var class_disa_1_1_adjacency___subgraph =
     [ "size_edge", "class_disa_1_1_adjacency___subgraph.html#ae13038ad8e3b198ec30c83e3ac524f2f", null ],
     [ "size_vertex", "class_disa_1_1_adjacency___subgraph.html#a6278cc8407882022d4790eadf867860c", null ],
     [ "swap", "class_disa_1_1_adjacency___subgraph.html#a2e4a6ced26dca3a8d702c4dedd486a41", null ],
-    [ "update_levels", "class_disa_1_1_adjacency___subgraph.html#a7d0d325a5b24ec16077a4153a3c78a9a", null ],
+    [ "update_levels", "class_disa_1_1_adjacency___subgraph.html#a9c75cda6d0fc356e61c666d73c0b36ca", null ],
     [ "vertex_level", "class_disa_1_1_adjacency___subgraph.html#ae74963d1838b37a9db0a64a3bfb2813a", null ]
 ];

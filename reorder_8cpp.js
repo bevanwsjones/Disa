@@ -1,6 +1,6 @@
 var reorder_8cpp =
 [
-    [ "breadth_first", "reorder_8cpp.html#a0ebbb7f36b56fc03ed65b7dae36ba0ae", null ],
-    [ "cuthill_mckee", "reorder_8cpp.html#aff6c6739051ad6169a65690246ea7620", null ],
-    [ "greedy_multicolouring", "reorder_8cpp.html#a67dd1bf443731d00b774623d28891657", null ]
+    [ "breadth_first", "reorder_8cpp.html#acf04b38f6a4f93b737ffb6ac2b433224", null ],
+    [ "cuthill_mckee", "reorder_8cpp.html#a07cb4eaebee2a4bfcc4350470a586274", null ],
+    [ "greedy_multicolouring", "reorder_8cpp.html#a5fb0d3be9790d345b48e09008ac179f0", null ]
 ];

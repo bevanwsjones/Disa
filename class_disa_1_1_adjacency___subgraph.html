@@ -99,9 +99,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0eb8041b5ac201610be65864fbce4da5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a0eb8041b5ac201610be65864fbce4da5">~Adjacency_Subgraph</a> ()=default</td></tr>
 <tr class="memdesc:a0eb8041b5ac201610be65864fbce4da5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="class_disa_1_1_adjacency___subgraph.html#a0eb8041b5ac201610be65864fbce4da5">More...</a><br /></td></tr>
 <tr class="separator:a0eb8041b5ac201610be65864fbce4da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d125c03c34d17ff12018825d171deae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a2d125c03c34d17ff12018825d171deae">Adjacency_Subgraph</a> (const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a> &amp;parent_graph, const std::vector&lt; std::size_t &gt; &amp;i_sub_graph_vertex, std::size_t extra_levels=0)</td></tr>
-<tr class="memdesc:a2d125c03c34d17ff12018825d171deae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for creating a subgraph from a parent graph.  <a href="class_disa_1_1_adjacency___subgraph.html#a2d125c03c34d17ff12018825d171deae">More...</a><br /></td></tr>
-<tr class="separator:a2d125c03c34d17ff12018825d171deae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ad31be06fab9f2b6d42ecee3592ce81"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a4ad31be06fab9f2b6d42ecee3592ce81">Adjacency_Subgraph</a> (const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>&lt; false &gt; &amp;parent_graph, const std::vector&lt; std::size_t &gt; &amp;i_sub_graph_vertex, std::size_t extra_levels=0)</td></tr>
+<tr class="memdesc:a4ad31be06fab9f2b6d42ecee3592ce81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for creating a subgraph from a parent graph.  <a href="class_disa_1_1_adjacency___subgraph.html#a4ad31be06fab9f2b6d42ecee3592ce81">More...</a><br /></td></tr>
+<tr class="separator:a4ad31be06fab9f2b6d42ecee3592ce81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ef9de02b4c8ec387321aaa3eefe6a30"><td class="memItemLeft" align="right" valign="top">std::span&lt; const size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a2ef9de02b4c8ec387321aaa3eefe6a30">at</a> (const std::size_t &amp;i_vertex) const</td></tr>
 <tr class="memdesc:a2ef9de02b4c8ec387321aaa3eefe6a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscript operator for access to a specified graph vertex's adjacency, with range checking.  <a href="class_disa_1_1_adjacency___subgraph.html#a2ef9de02b4c8ec387321aaa3eefe6a30">More...</a><br /></td></tr>
 <tr class="separator:a2ef9de02b4c8ec387321aaa3eefe6a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,18 +165,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af7ce524d1e4bd721d28d6d8903d91382"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#af7ce524d1e4bd721d28d6d8903d91382">is_local</a> (const std::size_t &amp;i_vertex) const</td></tr>
 <tr class="memdesc:af7ce524d1e4bd721d28d6d8903d91382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the vertex local to this subgraph.  <a href="class_disa_1_1_adjacency___subgraph.html#af7ce524d1e4bd721d28d6d8903d91382">More...</a><br /></td></tr>
 <tr class="separator:af7ce524d1e4bd721d28d6d8903d91382"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e1a5d13aa8ecfb23105b54b92359ff1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a8e1a5d13aa8ecfb23105b54b92359ff1">is_parent</a> (const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a> &amp;graph_parent) const noexcept</td></tr>
-<tr class="memdesc:a8e1a5d13aa8ecfb23105b54b92359ff1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the parsed graph is the parent of this sub-graph.  <a href="class_disa_1_1_adjacency___subgraph.html#a8e1a5d13aa8ecfb23105b54b92359ff1">More...</a><br /></td></tr>
-<tr class="separator:a8e1a5d13aa8ecfb23105b54b92359ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af69152179929d2cdec924fd0d80d28b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#af69152179929d2cdec924fd0d80d28b6">is_parent</a> (const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>&lt; false &gt; &amp;graph_parent) const noexcept</td></tr>
+<tr class="memdesc:af69152179929d2cdec924fd0d80d28b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the parsed graph is the parent of this sub-graph.  <a href="class_disa_1_1_adjacency___subgraph.html#af69152179929d2cdec924fd0d80d28b6">More...</a><br /></td></tr>
+<tr class="separator:af69152179929d2cdec924fd0d80d28b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfadd9095e0098019b0f28bfd1162b96"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#abfadd9095e0098019b0f28bfd1162b96">local_global</a> (const std::size_t &amp;i_vertex) const</td></tr>
 <tr class="memdesc:abfadd9095e0098019b0f28bfd1162b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the global index of a local vertex.  <a href="class_disa_1_1_adjacency___subgraph.html#abfadd9095e0098019b0f28bfd1162b96">More...</a><br /></td></tr>
 <tr class="separator:abfadd9095e0098019b0f28bfd1162b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fcf16cce1cc2fa5f4b7d96646e33221"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_adjacency___subgraph.html">Adjacency_Subgraph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a1fcf16cce1cc2fa5f4b7d96646e33221">reorder</a> (const std::vector&lt; std::size_t &gt; &amp;permutation)</td></tr>
 <tr class="memdesc:a1fcf16cce1cc2fa5f4b7d96646e33221"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorders this graph given a new index numbering.  <a href="class_disa_1_1_adjacency___subgraph.html#a1fcf16cce1cc2fa5f4b7d96646e33221">More...</a><br /></td></tr>
 <tr class="separator:a1fcf16cce1cc2fa5f4b7d96646e33221"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d0d325a5b24ec16077a4153a3c78a9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a7d0d325a5b24ec16077a4153a3c78a9a">update_levels</a> (const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a> &amp;parent_graph, std::size_t max_level, std::shared_ptr&lt; std::vector&lt; std::size_t &gt; &gt; i_global_local=nullptr)</td></tr>
-<tr class="memdesc:a7d0d325a5b24ec16077a4153a3c78a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the number of 'halo' levels/vertices around the primary sub-graph.  <a href="class_disa_1_1_adjacency___subgraph.html#a7d0d325a5b24ec16077a4153a3c78a9a">More...</a><br /></td></tr>
-<tr class="separator:a7d0d325a5b24ec16077a4153a3c78a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c75cda6d0fc356e61c666d73c0b36ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a9c75cda6d0fc356e61c666d73c0b36ca">update_levels</a> (const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>&lt; false &gt; &amp;parent_graph, std::size_t max_level, std::shared_ptr&lt; std::vector&lt; std::size_t &gt; &gt; i_global_local=nullptr)</td></tr>
+<tr class="memdesc:a9c75cda6d0fc356e61c666d73c0b36ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the number of 'halo' levels/vertices around the primary sub-graph.  <a href="class_disa_1_1_adjacency___subgraph.html#a9c75cda6d0fc356e61c666d73c0b36ca">More...</a><br /></td></tr>
+<tr class="separator:a9c75cda6d0fc356e61c666d73c0b36ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae74963d1838b37a9db0a64a3bfb2813a"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#ae74963d1838b37a9db0a64a3bfb2813a">vertex_level</a> (const std::size_t &amp;i_vertex) const</td></tr>
 <tr class="memdesc:ae74963d1838b37a9db0a64a3bfb2813a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the level of a given vertex in the graph.  <a href="class_disa_1_1_adjacency___subgraph.html#ae74963d1838b37a9db0a64a3bfb2813a">More...</a><br /></td></tr>
 <tr class="separator:ae74963d1838b37a9db0a64a3bfb2813a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -237,8 +237,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2d125c03c34d17ff12018825d171deae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d125c03c34d17ff12018825d171deae">&#9670;&nbsp;</a></span>Adjacency_Subgraph() <span class="overload">[2/2]</span></h2>
+<a id="a4ad31be06fab9f2b6d42ecee3592ce81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ad31be06fab9f2b6d42ecee3592ce81">&#9670;&nbsp;</a></span>Adjacency_Subgraph() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -246,7 +246,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="class_disa_1_1_adjacency___subgraph.html">Adjacency_Subgraph</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>&lt; false &gt; &amp;&#160;</td>
           <td class="paramname"><em>parent_graph</em>, </td>
         </tr>
         <tr>
@@ -649,8 +649,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8e1a5d13aa8ecfb23105b54b92359ff1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e1a5d13aa8ecfb23105b54b92359ff1">&#9670;&nbsp;</a></span>is_parent()</h2>
+<a id="af69152179929d2cdec924fd0d80d28b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af69152179929d2cdec924fd0d80d28b6">&#9670;&nbsp;</a></span>is_parent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -661,7 +661,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool is_parent </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>&lt; false &gt; &amp;&#160;</td>
           <td class="paramname"><em>graph_parent</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -1044,8 +1044,8 @@ Invalidates the parent hash if size is increased. </dd></dl>
 
 </div>
 </div>
-<a id="a7d0d325a5b24ec16077a4153a3c78a9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d0d325a5b24ec16077a4153a3c78a9a">&#9670;&nbsp;</a></span>update_levels()</h2>
+<a id="a9c75cda6d0fc356e61c666d73c0b36ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c75cda6d0fc356e61c666d73c0b36ca">&#9670;&nbsp;</a></span>update_levels()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1053,7 +1053,7 @@ Invalidates the parent hash if size is increased. </dd></dl>
         <tr>
           <td class="memname">void update_levels </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>&lt; false &gt; &amp;&#160;</td>
           <td class="paramname"><em>parent_graph</em>, </td>
         </tr>
         <tr>

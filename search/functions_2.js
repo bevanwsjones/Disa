@@ -7,11 +7,11 @@ var searchData=
   ['compute_5fresidual_336',['compute_residual',['../namespace_disa.html#a989af41b535128aecf8d0680d86f6ae8',1,'Disa']]],
   ['console_5fformat_337',['console_format',['../namespace_disa.html#a313943c669dbb0d1eff816585b62c881',1,'Disa']]],
   ['contains_338',['contains',['../class_disa_1_1_adjacency___graph.html#a1995f33622008acb17fc118451503bdb',1,'Disa::Adjacency_Graph::contains()'],['../class_disa_1_1_adjacency___subgraph.html#a1995f33622008acb17fc118451503bdb',1,'Disa::Adjacency_Subgraph::contains()'],['../class_disa_1_1_matrix___sparse.html#ae459dcff15917949a9018d1cd89fb029',1,'Disa::Matrix_Sparse::contains()']]],
-  ['create_5fgraph_5fhybrid_339',['create_graph_hybrid',['../namespace_disa.html#ae78338a4218ff9706dced4decc848792',1,'Disa']]],
-  ['create_5fgraph_5fline_340',['create_graph_line',['../namespace_disa.html#a70deecb2803a0ba57d7fbf6237aea382',1,'Disa']]],
-  ['create_5fgraph_5fsaad_341',['create_graph_saad',['../namespace_disa.html#a08c0625ab3ab76703aed79dc4fa7b8fb',1,'Disa']]],
-  ['create_5fgraph_5fstructured_342',['create_graph_structured',['../namespace_disa.html#a081e79667398f190cadf6f363f50b327',1,'Disa']]],
+  ['create_5fgraph_5fhybrid_339',['create_graph_hybrid',['../namespace_disa.html#a7bf8e949e818de5895404f8d77e3efc7',1,'Disa']]],
+  ['create_5fgraph_5fline_340',['create_graph_line',['../namespace_disa.html#a11a859298aab9e256762d7ee0ddda55a',1,'Disa']]],
+  ['create_5fgraph_5fsaad_341',['create_graph_saad',['../namespace_disa.html#a07ee8784ce19eea1db6ab8b243d106a6',1,'Disa']]],
+  ['create_5fgraph_5fstructured_342',['create_graph_structured',['../namespace_disa.html#ae70f63660d821d097cabfa65d2f15020',1,'Disa']]],
   ['cross_5fproduct_343',['cross_product',['../namespace_disa.html#a8ca8b4969e23b51f8f9569dabab8f33a',1,'Disa']]],
-  ['cuthill_5fmckee_344',['cuthill_mckee',['../namespace_disa.html#aff6c6739051ad6169a65690246ea7620',1,'Disa']]],
-  ['cuthill_5fmckee_5freverse_345',['cuthill_mckee_reverse',['../namespace_disa.html#aa49df54dcb38f4fa37bcba260c3bcfc1',1,'Disa']]]
+  ['cuthill_5fmckee_344',['cuthill_mckee',['../namespace_disa.html#a07cb4eaebee2a4bfcc4350470a586274',1,'Disa']]],
+  ['cuthill_5fmckee_5freverse_345',['cuthill_mckee_reverse',['../namespace_disa.html#a998d530594fbf6d8c44cb746ab7608c5',1,'Disa']]]
 ];

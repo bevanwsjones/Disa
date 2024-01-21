@@ -1,6 +1,7 @@
 var hierarchy =
 [
-    [ "Adjacency_Graph", "class_disa_1_1_adjacency___graph.html", null ],
+    [ "Adjacency_Graph< _directed >", "class_disa_1_1_adjacency___graph.html", null ],
+    [ "Adjacency_Graph< false >", "class_disa_1_1_adjacency___graph.html", null ],
     [ "Adjacency_Subgraph", "class_disa_1_1_adjacency___subgraph.html", null ],
     [ "AdjacencySubgraph", "class_adjacency_subgraph.html", null ],
     [ "array", null, [
@@ -14,7 +15,8 @@ var hierarchy =
     [ "Direct< Direct_Lower_Upper_Factorisation< _solver_type, _size, _pivot >, _size >", "class_disa_1_1_direct.html", [
       [ "Direct_Lower_Upper_Factorisation< _solver_type, _size, _pivot >", "class_disa_1_1_direct___lower___upper___factorisation.html", null ]
     ] ],
-    [ "hash< Disa::Adjacency_Graph >", "structstd_1_1hash_3_01_disa_1_1_adjacency___graph_01_4.html", null ],
+    [ "hash< Disa::Adjacency_Graph >", "structhash_3_01_disa_1_1_adjacency___graph_01_4.html", null ],
+    [ "hash< Disa::Adjacency_Graph< _directed > >", "structstd_1_1hash_3_01_disa_1_1_adjacency___graph_3_01__directed_01_4_01_4.html", null ],
     [ "Iterator_Matrix_Sparse_Element< _matrix_type >", "struct_disa_1_1_iterator___matrix___sparse___element.html", null ],
     [ "Iterator_Matrix_Sparse_Row< _matrix_type >", "struct_disa_1_1_iterator___matrix___sparse___row.html", null ],
     [ "Matrix_Sparse", "class_disa_1_1_matrix___sparse.html", null ],

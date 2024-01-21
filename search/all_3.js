@@ -14,11 +14,11 @@ var searchData=
   ['convergence_5fcriteria_30',['Convergence_Criteria',['../struct_disa_1_1_convergence___criteria.html',1,'Disa']]],
   ['convergence_5fdata_31',['Convergence_Data',['../struct_disa_1_1_convergence___data.html',1,'Disa']]],
   ['convergence_5ftolerance_32',['convergence_tolerance',['../struct_disa_1_1_solver___config.html#ad542bb389be35c369e6cad3b743b944a',1,'Disa::Solver_Config']]],
-  ['create_5fgraph_5fhybrid_33',['create_graph_hybrid',['../namespace_disa.html#ae78338a4218ff9706dced4decc848792',1,'Disa']]],
-  ['create_5fgraph_5fline_34',['create_graph_line',['../namespace_disa.html#a70deecb2803a0ba57d7fbf6237aea382',1,'Disa']]],
-  ['create_5fgraph_5fsaad_35',['create_graph_saad',['../namespace_disa.html#a08c0625ab3ab76703aed79dc4fa7b8fb',1,'Disa']]],
-  ['create_5fgraph_5fstructured_36',['create_graph_structured',['../namespace_disa.html#a081e79667398f190cadf6f363f50b327',1,'Disa']]],
+  ['create_5fgraph_5fhybrid_33',['create_graph_hybrid',['../namespace_disa.html#a7bf8e949e818de5895404f8d77e3efc7',1,'Disa']]],
+  ['create_5fgraph_5fline_34',['create_graph_line',['../namespace_disa.html#a11a859298aab9e256762d7ee0ddda55a',1,'Disa']]],
+  ['create_5fgraph_5fsaad_35',['create_graph_saad',['../namespace_disa.html#a07ee8784ce19eea1db6ab8b243d106a6',1,'Disa']]],
+  ['create_5fgraph_5fstructured_36',['create_graph_structured',['../namespace_disa.html#ae70f63660d821d097cabfa65d2f15020',1,'Disa']]],
   ['cross_5fproduct_37',['cross_product',['../namespace_disa.html#a8ca8b4969e23b51f8f9569dabab8f33a',1,'Disa']]],
-  ['cuthill_5fmckee_38',['cuthill_mckee',['../namespace_disa.html#aff6c6739051ad6169a65690246ea7620',1,'Disa']]],
-  ['cuthill_5fmckee_5freverse_39',['cuthill_mckee_reverse',['../namespace_disa.html#aa49df54dcb38f4fa37bcba260c3bcfc1',1,'Disa']]]
+  ['cuthill_5fmckee_38',['cuthill_mckee',['../namespace_disa.html#a07cb4eaebee2a4bfcc4350470a586274',1,'Disa']]],
+  ['cuthill_5fmckee_5freverse_39',['cuthill_mckee_reverse',['../namespace_disa.html#a998d530594fbf6d8c44cb746ab7608c5',1,'Disa']]]
 ];

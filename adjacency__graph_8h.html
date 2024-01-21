@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('adjacency__graph_8h.html',''); initRes
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;numeric&gt;</code><br />
 <code>#include &lt;span&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="adjacency__graph_8hpp_source.html">adjacency_graph.hpp</a>&quot;</code><br />
@@ -103,11 +104,10 @@ $(document).ready(function(){initNavTree('adjacency__graph_8h.html',''); initRes
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph&lt; _directed &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An graph G(V, E), where V is a set of vertex indices and E is a set of undirected edges connecting the vertices in V.  <a href="class_disa_1_1_adjacency___graph.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1hash_3_01_disa_1_1_adjacency___graph_01_4.html">hash&lt; Disa::Adjacency_Graph &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template specialization to provides hash function for the Adjacency_Graph.  <a href="structstd_1_1hash_3_01_disa_1_1_adjacency___graph_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1hash_3_01_disa_1_1_adjacency___graph_3_01__directed_01_4_01_4.html">hash&lt; Disa::Adjacency_Graph&lt; _directed &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -119,9 +119,10 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a187fe363f613eb942867490eac9ffa04"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a187fe363f613eb942867490eac9ffa04">operator&lt;&lt;</a> (std::ostream &amp;ostream, const Adjacency_Graph &amp;graph)</td></tr>
-<tr class="memdesc:a187fe363f613eb942867490eac9ffa04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded stream operator for the out stream, writes out a formatted graph.  <a href="namespace_disa.html#a187fe363f613eb942867490eac9ffa04">More...</a><br /></td></tr>
-<tr class="separator:a187fe363f613eb942867490eac9ffa04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f3cad1511bda44d82010b22562a1517"><td class="memTemplParams" colspan="2">template&lt;bool _directed&gt; </td></tr>
+<tr class="memitem:a2f3cad1511bda44d82010b22562a1517"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a2f3cad1511bda44d82010b22562a1517">operator&lt;&lt;</a> (std::ostream &amp;ostream, const Adjacency_Graph&lt; _directed &gt; &amp;graph)</td></tr>
+<tr class="memdesc:a2f3cad1511bda44d82010b22562a1517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded stream operator for the out stream, writes out a formatted graph.  <a href="namespace_disa.html#a2f3cad1511bda44d82010b22562a1517">More...</a><br /></td></tr>
+<tr class="separator:a2f3cad1511bda44d82010b22562a1517"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

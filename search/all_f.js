@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['recursive_5fgraph_5fbisection_176',['recursive_graph_bisection',['../namespace_disa.html#afe0cec247626f1277f4bd8937c0feefa',1,'Disa']]],
+  ['recursive_5fgraph_5fbisection_176',['recursive_graph_bisection',['../namespace_disa.html#a9ccfdf59250250b0a6e5d66cea34909d',1,'Disa']]],
   ['reference_177',['reference',['../struct_disa_1_1_iterator___matrix___sparse___row.html#a74202cdd96628bc49a756e5fc87d22de',1,'Disa::Iterator_Matrix_Sparse_Row::reference()'],['../struct_disa_1_1_iterator___matrix___sparse___element.html#a74202cdd96628bc49a756e5fc87d22de',1,'Disa::Iterator_Matrix_Sparse_Element::reference()']]],
   ['relaxation_178',['relaxation',['../struct_disa_1_1_solver___fixed___point___sor___data.html#a2ec4968c86d8111028f47e69dc181465',1,'Disa::Solver_Fixed_Point_Sor_Data']]],
-  ['reorder_179',['reorder',['../class_disa_1_1_adjacency___graph.html#a223803400f7584e4bfab5ded0e5b92bf',1,'Disa::Adjacency_Graph::reorder()'],['../class_disa_1_1_adjacency___subgraph.html#a1fcf16cce1cc2fa5f4b7d96646e33221',1,'Disa::Adjacency_Subgraph::reorder()']]],
+  ['reorder_179',['reorder',['../class_disa_1_1_adjacency___graph.html#a908cc98dc8cb1a4d689ff9def67cffa7',1,'Disa::Adjacency_Graph::reorder()'],['../class_disa_1_1_adjacency___subgraph.html#a1fcf16cce1cc2fa5f4b7d96646e33221',1,'Disa::Adjacency_Subgraph::reorder()']]],
   ['reorder_2ecpp_180',['reorder.cpp',['../reorder_8cpp.html',1,'']]],
   ['reorder_2eh_181',['reorder.h',['../reorder_8h.html',1,'']]],
   ['reserve_182',['reserve',['../class_disa_1_1_adjacency___graph.html#acaee28b4b5bc819b62e8a676b85f17a1',1,'Disa::Adjacency_Graph::reserve()'],['../class_disa_1_1_adjacency___subgraph.html#acaee28b4b5bc819b62e8a676b85f17a1',1,'Disa::Adjacency_Subgraph::reserve()'],['../class_disa_1_1_matrix___sparse.html#aa0b96fc2d748fea0d8b0a74c9d2d2f54',1,'Disa::Matrix_Sparse::reserve()']]],

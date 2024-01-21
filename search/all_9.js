@@ -17,7 +17,7 @@ var searchData=
   ['is_5fnearly_5fgreater_5fequal_101',['is_nearly_greater_equal',['../namespace_disa.html#ac79b4c22b2251a16b4ce10ab35754083',1,'Disa']]],
   ['is_5fnearly_5fless_102',['is_nearly_less',['../namespace_disa.html#ac30c55fc1693e9407d06d204a86b28aa',1,'Disa']]],
   ['is_5fnearly_5fless_5fequal_103',['is_nearly_less_equal',['../namespace_disa.html#a169f81a587880e04bd2bab802b3de310',1,'Disa']]],
-  ['is_5fparent_104',['is_parent',['../class_disa_1_1_adjacency___subgraph.html#a8e1a5d13aa8ecfb23105b54b92359ff1',1,'Disa::Adjacency_Subgraph']]],
+  ['is_5fparent_104',['is_parent',['../class_disa_1_1_adjacency___subgraph.html#af69152179929d2cdec924fd0d80d28b6',1,'Disa::Adjacency_Subgraph']]],
   ['iteration_105',['iteration',['../struct_disa_1_1_convergence___data.html#af8224d8758a534fe4c1b8c3ef4ae4e35',1,'Disa::Convergence_Data']]],
   ['iterator_106',['iterator',['../class_disa_1_1_matrix___sparse.html#a1f8941320cf11a7938ff45675c7a2649',1,'Disa::Matrix_Sparse::iterator()'],['../class_disa_1_1_matrix___sparse___row.html#addd2c4324986de171924c9f131b08510',1,'Disa::Matrix_Sparse_Row::iterator()']]],
   ['iterator_5fcategory_107',['iterator_category',['../struct_disa_1_1_iterator___matrix___sparse___row.html#a8806ca091813ced0b0658fedaa448357',1,'Disa::Iterator_Matrix_Sparse_Row::iterator_category()'],['../struct_disa_1_1_iterator___matrix___sparse___element.html#a8806ca091813ced0b0658fedaa448357',1,'Disa::Iterator_Matrix_Sparse_Element::iterator_category()']]],

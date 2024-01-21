@@ -14,7 +14,7 @@ var searchData=
   ['is_5fnearly_5fgreater_5fequal_374',['is_nearly_greater_equal',['../namespace_disa.html#ac79b4c22b2251a16b4ce10ab35754083',1,'Disa']]],
   ['is_5fnearly_5fless_375',['is_nearly_less',['../namespace_disa.html#ac30c55fc1693e9407d06d204a86b28aa',1,'Disa']]],
   ['is_5fnearly_5fless_5fequal_376',['is_nearly_less_equal',['../namespace_disa.html#a169f81a587880e04bd2bab802b3de310',1,'Disa']]],
-  ['is_5fparent_377',['is_parent',['../class_disa_1_1_adjacency___subgraph.html#a8e1a5d13aa8ecfb23105b54b92359ff1',1,'Disa::Adjacency_Subgraph']]],
+  ['is_5fparent_377',['is_parent',['../class_disa_1_1_adjacency___subgraph.html#af69152179929d2cdec924fd0d80d28b6',1,'Disa::Adjacency_Subgraph']]],
   ['iterator_5fmatrix_5fsparse_5felement_378',['Iterator_Matrix_Sparse_Element',['../struct_disa_1_1_iterator___matrix___sparse___element.html#a91859176069c836374f31531985ea7fb',1,'Disa::Iterator_Matrix_Sparse_Element']]],
   ['iterator_5fmatrix_5fsparse_5frow_379',['Iterator_Matrix_Sparse_Row',['../struct_disa_1_1_iterator___matrix___sparse___row.html#a766649e42cc35ff00c120a0697b79dd0',1,'Disa::Iterator_Matrix_Sparse_Row::Iterator_Matrix_Sparse_Row(const value_type &amp;row)'],['../struct_disa_1_1_iterator___matrix___sparse___row.html#a1b9f4792e03384df7bee9e8403a13d30',1,'Disa::Iterator_Matrix_Sparse_Row::Iterator_Matrix_Sparse_Row(std::size_t i_row, matrix_type *sparse_matrix)']]]
 ];

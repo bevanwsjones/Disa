@@ -1,9 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"struct_disa_1_1_iterator___matrix___sparse___element.html#ae56998457aadb1c21c394dc5d60766dd":[1,0,0,5,10],
-"struct_disa_1_1_iterator___matrix___sparse___element.html#aeac2992660f159aa2b41c11783ae05ed":[1,0,0,5,8],
-"struct_disa_1_1_iterator___matrix___sparse___row.html":[1,0,0,4],
-"struct_disa_1_1_iterator___matrix___sparse___row.html#a018262d0624b3a94443a6b6e75904510":[1,0,0,4,12],
 "struct_disa_1_1_iterator___matrix___sparse___row.html#a13974a6c8798531e2634f8941380aa45":[1,0,0,4,9],
 "struct_disa_1_1_iterator___matrix___sparse___row.html#a1b9f4792e03384df7bee9e8403a13d30":[1,0,0,4,7],
 "struct_disa_1_1_iterator___matrix___sparse___row.html#a1f6c2663b5a542be4f265da6e9ece561":[1,0,0,4,18],
@@ -90,8 +86,9 @@ var NAVTREEINDEX2 =
 "struct_disa_1_1_vector___dense_3_010_01_4.html#a504baedc79e82ff26fb891705239712e":[1,0,0,8,7],
 "struct_disa_1_1_vector___dense_3_010_01_4.html#a8adaa45a2ee29bd7c0b45ebb2dd793a3":[1,0,0,8,0],
 "struct_disa_1_1_vector___dense_3_010_01_4.html#a922f40266f68b9b31192594888a09345":[1,0,0,8,4],
-"structstd_1_1hash_3_01_disa_1_1_adjacency___graph_01_4.html":[1,0,1,0],
-"structstd_1_1hash_3_01_disa_1_1_adjacency___graph_01_4.html#a5ef8d281dd6cc6c41afe1b9cac928e80":[1,0,1,0,0],
+"structhash_3_01_disa_1_1_adjacency___graph_01_4.html":[1,0,3],
+"structstd_1_1hash_3_01_disa_1_1_adjacency___graph_3_01__directed_01_4_01_4.html":[1,0,1,0],
+"structstd_1_1hash_3_01_disa_1_1_adjacency___graph_3_01__directed_01_4_01_4.html#a534c78cead3e40994e65f002d89bc09c":[1,0,1,0,0],
 "vector__dense_8h.html":[2,0,1,0,5],
 "vector__dense_8h.html#a009d78f482c3c82b92f7abb01c3646e7":[2,0,1,0,5,3],
 "vector__dense_8h.html#a34ea7f0bef4eb3afb6578e3b16e43522":[2,0,1,0,5,4],
