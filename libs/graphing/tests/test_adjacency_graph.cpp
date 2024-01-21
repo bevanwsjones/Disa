@@ -420,8 +420,7 @@ TEST(test_adjacency_graph, erase_if_directed) {
       EXPECT_EQ(answer[i_vertex][i_adjacent], square_graph[i_vertex][i_adjacent]);
 }
 
-
-TEST(test_adjacency_graph, resize) {
+TEST(test_adjacency_graph, resize_undirected) {
 
   // Test sizing up.
   Adjacency_Graph<false> graph;
@@ -444,6 +443,33 @@ TEST(test_adjacency_graph, resize) {
   EXPECT_EQ(graph[2].size(), 2);
   EXPECT_EQ(graph[2][0], 0);
   EXPECT_EQ(graph[2][1], 1);
+
+  // check zero sizing.
+  graph.resize(0);
+  EXPECT_EQ(graph.size_edge(), 0);
+  EXPECT_EQ(graph.size_vertex(), 0);
+}
+
+
+TEST(test_adjacency_graph, resize_directed) {
+
+  // Test sizing up.
+  Adjacency_Graph<true> graph;
+  graph.resize(5);
+  EXPECT_EQ(graph.size_edge(), 0);
+  EXPECT_EQ(graph.size_vertex(), 5);
+
+  // Test size down, start with a fully connected pentagon graph.
+  graph = create_graph_structured<true>(4);
+
+  graph.resize(8); // halve the graph.
+  EXPECT_EQ(graph.size_edge(), 10);
+  EXPECT_EQ(graph.size_vertex(), 8);
+  Adjacency_Graph<true> answer({{0, 1}, {0, 4}, {1, 2}, {1, 5}, {2, 3}, {2, 6}, {3, 7}, {4, 5}, {5, 6}, {6, 7}}); 
+  answer.resize(8); // should be one extra vertex which is not connected to anything. 
+  FOR(i_vertex, answer.size_vertex())
+    FOR(i_adjacent, answer[i_vertex].size())
+      EXPECT_EQ(answer[i_vertex][i_adjacent], graph[i_vertex][i_adjacent]);
 
   // check zero sizing.
   graph.resize(0);
@@ -514,7 +540,6 @@ TEST(test_adjacency_graph, contains_undirected) {
   EXPECT_FALSE(graph.contains({0, 2}));
   EXPECT_FALSE(graph.contains({2, 0}));
 }
-
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Graph Operators
