@@ -95,7 +95,7 @@ public:
    *
    * @note There are no guarantees placed on the resulting local partition ordering.
    */
-  Adjacency_Subgraph(const Adjacency_Graph& parent_graph, const std::vector<std::size_t>& i_sub_graph_vertex,
+  Adjacency_Subgraph(const Adjacency_Graph<false>& parent_graph, const std::vector<std::size_t>& i_sub_graph_vertex,
                      std::size_t extra_levels = 0);
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -230,7 +230,7 @@ public:
    */
   inline void clear() {
     graph.clear();
-    hash_parent = std::hash<Adjacency_Graph>{}(graph);
+    hash_parent = std::hash<Adjacency_Graph<false> >{}(graph);
     i_local_global.clear();
     level_set_value.clear();
   }
@@ -243,7 +243,7 @@ public:
    * @note Invalidates the parent hash if size is increased.
    */
   inline void resize(const std::size_t size) {
-    if(size > size_vertex()) hash_parent = std::hash<Adjacency_Graph>{}(Adjacency_Graph());
+    if(size > size_vertex()) hash_parent = std::hash<Adjacency_Graph<false> >{}(Adjacency_Graph<false>());
     graph.resize(size);
     i_local_global.resize(size);
     if(!level_set_value.empty()) level_set_value.resize(size);
@@ -298,8 +298,8 @@ public:
    * @param[in] graph_parent The parent graph to check.
    * @return True if the graph is the parent, else false.
    */
-  [[nodiscard]] bool is_parent(const Adjacency_Graph& graph_parent) const noexcept {
-    return std::hash<Adjacency_Graph>{}(graph_parent) == hash_parent;
+  [[nodiscard]] bool is_parent(const Adjacency_Graph<false>& graph_parent) const noexcept {
+    return std::hash<Adjacency_Graph<false> >{}(graph_parent) == hash_parent;
   }
 
   /**
@@ -331,7 +331,7 @@ public:
    *       using the same pointer/vector can increase performance by avoiding repeated 'large' memory allocations.
    *       Finally, and std::numeric_limits<std::size_t>::max() value implies no mapping into this subgraph.
    */
-  void update_levels(const Adjacency_Graph& parent_graph, std::size_t max_level,
+  void update_levels(const Adjacency_Graph<false>& parent_graph, std::size_t max_level,
                      std::shared_ptr<std::vector<std::size_t> > i_global_local = nullptr);
 
   /**
@@ -346,8 +346,8 @@ public:
   }
 
 private:
-  std::size_t hash_parent{std::hash<Adjacency_Graph>{}(Adjacency_Graph())};    /**< The hash of a the parent graph, defaults to empty parent. */
-  Adjacency_Graph graph;                     /**< This graph's connectivity structure */
+  std::size_t hash_parent{std::hash<Adjacency_Graph<false> >{}(Adjacency_Graph<false> ())};    /**< The hash of a the parent graph, defaults to empty parent. */
+  Adjacency_Graph<false> graph;              /**< This graph's connectivity structure */
   std::vector<std::size_t> i_local_global;   /**< For each local vertex, its global index in the parent graph. */
   std::vector<std::size_t> level_set_value;  /**< For each local vertex, its level traversal value in this subgraph - 0 indicates the primary partition. */
 
@@ -363,7 +363,7 @@ private:
    * @param[out] i_global_local The global to local mapping of all vertices in the parent graph. Will be populated if
    *                            empty.
    */
-  void add_levels(const Adjacency_Graph& parent_graph, std::size_t max_level, std::size_t current_max,
+  void add_levels(const Adjacency_Graph<false>& parent_graph, std::size_t max_level, std::size_t current_max,
                   std::shared_ptr<std::vector<std::size_t> > i_global_local);
 
   /**
@@ -373,7 +373,7 @@ private:
    * @param[out] i_global_local The global to local mapping of all vertices in the parent graph. Will only be populated
    *                            if parsed as a non-nullptr empty.
    */
-  void remove_levels(const Adjacency_Graph& parent_graph, std::size_t max_level,
+  void remove_levels(const Adjacency_Graph<false>& parent_graph, std::size_t max_level,
                      std::shared_ptr<std::vector<std::size_t> > i_global_local);
 };
 

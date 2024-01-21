@@ -43,7 +43,7 @@ namespace Disa {
  * iterations or until the seed vertices do not change between iterations. Once the function returns the update
  * partition will be contained within the subgraph_list.
  */
-void multinode_level_set_expansion(const Adjacency_Graph& graph, const std::size_t max_iter,
+void multinode_level_set_expansion(const Adjacency_Graph<false>& graph, const std::size_t max_iter,
                                    std::vector<Adjacency_Subgraph>& subgraph_list) {
   ASSERT(!subgraph_list.empty(), "Parsed Subgraph list is empty.");
   ASSERT(std::all_of(subgraph_list.begin(), subgraph_list.end(),
@@ -110,7 +110,8 @@ void multinode_level_set_expansion(const Adjacency_Graph& graph, const std::size
  * level traversal to determine the level at which to split the subgraph with the largest number of vertices, which then
  * forms two new subgraphs. This process is repeated, until the desired number of partitions is achieved.
  */
-std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph& graph, std::size_t number_partitions) {
+std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph<false>& graph, 
+                                                          std::size_t number_partitions) {
   ASSERT(number_partitions > 0, "Cannot split a graph into zero domains.");
 
   // Memory allocation.

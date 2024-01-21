@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <functional>
 #include <limits>
+#include <numeric>
 #include <span>
 #include <vector>
 
@@ -45,26 +46,31 @@ namespace Disa {
  * @details
  * An adjacency graph G stores a pair of integer sets, V and E. V represents a list of vertex/point/node labels and E
  * contains a set (list) of pairs, each containing two unsigned integers which are elements of V. If V is an ordered
- * continuous set of unsigned integers it can be represented implicitly. This class thus represents G by storing the
- * connectivity, of each vertex, to its connected neighbours rather than V and E directly. This allowing for single
- * faster search times, similar to other 'sparse' containers.
+ * continuous set of unsigned integers it can be represented implicitly. An edge E is said to be directed if the order 
+ * of the pair matters, i.e. (i, j) != (j, i), else the edge is undirected. Note: in the undirected case the resulting 
+ * graph is symmetric. This class thus represents G by storing the connectivity, of each vertex, to its connected 
+ * neighbours (rather than the pairs of E directly). This allows for faster search times, similar to other 'sparse' 
+ * containers.
  *
  * From a design point of view this class is similar to that of a sparse vector, and thus follows most of the
  * std::vector paradigms, except that each 'element' is dynamically sized and an ordered set of unsigned adjacency
  * values.
  *
  * @note:
- * 1. Edges are undirected, and thus the edge connecting vertex i to j is the same as the edge connecting j to i.
- * 2. Currently the graph does not support self connected edges i.e. edges i to i.
- * 3. Once populated, no information about the edge indexing is stored.
- * 4. The graph cannot contain information for connectivity between two types of vertices (i.e. a red set and a blue
- *    set where each set begins indexing at 0).
+ * 1. Where _directed == false edges are undirected, and thus the edge (i, j) == (j, i).
+ * 2. Where _directed == true edges are undirected, and thus the edge (i, j) != (j, i). 
+ * 3. Currently the graph does not support self connected edges i.e. edges for the form (i, i).
+ * 4. Once populated, no information about the edge indexing is stored.
+ * 5. The class assumes there is no difference between vertex types (red or blue colourings for example).
+ * 6. The class will assume that all vertices, with an index <size_vertex() exist, independet of their connectivity.
  *
  * Future:
- * 1. Add iterators, begin(), end() etc.
- * 2. Create arithmetic operators +,-, etc for unions and intersections.
- * 3. Possible base graph class from which this class can inherit.
+ * 1. Look into optimising memory for directed graphs (in terms of max number of nodes, vs elements in adjacency list).
+ * 2. Add iterators, begin(), end() etc.
+ * 3. Create arithmetic operators +,-, etc for unions and intersections.
+ * 4. Possible base graph class from which this class can inherit.
  */
+template<bool _directed>
 class Adjacency_Graph {
 
 public:
@@ -200,7 +206,9 @@ public:
    * @brief Returns the number of edge in the graph.
    * @return The number of edge.
    */
-  [[nodiscard]] inline std::size_t size_edge() const noexcept { return vertex_adjacent_list.size()/2; }
+  [[nodiscard]] inline std::size_t size_edge() const noexcept { 
+    return !_directed ? vertex_adjacent_list.size()/2 : vertex_adjacent_list.size(); 
+  }
 
   /**
    * @brief Returns the number of vertices and edges in the graph.
@@ -217,7 +225,7 @@ public:
    */
   inline void reserve(std::size_t size_vertex, std::size_t size_edge = 0) noexcept {
     offset.reserve(size_vertex + 1);
-    vertex_adjacent_list.reserve(size_edge*2);
+    vertex_adjacent_list.reserve(size_edge*(!_directed ? 2 : 1));
   }
 
   /**
@@ -225,7 +233,8 @@ public:
    * @return Pair containing [vertices, edges].
    */
   [[nodiscard]] inline std::pair<std::size_t, std::size_t> capacity() const noexcept {
-    return std::make_pair(!offset.capacity() ? 0 : offset.capacity() - 1, vertex_adjacent_list.capacity()/2);
+    return std::make_pair(!offset.capacity() ? 0 : offset.capacity() - 1, 
+                          !_directed ? vertex_adjacent_list.capacity()/2 : vertex_adjacent_list.capacity());
   }
 
   /**
@@ -361,12 +370,10 @@ protected:
  * @param[in] graph The graph to write.
  * @return Returns the ostream, with the graph writen out.
  */
-std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph& graph);
+template<bool _directed>
+std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph<_directed>& graph);
 
 }
-
-// Add template definitions
-#include "adjacency_graph.hpp"
 
 // ---------------------------------------------------------------------------------------------------------------------
 // STL specialisation
@@ -378,17 +385,20 @@ namespace std {
  * @struct hash<Disa::Adjacency_Graph>
  * @brief Template specialization to provides hash function for the Adjacency_Graph.
  */
-template<>
-struct hash<Disa::Adjacency_Graph> {
+template<bool _directed>
+struct hash<Disa::Adjacency_Graph<_directed> > {
 
   /**
    * @brief Computes the hash value of a given Disa::Adjacency_Graph object.
    * @param graph The graph to be hashed.
    * @returns A std::size_t value representing the hash value of the input graph.
    */
-  std::size_t operator()(const Disa::Adjacency_Graph& graph) const noexcept;
+  std::size_t operator()(const Disa::Adjacency_Graph<_directed>& graph) const noexcept;
 };
 
 }
+
+// Add template definitions
+#include "adjacency_graph.hpp"
 
 #endif //DISA_ADJACENCY_GRAPH_H
