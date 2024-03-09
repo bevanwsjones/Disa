@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_5fmatrix_477',['_matrix',['../struct_disa_1_1_matrix___dense.html#a635ced80f5e72066aa85e2236a3083f5',1,'Disa::Matrix_Dense::_matrix()'],['../struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html#af5b3c02e2fc2815882169f40a07349c0',1,'Disa::Matrix_Dense&lt; 0, 0 &gt;::_matrix()']]],
-  ['_5fvector_478',['_vector',['../struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a',1,'Disa::Vector_Dense::_vector()'],['../struct_disa_1_1_vector___dense_3_010_01_4.html#a8adaa45a2ee29bd7c0b45ebb2dd793a3',1,'Disa::Vector_Dense&lt; 0 &gt;::_vector()']]]
+  ['const_5fiterator_486',['const_iterator',['../class_disa_1_1_matrix___sparse.html#af8907f7c916cafe0a825a530fb7bee66',1,'Disa::Matrix_Sparse::const_iterator()'],['../class_disa_1_1_matrix___sparse___row.html#a55b6d627d1c1e5f6cf8097701b316352',1,'Disa::Matrix_Sparse_Row::const_iterator()']]],
+  ['const_5fiterator_5felement_487',['const_iterator_element',['../class_disa_1_1_matrix___sparse.html#a927c50fe349b20b591b9131a79407d13',1,'Disa::Matrix_Sparse']]]
 ];

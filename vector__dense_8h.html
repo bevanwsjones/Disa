@@ -105,14 +105,16 @@ $(document).ready(function(){initNavTree('vector__dense_8h.html',''); initResiza
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense&lt; _size &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense&lt; _type, _size &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mathematical Vector, of dimension _size, where every vector element has allocated has memory.  <a href="struct_disa_1_1_vector___dense.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense_3_010_01_4.html">Vector_Dense&lt; 0 &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mathematical Vector, of dimension _size, where every vector element has allocated has memory.  <a href="struct_disa_1_1_vector___dense_3_010_01_4.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense_3_01__type_00_010_01_4.html">Vector_Dense&lt; _type, 0 &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_static_promoter.html">StaticPromoter&lt; _vector0, _vector1 &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chooses, between two vectors the static vector type if possible.  <a href="struct_disa_1_1_static_promoter.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_static___promoter.html">Static_Promoter&lt; _vector0, _vector1 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chooses, between two vectors, the static vector type if possible.  <a href="struct_disa_1_1_static___promoter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_static___demoter.html">Static_Demoter&lt; _vector0, _vector1 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chooses, between two vectors, the dynamic vector type if possible.  <a href="struct_disa_1_1_static___demoter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -122,22 +124,22 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a009d78f482c3c82b92f7abb01c3646e7"><td class="memTemplParams" colspan="2">template&lt;std::size_t _size&gt; </td></tr>
-<tr class="memitem:a009d78f482c3c82b92f7abb01c3646e7"><td class="memTemplItemLeft" align="right" valign="top">constexpr Vector_Dense&lt; _size &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a009d78f482c3c82b92f7abb01c3646e7">operator*</a> (const Scalar &amp;scalar, Vector_Dense&lt; _size &gt; vector)</td></tr>
-<tr class="memdesc:a009d78f482c3c82b92f7abb01c3646e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a vector by a scalar, c = b*a, where a, and c are vectors and b is a scalar.  <a href="namespace_disa.html#a009d78f482c3c82b92f7abb01c3646e7">More...</a><br /></td></tr>
-<tr class="separator:a009d78f482c3c82b92f7abb01c3646e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a775704172206fb005aad9c50a59bf80d"><td class="memTemplParams" colspan="2">template&lt;std::size_t _size&gt; </td></tr>
-<tr class="memitem:a775704172206fb005aad9c50a59bf80d"><td class="memTemplItemLeft" align="right" valign="top">constexpr Vector_Dense&lt; _size &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a775704172206fb005aad9c50a59bf80d">operator/</a> (Vector_Dense&lt; _size &gt; vector, const Scalar &amp;scalar)</td></tr>
-<tr class="memdesc:a775704172206fb005aad9c50a59bf80d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides a vector by a scalar, c = b*a, where a, and c are vectors and b is a scalar.  <a href="namespace_disa.html#a775704172206fb005aad9c50a59bf80d">More...</a><br /></td></tr>
-<tr class="separator:a775704172206fb005aad9c50a59bf80d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34ea7f0bef4eb3afb6578e3b16e43522"><td class="memTemplParams" colspan="2">template&lt;std::size_t _size_0, std::size_t _size_1&gt; </td></tr>
-<tr class="memitem:a34ea7f0bef4eb3afb6578e3b16e43522"><td class="memTemplItemLeft" align="right" valign="top">constexpr StaticPromoter&lt; Vector_Dense&lt; _size_0 &gt;, Vector_Dense&lt; _size_1 &gt; &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a34ea7f0bef4eb3afb6578e3b16e43522">operator+</a> (const Vector_Dense&lt; _size_0 &gt; &amp;vector0, const Vector_Dense&lt; _size_1 &gt; &amp;vector1)</td></tr>
-<tr class="memdesc:a34ea7f0bef4eb3afb6578e3b16e43522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds two vectors together, c = a + b, where a, b, and c are vectors.  <a href="namespace_disa.html#a34ea7f0bef4eb3afb6578e3b16e43522">More...</a><br /></td></tr>
-<tr class="separator:a34ea7f0bef4eb3afb6578e3b16e43522"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af18f9098a6d2baf5a3ebdfd424565eb9"><td class="memTemplParams" colspan="2">template&lt;std::size_t _size_0, std::size_t _size_1&gt; </td></tr>
-<tr class="memitem:af18f9098a6d2baf5a3ebdfd424565eb9"><td class="memTemplItemLeft" align="right" valign="top">StaticPromoter&lt; Vector_Dense&lt; _size_0 &gt;, Vector_Dense&lt; _size_1 &gt; &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#af18f9098a6d2baf5a3ebdfd424565eb9">operator-</a> (const Vector_Dense&lt; _size_0 &gt; &amp;vector0, const Vector_Dense&lt; _size_1 &gt; &amp;vector1)</td></tr>
-<tr class="memdesc:af18f9098a6d2baf5a3ebdfd424565eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtracts two vectors, c = a - b, where a, b, and c are vectors.  <a href="namespace_disa.html#af18f9098a6d2baf5a3ebdfd424565eb9">More...</a><br /></td></tr>
-<tr class="separator:af18f9098a6d2baf5a3ebdfd424565eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada6a836107e9306bad16bfde83210c29"><td class="memTemplParams" colspan="2">template&lt;typename _type , std::size_t _size&gt; </td></tr>
+<tr class="memitem:ada6a836107e9306bad16bfde83210c29"><td class="memTemplItemLeft" align="right" valign="top">constexpr Vector_Dense&lt; _type, _size &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#ada6a836107e9306bad16bfde83210c29">operator*</a> (const _type &amp;scalar, Vector_Dense&lt; _type, _size &gt; vector)</td></tr>
+<tr class="memdesc:ada6a836107e9306bad16bfde83210c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies a vector by a scalar, c = b*a, where a, and c are vectors and b is a scalar.  <a href="namespace_disa.html#ada6a836107e9306bad16bfde83210c29">More...</a><br /></td></tr>
+<tr class="separator:ada6a836107e9306bad16bfde83210c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19fe2e53ebf5be324189578cf9c01ad0"><td class="memTemplParams" colspan="2">template&lt;typename _type , std::size_t _size&gt; </td></tr>
+<tr class="memitem:a19fe2e53ebf5be324189578cf9c01ad0"><td class="memTemplItemLeft" align="right" valign="top">constexpr Vector_Dense&lt; _type, _size &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a19fe2e53ebf5be324189578cf9c01ad0">operator/</a> (Vector_Dense&lt; _type, _size &gt; vector, const _type &amp;scalar)</td></tr>
+<tr class="memdesc:a19fe2e53ebf5be324189578cf9c01ad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides a vector by a scalar, c = b*a, where a, and c are vectors and b is a scalar.  <a href="namespace_disa.html#a19fe2e53ebf5be324189578cf9c01ad0">More...</a><br /></td></tr>
+<tr class="separator:a19fe2e53ebf5be324189578cf9c01ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b46bad9b3703cbf6bc8cb54fde0325b"><td class="memTemplParams" colspan="2">template&lt;typename _type , std::size_t _size_0, std::size_t _size_1&gt; </td></tr>
+<tr class="memitem:a1b46bad9b3703cbf6bc8cb54fde0325b"><td class="memTemplItemLeft" align="right" valign="top">constexpr Static_Promoter&lt; Vector_Dense&lt; _type, _size_0 &gt;, Vector_Dense&lt; _type, _size_1 &gt; &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a1b46bad9b3703cbf6bc8cb54fde0325b">operator+</a> (const Vector_Dense&lt; _type, _size_0 &gt; &amp;vector0, const Vector_Dense&lt; _type, _size_1 &gt; &amp;vector1)</td></tr>
+<tr class="memdesc:a1b46bad9b3703cbf6bc8cb54fde0325b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds two vectors together, c = a + b, where a, b, and c are vectors.  <a href="namespace_disa.html#a1b46bad9b3703cbf6bc8cb54fde0325b">More...</a><br /></td></tr>
+<tr class="separator:a1b46bad9b3703cbf6bc8cb54fde0325b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6378b6629fce8f6a3fe635edb1c29d08"><td class="memTemplParams" colspan="2">template&lt;typename _type , std::size_t _size_0, std::size_t _size_1&gt; </td></tr>
+<tr class="memitem:a6378b6629fce8f6a3fe635edb1c29d08"><td class="memTemplItemLeft" align="right" valign="top">Static_Promoter&lt; Vector_Dense&lt; _type, _size_0 &gt;, Vector_Dense&lt; _type, _size_1 &gt; &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a6378b6629fce8f6a3fe635edb1c29d08">operator-</a> (const Vector_Dense&lt; _type, _size_0 &gt; &amp;vector0, const Vector_Dense&lt; _type, _size_1 &gt; &amp;vector1)</td></tr>
+<tr class="memdesc:a6378b6629fce8f6a3fe635edb1c29d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtracts two vectors, c = a - b, where a, b, and c are vectors.  <a href="namespace_disa.html#a6378b6629fce8f6a3fe635edb1c29d08">More...</a><br /></td></tr>
+<tr class="separator:a6378b6629fce8f6a3fe635edb1c29d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['iterator_483',['iterator',['../class_disa_1_1_matrix___sparse.html#a1f8941320cf11a7938ff45675c7a2649',1,'Disa::Matrix_Sparse::iterator()'],['../class_disa_1_1_matrix___sparse___row.html#addd2c4324986de171924c9f131b08510',1,'Disa::Matrix_Sparse_Row::iterator()']]],
-  ['iterator_5fcategory_484',['iterator_category',['../struct_disa_1_1_iterator___matrix___sparse___row.html#a8806ca091813ced0b0658fedaa448357',1,'Disa::Iterator_Matrix_Sparse_Row::iterator_category()'],['../struct_disa_1_1_iterator___matrix___sparse___element.html#a8806ca091813ced0b0658fedaa448357',1,'Disa::Iterator_Matrix_Sparse_Element::iterator_category()']]],
-  ['iterator_5felement_485',['iterator_element',['../class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2',1,'Disa::Matrix_Sparse']]]
+  ['matrix_493',['matrix',['../class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77',1,'Disa::Matrix_Sparse']]],
+  ['matrix_5ftype_494',['matrix_type',['../struct_disa_1_1_matrix___dense.html#af21dcda00222c295466ceb13341ec599',1,'Disa::Matrix_Dense::matrix_type()'],['../struct_disa_1_1_matrix___dense_3_01__type_00_010_00_010_01_4.html#ad982500834a40532fe9a8d3c45d70654',1,'Disa::Matrix_Dense&lt; _type, 0, 0 &gt;::matrix_type()'],['../class_disa_1_1_matrix___sparse___row.html#a49e8fc62917db6b3c620752d89e2a7af',1,'Disa::Matrix_Sparse_Row::matrix_type()'],['../struct_disa_1_1_iterator___matrix___sparse___row.html#a49e8fc62917db6b3c620752d89e2a7af',1,'Disa::Iterator_Matrix_Sparse_Row::matrix_type()'],['../struct_disa_1_1_iterator___matrix___sparse___element.html#a49e8fc62917db6b3c620752d89e2a7af',1,'Disa::Iterator_Matrix_Sparse_Element::matrix_type()']]]
 ];

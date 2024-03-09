@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Disa: Matrix_Static_Demoter&lt; _row_0, _colu_0, _row_1, _colu_1 &gt; Struct Template Reference</title>
+<title>Disa: Matrix_Static_Demoter&lt; matrix_0, matrix_1 &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,7 +86,7 @@ $(document).ready(function(){initNavTree('struct_disa_1_1_matrix___static___demo
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">Matrix_Static_Demoter&lt; _row_0, _colu_0, _row_1, _colu_1 &gt; Struct Template Reference</div>  </div>
+<div class="title">Matrix_Static_Demoter&lt; matrix_0, matrix_1 &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -97,26 +97,27 @@ $(document).ready(function(){initNavTree('struct_disa_1_1_matrix___static___demo
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a43eff1b453b923585ab85d96ee24d754"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_disa_1_1_matrix___dense.html">Matrix_Dense</a>&lt; <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a3470d5b57f6c1eeef6e9813c586ac02e">row_new</a>, <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#ac283d36195510b8011767e3e5e2160ee">colu_new</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a43eff1b453b923585ab85d96ee24d754">type</a></td></tr>
-<tr class="memdesc:a43eff1b453b923585ab85d96ee24d754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static Matrix type if either _row_0/_colu_0 or _row_1/_colu_1 is static else dynamic. *&zwj;/.  <a href="struct_disa_1_1_matrix___static___demoter.html#a43eff1b453b923585ab85d96ee24d754">More...</a><br /></td></tr>
-<tr class="separator:a43eff1b453b923585ab85d96ee24d754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a47d652fdfdeca7ce06b91215cda5d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a43a47d652fdfdeca7ce06b91215cda5d">type</a> = <a class="el" href="struct_disa_1_1_matrix___dense.html">Matrix_Dense</a>&lt; typename matrix_0::value_type, <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#aa16f7ebb4ad00975579277214adb4054">row_new</a>, <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#adbcfea1195fba5e050f9f262afa58d85">col_new</a> &gt;</td></tr>
+<tr class="memdesc:a43a47d652fdfdeca7ce06b91215cda5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static Matrix type if either _row_0/_colu_0 or _row_1/_colu_1 is static else dynamic. *&zwj;/.  <a href="struct_disa_1_1_matrix___static___demoter.html#a43a47d652fdfdeca7ce06b91215cda5d">More...</a><br /></td></tr>
+<tr class="separator:a43a47d652fdfdeca7ce06b91215cda5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:ab96eca623728389006cfa013da781e1e"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___static___demoter.html#ab96eca623728389006cfa013da781e1e">is_dynamic</a> = _row_0 == 0 || _colu_1 == 0</td></tr>
-<tr class="separator:ab96eca623728389006cfa013da781e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3470d5b57f6c1eeef6e9813c586ac02e"><td class="memItemLeft" align="right" valign="top">static const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a3470d5b57f6c1eeef6e9813c586ac02e">row_new</a> = <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#ab96eca623728389006cfa013da781e1e">is_dynamic</a> ? 0 : _row_0</td></tr>
-<tr class="separator:a3470d5b57f6c1eeef6e9813c586ac02e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac283d36195510b8011767e3e5e2160ee"><td class="memItemLeft" align="right" valign="top">static const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___static___demoter.html#ac283d36195510b8011767e3e5e2160ee">colu_new</a> = <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#ab96eca623728389006cfa013da781e1e">is_dynamic</a> ? 0 : _colu_1</td></tr>
-<tr class="separator:ac283d36195510b8011767e3e5e2160ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a969fd9b3228e7869e7c21de9bb8d9aa1"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a969fd9b3228e7869e7c21de9bb8d9aa1">is_dynamic</a> = matrix_0::is_dynamic || matrix_1::is_dynamic</td></tr>
+<tr class="separator:a969fd9b3228e7869e7c21de9bb8d9aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa16f7ebb4ad00975579277214adb4054"><td class="memItemLeft" align="right" valign="top">static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___static___demoter.html#aa16f7ebb4ad00975579277214adb4054">row_new</a> = <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a969fd9b3228e7869e7c21de9bb8d9aa1">is_dynamic</a> ? 0 : matrix_0::row</td></tr>
+<tr class="separator:aa16f7ebb4ad00975579277214adb4054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbcfea1195fba5e050f9f262afa58d85"><td class="memItemLeft" align="right" valign="top">static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___static___demoter.html#adbcfea1195fba5e050f9f262afa58d85">col_new</a> = <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a969fd9b3228e7869e7c21de9bb8d9aa1">is_dynamic</a> ? 0 : matrix_1::col</td></tr>
+<tr class="separator:adbcfea1195fba5e050f9f262afa58d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;std::size_t _row_0, std::size_t _colu_0, std::size_t _row_1, std::size_t _colu_1&gt;<br />
-struct Disa::Matrix_Static_Demoter&lt; _row_0, _colu_0, _row_1, _colu_1 &gt;</h3>
+<div class="textblock"><h3>template&lt;class matrix_0, class matrix_1&gt;<br />
+struct Disa::Matrix_Static_Demoter&lt; matrix_0, matrix_1 &gt;</h3>
 
 <p>Used for matrix multiplication, where the static nature of matrices must decay to dynamic. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
+    <tr><td class="paramname">_type</td><td>The type of the matrix, e.g. double, float, int. </td></tr>
     <tr><td class="paramname">_row_0</td><td>The number of rows of the A matrix, dynamic/static. </td></tr>
     <tr><td class="paramname">_col_0</td><td>The number of column of the A matrix, dynamic/static. </td></tr>
     <tr><td class="paramname">_row_1</td><td>The number of rows of the B matrix, dynamic/static. </td></tr>
@@ -125,14 +126,14 @@ struct Disa::Matrix_Static_Demoter&lt; _row_0, _colu_0, _row_1, _colu_1 &gt;</h3
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a43eff1b453b923585ab85d96ee24d754"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43eff1b453b923585ab85d96ee24d754">&#9670;&nbsp;</a></span>type</h2>
+<a id="a43a47d652fdfdeca7ce06b91215cda5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43a47d652fdfdeca7ce06b91215cda5d">&#9670;&nbsp;</a></span>type</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="struct_disa_1_1_matrix___dense.html">Matrix_Dense</a>&lt;<a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a3470d5b57f6c1eeef6e9813c586ac02e">row_new</a>, <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#ac283d36195510b8011767e3e5e2160ee">colu_new</a>&gt; <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a43eff1b453b923585ab85d96ee24d754">type</a></td>
+          <td class="memname">using <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a43a47d652fdfdeca7ce06b91215cda5d">type</a> =  <a class="el" href="struct_disa_1_1_matrix___dense.html">Matrix_Dense</a>&lt;typename matrix_0::value_type, <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#aa16f7ebb4ad00975579277214adb4054">row_new</a>, <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#adbcfea1195fba5e050f9f262afa58d85">col_new</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -142,8 +143,8 @@ struct Disa::Matrix_Static_Demoter&lt; _row_0, _colu_0, _row_1, _colu_1 &gt;</h3
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="ac283d36195510b8011767e3e5e2160ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac283d36195510b8011767e3e5e2160ee">&#9670;&nbsp;</a></span>colu_new</h2>
+<a id="adbcfea1195fba5e050f9f262afa58d85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbcfea1195fba5e050f9f262afa58d85">&#9670;&nbsp;</a></span>col_new</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -152,20 +153,20 @@ struct Disa::Matrix_Static_Demoter&lt; _row_0, _colu_0, _row_1, _colu_1 &gt;</h3
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::size_t colu_new = <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#ab96eca623728389006cfa013da781e1e">is_dynamic</a> ? 0 : _colu_1</td>
+          <td class="memname">constexpr std::size_t col_new = <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a969fd9b3228e7869e7c21de9bb8d9aa1">is_dynamic</a> ? 0 : matrix_1::col</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ab96eca623728389006cfa013da781e1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab96eca623728389006cfa013da781e1e">&#9670;&nbsp;</a></span>is_dynamic</h2>
+<a id="a969fd9b3228e7869e7c21de9bb8d9aa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a969fd9b3228e7869e7c21de9bb8d9aa1">&#9670;&nbsp;</a></span>is_dynamic</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,20 +175,20 @@ struct Disa::Matrix_Static_Demoter&lt; _row_0, _colu_0, _row_1, _colu_1 &gt;</h3
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool is_dynamic = _row_0 == 0 || _colu_1 == 0</td>
+          <td class="memname">constexpr bool is_dynamic = matrix_0::is_dynamic || matrix_1::is_dynamic</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a3470d5b57f6c1eeef6e9813c586ac02e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3470d5b57f6c1eeef6e9813c586ac02e">&#9670;&nbsp;</a></span>row_new</h2>
+<a id="aa16f7ebb4ad00975579277214adb4054"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa16f7ebb4ad00975579277214adb4054">&#9670;&nbsp;</a></span>row_new</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -196,12 +197,12 @@ struct Disa::Matrix_Static_Demoter&lt; _row_0, _colu_0, _row_1, _colu_1 &gt;</h3
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::size_t row_new = <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#ab96eca623728389006cfa013da781e1e">is_dynamic</a> ? 0 : _row_0</td>
+          <td class="memname">constexpr std::size_t row_new = <a class="el" href="struct_disa_1_1_matrix___static___demoter.html#a969fd9b3228e7869e7c21de9bb8d9aa1">is_dynamic</a> ? 0 : matrix_0::row</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

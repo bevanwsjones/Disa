@@ -1,11 +1,11 @@
 var vector__operators_8h =
 [
-    [ "angle", "vector__operators_8h.html#ad14acccedda68e5129f19f60b369a417", null ],
-    [ "cross_product", "vector__operators_8h.html#a8ca8b4969e23b51f8f9569dabab8f33a", null ],
-    [ "dot_product", "vector__operators_8h.html#a9f44a477ddfc6297d1d66707b64851ed", null ],
-    [ "lp_norm", "vector__operators_8h.html#ac3924292c63b4dfabebaba728239210d", null ],
-    [ "mean", "vector__operators_8h.html#a14fa911d9914881cd90722aa23b9e7f0", null ],
-    [ "projection_orthogonal", "vector__operators_8h.html#a610d6153cb8e35cc49eca74aa1a8362c", null ],
-    [ "projection_tangent", "vector__operators_8h.html#a47c16247440c805a75117128a6e0bf6d", null ],
-    [ "unit", "vector__operators_8h.html#abaf8a70ae2341d547d122981e63c8b29", null ]
+    [ "angle", "vector__operators_8h.html#aff048b1b87f1cd694f3539688d76fd0c", null ],
+    [ "cross_product", "vector__operators_8h.html#a456feac9d4e5f11a8cab31f875cf5d8a", null ],
+    [ "dot_product", "vector__operators_8h.html#aa0883461c879694a3e8205435923e569", null ],
+    [ "lp_norm", "vector__operators_8h.html#a25010854ded53d844e16d8159ea09810", null ],
+    [ "mean", "vector__operators_8h.html#a45c8821e9fe8741e3ede58b43aff5056", null ],
+    [ "projection_orthogonal", "vector__operators_8h.html#a83759d9ece7a6cba4e733b6e7dcb55fd", null ],
+    [ "projection_tangent", "vector__operators_8h.html#a82a4f1ca2fdd273aab99b5ba3c0f9636", null ],
+    [ "unit", "vector__operators_8h.html#a31d4a639fc2b140b07ddb5d7b4b3f881", null ]
 ];

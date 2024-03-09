@@ -1,15 +1,8 @@
 var searchData=
 [
-  ['adjacency_5fgraph_2',['Adjacency_Graph',['../class_disa_1_1_adjacency___graph.html#ad0e925f4c74b5a028289f5e5a648a826',1,'Disa::Adjacency_Graph::Adjacency_Graph(std::initializer_list&lt; Edge &gt; edge_graph)'],['../class_disa_1_1_adjacency___graph.html#af42629b2ddf4987908b086887e3eff30',1,'Disa::Adjacency_Graph::Adjacency_Graph()=default'],['../class_disa_1_1_adjacency___graph.html',1,'Adjacency_Graph&lt; _directed &gt;']]],
-  ['adjacency_5fgraph_2eh_3',['adjacency_graph.h',['../adjacency__graph_8h.html',1,'']]],
-  ['adjacency_5fgraph_2ehpp_4',['adjacency_graph.hpp',['../adjacency__graph_8hpp.html',1,'']]],
-  ['adjacency_5fgraph_3c_20false_20_3e_5',['Adjacency_Graph&lt; false &gt;',['../class_disa_1_1_adjacency___graph.html',1,'Disa']]],
-  ['adjacency_5fsubgraph_6',['Adjacency_Subgraph',['../class_disa_1_1_adjacency___subgraph.html#af246354bc15091bc83bf59495a3ca2e1',1,'Disa::Adjacency_Subgraph::Adjacency_Subgraph()=default'],['../class_disa_1_1_adjacency___subgraph.html#a4ad31be06fab9f2b6d42ecee3592ce81',1,'Disa::Adjacency_Subgraph::Adjacency_Subgraph(const Adjacency_Graph&lt; false &gt; &amp;parent_graph, const std::vector&lt; std::size_t &gt; &amp;i_sub_graph_vertex, std::size_t extra_levels=0)'],['../class_disa_1_1_adjacency___subgraph.html',1,'Adjacency_Subgraph']]],
-  ['adjacency_5fsubgraph_2ecpp_7',['adjacency_subgraph.cpp',['../adjacency__subgraph_8cpp.html',1,'']]],
-  ['adjacency_5fsubgraph_2eh_8',['adjacency_subgraph.h',['../adjacency__subgraph_8h.html',1,'']]],
-  ['adjacencysubgraph_9',['AdjacencySubgraph',['../class_adjacency_subgraph.html',1,'']]],
-  ['angle_10',['angle',['../namespace_disa.html#ad14acccedda68e5129f19f60b369a417',1,'Disa']]],
-  ['assert_11',['ASSERT',['../macros_8h.html#aa06eedd6f738a415870e97a375337d51',1,'macros.h']]],
-  ['assert_5fdebug_12',['ASSERT_DEBUG',['../macros_8h.html#aa43468426b5b5a5e19a1f40f8118a6b3',1,'macros.h']]],
-  ['at_13',['at',['../class_disa_1_1_matrix___sparse.html#a94abb34908c511d248a8b0633352c59f',1,'Disa::Matrix_Sparse::at(const std::size_t &amp;i_row, const std::size_t &amp;i_column)'],['../class_disa_1_1_matrix___sparse.html#af8c3416de7d45a99060441acef44afec',1,'Disa::Matrix_Sparse::at(const std::size_t &amp;i_row, const std::size_t &amp;i_column) const'],['../class_disa_1_1_adjacency___graph.html#a2ef9de02b4c8ec387321aaa3eefe6a30',1,'Disa::Adjacency_Graph::at()'],['../class_disa_1_1_adjacency___subgraph.html#a2ef9de02b4c8ec387321aaa3eefe6a30',1,'Disa::Adjacency_Subgraph::at()']]]
+  ['back_12',['back',['../class_disa_1_1_adjacency___graph.html#affd668ce0bc9f0c652923b9fbc10241d',1,'Disa::Adjacency_Graph::back() const'],['../class_disa_1_1_adjacency___graph.html#ae7c9139690af084bde55f3188900a8e9',1,'Disa::Adjacency_Graph::back()'],['../class_disa_1_1_adjacency___subgraph.html#affd668ce0bc9f0c652923b9fbc10241d',1,'Disa::Adjacency_Subgraph::back() const'],['../class_disa_1_1_adjacency___subgraph.html#ae7c9139690af084bde55f3188900a8e9',1,'Disa::Adjacency_Subgraph::back()']]],
+  ['backward_5fsweep_13',['backward_sweep',['../namespace_disa.html#a523c6673ab5cddb1961a16af22f8e95f',1,'Disa']]],
+  ['begin_14',['begin',['../class_disa_1_1_matrix___sparse.html#a76659e108220d454c7ad135b0cf67b04',1,'Disa::Matrix_Sparse::begin() noexcept'],['../class_disa_1_1_matrix___sparse.html#aa82e94545b90f2d46fd9ed5e75726050',1,'Disa::Matrix_Sparse::begin() const noexcept'],['../class_disa_1_1_matrix___sparse___row.html#a3e8af3c7af27f28f244e64a1925624b8',1,'Disa::Matrix_Sparse_Row::begin()'],['../class_disa_1_1_matrix___sparse___row.html#a6d746e1f0419882e20a54d8cd121f0fb',1,'Disa::Matrix_Sparse_Row::begin() const']]],
+  ['breadth_5ffirst_15',['breadth_first',['../namespace_disa.html#acf04b38f6a4f93b737ffb6ac2b433224',1,'Disa']]],
+  ['build_5fsolver_16',['build_solver',['../namespace_disa.html#aefb94f81769534f4e368f72f9f7c2721',1,'Disa']]]
 ];

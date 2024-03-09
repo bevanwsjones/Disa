@@ -1,11 +1,12 @@
 var struct_disa_1_1_vector___dense =
 [
-    [ "_vector", "struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a", null ],
+    [ "value_type", "struct_disa_1_1_vector___dense.html#a88373869d8235ffb1bd8eabfc29a1dc2", null ],
+    [ "vector_type", "struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0", null ],
     [ "Vector_Dense", "struct_disa_1_1_vector___dense.html#a21910d0736adceeb43f7a9caac7aaf0f", null ],
-    [ "Vector_Dense", "struct_disa_1_1_vector___dense.html#a01927766c096376975d3d305b790209c", null ],
-    [ "Vector_Dense", "struct_disa_1_1_vector___dense.html#ac8fef8a8c1cae506913d1e2d6b21bece", null ],
-    [ "operator*=", "struct_disa_1_1_vector___dense.html#a83077b641ba668c8588501e5453733ba", null ],
-    [ "operator+=", "struct_disa_1_1_vector___dense.html#a1d3d3a53c222ae495ed9d46e7d71be53", null ],
-    [ "operator-=", "struct_disa_1_1_vector___dense.html#a01e05c25884b604c33f7bb96acd22557", null ],
-    [ "operator/=", "struct_disa_1_1_vector___dense.html#a36c3cf959608985f08cc4a603a6d4e50", null ]
+    [ "Vector_Dense", "struct_disa_1_1_vector___dense.html#a1f094067ecac01fa4d5ec00b951a204c", null ],
+    [ "Vector_Dense", "struct_disa_1_1_vector___dense.html#aafdacb27c100d18def1fbca0666e3c50", null ],
+    [ "operator*=", "struct_disa_1_1_vector___dense.html#a74df9c7e235ea8539d30cc90847e5f14", null ],
+    [ "operator+=", "struct_disa_1_1_vector___dense.html#a8ae87da1c943600377e6ce18c75b4e73", null ],
+    [ "operator-=", "struct_disa_1_1_vector___dense.html#a34195025bd9132651dad6834a9fed688", null ],
+    [ "operator/=", "struct_disa_1_1_vector___dense.html#ac7cdd295a56daeaaa10a6e1740920006", null ]
 ];

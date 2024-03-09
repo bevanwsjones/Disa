@@ -5,9 +5,10 @@ var hierarchy =
     [ "Adjacency_Subgraph", "class_disa_1_1_adjacency___subgraph.html", null ],
     [ "AdjacencySubgraph", "class_adjacency_subgraph.html", null ],
     [ "array", null, [
-      [ "Matrix_Dense< _size, _size >", "struct_disa_1_1_matrix___dense.html", null ],
-      [ "Matrix_Dense< _row, _col >", "struct_disa_1_1_matrix___dense.html", null ],
-      [ "Vector_Dense< _size >", "struct_disa_1_1_vector___dense.html", null ]
+      [ "Matrix_Dense< Scalar, _size, _size >", "struct_disa_1_1_matrix___dense.html", null ],
+      [ "Vector_Dense< Scalar, 0 >", "struct_disa_1_1_vector___dense.html", null ],
+      [ "Matrix_Dense< _type, _row, _col >", "struct_disa_1_1_matrix___dense.html", null ],
+      [ "Vector_Dense< _type, _size >", "struct_disa_1_1_vector___dense.html", null ]
     ] ],
     [ "Convergence_Criteria", "struct_disa_1_1_convergence___criteria.html", null ],
     [ "Convergence_Data", "struct_disa_1_1_convergence___data.html", null ],
@@ -21,7 +22,7 @@ var hierarchy =
     [ "Iterator_Matrix_Sparse_Row< _matrix_type >", "struct_disa_1_1_iterator___matrix___sparse___row.html", null ],
     [ "Matrix_Sparse", "class_disa_1_1_matrix___sparse.html", null ],
     [ "Matrix_Sparse_Row< _matrix_type >", "class_disa_1_1_matrix___sparse___row.html", null ],
-    [ "Matrix_Static_Demoter< _row_0, _colu_0, _row_1, _colu_1 >", "struct_disa_1_1_matrix___static___demoter.html", null ],
+    [ "Matrix_Static_Demoter< matrix_0, matrix_1 >", "struct_disa_1_1_matrix___static___demoter.html", null ],
     [ "Solver", "class_disa_1_1_solver.html", null ],
     [ "Solver_Config", "struct_disa_1_1_solver___config.html", null ],
     [ "Solver_Data", "struct_disa_1_1_solver___data.html", [
@@ -33,9 +34,11 @@ var hierarchy =
     [ "Solver_Iterative< Solver_Fixed_Point< _solver_type, _solver_data >, _solver_data >", "class_disa_1_1_solver___iterative.html", [
       [ "Solver_Fixed_Point< _solver_type, _solver_data >", "class_disa_1_1_solver___fixed___point.html", null ]
     ] ],
-    [ "StaticPromoter< _vector0, _vector1 >", "struct_disa_1_1_static_promoter.html", null ],
+    [ "Static_Demoter< _vector0, _vector1 >", "struct_disa_1_1_static___demoter.html", null ],
+    [ "Static_Promoter< _vector0, _vector1 >", "struct_disa_1_1_static___promoter.html", null ],
     [ "vector", null, [
-      [ "Matrix_Dense< 0, 0 >", "struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html", null ],
-      [ "Vector_Dense< 0 >", "struct_disa_1_1_vector___dense_3_010_01_4.html", null ]
-    ] ]
+      [ "Matrix_Dense< _type, 0, 0 >", "struct_disa_1_1_matrix___dense_3_01__type_00_010_00_010_01_4.html", null ],
+      [ "Vector_Dense< _type, 0 >", "struct_disa_1_1_vector___dense_3_01__type_00_010_01_4.html", null ]
+    ] ],
+    [ "Vector_Dense< 0 >", "struct_vector___dense_3_010_01_4.html", null ]
 ];

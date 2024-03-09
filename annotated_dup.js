@@ -2,15 +2,16 @@ var annotated_dup =
 [
     [ "Disa", "namespace_disa.html", [
       [ "Matrix_Dense", "struct_disa_1_1_matrix___dense.html", "struct_disa_1_1_matrix___dense" ],
-      [ "Matrix_Dense< 0, 0 >", "struct_disa_1_1_matrix___dense_3_010_00_010_01_4.html", "struct_disa_1_1_matrix___dense_3_010_00_010_01_4" ],
+      [ "Matrix_Dense< _type, 0, 0 >", "struct_disa_1_1_matrix___dense_3_01__type_00_010_00_010_01_4.html", "struct_disa_1_1_matrix___dense_3_01__type_00_010_00_010_01_4" ],
       [ "Matrix_Static_Demoter", "struct_disa_1_1_matrix___static___demoter.html", "struct_disa_1_1_matrix___static___demoter" ],
       [ "Matrix_Sparse_Row", "class_disa_1_1_matrix___sparse___row.html", "class_disa_1_1_matrix___sparse___row" ],
       [ "Iterator_Matrix_Sparse_Row", "struct_disa_1_1_iterator___matrix___sparse___row.html", "struct_disa_1_1_iterator___matrix___sparse___row" ],
       [ "Iterator_Matrix_Sparse_Element", "struct_disa_1_1_iterator___matrix___sparse___element.html", "struct_disa_1_1_iterator___matrix___sparse___element" ],
       [ "Matrix_Sparse", "class_disa_1_1_matrix___sparse.html", "class_disa_1_1_matrix___sparse" ],
       [ "Vector_Dense", "struct_disa_1_1_vector___dense.html", "struct_disa_1_1_vector___dense" ],
-      [ "Vector_Dense< 0 >", "struct_disa_1_1_vector___dense_3_010_01_4.html", "struct_disa_1_1_vector___dense_3_010_01_4" ],
-      [ "StaticPromoter", "struct_disa_1_1_static_promoter.html", "struct_disa_1_1_static_promoter" ],
+      [ "Vector_Dense< _type, 0 >", "struct_disa_1_1_vector___dense_3_01__type_00_010_01_4.html", "struct_disa_1_1_vector___dense_3_01__type_00_010_01_4" ],
+      [ "Static_Promoter", "struct_disa_1_1_static___promoter.html", "struct_disa_1_1_static___promoter" ],
+      [ "Static_Demoter", "struct_disa_1_1_static___demoter.html", "struct_disa_1_1_static___demoter" ],
       [ "Adjacency_Graph", "class_disa_1_1_adjacency___graph.html", "class_disa_1_1_adjacency___graph" ],
       [ "Adjacency_Subgraph", "class_disa_1_1_adjacency___subgraph.html", "class_disa_1_1_adjacency___subgraph" ],
       [ "Direct", "class_disa_1_1_direct.html", "class_disa_1_1_direct" ],
@@ -30,5 +31,6 @@ var annotated_dup =
       [ "hash< Disa::Adjacency_Graph< _directed > >", "structstd_1_1hash_3_01_disa_1_1_adjacency___graph_3_01__directed_01_4_01_4.html", "structstd_1_1hash_3_01_disa_1_1_adjacency___graph_3_01__directed_01_4_01_4" ]
     ] ],
     [ "AdjacencySubgraph", "class_adjacency_subgraph.html", null ],
-    [ "hash< Disa::Adjacency_Graph >", "structhash_3_01_disa_1_1_adjacency___graph_01_4.html", null ]
+    [ "hash< Disa::Adjacency_Graph >", "structhash_3_01_disa_1_1_adjacency___graph_01_4.html", null ],
+    [ "Vector_Dense< 0 >", "struct_vector___dense_3_010_01_4.html", null ]
 ];

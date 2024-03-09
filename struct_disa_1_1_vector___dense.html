@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Disa: Vector_Dense&lt; _size &gt; Struct Template Reference</title>
+<title>Disa: Vector_Dense&lt; _type, _size &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('struct_disa_1_1_vector___dense.html','
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">Vector_Dense&lt; _size &gt; Struct Template Reference</div>  </div>
+<div class="title">Vector_Dense&lt; _type, _size &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -96,49 +96,52 @@ $(document).ready(function(){initNavTree('struct_disa_1_1_vector___dense.html','
 
 <p><code>#include &lt;<a class="el" href="vector__dense_8h_source.html">vector_dense.h</a>&gt;</code></p>
 
-<p>Inherits array&lt; Scalar, _size &gt;.</p>
+<p>Inherits array&lt; _type, _size &gt;.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:adfcf67a0faab7195e76f78704a0ea64a"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _size &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a></td></tr>
-<tr class="memdesc:adfcf67a0faab7195e76f78704a0ea64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Short hand for this vector type.  <a href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">More...</a><br /></td></tr>
-<tr class="separator:adfcf67a0faab7195e76f78704a0ea64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88373869d8235ffb1bd8eabfc29a1dc2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a88373869d8235ffb1bd8eabfc29a1dc2">value_type</a> = _type</td></tr>
+<tr class="memdesc:a88373869d8235ffb1bd8eabfc29a1dc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the vector elements.  <a href="struct_disa_1_1_vector___dense.html#a88373869d8235ffb1bd8eabfc29a1dc2">More...</a><br /></td></tr>
+<tr class="separator:a88373869d8235ffb1bd8eabfc29a1dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8421798fcdb03e11795e1adc8f8832a0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a> = <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _type, _size &gt;</td></tr>
+<tr class="memdesc:a8421798fcdb03e11795e1adc8f8832a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Short hand for this vector type.  <a href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">More...</a><br /></td></tr>
+<tr class="separator:a8421798fcdb03e11795e1adc8f8832a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a21910d0736adceeb43f7a9caac7aaf0f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a21910d0736adceeb43f7a9caac7aaf0f">Vector_Dense</a> ()</td></tr>
 <tr class="memdesc:a21910d0736adceeb43f7a9caac7aaf0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise empty vector.  <a href="struct_disa_1_1_vector___dense.html#a21910d0736adceeb43f7a9caac7aaf0f">More...</a><br /></td></tr>
 <tr class="separator:a21910d0736adceeb43f7a9caac7aaf0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01927766c096376975d3d305b790209c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a01927766c096376975d3d305b790209c">Vector_Dense</a> (const std::initializer_list&lt; <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;list)</td></tr>
-<tr class="memdesc:a01927766c096376975d3d305b790209c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to construct from initializer list, list and vector must be of the same size.  <a href="struct_disa_1_1_vector___dense.html#a01927766c096376975d3d305b790209c">More...</a><br /></td></tr>
-<tr class="separator:a01927766c096376975d3d305b790209c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8fef8a8c1cae506913d1e2d6b21bece"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#ac8fef8a8c1cae506913d1e2d6b21bece">Vector_Dense</a> (const std::function&lt; <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>(const std::size_t)&gt; &amp;lambda, std::size_t size=_size)</td></tr>
-<tr class="memdesc:ac8fef8a8c1cae506913d1e2d6b21bece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to construct a vector from a lambda.  <a href="struct_disa_1_1_vector___dense.html#ac8fef8a8c1cae506913d1e2d6b21bece">More...</a><br /></td></tr>
-<tr class="separator:ac8fef8a8c1cae506913d1e2d6b21bece"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83077b641ba668c8588501e5453733ba"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a83077b641ba668c8588501e5453733ba">operator*=</a> (const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;scalar)</td></tr>
-<tr class="memdesc:a83077b641ba668c8588501e5453733ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies the vector by a scalar, a' = a*b, where a is the vectors and b is a scalar.  <a href="struct_disa_1_1_vector___dense.html#a83077b641ba668c8588501e5453733ba">More...</a><br /></td></tr>
-<tr class="separator:a83077b641ba668c8588501e5453733ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36c3cf959608985f08cc4a603a6d4e50"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a36c3cf959608985f08cc4a603a6d4e50">operator/=</a> (const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;scalar)</td></tr>
-<tr class="memdesc:a36c3cf959608985f08cc4a603a6d4e50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides the vector by a scalar, a' = a/b, where a is the vectors and b is a scalar.  <a href="struct_disa_1_1_vector___dense.html#a36c3cf959608985f08cc4a603a6d4e50">More...</a><br /></td></tr>
-<tr class="separator:a36c3cf959608985f08cc4a603a6d4e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d3d3a53c222ae495ed9d46e7d71be53"><td class="memTemplParams" colspan="2">template&lt;std::size_t _size_other&gt; </td></tr>
-<tr class="memitem:a1d3d3a53c222ae495ed9d46e7d71be53"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a1d3d3a53c222ae495ed9d46e7d71be53">operator+=</a> (const <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _size_other &gt; &amp;vector)</td></tr>
-<tr class="memdesc:a1d3d3a53c222ae495ed9d46e7d71be53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Addition of a second vector, a' = a + b, where a and b are vectors.  <a href="struct_disa_1_1_vector___dense.html#a1d3d3a53c222ae495ed9d46e7d71be53">More...</a><br /></td></tr>
-<tr class="separator:a1d3d3a53c222ae495ed9d46e7d71be53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01e05c25884b604c33f7bb96acd22557"><td class="memTemplParams" colspan="2">template&lt;std::size_t _size_other&gt; </td></tr>
-<tr class="memitem:a01e05c25884b604c33f7bb96acd22557"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a01e05c25884b604c33f7bb96acd22557">operator-=</a> (const <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _size_other &gt; &amp;vector)</td></tr>
-<tr class="memdesc:a01e05c25884b604c33f7bb96acd22557"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtraction by a second vector, a' = a - b, where a and b are vectors.  <a href="struct_disa_1_1_vector___dense.html#a01e05c25884b604c33f7bb96acd22557">More...</a><br /></td></tr>
-<tr class="separator:a01e05c25884b604c33f7bb96acd22557"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f094067ecac01fa4d5ec00b951a204c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a1f094067ecac01fa4d5ec00b951a204c">Vector_Dense</a> (const std::initializer_list&lt; _type &gt; &amp;list)</td></tr>
+<tr class="memdesc:a1f094067ecac01fa4d5ec00b951a204c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to construct from initializer list, list and vector must be of the same size.  <a href="struct_disa_1_1_vector___dense.html#a1f094067ecac01fa4d5ec00b951a204c">More...</a><br /></td></tr>
+<tr class="separator:a1f094067ecac01fa4d5ec00b951a204c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafdacb27c100d18def1fbca0666e3c50"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#aafdacb27c100d18def1fbca0666e3c50">Vector_Dense</a> (const std::function&lt; _type(const std::size_t)&gt; &amp;lambda, std::size_t size=_size)</td></tr>
+<tr class="memdesc:aafdacb27c100d18def1fbca0666e3c50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor to construct a vector from a lambda.  <a href="struct_disa_1_1_vector___dense.html#aafdacb27c100d18def1fbca0666e3c50">More...</a><br /></td></tr>
+<tr class="separator:aafdacb27c100d18def1fbca0666e3c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74df9c7e235ea8539d30cc90847e5f14"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a74df9c7e235ea8539d30cc90847e5f14">operator*=</a> (const _type &amp;scalar)</td></tr>
+<tr class="memdesc:a74df9c7e235ea8539d30cc90847e5f14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies the vector by a scalar, a' = a*b, where a is the vectors and b is a scalar.  <a href="struct_disa_1_1_vector___dense.html#a74df9c7e235ea8539d30cc90847e5f14">More...</a><br /></td></tr>
+<tr class="separator:a74df9c7e235ea8539d30cc90847e5f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7cdd295a56daeaaa10a6e1740920006"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#ac7cdd295a56daeaaa10a6e1740920006">operator/=</a> (const _type &amp;scalar)</td></tr>
+<tr class="memdesc:ac7cdd295a56daeaaa10a6e1740920006"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divides the vector by a scalar, a' = a/b, where a is the vectors and b is a scalar.  <a href="struct_disa_1_1_vector___dense.html#ac7cdd295a56daeaaa10a6e1740920006">More...</a><br /></td></tr>
+<tr class="separator:ac7cdd295a56daeaaa10a6e1740920006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ae87da1c943600377e6ce18c75b4e73"><td class="memTemplParams" colspan="2">template&lt;std::size_t _size_other&gt; </td></tr>
+<tr class="memitem:a8ae87da1c943600377e6ce18c75b4e73"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a8ae87da1c943600377e6ce18c75b4e73">operator+=</a> (const <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _type, _size_other &gt; &amp;vector)</td></tr>
+<tr class="memdesc:a8ae87da1c943600377e6ce18c75b4e73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Addition of a second vector, a' = a + b, where a and b are vectors.  <a href="struct_disa_1_1_vector___dense.html#a8ae87da1c943600377e6ce18c75b4e73">More...</a><br /></td></tr>
+<tr class="separator:a8ae87da1c943600377e6ce18c75b4e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34195025bd9132651dad6834a9fed688"><td class="memTemplParams" colspan="2">template&lt;std::size_t _size_other&gt; </td></tr>
+<tr class="memitem:a34195025bd9132651dad6834a9fed688"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a34195025bd9132651dad6834a9fed688">operator-=</a> (const <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _type, _size_other &gt; &amp;vector)</td></tr>
+<tr class="memdesc:a34195025bd9132651dad6834a9fed688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtraction by a second vector, a' = a - b, where a and b are vectors.  <a href="struct_disa_1_1_vector___dense.html#a34195025bd9132651dad6834a9fed688">More...</a><br /></td></tr>
+<tr class="separator:a34195025bd9132651dad6834a9fed688"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:ab96eca623728389006cfa013da781e1e"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#ab96eca623728389006cfa013da781e1e">is_dynamic</a> = false</td></tr>
-<tr class="memdesc:ab96eca623728389006cfa013da781e1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates the vector is compile time sized.  <a href="struct_disa_1_1_vector___dense.html#ab96eca623728389006cfa013da781e1e">More...</a><br /></td></tr>
-<tr class="separator:ab96eca623728389006cfa013da781e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a969fd9b3228e7869e7c21de9bb8d9aa1"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html#a969fd9b3228e7869e7c21de9bb8d9aa1">is_dynamic</a> = false</td></tr>
+<tr class="memdesc:a969fd9b3228e7869e7c21de9bb8d9aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates the vector is compile time sized.  <a href="struct_disa_1_1_vector___dense.html#a969fd9b3228e7869e7c21de9bb8d9aa1">More...</a><br /></td></tr>
+<tr class="separator:a969fd9b3228e7869e7c21de9bb8d9aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;std::size_t _size&gt;<br />
-struct Disa::Vector_Dense&lt; _size &gt;</h3>
+<div class="textblock"><h3>template&lt;typename _type, std::size_t _size&gt;<br />
+struct Disa::Vector_Dense&lt; _type, _size &gt;</h3>
 
 <p>Mathematical Vector, of dimension _size, where every vector element has allocated has memory. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -150,14 +153,30 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
 <p>The <a class="el" href="struct_disa_1_1_vector___dense.html" title="Mathematical Vector, of dimension _size, where every vector element has allocated has memory.">Vector_Dense</a> struct implements a mathematical vector of real numbers. <a class="el" href="namespace_disa.html">Disa</a> does not make distinctions row and column vectors, as such this information is not stored.</p>
 <p>To avoid massive boiler plate the vector inherits from std::array, which implies the vector's dimension is fixed at compile time. To obtain a dynamically allocated dense vector the _size value can be set to 0. In which case std::vector is inherited, see below specialisation. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="adfcf67a0faab7195e76f78704a0ea64a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfcf67a0faab7195e76f78704a0ea64a">&#9670;&nbsp;</a></span>_vector</h2>
+<a id="a88373869d8235ffb1bd8eabfc29a1dc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88373869d8235ffb1bd8eabfc29a1dc2">&#9670;&nbsp;</a></span>value_type</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt;_size&gt; <a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a></td>
+          <td class="memname">using <a class="el" href="struct_disa_1_1_vector___dense.html#a88373869d8235ffb1bd8eabfc29a1dc2">value_type</a> =  _type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The type of the vector elements. </p>
+
+</div>
+</div>
+<a id="a8421798fcdb03e11795e1adc8f8832a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8421798fcdb03e11795e1adc8f8832a0">&#9670;&nbsp;</a></span>vector_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a> =  <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt;_type, _size&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -194,8 +213,8 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
 
 </div>
 </div>
-<a id="a01927766c096376975d3d305b790209c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01927766c096376975d3d305b790209c">&#9670;&nbsp;</a></span>Vector_Dense() <span class="overload">[2/3]</span></h2>
+<a id="a1f094067ecac01fa4d5ec00b951a204c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f094067ecac01fa4d5ec00b951a204c">&#9670;&nbsp;</a></span>Vector_Dense() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +225,7 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a> </td>
           <td>(</td>
-          <td class="paramtype">const std::initializer_list&lt; <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::initializer_list&lt; _type &gt; &amp;&#160;</td>
           <td class="paramname"><em>list</em></td><td>)</td>
           <td></td>
         </tr>
@@ -228,8 +247,8 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
 
 </div>
 </div>
-<a id="ac8fef8a8c1cae506913d1e2d6b21bece"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8fef8a8c1cae506913d1e2d6b21bece">&#9670;&nbsp;</a></span>Vector_Dense() <span class="overload">[3/3]</span></h2>
+<a id="aafdacb27c100d18def1fbca0666e3c50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafdacb27c100d18def1fbca0666e3c50">&#9670;&nbsp;</a></span>Vector_Dense() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,7 +259,7 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
         <tr>
           <td class="memname"><a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a> </td>
           <td>(</td>
-          <td class="paramtype">const std::function&lt; <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>(const std::size_t)&gt; &amp;&#160;</td>
+          <td class="paramtype">const std::function&lt; _type(const std::size_t)&gt; &amp;&#160;</td>
           <td class="paramname"><em>lambda</em>, </td>
         </tr>
         <tr>
@@ -280,8 +299,8 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a83077b641ba668c8588501e5453733ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a83077b641ba668c8588501e5453733ba">&#9670;&nbsp;</a></span>operator*=()</h2>
+<a id="a74df9c7e235ea8539d30cc90847e5f14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74df9c7e235ea8539d30cc90847e5f14">&#9670;&nbsp;</a></span>operator*=()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,9 +309,9 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a>&amp; operator*= </td>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a>&amp; operator*= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;&#160;</td>
+          <td class="paramtype">const _type &amp;&#160;</td>
           <td class="paramname"><em>scalar</em></td><td>)</td>
           <td></td>
         </tr>
@@ -315,8 +334,8 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
 
 </div>
 </div>
-<a id="a1d3d3a53c222ae495ed9d46e7d71be53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d3d3a53c222ae495ed9d46e7d71be53">&#9670;&nbsp;</a></span>operator+=()</h2>
+<a id="a8ae87da1c943600377e6ce18c75b4e73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ae87da1c943600377e6ce18c75b4e73">&#9670;&nbsp;</a></span>operator+=()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -325,9 +344,9 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a>&amp; operator+= </td>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a>&amp; operator+= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _size_other &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _type, _size_other &gt; &amp;&#160;</td>
           <td class="paramname"><em>vector</em></td><td>)</td>
           <td></td>
         </tr>
@@ -356,8 +375,8 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
 
 </div>
 </div>
-<a id="a01e05c25884b604c33f7bb96acd22557"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01e05c25884b604c33f7bb96acd22557">&#9670;&nbsp;</a></span>operator-=()</h2>
+<a id="a34195025bd9132651dad6834a9fed688"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34195025bd9132651dad6834a9fed688">&#9670;&nbsp;</a></span>operator-=()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,9 +385,9 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a>&amp; operator-= </td>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a>&amp; operator-= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _size_other &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a>&lt; _type, _size_other &gt; &amp;&#160;</td>
           <td class="paramname"><em>vector</em></td><td>)</td>
           <td></td>
         </tr>
@@ -397,8 +416,8 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
 
 </div>
 </div>
-<a id="a36c3cf959608985f08cc4a603a6d4e50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36c3cf959608985f08cc4a603a6d4e50">&#9670;&nbsp;</a></span>operator/=()</h2>
+<a id="ac7cdd295a56daeaaa10a6e1740920006"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7cdd295a56daeaaa10a6e1740920006">&#9670;&nbsp;</a></span>operator/=()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -407,9 +426,9 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#adfcf67a0faab7195e76f78704a0ea64a">_vector</a>&amp; operator/= </td>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_vector___dense.html#a8421798fcdb03e11795e1adc8f8832a0">vector_type</a>&amp; operator/= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;&#160;</td>
+          <td class="paramtype">const _type &amp;&#160;</td>
           <td class="paramname"><em>scalar</em></td><td>)</td>
           <td></td>
         </tr>
@@ -434,8 +453,8 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="ab96eca623728389006cfa013da781e1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab96eca623728389006cfa013da781e1e">&#9670;&nbsp;</a></span>is_dynamic</h2>
+<a id="a969fd9b3228e7869e7c21de9bb8d9aa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a969fd9b3228e7869e7c21de9bb8d9aa1">&#9670;&nbsp;</a></span>is_dynamic</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -444,12 +463,12 @@ struct Disa::Vector_Dense&lt; _size &gt;</h3>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool is_dynamic = false</td>
+          <td class="memname">constexpr bool is_dynamic = false</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

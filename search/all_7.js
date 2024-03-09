@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['gauss_5fseidel_79',['gauss_seidel',['../namespace_disa.html#a5cc27b15a9dee0ad91cc0f746fcd987bacd9152dc4c50cce6f3cab9c7bfe58c4f',1,'Disa']]],
-  ['generator_2eh_80',['generator.h',['../generator_8h.html',1,'']]],
-  ['get_5fconfig_81',['get_config',['../class_disa_1_1_direct.html#a708f8f61a293a32749811f0340ca6c39',1,'Disa::Direct::get_config()'],['../class_disa_1_1_direct___lower___upper___factorisation.html#a82066c4dc6350b31803f6f45f22e1f7c',1,'Disa::Direct_Lower_Upper_Factorisation::get_config()']]],
-  ['get_5fmacro_82',['GET_MACRO',['../macros_8h.html#a857fa4baf727f64fa21f32da2b6c0468',1,'macros.h']]],
-  ['graph_5futilities_2eh_83',['graph_utilities.h',['../graph__utilities_8h.html',1,'']]],
-  ['greedy_5fmulticolouring_84',['greedy_multicolouring',['../namespace_disa.html#a5fb0d3be9790d345b48e09008ac179f0',1,'Disa']]]
+  ['hash_3c_20disa_3a_3aadjacency_5fgraph_20_3e_84',['hash&lt; Disa::Adjacency_Graph &gt;',['../structhash_3_01_disa_1_1_adjacency___graph_01_4.html',1,'']]],
+  ['hash_3c_20disa_3a_3aadjacency_5fgraph_3c_20_5fdirected_20_3e_20_3e_85',['hash&lt; Disa::Adjacency_Graph&lt; _directed &gt; &gt;',['../structstd_1_1hash_3_01_disa_1_1_adjacency___graph_3_01__directed_01_4_01_4.html',1,'std']]]
 ];
