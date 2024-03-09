@@ -258,7 +258,7 @@ struct Vector_Dense<_type, 0> : public std::vector<_type> {
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @brief Chooses, between two vectors the static vector type if possible.
+ * @brief Chooses, between two vectors, the static vector type if possible.
  * @tparam _vector0 The first vector type.
  * @tparam _vector1 The second vector type.
  */
@@ -266,6 +266,17 @@ template<class _vector0, class _vector1>
 struct Static_Promoter {
   typedef typename std::conditional<!_vector0::is_dynamic, _vector0,
                                     _vector1>::type type;    //! Static vector type if either _vector_0 or _vector_1 is static else dynamic. */
+};
+
+/**
+ * @brief Chooses, between two vectors, the dynamic vector type if possible.
+ * @tparam _vector0 The first vector type.
+ * @tparam _vector1 The second vector type.
+ */
+template<class _vector0, class _vector1>
+struct Static_Demoter {
+  typedef typename std::conditional<_vector0::is_dynamic, _vector0,
+                                    _vector1>::type type;    //! Dynamic vector type if either _vector_0 or _vector_1 is static else dynamic. */
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
