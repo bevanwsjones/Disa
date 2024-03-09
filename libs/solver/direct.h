@@ -74,7 +74,7 @@ public:
    * @param[in] a_matrix The coefficient matrix to factorise.
    * @return True if the matrix was factorised successfully, else false.
    */
-  bool factorise(const Matrix_Dense<_size, _size>& a_matrix);
+  bool factorise(const Matrix_Dense<Scalar, _size, _size>& a_matrix);
 
   /**
    * @brief Solves the linear system, using the solver's internally stored factorised coefficient matrix. 
@@ -85,7 +85,7 @@ public:
    * @warning The factorise function must have been called before this function, and returned true for a correct solver 
    * to occur.
    */
-  const Convergence_Data& solve(Vector_Dense<_size>& x_vector, const Vector_Dense<_size>& b_vector){
+  const Convergence_Data& solve(Vector_Dense<Scalar, _size>& x_vector, const Vector_Dense<Scalar, _size>& b_vector){
     return static_cast<_solver*>(this)->solve_system(x_vector, b_vector);
   };
 

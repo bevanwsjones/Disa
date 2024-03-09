@@ -40,9 +40,9 @@ TEST(solver_utilites, update_convergence) {
   matrix_sparse[2][2] = 0.5;
   matrix_sparse[3][3] = 0.5;
   matrix_sparse[4][4] = 0.5;
-  Vector_Dense<0> solution;
+  Vector_Dense<Scalar, 0> solution;
   solution.resize(5, 2.0);
-  Vector_Dense<0> constant = {3.0, -1.0, 3.0, -1.0, 3.0};
+  Vector_Dense<Scalar, 0> constant = {3.0, -1.0, 3.0, -1.0, 3.0};
   auto [weighted_l2_norm_0, l_inf_norm_0] = compute_residual(matrix_sparse, solution, constant);
 
 
@@ -59,7 +59,7 @@ TEST(solver_utilites, update_convergence) {
   EXPECT_EQ(data.residual_max_normalised, 1.0);
 
   // Second iteration, check  that which must be correct after instantiation.
-  constant = Vector_Dense<0>({2.0, 0.0, 3.0, 0.0, 2.0});
+  constant = Vector_Dense<Scalar, 0>({2.0, 0.0, 3.0, 0.0, 2.0});
   auto [weighted_l2_norm, l_inf_norm] = compute_residual(matrix_sparse, solution, constant);
 
   data.update(matrix_sparse, solution, constant);
@@ -111,21 +111,21 @@ TEST(solver_utilites, compute_residual) {
   matrix_sparse[2][2] = 0.5;
   matrix_sparse[3][3] = 0.5;
   matrix_sparse[4][4] = 0.5;
-  Vector_Dense<0> solution;
+  Vector_Dense<Scalar, 0> solution;
   solution.resize(5, 2.0);
 
-  Vector_Dense<0> constant = {3.0, -1.0, 3.0, -1.0, 3.0};
+  Vector_Dense<Scalar, 0> constant = {3.0, -1.0, 3.0, -1.0, 3.0};
   auto [weighted_l2_norm, l_inf_norm] = compute_residual(matrix_sparse, solution, constant);
   EXPECT_DOUBLE_EQ(weighted_l2_norm, 2.0);
   EXPECT_DOUBLE_EQ(l_inf_norm, 2.0);
 
-  constant = Vector_Dense<0>({2.0, 0.0, 3.0, 0.0, 2.0});
+  constant = Vector_Dense<Scalar, 0>({2.0, 0.0, 3.0, 0.0, 2.0});
   std::tie(weighted_l2_norm, l_inf_norm) = compute_residual(matrix_sparse, solution, constant);
   EXPECT_DOUBLE_EQ(weighted_l2_norm, std::sqrt(8.0/5.0));
   EXPECT_DOUBLE_EQ(l_inf_norm, 2.0);
 
   EXPECT_DEATH(compute_residual(Matrix_Sparse(5, 2), solution, constant), ".*");
   EXPECT_DEATH(compute_residual(Matrix_Sparse(1, 5), solution, constant), ".*");
-  EXPECT_DEATH(compute_residual(Matrix_Sparse(1, 1), Vector_Dense<0>{}, constant), ".*");
-  EXPECT_DEATH(compute_residual(Matrix_Sparse(1, 1), solution, Vector_Dense<0>{}), ".*");
+  EXPECT_DEATH(compute_residual(Matrix_Sparse(1, 1), Vector_Dense<Scalar, 0>{}, constant), ".*");
+  EXPECT_DEATH(compute_residual(Matrix_Sparse(1, 1), solution, Vector_Dense<Scalar, 0>{}), ".*");
 }

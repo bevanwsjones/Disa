@@ -44,7 +44,7 @@ namespace Disa {
  */
 template<Solver_Type _solver_type, std::size_t _size, bool _pivot>
 bool Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>::factorise(
-  const Matrix_Dense<_size, _size>& a_matrix) {
+  const Matrix_Dense<Scalar, _size, _size>& a_matrix) {
   
   // Initialise factorisation data.
   factorised = false;
@@ -105,7 +105,7 @@ bool Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>::factorise(
  */
 template<Solver_Type _solver_type, std::size_t _size, bool _pivot>
 Convergence_Data Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>::solve_system(
-  Vector_Dense<_size>& x_vector, const Vector_Dense<_size>& b_vector) {
+  Vector_Dense<Scalar, _size>& x_vector, const Vector_Dense<Scalar, _size>& b_vector) {
 
   ASSERT_DEBUG(b_vector.size() == lu_factorised.size_row(), "Constant vector not of the correct size.");
   
