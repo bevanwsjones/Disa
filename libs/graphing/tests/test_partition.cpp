@@ -29,7 +29,7 @@ using namespace Disa;
 
 TEST(test_partition, multinode_level_set_expansion) {
   std::size_t number_vertices = 10;
-  Adjacency_Graph graph = create_graph_line(number_vertices);
+  Adjacency_Graph<false> graph = create_graph_line<false>(number_vertices);
   std::vector<Adjacency_Subgraph> subgraph;
 
   // Start with a poorly split graph.
@@ -72,15 +72,15 @@ TEST(test_partition, multinode_level_set_expansion) {
   // death tests.
   std::vector<Adjacency_Subgraph> empty;
   EXPECT_DEATH(multinode_level_set_expansion(graph, 4, empty), "./*");
-  EXPECT_DEATH(multinode_level_set_expansion(Adjacency_Graph(), 4, subgraph), "./*");
+  EXPECT_DEATH(multinode_level_set_expansion(Adjacency_Graph<false>(), 4, subgraph), "./*");
 }
 
 TEST(LevelTraversalTest, SimpleTest) {
   std::size_t number_vertices = 40;
-  auto subgraph_2 = recursive_graph_bisection(create_graph_line(number_vertices), 2);
-  auto subgraph_3 = recursive_graph_bisection(create_graph_line(number_vertices), 3);
-  auto subgraph_4 = recursive_graph_bisection(create_graph_line(number_vertices), 4);
-  auto subgraph_5 = recursive_graph_bisection(create_graph_line(number_vertices), 5);
+  auto subgraph_2 = recursive_graph_bisection(create_graph_line<false>(number_vertices), 2);
+  auto subgraph_3 = recursive_graph_bisection(create_graph_line<false>(number_vertices), 3);
+  auto subgraph_4 = recursive_graph_bisection(create_graph_line<false>(number_vertices), 4);
+  auto subgraph_5 = recursive_graph_bisection(create_graph_line<false>(number_vertices), 5);
 
   EXPECT_EQ(subgraph_2.size(), 2);
   EXPECT_EQ(subgraph_2[0].size_vertex(), 20);
