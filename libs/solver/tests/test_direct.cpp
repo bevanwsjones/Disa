@@ -85,9 +85,9 @@ TEST_F(direct_solvers, lower_upper_factorisation_death_test) {
   EXPECT_DEATH(Solver_LUP<0>lup(data), "./*");
 
   // incorrect sizes
-  Vector_Dense<0> b_vector = {6, 2};
-  Vector_Dense<0> x_vector = {0, 0, 0};
-  Matrix_Dense<0, 0> matrix = {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}};
+  Vector_Dense<Scalar, 0> b_vector = {6, 2};
+  Vector_Dense<Scalar, 0> x_vector = {0, 0, 0};
+  Matrix_Dense<Scalar, 0, 0> matrix = {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}};
   lu_solver.factorise(matrix);
   lup_solver.factorise(matrix);  
   EXPECT_DEATH(lu_solver.solve_system(x_vector, b_vector), "./*");
@@ -96,9 +96,9 @@ TEST_F(direct_solvers, lower_upper_factorisation_death_test) {
 
 TEST_F(direct_solvers, lower_upper_factorisation_not_factorised) {
  
-  Vector_Dense<0> b_vector = {6, 2, 7};
-  Vector_Dense<0> x_vector = {0, 0, 0};
-  Matrix_Dense<0, 0> matrix = {{0, 0, 0}, {9, 5, 1}, {4, 3, 8}};  // singular.
+  Vector_Dense<Scalar, 0> b_vector = {6, 2, 7};
+  Vector_Dense<Scalar, 0> x_vector = {0, 0, 0};
+  Matrix_Dense<Scalar, 0, 0> matrix = {{0, 0, 0}, {9, 5, 1}, {4, 3, 8}};  // singular.
   
   EXPECT_FALSE(lu_solver.factorise(matrix));
   EXPECT_FALSE(lup_solver.factorise(matrix)); 
@@ -110,10 +110,10 @@ TEST_F(direct_solvers, lower_upper_factorisation_not_factorised) {
 TEST_F(direct_solvers, lower_upper_factorise_solve) {
 
   // Setup linear system (source https://lampx.tugraz.at/~hadley/num/ch2/2.3a.php)
-  Matrix_Dense<0, 0> matrix = {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}};
-  Vector_Dense<0> b_vector = {6, 2, 7};
-  Vector_Dense<0> x_vector = {0, 0, 0};
-  Vector_Dense<0> solution = {0.04166666666666696, 0.16666666666666657, 0.7916666666666667};
+  Matrix_Dense<Scalar, 0, 0> matrix = {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}};
+  Vector_Dense<Scalar, 0> b_vector = {6, 2, 7};
+  Vector_Dense<Scalar, 0> x_vector = {0, 0, 0};
+  Vector_Dense<Scalar, 0> solution = {0.04166666666666696, 0.16666666666666657, 0.7916666666666667};
 
   // Test LU
   EXPECT_TRUE(lu_solver.factorise(matrix));

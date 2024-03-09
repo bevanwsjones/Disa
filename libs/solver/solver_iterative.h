@@ -53,8 +53,8 @@ public:
     return static_cast<_solver*>(this)->initialise_solver(solver_config);
   };
 
-  const Convergence_Data& solve(const Matrix_Sparse& matrix, Vector_Dense<0>& x_vector,
-                                const Vector_Dense<0>& b_vector){
+  const Convergence_Data& solve(const Matrix_Sparse& matrix, Vector_Dense<Scalar, 0>& x_vector,
+                                const Vector_Dense<Scalar, 0>& b_vector){
     return static_cast<_solver*>(this)->solve_system(matrix, x_vector, b_vector);
   };
 

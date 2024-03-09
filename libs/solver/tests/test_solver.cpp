@@ -40,13 +40,10 @@ class Laplace2DProblem : public ::testing::Test
 public:
   Matrix_Sparse a_sparse;      //!< Sparse coefficient matrix of the linear system
   Matrix_Sparse a_sparse_0;    //!< Sparse coefficient matrix of the linear system
-  Vector_Dense<0> x_vector;    //!< Solution vector of the linear system.
-  Vector_Dense<0> b_vector;    //!< Constant vector of the linear system.
-  Vector_Dense<0> b_vector_0;  //!< Constant vector of the linear system.
-
-
-
-  Matrix_Dense<0,0> a_dense;    //!< Dense coefficient matrix of the linear system
+  Vector_Dense<Scalar, 0> x_vector;    //!< Solution vector of the linear system.
+  Vector_Dense<Scalar, 0> b_vector;    //!< Constant vector of the linear system.
+  Vector_Dense<Scalar, 0> b_vector_0;  //!< Constant vector of the linear system.
+  Matrix_Dense<Scalar, 0,0> a_dense;    //!< Dense coefficient matrix of the linear system
 
   /**
    * @brief Calls below setup function with a mesh size of 100 grid points (10 on each axis).

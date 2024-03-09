@@ -54,10 +54,11 @@ namespace Disa {
  * compile time. To obtain a dynamically allocated dense vector the _size value can be set to 0. In which case
  * std::vector is inherited, see below specialisation.
  */
-template<std::size_t _size>
-struct Vector_Dense : public std::array<Scalar, _size> {
-  typedef Vector_Dense<_size> _vector;     //!< Short hand for this vector type.
-  const static bool is_dynamic = false;    //!< Indicates the vector is compile time sized.
+template<typename _type, std::size_t _size>
+struct Vector_Dense : public std::array<_type, _size> {
+  using value_type = _type;                         //!< The type of the vector elements.
+  using vector_type = Vector_Dense<_type, _size>;   //!< Short hand for this vector type.
+  static constexpr bool is_dynamic = false;         //!< Indicates the vector is compile time sized.
 
   // -------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
@@ -66,13 +67,13 @@ struct Vector_Dense : public std::array<Scalar, _size> {
   /**
    * @brief Initialise empty vector.
    */
-  Vector_Dense() : std::array<Scalar, _size>() {};
+  Vector_Dense() : std::array<_type, _size>() {};
 
   /**
    * @brief Constructor to construct from initializer list, list and vector must be of the same size.
    * @param[in] list The list of Scalars to initialised the vector.
    */
-  Vector_Dense(const std::initializer_list<Scalar>& list) {
+  Vector_Dense(const std::initializer_list<_type>& list) {
     ASSERT_DEBUG(list.size() == _size, "Initializer list of incorrect size, " + std::to_string(list.size()) + " vs. " +
       std::to_string(_size) + ".");
     auto iter = this->begin();
@@ -85,7 +86,7 @@ struct Vector_Dense : public std::array<Scalar, _size> {
    * @param[in] lambda Lambda expression.
    * @param[in] size Desired size of the vector. Added for interoperability with dynamic vectors.
    */
-  explicit Vector_Dense(const std::function<Scalar(const std::size_t)>& lambda, std::size_t size = _size) {
+  explicit Vector_Dense(const std::function<_type(const std::size_t)>& lambda, std::size_t size = _size) {
     ASSERT_DEBUG(size == _size, "Cannot change the size for a static vector.");
     FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
@@ -99,7 +100,7 @@ struct Vector_Dense : public std::array<Scalar, _size> {
    * @param scalar Scalar value, b, to multiply the vector by.
    * @return Updated vector (a').
    */
-  constexpr _vector& operator*=(const Scalar& scalar) {
+  constexpr vector_type& operator*=(const _type& scalar) {
     FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
@@ -111,7 +112,7 @@ struct Vector_Dense : public std::array<Scalar, _size> {
    *
    * Note: Division by zero is left to the user to handle.
    */
-  constexpr _vector& operator/=(const Scalar& scalar) {
+  constexpr vector_type& operator/=(const _type& scalar) {
     FOR_EACH_REF(element, *this) element /= scalar;
     return *this;
   }
@@ -123,7 +124,7 @@ struct Vector_Dense : public std::array<Scalar, _size> {
    * @return Updated vector (a').
    */
   template<std::size_t _size_other>
-  constexpr _vector& operator+=(const Vector_Dense<_size_other>& vector) {
+  constexpr vector_type& operator+=(const Vector_Dense<_type, _size_other>& vector) {
     ASSERT_DEBUG(_size == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + ".");
     FOR(index, _size) (*this)[index] += vector[index];
@@ -137,7 +138,7 @@ struct Vector_Dense : public std::array<Scalar, _size> {
    * @return Updated vector (a').
    */
   template<std::size_t _size_other>
-  constexpr _vector& operator-=(const Vector_Dense<_size_other>& vector) {
+  constexpr vector_type& operator-=(const Vector_Dense<_type, _size_other>& vector) {
     ASSERT_DEBUG(_size == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + ".");
     FOR(index, _size) (*this)[index] -= vector[index];
@@ -160,10 +161,11 @@ struct Vector_Dense : public std::array<Scalar, _size> {
  * compile time. To obtain a dynamically allocated dense vector the _size value can be set to 0. In which case the
  * std::vector is inherited, see below specialisation.
  */
-template<>
-struct Vector_Dense<0> : public std::vector<Scalar> {
-  typedef Vector_Dense<0> _vector;      //!< Short hand for this vector type.
-  const static bool is_dynamic = true;  //!< Indicates the vector is runtime resizable.
+template<typename _type>
+struct Vector_Dense<_type, 0> : public std::vector<_type> {
+  using value_type = _type;                     //!< The type of the vector elements.
+  using vector_type = Vector_Dense<_type, 0>;   //!< Short hand for this vector type.
+  static constexpr bool is_dynamic = true;      //!< Indicates the vector is runtime resizable.
 
   // -------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
@@ -172,15 +174,15 @@ struct Vector_Dense<0> : public std::vector<Scalar> {
   /**
    * @brief Initialise empty vector.
    */
-  Vector_Dense() : std::vector<Scalar>() {};
+  Vector_Dense() : std::vector<_type>() {};
 
   /**
    * @brief Constructor to construct from initializer list, vector is resized to list size.
    * @param[in] list The list of Scalars to initialised the vector.
    */
-  Vector_Dense(const std::initializer_list<Scalar>& list) {
-    resize(list.size());
-    auto iter = begin();
+  Vector_Dense(const std::initializer_list<_type>& list) {
+    this->resize(list.size());
+    auto iter = this->begin();
     FOR_EACH(item, list) *iter++ = item;
   }
 
@@ -190,7 +192,7 @@ struct Vector_Dense<0> : public std::vector<Scalar> {
    * @param[in] lambda Lambda expression.
    * @param[in] size Desired size of the vector.
    */
-  explicit Vector_Dense(const std::function<Scalar(std::size_t)>& lambda, std::size_t size) : std::vector<Scalar>(
+  explicit Vector_Dense(const std::function<_type(std::size_t)>& lambda, std::size_t size) : std::vector<_type>(
     size) {
     FOR(i_element, this->size()) (*this)[i_element] = lambda(i_element);
   }
@@ -204,7 +206,7 @@ struct Vector_Dense<0> : public std::vector<Scalar> {
    * @param scalar Scalar value, b, to multiply the vector by.
    * @return Updated vector (a).
    */
-  _vector& operator*=(const Scalar& scalar) {
+  vector_type& operator*=(const _type& scalar) {
     FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
@@ -216,7 +218,7 @@ struct Vector_Dense<0> : public std::vector<Scalar> {
    *
    * Note: Division by zero is left to the user to handle.
    */
-  _vector& operator/=(const Scalar& scalar) {
+  vector_type& operator/=(const _type& scalar) {
     FOR_EACH_REF(element, *this) element /= scalar;
     return *this;
   }
@@ -228,11 +230,11 @@ struct Vector_Dense<0> : public std::vector<Scalar> {
    * @return Updated vector (a').
    */
   template<std::size_t _size_other>
-  constexpr _vector& operator+=(const Vector_Dense<_size_other>& vector) {
-    ASSERT_DEBUG(size() == vector.size(),
-                 "Incompatible vector sizes, " + std::to_string(size()) + " vs. " + std::to_string(vector.size()) +
-                 ".");
-    FOR(index, size()) (*this)[index] += vector[index];
+  constexpr vector_type& operator+=(const Vector_Dense<_type, _size_other>& vector) {
+    ASSERT_DEBUG(this->size() == vector.size(),
+                 "Incompatible vector sizes, " + std::to_string(this->size()) + " vs. " 
+                 + std::to_string(vector.size()) + ".");
+    FOR(index, this->size()) (*this)[index] += vector[index];
     return *this;
   }
 
@@ -243,11 +245,11 @@ struct Vector_Dense<0> : public std::vector<Scalar> {
    * @return Updated vector (a').
    */
   template<std::size_t _size_other>
-  constexpr _vector& operator-=(const Vector_Dense<_size_other>& vector) {
-    ASSERT_DEBUG(size() == vector.size(),
-                 "Incompatible vector sizes, " + std::to_string(size()) + " vs. " + std::to_string(vector.size()) +
+  constexpr vector_type& operator-=(const Vector_Dense<_type, _size_other>& vector) {
+    ASSERT_DEBUG(this->size() == vector.size(),
+                 "Incompatible vector sizes, " + std::to_string(this->size()) + " vs. " + std::to_string(vector.size()) +
                  ".");
-    FOR(index, size()) (*this)[index] -= vector[index];
+    FOR(index, this->size()) (*this)[index] -= vector[index];
     return *this;
   }
 
@@ -258,14 +260,25 @@ struct Vector_Dense<0> : public std::vector<Scalar> {
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @brief Chooses, between two vectors the static vector type if possible.
+ * @brief Chooses, between two vectors, the static vector type if possible.
  * @tparam _vector0 The first vector type.
  * @tparam _vector1 The second vector type.
  */
 template<class _vector0, class _vector1>
-struct StaticPromoter {
+struct Static_Promoter {
   typedef typename std::conditional<!_vector0::is_dynamic, _vector0,
                                     _vector1>::type type;    //! Static vector type if either _vector_0 or _vector_1 is static else dynamic. */
+};
+
+/**
+ * @brief Chooses, between two vectors, the dynamic vector type if possible.
+ * @tparam _vector0 The first vector type.
+ * @tparam _vector1 The second vector type.
+ */
+template<class _vector0, class _vector1>
+struct Static_Demoter {
+  typedef typename std::conditional<_vector0::is_dynamic, _vector0,
+                                    _vector1>::type type;    //! Dynamic vector type if either _vector_0 or _vector_1 is static else dynamic. */
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -279,8 +292,8 @@ struct StaticPromoter {
  * @param vector Vector, a, to be multiplied.
  * @return New vector (c).
  */
-template<std::size_t _size>
-constexpr Vector_Dense<_size> operator*(const Scalar& scalar, Vector_Dense<_size> vector) {
+template<typename _type, std::size_t _size>
+constexpr Vector_Dense<_type, _size> operator*(const _type& scalar, Vector_Dense<_type, _size> vector) {
   return vector *= scalar;
 }
 
@@ -291,8 +304,8 @@ constexpr Vector_Dense<_size> operator*(const Scalar& scalar, Vector_Dense<_size
  * @param vector Vector, a, to be multiplied.
  * @return New vector (c).
  */
-template<std::size_t _size>
-constexpr Vector_Dense<_size> operator/(Vector_Dense<_size> vector, const Scalar& scalar) {
+template<typename _type, std::size_t _size>
+constexpr Vector_Dense<_type, _size> operator/(Vector_Dense<_type, _size> vector, const _type& scalar) {
   return vector /= scalar;
 }
 
@@ -304,13 +317,13 @@ constexpr Vector_Dense<_size> operator/(Vector_Dense<_size> vector, const Scalar
  * @param vector1 The second vector of the addition, b.
  * @return Newly constructed vector c.
  */
-template<std::size_t _size_0, std::size_t _size_1>
-typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type
-constexpr operator+(const Vector_Dense<_size_0>& vector0, const Vector_Dense<_size_1>& vector1) {
+template<typename _type, std::size_t _size_0, std::size_t _size_1>
+typename Static_Promoter<Vector_Dense<_type, _size_0>, Vector_Dense<_type, _size_1> >::type
+constexpr operator+(const Vector_Dense<_type, _size_0>& vector0, const Vector_Dense<_type, _size_1>& vector1) {
   ASSERT_DEBUG(vector0.size() == vector1.size(),
                "Incompatible vector sizes, " + std::to_string(vector0.size()) + " vs. " +
                std::to_string(vector1.size()) + ".");
-  typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type _return_vector;
+  typedef typename Static_Promoter<Vector_Dense<_type, _size_0>, Vector_Dense<_type, _size_1> >::type _return_vector;
   return _return_vector([&](const std::size_t ii) { return vector0[ii] + vector1[ii]; }, vector0.size());
 }
 
@@ -322,13 +335,13 @@ constexpr operator+(const Vector_Dense<_size_0>& vector0, const Vector_Dense<_si
  * @param vector1 The subtracting vector, b.
  * @return Newly constructed vector c.
  */
-template<std::size_t _size_0, std::size_t _size_1>
-typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type
-operator-(const Vector_Dense<_size_0>& vector0, const Vector_Dense<_size_1>& vector1) {
+template<typename _type, std::size_t _size_0, std::size_t _size_1>
+typename Static_Promoter<Vector_Dense<_type, _size_0>, Vector_Dense<_type, _size_1> >::type
+operator-(const Vector_Dense<_type, _size_0>& vector0, const Vector_Dense<_type, _size_1>& vector1) {
   ASSERT_DEBUG(vector0.size() == vector1.size(),
                "Incompatible vector sizes, " + std::to_string(vector0.size()) + " vs. " +
                std::to_string(vector1.size()) + ".");
-  typedef typename StaticPromoter<Vector_Dense<_size_0>, Vector_Dense<_size_1> >::type _return_vector;
+  typedef typename Static_Promoter<Vector_Dense<_type, _size_0>, Vector_Dense<_type, _size_1> >::type _return_vector;
   return _return_vector([&](const std::size_t ii) { return vector0[ii] - vector1[ii]; }, vector0.size());
 }
 

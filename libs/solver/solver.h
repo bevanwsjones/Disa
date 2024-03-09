@@ -33,13 +33,13 @@ namespace Disa{
 
 // Forward declarations
 class Matrix_Sparse;
-template<std::size_t> class Vector_Dense;
+template<typename, std::size_t> class Vector_Dense;
 
 /**
  * @brief Solver
  * @brief General Solver Class for all solver types.
  * 
- * This class serves at a 'all in one' solver class for both sparse and dense systems. To acheive 
+ * This class serves at a 'all in one' solver class for both sparse and dense systems. To achieve 
  */
 class Solver {
 public:
@@ -53,8 +53,8 @@ public:
                std::unique_ptr<Sover_Sor>,
                std::nullptr_t> solver{nullptr};
 
-  Convergence_Data solve(const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector,
-                         const Vector_Dense<0>& b_vector) {
+  Convergence_Data solve(const Matrix_Sparse& a_matrix, Vector_Dense<Scalar, 0>& x_vector,
+                         const Vector_Dense<Scalar, 0>& b_vector) {
 
     switch(solver.index()) {
       case 0: ERROR("LU solver does not support sparse matrices.");
@@ -68,7 +68,7 @@ public:
     }    
   };
 
-  Convergence_Data solve(Vector_Dense<0>& x_vector, const Vector_Dense<0>& b_vector) {
+  Convergence_Data solve(Vector_Dense<Scalar, 0>& x_vector, const Vector_Dense<Scalar, 0>& b_vector) {
 
     switch(solver.index()) {
       case 0: return std::get<std::unique_ptr<Solver_LU<0> > >(solver)->solve_system(x_vector, b_vector);

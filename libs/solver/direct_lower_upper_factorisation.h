@@ -76,7 +76,7 @@ public:
    * @param[in] a_matrix The coefficient matrix to factorise.
    * @return True if the matrix was factorised successfully, else false for degenerate/singular matrices.
    */
-  bool factorise(const Matrix_Dense<_size, _size>& a_matrix);
+  bool factorise(const Matrix_Dense<Scalar, _size, _size>& a_matrix);
 
   /**
    * @brief Solves the linear system, using the solver's internally stored factorised coefficient matrix. 
@@ -87,7 +87,7 @@ public:
    * @warning The factorise function must have been called before this function, and returned true for a correct solver 
    * to occur.
    */
-  Convergence_Data solve_system(Vector_Dense<_size>& x_vector, const Vector_Dense<_size>& b_vector);
+  Convergence_Data solve_system(Vector_Dense<Scalar, _size>& x_vector, const Vector_Dense<Scalar, _size>& b_vector);
 
   /**
    * @brief Gets the current configuration of the solver.
@@ -104,7 +104,7 @@ public:
   private:
   bool factorised{false};                             //<! Has factorisation been completed successfully. 
   Scalar factorisation_tolerance{default_absolute};   //<! The value below which diagonal entires should be considered zero.
-  Matrix_Dense<_size, _size> lu_factorised;           //<! The factorised LU coefficient matrix (implicit 1's on diagonal of L).
+  Matrix_Dense<Scalar, _size, _size> lu_factorised;   //<! The factorised LU coefficient matrix (implicit 1's on diagonal of L).
   std::vector<std::size_t> pivots;                    //<! The pivots indicies, is only sized for LUP solver.
 };
 

@@ -30,7 +30,7 @@ struct Solver_Fixed_Point_Data : public Solver_Data{
 };
 
 struct Solver_Fixed_Point_Jacobi_Data : public Solver_Data{
-  Vector_Dense<0> working;
+  Vector_Dense<Scalar, 0> working;
 };
 
 struct Solver_Fixed_Point_Sor_Data : public Solver_Data{
@@ -58,8 +58,8 @@ public:
    * @param b_vector
    * @return
    */
-  Convergence_Data solve_system(const Matrix_Sparse& a_matrix, Vector_Dense<0>& x_vector,
-                                       const Vector_Dense<0>& b_vector);
+  Convergence_Data solve_system(const Matrix_Sparse& a_matrix, Vector_Dense<Scalar, 0>& x_vector,
+                                       const Vector_Dense<Scalar, 0>& b_vector);
 };
 
 typedef Solver_Fixed_Point<Solver_Type::jacobi, Solver_Fixed_Point_Jacobi_Data> Solver_Jacobi;
