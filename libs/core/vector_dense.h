@@ -56,9 +56,9 @@ namespace Disa {
  */
 template<typename _type, std::size_t _size>
 struct Vector_Dense : public std::array<_type, _size> {
-  using _value_type = _type;                    //!< The type of the vector elements.
-  using _vector = Vector_Dense<_type, _size>;   //!< Short hand for this vector type.
-  static constexpr bool is_dynamic = false;     //!< Indicates the vector is compile time sized.
+  using value_type = _type;                         //!< The type of the vector elements.
+  using vector_type = Vector_Dense<_type, _size>;   //!< Short hand for this vector type.
+  static constexpr bool is_dynamic = false;         //!< Indicates the vector is compile time sized.
 
 // -------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
@@ -100,7 +100,7 @@ struct Vector_Dense : public std::array<_type, _size> {
    * @param scalar Scalar value, b, to multiply the vector by.
    * @return Updated vector (a').
    */
-  constexpr _vector& operator*=(const _type& scalar) {
+  constexpr vector_type& operator*=(const _type& scalar) {
     FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
@@ -112,7 +112,7 @@ struct Vector_Dense : public std::array<_type, _size> {
    *
    * Note: Division by zero is left to the user to handle.
    */
-  constexpr _vector& operator/=(const _type& scalar) {
+  constexpr vector_type& operator/=(const _type& scalar) {
     FOR_EACH_REF(element, *this) element /= scalar;
     return *this;
   }
@@ -124,7 +124,7 @@ struct Vector_Dense : public std::array<_type, _size> {
    * @return Updated vector (a').
    */
   template<std::size_t _size_other>
-  constexpr _vector& operator+=(const Vector_Dense<_type, _size_other>& vector) {
+  constexpr vector_type& operator+=(const Vector_Dense<_type, _size_other>& vector) {
     ASSERT_DEBUG(_size == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + ".");
     FOR(index, _size) (*this)[index] += vector[index];
@@ -138,7 +138,7 @@ struct Vector_Dense : public std::array<_type, _size> {
    * @return Updated vector (a').
    */
   template<std::size_t _size_other>
-  constexpr _vector& operator-=(const Vector_Dense<_type, _size_other>& vector) {
+  constexpr vector_type& operator-=(const Vector_Dense<_type, _size_other>& vector) {
     ASSERT_DEBUG(_size == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(_size) + " vs. " + std::to_string(vector.size()) + ".");
     FOR(index, _size) (*this)[index] -= vector[index];
@@ -163,9 +163,9 @@ struct Vector_Dense : public std::array<_type, _size> {
  */
 template<typename _type>
 struct Vector_Dense<_type, 0> : public std::vector<_type> {
-  using _value_type = _type;                //!< The type of the vector elements.
-  using _vector = Vector_Dense<_type, 0>;   //!< Short hand for this vector type.
-  static constexpr bool is_dynamic = true;  //!< Indicates the vector is runtime resizable.
+  using value_type = _type;                     //!< The type of the vector elements.
+  using vector_type = Vector_Dense<_type, 0>;   //!< Short hand for this vector type.
+  static constexpr bool is_dynamic = true;      //!< Indicates the vector is runtime resizable.
 
   // -------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
@@ -206,7 +206,7 @@ struct Vector_Dense<_type, 0> : public std::vector<_type> {
    * @param scalar Scalar value, b, to multiply the vector by.
    * @return Updated vector (a).
    */
-  _vector& operator*=(const _type& scalar) {
+  vector_type& operator*=(const _type& scalar) {
     FOR_EACH_REF(element, *this) element *= scalar;
     return *this;
   }
@@ -218,7 +218,7 @@ struct Vector_Dense<_type, 0> : public std::vector<_type> {
    *
    * Note: Division by zero is left to the user to handle.
    */
-  _vector& operator/=(const _type& scalar) {
+  vector_type& operator/=(const _type& scalar) {
     FOR_EACH_REF(element, *this) element /= scalar;
     return *this;
   }
@@ -230,7 +230,7 @@ struct Vector_Dense<_type, 0> : public std::vector<_type> {
    * @return Updated vector (a').
    */
   template<std::size_t _size_other>
-  constexpr _vector& operator+=(const Vector_Dense<_type, _size_other>& vector) {
+  constexpr vector_type& operator+=(const Vector_Dense<_type, _size_other>& vector) {
     ASSERT_DEBUG(this->size() == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(this->size()) + " vs. " 
                  + std::to_string(vector.size()) + ".");
@@ -245,7 +245,7 @@ struct Vector_Dense<_type, 0> : public std::vector<_type> {
    * @return Updated vector (a').
    */
   template<std::size_t _size_other>
-  constexpr _vector& operator-=(const Vector_Dense<_type, _size_other>& vector) {
+  constexpr vector_type& operator-=(const Vector_Dense<_type, _size_other>& vector) {
     ASSERT_DEBUG(this->size() == vector.size(),
                  "Incompatible vector sizes, " + std::to_string(this->size()) + " vs. " + std::to_string(vector.size()) +
                  ".");
