@@ -60,7 +60,7 @@ struct Vector_Dense : public std::array<_type, _size> {
   using vector_type = Vector_Dense<_type, _size>;   //!< Short hand for this vector type.
   static constexpr bool is_dynamic = false;         //!< Indicates the vector is compile time sized.
 
-// -------------------------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
   // Constructors/Destructors
   // -------------------------------------------------------------------------------------------------------------------
 

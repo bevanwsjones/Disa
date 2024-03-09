@@ -120,7 +120,7 @@ inline std::basic_string<char> console_format(const Log_Level level, const std::
 // Types
 // ---------------------------------------------------------------------------------------------------------------------
 
-typedef std::make_signed<std::size_t>::type s_size_t;    //!< Signed type for size type, used for conversion.
+using s_size_t = std::make_signed<std::size_t>::type;    //!< Used for static casting where needed, and to prevent compile warnings (if you are using a signed type for size_t, you are doing something wrong).
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Looping Macros
