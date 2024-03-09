@@ -664,23 +664,23 @@ TEST(test_matrix_sparse, scalar_matrix_division) {
 
 TEST(test_matrix_sparse, matrix_vector_multiplication) {
   Matrix_Sparse matrix({0, 1, 4}, {1, 0, 1, 2}, {3.0, -4.0, 5.0, -2.0}, 3);
-  Vector_Dense<0> dynamic_vector = {-1.0, 2.0, 3.0};
-  Vector_Dense<3> static_vector = {-10.0, 20.0, -30};
+  Vector_Dense<Scalar, 0> dynamic_vector = {-1.0, 2.0, 3.0};
+  Vector_Dense<Scalar, 3> static_vector = {-10.0, 20.0, -30};
 
-  Vector_Dense<0> result_dynamic = matrix*dynamic_vector;
+  Vector_Dense<Scalar, 0> result_dynamic = matrix*dynamic_vector;
   EXPECT_EQ(result_dynamic.size(), 2);
   EXPECT_DOUBLE_EQ(result_dynamic[0], 6.0);
   EXPECT_DOUBLE_EQ(result_dynamic[1], 8.0);
 
   matrix.resize(3, 3);
-  Vector_Dense<3> result_static = matrix*static_vector;
+  Vector_Dense<Scalar, 3> result_static = matrix*static_vector;
   EXPECT_DOUBLE_EQ(result_static[0], 60.0);
   EXPECT_DOUBLE_EQ(result_static[1], 200.0);
   EXPECT_DOUBLE_EQ(result_static[2], 0.0);
 
   Matrix_Sparse dynamic_matrix_incorrect;
-  Vector_Dense<0> dynamic_vector_incorrect;
-  Vector_Dense<2> static_vector_incorrect;
+  Vector_Dense<Scalar, 0> dynamic_vector_incorrect;
+  Vector_Dense<Scalar, 2> static_vector_incorrect;
   EXPECT_DEATH(dynamic_matrix_incorrect*dynamic_vector, "./*");
   EXPECT_DEATH(dynamic_matrix_incorrect*static_vector_incorrect, "./*");
   dynamic_matrix_incorrect.resize(4, 2);

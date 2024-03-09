@@ -1101,12 +1101,12 @@ inline Matrix_Sparse operator/(Matrix_Sparse matrix, const Scalar& scalar) {
  * @note at present for static vectors the matrix must be square.
  */
 template<std::size_t _size>
-Vector_Dense<_size> operator*(const Matrix_Sparse& matrix, const Vector_Dense<_size>& vector) {
+Vector_Dense<Scalar, _size> operator*(const Matrix_Sparse& matrix, const Vector_Dense<Scalar, _size>& vector) {
   ASSERT_DEBUG(matrix.size_column() == vector.size(),
                "Incompatible vector-matrix dimensions, " + std::to_string(matrix.size_row()) + "," +
                std::to_string(matrix.size_column()) + " vs. " + std::to_string(vector.size()) + ".");
   ASSERT_DEBUG(!_size || matrix.size_row() == vector.size(), "For static vectors the matrix must be square.");
-  return Vector_Dense<_size>([&](const std::size_t i_row, Scalar value = 0) {
+  return Vector_Dense<Scalar, _size>([&](const std::size_t i_row, Scalar value = 0) {
     FOR_ITER(iter, *(matrix.begin() + i_row)) value += *iter*vector[iter.i_column()];
     return value; }, matrix.size_row());
 }
