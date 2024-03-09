@@ -56,7 +56,8 @@ namespace Disa {
  */
 template<typename _type, std::size_t _size>
 struct Vector_Dense : public std::array<_type, _size> {
-  typedef Vector_Dense<_type, _size> _vector;   //!< Short hand for this vector type.
+  using _value_type = _type;                    //!< The type of the vector elements.
+  using _vector = Vector_Dense<_type, _size>;   //!< Short hand for this vector type.
   static constexpr bool is_dynamic = false;     //!< Indicates the vector is compile time sized.
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -162,7 +163,8 @@ struct Vector_Dense : public std::array<_type, _size> {
  */
 template<typename _type>
 struct Vector_Dense<_type, 0> : public std::vector<_type> {
-  typedef Vector_Dense<_type, 0> _vector;   //!< Short hand for this vector type.
+  using _value_type = _type;                //!< The type of the vector elements.
+  using _vector = Vector_Dense<_type, 0>;   //!< Short hand for this vector type.
   static constexpr bool is_dynamic = true;  //!< Indicates the vector is runtime resizable.
 
   // -------------------------------------------------------------------------------------------------------------------
