@@ -15,37 +15,20 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: disa.h
-// Description: Library header, adds all relevant includes for sub-libraries.
+// File Name: index.h
+// Description: Contains the declaration and definitions of 'macro' like globals which help with findexing, specifically 
+//              related to the size of the matrices or vectors.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_DISA_H
-#define DISA_DISA_H
+#ifndef DISA_INDEX_H
+#define DISA_INDEX_H
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Core library headers
-// ---------------------------------------------------------------------------------------------------------------------
+#include <ctype.h>
 
-#include "matrix_sparse.h"
-#include "matrix_dense.h"
-#include "scalar.h"
-#include "vector_dense.h"
-#include "vector_sparse.h"
-#include "vector_operators.h"
+namespace Disa {
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Graphing library headers
-// ---------------------------------------------------------------------------------------------------------------------
+using Index = __uint32_t;
 
-#include "adjacency_graph.h"
-#include "edge.h"
-#include "partition.h"
-#include "reorder.h"
+}
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Solver library headers
-// ---------------------------------------------------------------------------------------------------------------------
-
-#include "solver.h"
-
-#endif //DISA_DISA_H
+#endif DISA_INDEX_H

@@ -22,19 +22,12 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 set(SOURCES
-        macros.h
-        matrix_dense.h
-        matrix_sparse.h
-        scalar.h
-        vector_dense.h
-        vector_operators.h
-
         matrix_sparse.cpp
         )
 
-add_library(core ${SOURCES})
+add_library(core INTERFACE ${SOURCES})
 set_target_properties(core PROPERTIES LINKER_LANGUAGE CXX)
-target_include_directories(core PUBLIC .)
+target_include_directories(core INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Testing

@@ -27,6 +27,8 @@
 #include "scalar.h"
 #include "vector_dense.h"
 
+#include "vector_sparse.h" // todo - remove
+
 #include <numeric>
 #include <vector>
 

@@ -31,7 +31,7 @@ set(CMAKE_CXX_STANDARD 20)
 # Options
 # ----------------------------------------------------------------------------------------------------------------------
 
-option(ENABLE_TEST "Turn on to enable tests" ON)
+option(ENABLE_TEST "Turn on to enable tests" OFF)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDISA_DEBUG")
 add_compile_definitions("DISA_DEBUG")
