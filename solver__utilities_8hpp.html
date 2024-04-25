@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Disa: libs/solver/solver_utilities.hpp File Reference</title>
+<title>Disa: include/solver/solver_utilities.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,19 +83,52 @@ $(document).ready(function(){initNavTree('solver__utilities_8hpp.html',''); init
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">solver_utilities.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &quot;<a class="el" href="scalar_8hpp_source.html">scalar.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="matrix__sparse_8hpp_source.html">matrix_sparse.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="vector__dense_8hpp_source.html">vector_dense.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="vector__operators_8hpp_source.html">vector_operators.hpp</a>&quot;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
+</div>
 <p><a href="solver__utilities_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_solver___config.html">Solver_Config</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all possible configurations for all solvers in <a class="el" href="namespace_disa.html">Disa</a>.  <a href="struct_disa_1_1_solver___config.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_convergence___data.html">Convergence_Data</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains data to track the convergence progress of a solver.  <a href="struct_disa_1_1_convergence___data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_convergence___criteria.html">Convergence_Criteria</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the criteria values against which convergence status can be assessed.  <a href="struct_disa_1_1_convergence___criteria.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespace_disa"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_disa.html">Disa</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a5cc27b15a9dee0ad91cc0f746fcd987b"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a5cc27b15a9dee0ad91cc0f746fcd987b">Solver_Type</a> { <br />
+&#160;&#160;<a class="el" href="namespace_disa.html#a5cc27b15a9dee0ad91cc0f746fcd987ba8742060c1cb1135de58ec175157374f8">lower_upper_factorisation</a>
+, <a class="el" href="namespace_disa.html#a5cc27b15a9dee0ad91cc0f746fcd987ba1606457c201437c4f914a83939e25722">jacobi</a>
+, <a class="el" href="namespace_disa.html#a5cc27b15a9dee0ad91cc0f746fcd987bacd9152dc4c50cce6f3cab9c7bfe58c4f">gauss_seidel</a>
+, <a class="el" href="namespace_disa.html#a5cc27b15a9dee0ad91cc0f746fcd987bab3a4458f26ca796419728e53b8c9c79d">successive_over_relaxation</a>
+, <br />
+&#160;&#160;<a class="el" href="namespace_disa.html#a5cc27b15a9dee0ad91cc0f746fcd987baad921d60486366258809553a3db49a4a">unknown</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a5cc27b15a9dee0ad91cc0f746fcd987b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerated list of all linear solvers in <a class="el" href="namespace_disa.html">Disa</a>.  <a href="namespace_disa.html#a5cc27b15a9dee0ad91cc0f746fcd987b">More...</a><br /></td></tr>
+<tr class="separator:a5cc27b15a9dee0ad91cc0f746fcd987b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -109,7 +142,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_6719ab1f1f7655efc2fa43f7eb574fd1.html">libs</a></li><li class="navelem"><a class="el" href="dir_6de032d0d9a654666bd4023108850d60.html">solver</a></li><li class="navelem"><a class="el" href="solver__utilities_8hpp.html">solver_utilities.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_a41085eaf10b710b06fa633322b65393.html">solver</a></li><li class="navelem"><a class="el" href="solver__utilities_8hpp.html">solver_utilities.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
