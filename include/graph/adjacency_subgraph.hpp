@@ -22,9 +22,9 @@
 #ifndef DISA_ADJACENCY_SUB_GRAPH_H
 #define DISA_ADJACENCY_SUB_GRAPH_H
 
-#include "adjacency_graph.h"
+#include "adjacency_graph.hpp"
 
-#include "graph_utilities.h"
+#include "graph_utilities.hpp"
 
 #include <functional>
 #include <memory>

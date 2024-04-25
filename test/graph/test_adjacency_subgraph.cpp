@@ -20,8 +20,8 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
-#include "adjacency_subgraph.h"
-#include "generator.h"
+#include "adjacency_subgraph.hpp"
+#include "generator.hpp"
 
 using namespace Disa;
 

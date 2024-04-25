@@ -22,7 +22,7 @@
 #ifndef DISA_GENERATOR_H
 #define DISA_GENERATOR_H
 
-#include "adjacency_graph.h"
+#include "adjacency_graph.hpp"
 
 namespace Disa {
 

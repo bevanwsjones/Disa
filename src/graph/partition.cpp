@@ -19,10 +19,10 @@
 // Description: Contains declaration of partitioning methods.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "adjacency_graph.h"
-#include "adjacency_subgraph.h"
-#include "graph_utilities.h"
-#include "partition.h"
+#include "adjacency_graph.hpp"
+#include "adjacency_subgraph.hpp"
+#include "graph_utilities.hpp"
+#include "partition.hpp"
 
 #include <cmath>
 #include <numeric>

@@ -22,7 +22,7 @@
 #ifndef DISA_EDGE_H
 #define DISA_EDGE_H
 
-#include "macros.h"
+#include "macros.hpp"
 
 #include <utility>
 

@@ -16,27 +16,31 @@
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ----------------------------------------------------------------------------------------------------------------------
 # File Name: CMakeLists.txt
-# Description: Build definition for the core library of Disa.
+# Description: Build definition for the tests for the graph library of Disa.
 # ----------------------------------------------------------------------------------------------------------------------
-# Library Definition
+# Test Definition
 # ----------------------------------------------------------------------------------------------------------------------
 
-set(INCLUDE
-    "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/graph>"
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}>"
-)
+add_executable(test_adjacency_graph test_adjacency_graph.cpp)
+target_link_libraries(test_adjacency_graph GTest::gtest_main graph)
+gtest_discover_tests(test_adjacency_graph)
 
-set(SOURCE
-    ${CMAKE_CURRENT_SOURCE_DIR}/adjacency_subgraph.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/partition.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/reorder.cpp
-)
+add_executable(test_adjacency_subgraph test_adjacency_subgraph.cpp)
+target_link_libraries(test_adjacency_subgraph GTest::gtest_main graph)
+gtest_discover_tests(test_adjacency_subgraph)
 
-set(LIB 
-    core
-)
+add_executable(test_edge test_edge.cpp)
+target_link_libraries(test_edge GTest::gtest_main graph)
+gtest_discover_tests(test_edge)
 
-add_library(graph STATIC ${SOURCE})
-target_include_directories(graph PUBLIC ${INCLUDE})
-target_link_libraries(graph PUBLIC ${LIB})
+add_executable(test_partition test_partition.cpp)
+target_link_libraries(test_partition GTest::gtest_main graph)
+gtest_discover_tests(test_partition)
 
+add_executable(test_reorder test_reorder.cpp)
+target_link_libraries(test_reorder GTest::gtest_main graph)
+gtest_discover_tests(test_reorder)
+
+add_executable(test_graph_utilities test_graph_utilities.cpp)
+target_link_libraries(test_graph_utilities GTest::gtest_main graph)
+gtest_discover_tests(test_graph_utilities)

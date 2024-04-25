@@ -19,8 +19,8 @@
 // Description: Definitions for the various reordering/permutation algorithms available in Disa.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "macros.h"
-#include "reorder.h"
+#include "macros.hpp"
+#include "reorder.hpp"
 
 #include <map>
 #include <numeric>

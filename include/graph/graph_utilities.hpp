@@ -22,8 +22,8 @@
 #ifndef DISA_GRAPH_UTILITIES_H
 #define DISA_GRAPH_UTILITIES_H
 
-#include "adjacency_graph.h"
-#include "adjacency_subgraph.h"
+#include "adjacency_graph.hpp"
+#include "adjacency_subgraph.hpp"
 
 #include <numeric>
 #include <vector>

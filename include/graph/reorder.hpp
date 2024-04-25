@@ -22,7 +22,7 @@
 #ifndef DISA_REORDER_H
 #define DISA_REORDER_H
 
-#include "adjacency_graph.h"
+#include "adjacency_graph.hpp"
 
 #include <numeric>
 

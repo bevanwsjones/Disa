@@ -20,7 +20,7 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
-#include "reorder.h"
+#include "reorder.hpp"
 
 using namespace Disa;
 

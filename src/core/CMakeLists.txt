@@ -21,14 +21,14 @@
 # Library Definition
 # ----------------------------------------------------------------------------------------------------------------------
 
-set(INCLUDE_DIRECTORY
+set(INCLUDE
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/core>"
     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}>"
 )
 
-set(SOURCE_FILES
+set(SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/matrix_sparse.cpp
 )
 
-add_library(core STATIC ${SOURCE_FILES})
-target_include_directories(core PUBLIC ${INCLUDE_DIRECTORY})
+add_library(core STATIC ${SOURCE})
+target_include_directories(core PUBLIC ${INCLUDE})

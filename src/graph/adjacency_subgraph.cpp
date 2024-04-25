@@ -19,8 +19,8 @@
 // Description: Declarations of the adjacency subgraph class.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "adjacency_subgraph.h"
-#include "graph_utilities.h"
+#include "adjacency_subgraph.hpp"
+#include "graph_utilities.hpp"
 
 #include <numeric>
 #include <queue>
