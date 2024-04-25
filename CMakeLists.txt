@@ -45,7 +45,6 @@ add_compile_definitions("DISA_DEBUG")
 # ----------------------------------------------------------------------------------------------------------------------
 
 if(ENABLE_TEST)
-
   include(FetchContent)
   FetchContent_Declare(googletest GIT_REPOSITORY https://github.com/google/googletest.git GIT_TAG release-1.12.1)
   set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -54,7 +53,6 @@ if(ENABLE_TEST)
   enable_testing()
   include(CTest)
   include(GoogleTest)
-
 endif ()
 
 
@@ -66,30 +64,26 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/libs/core)
-add_subdirectory(${PROJECT_SOURCE_DIR}/libs/graphing)
-add_subdirectory(${PROJECT_SOURCE_DIR}/libs/solver)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/core)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/graph)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/solver)
+
+if(ENABLE_TEST)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/test/core)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/test/graph)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/test/solver)
+endif()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Library Recipe
 # ----------------------------------------------------------------------------------------------------------------------
 
-include_directories(include)
+set(LIBRARIES 
+    core
+    graph 
+    solver
+)
 
-set(SOURCES
-        include/disa.h
-        )
-
-set(LIBRARIES
-        core
-        graphing
-        solver
-        )
-
-add_library(disa ${SOURCES})
-target_link_libraries(disa ${LIBRARIES})
+add_library(disa INTERFACE)
+target_link_libraries(disa INTERFACE ${LIBRARIES})
 set_target_properties(disa PROPERTIES LINKER_LANGUAGE CXX)
-
-add_executable(example src/main.cpp ${SOURCES})
-target_link_libraries(example disa)
-
