@@ -150,7 +150,7 @@ class Const_Iterator_Vector_Sparse {
     using iterator_type = Const_Iterator_Vector_Sparse<_type, _index>;
 
     Const_Iterator_Vector_Sparse() = default;
-    ~Iterator_Vector_Sparse() = default;
+    ~Const_Iterator_Vector_Sparse() = default;
     Const_Iterator_Vector_Sparse(pointer_non_zero non_zero, pointer_index index) : value(value_type(non_zero, index)) { };
 
     reference operator*();
