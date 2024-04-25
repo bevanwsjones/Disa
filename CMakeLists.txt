@@ -66,30 +66,33 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/libs/core)
-add_subdirectory(${PROJECT_SOURCE_DIR}/libs/graphing)
-add_subdirectory(${PROJECT_SOURCE_DIR}/libs/solver)
+#add_subdirectory(${PROJECT_SOURCE_DIR}/src/container)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/core)
+#add_subdirectory(${PROJECT_SOURCE_DIR}/src/graph)
+#add_subdirectory(${PROJECT_SOURCE_DIR}/src/solver)
+
+add_subdirectory(${PROJECT_SOURCE_DIR}/test/core)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Library Recipe
 # ----------------------------------------------------------------------------------------------------------------------
 
-include_directories(include)
+# include_directories(include)
 
-set(SOURCES
-        include/disa.h
-        )
+# set(SOURCES
+#         include/disa.h
+#         )
 
-set(LIBRARIES
-        core
-        graphing
-        solver
-        )
+# set(LIBRARIES
+#         core
+#         graphing
+#         solver
+#         )
 
-add_library(disa ${SOURCES})
-target_link_libraries(disa ${LIBRARIES})
-set_target_properties(disa PROPERTIES LINKER_LANGUAGE CXX)
+# add_library(disa ${SOURCES})
+# target_link_libraries(disa ${LIBRARIES})
+# set_target_properties(disa PROPERTIES LINKER_LANGUAGE CXX)
 
-add_executable(example src/main.cpp ${SOURCES})
-target_link_libraries(example disa)
+# add_executable(example src/main.cpp ${SOURCES})
+# target_link_libraries(example disa)
 
