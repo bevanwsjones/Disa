@@ -15,17 +15,17 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: test_matrix_operators.h
-// Description: Unit tests for matrix operations.
+// File Name: laplace_2d.hpp
+// Description: Classes and functions for generating a 2D laplace problem.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_LAPLACE_2D_H
 #define DISA_LAPLACE_2D_H
 
-#include "matrix_dense.h"
-#include "matrix_sparse.h"
-#include "scalar.h"
-#include "vector_dense.h"
+#include "matrix_dense.hpp"
+#include "matrix_sparse.hpp"
+#include "scalar.hpp"
+#include "vector_dense.hpp"
 
 /**
  * @class Laplace_2D

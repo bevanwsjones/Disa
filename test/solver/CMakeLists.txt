@@ -16,27 +16,21 @@
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ----------------------------------------------------------------------------------------------------------------------
 # File Name: CMakeLists.txt
-# Description: Build definition for the graph library of Disa.
+# Description: Build definition for the unit tests for the solver library of Disa.
 # ----------------------------------------------------------------------------------------------------------------------
 # Library Definition
 # ----------------------------------------------------------------------------------------------------------------------
 
-set(INCLUDE
-    "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/graph>"
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}>"
-)
+set(TEST_PROBLEMS "laplace_2d.h")
 
-set(SOURCE
-    ${CMAKE_CURRENT_SOURCE_DIR}/adjacency_subgraph.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/partition.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/reorder.cpp
-)
+add_executable(test_direct "test_direct.cpp" ${TEST_PROBLEMS})
+target_link_libraries(test_direct GTest::gtest_main solver)
+gtest_discover_tests(test_direct)
 
-set(LIBRARIES 
-    core
-)
+add_executable(test_solver "test_solver.cpp")
+target_link_libraries(test_solver GTest::gtest_main solver)
+gtest_discover_tests(test_solver)
 
-add_library(graph STATIC ${SOURCE})
-target_include_directories(graph PUBLIC ${INCLUDE})
-target_link_libraries(graph PUBLIC ${LIBRARIES})
-
+add_executable(test_solver_utilities "test_solver_utilities.cpp")
+target_link_libraries(test_solver_utilities GTest::gtest_main solver)
+gtest_discover_tests(test_solver_utilities)

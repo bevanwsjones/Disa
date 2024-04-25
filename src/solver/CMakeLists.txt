@@ -21,48 +21,21 @@
 # Library Definition
 # ----------------------------------------------------------------------------------------------------------------------
 
-set(SOURCES        
-        "direct_lower_upper_factorisation.h"
-        "direct_lower_upper_factorisation.hpp"
-        "direct.h"
-        "solver_fixed_point.h"
-        "solver_fixed_point.cpp"
-        "solver_iterative.h"
-        "solver_utilities.h"
-        "solver_utilities.hpp"
-        "solver.h"
-        "solver.cpp"
-        )
+set(INCLUDE
+    "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/solver>"
+    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}>"
+)
+
+set(SOURCE              
+    "solver_fixed_point.cpp"
+    "solver.cpp"
+)
 
 set(LIBRARIES
-        core
-        )
+    core
+)
 
-add_library(solver ${SOURCES})
-target_link_libraries(solver ${LIBRARIES})
-set_target_properties(solver PROPERTIES LINKER_LANGUAGE CXX)
-target_include_directories(solver PUBLIC .)
+add_library(solver STATIC ${SOURCE})
+target_include_directories(solver PUBLIC ${INCLUDE})
+target_link_libraries(solver PUBLIC ${LIBRARIES})
 
-# ----------------------------------------------------------------------------------------------------------------------
-# Testing
-# ----------------------------------------------------------------------------------------------------------------------
-
-if(ENABLE_TEST)
-
-set(TEST_PROBLEMS 
-        "tests/laplace_2d.h")
-
-  add_executable(test_direct "tests/test_direct.cpp" ${TEST_PROBLEMS})
-  target_link_libraries(test_direct GTest::gtest_main solver)
-  gtest_discover_tests(test_direct)
-
-
-  add_executable(test_solver "tests/test_solver.cpp")
-  target_link_libraries(test_solver GTest::gtest_main solver)
-  gtest_discover_tests(test_solver)
-
-  add_executable(test_solver_utilities "tests/test_solver_utilities.cpp")
-  target_link_libraries(test_solver_utilities GTest::gtest_main solver)
-  gtest_discover_tests(test_solver_utilities)
-
-endif ()

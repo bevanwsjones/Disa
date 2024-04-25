@@ -19,7 +19,7 @@
 // Description: Contains the base definitions for the solver library.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "solver.h"
+#include "solver.hpp"
 
 namespace Disa {
     

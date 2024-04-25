@@ -15,36 +15,54 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: disa.h
-// Description: Library header, adds all relevant includes for sub-libraries.
+// File Name: iterative_solvers.hpp
+// Description: Contains the class declarations for the iterative solvers, Jacobi, Gauss-Seidel, SOR <- todo : update
 // ---------------------------------------------------------------------------------------------------------------------
 
-#ifndef DISA_DISA_H
-#define DISA_DISA_H
+#ifndef DISA_SOLVER_ITERATIVE_H
+#define DISA_SOLVER_ITERATIVE_H
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Core library headers
-// ---------------------------------------------------------------------------------------------------------------------
+#include "matrix_sparse.hpp"
+#include "solver_utilities.hpp"
+#include "vector_dense.hpp"
 
-#include "matrix_sparse.h"
-#include "matrix_dense.h"
-#include "scalar.h"
-#include "vector_dense.h"
-#include "vector_operators.h"
+#include <variant>
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Graphing library headers
-// ---------------------------------------------------------------------------------------------------------------------
+namespace Disa {
 
-#include "adjacency_graph.h"
-#include "edge.h"
-#include "partition.h"
-#include "reorder.h"
+// Forward declarations
+class Matrix_Sparse;
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Solver library headers
-// ---------------------------------------------------------------------------------------------------------------------
+struct Solver_Data {
+  Convergence_Criteria limits;
+};
 
-#include "solver.h"
+/**
+ * @brief
+ */
+template<class _solver, class _solver_data>
+class Solver_Iterative
+{
 
-#endif //DISA_DISA_H
+public:
+  explicit Solver_Iterative(const Solver_Config solver_config) {
+    initialise(solver_config);
+  };
+
+  void initialise(Solver_Config solver_config){
+    return static_cast<_solver*>(this)->initialise_solver(solver_config);
+  };
+
+  const Convergence_Data& solve(const Matrix_Sparse& matrix, Vector_Dense<Scalar, 0>& x_vector,
+                                const Vector_Dense<Scalar, 0>& b_vector){
+    return static_cast<_solver*>(this)->solve_system(matrix, x_vector, b_vector);
+  };
+
+protected:
+  _solver_data data;
+};
+
+
+}
+
+#endif //DISA_SOLVER_ITERATIVE_H

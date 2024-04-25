@@ -22,9 +22,9 @@
 #ifndef DISA_SOLVER_DIRECT_H
 #define DISA_SOLVER_DIRECT_H
 
-#include "matrix_dense.h"
-#include "solver_utilities.h"
-#include "vector_dense.h"
+#include "matrix_dense.hpp"
+#include "solver_utilities.hpp"
+#include "vector_dense.hpp"
 
 #include <variant>
 

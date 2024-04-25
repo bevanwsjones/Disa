@@ -15,16 +15,15 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: test_matrix_operators.h
-// Description: Unit tests for matrix operations.
+// File Name: test_solver.cpp
+// Description: Unit tests for the linear solver.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
 
-#include "matrix_sparse.h"
-#include "matrix_dense.h"
-
-#include "solver.h"
+#include "matrix_sparse.hpp"
+#include "matrix_dense.hpp"
+#include "solver.hpp"
 
 using namespace Disa;
 

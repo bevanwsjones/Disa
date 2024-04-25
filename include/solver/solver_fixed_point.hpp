@@ -15,14 +15,14 @@
 //  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 //  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ----------------------------------------------------------------------------------------------------------------------
-//  File Name:
+//  File Name: solver_fixed_point.hpp
 //  Description:
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_SOLVER_FIXED_POINT_H
 #define DISA_SOLVER_FIXED_POINT_H
 
-#include "solver_iterative.h"
+#include "solver_iterative.hpp"
 
 namespace Disa {
 

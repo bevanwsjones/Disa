@@ -15,17 +15,17 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: solver.h
+// File Name: solver.hpp
 // Description: Contains the base definitions for the solver library.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_SOLVERS_H
 #define DISA_SOLVERS_H
 
-#include "direct_lower_upper_factorisation.h"
-#include "scalar.h"
-#include "solver_fixed_point.h"
-#include "solver_utilities.h"
+#include "direct_lower_upper_factorisation.hpp"
+#include "scalar.hpp"
+#include "solver_fixed_point.hpp"
+#include "solver_utilities.hpp"
 
 #include <memory>
 

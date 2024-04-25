@@ -19,10 +19,10 @@
 //  Description:
 // ----------------------------------------------------------------------------------------------------------------------
 
-#include "matrix_sparse.h"
-#include "scalar.h"
-#include "solver_fixed_point.h"
-#include "vector_dense.h"
+#include "matrix_sparse.hpp"
+#include "scalar.hpp"
+#include "solver_fixed_point.hpp"
+#include "vector_dense.hpp"
 
 namespace Disa {
 

@@ -15,13 +15,13 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name:
-// Description:
+// File Name: test_solver_utilities.cpp
+// Description: Unit tests for solver utilities.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
 
-#include "solver_utilities.h"
+#include "solver_utilities.hpp"
 
 using namespace Disa;
 

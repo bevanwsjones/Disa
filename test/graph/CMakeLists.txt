@@ -16,7 +16,7 @@
 # OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # ----------------------------------------------------------------------------------------------------------------------
 # File Name: CMakeLists.txt
-# Description: Build definition for the tests for the graph library of Disa.
+# Description: Build definition for the unit tests for the graph library of Disa.
 # ----------------------------------------------------------------------------------------------------------------------
 # Test Definition
 # ----------------------------------------------------------------------------------------------------------------------
