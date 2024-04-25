@@ -20,7 +20,7 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
-#include "vector_dense.h"
+#include "vector_dense.hpp"
 
 #ifdef DISA_DEBUG
 

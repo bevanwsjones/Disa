@@ -20,7 +20,7 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
-#include "matrix_sparse.h"
+#include "matrix_sparse.hpp"
 
 using namespace Disa;
 

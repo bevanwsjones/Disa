@@ -15,15 +15,15 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: vector_dense.h
+// File Name: vector_dense.hpp
 // Description: Contains the declaration and definitions for the basic static and dynamic dense vector classes for Disa.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_VECTOR_DENSE_H
 #define DISA_VECTOR_DENSE_H
 
-#include "macros.h"
-#include "scalar.h"
+#include "macros.hpp"
+#include "scalar.hpp"
 
 #include <algorithm>
 #include <array>

@@ -15,17 +15,17 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: matrix_dense.h
+// File Name: matrix_dense.hpp
 // Description: Contains the declaration and definitions for the basic static and dynamic dense matrix classes for Disa.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_MATRIX_DENSE_H
 #define DISA_MATRIX_DENSE_H
 
-#include "macros.h"
-#include "scalar.h"
-#include "vector_dense.h"
-#include "vector_operators.h"
+#include "macros.hpp"
+#include "scalar.hpp"
+#include "vector_dense.hpp"
+#include "vector_operators.hpp"
 
 #include <algorithm>
 #include <array>

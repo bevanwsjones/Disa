@@ -15,7 +15,7 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-//  File Name: matrix_sparse.h
+//  File Name: matrix_sparse.hpp
 //  Description: Contains the declaration and some definitions for the basic sparse matrix classes for Disa, at present
 //               represented as a CSR matrix.
 // ---------------------------------------------------------------------------------------------------------------------
@@ -23,9 +23,9 @@
 #ifndef DISA_MATRIX_SPARSE_H
 #define DISA_MATRIX_SPARSE_H
 
-#include "macros.h"
-#include "scalar.h"
-#include "vector_dense.h"
+#include "macros.hpp"
+#include "scalar.hpp"
+#include "vector_dense.hpp"
 
 #include <numeric>
 #include <vector>

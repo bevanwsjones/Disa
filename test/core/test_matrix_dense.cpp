@@ -20,7 +20,7 @@
 // ----------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
-#include "matrix_dense.h"
+#include "matrix_dense.hpp"
 
 #ifdef DISA_DEBUG
 

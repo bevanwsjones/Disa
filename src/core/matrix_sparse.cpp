@@ -20,7 +20,7 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include <tuple>
-#include "matrix_sparse.h"
+#include "matrix_sparse.hpp"
 
 namespace Disa {
 

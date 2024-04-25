@@ -22,6 +22,23 @@
 # Test Definition
 # ----------------------------------------------------------------------------------------------------------------------
 
+
+add_executable(test_matrix_dense test_matrix_dense.cpp)
+target_link_libraries(test_matrix_dense PRIVATE GTest::gtest_main core)
+gtest_discover_tests(test_matrix_dense)
+
+add_executable(test_matrix_sparse test_matrix_sparse.cpp)
+target_link_libraries(test_matrix_sparse PRIVATE GTest::gtest_main core)
+gtest_discover_tests(test_matrix_sparse)
+
 add_executable(test_scalar test_scalar.cpp)
 target_link_libraries(test_scalar PRIVATE GTest::gtest_main core)
 gtest_discover_tests(test_scalar)
+
+add_executable(test_vector_dense test_vector_dense.cpp)
+target_link_libraries(test_vector_dense PRIVATE GTest::gtest_main core)
+gtest_discover_tests(test_vector_dense)
+
+add_executable(test_vector_operators test_vector_operators.cpp)
+target_link_libraries(test_vector_operators PRIVATE GTest::gtest_main core)
+gtest_discover_tests(test_vector_operators)

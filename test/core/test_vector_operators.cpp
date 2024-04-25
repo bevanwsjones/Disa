@@ -20,7 +20,7 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
-#include "vector_operators.h"
+#include "vector_operators.hpp"
 
 #ifdef DISA_DEBUG
 

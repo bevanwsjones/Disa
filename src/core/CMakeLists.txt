@@ -26,5 +26,9 @@ set(INCLUDE_DIRECTORY
     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_FULL_INCLUDEDIR}>"
 )
 
-add_library(core INTERFACE)
-target_include_directories(core INTERFACE ${INCLUDE_DIRECTORY})
+set(SOURCE_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/matrix_sparse.cpp
+)
+
+add_library(core STATIC ${SOURCE_FILES})
+target_include_directories(core PUBLIC ${INCLUDE_DIRECTORY})
