@@ -158,25 +158,25 @@ struct Matrix_Sparse_Element {
     pointer_entry entry_ptr;    /**< The entry pointer of the element. */    
 };
 
-template<typename _entry_type, typename _index_type>
-struct Iterator_Matrix_Sparse_Element {
+template<typename _entry_type, typename _index_type, bool _is_const>
+struct Base_Iterator_Matrix_Sparse_Element {
   public:
     using index_type = _index_type;
-    using pointer_index = _index_type*;
-
+    using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
+    
     using entry_type = _entry_type;
-    using pointer_entry = _entry_type*;  
-
+    using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;  
+   
     using value_type = Matrix_Sparse_Element<entry_type, index_type>;
-    using reference = Matrix_Sparse_Element<entry_type, index_type>&;
-    using pointer = Matrix_Sparse_Element<entry_type, index_type>*;
+    using reference = std::conditional_t<_is_const, const Matrix_Sparse_Element<entry_type, index_type>&, Matrix_Sparse_Element<entry_type, index_type>&>;
+    using pointer = std::conditional_t<_is_const, const Matrix_Sparse_Element<entry_type, index_type>*, Matrix_Sparse_Element<entry_type, index_type>*>;
 
-    using iterator_type = Iterator_Matrix_Sparse_Element<entry_type, index_type>;
+    using iterator_type = Base_Iterator_Matrix_Sparse_Element<entry_type, index_type, _is_const>;
 
-    Iterator_Matrix_Sparse_Element() = default;
-    ~Iterator_Matrix_Sparse_Element() = default;
-    Iterator_Matrix_Sparse_Element(value_type element_value) : value(element_value) {};
-    Iterator_Matrix_Sparse_Element(const index_type& row, pointer_index column, pointer_entry entry) : value(row, column, entry) {};
+    Base_Iterator_Matrix_Sparse_Element() = default;
+    ~Base_Iterator_Matrix_Sparse_Element() = default;
+    Base_Iterator_Matrix_Sparse_Element(value_type element_value) : value(element_value) {};
+    Base_Iterator_Matrix_Sparse_Element(const index_type& row, pointer_index column, pointer_entry entry) : value(row, column, entry) {};
 
     reference operator*(){ return value; };
     pointer operator->() { return &value; };
@@ -199,48 +199,9 @@ struct Iterator_Matrix_Sparse_Element {
 };
 
 template<typename _entry_type, typename _index_type>
-struct Const_Iterator_Matrix_Sparse_Element {
-  public:
-    using index_type = _index_type;
-    using pointer_index = const _index_type*;
-
-    using entry_type = _entry_type;
-    using pointer_entry = const _entry_type*;  
-
-    using value_type = Matrix_Sparse_Element<entry_type, index_type>;
-    using reference = const Matrix_Sparse_Element<entry_type, index_type>&;
-    using pointer = const Matrix_Sparse_Element<entry_type, index_type>*;
-
-    using iterator_type = Const_Iterator_Matrix_Sparse_Element<entry_type, index_type>;
-
-    Const_Iterator_Matrix_Sparse_Element() = default;
-    ~Const_Iterator_Matrix_Sparse_Element() = default;
-    Const_Iterator_Matrix_Sparse_Element(value_type element_value) : value(element_value) {};
-    Const_Iterator_Matrix_Sparse_Element(const index_type& row, pointer_index column, pointer_entry entry) : value(row, column, entry) {};
-
-    reference operator*() const { return value; };
-    pointer operator->() const { return &value; };
-
-    iterator_type& operator++() { ++value; return *this; };
-    iterator_type operator++(int){iterator_type old = *this; ++value; return old; };
-    iterator_type& operator--() {--value; return *this; };
-    iterator_type operator--(int) {iterator_type old = *this; --value; return old; };
-
-    [[nodiscard]] bool operator==(const iterator_type& that) const {
-        return this->value == that.value; 
-    };
-
-    [[nodiscard]] bool operator!=(const iterator_type& that) const {
-        return this->value != that.value; 
-    };
-
-  private:
-    value_type value;
-};
-
-// template<typename _entry_type, typename _index_type>
-// struct Const_Iterator_Matrix_Sparse_Element {};
-
+using Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element<_entry_type, _index_type, false>;
+template<typename _entry_type, typename _index_type>
+using Const_Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element<_entry_type, _index_type, true>;
 // template<typename _entry_type, typename _index_type>
 // struct Matrix_Sparse_Row {
 //     public:
