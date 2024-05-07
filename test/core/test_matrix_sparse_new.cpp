@@ -147,3 +147,83 @@ TEST(ConstIteratorMatrixSparseElementTest, EqualityOperators) {
     ASSERT_EQ(iterator1, iterator1);
     ASSERT_NE(iterator1, iterator2);
 }
+
+//Row:
+
+TEST(MatrixSparseRowTest, BeginEndIterators) {
+    // Create a Matrix_Sparse_Row object
+    Matrix_Sparse<int, int> matrix;
+    int row = 0;
+    std::vector<int> column_data = {1, 2, 3};
+    std::vector<int> entry_data = {4, 5, 6};
+    std::span<int> column(column_data);
+    std::span<int> entries(entry_data);
+    Matrix_Sparse_Row<int, int> matrix_row(&matrix, row, column, entries);
+
+    // Test non-const begin() and end()
+    auto it = matrix_row.begin();
+    auto end = matrix_row.end();
+    ASSERT_NE(it, end);  // Assuming the matrix_row is not empty
+
+    // Check that the values returned by the iterator match the original data
+    ASSERT_EQ(it->row(), row);
+    ASSERT_EQ(it->column(), column_data[0]);
+    ASSERT_EQ(it->value(), entry_data[0]);
+
+    // Test const begin() and end()
+    const auto& const_matrix_row = matrix_row;
+    auto const_it = const_matrix_row.begin();
+    auto const_end = const_matrix_row.end();
+    ASSERT_NE(const_it, const_end);  // Assuming the matrix_row is not empty
+
+    // Check that the values returned by the const iterator match the original data
+    ASSERT_EQ(const_it->row(), row);
+    ASSERT_EQ(const_it->column(), column_data[0]);
+    ASSERT_EQ(const_it->value(), entry_data[0]);
+
+    // Test cbegin() and cend()
+    auto cbegin_it = matrix_row.cbegin();
+    auto cend_it = matrix_row.cend();
+    ASSERT_NE(cbegin_it, cend_it);  // Assuming the matrix_row is not empty
+
+    // Check that the values returned by the cbegin iterator match the original data
+    ASSERT_EQ(cbegin_it->row(), row);
+    ASSERT_EQ(cbegin_it->column(), column_data[0]);
+    ASSERT_EQ(cbegin_it->value(), entry_data[0]);
+}
+
+TEST(MatrixSparseRowTest, ArithmeticOperators) {
+    // Create a Matrix_Sparse_Row object
+    Matrix_Sparse<int, int> matrix;
+    int row = 0;
+    std::span<int> column;
+    std::span<int> entries;
+    Matrix_Sparse_Row<int, int> matrix_row(&matrix, row, column, entries);
+
+    // Test operator++
+    auto old_row = matrix_row;
+    auto new_row = ++matrix_row;
+    ASSERT_EQ(new_row.row(), old_row.row() + 1);
+
+    // Test operator++(int)
+    old_row = matrix_row;
+    new_row = matrix_row++;
+    ASSERT_EQ(new_row.row(), old_row.row());
+    ASSERT_EQ(matrix_row.row(), old_row.row() + 1);
+
+    // Test operator--
+    old_row = matrix_row;
+    new_row = --matrix_row;
+    ASSERT_EQ(new_row.row(), old_row.row() - 1);
+
+    // Test operator--(int)
+    old_row = matrix_row;
+    new_row = matrix_row--;
+    ASSERT_EQ(new_row.row(), old_row.row());
+    ASSERT_EQ(matrix_row.row(), old_row.row() - 1);
+}
+
+TEST(Matrix_SCRATCH, test){
+    Matrix_Sparse_Row<int, int> row;
+    row[1] = 0;
+}
