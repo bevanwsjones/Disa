@@ -138,11 +138,11 @@ struct Matrix_Sparse_Element {
      * @brief Equality comparison operator.
      * 
      * @param that The element to compare with.
-     * @return True if the elements are equal, false otherwise.
+     * @return True if the elements (row, column, value) are equal, false otherwise.
      */
     [[nodiscard]] bool operator==(const base_type& that) const {
-        return this->row_index == that.row_index && this->column_ptr == that.column_ptr 
-               && this->entry_ptr == that.entry_ptr; 
+        return this->row_index == that.row_index && *this->column_ptr == *that.column_ptr 
+               && *this->entry_ptr == *that.entry_ptr; 
     };
 
     /**
@@ -206,6 +206,8 @@ using Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element<_entr
 template<typename _entry_type, typename _index_type>
 using Const_Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element<_entry_type, _index_type, true>;
 
+// row
+
 template<typename _entry_type, typename _index_type>
 struct Matrix_Sparse_Row {
     public:
@@ -230,7 +232,6 @@ struct Matrix_Sparse_Row {
 
     index_type row() const { return row_index; };
     
-
     // Non-const versions
     iterator begin() { return iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
     iterator end() { return iterator(row_index, &(*column_index.end()), &(*entry.end())); }
@@ -270,27 +271,48 @@ struct Matrix_Sparse_Row {
     std::span<entry_type> entry;
 };
 
-// template<typename _value_type, typename _index_type>
-// struct Iterator_Matrix_Sparse_Row {};
+template<typename _entry_type, typename _index_type, bool _is_const>
+struct Base_Iterator_Matrix_Sparse_Row {
+  public:
+    using index_type = _index_type;
+    using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
+    
+    using entry_type = _entry_type;
+    using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;  
+   
+    using value_type = Matrix_Sparse_Row<entry_type, index_type>;
+    using reference = std::conditional_t<_is_const, const Matrix_Sparse_Row<entry_type, index_type>&, Matrix_Sparse_Row<entry_type, index_type>&>;
+    using pointer = std::conditional_t<_is_const, const Matrix_Sparse_Row<entry_type, index_type>*, Matrix_Sparse_Row<entry_type, index_type>*>;
 
-// template<typename _entry_type, typename _index_type>
-// struct Const_Iterator_Matrix_Sparse_Row {
+    using iterator_type = Base_Iterator_Matrix_Sparse_Row<entry_type, index_type, _is_const>;
 
-//     using index_type = _index_type;
-//     using pointer_index = _index_type*;
+    Base_Iterator_Matrix_Sparse_Row() = default;
+    ~Base_Iterator_Matrix_Sparse_Row() = default;
+    
+    reference operator*(){ return value; };
+    pointer operator->() { return &value; };
 
-//     using entry_type = _entry_type;
-//     using pointer_entry = _entry_type*;
+    iterator_type& operator++() { ++value; return *this; };
+    iterator_type operator++(int){iterator_type old = *this; ++value; return old; };
+    iterator_type& operator--() {--value; return *this; };
+    iterator_type operator--(int) {iterator_type old = *this; --value; return old; };
 
-//     using value_type = Matrix_Sparse_Row<entry_type, _index>;
-//     using reference = const Matrix_Sparse_Row<entry_type, _index>&;
-//     using pointer = const Matrix_Sparse_Row<entry_type, _index>*;
+    [[nodiscard]] bool operator==(const iterator_type& that) const {
+        return this->value == that.value; 
+    };
 
-//     using iterator_type = Const_Iterator_Matrix_Sparse_Row<_type, _index>;
+    [[nodiscard]] bool operator!=(const iterator_type& that) const {
+        return this->value != that.value; 
+    };
 
-//     private:
-//     pointer_index row_ptr;
-// };
+  private:
+    value_type value;
+};
+
+template<typename _entry_type, typename _index_type>
+using Iterator_Matrix_Sparse_Row = Base_Iterator_Matrix_Sparse_Row<_entry_type, _index_type, false>;
+template<typename _entry_type, typename _index_type>
+using Const_Iterator_Matrix_Sparse_Row = Base_Iterator_Matrix_Sparse_Row<_entry_type, _index_type, true>;
 
 
 template<typename _entry_type, typename _index_type>
@@ -300,6 +322,7 @@ class Matrix_Sparse {
     void insert(const _index_type& row, const _index_type& column, const _entry_type& value) {
         
     };
+
 //   public:
 //   using index_type = _index_type;
 //   using entry_type = _entry_type;

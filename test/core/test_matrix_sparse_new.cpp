@@ -53,13 +53,19 @@ TEST(MatrixSparseElementTest, IncrementDecrementOperators) {
 }
 
 TEST(MatrixSparseElementTest, EqualityOperators) {
-    int row = 1;
-    int column = 2;
-    int value = 3;
-    Matrix_Sparse_Element<int, int> element1(row, &column, &value);
-    Matrix_Sparse_Element<int, int> element2(row, &column, &value);
+    int row1 = 1;
+    int column1 = 2;
+    int value1 = 3;
+    Matrix_Sparse_Element<int, int> element1(row1, &column1, &value1);
+
+    int row2 = 1;
+    int column2 = 2;
+    int value2 = 3;
+    Matrix_Sparse_Element<int, int> element2(row2, &column2, &value2);
+
     ASSERT_EQ(element1, element2);
-    element2++;
+
+    value2 = 4; // Change the value that element2 points to
     ASSERT_NE(element1, element2);
 }
 
@@ -221,9 +227,4 @@ TEST(MatrixSparseRowTest, ArithmeticOperators) {
     new_row = matrix_row--;
     ASSERT_EQ(new_row.row(), old_row.row());
     ASSERT_EQ(matrix_row.row(), old_row.row() - 1);
-}
-
-TEST(Matrix_SCRATCH, test){
-    Matrix_Sparse_Row<int, int> row;
-    row[1] = 0;
 }
