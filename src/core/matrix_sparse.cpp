@@ -184,7 +184,7 @@ Matrix_Sparse::const_iterator Matrix_Sparse::cend() const noexcept {
  * non-zero in the row by propagating the offset incrementation to the remaining parts of the vector. The column index
  * and element value vectors are appropriately updated.
  */
-  std::pair<Matrix_Sparse::iterator_element, bool>
+std::pair<Matrix_Sparse::iterator_element, bool>
 Matrix_Sparse::insert(const std::size_t& i_row, const std::size_t& i_column, const double& value) {
 
   // Resize if we need to.

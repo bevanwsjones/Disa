@@ -231,9 +231,62 @@ TEST(MatrixSparseRowTest, ArithmeticOperators) {
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Matrix Sparse
-// -------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+// Constructors/Destructors
+// ---------------------------------------------------------------------------------------------------------------------
+
+TEST(test_matrix_sparse, constructors_row_column) {
+  Matrix_Sparse<Scalar, std::size_t> matrix(2, 4);
+  EXPECT_EQ(matrix.size_row(), 2);
+  EXPECT_EQ(matrix.size_column(), 4);
+}
+
+TEST(test_matrix_sparse, constructors_initialiser_lists) {
+  Matrix_Sparse<Scalar, std::size_t> matrix({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+                                            5);
+  EXPECT_EQ(matrix.size_row(), 4);
+  EXPECT_EQ(matrix.size_column(), 5);
+  EXPECT_EQ(matrix.size_non_zero(), 7);
+  EXPECT_DOUBLE_EQ(matrix[0][1], 1.0);
+  EXPECT_DOUBLE_EQ(matrix[0][3], 2.0);
+  EXPECT_DOUBLE_EQ(matrix[1][0], 4.0);
+  EXPECT_DOUBLE_EQ(matrix[1][2], 3.0);
+  EXPECT_DOUBLE_EQ(matrix[1][3], 5.0);
+  EXPECT_DOUBLE_EQ(matrix[3][3], 7.0);
+  EXPECT_DOUBLE_EQ(matrix[3][4], 6.0);
+
+  // Valid construction 2x2: Matrix_Sparse({0, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2)
+  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 0, 0, 1}, {1.0, 2.0, 3.0, 4.0}, 2)), ".*"); // more column indexes than non-zero.back().
+  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0, 4.0}, 2)), ".*"); // mismatch column and entry size.
+  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({1, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2)), ".*"); // first non-zero value is not 0.
+  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({2, 0, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2)), ".*"); // un-ordered non-zeros
+  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 0, 2}, {1.0, 2.0, 3.0}, 2)), ".*"); // column index out of range
+  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 1, 0}, {1.0, 2.0, 3.0}, 2)), ".*"); // repeated column index
+}
+// ---------------------------------------------------------------------------------------------------------------------
+// Element Access
+// ---------------------------------------------------------------------------------------------------------------------
+
+TEST(test_matrix_sparse, operator_subscript) {
+  Matrix_Sparse<Scalar, std::size_t> matrix_0({0, 1, 2}, {0, 1}, {1.0, 2.0}, 2);
+
+  EXPECT_DOUBLE_EQ(matrix_0[0][0], 1.0);
+  EXPECT_DOUBLE_EQ(matrix_0[1][1], 2.0);
+  EXPECT_TRUE(false);
+  //matrix_0[0][1] = 3.0; // this should insert a new element.
+
+  const Matrix_Sparse<Scalar, std::size_t> matrix_1 = matrix_0;
+  EXPECT_DOUBLE_EQ(matrix_1[0][0], 1.0);
+  // EXPECT_DOUBLE_EQ(matrix_1[0][1], 3.0);
+  // EXPECT_DOUBLE_EQ(matrix_1[1][1], 2.0);
+
+  //Check debug for const matrix.
+  // EXPECT_DEATH(matrix_1[1][0], "./*");
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
 // Capacity
-// -------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 TEST(test_matrix_sparse, empty) {
   Matrix_Sparse<Scalar, std::size_t> matrix;
@@ -320,10 +373,10 @@ TEST(test_matrix_sparse, clear) {
 TEST(test_matrix_sparse, insert_insert_or_assign) {
   EXPECT_TRUE(false);
 
-//   Matrix_Sparse<Scalar, std::size_t> matrix;
-//   matrix.resize(5, 5);
+  Matrix_Sparse<Scalar, std::size_t> matrix;
+  matrix.resize(5, 5);
 
-//   matrix.insert(3, 2, 1);
+//   matrix.insert(3, 2, 1); 
 //   EXPECT_EQ(matrix.size_non_zero(), 1);
 //   EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
 
@@ -525,3 +578,95 @@ TEST(test_matrix_sparse, swap) {
 //   EXPECT_DOUBLE_EQ(matrix_1[0][1], 1.0);
 //   EXPECT_DOUBLE_EQ(matrix_1[1][0], 2.0);
 }
+
+
+// -------------------------------------------------------------------------------------------------------------------
+// Lookup
+// -------------------------------------------------------------------------------------------------------------------
+
+// TEST(test_matrix_sparse, find) {
+//   Matrix_Sparse<Scalar, std::size_t> matrix({0, 1, 3, 3}, {1, 0, 2}, {3.0, 4.0, 5.0}, 3);
+//   EXPECT_EQ(matrix.find(0, 0), matrix[0].end());
+//   EXPECT_EQ(matrix.find(0, 1).i_row(), 0);
+//   EXPECT_EQ(matrix.find(0, 1).i_column(), 1);
+//   EXPECT_EQ(matrix.find(0, 2), matrix[0].end());
+
+//   EXPECT_EQ(matrix.find(1, 0).i_row(), 1);
+//   EXPECT_EQ(matrix.find(1, 0).i_column(), 0);
+//   EXPECT_EQ(matrix.find(1, 1), matrix[1].end());
+//   EXPECT_EQ(matrix.find(1, 2).i_row(), 1);
+//   EXPECT_EQ(matrix.find(1, 2).i_column(), 2);
+
+//   EXPECT_EQ(matrix.find(2, 1), matrix[2].end());
+//   EXPECT_EQ(matrix.find(2, 2), matrix[2].end());
+//   EXPECT_EQ(matrix.find(2, 3), matrix[2].end());
+//   EXPECT_EQ(matrix.find(3, 3), matrix.end()->end());
+
+//   const Matrix_Sparse<Scalar, std::size_t> matrix_const({0, 1, 3, 3}, {1, 0, 2}, {3.0, 4.0, 5.0}, 3);
+//   EXPECT_EQ(matrix_const.find(0, 0), matrix_const[0].end());
+//   EXPECT_EQ(matrix_const.find(0, 1).i_row(), 0);
+//   EXPECT_EQ(matrix_const.find(0, 1).i_column(), 1);
+//   EXPECT_EQ(matrix_const.find(0, 2), matrix_const[0].end());
+
+//   EXPECT_EQ(matrix_const.find(1, 0).i_row(), 1);
+//   EXPECT_EQ(matrix_const.find(1, 0).i_column(), 0);
+//   EXPECT_EQ(matrix_const.find(1, 1), matrix_const[1].end());
+//   EXPECT_EQ(matrix_const.find(1, 2).i_row(), 1);
+//   EXPECT_EQ(matrix_const.find(1, 2).i_column(), 2);
+
+//   EXPECT_EQ(matrix_const.find(2, 1), matrix_const[2].end());
+//   EXPECT_EQ(matrix_const.find(2, 2), matrix_const[2].end());
+//   EXPECT_EQ(matrix_const.find(2, 3), matrix_const[2].end());
+//   EXPECT_EQ(matrix_const.find(3, 3), (*matrix_const.end()).end());
+// }
+
+// TEST(test_matrix_sparse, contains) {
+//   Matrix_Sparse<Scalar, std::size_t> matrix({0, 1, 2, 3}, {1, 2, 1}, {3.0, 4.0, 5.0}, 3);
+//   EXPECT_TRUE(matrix.contains(0, 1));
+//   EXPECT_TRUE(matrix.contains(1, 2));
+//   EXPECT_FALSE(matrix.contains(0, 0));
+//   EXPECT_FALSE(matrix.contains(2, 0));
+
+//   // edge cases
+//   matrix = Matrix_Sparse<Scalar, std::size_t>({0, 0, 0}, {}, {}, 2);
+//   EXPECT_FALSE(matrix.contains(0, 0));
+//   EXPECT_FALSE(matrix.contains(0, 1));
+//   EXPECT_FALSE(matrix.contains(1, 0));
+//   EXPECT_FALSE(matrix.contains(1, 1));
+// }
+
+// TEST(test_matrix_sparse, lower_bound) {
+//   Matrix_Sparse<Scalar, std::size_t> matrix({0, 1, 3, 3}, {1, 0, 2}, {3.0, 4.0, 5.0}, 3);
+//   EXPECT_EQ(matrix.lower_bound(0, 0).i_row(), 0);
+//   EXPECT_EQ(matrix.lower_bound(0, 0).i_column(), 1);
+//   EXPECT_EQ(matrix.lower_bound(0, 1).i_row(), 0);
+//   EXPECT_EQ(matrix.lower_bound(0, 1).i_column(), 1);
+//   EXPECT_EQ(matrix.lower_bound(0, 2), matrix[0].end());
+
+//   EXPECT_EQ(matrix.lower_bound(1, 0).i_row(), 1);
+//   EXPECT_EQ(matrix.lower_bound(1, 0).i_column(), 0);
+//   EXPECT_EQ(matrix.lower_bound(1, 1).i_row(), 1);
+//   EXPECT_EQ(matrix.lower_bound(1, 1).i_column(), 2);
+//   EXPECT_EQ(matrix.lower_bound(1, 2).i_row(), 1);
+//   EXPECT_EQ(matrix.lower_bound(1, 2).i_column(), 2);
+
+//   EXPECT_EQ(matrix.lower_bound(2, 0), matrix[2].end());
+//   EXPECT_EQ(matrix.lower_bound(3, 3), matrix.end()->end());
+
+//   const Matrix_Sparse<Scalar, std::size_t> matrix_const({0, 1, 3, 3}, {1, 0, 2}, {3.0, 4.0, 5.0}, 3);
+//   EXPECT_EQ(matrix_const.lower_bound(0, 0).i_row(), 0);
+//   EXPECT_EQ(matrix_const.lower_bound(0, 0).i_column(), 1);
+//   EXPECT_EQ(matrix_const.lower_bound(0, 1).i_row(), 0);
+//   EXPECT_EQ(matrix_const.lower_bound(0, 1).i_column(), 1);
+//   EXPECT_EQ(matrix_const.lower_bound(0, 2), matrix_const[0].end());
+
+//   EXPECT_EQ(matrix_const.lower_bound(1, 0).i_row(), 1);
+//   EXPECT_EQ(matrix_const.lower_bound(1, 0).i_column(), 0);
+//   EXPECT_EQ(matrix_const.lower_bound(1, 1).i_row(), 1);
+//   EXPECT_EQ(matrix_const.lower_bound(1, 1).i_column(), 2);
+//   EXPECT_EQ(matrix_const.lower_bound(1, 2).i_row(), 1);
+//   EXPECT_EQ(matrix_const.lower_bound(1, 2).i_column(), 2);
+
+//   EXPECT_EQ(matrix_const.lower_bound(2, 0), matrix_const[2].end());
+//   EXPECT_EQ(matrix_const.lower_bound(3, 3), (*matrix_const.end()).end());
+// }
