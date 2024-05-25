@@ -28,6 +28,7 @@ set(INCLUDE
 
 set(SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/matrix_sparse.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/matrix_sparse_data.cpp
 )
 
 add_library(core STATIC ${SOURCE})
