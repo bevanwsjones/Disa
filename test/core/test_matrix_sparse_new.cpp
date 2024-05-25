@@ -228,3 +228,300 @@ TEST(MatrixSparseRowTest, ArithmeticOperators) {
     ASSERT_EQ(new_row.row(), old_row.row());
     ASSERT_EQ(matrix_row.row(), old_row.row() - 1);
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse
+// -------------------------------------------------------------------------------------------------------------------
+// Capacity
+// -------------------------------------------------------------------------------------------------------------------
+
+TEST(test_matrix_sparse, empty) {
+  Matrix_Sparse<Scalar, std::size_t> matrix;
+  EXPECT_TRUE(matrix.empty());
+  EXPECT_EQ(matrix.size_row(), 0);
+  EXPECT_EQ(matrix.size_column(), 0);
+  EXPECT_EQ(matrix.size_non_zero(), 0);
+  EXPECT_EQ(matrix.size().first, std::make_pair(0, 0).first);
+  EXPECT_EQ(matrix.size().second, std::make_pair(0, 0).second);
+
+  // check edge cases.
+  matrix.resize(0, 2);
+  EXPECT_TRUE(matrix.empty());
+  matrix.resize(1, 0);
+  EXPECT_FALSE(matrix.empty());
+  matrix.resize(2, 2);
+  EXPECT_FALSE(matrix.empty());
+}
+
+TEST(test_matrix_sparse, size) {
+  Matrix_Sparse<Scalar, std::size_t> matrix;
+  EXPECT_EQ(matrix.size_row(), 0);
+  EXPECT_EQ(matrix.size_column(), 0);
+  EXPECT_EQ(matrix.size_non_zero(), 0);
+  EXPECT_EQ(matrix.size().first, std::make_pair(0, 0).first);
+  EXPECT_EQ(matrix.size().second, std::make_pair(0, 0).second);
+
+  matrix.resize(7, 6);
+  EXPECT_TRUE(false);
+//  matrix[0][5] = 1.0; // add additional entry - show that non-zero increased.
+  EXPECT_FALSE(matrix.empty());
+  EXPECT_EQ(matrix.size_row(), 7);
+  EXPECT_EQ(matrix.size_column(), 6);
+  EXPECT_EQ(matrix.size_non_zero(), 1);
+  EXPECT_EQ(matrix.size().first, std::make_pair(7, 6).first);
+  EXPECT_EQ(matrix.size().second, std::make_pair(7, 6).second);
+}
+
+TEST(test_matrix_sparse, reserve_capacity) {
+  Matrix_Sparse<Scalar, std::size_t> matrix;
+  EXPECT_EQ(matrix.capacity().first, 0);
+  EXPECT_EQ(matrix.capacity().second, 0);
+
+  matrix.reserve(10, 40);
+  EXPECT_EQ(matrix.capacity().first, 11);
+  EXPECT_EQ(matrix.capacity().second, 40);
+}
+
+TEST(test_matrix_sparse, shrink_to_fit) {
+  Matrix_Sparse<Scalar, std::size_t> matrix;
+  matrix.reserve(10, 40);
+  EXPECT_EQ(matrix.capacity().first, 11);
+  EXPECT_EQ(matrix.capacity().second, 40);
+
+  matrix.resize(5, 30);
+  EXPECT_TRUE(false);
+  //matrix[4][8] = 10;
+  matrix.shrink_to_fit();
+  EXPECT_EQ(matrix.capacity().first, 6);
+  EXPECT_EQ(matrix.capacity().second, 1);
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+// Modifiers
+// -------------------------------------------------------------------------------------------------------------------
+
+TEST(test_matrix_sparse, clear) {
+  Matrix_Sparse<Scalar, std::size_t> matrix;
+  matrix.resize(7, 6);
+  EXPECT_TRUE(false);
+  //matrix[0][5] = 1.0; // add additional entry - show that non-zero increased.
+
+  matrix.clear();
+  EXPECT_TRUE(matrix.empty());
+  EXPECT_EQ(matrix.size_row(), 0);
+  EXPECT_EQ(matrix.size_column(), 0);
+  EXPECT_EQ(matrix.size_non_zero(), 0);
+  EXPECT_EQ(matrix.size().first, std::make_pair(0, 0).first);
+  EXPECT_EQ(matrix.size().second, std::make_pair(0, 0).second);
+  EXPECT_EQ(matrix.capacity().first, std::make_pair(8, 1).first);   // make sure we have not lost capacity.
+  EXPECT_EQ(matrix.capacity().second, std::make_pair(8, 1).second); // make sure we have not lost capacity.
+}
+
+TEST(test_matrix_sparse, insert_insert_or_assign) {
+  EXPECT_TRUE(false);
+
+//   Matrix_Sparse<Scalar, std::size_t> matrix;
+//   matrix.resize(5, 5);
+
+//   matrix.insert(3, 2, 1);
+//   EXPECT_EQ(matrix.size_non_zero(), 1);
+//   EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+
+//   auto iter_bool_pair = matrix.insert(3, 1, 3); // out of order testing - will check order at the end.
+//   EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 3.0);
+//   EXPECT_TRUE(iter_bool_pair.second);
+//   EXPECT_EQ(matrix.size_non_zero(), 2);
+//   EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+
+//   iter_bool_pair = matrix.insert(2, 1, 4);
+//   EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 4.0);
+//   EXPECT_TRUE(iter_bool_pair.second);
+//   EXPECT_DOUBLE_EQ(matrix.size_non_zero(), 3);
+//   EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+
+//   iter_bool_pair = matrix.insert(2, 4, 5); // last of columns test
+//   EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 5.0);
+//   EXPECT_TRUE(iter_bool_pair.second);
+//   EXPECT_EQ(matrix.size_non_zero(), 4);
+//   EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+//   EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+
+//   iter_bool_pair = matrix.insert(4, 0, 8); // last of rows test
+//   EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 8.0);
+//   EXPECT_TRUE(iter_bool_pair.second);
+//   EXPECT_EQ(matrix.size_non_zero(), 5);
+//   EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+//   EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+//   EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
+
+//   iter_bool_pair = matrix.insert(4, 4, -5); // last row and column test
+//   EXPECT_DOUBLE_EQ(*iter_bool_pair.first, -5.0);
+//   EXPECT_TRUE(iter_bool_pair.second);
+//   EXPECT_EQ(matrix.size_non_zero(), 6);
+//   EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+//   EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+//   EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
+//   EXPECT_DOUBLE_EQ(matrix[4][4], -5.0);
+
+//   iter_bool_pair = matrix.insert(3, 2, 2.0); // no insert test
+//   EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 1.0);
+//   EXPECT_FALSE(iter_bool_pair.second);
+//   EXPECT_EQ(matrix.size_non_zero(), 6);
+//   EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+//   EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+//   EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+//   EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
+//   EXPECT_DOUBLE_EQ(matrix[4][4], -5.0);
+
+//   iter_bool_pair = matrix.insert(6, 2, 10.0); // extra rows
+//   EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 10.0);
+//   EXPECT_TRUE(iter_bool_pair.second);
+//   EXPECT_EQ(matrix.size_row(), 7);
+//   EXPECT_EQ(matrix.size_non_zero(), 7);
+//   EXPECT_DOUBLE_EQ(matrix[6][2], 10.0);
+
+//   iter_bool_pair = matrix.insert(2, 6, 50.0); // extra columns
+//   EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 50.0);
+//   EXPECT_TRUE(iter_bool_pair.second);
+//   EXPECT_EQ(matrix.size_row(), 7);
+//   EXPECT_EQ(matrix.size_column(), 7);
+//   EXPECT_EQ(matrix.size_non_zero(), 8);
+//   EXPECT_DOUBLE_EQ(matrix[2][6], 50.0);
+
+//   iter_bool_pair = matrix.insert_or_assign(2, 6, -50.0); // check insert_or_assign
+//   EXPECT_DOUBLE_EQ(*iter_bool_pair.first, -50.0);
+//   EXPECT_FALSE(iter_bool_pair.second);
+//   EXPECT_EQ(matrix.size_row(), 7);
+//   EXPECT_EQ(matrix.size_column(), 7);
+//   EXPECT_EQ(matrix.size_non_zero(), 8);
+//   EXPECT_DOUBLE_EQ(matrix[2][6], -50.0);
+
+//   // check ascending order has been maintained.
+//   FOR_EACH(row_vector, matrix) {
+//     auto prev = row_vector.begin();
+//     FOR_ITER(iter, row_vector) {
+//       if(iter != row_vector.begin()) {
+//         EXPECT_GT(iter.i_column(), prev.i_column());
+//         EXPECT_EQ(iter.i_row(), prev.i_row()); // more of a sanity check.
+//         ++prev;
+//       }
+//     }
+//   }
+}
+
+TEST(test_matrix_sparse, erase) {
+  EXPECT_TRUE(false);
+
+//   Matrix_Sparse<Scalar, std::size_t> matrix({0, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2);
+//   auto iter = matrix.erase(matrix.find(0, 1));
+//   EXPECT_EQ(matrix.size_row(), 2);
+//   EXPECT_EQ(matrix.size_column(), 2);
+//   EXPECT_EQ(matrix.size_non_zero(), 2);
+//   EXPECT_TRUE(iter == matrix[0].end()); // should point to end
+//   EXPECT_DOUBLE_EQ(*iter, 3.0); // end should be the next row over.
+//   EXPECT_DOUBLE_EQ(matrix[0][0], 2.0);
+//   EXPECT_DOUBLE_EQ(matrix[1][0], 3.0);
+
+//   // Check debug undefined behaviour
+//   EXPECT_DEATH(matrix.erase(matrix.find(3, 0)), "./*");
+//   EXPECT_DEATH(matrix.erase(matrix.find(0, 2)), "./*");
+//   EXPECT_DEATH(matrix.erase(matrix.find(1, 1)), "./*");
+}
+
+TEST(test_matrix_sparse, resize) {
+
+  EXPECT_TRUE(false);
+
+//   Matrix_Sparse<Scalar, std::size_t> matrix;
+
+//   // check row and column expansion
+//   matrix.resize(5, 9);
+//   EXPECT_FALSE(matrix.empty());
+//   EXPECT_EQ(matrix.size_row(), 5);
+//   EXPECT_EQ(matrix.size_column(), 9);
+//   EXPECT_EQ(matrix.size_non_zero(), 0);
+//   EXPECT_EQ(matrix.size().first, std::make_pair(5, 9).first);
+//   EXPECT_EQ(matrix.size().second, std::make_pair(5, 9).second);
+
+//   // check row reduction
+//   matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+//   matrix.resize(3, 5);
+//   EXPECT_EQ(matrix.size_row(), 3);
+//   EXPECT_EQ(matrix.size_column(), 5);
+//   EXPECT_EQ(matrix.size_non_zero(), 5);
+
+//   // check column reduction
+//   matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+//   matrix.resize(4, 2);
+//   EXPECT_EQ(matrix.size_row(), 4);
+//   EXPECT_EQ(matrix.size_column(), 2);
+//   EXPECT_EQ(matrix.size_non_zero(), 2);
+//   EXPECT_EQ(matrix[0][1], 1.0);
+//   EXPECT_EQ(matrix[1][0], 4.0);
+
+//   // check row reduction with column expansion
+//   matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+//   matrix.resize(2, 8);
+//   EXPECT_EQ(matrix.size_row(), 2);
+//   EXPECT_EQ(matrix.size_column(), 8);
+//   EXPECT_EQ(matrix.size_non_zero(), 5);
+//   EXPECT_EQ(matrix[0][1], 1.0);
+//   EXPECT_EQ(matrix[0][3], 2.0);
+//   EXPECT_EQ(matrix[1][0], 4.0);
+//   EXPECT_EQ(matrix[1][2], 3.0);
+//   EXPECT_EQ(matrix[1][3], 5.0);
+
+//   // check row expansion with column reduction
+//   matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+//   matrix.resize(10, 2);
+//   EXPECT_EQ(matrix.size_row(), 10);
+//   EXPECT_EQ(matrix.size_column(), 2);
+//   EXPECT_EQ(matrix.size_non_zero(), 2);
+//   EXPECT_EQ(matrix[0][1], 1.0);
+//   EXPECT_EQ(matrix[1][0], 4.0);
+
+//   // check row and column reduction
+//   matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+//   matrix.resize(1, 2);
+//   EXPECT_EQ(matrix.size_row(), 1);
+//   EXPECT_EQ(matrix.size_column(), 2);
+//   EXPECT_EQ(matrix.size_non_zero(), 1);
+//   EXPECT_EQ(matrix[0][1], 1.0);
+
+//   // check zero sizing.
+//   matrix = Matrix_Sparse ({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0}, 5);
+//   matrix.resize(0, 0);
+//   EXPECT_EQ(matrix.size_row(), 0);
+//   EXPECT_EQ(matrix.size_column(), 0);
+//   EXPECT_EQ(matrix.size_non_zero(), 0);
+}
+
+TEST(test_matrix_sparse, swap) {
+
+  EXPECT_TRUE(false);
+//   Matrix_Sparse<Scalar, std::size_t> matrix_0({0, 1, 2}, {1, 0}, {1.0, 2.0}, 2);
+//   Matrix_Sparse<Scalar, std::size_t> matrix_1({0, 1, 2, 3}, {1, 0, 1}, {3.0, 4.0, 5.0}, 3);
+
+//   matrix_0.swap(matrix_1);
+//   EXPECT_EQ(matrix_0.size_row(), 3);
+//   EXPECT_EQ(matrix_0.size_column(), 3);
+//   EXPECT_EQ(matrix_0.size_non_zero(), 3);
+//   EXPECT_EQ(matrix_1.size_row(), 2);
+//   EXPECT_EQ(matrix_1.size_column(), 2);
+//   EXPECT_EQ(matrix_1.size_non_zero(), 2);
+//   EXPECT_DOUBLE_EQ(matrix_0[0][1], 3.0);
+//   EXPECT_DOUBLE_EQ(matrix_0[1][0], 4.0);
+//   EXPECT_DOUBLE_EQ(matrix_0[2][1], 5.0);
+//   EXPECT_DOUBLE_EQ(matrix_1[0][1], 1.0);
+//   EXPECT_DOUBLE_EQ(matrix_1[1][0], 2.0);
+}

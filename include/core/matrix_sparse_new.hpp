@@ -1,4 +1,3 @@
-
 // ---------------------------------------------------------------------------------------------------------------------
 // MIT License
 // Copyright (c) 2022 Bevan W.S. Jones
@@ -27,6 +26,8 @@
 #include <numeric>
 #include <vector>
 #include <span>
+
+#include "scalar.hpp"
 
 namespace Disa {
 
@@ -314,31 +315,187 @@ using Iterator_Matrix_Sparse_Row = Base_Iterator_Matrix_Sparse_Row<_entry_type, 
 template<typename _entry_type, typename _index_type>
 using Const_Iterator_Matrix_Sparse_Row = Base_Iterator_Matrix_Sparse_Row<_entry_type, _index_type, true>;
 
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse
+// ---------------------------------------------------------------------------------------------------------------------
 
-template<typename _entry_type, typename _index_type>
+template<typename _element_type, typename _index_type>
 class Matrix_Sparse {
 
-    public:
-    void insert(const _index_type& row, const _index_type& column, const _entry_type& value) {
-        
-    };
+  public:
+  
+  using index_type = _index_type;
+  using reference_index = _index_type&;
+  using const_reference_index = const _index_type&;
+  using pointer_index = _index_type*;
 
-//   public:
-//   using index_type = _index_type;
-//   using entry_type = _entry_type;
-   using row_type = Matrix_Sparse_Row<_entry_type, _index_type>;
-//   using matrix_type = Matrix_Sparse<entry_type, index_type>;
-//   using interator = Iterator_Matrix_Sparse_Row<entry_type, index_type>;
-//   using const_iterator = COnst_Iterator_Matrix_Sparse_Row<entry_type, index_type>;
+  using element_type = _element_type;
+  using reference_element = _element_type&;
+  using const_reference_element = const _element_type&;
+  using pointer_element = _element_type*;
 
-    row_type operator[](const _index_type& i_row) {
-         return row_type(); 
-    };
+  
+  using row_type = Matrix_Sparse_Row<element_type, index_type>;
 
-    private:
-    std::vector<_index_type> row_offsets;
-    std::vector<_index_type> column_index;
-    std::vector<_entry_type> entry;
+  using matrix_type = Matrix_Sparse_Row<element_type, index_type>;
+
+  // -------------------------------------------------------------------------------------------------------------------
+  // Element Access
+  // -------------------------------------------------------------------------------------------------------------------
+  
+  row_type operator[](const _index_type& i_row) {
+        return row_type(); 
+  };
+
+  // -------------------------------------------------------------------------------------------------------------------
+  // Capacity
+  // -------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @brief Checks whether the matrix is empty. An empty matrix is considered where the number of rows is 0.
+   * @return True if the matrix is empty, else false.
+   */
+  [[nodiscard]] inline bool empty() const noexcept { return row_offset.empty() || row_offset.size() < 2; };
+
+  /**
+   * @brief Returns the number of rows in the matrix.
+   * @return The number of rows.
+   */
+  [[nodiscard]] inline index_type size_row() const noexcept {
+    return !row_offset.empty() ? static_cast<index_type>(row_offset.size() - 1) : 0;
+  };
+
+  /**
+   * @brief Returns the number of columns in the matrix.
+   * @return The number of columns.
+   */
+  [[nodiscard]] inline index_type size_column() const noexcept { return column_size; };
+
+  /**
+   * @brief Returns the number of non-zeros in the matrix.
+   * @return The number of non-zeros.
+   */
+  [[nodiscard]] inline index_type size_non_zero() const noexcept { 
+    return static_cast<index_type>(column_index.size()); 
+  };
+
+  /**
+   * @brief Returns the number of rows and columns in the matrix. If rows are 0, columns are 0.
+   * @return Pair containing [rows, columns].
+   */
+  [[nodiscard]] inline std::pair<index_type, index_type> size() const noexcept {
+    return std::make_pair(size_row(), size_column());
+  };
+
+
+  /**
+   * @brief Reserves storage for the matrix.
+   * @param[in] row The number of rows to reserve for.
+   * @param[in] non_zero The number of non-zeros to reserve. Note this is not the column size.
+   *
+   * @note The number of row offsets which are reserved will be one greater than the row size passed.
+   */
+  inline void reserve(const index_type& row, const index_type& non_zero) noexcept {
+    row_offset.reserve(row + 1);
+    column_index.reserve(non_zero);
+    element_value.reserve(non_zero);
+  };
+
+  /**
+   * @brief Returns the number of row offsets and non-zeros entries that can be held in currently allocated storage.
+   * @return [number of rows offsets, number of non-zeros entries.]
+   *
+   * @note The number of row offsets (for CSR matrices) is always one greater than the actual matrix row size.
+   */
+  [[nodiscard]] inline std::pair<index_type, index_type> capacity() const noexcept {
+    return std::make_pair(row_offset.capacity(), row_offset.capacity());
+  };
+
+  /**
+   * @brief reduces memory usage by the matrix by freeing unused memory for both rows and non-zeros
+   */
+  inline void shrink_to_fit() noexcept {
+    row_offset.shrink_to_fit();
+    column_index.shrink_to_fit();
+    element_value.shrink_to_fit();
+  };
+
+  // -------------------------------------------------------------------------------------------------------------------
+  // Modifiers
+  // -------------------------------------------------------------------------------------------------------------------
+  
+  /**
+   * @brief Clears the contents of the matrix, sets the column size to zero.
+   */
+  inline void clear() noexcept {
+    row_offset.clear();
+    column_index.clear();
+    element_value.clear();
+    column_size = 0;
+  };
+
+  void insert(const_reference_index row, const_reference_index column, const_reference_element value) {}
+
+  /**
+   * @brief Changes the number of rows and columns of the matrix.
+   * @param[in] row Number of rows to resized the matrix to.
+   * @param[in] column Number of columns to resized the matrix to.
+   *
+   * @note Does not effect number of non-zeros, unless the new row and column sizes reduce the size of the matrix.
+   */
+  void resize(const_reference_index row, const_reference_index column) {
+
+    // resize rows first
+    if(row < size_row()) {
+      column_index.resize(row_offset[row]);
+      element_value.resize(row_offset[row]);
+    }
+    row_offset.resize(row + 1, row_offset.empty() ? 0 : row_offset.back());
+
+    // resize columns
+    // Note: Since we may have to do column erases over multiple rows we do it directly here rather than use erase().
+    if(column < size_column()) {
+      std::size_t offset_loss = 0;
+      FOR(i_row, size_row()) {
+        const auto& iter_column_end = column_index.begin() + static_cast<s_size_t>(row_offset[i_row + 1] - offset_loss);
+        auto iter_column = std::upper_bound(column_index.begin() + static_cast<s_size_t>(row_offset[i_row]),
+                                            iter_column_end, column - 1);
+        if(iter_column != iter_column_end) {
+          const s_size_t& start_distance = std::distance(column_index.begin(), iter_column);
+          const s_size_t& end_distance = std::distance(column_index.begin(), iter_column_end);
+          column_index.erase(iter_column, iter_column_end);
+          element_value.erase(element_value.begin() + start_distance, element_value.begin() + end_distance);
+          offset_loss += end_distance - start_distance;
+        }
+        row_offset[i_row + 1] -= offset_loss;
+      }
+    }
+    column_size = column;
+  }
+
+  /**
+   * @brief Swaps the contents of the matrix with the parsed matrix
+   * @param[in,out] other The other matrix, this matrix will obtain the other's value and visa versa.
+   */
+  inline void swap(matrix_type& other) noexcept {
+    std::swap(row_offset, other.row_offset);
+    std::swap(column_index, other.column_index);
+    std::swap(element_value, other.element_value);
+    std::swap(column_size, other.column_size);
+  };
+
+  // -------------------------------------------------------------------------------------------------------------------
+  // Lookup
+  // -------------------------------------------------------------------------------------------------------------------
+
+
+
+  private:
+  std::vector<index_type> row_offset;         //!< Offset to non-zero elements in the matrix for each row (size is one greater than number of rows).
+  std::vector<index_type> column_index;       //!< The column index for each non-zero value, corresponds to value.
+  std::vector<element_type> element_value;    //!< The each non-zero value value, corresponds to column_index.
+  index_type column_size{0};                  //!< The number of columns of the matrix (used to check validity of operations).
+
 
 };
 
