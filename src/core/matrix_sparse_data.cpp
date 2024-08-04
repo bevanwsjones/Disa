@@ -103,9 +103,8 @@ CSR_Data<_value_type, _index_type>::iterator lower_bound(CSR_Data<_value_type, _
 {
   if(row < size_row(data))
   {
-    using s_index_type = std::make_signed_t<_index_type>;
-    const auto &iter_start = data.column_index.begin() + static_cast<s_index_type>(data.row_offset[row]);
-    const auto &iter_end = data.column_index.begin() + static_cast<s_index_type>(data.row_offset[row + 1]);
+    const auto &iter_start = data.column_index.begin() + data.row_offset[row];
+    const auto &iter_end = data.column_index.begin() + data.row_offset[row + 1];
     const auto &iter_lower = std::lower_bound(iter_start, iter_end, column);
     return std::make_tuple(iter_lower != iter_end ? row : (row + 1) , iter_lower, 
                            data.value.begin() + std::distance(data.column_index.begin(), iter_lower));
@@ -120,9 +119,8 @@ CSR_Data<_value_type, _index_type>::const_iterator lower_bound(const CSR_Data<_v
 {
   if(row < size_row(data))
   {
-    using s_index_type = std::make_signed_t<_index_type>;
-    const auto &iter_start = data.column_index.begin() + static_cast<s_index_type>(data.row_offset[row]);
-    const auto &iter_end = data.column_index.begin() + static_cast<s_index_type>(data.row_offset[row + 1]);
+    const auto &iter_start = data.column_index.begin() + data.row_offset[row];
+    const auto &iter_end = data.column_index.begin() + data.row_offset[row + 1];
     const auto &iter_lower = std::lower_bound(iter_start, iter_end, column);
         return std::make_tuple(iter_lower != iter_end ? row : (row + 1) , iter_lower, 
                                data.value.begin() + std::distance(data.column_index.begin(), iter_lower));
@@ -141,6 +139,6 @@ CSR_Data<_value_type, _index_type>::const_iterator lower_bound(const CSR_Data<_v
   template CSR_Data<V_T, I_T>::const_iterator lower_bound(const CSR_Data<V_T, I_T> &, const I_T &, const I_T &)
 
   // Instantiate templates for int and double
-  INSTANTIATE_TEMPLATES(Scalar, uint32_t);
+  INSTANTIATE_TEMPLATES(Scalar, std::size_t);
 
 }
