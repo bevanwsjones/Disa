@@ -22,8 +22,8 @@
 #ifndef DISA_SOLVER_UTILITIES_H
 #define DISA_SOLVER_UTILITIES_H
 
-#include "scalar.hpp"
 #include "matrix_sparse.hpp"
+#include "scalar.hpp"
 #include "vector_dense.hpp"
 #include "vector_operators.hpp"
 
@@ -40,11 +40,11 @@ namespace Disa {
  * @brief Enumerated list of all linear solvers in Disa.
  */
 enum class Solver_Type {
-  lower_upper_factorisation,    //!< The Lower Upper Factorisation solver (Dense Systems).
-  jacobi,                       //!< The Jacobi fixed point iterative solver (Sparse Systems).
-  gauss_seidel,                 //!< The Gauss Seidel fixed point iterative solver (Sparse Systems).
-  successive_over_relaxation,   //!< The Successive Over Relaxation fixed point iterative solver (Sparse Systems).
-  unknown                       //!< Uninitialised/Unknown solver.
+  lower_upper_factorisation,   //!< The Lower Upper Factorisation solver (Dense Systems).
+  jacobi,                      //!< The Jacobi fixed point iterative solver (Sparse Systems).
+  gauss_seidel,                //!< The Gauss Seidel fixed point iterative solver (Sparse Systems).
+  successive_over_relaxation,  //!< The Successive Over Relaxation fixed point iterative solver (Sparse Systems).
+  unknown                      //!< Uninitialised/Unknown solver.
 };
 
 /**
@@ -54,7 +54,7 @@ enum class Solver_Type {
 struct Solver_Config {
 
   // General Configuration
-  Solver_Type type {Solver_Type::unknown};   //!< The solver to construct.
+  Solver_Type type{Solver_Type::unknown};  //!< The solver to construct.
 
   // -------------------------------------------------------------------------------------------------------------------
   // Direct Solver Options
@@ -67,13 +67,13 @@ struct Solver_Config {
   // Iterative Solver Options
   // -------------------------------------------------------------------------------------------------------------------
 
-  // Convergence Configurations 
-  std::size_t minimum_iterations {0};        //!< The minimum 'force' number of iterations during for a solve.
-  std::size_t maximum_iterations {0};        //!< The maximum allowable iterations during a solve.
-  Scalar convergence_tolerance {0};          //!< The convergence tolerance below which a solve is considered converged.
+  // Convergence Configurations
+  std::size_t minimum_iterations{0};  //!< The minimum 'force' number of iterations during for a solve.
+  std::size_t maximum_iterations{0};  //!< The maximum allowable iterations during a solve.
+  Scalar convergence_tolerance{0};    //!< The convergence tolerance below which a solve is considered converged.
 
   // Iterative
-  Scalar SOR_relaxation {1.5};               //!< The relaxation factor for a  Successive Over Relaxation solver.
+  Scalar SOR_relaxation{1.5};  //!< The relaxation factor for a  Successive Over Relaxation solver.
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -96,20 +96,25 @@ struct Solver_Config {
  */
 struct Convergence_Data {
 
-  bool converged{false};                          //!< Is the system converged.
+  bool converged{false};  //!< Is the system converged.
 
-  std::chrono::microseconds duration {0};                                               //!< The duration of the solve.
-  std::chrono::steady_clock::time_point start_time {std::chrono::steady_clock::now()};  //!< The time at which the object was created.
+  std::chrono::microseconds duration{0};  //!< The duration of the solve.
+  std::chrono::steady_clock::time_point start_time{
+  std::chrono::steady_clock::now()};  //!< The time at which the object was created.
 
-  std::size_t iteration {0};                      //!< The number of iterations performed by the solver.
+  std::size_t iteration{0};  //!< The number of iterations performed by the solver.
 
-  Scalar residual {scalar_max};                   //!< The un-normalised weighted l2 norm of the residual vector.
-  Scalar residual_0 {scalar_max};                 //!< The initial l2 norm of the residual vector of the system (before the first solve).
-  Scalar residual_normalised {scalar_max};        //!< The l2 norm of the residual vector normalised to the l2 norm of the initial residual vector.
+  Scalar residual{scalar_max};  //!< The un-normalised weighted l2 norm of the residual vector.
+  Scalar residual_0{
+  scalar_max};  //!< The initial l2 norm of the residual vector of the system (before the first solve).
+  Scalar residual_normalised{
+  scalar_max};  //!< The l2 norm of the residual vector normalised to the l2 norm of the initial residual vector.
 
-  Scalar residual_max {scalar_max};               //!< The un-normalised linf norm of the residual vector.
-  Scalar residual_max_0 {scalar_max};             //!< The initial l2 norm of the residual vector of the system (before the first solve).
-  Scalar residual_max_normalised {scalar_max};    //!< The linf norm of the residual vector normalised to the l2 norm of the initial residual vector.
+  Scalar residual_max{scalar_max};  //!< The un-normalised linf norm of the residual vector.
+  Scalar residual_max_0{
+  scalar_max};  //!< The initial l2 norm of the residual vector of the system (before the first solve).
+  Scalar residual_max_normalised{
+  scalar_max};  //!< The linf norm of the residual vector normalised to the l2 norm of the initial residual vector.
 
   /**
    * @brief Updates the convergence state of a linear system (Ax = b) by computing various residual norms and data.
@@ -146,9 +151,9 @@ struct Convergence_Data {
  */
 struct Convergence_Criteria {
 
-  std::size_t min_iterations {0};                                         //!< The minimum number of iterations.
-  std::size_t max_iteration {std::numeric_limits<std::size_t>::max()};    //!< The maximum allowable number of iterations.
-  Scalar tolerance {scalar_max};                                          //!< The convergence tolerance.
+  std::size_t min_iterations{0};                                       //!< The minimum number of iterations.
+  std::size_t max_iteration{std::numeric_limits<std::size_t>::max()};  //!< The maximum allowable number of iterations.
+  Scalar tolerance{scalar_max};                                        //!< The convergence tolerance.
 
   /**
    * @brief Checks the parsed convergence data against the criteria (see struct comment for the criteria).
@@ -159,7 +164,7 @@ struct Convergence_Criteria {
     if(data.iteration < min_iterations) return false;
     if(data.iteration > max_iteration) return true;
     if(data.residual_normalised > tolerance) return false;
-    if(data.residual_max_normalised > 10.0*tolerance) return false;
+    if(data.residual_max_normalised > 10.0 * tolerance) return false;
     return true;
   }
 };
@@ -196,8 +201,8 @@ void Convergence_Data::update(const _matrix& coef, const _vector& solution, cons
     residual_0 = residual;
     residual_max_0 = residual_max;
   }
-  residual_normalised = residual/residual_0;
-  residual_max_normalised = residual_max/residual_max_0;
+  residual_normalised = residual / residual_0;
+  residual_max_normalised = residual_max / residual_max_0;
 
   ++iteration;
   duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - start_time);
@@ -229,7 +234,7 @@ template<class _matrix, class _vector>
 std::pair<Scalar, Scalar> compute_residual(const _matrix& coef, const _vector& solution, const _vector& constant) {
 
   // Check sizes
-  ASSERT_DEBUG(solution.size() != 0 && constant.size() != 0 , "System size is 0.");
+  ASSERT_DEBUG(solution.size() != 0 && constant.size() != 0, "System size is 0.");
   ASSERT_DEBUG(coef.size_row() == solution.size(),
                "Coefficient matrix row size incompatible with solution vector size.");
   ASSERT_DEBUG(coef.size_column() == constant.size(),
@@ -240,7 +245,7 @@ std::pair<Scalar, Scalar> compute_residual(const _matrix& coef, const _vector& s
   for(auto i_row = 0; i_row < coef.size_row(); ++i_row) {
     Scalar matrix_vector_row = 0;
     for(auto column_iter = coef[i_row].cbegin(); column_iter != coef[i_row].cend(); ++column_iter)
-      matrix_vector_row += *column_iter*solution[column_iter.i_column()];
+      matrix_vector_row += *column_iter * solution[column_iter.i_column()];
 
     // Compute the l2_norm and l_inf norm.
     const Scalar& row_residual_squared = std::pow(matrix_vector_row - constant[i_row], 2);
@@ -249,9 +254,9 @@ std::pair<Scalar, Scalar> compute_residual(const _matrix& coef, const _vector& s
   }
 
   // 'Weight' the l_2 norm and return both norms.
-  return {std::sqrt(l2_norm/static_cast<Scalar>(solution.size())), std::sqrt(linf_norm)};
+  return {std::sqrt(l2_norm / static_cast<Scalar>(solution.size())), std::sqrt(linf_norm)};
 }
 
-}
+}  // namespace Disa
 
-#endif //DISA_SOLVER_UTILITIES_H
+#endif  //DISA_SOLVER_UTILITIES_H

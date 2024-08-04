@@ -31,7 +31,7 @@ using namespace Disa;
 /**
  * @brief Macro for is_nearly equal testing since a additional inequality checks need it in addition to another check.
  */
-#define NEARLY_EQUAL_TESTS()                                                  \
+#define NEARLY_EQUAL_TESTS() \
   //case 1: norm is greater than max                                          \
   Scalar scalar_0 = 0.51*scalar_max;                                          \
   Scalar scalar_1 = scalar_max*(0.51 + default_relative - scalar_epsilon);    \
@@ -61,28 +61,31 @@ using namespace Disa;
 /**
  * @brief wraps NEARLY_EQUAL_TESTS
  */
-#define NEARLY_EQUAL_TEST() do {NEARLY_EQUAL_TESTS()} while(0)
+#define NEARLY_EQUAL_TEST() \
+  do {                      \
+    NEARLY_EQUAL_TESTS()    \
+  } while(0)
 
 TEST(test_scalar, is_nearly_equal) {
   NEARLY_EQUAL_TEST();
 }
 
-TEST(test_scalar, is_nearly_greater_equal){
-    NEARLY_EQUAL_TEST();
+TEST(test_scalar, is_nearly_greater_equal) {
+  NEARLY_EQUAL_TEST();
 
   // Check greater than.
   Scalar scalar_0 = 10.0;
-  Scalar scalar_1 = 10.0*(1.0 - default_relative*scalar_epsilon);
+  Scalar scalar_1 = 10.0 * (1.0 - default_relative * scalar_epsilon);
   EXPECT_TRUE(is_nearly_greater_equal(scalar_0, scalar_1));
-  EXPECT_FALSE(is_nearly_greater_equal(-1.0*scalar_0, scalar_1));
+  EXPECT_FALSE(is_nearly_greater_equal(-1.0 * scalar_0, scalar_1));
 }
 
-TEST(test_scalar, is_nearly_less_equal){
+TEST(test_scalar, is_nearly_less_equal) {
   NEARLY_EQUAL_TEST();
 
   // Check greater than.
   Scalar scalar_0 = -10.0;
-  Scalar scalar_1 = -10.0*(1.0 - default_relative*scalar_epsilon);
+  Scalar scalar_1 = -10.0 * (1.0 - default_relative * scalar_epsilon);
   EXPECT_TRUE(is_nearly_less_equal(scalar_0, scalar_1));
-  EXPECT_FALSE(is_nearly_less_equal(-1.0*scalar_0, scalar_1));
+  EXPECT_FALSE(is_nearly_less_equal(-1.0 * scalar_0, scalar_1));
 }

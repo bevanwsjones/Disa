@@ -16,7 +16,7 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
 // File Name: direct.h
-// Description: Base CRT class for the direct linear solvers. 
+// Description: Base CRT class for the direct linear solvers.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #ifndef DISA_SOLVER_DIRECT_H
@@ -38,11 +38,9 @@ namespace Disa {
  * @tparam _size The linear system size/dimension, if 0 a dynamically sized system is assumed.
  */
 template<class _solver, std::size_t _size>
-class Direct
-{
+class Direct {
 
-public:
-
+ public:
   /**
    * @brief Creates a default Direct Solver.
    */
@@ -51,23 +49,19 @@ public:
   /**
    * @brief Destroy the Direct Solver.
    */
-   ~Direct() = default;
+  ~Direct() = default;
 
   /**
    * @brief Construct a new Direct object
    * @param config Configured solver configuration object, containing parameters for the solver.
    */
-  explicit Direct(const Solver_Config config) {
-    initialise(config);
-  };
+  explicit Direct(const Solver_Config config) { initialise(config); };
 
   /**
    * @brief Initialises the solver, e.g. allocates memory, sets internal variables etc.
    * @param[in] config Configured solver configuration object, containing parameters for the solver.
    */
-  void initialise(Solver_Config config){
-    return static_cast<_solver*>(this)->initialise_solver(config);
-  };
+  void initialise(Solver_Config config) { return static_cast<_solver*>(this)->initialise_solver(config); };
 
   /**
    * @brief Factorises the coefficient matrix. 
@@ -85,7 +79,7 @@ public:
    * @warning The factorise function must have been called before this function, and returned true for a correct solver 
    * to occur.
    */
-  const Convergence_Data& solve(Vector_Dense<Scalar, _size>& x_vector, const Vector_Dense<Scalar, _size>& b_vector){
+  const Convergence_Data& solve(Vector_Dense<Scalar, _size>& x_vector, const Vector_Dense<Scalar, _size>& b_vector) {
     return static_cast<_solver*>(this)->solve_system(x_vector, b_vector);
   };
 
@@ -93,12 +87,9 @@ public:
    * @brief Get the configuration of the solver.
    * @return A configuration object with the solvers state.
    */
-  const Solver_Config get_config() {
-    return static_cast<_solver*>(this)->get_config();
-  }
-
+  const Solver_Config get_config() { return static_cast<_solver*>(this)->get_config(); }
 };
 
-}
+}  // namespace Disa
 
-#endif //DISA_SOLVER_DIRECT_H
+#endif  //DISA_SOLVER_DIRECT_H

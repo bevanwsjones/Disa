@@ -19,8 +19,8 @@
 // Description: Definitions for the various reordering/permutation algorithms available in Disa.
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "macros.hpp"
 #include "reorder.hpp"
+#include "macros.hpp"
 
 #include <map>
 #include <numeric>
@@ -51,8 +51,9 @@ namespace Disa {
 
   // Checking
   if(graph.empty()) return {};
-  ASSERT_DEBUG(start_vertex < graph.size_vertex(), "New root, " + std::to_string(start_vertex) + " no in graph range [0, "
-                                                   + std::to_string(graph.size_vertex()) + ").");
+  ASSERT_DEBUG(
+  start_vertex < graph.size_vertex(),
+  "New root, " + std::to_string(start_vertex) + " no in graph range [0, " + std::to_string(graph.size_vertex()) + ").");
 
   // Setup
   std::size_t new_index = 0;
@@ -98,9 +99,9 @@ std::vector<std::size_t> cuthill_mckee(const Adjacency_Graph<false>& graph, std:
 
   // Checking
   if(graph.empty()) return {};
-  ASSERT_DEBUG(start_vertex < graph.size_vertex() or start_vertex == std::numeric_limits<std::size_t>::max(),
-               "New root, " + std::to_string(start_vertex) + " no in graph range [0, "
-               + std::to_string(graph.size_vertex()) + ").");
+  ASSERT_DEBUG(
+  start_vertex < graph.size_vertex() or start_vertex == std::numeric_limits<std::size_t>::max(),
+  "New root, " + std::to_string(start_vertex) + " no in graph range [0, " + std::to_string(graph.size_vertex()) + ").");
 
   // Setup
   std::size_t new_index = 0;
@@ -112,11 +113,11 @@ std::vector<std::size_t> cuthill_mckee(const Adjacency_Graph<false>& graph, std:
   if(start_vertex == std::numeric_limits<std::size_t>::max()) {
     std::size_t minimum_degree = std::numeric_limits<std::size_t>::max();
     FOR(i_vertex, graph.size_vertex())
-      if(minimum_degree > graph.degree(i_vertex)) {
-        start_vertex = i_vertex;
-        minimum_degree = graph.degree(i_vertex);
-        ASSERT_DEBUG(static_cast<bool>(minimum_degree), "Graph is disjoint, vertex with zero degree found.");
-      }
+    if(minimum_degree > graph.degree(i_vertex)) {
+      start_vertex = i_vertex;
+      minimum_degree = graph.degree(i_vertex);
+      ASSERT_DEBUG(static_cast<bool>(minimum_degree), "Graph is disjoint, vertex with zero degree found.");
+    }
     ASSERT(start_vertex != std::numeric_limits<std::size_t>::max(), "Could not find a vertex with a minimum degree.");
   }
   queue.push(start_vertex);
@@ -140,7 +141,7 @@ std::vector<std::size_t> cuthill_mckee(const Adjacency_Graph<false>& graph, std:
     // Sort and add to the queue.
     if(!vertex_adjacent_degree.empty()) {
       std::sort(vertex_adjacent_degree.begin(), vertex_adjacent_degree.end(),
-                [](const auto& pair_0, const auto& pair_1) { return pair_0.second < pair_1.second;});
+                [](const auto& pair_0, const auto& pair_1) { return pair_0.second < pair_1.second; });
       FOR_EACH(mappp, vertex_adjacent_degree) queue.push(mappp.first);
     }
   }
@@ -205,7 +206,7 @@ std::vector<std::size_t> greedy_multicolouring(const Adjacency_Graph<false>& gra
 
   // Create permutation vector.
   std::size_t new_index = 0;
-  FOR(i_colour, max_color + 1){
+  FOR(i_colour, max_color + 1) {
     FOR(i_vertex, colour.size()) {
       if(colour[i_vertex] == i_colour) permutation[i_vertex] = new_index++;
     }
@@ -214,4 +215,4 @@ std::vector<std::size_t> greedy_multicolouring(const Adjacency_Graph<false>& gra
   return permutation;
 }
 
-}
+}  // namespace Disa

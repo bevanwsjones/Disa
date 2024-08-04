@@ -41,28 +41,24 @@ struct Solver_Data {
  * @brief
  */
 template<class _solver, class _solver_data>
-class Solver_Iterative
-{
+class Solver_Iterative {
 
-public:
-  explicit Solver_Iterative(const Solver_Config solver_config) {
-    initialise(solver_config);
-  };
+ public:
+  explicit Solver_Iterative(const Solver_Config solver_config) { initialise(solver_config); };
 
-  void initialise(Solver_Config solver_config){
+  void initialise(Solver_Config solver_config) {
     return static_cast<_solver*>(this)->initialise_solver(solver_config);
   };
 
   const Convergence_Data& solve(const Matrix_Sparse& matrix, Vector_Dense<Scalar, 0>& x_vector,
-                                const Vector_Dense<Scalar, 0>& b_vector){
+                                const Vector_Dense<Scalar, 0>& b_vector) {
     return static_cast<_solver*>(this)->solve_system(matrix, x_vector, b_vector);
   };
 
-protected:
+ protected:
   _solver_data data;
 };
 
+}  // namespace Disa
 
-}
-
-#endif //DISA_SOLVER_ITERATIVE_H
+#endif  //DISA_SOLVER_ITERATIVE_H
