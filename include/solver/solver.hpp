@@ -29,11 +29,12 @@
 
 #include <memory>
 
-namespace Disa{
+namespace Disa {
 
 // Forward declarations
 class Matrix_Sparse;
-template<typename, std::size_t> class Vector_Dense;
+template<typename, std::size_t>
+class Vector_Dense;
 
 /**
  * @brief Solver
@@ -42,50 +43,55 @@ template<typename, std::size_t> class Vector_Dense;
  * This class serves at a 'all in one' solver class for both sparse and dense systems. To achieve 
  */
 class Solver {
-public:
-
+ public:
   explicit Solver() = default;
 
-  std::variant<std::unique_ptr<Solver_LU<0> >,
-               std::unique_ptr<Solver_LUP<0> >,
-               std::unique_ptr<Solver_Jacobi>,
-               std::unique_ptr<Solver_Gauss_Seidel>,
-               std::unique_ptr<Sover_Sor>,
-               std::nullptr_t> solver{nullptr};
+  std::variant<std::unique_ptr<Solver_LU<0>>, std::unique_ptr<Solver_LUP<0>>, std::unique_ptr<Solver_Jacobi>,
+               std::unique_ptr<Solver_Gauss_Seidel>, std::unique_ptr<Sover_Sor>, std::nullptr_t>
+  solver{nullptr};
 
   Convergence_Data solve(const Matrix_Sparse& a_matrix, Vector_Dense<Scalar, 0>& x_vector,
                          const Vector_Dense<Scalar, 0>& b_vector) {
 
     switch(solver.index()) {
-      case 0: ERROR("LU solver does not support sparse matrices.");
-      case 1: ERROR("LUP solver does not support sparse matrices.");
-      case 2: return std::get<std::unique_ptr<Solver_Jacobi> >(solver)->solve_system(a_matrix, x_vector, b_vector);
-      case 3: return std::get<std::unique_ptr<Solver_Gauss_Seidel> >(solver)->solve_system(a_matrix, x_vector, b_vector);
-      case 4: return std::get<std::unique_ptr<Sover_Sor> >(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 0:
+        ERROR("LU solver does not support sparse matrices.");
+      case 1:
+        ERROR("LUP solver does not support sparse matrices.");
+      case 2:
+        return std::get<std::unique_ptr<Solver_Jacobi>>(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 3:
+        return std::get<std::unique_ptr<Solver_Gauss_Seidel>>(solver)->solve_system(a_matrix, x_vector, b_vector);
+      case 4:
+        return std::get<std::unique_ptr<Sover_Sor>>(solver)->solve_system(a_matrix, x_vector, b_vector);
       default:
         ERROR("Unknown or uninitialized solver.");
         exit(1);
-    }    
+    }
   };
 
   Convergence_Data solve(Vector_Dense<Scalar, 0>& x_vector, const Vector_Dense<Scalar, 0>& b_vector) {
 
     switch(solver.index()) {
-      case 0: return std::get<std::unique_ptr<Solver_LU<0> > >(solver)->solve_system(x_vector, b_vector);
-      case 1: return std::get<std::unique_ptr<Solver_LUP<0> > >(solver)->solve_system(x_vector, b_vector);
-      case 2: ERROR("Jacobi solver does not support sparse matrices.");
-      case 3: ERROR("Gauss Seidel solver does not support sparse matrices.");
-      case 4: ERROR("SOR solver does not support sparse matrices.");
+      case 0:
+        return std::get<std::unique_ptr<Solver_LU<0>>>(solver)->solve_system(x_vector, b_vector);
+      case 1:
+        return std::get<std::unique_ptr<Solver_LUP<0>>>(solver)->solve_system(x_vector, b_vector);
+      case 2:
+        ERROR("Jacobi solver does not support sparse matrices.");
+      case 3:
+        ERROR("Gauss Seidel solver does not support sparse matrices.");
+      case 4:
+        ERROR("SOR solver does not support sparse matrices.");
       default:
         ERROR("Unknown or uninitialized solver.");
         exit(1);
-    }    
+    }
   };
-
 };
 
 Solver build_solver(Solver_Config config);
 
-}
+}  // namespace Disa
 
-#endif //DISA_SOLVERS_H
+#endif  //DISA_SOLVERS_H

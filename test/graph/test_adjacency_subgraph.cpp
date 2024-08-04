@@ -19,9 +19,9 @@
 // Description:
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "gtest/gtest.h"
 #include "adjacency_subgraph.hpp"
 #include "generator.hpp"
+#include "gtest/gtest.h"
 
 using namespace Disa;
 
@@ -61,7 +61,7 @@ TEST(Adjacency_Subgraph, constructor_no_level) {
   EXPECT_EQ(subgraph.local_global(4), 14);
 }
 
-TEST(Adjacency_Subgraph, constructor_level){
+TEST(Adjacency_Subgraph, constructor_level) {
 
   Adjacency_Graph graph = create_graph_saad();
   Adjacency_Subgraph subgraph(graph, {0, 6, 8}, 2);
@@ -176,7 +176,7 @@ TEST(Adjacency_Subgraph, data) {
   EXPECT_EQ(std::get<2>(data), nullptr);
   EXPECT_EQ(std::get<3>(data), nullptr);
 
-  subgraph.resize(4); // we have no edges yet, so the vertex list remains a nullptr.
+  subgraph.resize(4);  // we have no edges yet, so the vertex list remains a nullptr.
   EXPECT_EQ(std::get<0>(data), nullptr);
   EXPECT_EQ(std::get<1>(data), nullptr);
   EXPECT_EQ(std::get<2>(data), nullptr);
@@ -189,7 +189,7 @@ TEST(Adjacency_Subgraph, data) {
   EXPECT_NE(std::get<0>(data), nullptr);
   EXPECT_NE(std::get<1>(data), nullptr);
   EXPECT_NE(std::get<2>(data), nullptr);
-  EXPECT_EQ(std::get<3>(data), nullptr); // there are no levels
+  EXPECT_EQ(std::get<3>(data), nullptr);  // there are no levels
 
   // Create a subgraph with levels.
   subgraph = Adjacency_Subgraph(graph, {0, 8, 6}, 1);
@@ -369,15 +369,18 @@ TEST(Adjacency_Subgraph, reorder) {
   EXPECT_NO_FATAL_FAILURE(subgraph.reorder(std::vector<std::size_t>()));
   EXPECT_DEATH(subgraph.reorder(std::vector<std::size_t>({0, 1})), "./*");
 
-  Adjacency_Graph graph = create_graph_structured<false>(3); // pentagon with diagonal connection.
+  Adjacency_Graph graph = create_graph_structured<false>(3);  // pentagon with diagonal connection.
   subgraph = Adjacency_Subgraph(graph, {4}, 1);
   subgraph.update_levels(graph, 2);
 
   // Check death conditions
-  EXPECT_DEATH(subgraph.reorder(std::vector<std::size_t>({0, 1})), "./*");                              // check under size crashes
-  EXPECT_DEATH(subgraph.reorder(std::vector<std::size_t>({10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0})), "./*");  // check oversize crashes
-  EXPECT_DEATH(subgraph.reorder(std::vector<std::size_t>({9, 8, 7, 6, 5, 4, 8, 2, 1, 0})), "./*");      // check duplicate crashes
-  EXPECT_DEATH(subgraph.reorder(std::vector<std::size_t>({9, 8, 7, 6, 5, 4, 3, 10, 1, 0})), "./*");     // check index > size
+  EXPECT_DEATH(subgraph.reorder(std::vector<std::size_t>({0, 1})), "./*");  // check under size crashes
+  EXPECT_DEATH(subgraph.reorder(std::vector<std::size_t>({10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0})),
+               "./*");  // check oversize crashes
+  EXPECT_DEATH(subgraph.reorder(std::vector<std::size_t>({9, 8, 7, 6, 5, 4, 8, 2, 1, 0})),
+               "./*");  // check duplicate crashes
+  EXPECT_DEATH(subgraph.reorder(std::vector<std::size_t>({9, 8, 7, 6, 5, 4, 3, 10, 1, 0})),
+               "./*");  // check index > size
 
   // Actual reordering check, needs to re-order and ensure sorted lists are created.
   //                         global index   4  1  3  5  7  0  2  6  8
@@ -461,7 +464,7 @@ TEST(Adjacency_Subgraph, reorder) {
 TEST(Adjacency_Subgraph, update_levels_add) {
   Adjacency_Graph graph = create_graph_structured<false>(3);
   Adjacency_Subgraph subgraph(graph, {4});
-  std::shared_ptr<std::vector<std::size_t> > i_global_local = std::make_shared<std::vector<std::size_t> >();
+  std::shared_ptr<std::vector<std::size_t>> i_global_local = std::make_shared<std::vector<std::size_t>>();
 
   subgraph.update_levels(graph, 1, i_global_local);
   EXPECT_FALSE(i_global_local == nullptr);
@@ -477,7 +480,7 @@ TEST(Adjacency_Subgraph, update_levels_add) {
   EXPECT_EQ(subgraph.vertex_level(3), 1);
   EXPECT_EQ(subgraph.vertex_level(4), 1);
   FOR(i_vertex, subgraph.size_vertex())
-    EXPECT_EQ((*i_global_local)[subgraph.local_global(i_vertex)], i_vertex);
+  EXPECT_EQ((*i_global_local)[subgraph.local_global(i_vertex)], i_vertex);
   EXPECT_EQ((*i_global_local)[0], std::numeric_limits<std::size_t>::max());
   EXPECT_EQ((*i_global_local)[2], std::numeric_limits<std::size_t>::max());
   EXPECT_EQ((*i_global_local)[6], std::numeric_limits<std::size_t>::max());
@@ -499,16 +502,16 @@ TEST(Adjacency_Subgraph, update_levels_add) {
   EXPECT_EQ(subgraph.vertex_level(7), 2);
   EXPECT_EQ(subgraph.vertex_level(8), 2);
   FOR(i_vertex, subgraph.size_vertex())
-    EXPECT_EQ((*i_global_local)[subgraph.local_global(i_vertex)], i_vertex);
+  EXPECT_EQ((*i_global_local)[subgraph.local_global(i_vertex)], i_vertex);
 
   EXPECT_DEATH(subgraph.update_levels(Adjacency_Graph<false>(), 1, i_global_local), "./*");
-  EXPECT_NO_THROW(Adjacency_Subgraph(graph, {4}).update_levels(graph, 1);); // ensure default does not throw.
+  EXPECT_NO_THROW(Adjacency_Subgraph(graph, {4}).update_levels(graph, 1););  // ensure default does not throw.
 }
 
 TEST(Adjacency_Subgraph, update_levels_remove) {
   Adjacency_Graph<false> graph = create_graph_structured<false>(3);
   Adjacency_Subgraph subgraph(graph, {4}, 2);
-  std::shared_ptr<std::vector<std::size_t> > i_global_local = std::make_shared<std::vector<std::size_t> >();
+  std::shared_ptr<std::vector<std::size_t>> i_global_local = std::make_shared<std::vector<std::size_t>>();
 
   subgraph.update_levels(graph, 1, i_global_local);
   EXPECT_FALSE(i_global_local == nullptr);
@@ -524,7 +527,7 @@ TEST(Adjacency_Subgraph, update_levels_remove) {
   EXPECT_EQ(subgraph.vertex_level(3), 1);
   EXPECT_EQ(subgraph.vertex_level(4), 1);
   FOR(i_vertex, subgraph.size_vertex())
-    EXPECT_EQ((*i_global_local)[subgraph.local_global(i_vertex)], i_vertex);
+  EXPECT_EQ((*i_global_local)[subgraph.local_global(i_vertex)], i_vertex);
   EXPECT_EQ((*i_global_local)[0], std::numeric_limits<std::size_t>::max());
   EXPECT_EQ((*i_global_local)[2], std::numeric_limits<std::size_t>::max());
   EXPECT_EQ((*i_global_local)[6], std::numeric_limits<std::size_t>::max());
@@ -540,7 +543,7 @@ TEST(Adjacency_Subgraph, update_levels_remove) {
   EXPECT_EQ(subgraph.local_global(0), 4);
 
   EXPECT_DEATH(subgraph.update_levels(Adjacency_Graph<false>(), 1, i_global_local), "./*");
-  EXPECT_NO_THROW(Adjacency_Subgraph(graph, {4}, 2).update_levels(graph, 1);); // ensure default does not throw.
+  EXPECT_NO_THROW(Adjacency_Subgraph(graph, {4}, 2).update_levels(graph, 1););  // ensure default does not throw.
 }
 
 TEST(Adjacency_Subgraph, vertex_level) {
@@ -555,7 +558,7 @@ TEST(Adjacency_Subgraph, vertex_level) {
   EXPECT_EQ(subgraph.vertex_level(4), 0);
 
   // Test local_global on both level and primary parts of the subgraph.
-  std::shared_ptr<std::vector<std::size_t> > i_global_local = std::make_shared<std::vector<std::size_t> >();
+  std::shared_ptr<std::vector<std::size_t>> i_global_local = std::make_shared<std::vector<std::size_t>>();
   subgraph = Adjacency_Subgraph(graph, {4});
   subgraph.update_levels(graph, 2, i_global_local);
   EXPECT_EQ(subgraph.vertex_level((*i_global_local)[0]), 2);
@@ -569,17 +572,3 @@ TEST(Adjacency_Subgraph, vertex_level) {
   EXPECT_EQ(subgraph.vertex_level((*i_global_local)[8]), 2);
   EXPECT_DEATH(subgraph.vertex_level(10) == 0, "./*");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

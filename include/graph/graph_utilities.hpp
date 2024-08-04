@@ -25,10 +25,10 @@
 #include "adjacency_graph.hpp"
 #include "adjacency_subgraph.hpp"
 
-#include <numeric>
-#include <vector>
-#include <queue>
 #include <cmath>
+#include <numeric>
+#include <queue>
+#include <vector>
 
 namespace Disa {
 
@@ -51,7 +51,7 @@ std::vector<std::size_t> level_traversal(const _graph& graph, const std::size_t 
 
   ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
   ASSERT_DEBUG(i_start < graph.size_vertex(),
-               "Starting vertex not in range (0, "+ std::to_string(graph.size_vertex()) + "].");
+               "Starting vertex not in range (0, " + std::to_string(graph.size_vertex()) + "].");
 
   std::vector<std::size_t> vertex_level(graph.size_vertex(), std::numeric_limits<std::size_t>::max());
   std::queue<std::size_t> vertex_queue({i_start});
@@ -75,14 +75,14 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
 
   ASSERT_DEBUG(!graph.empty(), "Graph is empty.");
   ASSERT_DEBUG(vertex_level.size() == graph.size_vertex(), "Vertex level and graph size_vertex do not match.");
-  FOR_EACH_REF(level, vertex_level) ++level;   // roll the vector over, before checking max.
+  FOR_EACH_REF(level, vertex_level)++ level;  // roll the vector over, before checking max.
   ASSERT_DEBUG(*std::max_element(vertex_level.begin(), vertex_level.end()) < graph.size_vertex(),
-               "A vertex in vertex level not in graph range (0, "+ std::to_string(graph.size_vertex()) + "].");
+               "A vertex in vertex level not in graph range (0, " + std::to_string(graph.size_vertex()) + "].");
 
   while(!vertex_queue.empty()) {
     const std::size_t front = vertex_queue.front();
     vertex_queue.pop();
-    if(vertex_level[front] == end_level + 1) continue; // Do not add new vertices, +1 because of above increment.
+    if(vertex_level[front] == end_level + 1) continue;  // Do not add new vertices, +1 because of above increment.
     FOR_EACH(vertex, graph[front]) {
       if(!static_cast<bool>(vertex_level[vertex])) {
         vertex_queue.push(vertex);
@@ -90,7 +90,7 @@ void level_traversal(const _graph& graph, std::queue<std::size_t>& vertex_queue,
       }
     }
   }
-  FOR_EACH_REF(level, vertex_level) --level;
+  FOR_EACH_REF(level, vertex_level)-- level;
 }
 
 /**
@@ -111,7 +111,7 @@ void level_expansion(const _graph& graph, const std::vector<std::size_t>& seeds,
 
   // Setup memory, and seed the queues and colors.
   vertex_color.resize(graph.size_vertex());
-  std::vector<std::queue<std::size_t> > vertex_queues(seeds.size());
+  std::vector<std::queue<std::size_t>> vertex_queues(seeds.size());
   FOR_EACH_REF(color, vertex_color) color = std::numeric_limits<std::size_t>::max();
   FOR(i_seed, seeds.size()) {
     vertex_queues[i_seed].push({seeds[i_seed]});
@@ -120,11 +120,11 @@ void level_expansion(const _graph& graph, const std::vector<std::size_t>& seeds,
 
   // Color vertices.
   std::size_t iteration = 0;
-  while(std::any_of(vertex_queues.begin(), vertex_queues.end(), [](const auto& queue){return !queue.empty();})) {
+  while(std::any_of(vertex_queues.begin(), vertex_queues.end(), [](const auto& queue) { return !queue.empty(); })) {
     FOR(i_queue, vertex_queues.size()) {
       // ensures we do a forward's and backwards sweep to try and keep expansion 'unbiased'.
-      auto& vertex_queue = iteration%2 == 0 ? vertex_queues[i_queue]
-                                            : vertex_queues[vertex_queues.size() - i_queue - 1];
+      auto& vertex_queue =
+      iteration % 2 == 0 ? vertex_queues[i_queue] : vertex_queues[vertex_queues.size() - i_queue - 1];
 
       // Perform a level expansion for this color.
       std::queue<std::size_t> new_queue;
@@ -140,8 +140,8 @@ void level_expansion(const _graph& graph, const std::vector<std::size_t>& seeds,
       }
       std::swap(new_queue, vertex_queue);
     }
-    ASSERT(iteration++ < graph.size_vertex(), "Number of iterations have exceeded, "
-                                               + std::to_string(iteration) + ". Is the graph disjoint?");
+    ASSERT(iteration++ < graph.size_vertex(),
+           "Number of iterations have exceeded, " + std::to_string(iteration) + ". Is the graph disjoint?");
   }
 }
 
@@ -157,8 +157,7 @@ std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t i_start = 
 
   ASSERT_DEBUG(!graph.empty(), "The parsed graph is empty.");
   ASSERT_DEBUG(i_start < graph.size_vertex(), "The parsed start vertex is not in the graph.");
-  if(graph.degree(i_start) == 0)
-  {
+  if(graph.degree(i_start) == 0) {
     WARNING("The parsed start vertex has a 0 degree.");
     return i_start;
   }
@@ -174,8 +173,8 @@ std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t i_start = 
     found = true;
     distance = level_traversal(graph, pseudo_peripheral_node);
     FOR(i_vertex, graph.size_vertex()) {
-      if(distance[i_vertex] > max_distance || (distance[i_vertex] == max_distance
-                                               && graph.degree(i_vertex) < graph.degree(pseudo_peripheral_node))) {
+      if(distance[i_vertex] > max_distance ||
+         (distance[i_vertex] == max_distance && graph.degree(i_vertex) < graph.degree(pseudo_peripheral_node))) {
         max_distance = distance[i_vertex];
         pseudo_peripheral_node = i_vertex;
         found = false;
@@ -192,9 +191,9 @@ std::size_t pseudo_peripheral_vertex(const _graph& graph, std::size_t i_start = 
  * @param[out] eccentricity Output vector of vectors containing the eccentricity of each vertex in the graph.
  */
 template<class _graph>
-void eccentricity_graph(const _graph& graph, std::vector<std::vector<std::size_t> >& eccentricity) {
+void eccentricity_graph(const _graph& graph, std::vector<std::vector<std::size_t>>& eccentricity) {
   eccentricity.resize(graph.size_vertex());
-    FOR(i_vertex, graph.size_vertex()){
+  FOR(i_vertex, graph.size_vertex()) {
     const std::size_t start_vertex = graph.size_vertex() - i_vertex - 1;
     eccentricity_vertex_breadth_first(graph, start_vertex, eccentricity[start_vertex], start_vertex + 1);
   }
@@ -220,8 +219,8 @@ void eccentricity_vertex_breadth_first(const _graph& graph, const std::size_t i_
   ASSERT_DEBUG(i_start < graph.size_vertex(), "The parsed start vertex is not in the graph.");
   ASSERT_DEBUG(i_start <= i_stop, "The parsed start vertex is greater than the parsed stop vertex.");
   ASSERT_DEBUG(i_stop == std::numeric_limits<std::size_t>::max() || i_stop <= graph.size_vertex(),
-               "The stopping vertex is not in the graph size range [0, " + std::to_string(graph.size_vertex())
-               + "] and not set to a default.");
+               "The stopping vertex is not in the graph size range [0, " + std::to_string(graph.size_vertex()) +
+               "] and not set to a default.");
 
   // Initialise the distance vector.
   std::fill(distance.begin(), distance.end(), std::numeric_limits<std::size_t>::max());
@@ -236,16 +235,16 @@ void eccentricity_vertex_breadth_first(const _graph& graph, const std::size_t i_
   while(!queue.empty()) {
     const std::size_t front = queue.front();
     queue.pop();
-    if(front >= i_stop) continue; // we don't search.
+    if(front >= i_stop) continue;  // we don't search.
     FOR_EACH(vertex, graph[front]) {
       if(distance[vertex] == std::numeric_limits<std::size_t>::max()) {
         distance[vertex] = distance[front] + 1;
         queue.push(vertex);
-        }
+      }
     }
   }
 }
 
-}
+}  // namespace Disa
 
-#endif //DISA_GRAPH_UTILITIES_H
+#endif  //DISA_GRAPH_UTILITIES_H

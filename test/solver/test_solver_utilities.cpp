@@ -45,7 +45,6 @@ TEST(solver_utilites, update_convergence) {
   Vector_Dense<Scalar, 0> constant = {3.0, -1.0, 3.0, -1.0, 3.0};
   auto [weighted_l2_norm_0, l_inf_norm_0] = compute_residual(matrix_sparse, solution, constant);
 
-
   // Test that which must be correct after instantiation.
   data.update(matrix_sparse, solution, constant);
   EXPECT_EQ(data.iteration, 1);
@@ -70,8 +69,8 @@ TEST(solver_utilites, update_convergence) {
   EXPECT_EQ(data.residual_max, l_inf_norm);
   EXPECT_EQ(data.residual_0, weighted_l2_norm_0);
   EXPECT_EQ(data.residual_max_0, l_inf_norm_0);
-  EXPECT_EQ(data.residual_normalised, weighted_l2_norm/weighted_l2_norm_0);
-  EXPECT_EQ(data.residual_max_normalised, l_inf_norm/l_inf_norm_0);
+  EXPECT_EQ(data.residual_normalised, weighted_l2_norm / weighted_l2_norm_0);
+  EXPECT_EQ(data.residual_max_normalised, l_inf_norm / l_inf_norm_0);
 }
 
 TEST(solver_utilites, is_converged) {
@@ -85,20 +84,20 @@ TEST(solver_utilites, is_converged) {
   // Required minimum iterations not met.
   Convergence_Data data;
   data.iteration = 5;
-  data.residual_normalised = criteria.tolerance*1.0e-1;
-  data.residual_max_normalised = criteria.tolerance*1.0e-1;
+  data.residual_normalised = criteria.tolerance * 1.0e-1;
+  data.residual_max_normalised = criteria.tolerance * 1.0e-1;
   EXPECT_FALSE(criteria.is_converged(data));
 
   // Max iteration reached (force true converged), but residual is still too high.
   data.iteration = 101;
-  data.residual_normalised = criteria.tolerance*1.0e+1;
-  data.residual_max_normalised = criteria.tolerance*1.0e+2;
+  data.residual_normalised = criteria.tolerance * 1.0e+1;
+  data.residual_max_normalised = criteria.tolerance * 1.0e+2;
   EXPECT_TRUE(criteria.is_converged(data));
 
   // Residual meets convergence tolerance
   data.iteration = 50;
-  data.residual_normalised = criteria.tolerance*1.0e-1;
-  data.residual_max_normalised = criteria.tolerance*2.0; // demonstrate max residual higher than tolerance
+  data.residual_normalised = criteria.tolerance * 1.0e-1;
+  data.residual_max_normalised = criteria.tolerance * 2.0;  // demonstrate max residual higher than tolerance
   EXPECT_TRUE(criteria.is_converged(data));
 }
 
@@ -121,7 +120,7 @@ TEST(solver_utilites, compute_residual) {
 
   constant = Vector_Dense<Scalar, 0>({2.0, 0.0, 3.0, 0.0, 2.0});
   std::tie(weighted_l2_norm, l_inf_norm) = compute_residual(matrix_sparse, solution, constant);
-  EXPECT_DOUBLE_EQ(weighted_l2_norm, std::sqrt(8.0/5.0));
+  EXPECT_DOUBLE_EQ(weighted_l2_norm, std::sqrt(8.0 / 5.0));
   EXPECT_DOUBLE_EQ(l_inf_norm, 2.0);
 
   EXPECT_DEATH(compute_residual(Matrix_Sparse(5, 2), solution, constant), ".*");

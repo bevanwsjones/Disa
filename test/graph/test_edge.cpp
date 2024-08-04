@@ -19,8 +19,8 @@
 // Description:
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "gtest/gtest.h"
 #include "edge.hpp"
+#include "gtest/gtest.h"
 
 using namespace Disa;
 
@@ -39,4 +39,3 @@ TEST(test_edge, order_edge_vertex) {
 
   EXPECT_DEATH(order_edge_vertex(nullptr), ".*");
 }
-

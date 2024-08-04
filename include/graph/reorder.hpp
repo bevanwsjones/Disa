@@ -55,11 +55,12 @@ std::vector<std::size_t> cuthill_mckee(const Adjacency_Graph<false>& graph,
  * @param[in] root_vertex The new graph root vertex, if default a periphery node will be search for. Defaults to max().
  * @return The permutation vector mapping the old to new graph, i.e. new_index = permutation[old_index].
  */
-inline std::vector<std::size_t> cuthill_mckee_reverse(const Adjacency_Graph<false>& graph,
-                                                      std::size_t root_vertex = std::numeric_limits<std::size_t>::max())
-                                                      {
+inline std::vector<std::size_t> cuthill_mckee_reverse(
+const Adjacency_Graph<false>& graph, std::size_t root_vertex = std::numeric_limits<std::size_t>::max()) {
   std::vector permutation = cuthill_mckee(graph, root_vertex);
-  FOR_EACH_REF(t, permutation) { t = permutation.size() - t - 1;}
+  FOR_EACH_REF(t, permutation) {
+    t = permutation.size() - t - 1;
+  }
   return permutation;
 };
 
@@ -74,5 +75,5 @@ inline std::vector<std::size_t> cuthill_mckee_reverse(const Adjacency_Graph<fals
  */
 std::vector<std::size_t> greedy_multicolouring(const Adjacency_Graph<false>& graph);
 
-}
-#endif //DISA_REORDER_H
+}  // namespace Disa
+#endif  //DISA_REORDER_H

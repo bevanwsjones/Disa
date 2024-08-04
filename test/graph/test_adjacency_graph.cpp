@@ -19,9 +19,9 @@
 //  Description:
 // ----------------------------------------------------------------------------------------------------------------------
 
-#include "gtest/gtest.h"
 #include "adjacency_graph.hpp"
 #include "generator.hpp"
+#include "gtest/gtest.h"
 
 using namespace Disa;
 
@@ -85,7 +85,7 @@ TEST(test_adjacency_graph, edge_list_construction) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 TEST(test_adjacency_graph, at) {
-  Adjacency_Graph<false> graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}}); // place some edge backwards.
+  Adjacency_Graph<false> graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}});  // place some edge backwards.
 
   EXPECT_EQ(graph[0][0], 1);
   EXPECT_EQ(graph[0][1], 3);
@@ -101,7 +101,7 @@ TEST(test_adjacency_graph, at) {
 }
 
 TEST(test_adjacency_graph, access_operator) {
-  Adjacency_Graph<false> graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}}); // place some edge backwards.
+  Adjacency_Graph<false> graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}});  // place some edge backwards.
 
   EXPECT_EQ(graph[0][0], 1);
   EXPECT_EQ(graph[0][1], 3);
@@ -121,7 +121,7 @@ TEST(test_adjacency_graph, data) {
   EXPECT_EQ(graph.data().first, nullptr);
   EXPECT_EQ(graph.data().second, nullptr);
 
-  graph.resize(4); // we have no edges yet, so the vertex list remains a nullptr.
+  graph.resize(4);  // we have no edges yet, so the vertex list remains a nullptr.
   EXPECT_EQ(graph.data().first, nullptr);
   EXPECT_NE(graph.data().second, nullptr);
 
@@ -130,13 +130,13 @@ TEST(test_adjacency_graph, data) {
   EXPECT_NE(graph.data().second, nullptr);
 }
 
-TEST(test_adjacency_graph, front){
+TEST(test_adjacency_graph, front) {
   Adjacency_Graph<true> graph({{0, 1}, {1, 2}, {3, 2}, {3, 0}});
   EXPECT_EQ(graph.front().size(), 1);
   EXPECT_EQ(graph.front()[0], graph[0][0]);
 }
 
-TEST(test_adjacency_graph, back){
+TEST(test_adjacency_graph, back) {
   Adjacency_Graph<false> graph({{0, 1}, {2, 1}, {2, 3}, {3, 0}});
   EXPECT_EQ(graph.back().size(), 2);
   EXPECT_EQ(graph.back()[0], graph[3][0]);
@@ -182,7 +182,7 @@ TEST(test_adjacency_graph, size_directed) {
   EXPECT_EQ(graph.size().first, std::make_pair(3, 2).first);
   EXPECT_EQ(graph.size().second, std::make_pair(3, 2).second);
 
-  graph.insert(std::make_pair(5, 6)); // Creates a set of unconnected vertices, total vertices 7.
+  graph.insert(std::make_pair(5, 6));  // Creates a set of unconnected vertices, total vertices 7.
   EXPECT_EQ(graph.size_vertex(), 7);
   EXPECT_EQ(graph.size_edge(), 3);
   EXPECT_EQ(graph.size().first, std::make_pair(7, 3).first);
@@ -208,7 +208,7 @@ TEST(test_adjacency_graph, size_undirected) {
   EXPECT_EQ(graph.size().first, std::make_pair(3, 2).first);
   EXPECT_EQ(graph.size().second, std::make_pair(3, 2).second);
 
-  graph.insert(std::make_pair(5, 6)); // Creates a set of unconnected vertices, total vertices 7.
+  graph.insert(std::make_pair(5, 6));  // Creates a set of unconnected vertices, total vertices 7.
   EXPECT_EQ(graph.size_vertex(), 7);
   EXPECT_EQ(graph.size_edge(), 3);
   EXPECT_EQ(graph.size().first, std::make_pair(7, 3).first);
@@ -268,8 +268,8 @@ TEST(test_adjacency_graph, clear_directed) {
   EXPECT_TRUE(graph.empty());
   EXPECT_EQ(graph.size_edge(), 0);
   EXPECT_EQ(graph.size_vertex(), 0);
-  EXPECT_EQ(graph.capacity().first, std::make_pair(4, 4).first);   // make sure we have not lost capacity.
-  EXPECT_EQ(graph.capacity().second, std::make_pair(4, 4).second); // make sure we have not lost capacity.
+  EXPECT_EQ(graph.capacity().first, std::make_pair(4, 4).first);    // make sure we have not lost capacity.
+  EXPECT_EQ(graph.capacity().second, std::make_pair(4, 4).second);  // make sure we have not lost capacity.
 }
 
 TEST(test_adjacency_graph, clear_undirected) {
@@ -279,8 +279,8 @@ TEST(test_adjacency_graph, clear_undirected) {
   EXPECT_TRUE(graph.empty());
   EXPECT_EQ(graph.size_edge(), 0);
   EXPECT_EQ(graph.size_vertex(), 0);
-  EXPECT_EQ(graph.capacity().first, std::make_pair(4, 4).first);   // make sure we have not lost capacity.
-  EXPECT_EQ(graph.capacity().second, std::make_pair(4, 4).second); // make sure we have not lost capacity.
+  EXPECT_EQ(graph.capacity().first, std::make_pair(4, 4).first);    // make sure we have not lost capacity.
+  EXPECT_EQ(graph.capacity().second, std::make_pair(4, 4).second);  // make sure we have not lost capacity.
 }
 
 TEST(test_adjacency_graph, insert_directed) {
@@ -304,7 +304,7 @@ TEST(test_adjacency_graph, insert_directed) {
 
   // Attempt to insert an existing edge
   EXPECT_FALSE(graph.insert({1, 2}));
- 
+
   // Connect across
   EXPECT_TRUE(graph.insert({0, 3}));
   EXPECT_TRUE(graph.insert({0, 2}));
@@ -312,7 +312,7 @@ TEST(test_adjacency_graph, insert_directed) {
   // Check graph
   EXPECT_EQ(graph.size_edge(), 10);
   EXPECT_EQ(graph.size_vertex(), 7);
- 
+
   EXPECT_EQ(graph[0].size(), 4);
   EXPECT_EQ(graph[1].size(), 1);
   EXPECT_EQ(graph[2].size(), 1);
@@ -320,17 +320,17 @@ TEST(test_adjacency_graph, insert_directed) {
   EXPECT_EQ(graph[4].size(), 0);
   EXPECT_EQ(graph[5].size(), 1);
   EXPECT_EQ(graph[6].size(), 1);
-  EXPECT_EQ(graph[0][0], 1); 
+  EXPECT_EQ(graph[0][0], 1);
   EXPECT_EQ(graph[0][1], 2);
   EXPECT_EQ(graph[0][2], 3);
   EXPECT_EQ(graph[0][3], 4);
   EXPECT_EQ(graph[1][0], 2);
   EXPECT_EQ(graph[2][0], 3);
   EXPECT_EQ(graph[3][0], 4);
-  EXPECT_EQ(graph[3][1], 6); 
+  EXPECT_EQ(graph[3][1], 6);
   EXPECT_EQ(graph[5][0], 6);
   EXPECT_EQ(graph[6][0], 0);
-  
+
   // death test - invalid edge
   EXPECT_DEATH(graph.insert({1, 1}), ".*");
 }
@@ -396,28 +396,32 @@ TEST(test_adjacency_graph, insert_undirected) {
 
 TEST(test_adjacency_graph, erase_if_directed) {
   Adjacency_Graph<true> square_graph = create_graph_structured<true>(4);
-  
+
   // remap 1 -> 0, 3 -> 1, 5 -> 2, 7 -> 3, 9 -> 4, 11 -> 5, 13 -> 6, 15 -> 7
-  auto erase_if_even = [](const auto& i_vertex){return i_vertex%2 == 0;};
-  Adjacency_Graph<true> answer({{0, 2}, {1, 3}, {2, 4}, {3, 5}, {4, 6}, {5, 7}}); // only up connection survive
-  answer.resize(8); // should be one extra vertex which is not connected to anything. 
+  auto erase_if_even = [](const auto& i_vertex) {
+    return i_vertex % 2 == 0;
+  };
+  Adjacency_Graph<true> answer({{0, 2}, {1, 3}, {2, 4}, {3, 5}, {4, 6}, {5, 7}});  // only up connection survive
+  answer.resize(8);  // should be one extra vertex which is not connected to anything.
 
   square_graph.erase_if(erase_if_even);
   FOR(i_vertex, answer.size_vertex())
-    FOR(i_adjacent, answer[i_vertex].size())
-      EXPECT_EQ(answer[i_vertex][i_adjacent], square_graph[i_vertex][i_adjacent]);
+  FOR(i_adjacent, answer[i_vertex].size())
+  EXPECT_EQ(answer[i_vertex][i_adjacent], square_graph[i_vertex][i_adjacent]);
 }
 
 TEST(test_adjacency_graph, erase_if_undirected) {
   Adjacency_Graph<false> saad = create_graph_saad();
-  auto erase_if_odd = [](const auto& i_vertex){return i_vertex%2 != 0;};
+  auto erase_if_odd = [](const auto& i_vertex) {
+    return i_vertex % 2 != 0;
+  };
   Adjacency_Graph<false> answer({{0, 3}, {0, 4}, {1, 3}, {2, 5}, {3, 4}, {5, 6}});
   answer.resize(7);
 
   saad.erase_if(erase_if_odd);
   FOR(i_vertex, answer.size_vertex())
-    FOR(i_adjacent, answer[i_vertex].size())
-      EXPECT_EQ(answer[i_vertex][i_adjacent], saad[i_vertex][i_adjacent]);
+  FOR(i_adjacent, answer[i_vertex].size())
+  EXPECT_EQ(answer[i_vertex][i_adjacent], saad[i_vertex][i_adjacent]);
 }
 
 TEST(test_adjacency_graph, resize_directed) {
@@ -431,14 +435,14 @@ TEST(test_adjacency_graph, resize_directed) {
   // Test size down, start with a fully connected pentagon graph.
   graph = create_graph_structured<true>(4);
 
-  graph.resize(8); // halve the graph.
+  graph.resize(8);  // halve the graph.
   EXPECT_EQ(graph.size_edge(), 10);
   EXPECT_EQ(graph.size_vertex(), 8);
-  Adjacency_Graph<true> answer({{0, 1}, {0, 4}, {1, 2}, {1, 5}, {2, 3}, {2, 6}, {3, 7}, {4, 5}, {5, 6}, {6, 7}}); 
-  answer.resize(8); // should be one extra vertex which is not connected to anything. 
+  Adjacency_Graph<true> answer({{0, 1}, {0, 4}, {1, 2}, {1, 5}, {2, 3}, {2, 6}, {3, 7}, {4, 5}, {5, 6}, {6, 7}});
+  answer.resize(8);  // should be one extra vertex which is not connected to anything.
   FOR(i_vertex, answer.size_vertex())
-    FOR(i_adjacent, answer[i_vertex].size())
-      EXPECT_EQ(answer[i_vertex][i_adjacent], graph[i_vertex][i_adjacent]);
+  FOR(i_adjacent, answer[i_vertex].size())
+  EXPECT_EQ(answer[i_vertex][i_adjacent], graph[i_vertex][i_adjacent]);
 
   // check zero sizing.
   graph.resize(0);
@@ -457,7 +461,7 @@ TEST(test_adjacency_graph, resize_undirected) {
   // Test size down, start with a fully connected pentagon graph.
   graph = Adjacency_Graph<false>({{0, 1}, {1, 2}, {2, 3}, {3, 4}, {0, 4}, {0, 2}, {0, 3}, {1, 3}, {1, 4}, {2, 4}});
 
-  graph.resize(3); // get rid of all two vertices - it's now a 2-simplex.
+  graph.resize(3);  // get rid of all two vertices - it's now a 2-simplex.
   EXPECT_EQ(graph.size_edge(), 3);
   EXPECT_EQ(graph.size_vertex(), 3);
   EXPECT_EQ(graph[0].size(), 2);
@@ -561,13 +565,14 @@ TEST(test_adjacency_graph, reorder_directed) {
   EXPECT_NO_FATAL_FAILURE(graph.reorder(std::vector<std::size_t>()));
   EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({0, 1})), "./*");
 
-  graph = Adjacency_Graph<true>({{0, 1}, {1, 2}, {2, 3}, {3, 4}, {0, 3}, {0, 4}}); // pentagon with diagonal connection.
+  graph =
+  Adjacency_Graph<true>({{0, 1}, {1, 2}, {2, 3}, {3, 4}, {0, 3}, {0, 4}});  // pentagon with diagonal connection.
 
   // Check death conditions
-  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({0, 1})), "./*");               // check under size crashes
-  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 0, 3, 2, 5, 4})), "./*");   // check oversize crashes
-  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 3, 2, 4})), "./*");      // check duplicate crashes
-  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 9, 2, 4})), "./*");      // check index > size
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({0, 1})), "./*");              // check under size crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 0, 3, 2, 5, 4})), "./*");  // check oversize crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 3, 2, 4})), "./*");     // check duplicate crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 9, 2, 4})), "./*");     // check index > size
 
   // Actual reordering check, needs to re-order and ensure sorted lists are created.
   //                            old index   0  1  2  3  4
@@ -594,7 +599,7 @@ TEST(test_adjacency_graph, reorder_directed) {
   EXPECT_EQ(graph[0].size(), 1);
   EXPECT_EQ(graph[0][0], 1);
 
-  // 4 :         -> 1 : 
+  // 4 :         -> 1 :
   EXPECT_EQ(graph[1].size(), 0);
 }
 
@@ -605,13 +610,14 @@ TEST(test_adjacency_graph, reorder_undirected) {
   EXPECT_NO_FATAL_FAILURE(graph.reorder(std::vector<std::size_t>()));
   EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({0, 1})), "./*");
 
-  graph = Adjacency_Graph<false>({{0, 1}, {1, 2}, {2, 3}, {3, 4}, {0, 3}, {0, 4}}); // pentagon with diagonal connection.
+  graph =
+  Adjacency_Graph<false>({{0, 1}, {1, 2}, {2, 3}, {3, 4}, {0, 3}, {0, 4}});  // pentagon with diagonal connection.
 
   // Check death conditions
-  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({0, 1})), "./*");               // check under size crashes
-  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 0, 3, 2, 5, 4})), "./*");   // check oversize crashes
-  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 3, 2, 4})), "./*");      // check duplicate crashes
-  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 9, 2, 4})), "./*");      // check index > size
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({0, 1})), "./*");              // check under size crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 0, 3, 2, 5, 4})), "./*");  // check oversize crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 3, 2, 4})), "./*");     // check duplicate crashes
+  EXPECT_DEATH(graph.reorder(std::vector<std::size_t>({1, 3, 9, 2, 4})), "./*");     // check index > size
 
   // Actual reordering check, needs to re-order and ensure sorted lists are created.
   //                            old index   0  1  2  3  4

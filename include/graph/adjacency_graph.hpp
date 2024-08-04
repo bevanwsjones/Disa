@@ -73,8 +73,7 @@ namespace Disa {
 template<bool _directed>
 class Adjacency_Graph {
 
-public:
-
+ public:
   // -------------------------------------------------------------------------------------------------------------------
   // Public Constructors and Destructors
   // -------------------------------------------------------------------------------------------------------------------
@@ -206,8 +205,8 @@ public:
    * @brief Returns the number of edge in the graph.
    * @return The number of edge.
    */
-  [[nodiscard]] inline std::size_t size_edge() const noexcept { 
-    return !_directed ? vertex_adjacent_list.size()/2 : vertex_adjacent_list.size(); 
+  [[nodiscard]] inline std::size_t size_edge() const noexcept {
+    return !_directed ? vertex_adjacent_list.size() / 2 : vertex_adjacent_list.size();
   }
 
   /**
@@ -225,7 +224,7 @@ public:
    */
   inline void reserve(std::size_t size_vertex, std::size_t size_edge = 0) noexcept {
     offset.reserve(size_vertex + 1);
-    vertex_adjacent_list.reserve(size_edge*(!_directed ? 2 : 1));
+    vertex_adjacent_list.reserve(size_edge * (!_directed ? 2 : 1));
   }
 
   /**
@@ -233,8 +232,8 @@ public:
    * @return Pair containing [vertices, edges].
    */
   [[nodiscard]] inline std::pair<std::size_t, std::size_t> capacity() const noexcept {
-    return std::make_pair(!offset.capacity() ? 0 : offset.capacity() - 1, 
-                          !_directed ? vertex_adjacent_list.capacity()/2 : vertex_adjacent_list.capacity());
+    return std::make_pair(!offset.capacity() ? 0 : offset.capacity() - 1,
+                          !_directed ? vertex_adjacent_list.capacity() / 2 : vertex_adjacent_list.capacity());
   }
 
   /**
@@ -312,8 +311,8 @@ public:
    * @return The degree of the vertex.
    */
   [[nodiscard]] inline std::size_t degree(const std::size_t& i_vertex) const {
-    ASSERT_DEBUG(i_vertex < size_vertex(), "Vertex index " + std::to_string(i_vertex) + " not in range [0, "
-                                           + std::to_string(i_vertex) + ").");
+    ASSERT_DEBUG(i_vertex < size_vertex(),
+                 "Vertex index " + std::to_string(i_vertex) + " not in range [0, " + std::to_string(i_vertex) + ").");
     return offset[i_vertex + 1] - offset[i_vertex];
   }
 
@@ -328,9 +327,9 @@ public:
   // Private Members
   // -------------------------------------------------------------------------------------------------------------------
 
-protected:
-  std::vector<std::size_t> vertex_adjacent_list;    //!< Single contiguous list of all vertex adjacency for the graph.
-  std::vector<std::size_t> offset;                  //!< List pointing to the start of each vertex's adjacency graph.
+ protected:
+  std::vector<std::size_t> vertex_adjacent_list;  //!< Single contiguous list of all vertex adjacency for the graph.
+  std::vector<std::size_t> offset;                //!< List pointing to the start of each vertex's adjacency graph.
 
   // -------------------------------------------------------------------------------------------------------------------
   // Helper Functions
@@ -412,29 +411,27 @@ Adjacency_Graph<_directed>::Adjacency_Graph(std::initializer_list<Edge> edge_gra
  */
 template<bool _directed>
 bool Adjacency_Graph<_directed>::insert(const Edge& edge) {
-  ASSERT_DEBUG(edge.first != edge.second, "Edge vertices identical, " + std::to_string(edge.first) + " and "
-                                          + std::to_string(edge.second) + ".");
+  ASSERT_DEBUG(edge.first != edge.second,
+               "Edge vertices identical, " + std::to_string(edge.first) + " and " + std::to_string(edge.second) + ".");
 
   // Preliminaries check if the edge exists, then determine if we need to resize.
   if(contains(edge)) return false;
   const auto& [i_first_vertex, i_second_vertex] =
-   !_directed ? order_edge_vertex(&edge) : std::pair<const std::size_t&, const std::size_t&>({edge.first, edge.second});
-  if(std::max(i_first_vertex, i_second_vertex)  >= size_vertex()) resize(std::max(i_first_vertex, i_second_vertex) + 1);
+  !_directed ? order_edge_vertex(&edge) : std::pair<const std::size_t&, const std::size_t&>({edge.first, edge.second});
+  if(std::max(i_first_vertex, i_second_vertex) >= size_vertex()) resize(std::max(i_first_vertex, i_second_vertex) + 1);
 
   // Insert lower vertex.
   insert_vertex_adjacent_list(i_first_vertex, i_second_vertex);
   std::for_each(std::next(offset.begin(), static_cast<s_size_t>(i_first_vertex + 1)),
                 !_directed ? std::next(offset.begin(), static_cast<s_size_t>(i_second_vertex + 2)) : offset.end(),
-                [](std::size_t& off){off++;}); 
+                [](std::size_t& off) { off++; });
   if(_directed) return true;
 
   // Insert upper vertex (tricky: last for loop is safe -> The highest vertex + 1 (for size) + 1 (for offset) <= end()).
   insert_vertex_adjacent_list(i_second_vertex, i_first_vertex);
   ++(*std::next(offset.begin(), static_cast<s_size_t>(i_second_vertex + 1)));
   std::for_each(std::next(offset.begin(), static_cast<s_size_t>(i_second_vertex + 2)), offset.end(),
-                [](std::size_t& off){off += 2;});
-
-  
+                [](std::size_t& off) { off += 2; });
 
   return true;
 }
@@ -467,7 +464,7 @@ void Adjacency_Graph<_directed>::erase_if(_unary_predicate delete_vertex) {
       new_indexes[i_vertex_old] = i_vertex++;
       removed += std::count_if(adjacency.first, adjacency.second, delete_vertex);
       std::transform(adjacency.first, adjacency.second, begin_delete, delete_vertex);
-    } else { // All adjacency entries need to be removed, since the vertex is to be removed.
+    } else {  // All adjacency entries need to be removed, since the vertex is to be removed.
       removed += std::distance(adjacency.first, adjacency.second);
       std::transform(begin_delete, end_delete, begin_delete, [](const auto) { return true; });
     }
@@ -490,8 +487,8 @@ void Adjacency_Graph<_directed>::erase_if(_unary_predicate delete_vertex) {
                  [&](const auto& i_old_vertex) { return new_indexes[i_old_vertex]; });
 
   ASSERT(offset.back() == vertex_adjacent_list.size(),
-         "Total offsets no longer match vertex size while reducing to subgraph, " + std::to_string(offset.back())
-         + " vs. " + std::to_string(vertex_adjacent_list.size()) + ".");
+         "Total offsets no longer match vertex size while reducing to subgraph, " + std::to_string(offset.back()) +
+         " vs. " + std::to_string(vertex_adjacent_list.size()) + ".");
 };
 
 /**
@@ -506,8 +503,7 @@ void Adjacency_Graph<_directed>::resize(const std::size_t& size) {
   // Branch based on expansion or contraction of the graph.
   if(size_vertex() < size) {
     offset.resize(size + 1, offset.empty() ? 0 : offset.back());
-  }
-  else {
+  } else {
     // Resize the containers.
     offset.resize(size + 1);
     vertex_adjacent_list.resize(offset.back());
@@ -538,8 +534,8 @@ void Adjacency_Graph<_directed>::resize(const std::size_t& size) {
  */
 template<bool _directed>
 [[nodiscard]] bool Adjacency_Graph<_directed>::contains(const Edge& edge) const {
-  ASSERT_DEBUG(edge.first != edge.second, "Edge vertices identical, " + std::to_string(edge.first) + " and "
-                                          + std::to_string(edge.second) + ".");
+  ASSERT_DEBUG(edge.first != edge.second,
+               "Edge vertices identical, " + std::to_string(edge.first) + " and " + std::to_string(edge.second) + ".");
 
   if(empty()) return false;
   if(std::max(edge.first, edge.second) >= size_vertex()) return false;
@@ -562,10 +558,11 @@ template<bool _directed>
 template<bool _directed>
 Adjacency_Graph<_directed> Adjacency_Graph<_directed>::reorder(const std::vector<std::size_t>& permutation) {
 
-  ASSERT_DEBUG(permutation.size() == size_vertex(), "Incorrect sizes, " + std::to_string(permutation.size()) + " vs. "
-                                                    + std::to_string(size_vertex()) + ".");
-  ASSERT_DEBUG(std::accumulate(permutation.begin(), permutation.end(), 0.0) == (size_vertex() - 1)*size_vertex()/2.0,
-               "Checksum for parsed re_ordering failed, are the elements unique?");
+  ASSERT_DEBUG(permutation.size() == size_vertex(), "Incorrect sizes, " + std::to_string(permutation.size()) + " vs. " +
+                                                    std::to_string(size_vertex()) + ".");
+  ASSERT_DEBUG(
+  std::accumulate(permutation.begin(), permutation.end(), 0.0) == (size_vertex() - 1) * size_vertex() / 2.0,
+  "Checksum for parsed re_ordering failed, are the elements unique?");
 
   // Allocate memory.
   Adjacency_Graph graph;
@@ -585,7 +582,7 @@ Adjacency_Graph<_directed> Adjacency_Graph<_directed>::reorder(const std::vector
     auto adjacency_iter = vertex_adjacency_iter(i_old);
     std::transform(adjacency_iter.first, adjacency_iter.second,
                    std::next(graph.vertex_adjacent_list.begin(), static_cast<s_size_t>(graph.offset[i_new])),
-                   [permutation](const std::size_t& i_old){return permutation[i_old];});
+                   [permutation](const std::size_t& i_old) { return permutation[i_old]; });
     adjacency_iter = graph.vertex_adjacency_iter(i_new);
     std::sort(adjacency_iter.first, adjacency_iter.second);
   }
@@ -630,15 +627,15 @@ void Adjacency_Graph<_directed>::insert_vertex_adjacent_list(std::size_t vertex,
 template<bool _directed>
 std::ostream& operator<<(std::ostream& ostream, const Adjacency_Graph<_directed>& graph) {
   FOR(i_vertex, graph.size_vertex()) {
-    if(i_vertex != 0) ostream<<"\n";
+    if(i_vertex != 0) ostream << "\n";
     FOR_EACH(adjacent_vertex, graph[i_vertex])
-      ostream<<adjacent_vertex<<(adjacent_vertex != graph[i_vertex].back() ? ", " : "");
-    if(graph[i_vertex].empty()) ostream<<".";
+    ostream << adjacent_vertex << (adjacent_vertex != graph[i_vertex].back() ? ", " : "");
+    if(graph[i_vertex].empty()) ostream << ".";
   }
   return ostream;
 }
 
-}
+}  // namespace Disa
 
 //----------------------------------------------------------------------------------------------------------------------
 // STL specialisation
@@ -651,7 +648,7 @@ namespace std {
  * @brief Template specialization to provides hash function for the Adjacency_Graph.
  */
 template<bool _directed>
-struct hash<Disa::Adjacency_Graph<_directed> > {
+struct hash<Disa::Adjacency_Graph<_directed>> {
 
   /**
    * @brief Computes the hash value of a given Disa::Adjacency_Graph object.
@@ -667,17 +664,17 @@ struct hash<Disa::Adjacency_Graph<_directed> > {
  * If the graph is empty, the hash value is set to zero.
  */
 template<bool _directed>
-std::size_t hash<Disa::Adjacency_Graph<_directed> >::operator()(const Disa::Adjacency_Graph<_directed>& graph) const noexcept {
-  if(graph.empty()) return 0; // All empty graphs are considered identical.
+std::size_t hash<Disa::Adjacency_Graph<_directed>>::operator()(
+const Disa::Adjacency_Graph<_directed>& graph) const noexcept {
+  if(graph.empty()) return 0;  // All empty graphs are considered identical.
   std::size_t hashValue = 0;
-  hashValue ^= std::hash<std::size_t> {}(graph.size_vertex());
-  hashValue ^= std::hash<std::size_t> {}(graph.size_edge());
-  hashValue ^= std::hash<std::size_t> {}(graph.front().size());
-  hashValue ^= std::hash<std::size_t> {}(graph.back().size());
+  hashValue ^= std::hash<std::size_t>{}(graph.size_vertex());
+  hashValue ^= std::hash<std::size_t>{}(graph.size_edge());
+  hashValue ^= std::hash<std::size_t>{}(graph.front().size());
+  hashValue ^= std::hash<std::size_t>{}(graph.back().size());
   return hashValue;
 }
 
-}
+}  // namespace std
 
-
-#endif //DISA_ADJACENCY_GRAPH_H
+#endif  //DISA_ADJACENCY_GRAPH_H

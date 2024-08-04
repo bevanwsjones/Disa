@@ -57,7 +57,6 @@ TEST(test_graph_utilities, level_traversal_end_at_level) {
   std::vector<std::size_t> expected_levels = {0, 2, 2, 4, 4, size_t_max, 1, 2, 1, 3, 3, 4, 3, 5, 5};
   EXPECT_EQ(expected_levels, level_traversal(graph_saad, 0, 5));
 
-
   std::vector<std::size_t> levels(graph_saad.size_vertex(), std::numeric_limits<std::size_t>::max());
   levels[0] = 0;
   levels[1] = 0;
@@ -68,7 +67,7 @@ TEST(test_graph_utilities, level_traversal_end_at_level) {
   EXPECT_EQ(expected_levels, levels);
 }
 
-TEST(test_graph_utilities, level_traversal_death){
+TEST(test_graph_utilities, level_traversal_death) {
 
   Adjacency_Graph<false> graph_saad = create_graph_saad();
 
@@ -93,22 +92,16 @@ TEST(test_graph_utilities, level_expansion) {
   Adjacency_Graph<false> graph = create_graph_structured<false>(5);
   std::vector<std::size_t> colors;
   level_expansion(graph, {6, 8, 16, 18}, colors);
-  std::vector<std::size_t> hand_computed_answer({0, 0, 1, 1, 1,
-                                                 0, 0, 0, 1, 1,
-                                                 2, 0, 2, 1, 3,
-                                                 2, 2, 2, 3, 3,
-                                                 2, 2, 3, 3, 3});
+  std::vector<std::size_t> hand_computed_answer(
+  {0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 2, 0, 2, 1, 3, 2, 2, 2, 3, 3, 2, 2, 3, 3, 3});
   EXPECT_EQ(colors, hand_computed_answer);
 
   // Second grid, with 3 'reverse' seed points.
-  Adjacency_Subgraph subgraph(graph, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-                                      15, 16, 17, 18, 19, 20, 21, 22, 23, 24});
+  Adjacency_Subgraph subgraph(
+  graph, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24});
   level_expansion(subgraph, {20, 12, 4}, colors);
-  hand_computed_answer = std::vector<std::size_t>({1, 1, 2, 2, 2,
-                                                   1, 1, 1, 2, 2,
-                                                   1, 1, 1, 1, 2,
-                                                   0, 1, 1, 1, 1,
-                                                   0, 0, 1, 1, 1});
+  hand_computed_answer =
+  std::vector<std::size_t>({1, 1, 2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 2, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1});
   EXPECT_EQ(colors, hand_computed_answer);
 
   // Death test.
@@ -136,7 +129,7 @@ TEST(test_graph_utilities, pseudo_peripheral_vertex) {
 
 TEST(test_graph_utilities, eccentricity_graph) {
   Adjacency_Graph graph = create_graph_structured<false>(5);
-  std::vector<std::vector<std::size_t> > eccentricity;
+  std::vector<std::vector<std::size_t>> eccentricity;
   eccentricity_graph(graph, eccentricity);
 
   // Weak test, ensure we are getting at least the values from the individual eccentricity_vertex_breadth_first calls.
@@ -153,20 +146,15 @@ TEST(test_graph_utilities, eccentricity_vertex_breadth_first) {
   Adjacency_Graph graph = create_graph_structured<false>(5);
   std::vector<std::size_t> distances;
   eccentricity_vertex_breadth_first(graph, 0, distances);
-  std::vector<std::size_t> hand_computed_answer({0, 1, 2, 3, 4,
-                                                 1, 2, 3, 4, 5,
-                                                 2, 3, 4, 5, 6,
-                                                 3, 4, 5, 6, 7,
-                                                 4, 5, 6, 7, 8});
+  std::vector<std::size_t> hand_computed_answer(
+  {0, 1, 2, 3, 4, 1, 2, 3, 4, 5, 2, 3, 4, 5, 6, 3, 4, 5, 6, 7, 4, 5, 6, 7, 8});
   EXPECT_EQ(distances, hand_computed_answer);
 
   // Perform a test on a subgraph, capping the max vertex, and starting at a different vertex to the above.
-  Adjacency_Subgraph subgraph(graph, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-                                      15, 16, 17, 18, 19, 20, 21, 22, 23, 24});
+  Adjacency_Subgraph subgraph(
+  graph, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24});
   eccentricity_vertex_breadth_first(graph, 12, distances, 15);
-  hand_computed_answer = std::vector<std::size_t> ({4, 3, 2, 3, 4,
-                                                    3, 2, 1, 2, 3,
-                                                    2, 1, 0, 1, 2});
+  hand_computed_answer = std::vector<std::size_t>({4, 3, 2, 3, 4, 3, 2, 1, 2, 3, 2, 1, 0, 1, 2});
   EXPECT_EQ(distances, hand_computed_answer);
 
   // Death test.
