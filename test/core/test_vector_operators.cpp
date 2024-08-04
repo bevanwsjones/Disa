@@ -45,8 +45,8 @@ TEST(test_vector_operators, lp_norm) {
 TEST(test_vector_operators, mean) {
   Vector_Dense<Scalar, 0> dynamic_vector = {1.0, -2.0, 3.0, 4.0};
   Vector_Dense<Scalar, 4> static_vector = {1.0, -2.0, 3.0, -4.0};
-  EXPECT_DOUBLE_EQ(mean(dynamic_vector), 6.0/4.0);
-  EXPECT_DOUBLE_EQ(mean(static_vector), -2.0/4.0);
+  EXPECT_DOUBLE_EQ(mean(dynamic_vector), 6.0 / 4.0);
+  EXPECT_DOUBLE_EQ(mean(static_vector), -2.0 / 4.0);
 
   Vector_Dense<Scalar, 0> zero_size;
   EXPECT_DEATH(mean(zero_size), "./*");
@@ -79,12 +79,12 @@ TEST(test_vector_operators, unit) {
   dynamic_vector = unit(dynamic_vector);
   static_vector = unit(static_vector);
 
-  EXPECT_DOUBLE_EQ(dynamic_vector[0], 1.0/std::sqrt(14.0));
-  EXPECT_DOUBLE_EQ(dynamic_vector[1], -2.0/std::sqrt(14.0));
-  EXPECT_DOUBLE_EQ(dynamic_vector[2], 3.0/std::sqrt(14.0));
-  EXPECT_DOUBLE_EQ(static_vector[0], -1.0/std::sqrt(14.0));
-  EXPECT_DOUBLE_EQ(static_vector[1], 2.0/std::sqrt(14.0));
-  EXPECT_DOUBLE_EQ(static_vector[2], -3.0/std::sqrt(14.0));
+  EXPECT_DOUBLE_EQ(dynamic_vector[0], 1.0 / std::sqrt(14.0));
+  EXPECT_DOUBLE_EQ(dynamic_vector[1], -2.0 / std::sqrt(14.0));
+  EXPECT_DOUBLE_EQ(dynamic_vector[2], 3.0 / std::sqrt(14.0));
+  EXPECT_DOUBLE_EQ(static_vector[0], -1.0 / std::sqrt(14.0));
+  EXPECT_DOUBLE_EQ(static_vector[1], 2.0 / std::sqrt(14.0));
+  EXPECT_DOUBLE_EQ(static_vector[2], -3.0 / std::sqrt(14.0));
 
   dynamic_vector *= 0.0;
   static_vector *= 0.0;
@@ -109,17 +109,17 @@ TEST(test_vector_operators, angle) {
 
   Scalar angle_radian = angle<true>(dynamic_vector_0, dynamic_vector_1);
   Scalar angle_degree = angle<false>(dynamic_vector_0, dynamic_vector_1);
-  EXPECT_DOUBLE_EQ(angle_radian, 0.5*std::numbers::pi);
+  EXPECT_DOUBLE_EQ(angle_radian, 0.5 * std::numbers::pi);
   EXPECT_DOUBLE_EQ(angle_degree, 90.0);
 
   angle_radian = angle<true>(static_vector_0, static_vector_1);
   angle_degree = angle<false>(static_vector_0, static_vector_1);
-  EXPECT_DOUBLE_EQ(angle_radian, 0.5*std::numbers::pi);
+  EXPECT_DOUBLE_EQ(angle_radian, 0.5 * std::numbers::pi);
   EXPECT_DOUBLE_EQ(angle_degree, 90.0);
 
   angle_radian = angle<true>(dynamic_vector_0, static_vector_1);
   angle_degree = angle<false>(static_vector_1, dynamic_vector_1);
-  EXPECT_DOUBLE_EQ(angle_radian, 0.5*std::numbers::pi);
+  EXPECT_DOUBLE_EQ(angle_radian, 0.5 * std::numbers::pi);
   EXPECT_DOUBLE_EQ(angle_degree, 90.0);
 
   EXPECT_DEATH((cross_product(Vector_Dense<Scalar, 0>(), Vector_Dense<Scalar, 3>())), "./*");
@@ -165,7 +165,7 @@ TEST(test_vector_operators, tangent_projection) {
   Vector_Dense<Scalar, 0> dynamic_vector = {4.0, -2.0, 3.0};
   Vector_Dense<Scalar, 0> dynamic_unit = {1.0, 0.0, 0.0};
   Vector_Dense<Scalar, 3> static_vector = {-1.0, -2.0, -3.0};
-  Vector_Dense<Scalar, 3> static_unit = {0.0, 1.0/std::sqrt(2.0), 1.0/std::sqrt(2.0)};
+  Vector_Dense<Scalar, 3> static_unit = {0.0, 1.0 / std::sqrt(2.0), 1.0 / std::sqrt(2.0)};
 
   Vector_Dense<Scalar, 0> dynamic_result = projection_tangent(dynamic_vector, dynamic_unit);
   Vector_Dense<Scalar, 3> static_result = projection_tangent(static_vector, static_unit);
@@ -186,7 +186,7 @@ TEST(test_vector_operators, orthogonal_projection) {
   Vector_Dense<Scalar, 0> dynamic_vector = {4.0, -2.0, 3.0};
   Vector_Dense<Scalar, 0> dynamic_unit = {1.0, 0.0, 0.0};
   Vector_Dense<Scalar, 3> static_vector = {-1.0, -2.0, -3.0};
-  Vector_Dense<Scalar, 3> static_unit = {0.0, 1.0/std::sqrt(2.0), 1.0/std::sqrt(2.0)};
+  Vector_Dense<Scalar, 3> static_unit = {0.0, 1.0 / std::sqrt(2.0), 1.0 / std::sqrt(2.0)};
 
   Vector_Dense<Scalar, 0> dynamic_result = projection_orthogonal(dynamic_vector, dynamic_unit);
   Vector_Dense<Scalar, 3> static_result = projection_orthogonal(static_vector, static_unit);
@@ -194,11 +194,11 @@ TEST(test_vector_operators, orthogonal_projection) {
   EXPECT_DOUBLE_EQ(dynamic_result[1], -2.0);
   EXPECT_DOUBLE_EQ(dynamic_result[2], 3.0);
   EXPECT_DOUBLE_EQ(static_result[0], -1.0);
-  EXPECT_NEAR(static_result[1], 0.5, std::numeric_limits<double>::epsilon()*10.0);
+  EXPECT_NEAR(static_result[1], 0.5, std::numeric_limits<double>::epsilon() * 10.0);
   EXPECT_DOUBLE_EQ(static_result[2], -0.5);
 
   EXPECT_DEATH(projection_orthogonal(dynamic_vector, Vector_Dense<Scalar, 0>({1.0, 2.0})), "./*");
   EXPECT_DEATH(projection_orthogonal(static_vector, Vector_Dense<Scalar, 2>({1.0, 2.0})), "./*");
 }
 
-#endif//DISA_DEBUG
+#endif  //DISA_DEBUG

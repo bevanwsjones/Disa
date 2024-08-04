@@ -21,22 +21,22 @@
 
 #include "gtest/gtest.h"
 
-#include "matrix_sparse.hpp"
 #include "matrix_dense.hpp"
+#include "matrix_sparse.hpp"
 #include "solver.hpp"
 
 using namespace Disa;
+
 class direct_solvers : public ::testing::Test {
 
-  public: 
-
-  Solver_LU<0>lu_solver;
-  Solver_LUP<0>lup_solver;
+ public:
+  Solver_LU<0> lu_solver;
+  Solver_LUP<0> lup_solver;
 
   /**
    * @brief Sets up simple solvers.
-   */ 
-  void SetUp() override { 
+   */
+  void SetUp() override {
     Solver_Config data;
     data.type = Solver_Type::lower_upper_factorisation;
     data.pivot = false;
@@ -64,7 +64,7 @@ TEST_F(direct_solvers, lower_upper_factorisation_initialise) {
   auto lup_data = lup_solver.get_config();
   EXPECT_EQ(lup_data.type, Solver_Type::lower_upper_factorisation);
   EXPECT_EQ(lup_data.pivot, true);
-  EXPECT_EQ(lup_data.factor_tolerance, data.factor_tolerance);  
+  EXPECT_EQ(lup_data.factor_tolerance, data.factor_tolerance);
 }
 
 TEST_F(direct_solvers, lower_upper_factorisation_death_test) {
@@ -73,38 +73,38 @@ TEST_F(direct_solvers, lower_upper_factorisation_death_test) {
   Solver_Config data;
   data.type = Solver_Type::lower_upper_factorisation;
   data.pivot = false;
-  EXPECT_DEATH(Solver_LUP<0>lup(data), "./*");
+  EXPECT_DEATH(Solver_LUP<0> lup(data), "./*");
   data.pivot = true;
-  EXPECT_DEATH(Solver_LU<0>lup(data), "./*");
+  EXPECT_DEATH(Solver_LU<0> lup(data), "./*");
 
   // Check incorrect solver type
-  data.type = Solver_Type::unknown; // anything other than lower_upper_factorisation
+  data.type = Solver_Type::unknown;  // anything other than lower_upper_factorisation
   data.pivot = false;
-  EXPECT_DEATH(Solver_LU<0>lup(data), "./*");
+  EXPECT_DEATH(Solver_LU<0> lup(data), "./*");
   data.pivot = true;
-  EXPECT_DEATH(Solver_LUP<0>lup(data), "./*");
+  EXPECT_DEATH(Solver_LUP<0> lup(data), "./*");
 
   // incorrect sizes
   Vector_Dense<Scalar, 0> b_vector = {6, 2};
   Vector_Dense<Scalar, 0> x_vector = {0, 0, 0};
   Matrix_Dense<Scalar, 0, 0> matrix = {{2, 7, 6}, {9, 5, 1}, {4, 3, 8}};
   lu_solver.factorise(matrix);
-  lup_solver.factorise(matrix);  
+  lup_solver.factorise(matrix);
   EXPECT_DEATH(lu_solver.solve_system(x_vector, b_vector), "./*");
   EXPECT_DEATH(lup_solver.solve_system(x_vector, b_vector), "./*");
 }
 
 TEST_F(direct_solvers, lower_upper_factorisation_not_factorised) {
- 
+
   Vector_Dense<Scalar, 0> b_vector = {6, 2, 7};
   Vector_Dense<Scalar, 0> x_vector = {0, 0, 0};
   Matrix_Dense<Scalar, 0, 0> matrix = {{0, 0, 0}, {9, 5, 1}, {4, 3, 8}};  // singular.
-  
+
   EXPECT_FALSE(lu_solver.factorise(matrix));
-  EXPECT_FALSE(lup_solver.factorise(matrix)); 
-  
-  EXPECT_FALSE(lu_solver.solve_system(x_vector, b_vector).converged); 
-  EXPECT_FALSE(lup_solver.solve_system(x_vector, b_vector).converged);  
+  EXPECT_FALSE(lup_solver.factorise(matrix));
+
+  EXPECT_FALSE(lu_solver.solve_system(x_vector, b_vector).converged);
+  EXPECT_FALSE(lup_solver.solve_system(x_vector, b_vector).converged);
 }
 
 TEST_F(direct_solvers, lower_upper_factorise_solve) {
@@ -132,5 +132,5 @@ TEST_F(direct_solvers, lower_upper_factorise_solve) {
   EXPECT_EQ(data.iteration, 1);
   EXPECT_NEAR(solution[0], x_vector[0], default_absolute);
   EXPECT_NEAR(solution[1], x_vector[1], default_absolute);
-  EXPECT_NEAR(solution[2], x_vector[2], default_absolute);   
+  EXPECT_NEAR(solution[2], x_vector[2], default_absolute);
 }

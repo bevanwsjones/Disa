@@ -34,16 +34,21 @@ namespace Disa {
 // ---------------------------------------------------------------------------------------------------------------------
 
 using Scalar = double;
-inline constexpr Scalar scalar_max_digits10 = std::numeric_limits<Scalar>::max_digits10;   //!< Alias for scalar max_digits10
+inline constexpr Scalar scalar_max_digits10 =
+std::numeric_limits<Scalar>::max_digits10;  //!< Alias for scalar max_digits10
 
-inline constexpr Scalar scalar_epsilon = std::numeric_limits<Scalar>::epsilon();     //!< Alias for scalar epsilon
-inline constexpr Scalar scalar_infinity = std::numeric_limits<Scalar>::infinity();   //!< Alias for scalar infinity
-inline constexpr Scalar scalar_lowest = std::numeric_limits<Scalar>::lowest();       //!< Alias for scalar lowest
-inline constexpr Scalar scalar_max = std::numeric_limits<Scalar>::max();             //!< Alias for scalar max
-inline constexpr Scalar scalar_min = std::numeric_limits<Scalar>::min();             //!< Alias for scalar min
+inline constexpr Scalar scalar_epsilon = std::numeric_limits<Scalar>::epsilon();    //!< Alias for scalar epsilon
+inline constexpr Scalar scalar_infinity = std::numeric_limits<Scalar>::infinity();  //!< Alias for scalar infinity
+inline constexpr Scalar scalar_lowest = std::numeric_limits<Scalar>::lowest();      //!< Alias for scalar lowest
+inline constexpr Scalar scalar_max = std::numeric_limits<Scalar>::max();            //!< Alias for scalar max
+inline constexpr Scalar scalar_min = std::numeric_limits<Scalar>::min();            //!< Alias for scalar min
 
-inline constexpr Scalar default_absolute = static_cast<Scalar>(64)*scalar_epsilon;       //!< Global for default absolute equality check, 'reasonably over 2 orders of epsilon.
-inline constexpr Scalar default_relative = static_cast<Scalar>(65536)*scalar_epsilon;    //!< Global for default relative equality check, 'reasonably over 4 orders of epsilon.
+inline constexpr Scalar default_absolute =
+static_cast<Scalar>(64) *
+scalar_epsilon;  //!< Global for default absolute equality check, 'reasonably over 2 orders of epsilon.
+inline constexpr Scalar default_relative =
+static_cast<Scalar>(65536) *
+scalar_epsilon;  //!< Global for default relative equality check, 'reasonably over 4 orders of epsilon.
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Equality Checks
@@ -75,15 +80,15 @@ inline constexpr Scalar default_relative = static_cast<Scalar>(65536)*scalar_eps
 [[nodiscard]] constexpr bool is_nearly_equal(const Scalar& scalar_0, const Scalar& scalar_1,
                                              const Scalar& tolerance_relative = default_relative,
                                              const Scalar& tolerance_absolute = default_absolute) {
-  ASSERT_DEBUG(scalar_epsilon <= tolerance_relative,
-               "Relative tolerance " + std::to_string(tolerance_relative) + " must be greater than scalar epsilon, "
-               + std::to_string(scalar_epsilon) + ".");
+  ASSERT_DEBUG(scalar_epsilon <= tolerance_relative, "Relative tolerance " + std::to_string(tolerance_relative) +
+                                                     " must be greater than scalar epsilon, " +
+                                                     std::to_string(scalar_epsilon) + ".");
   ASSERT_DEBUG(tolerance_relative <= static_cast<Scalar>(1),
                "Relative tolerance " + std::to_string(tolerance_relative) + "  greater than 1, will magnify the norm.");
   if(scalar_0 == scalar_1) return true;
   return std::abs(scalar_0 - scalar_1) <
-         std::max(tolerance_absolute, tolerance_relative*std::min(std::abs(scalar_0) + std::abs(scalar_1),
-                                                                  scalar_max));
+         std::max(tolerance_absolute,
+                  tolerance_relative * std::min(std::abs(scalar_0) + std::abs(scalar_1), scalar_max));
 }
 
 /**
@@ -130,8 +135,8 @@ inline constexpr Scalar default_relative = static_cast<Scalar>(65536)*scalar_eps
  * tested.
  */
 [[nodiscard]] constexpr bool is_nearly_greater(const Scalar& scalar_0, const Scalar& scalar_1,
-                                              const Scalar& tolerance_relative = default_relative,
-                                              const Scalar& tolerance_absolute = default_absolute) {
+                                               const Scalar& tolerance_relative = default_relative,
+                                               const Scalar& tolerance_absolute = default_absolute) {
   return !is_nearly_less_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);
 }
 
@@ -151,11 +156,11 @@ inline constexpr Scalar default_relative = static_cast<Scalar>(65536)*scalar_eps
  * is tested.
  */
 [[nodiscard]] constexpr bool is_nearly_less(const Scalar& scalar_0, const Scalar& scalar_1,
-                                        const Scalar& tolerance_relative = default_relative,
-                                        const Scalar& tolerance_absolute = default_absolute) {
+                                            const Scalar& tolerance_relative = default_relative,
+                                            const Scalar& tolerance_absolute = default_absolute) {
   return !is_nearly_greater_equal(scalar_0, scalar_1, tolerance_relative, tolerance_absolute);
 }
 
-}
+}  // namespace Disa
 
-#endif //DISA_SCALAR_H
+#endif  //DISA_SCALAR_H

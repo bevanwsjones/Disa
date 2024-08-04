@@ -26,14 +26,13 @@
 
 namespace Disa {
 
-struct Solver_Fixed_Point_Data : public Solver_Data{
-};
+struct Solver_Fixed_Point_Data : public Solver_Data {};
 
-struct Solver_Fixed_Point_Jacobi_Data : public Solver_Data{
+struct Solver_Fixed_Point_Jacobi_Data : public Solver_Data {
   Vector_Dense<Scalar, 0> working;
 };
 
-struct Solver_Fixed_Point_Sor_Data : public Solver_Data{
+struct Solver_Fixed_Point_Sor_Data : public Solver_Data {
   Scalar relaxation{1.5};
 };
 
@@ -45,9 +44,9 @@ struct Solver_Fixed_Point_Sor_Data : public Solver_Data{
 template<Solver_Type _solver_type, class _solver_data>
 class Solver_Fixed_Point : public Solver_Iterative<Solver_Fixed_Point<_solver_type, _solver_data>, _solver_data> {
 
-public:
-
-  explicit Solver_Fixed_Point(Solver_Config config) : Solver_Iterative<Solver_Fixed_Point<_solver_type, _solver_data>, _solver_data >(config) {};
+ public:
+  explicit Solver_Fixed_Point(Solver_Config config)
+      : Solver_Iterative<Solver_Fixed_Point<_solver_type, _solver_data>, _solver_data>(config){};
 
   void initialise_solver(Solver_Config config);
 
@@ -59,13 +58,13 @@ public:
    * @return
    */
   Convergence_Data solve_system(const Matrix_Sparse& a_matrix, Vector_Dense<Scalar, 0>& x_vector,
-                                       const Vector_Dense<Scalar, 0>& b_vector);
+                                const Vector_Dense<Scalar, 0>& b_vector);
 };
 
 typedef Solver_Fixed_Point<Solver_Type::jacobi, Solver_Fixed_Point_Jacobi_Data> Solver_Jacobi;
 typedef Solver_Fixed_Point<Solver_Type::gauss_seidel, Solver_Fixed_Point_Data> Solver_Gauss_Seidel;
 typedef Solver_Fixed_Point<Solver_Type::successive_over_relaxation, Solver_Fixed_Point_Sor_Data> Sover_Sor;
 
-}
+}  // namespace Disa
 
-#endif //DISA_SOLVER_FIXED_POINT_H
+#endif  //DISA_SOLVER_FIXED_POINT_H

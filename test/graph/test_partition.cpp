@@ -46,8 +46,8 @@ TEST(test_partition, multinode_level_set_expansion) {
   // Check uniqueness
   std::vector<bool> in_partition(number_vertices, false);
   FOR_EACH(subgraph, subgraph)
-    FOR(i_local_vertex, subgraph.size_vertex())
-      in_partition[subgraph.local_global(i_local_vertex)] = true;
+  FOR(i_local_vertex, subgraph.size_vertex())
+  in_partition[subgraph.local_global(i_local_vertex)] = true;
   EXPECT_FALSE(std::find(in_partition.begin(), in_partition.end(), true) == in_partition.end());
 
   // Invert problem and repeat.
@@ -65,8 +65,8 @@ TEST(test_partition, multinode_level_set_expansion) {
   // Check uniqueness
   std::fill(in_partition.begin(), in_partition.end(), false);
   FOR_EACH(subgraph, subgraph)
-    FOR(i_local_vertex, subgraph.size_vertex())
-      in_partition[subgraph.local_global(i_local_vertex)] = true;
+  FOR(i_local_vertex, subgraph.size_vertex())
+  in_partition[subgraph.local_global(i_local_vertex)] = true;
   EXPECT_FALSE(std::find(in_partition.begin(), in_partition.end(), true) == in_partition.end());
 
   // death tests.
@@ -89,8 +89,8 @@ TEST(LevelTraversalTest, SimpleTest) {
   EXPECT_EQ(subgraph_2[1].size_edge(), 19);
   std::vector<bool> in_partition(number_vertices, false);
   FOR_EACH(subgraph, subgraph_2)
-    FOR(i_local_vertex, subgraph.size_vertex())
-      in_partition[subgraph.local_global(i_local_vertex)] = true;
+  FOR(i_local_vertex, subgraph.size_vertex())
+  in_partition[subgraph.local_global(i_local_vertex)] = true;
   EXPECT_FALSE(std::find(in_partition.begin(), in_partition.end(), true) == in_partition.end());
 
   EXPECT_EQ(subgraph_3.size(), 3);
@@ -102,8 +102,8 @@ TEST(LevelTraversalTest, SimpleTest) {
   EXPECT_EQ(subgraph_3[2].size_edge(), 9);
   std::fill(in_partition.begin(), in_partition.end(), false);
   FOR_EACH(subgraph, subgraph_3)
-    FOR(i_local_vertex, subgraph.size_vertex())
-      in_partition[subgraph.local_global(i_local_vertex)] = true;
+  FOR(i_local_vertex, subgraph.size_vertex())
+  in_partition[subgraph.local_global(i_local_vertex)] = true;
   EXPECT_FALSE(std::find(in_partition.begin(), in_partition.end(), true) == in_partition.end());
 
   EXPECT_EQ(subgraph_4.size(), 4);
@@ -117,8 +117,8 @@ TEST(LevelTraversalTest, SimpleTest) {
   EXPECT_EQ(subgraph_4[3].size_edge(), 9);
   std::fill(in_partition.begin(), in_partition.end(), false);
   FOR_EACH(subgraph, subgraph_4)
-    FOR(i_local_vertex, subgraph.size_vertex())
-      in_partition[subgraph.local_global(i_local_vertex)] = true;
+  FOR(i_local_vertex, subgraph.size_vertex())
+  in_partition[subgraph.local_global(i_local_vertex)] = true;
   EXPECT_FALSE(std::find(in_partition.begin(), in_partition.end(), true) == in_partition.end());
 
   EXPECT_EQ(subgraph_5.size(), 5);
@@ -134,7 +134,7 @@ TEST(LevelTraversalTest, SimpleTest) {
   EXPECT_EQ(subgraph_5[4].size_edge(), 4);
   std::fill(in_partition.begin(), in_partition.end(), false);
   FOR_EACH(subgraph, subgraph_5)
-    FOR(i_local_vertex, subgraph.size_vertex())
-      in_partition[subgraph.local_global(i_local_vertex)] = true;
+  FOR(i_local_vertex, subgraph.size_vertex())
+  in_partition[subgraph.local_global(i_local_vertex)] = true;
   EXPECT_FALSE(std::find(in_partition.begin(), in_partition.end(), true) == in_partition.end());
 }

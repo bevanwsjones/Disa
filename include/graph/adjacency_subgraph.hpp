@@ -69,8 +69,7 @@ namespace Disa {
  */
 class Adjacency_Subgraph {
 
-public:
-
+ public:
   // -------------------------------------------------------------------------------------------------------------------
   // Public Constructors and Destructors
   // -------------------------------------------------------------------------------------------------------------------
@@ -208,8 +207,7 @@ public:
    * @return tuple containing capacities for [vertices, edges].
    */
   [[nodiscard]] inline std::tuple<std::size_t, std::size_t, std::size_t, std::size_t> capacity() const noexcept {
-    return {graph.capacity().first, graph.capacity().second, i_local_global.capacity(),
-            level_set_value.capacity()};
+    return {graph.capacity().first, graph.capacity().second, i_local_global.capacity(), level_set_value.capacity()};
   }
 
   /**
@@ -230,7 +228,7 @@ public:
    */
   inline void clear() {
     graph.clear();
-    hash_parent = std::hash<Adjacency_Graph<false> >{}(graph);
+    hash_parent = std::hash<Adjacency_Graph<false>>{}(graph);
     i_local_global.clear();
     level_set_value.clear();
   }
@@ -243,7 +241,7 @@ public:
    * @note Invalidates the parent hash if size is increased.
    */
   inline void resize(const std::size_t size) {
-    if(size > size_vertex()) hash_parent = std::hash<Adjacency_Graph<false> >{}(Adjacency_Graph<false>());
+    if(size > size_vertex()) hash_parent = std::hash<Adjacency_Graph<false>>{}(Adjacency_Graph<false>());
     graph.resize(size);
     i_local_global.resize(size);
     if(!level_set_value.empty()) level_set_value.resize(size);
@@ -269,7 +267,7 @@ public:
    * @param[in] edge The edge to check for.
    * @return True if the graph contains the edge, else false.
    */
-  [[nodiscard]] bool contains(const Edge& edge) const {return graph.contains(edge); };
+  [[nodiscard]] bool contains(const Edge& edge) const { return graph.contains(edge); };
 
   // -------------------------------------------------------------------------------------------------------------------
   // Graph Operators
@@ -288,8 +286,8 @@ public:
    * @return True if the vertex is part of this subgraph, else false.
    */
   [[nodiscard]] bool is_local(const std::size_t& i_vertex) const {
-    ASSERT_DEBUG(i_vertex < size_vertex(), "Local vertex index " + std::to_string(i_vertex) + " not in range [0, "
-                                           + std::to_string(i_vertex) + ").");
+    ASSERT_DEBUG(i_vertex < size_vertex(), "Local vertex index " + std::to_string(i_vertex) + " not in range [0, " +
+                                           std::to_string(i_vertex) + ").");
     return level_set_value.empty() ? true : level_set_value[i_vertex] == 0;
   }
 
@@ -299,7 +297,7 @@ public:
    * @return True if the graph is the parent, else false.
    */
   [[nodiscard]] bool is_parent(const Adjacency_Graph<false>& graph_parent) const noexcept {
-    return std::hash<Adjacency_Graph<false> >{}(graph_parent) == hash_parent;
+    return std::hash<Adjacency_Graph<false>>{}(graph_parent) == hash_parent;
   }
 
   /**
@@ -308,8 +306,8 @@ public:
    * @return The global vertex index.
    */
   [[nodiscard]] inline std::size_t local_global(const std::size_t& i_vertex) const {
-    ASSERT_DEBUG(i_vertex < size_vertex(), "Local vertex index " + std::to_string(i_vertex) + " not in range [0, "
-                                           + std::to_string(i_vertex) + ").");
+    ASSERT_DEBUG(i_vertex < size_vertex(), "Local vertex index " + std::to_string(i_vertex) + " not in range [0, " +
+                                           std::to_string(i_vertex) + ").");
     return i_local_global[i_vertex];
   }
 
@@ -332,7 +330,7 @@ public:
    *       Finally, and std::numeric_limits<std::size_t>::max() value implies no mapping into this subgraph.
    */
   void update_levels(const Adjacency_Graph<false>& parent_graph, std::size_t max_level,
-                     std::shared_ptr<std::vector<std::size_t> > i_global_local = nullptr);
+                     std::shared_ptr<std::vector<std::size_t>> i_global_local = nullptr);
 
   /**
    * @brief Returns the level of a given vertex in the graph.
@@ -340,16 +338,18 @@ public:
    * @return The level of the vertex at the specified local index.
    */
   [[nodiscard]] inline std::size_t vertex_level(const std::size_t& i_vertex) const {
-    ASSERT_DEBUG(i_vertex < size_vertex(), "Local vertex index " + std::to_string(i_vertex) + " not in range [0, "
-                                           + std::to_string(i_vertex) + ").");
+    ASSERT_DEBUG(i_vertex < size_vertex(), "Local vertex index " + std::to_string(i_vertex) + " not in range [0, " +
+                                           std::to_string(i_vertex) + ").");
     return level_set_value.empty() ? 0 : level_set_value[i_vertex];
   }
 
-private:
-  std::size_t hash_parent{std::hash<Adjacency_Graph<false> >{}(Adjacency_Graph<false> ())};    /**< The hash of a the parent graph, defaults to empty parent. */
-  Adjacency_Graph<false> graph;              /**< This graph's connectivity structure */
-  std::vector<std::size_t> i_local_global;   /**< For each local vertex, its global index in the parent graph. */
-  std::vector<std::size_t> level_set_value;  /**< For each local vertex, its level traversal value in this subgraph - 0 indicates the primary partition. */
+ private:
+  std::size_t hash_parent{std::hash<Adjacency_Graph<false>>{}(
+  Adjacency_Graph<false>())};              /**< The hash of a the parent graph, defaults to empty parent. */
+  Adjacency_Graph<false> graph;            /**< This graph's connectivity structure */
+  std::vector<std::size_t> i_local_global; /**< For each local vertex, its global index in the parent graph. */
+  std::vector<std::size_t>
+  level_set_value; /**< For each local vertex, its level traversal value in this subgraph - 0 indicates the primary partition. */
 
   // -------------------------------------------------------------------------------------------------------------------
   // Helper Functions
@@ -364,7 +364,7 @@ private:
    *                            empty.
    */
   void add_levels(const Adjacency_Graph<false>& parent_graph, std::size_t max_level, std::size_t current_max,
-                  std::shared_ptr<std::vector<std::size_t> > i_global_local);
+                  std::shared_ptr<std::vector<std::size_t>> i_global_local);
 
   /**
    * @brief Removes levels from the subgraph.
@@ -374,7 +374,7 @@ private:
    *                            if parsed as a non-nullptr empty.
    */
   void remove_levels(const Adjacency_Graph<false>& parent_graph, std::size_t max_level,
-                     std::shared_ptr<std::vector<std::size_t> > i_global_local);
+                     std::shared_ptr<std::vector<std::size_t>> i_global_local);
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -395,6 +395,6 @@ private:
  */
 std::ostream& operator<<(std::ostream& ostream, const Adjacency_Subgraph& graph);
 
-}
+}  // namespace Disa
 
-#endif //DISA_ADJACENCY_SUB_GRAPH_H
+#endif  //DISA_ADJACENCY_SUB_GRAPH_H

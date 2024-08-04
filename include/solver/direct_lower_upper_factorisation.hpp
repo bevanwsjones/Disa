@@ -19,7 +19,6 @@
 // Description: Contains the declaration of the direct lower upper factorisation solver.
 // ---------------------------------------------------------------------------------------------------------------------
 
-
 #ifndef DISA_DIRECT_UPPER_LOWER_FACTORISATION_H
 #define DISA_DIRECT_UPPER_LOWER_FACTORISATION_H
 
@@ -42,22 +41,22 @@ namespace Disa {
  * @tparam _pivot Is the solver allowed to use pivoting when factorising (recommended true).
  */
 template<Solver_Type _solver_type, std::size_t _size, bool _pivot>
-class Direct_Lower_Upper_Factorisation 
-: public Direct<Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>, _size > {
+class Direct_Lower_Upper_Factorisation
+    : public Direct<Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>, _size> {
 
-public:
-    /**
-   * @brief Construct a new Direct_Lower_Upper_Factorisation object
-   * @param[in] config The configuration for the LU solver to use.
-   */
-  explicit Direct_Lower_Upper_Factorisation() = default;
-  
+ public:
   /**
    * @brief Construct a new Direct_Lower_Upper_Factorisation object
    * @param[in] config The configuration for the LU solver to use.
    */
-  explicit Direct_Lower_Upper_Factorisation(Solver_Config config) 
-  : Direct<Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>, _size >(config) {
+  explicit Direct_Lower_Upper_Factorisation() = default;
+
+  /**
+   * @brief Construct a new Direct_Lower_Upper_Factorisation object
+   * @param[in] config The configuration for the LU solver to use.
+   */
+  explicit Direct_Lower_Upper_Factorisation(Solver_Config config)
+      : Direct<Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>, _size>(config) {
     initialise_solver(config);
   };
 
@@ -101,17 +100,19 @@ public:
     return config;
   }
 
-  private:
-  bool factorised{false};                             //<! Has factorisation been completed successfully. 
-  Scalar factorisation_tolerance{default_absolute};   //<! The value below which diagonal entires should be considered zero.
-  Matrix_Dense<Scalar, _size, _size> lu_factorised;   //<! The factorised LU coefficient matrix (implicit 1's on diagonal of L).
-  std::vector<std::size_t> pivots;                    //<! The pivots indicies, is only sized for LUP solver.
+ private:
+  bool factorised{false};  //<! Has factorisation been completed successfully.
+  Scalar factorisation_tolerance{
+  default_absolute};  //<! The value below which diagonal entires should be considered zero.
+  Matrix_Dense<Scalar, _size, _size>
+  lu_factorised;                    //<! The factorised LU coefficient matrix (implicit 1's on diagonal of L).
+  std::vector<std::size_t> pivots;  //<! The pivots indicies, is only sized for LUP solver.
 };
 
 template<std::size_t _size>
 using Solver_LUP = Direct_Lower_Upper_Factorisation<Solver_Type::lower_upper_factorisation, _size, true>;
 template<std::size_t _size>
-using Solver_LU = Direct_Lower_Upper_Factorisation<Solver_Type::lower_upper_factorisation, _size, false> ;
+using Solver_LU = Direct_Lower_Upper_Factorisation<Solver_Type::lower_upper_factorisation, _size, false>;
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Direct Lower Upper Factorisation Template Definitions
@@ -140,12 +141,12 @@ using Solver_LU = Direct_Lower_Upper_Factorisation<Solver_Type::lower_upper_fact
  */
 template<Solver_Type _solver_type, std::size_t _size, bool _pivot>
 bool Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>::factorise(
-  const Matrix_Dense<Scalar, _size, _size>& a_matrix) {
-  
+const Matrix_Dense<Scalar, _size, _size>& a_matrix) {
+
   // Initialise factorisation data.
   factorised = false;
   lu_factorised = a_matrix;
-  if(_pivot){
+  if(_pivot) {
     pivots.resize(lu_factorised.size_column());
     std::iota(pivots.begin(), pivots.end(), 0);
   }
@@ -155,42 +156,42 @@ bool Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>::factorise(
 
     // Pivoting
     if(_pivot) {
-      
+
       // Find largest remaining column value to pivot on.
       Scalar max = 0.0;
       std::size_t i_max = i_row;
       for(std::size_t i_row_sweep = i_row; i_row_sweep < lu_factorised.size_column(); ++i_row_sweep) {
         const Scalar absA = std::abs(lu_factorised[i_row_sweep][i_row]);
-        if(is_nearly_greater(absA, max)) { 
-            max = absA;
-            i_max = i_row_sweep;
+        if(is_nearly_greater(absA, max)) {
+          max = absA;
+          i_max = i_row_sweep;
         }
-      } 
+      }
 
       // Pivot if larger value found.
-      if (i_max != i_row) {
-          std::swap(pivots[i_row], pivots[i_max]);
-          std::swap(lu_factorised[i_row], lu_factorised[i_max]);
+      if(i_max != i_row) {
+        std::swap(pivots[i_row], pivots[i_max]);
+        std::swap(lu_factorised[i_row], lu_factorised[i_max]);
       }
     }
-    
+
     // Check degeneracy.
-    if(std::abs(lu_factorised[i_row][i_row]) < factorisation_tolerance) return false; 
-    
+    if(std::abs(lu_factorised[i_row][i_row]) < factorisation_tolerance) return false;
+
     // Decomposition, actual factorisation to compute L and U.
     for(std::size_t i_row_sweep = i_row + 1; i_row_sweep < lu_factorised.size_row(); ++i_row_sweep) {
-        lu_factorised[i_row_sweep][i_row] /= lu_factorised[i_row][i_row];
+      lu_factorised[i_row_sweep][i_row] /= lu_factorised[i_row][i_row];
 
-        for (std::size_t i_column_sweep = i_row + 1; i_column_sweep < lu_factorised.size_column(); ++i_column_sweep)
-            lu_factorised[i_row_sweep][i_column_sweep] -= 
-              lu_factorised[i_row_sweep][i_row] * lu_factorised[i_row][i_column_sweep];
+      for(std::size_t i_column_sweep = i_row + 1; i_column_sweep < lu_factorised.size_column(); ++i_column_sweep)
+        lu_factorised[i_row_sweep][i_column_sweep] -=
+        lu_factorised[i_row_sweep][i_row] * lu_factorised[i_row][i_column_sweep];
     }
-  }   
+  }
 
   factorised = true;
   return true;
 }
-  
+
 /**
  * @details 
  * This function solves a linear system of equations using direct lower-upper factorization. It takes an input dense 
@@ -201,32 +202,32 @@ bool Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>::factorise(
  */
 template<Solver_Type _solver_type, std::size_t _size, bool _pivot>
 Convergence_Data Direct_Lower_Upper_Factorisation<_solver_type, _size, _pivot>::solve_system(
-  Vector_Dense<Scalar, _size>& x_vector, const Vector_Dense<Scalar, _size>& b_vector) {
+Vector_Dense<Scalar, _size>& x_vector, const Vector_Dense<Scalar, _size>& b_vector) {
 
   ASSERT_DEBUG(b_vector.size() == lu_factorised.size_row(), "Constant vector not of the correct size.");
-  
+
   Convergence_Data convergence_data = Convergence_Data();
   if(!factorised) return convergence_data;
 
   ++convergence_data.iteration;
   x_vector.resize(b_vector.size());
   for(std::size_t i_row = 0; i_row < lu_factorised.size_row(); ++i_row) {
-        x_vector[i_row] = b_vector[_pivot ? pivots[i_row] : i_row];
-  
-        for(std::size_t i_column = 0; i_column < i_row; ++i_column)
-            x_vector[i_row] -= lu_factorised[i_row][i_column] * x_vector[i_column];
-    }
+    x_vector[i_row] = b_vector[_pivot ? pivots[i_row] : i_row];
 
-    for(std::size_t i_row = lu_factorised.size_row() - 1; i_row != std::numeric_limits<std::size_t>::max(); --i_row) {
-        for(std::size_t i_column = i_row + 1; i_column < lu_factorised.size_column(); ++i_column)
-            x_vector[i_row] -= lu_factorised[i_row][i_column] * x_vector[i_column];
-        x_vector[i_row] /= lu_factorised[i_row][i_row];
-    }
-  
+    for(std::size_t i_column = 0; i_column < i_row; ++i_column)
+      x_vector[i_row] -= lu_factorised[i_row][i_column] * x_vector[i_column];
+  }
+
+  for(std::size_t i_row = lu_factorised.size_row() - 1; i_row != std::numeric_limits<std::size_t>::max(); --i_row) {
+    for(std::size_t i_column = i_row + 1; i_column < lu_factorised.size_column(); ++i_column)
+      x_vector[i_row] -= lu_factorised[i_row][i_column] * x_vector[i_column];
+    x_vector[i_row] /= lu_factorised[i_row][i_row];
+  }
+
   convergence_data.converged = true;
   return convergence_data;
 }
-  
-}
 
-#endif //DISA_DIRECT_UPPER_LOWER_FACTORISATION_H
+}  // namespace Disa
+
+#endif  //DISA_DIRECT_UPPER_LOWER_FACTORISATION_H

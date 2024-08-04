@@ -32,7 +32,7 @@ namespace Disa {
 // Edge
 // ---------------------------------------------------------------------------------------------------------------------
 
-using Edge = std::pair<std::size_t, std::size_t>; //! Definition of an edge, alias for a pair of unsigned ints.
+using Edge = std::pair<std::size_t, std::size_t>;  //! Definition of an edge, alias for a pair of unsigned ints.
 
 /**
  * @brief Returns an ordered vertex list for an edge (without duplicated memory).
@@ -45,6 +45,6 @@ constexpr std::pair<const std::size_t&, const std::size_t&> order_edge_vertex(co
                                     : std::pair<const std::size_t&, const std::size_t&>({edge->second, edge->first});
 }
 
-}
+}  // namespace Disa
 
-#endif //DISA_EDGE_H
+#endif  //DISA_EDGE_H

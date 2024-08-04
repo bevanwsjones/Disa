@@ -26,7 +26,7 @@
 #include <queue>
 
 namespace Disa {
-  
+
 // ---------------------------------------------------------------------------------------------------------------------
 // Adjacency_Subgraph
 // ---------------------------------------------------------------------------------------------------------------------
@@ -46,13 +46,13 @@ Adjacency_Subgraph::Adjacency_Subgraph(const Adjacency_Graph<false>& parent_grap
   ASSERT(unique_check.size() == i_partition_local_global.size(), "Partition vertices are not unique.");
   ASSERT(i_partition_local_global.size() <= parent_graph.size_vertex(),
          "Partition size is bigger than graph vertex size.");
-  ASSERT(!std::any_of(i_partition_local_global.begin(), i_partition_local_global.end(),
-                            [&](const std::size_t i_global){return i_global >= parent_graph.size_vertex();}),
-               "A global vertex is not in the parsed parent graph range [0, "
-               + std::to_string(parent_graph.size_vertex()) + ").");
+  ASSERT(
+  !std::any_of(i_partition_local_global.begin(), i_partition_local_global.end(),
+               [&](const std::size_t i_global) { return i_global >= parent_graph.size_vertex(); }),
+  "A global vertex is not in the parsed parent graph range [0, " + std::to_string(parent_graph.size_vertex()) + ").");
 #endif
 
-  hash_parent = std::hash<Adjacency_Graph<false> >{}(parent_graph);
+  hash_parent = std::hash<Adjacency_Graph<false>>{}(parent_graph);
   graph = parent_graph;
   reserve(i_partition_local_global.size());
 
@@ -66,13 +66,14 @@ Adjacency_Subgraph::Adjacency_Subgraph(const Adjacency_Graph<false>& parent_grap
   }
 
   // Remove vertices not in this subgraph.
-  auto not_in_subgraph =
-    [&](const std::size_t& vertex){return i_global_local[vertex] == std::numeric_limits<std::size_t>::max();};
+  auto not_in_subgraph = [&](const std::size_t& vertex) {
+    return i_global_local[vertex] == std::numeric_limits<std::size_t>::max();
+  };
   graph.erase_if(not_in_subgraph);
 
   // Add back additional levels as needed.
   if(extra_levels != 0)
-    update_levels(parent_graph, extra_levels, std::make_shared<std::vector<std::size_t> >(i_global_local));
+    update_levels(parent_graph, extra_levels, std::make_shared<std::vector<std::size_t>>(i_global_local));
 };
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -91,8 +92,8 @@ Adjacency_Subgraph Adjacency_Subgraph::reorder(const std::vector<std::size_t>& p
   new_graph.level_set_value.resize(level_set_value.empty() ? 0 : permutation.size());
 
   FOR(i_old, size_vertex()) {
-  new_graph.i_local_global[permutation[i_old]] = i_local_global[i_old];
-  if(!level_set_value.empty()) new_graph.level_set_value[permutation[i_old]] = level_set_value[i_old];
+    new_graph.i_local_global[permutation[i_old]] = i_local_global[i_old];
+    if(!level_set_value.empty()) new_graph.level_set_value[permutation[i_old]] = level_set_value[i_old];
   }
 
   new_graph.i_local_global.swap(i_local_global);
@@ -107,9 +108,10 @@ Adjacency_Subgraph Adjacency_Subgraph::reorder(const std::vector<std::size_t>& p
  * i_global_local shared pointer.
  */
 void Adjacency_Subgraph::update_levels(const Adjacency_Graph<false>& parent_graph, const std::size_t max_level,
-                                       std::shared_ptr<std::vector<std::size_t> > i_global_local) {
+                                       std::shared_ptr<std::vector<std::size_t>> i_global_local) {
 
-  ASSERT(hash_parent == std::hash<Adjacency_Graph<false> >{}(parent_graph), "Parsed graph is not the parent to this subgraph.");
+  ASSERT(hash_parent == std::hash<Adjacency_Graph<false>>{}(parent_graph),
+         "Parsed graph is not the parent to this subgraph.");
 
   // Determine if we are adding or removing levels
   std::size_t current_max = 0;
@@ -133,11 +135,12 @@ void Adjacency_Subgraph::update_levels(const Adjacency_Graph<false>& parent_grap
  */
 void Adjacency_Subgraph::add_levels(const Adjacency_Graph<false>& parent_graph, const std::size_t max_level,
                                     const std::size_t current_max,
-                                    std::shared_ptr<std::vector<std::size_t> > i_global_local) {
+                                    std::shared_ptr<std::vector<std::size_t>> i_global_local) {
 
   // Check the global-local vector
-  if(i_global_local == nullptr) i_global_local =
-    std::make_shared<std::vector<std::size_t> > (parent_graph.size_vertex(), std::numeric_limits<std::size_t>::max());
+  if(i_global_local == nullptr)
+    i_global_local =
+    std::make_shared<std::vector<std::size_t>>(parent_graph.size_vertex(), std::numeric_limits<std::size_t>::max());
   if(i_global_local->size() != parent_graph.size_vertex()) i_global_local->resize(parent_graph.size_vertex());
   std::fill(i_global_local->begin(), i_global_local->end(), std::numeric_limits<std::size_t>::max());
 
@@ -155,11 +158,11 @@ void Adjacency_Subgraph::add_levels(const Adjacency_Graph<false>& parent_graph, 
 
   // Add new vertices to local-global mapping.
   FOR(i_vertex, levels.size())
-    if(current_max < levels[i_vertex] && levels[i_vertex] <= max_level) {
-      (*i_global_local)[i_vertex] = i_local_global.size();
-      i_local_global.push_back(i_vertex);
-      level_set_value.push_back(levels[i_vertex]);
-    }
+  if(current_max < levels[i_vertex] && levels[i_vertex] <= max_level) {
+    (*i_global_local)[i_vertex] = i_local_global.size();
+    i_local_global.push_back(i_vertex);
+    level_set_value.push_back(levels[i_vertex]);
+  }
 
   // Insert edge connectivity between newly added vertices.
   FOR(i_global, levels.size()) {
@@ -180,26 +183,28 @@ void Adjacency_Subgraph::add_levels(const Adjacency_Graph<false>& parent_graph, 
  * local-to-global map and levels are updated. If the global-to-local map is not a nullptr it is (re)populated.
  */
 void Adjacency_Subgraph::remove_levels(const Adjacency_Graph<false>& parent_graph, const std::size_t max_level,
-                                       std::shared_ptr<std::vector<std::size_t> > i_global_local) {
-  auto not_in_subgraph = [&](const std::size_t& vertex){return level_set_value[vertex] > max_level;};
+                                       std::shared_ptr<std::vector<std::size_t>> i_global_local) {
+  auto not_in_subgraph = [&](const std::size_t& vertex) {
+    return level_set_value[vertex] > max_level;
+  };
   graph.erase_if(not_in_subgraph);
 
   std::size_t i_vertex = 0;
-  i_local_global.erase(std::remove_if(i_local_global.begin(), i_local_global.end(),
-                                      [&](const auto){return not_in_subgraph(i_vertex++);}), i_local_global.end());
+  i_local_global.erase(
+  std::remove_if(i_local_global.begin(), i_local_global.end(), [&](const auto) { return not_in_subgraph(i_vertex++); }),
+  i_local_global.end());
 
   if(max_level != 0) {
     level_set_value.erase(std::remove_if(level_set_value.begin(), level_set_value.end(),
                                          [&](const std::size_t level) { return level > max_level; }),
                           level_set_value.end());
-  }
-  else level_set_value.clear();
+  } else level_set_value.clear();
 
   // If we were parsed a global to local pointer, populate with new data.
   if(i_global_local != nullptr) {
     i_global_local->resize(parent_graph.size_vertex());
     std::fill(i_global_local->begin(), i_global_local->end(), std::numeric_limits<std::size_t>::max());
-    FOR(i_local, size_vertex()) (*i_global_local)[local_global(i_local)] = i_local;
+    FOR(i_local, size_vertex())(*i_global_local)[local_global(i_local)] = i_local;
   }
 }
 
@@ -227,16 +232,16 @@ void Adjacency_Subgraph::remove_levels(const Adjacency_Graph<false>& parent_grap
 std::ostream& operator<<(std::ostream& ostream, const Adjacency_Subgraph& graph) {
 
   FOR(i_vertex, graph.size_vertex()) {
-    if(i_vertex != 0) ostream<<"\n";
+    if(i_vertex != 0) ostream << "\n";
     FOR_EACH(adjacent_vertex, graph[i_vertex])
-      ostream<<adjacent_vertex<<(adjacent_vertex != graph[i_vertex].back() ? ", " : "");
-    if(graph[i_vertex].empty()) ostream<<".";
+    ostream << adjacent_vertex << (adjacent_vertex != graph[i_vertex].back() ? ", " : "");
+    if(graph[i_vertex].empty()) ostream << ".";
   }
 
   FOR(i_vertex, graph.size_vertex())
-    ostream<<"\n"<<i_vertex<<" -> "<<graph.local_global(i_vertex)<<" ("<<graph.vertex_level(i_vertex)<<")";
+  ostream << "\n" << i_vertex << " -> " << graph.local_global(i_vertex) << " (" << graph.vertex_level(i_vertex) << ")";
 
   return ostream;
 }
 
-}
+}  // namespace Disa

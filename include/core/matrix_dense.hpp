@@ -58,11 +58,11 @@ namespace Disa {
  */
 template<typename _type, std::size_t _row, std::size_t _col>
 struct Matrix_Dense : public std::array<Vector_Dense<_type, _col>, _row> {
-  using value_type = _type;                               //!< The type of the matrix, e.g. double, float, int.
-  using matrix_type = Matrix_Dense<_type, _row, _col>;    //!< Short hand for this matrix type.
-  static constexpr std::size_t row = _row;                //!< Number of rows in the matrix
-  static constexpr std::size_t col = _col;                //!< Number of columns in the matrix
-  static constexpr bool is_dynamic = false;               //!< Indicates the matrix is compile time sized.
+  using value_type = _type;                             //!< The type of the matrix, e.g. double, float, int.
+  using matrix_type = Matrix_Dense<_type, _row, _col>;  //!< Short hand for this matrix type.
+  static constexpr std::size_t row = _row;              //!< Number of rows in the matrix
+  static constexpr std::size_t col = _col;              //!< Number of columns in the matrix
+  static constexpr bool is_dynamic = false;             //!< Indicates the matrix is compile time sized.
   static_assert(_row != 0 && _col != 0, "Semi-static matrices are not supported");
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -72,15 +72,15 @@ struct Matrix_Dense : public std::array<Vector_Dense<_type, _col>, _row> {
   /**
    * @brief Initialise empty matrix.
    */
-  Matrix_Dense() : std::array<Vector_Dense<_type, _col>, _row>() {};
+  Matrix_Dense() : std::array<Vector_Dense<_type, _col>, _row>(){};
 
   /**
    * @brief Constructor to construct from initializer of vectors list, list and matrix must be of the same dimensions.
    * @param[in] list The list of vectors to initialise the matrix.
    */
-  Matrix_Dense(const std::initializer_list<Vector_Dense<_type, _col> >& list) {
+  Matrix_Dense(const std::initializer_list<Vector_Dense<_type, _col>>& list) {
     auto iter = this->begin();
-    FOR_EACH(item, list) *iter++ = item;
+    FOR_EACH(item, list)* iter++ = item;
   }
 
   /**
@@ -89,10 +89,12 @@ struct Matrix_Dense : public std::array<Vector_Dense<_type, _col>, _row> {
    * @param[in] row Desired number of rows of the matrix. Defaulted, allows interoperability with dynamic matrices
    * @param[in] column Desired number of columns of the matrix. Defaulted, allows interoperability with dynamic matrices
    */
-  explicit Matrix_Dense(const std::function<Scalar(std::size_t, std::size_t)>& lambda,
-                        std::size_t row = _row, std::size_t column = _col) {
+  explicit Matrix_Dense(const std::function<Scalar(std::size_t, std::size_t)>& lambda, std::size_t row = _row,
+                        std::size_t column = _col) {
     ASSERT_DEBUG(row == _row && column == _col, "Cannot change the number of rows and columns for a static matrix.");
-    FOR(i_row, row) { FOR(i_column, column) (*this)[i_row][i_column] = lambda(i_row, i_column); }
+    FOR(i_row, row) {
+      FOR(i_column, column)(*this)[i_row][i_column] = lambda(i_row, i_column);
+    }
   }
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -154,10 +156,10 @@ struct Matrix_Dense : public std::array<Vector_Dense<_type, _col>, _row> {
    */
   template<std::size_t _row_other, std::size_t _col_other>
   constexpr matrix_type& operator+=(const Matrix_Dense<_type, _row_other, _col_other>& matrix) {
-    ASSERT_DEBUG(size() == matrix.size(),
-                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
-                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
-    FOR(row, _row) (*this)[row] += matrix[row];
+    ASSERT_DEBUG(size() == matrix.size(), "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," +
+                                          std::to_string(size_column()) + " vs. " + std::to_string(matrix.size_row()) +
+                                          "," + std::to_string(matrix.size_column()) + ".");
+    FOR(row, _row)(*this)[row] += matrix[row];
     return *this;
   }
 
@@ -170,10 +172,10 @@ struct Matrix_Dense : public std::array<Vector_Dense<_type, _col>, _row> {
    */
   template<std::size_t _row_other, std::size_t _col_other>
   constexpr matrix_type& operator-=(const Matrix_Dense<_type, _row_other, _col_other>& matrix) {
-    ASSERT_DEBUG(size() == matrix.size(),
-                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
-                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
-    FOR(row, _row) (*this)[row] -= matrix[row];
+    ASSERT_DEBUG(size() == matrix.size(), "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," +
+                                          std::to_string(size_column()) + " vs. " + std::to_string(matrix.size_row()) +
+                                          "," + std::to_string(matrix.size_column()) + ".");
+    FOR(row, _row)(*this)[row] -= matrix[row];
     return *this;
   }
 
@@ -189,16 +191,16 @@ struct Matrix_Dense : public std::array<Vector_Dense<_type, _col>, _row> {
   template<std::size_t _row_other, std::size_t _col_other>
   constexpr matrix_type& operator*=(const Matrix_Dense<_type, _row_other, _col_other>& matrix) {
     // For static containers the matrices must be square.
-    ASSERT_DEBUG(size() == matrix.size(),
-                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
-                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
+    ASSERT_DEBUG(size() == matrix.size(), "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," +
+                                          std::to_string(size_column()) + " vs. " + std::to_string(matrix.size_row()) +
+                                          "," + std::to_string(matrix.size_column()) + ".");
     matrix_type copy;
     std::swap(*this, copy);
     FOR(i_row, size_row()) {
       FOR(i_row_other, matrix.size_row()) {
         FOR(i_column, size_column()) {
-          if (i_row_other == 0) (*this)[i_row][i_column] = 0.0;
-          (*this)[i_row][i_column] += copy[i_row][i_row_other]*matrix[i_row_other][i_column];
+          if(i_row_other == 0) (*this)[i_row][i_column] = 0.0;
+          (*this)[i_row][i_column] += copy[i_row][i_row_other] * matrix[i_row_other][i_column];
         }
       }
     }
@@ -219,8 +221,8 @@ struct Matrix_Dense : public std::array<Vector_Dense<_type, _col>, _row> {
  * _col = 0.
  */
 template<typename _type>
-struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0> > {
-  using value_type = _type;                       //!< The type of the matrix, e.g. double, float, int. 
+struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0>> {
+  using value_type = _type;                       //!< The type of the matrix, e.g. double, float, int.
   using matrix_type = Matrix_Dense<_type, 0, 0>;  //!< Short hand for this matrix type.
   static constexpr std::size_t row = 0;           //!< Number of rows in the matrix, 0 = dynamic
   static constexpr std::size_t col = 0;           //!< Number of columns in the matrix
@@ -233,13 +235,13 @@ struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0> > {
   /**
    * @brief Initialise empty matrix.
    */
-  Matrix_Dense() : std::vector<Vector_Dense<_type, 0> >() {};
+  Matrix_Dense() : std::vector<Vector_Dense<_type, 0>>(){};
 
   /**
    * @brief Constructor to construct a matrix from an initializer list, matrix is resized to list size.
    * @param[in] list The list of Scalars to initialise the matrix. Each row much be the same size.
    */
-  Matrix_Dense(const std::initializer_list<Vector_Dense<_type, 0> >& list) {
+  Matrix_Dense(const std::initializer_list<Vector_Dense<_type, 0>>& list) {
     resize(list.size());
     auto iter = this->begin();
     FOR_EACH(item, list) {
@@ -259,7 +261,7 @@ struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0> > {
     resize(row);
     FOR(i_row, row) {
       (*this)[i_row].resize(column);
-      FOR(i_column, column) (*this)[i_row][i_column] = lambda(i_row, i_column);
+      FOR(i_column, column)(*this)[i_row][i_column] = lambda(i_row, i_column);
     }
   }
 
@@ -267,7 +269,7 @@ struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0> > {
   // Size Functions
   // -------------------------------------------------------------------------------------------------------------------
 
-  using std::vector<Vector_Dense<_type, 0> >::resize;
+  using std::vector<Vector_Dense<_type, 0>>::resize;
 
   /**
    * @brief Resizes the rows and columns of the matrix.
@@ -283,7 +285,7 @@ struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0> > {
    * @brief Returns the number of rows in the matrix.
    * @return The number of rows.
    */
-  [[nodiscard]] std::size_t size_row() const noexcept { return std::vector<Vector_Dense<_type, 0> >::size(); }
+  [[nodiscard]] std::size_t size_row() const noexcept { return std::vector<Vector_Dense<_type, 0>>::size(); }
 
   /**
    * @brief Returns the number of columns in the matrix.
@@ -334,10 +336,10 @@ struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0> > {
    */
   template<std::size_t _row_other, std::size_t _col_other>
   constexpr matrix_type& operator+=(const Matrix_Dense<_type, _row_other, _col_other>& matrix) {
-    ASSERT_DEBUG(size() == matrix.size(),
-                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
-                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
-    FOR(row, size_row()) (*this)[row] += matrix[row];
+    ASSERT_DEBUG(size() == matrix.size(), "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," +
+                                          std::to_string(size_column()) + " vs. " + std::to_string(matrix.size_row()) +
+                                          "," + std::to_string(matrix.size_column()) + ".");
+    FOR(row, size_row())(*this)[row] += matrix[row];
     return *this;
   }
 
@@ -350,10 +352,10 @@ struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0> > {
    */
   template<std::size_t _row_other, std::size_t _col_other>
   constexpr matrix_type& operator-=(const Matrix_Dense<_type, _row_other, _col_other>& matrix) {
-    ASSERT_DEBUG(size() == matrix.size(),
-                 "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," + std::to_string(size_column()) +
-                 " vs. " + std::to_string(matrix.size_row()) + "," + std::to_string(matrix.size_column()) + ".");
-    FOR(row, size_row()) (*this)[row] -= matrix[row];
+    ASSERT_DEBUG(size() == matrix.size(), "Incompatible matrix dimensions, " + std::to_string(size_row()) + "," +
+                                          std::to_string(size_column()) + " vs. " + std::to_string(matrix.size_row()) +
+                                          "," + std::to_string(matrix.size_column()) + ".");
+    FOR(row, size_row())(*this)[row] -= matrix[row];
     return *this;
   }
 
@@ -379,7 +381,7 @@ struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0> > {
       FOR(i_row_other, matrix.size_row()) {
         FOR(i_column, size_column()) {
           if(i_row_other == 0) (*this)[i_row][i_column] = 0.0;
-          (*this)[i_row][i_column] += copy[i_row][i_row_other]*matrix[i_row_other][i_column];
+          (*this)[i_row][i_column] += copy[i_row][i_row_other] * matrix[i_row_other][i_column];
         }
       }
     }
@@ -404,7 +406,9 @@ struct Matrix_Static_Demoter {
   static constexpr bool is_dynamic = matrix_0::is_dynamic || matrix_1::is_dynamic;
   static constexpr std::size_t row_new = is_dynamic ? 0 : matrix_0::row;
   static constexpr std::size_t col_new = is_dynamic ? 0 : matrix_1::col;
-  using type = Matrix_Dense<typename matrix_0::value_type, row_new, col_new>;    //!< Static Matrix type if either _row_0/_colu_0 or _row_1/_colu_1 is static else dynamic. */
+  using type =
+  Matrix_Dense<typename matrix_0::value_type, row_new,
+               col_new>;  //!< Static Matrix type if either _row_0/_colu_0 or _row_1/_colu_1 is static else dynamic. */
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -450,12 +454,12 @@ constexpr Matrix_Dense<_type, _row, _col> operator/(Matrix_Dense<_type, _row, _c
  * @return New vector, c.
  */
 template<typename _type, std::size_t _row, std::size_t _col, std::size_t _size>
-typename Static_Promoter<Vector_Dense<_type, _row>, Vector_Dense<_type, _size> >::type
-constexpr operator*(const Matrix_Dense<_type, _row, _col>& matrix, const Vector_Dense<_type, _size>& vector) {
+typename Static_Promoter<Vector_Dense<_type, _row>, Vector_Dense<_type, _size>>::type constexpr operator*(
+const Matrix_Dense<_type, _row, _col>& matrix, const Vector_Dense<_type, _size>& vector) {
   ASSERT_DEBUG(matrix.size_column() == vector.size(),
                "Incompatible vector-matrix dimensions, " + std::to_string(matrix.size_row()) + "," +
                std::to_string(matrix.size_column()) + " vs. " + std::to_string(vector.size()));
-  typedef typename Static_Promoter<Vector_Dense<_type, _row>, Vector_Dense<_type, _size> >::type _return_vector;
+  typedef typename Static_Promoter<Vector_Dense<_type, _row>, Vector_Dense<_type, _size>>::type _return_vector;
   return _return_vector([&](const std::size_t i_row) { return dot_product(matrix[i_row], vector); },
                         matrix.size_column());
 }
@@ -472,18 +476,17 @@ constexpr operator*(const Matrix_Dense<_type, _row, _col>& matrix, const Vector_
  * @return New matrix, C.
  */
 template<typename _type, std::size_t _row_0, std::size_t _col_0, std::size_t _row_1, std::size_t _col_1>
-typename Static_Promoter<Matrix_Dense<_type, _row_0, _col_0>, Matrix_Dense<_type, _row_1, _col_1> >::type
-constexpr operator+(const Matrix_Dense<_type, _row_0, _col_0>& matrix_0, 
-                    const Matrix_Dense<_type, _row_1, _col_1>& matrix_1) {
+typename Static_Promoter<Matrix_Dense<_type, _row_0, _col_0>, Matrix_Dense<_type, _row_1, _col_1>>::type constexpr
+operator+(const Matrix_Dense<_type, _row_0, _col_0>& matrix_0, const Matrix_Dense<_type, _row_1, _col_1>& matrix_1) {
   ASSERT_DEBUG(matrix_0.size() == matrix_1.size(),
                "Incompatible matrix dimensions, " + std::to_string(matrix_0.size_row()) + "," +
                std::to_string(matrix_0.size_column()) + " vs. " + std::to_string(matrix_1.size_row()) + "," +
                std::to_string(matrix_1.size_column()) + ".");
-  typedef typename Static_Promoter<Matrix_Dense<_type, _row_0, _col_0>,
-                                   Matrix_Dense<_type, _row_1, _col_1> >::type _return_matrix;
+  typedef typename Static_Promoter<Matrix_Dense<_type, _row_0, _col_0>, Matrix_Dense<_type, _row_1, _col_1>>::type
+  _return_matrix;
   return _return_matrix(
-    [&](std::size_t i_row, std::size_t i_column) { return matrix_0[i_row][i_column] + matrix_1[i_row][i_column]; },
-    matrix_0.size_row(), matrix_0.size_column());
+  [&](std::size_t i_row, std::size_t i_column) { return matrix_0[i_row][i_column] + matrix_1[i_row][i_column]; },
+  matrix_0.size_row(), matrix_0.size_column());
 }
 
 /**
@@ -498,18 +501,17 @@ constexpr operator+(const Matrix_Dense<_type, _row_0, _col_0>& matrix_0,
  * @return New matrix, C.
  */
 template<typename _type, std::size_t _row_0, std::size_t _col_0, std::size_t _row_1, std::size_t _col_1>
-typename Static_Promoter<Matrix_Dense<_type, _row_0, _col_0>, Matrix_Dense<_type, _row_1, _col_1> >::type
-constexpr operator-(const Matrix_Dense<_type, _row_0, _col_0>& matrix_0, 
-                    const Matrix_Dense<_type, _row_1, _col_1>& matrix_1) {
+typename Static_Promoter<Matrix_Dense<_type, _row_0, _col_0>, Matrix_Dense<_type, _row_1, _col_1>>::type constexpr
+operator-(const Matrix_Dense<_type, _row_0, _col_0>& matrix_0, const Matrix_Dense<_type, _row_1, _col_1>& matrix_1) {
   ASSERT_DEBUG(matrix_0.size() == matrix_1.size(),
                "Incompatible matrix dimensions, " + std::to_string(matrix_0.size_row()) + "," +
                std::to_string(matrix_0.size_column()) + " vs. " + std::to_string(matrix_1.size_row()) + "," +
                std::to_string(matrix_1.size_column()) + ".");
-  typedef typename Static_Promoter<Matrix_Dense<_type, _row_0, _col_0>, 
-                                   Matrix_Dense<_type, _row_1, _col_1> >::type _return_matrix;
+  typedef typename Static_Promoter<Matrix_Dense<_type, _row_0, _col_0>, Matrix_Dense<_type, _row_1, _col_1>>::type
+  _return_matrix;
   return _return_matrix(
-    [&](std::size_t i_row, std::size_t i_column) { return matrix_0[i_row][i_column] - matrix_1[i_row][i_column]; },
-    matrix_0.size_row(), matrix_0.size_column());
+  [&](std::size_t i_row, std::size_t i_column) { return matrix_0[i_row][i_column] - matrix_1[i_row][i_column]; },
+  matrix_0.size_row(), matrix_0.size_column());
 }
 
 /**
@@ -524,21 +526,20 @@ constexpr operator-(const Matrix_Dense<_type, _row_0, _col_0>& matrix_0,
  * @return New matrix, C.
  */
 template<typename _type, std::size_t _row_0, std::size_t _col_0, std::size_t _row_1, std::size_t _col_1>
-typename Matrix_Static_Demoter<const Matrix_Dense<_type, _row_0, _col_0>, const Matrix_Dense<_type, _row_1, _col_1> >::type
-constexpr operator*(const Matrix_Dense<_type, _row_0, _col_0>& matrix_0,
-                    const Matrix_Dense<_type, _row_1, _col_1>& matrix_1) {
+typename Matrix_Static_Demoter<const Matrix_Dense<_type, _row_0, _col_0>,
+                               const Matrix_Dense<_type, _row_1, _col_1>>::type constexpr
+operator*(const Matrix_Dense<_type, _row_0, _col_0>& matrix_0, const Matrix_Dense<_type, _row_1, _col_1>& matrix_1) {
   ASSERT_DEBUG(matrix_0.size_column() == matrix_1.size_row(),
                "Incompatible matrix dimensions, " + std::to_string(matrix_0.size_row()) + "," +
                std::to_string(matrix_0.size_column()) + " vs. " + std::to_string(matrix_1.size_row()) + "," +
                std::to_string(matrix_1.size_column()) + ".");
-  typename Matrix_Static_Demoter<const Matrix_Dense<_type, _row_0, _col_0>, 
-                                 const Matrix_Dense<_type, _row_1, _col_1> >::type
-    _return_matrix([&](const std::size_t i_row, const std::size_t i_column) {
-    return matrix_0[i_row][i_column];
-  }, matrix_0.size_row(), matrix_0.size_column());
+  typename Matrix_Static_Demoter<const Matrix_Dense<_type, _row_0, _col_0>,
+                                 const Matrix_Dense<_type, _row_1, _col_1>>::type
+  _return_matrix([&](const std::size_t i_row, const std::size_t i_column) { return matrix_0[i_row][i_column]; },
+                 matrix_0.size_row(), matrix_0.size_column());
   return _return_matrix *= matrix_1;
 }
 
-}
+}  // namespace Disa
 
-#endif //DISA_MATRIX_DENSE_H
+#endif  //DISA_MATRIX_DENSE_H

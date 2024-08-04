@@ -49,9 +49,9 @@ void multinode_level_set_expansion(const Adjacency_Graph<false>& graph, std::siz
  * @param[in] number_partitions The number of subgraphs to be generated.
  * @return A vector of subgraphs representing the bisected graph.
  */
-std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph<false>& graph, 
+std::vector<Adjacency_Subgraph> recursive_graph_bisection(const Adjacency_Graph<false>& graph,
                                                           std::size_t number_partitions);
 
-}
+}  // namespace Disa
 
-#endif //DISA_PARTITION_H
+#endif  //DISA_PARTITION_H
