@@ -174,9 +174,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1fcf16cce1cc2fa5f4b7d96646e33221"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_adjacency___subgraph.html">Adjacency_Subgraph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a1fcf16cce1cc2fa5f4b7d96646e33221">reorder</a> (const std::vector&lt; std::size_t &gt; &amp;permutation)</td></tr>
 <tr class="memdesc:a1fcf16cce1cc2fa5f4b7d96646e33221"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorders this graph given a new index numbering.  <a href="class_disa_1_1_adjacency___subgraph.html#a1fcf16cce1cc2fa5f4b7d96646e33221">More...</a><br /></td></tr>
 <tr class="separator:a1fcf16cce1cc2fa5f4b7d96646e33221"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c75cda6d0fc356e61c666d73c0b36ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a9c75cda6d0fc356e61c666d73c0b36ca">update_levels</a> (const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>&lt; false &gt; &amp;parent_graph, std::size_t max_level, std::shared_ptr&lt; std::vector&lt; std::size_t &gt; &gt; i_global_local=nullptr)</td></tr>
-<tr class="memdesc:a9c75cda6d0fc356e61c666d73c0b36ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the number of 'halo' levels/vertices around the primary sub-graph.  <a href="class_disa_1_1_adjacency___subgraph.html#a9c75cda6d0fc356e61c666d73c0b36ca">More...</a><br /></td></tr>
-<tr class="separator:a9c75cda6d0fc356e61c666d73c0b36ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a126370241d2da3c2161a688518f2e748"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#a126370241d2da3c2161a688518f2e748">update_levels</a> (const <a class="el" href="class_disa_1_1_adjacency___graph.html">Adjacency_Graph</a>&lt; false &gt; &amp;parent_graph, std::size_t max_level, std::shared_ptr&lt; std::vector&lt; std::size_t &gt;&gt; i_global_local=nullptr)</td></tr>
+<tr class="memdesc:a126370241d2da3c2161a688518f2e748"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the number of 'halo' levels/vertices around the primary sub-graph.  <a href="class_disa_1_1_adjacency___subgraph.html#a126370241d2da3c2161a688518f2e748">More...</a><br /></td></tr>
+<tr class="separator:a126370241d2da3c2161a688518f2e748"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae74963d1838b37a9db0a64a3bfb2813a"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_adjacency___subgraph.html#ae74963d1838b37a9db0a64a3bfb2813a">vertex_level</a> (const std::size_t &amp;i_vertex) const</td></tr>
 <tr class="memdesc:ae74963d1838b37a9db0a64a3bfb2813a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the level of a given vertex in the graph.  <a href="class_disa_1_1_adjacency___subgraph.html#ae74963d1838b37a9db0a64a3bfb2813a">More...</a><br /></td></tr>
 <tr class="separator:ae74963d1838b37a9db0a64a3bfb2813a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1044,8 +1044,8 @@ Invalidates the parent hash if size is increased. </dd></dl>
 
 </div>
 </div>
-<a id="a9c75cda6d0fc356e61c666d73c0b36ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c75cda6d0fc356e61c666d73c0b36ca">&#9670;&nbsp;</a></span>update_levels()</h2>
+<a id="a126370241d2da3c2161a688518f2e748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a126370241d2da3c2161a688518f2e748">&#9670;&nbsp;</a></span>update_levels()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1065,7 +1065,7 @@ Invalidates the parent hash if size is increased. </dd></dl>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::shared_ptr&lt; std::vector&lt; std::size_t &gt; &gt;&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; std::vector&lt; std::size_t &gt;&gt;&#160;</td>
           <td class="paramname"><em>i_global_local</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>

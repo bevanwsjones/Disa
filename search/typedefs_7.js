@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s_5fsize_5ft_485',['s_size_t',['../namespace_disa.html#a292ef5870b9a88a0657959d670390c41',1,'Disa']]],
+  ['s_5fsize_5ft_485',['s_size_t',['../namespace_disa.html#a7d4bf73548962961b7931d56f612f906',1,'Disa']]],
   ['scalar_486',['Scalar',['../namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb',1,'Disa']]],
   ['size_5ftype_487',['size_type',['../struct_disa_1_1_iterator___matrix___sparse___element.html#a47d066d8573fb593329e4a07b3f80283',1,'Disa::Iterator_Matrix_Sparse_Element']]],
   ['solver_5fgauss_5fseidel_488',['Solver_Gauss_Seidel',['../namespace_disa.html#a398ac024b656d2e99d3f07e22b7d4d5e',1,'Disa']]],

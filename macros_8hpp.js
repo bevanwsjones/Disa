@@ -14,7 +14,7 @@ var macros_8hpp =
     [ "GET_MACRO", "macros_8hpp.html#a857fa4baf727f64fa21f32da2b6c0468", null ],
     [ "INFO", "macros_8hpp.html#a809f816dd6df4e17499413cff1926fd4", null ],
     [ "WARNING", "macros_8hpp.html#aaf99b8fcaa4b837f684ea0505ed34487", null ],
-    [ "s_size_t", "macros_8hpp.html#a292ef5870b9a88a0657959d670390c41", null ],
+    [ "s_size_t", "macros_8hpp.html#a7d4bf73548962961b7931d56f612f906", null ],
     [ "Log_Level", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0e", [
       [ "Error", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea902b0d55fddef6f8d651fe1035b7d4bd", null ],
       [ "Warning", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea0eaadb4fcb48a0a0ed7bc9868be9fbaa", null ],

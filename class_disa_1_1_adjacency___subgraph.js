@@ -27,6 +27,6 @@ var class_disa_1_1_adjacency___subgraph =
     [ "size_edge", "class_disa_1_1_adjacency___subgraph.html#ae13038ad8e3b198ec30c83e3ac524f2f", null ],
     [ "size_vertex", "class_disa_1_1_adjacency___subgraph.html#a6278cc8407882022d4790eadf867860c", null ],
     [ "swap", "class_disa_1_1_adjacency___subgraph.html#a2e4a6ced26dca3a8d702c4dedd486a41", null ],
-    [ "update_levels", "class_disa_1_1_adjacency___subgraph.html#a9c75cda6d0fc356e61c666d73c0b36ca", null ],
+    [ "update_levels", "class_disa_1_1_adjacency___subgraph.html#a126370241d2da3c2161a688518f2e748", null ],
     [ "vertex_level", "class_disa_1_1_adjacency___subgraph.html#ae74963d1838b37a9db0a64a3bfb2813a", null ]
 ];

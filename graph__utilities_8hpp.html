@@ -91,10 +91,10 @@ $(document).ready(function(){initNavTree('graph__utilities_8hpp.html',''); initR
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="adjacency__graph_8hpp_source.html">adjacency_graph.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="adjacency__subgraph_8hpp_source.html">adjacency_subgraph.hpp</a>&quot;</code><br />
-<code>#include &lt;numeric&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;queue&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;numeric&gt;</code><br />
+<code>#include &lt;queue&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="graph__utilities_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -121,10 +121,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ad4545c645058204de6bd28e10681f9a9"><td class="memTemplItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#ad4545c645058204de6bd28e10681f9a9">pseudo_peripheral_vertex</a> (const _graph &amp;graph, std::size_t i_start=0)</td></tr>
 <tr class="memdesc:ad4545c645058204de6bd28e10681f9a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds a pseudo peripheral vertex in the parsed graph.  <a href="namespace_disa.html#ad4545c645058204de6bd28e10681f9a9">More...</a><br /></td></tr>
 <tr class="separator:ad4545c645058204de6bd28e10681f9a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6366f3d734594bd7411598b839ee5912"><td class="memTemplParams" colspan="2">template&lt;class _graph &gt; </td></tr>
-<tr class="memitem:a6366f3d734594bd7411598b839ee5912"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a6366f3d734594bd7411598b839ee5912">eccentricity_graph</a> (const _graph &amp;graph, std::vector&lt; std::vector&lt; std::size_t &gt; &gt; &amp;eccentricity)</td></tr>
-<tr class="memdesc:a6366f3d734594bd7411598b839ee5912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the eccentricity of all vertices in the graph using the breadth-first search algorithm.  <a href="namespace_disa.html#a6366f3d734594bd7411598b839ee5912">More...</a><br /></td></tr>
-<tr class="separator:a6366f3d734594bd7411598b839ee5912"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45311df1e208f390cb22280079b43fcb"><td class="memTemplParams" colspan="2">template&lt;class _graph &gt; </td></tr>
+<tr class="memitem:a45311df1e208f390cb22280079b43fcb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a45311df1e208f390cb22280079b43fcb">eccentricity_graph</a> (const _graph &amp;graph, std::vector&lt; std::vector&lt; std::size_t &gt;&gt; &amp;eccentricity)</td></tr>
+<tr class="memdesc:a45311df1e208f390cb22280079b43fcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the eccentricity of all vertices in the graph using the breadth-first search algorithm.  <a href="namespace_disa.html#a45311df1e208f390cb22280079b43fcb">More...</a><br /></td></tr>
+<tr class="separator:a45311df1e208f390cb22280079b43fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af567d3896f170a065339bfb89deef1b0"><td class="memTemplParams" colspan="2">template&lt;class _graph &gt; </td></tr>
 <tr class="memitem:af567d3896f170a065339bfb89deef1b0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#af567d3896f170a065339bfb89deef1b0">eccentricity_vertex_breadth_first</a> (const _graph &amp;graph, const std::size_t i_start, std::vector&lt; std::size_t &gt; &amp;distance, const std::size_t i_stop=std::numeric_limits&lt; std::size_t &gt;::max())</td></tr>
 <tr class="memdesc:af567d3896f170a065339bfb89deef1b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform breadth-first search to compute the eccentricity of each vertex in a graph from a given vertex.  <a href="namespace_disa.html#af567d3896f170a065339bfb89deef1b0">More...</a><br /></td></tr>

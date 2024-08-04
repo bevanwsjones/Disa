@@ -3,7 +3,7 @@ var struct_disa_1_1_matrix___dense =
     [ "matrix_type", "struct_disa_1_1_matrix___dense.html#af21dcda00222c295466ceb13341ec599", null ],
     [ "value_type", "struct_disa_1_1_matrix___dense.html#a88373869d8235ffb1bd8eabfc29a1dc2", null ],
     [ "Matrix_Dense", "struct_disa_1_1_matrix___dense.html#a8b9ed1f325122cee4905e0d780db5f63", null ],
-    [ "Matrix_Dense", "struct_disa_1_1_matrix___dense.html#a2712f4bd80c99f31b9ac5b88b0b049f7", null ],
+    [ "Matrix_Dense", "struct_disa_1_1_matrix___dense.html#a88c3ed8caf24d75f9259aefa33cd7064", null ],
     [ "Matrix_Dense", "struct_disa_1_1_matrix___dense.html#a01ea131aa6a6d37391680649f3e52d77", null ],
     [ "operator*=", "struct_disa_1_1_matrix___dense.html#a73d8be0c87640de991709c1c7210ed9a", null ],
     [ "operator*=", "struct_disa_1_1_matrix___dense.html#a74b3f3e630954becdc91fd7e428168fd", null ],
