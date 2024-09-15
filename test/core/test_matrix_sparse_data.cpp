@@ -24,21 +24,16 @@
 
 using namespace Disa;
 
-
-
 TEST(test_matrix_sparse, lower_bound) {
   CSR_Data<Scalar, uint> data = {
-    .row_offset = {0, 1, 3, 3}, 
-    .column_index = {1, 0, 2}, 
-    .value = {3.0, 4.0, 5.0}, 
-    .columns = 3};
+  .row_offset = {0, 1, 3, 3}, .column_index = {1, 0, 2}, .value = {3.0, 4.0, 5.0}, .columns = 3};
 
-  
   EXPECT_EQ(std::get<0>(lower_bound(data, 0u, 0u)), 0);
-  // EXPECT_EQ(lower_bound(0, 0).i_column(), 1);
-  // EXPECT_EQ(lower_bound(0, 1).i_row(), 0);
-  // EXPECT_EQ(lower_bound(0, 1).i_column(), 1);
-  // EXPECT_EQ(lower_bound(0, 2), matrix[0].end());
+  EXPECT_EQ(std::get<1>(lower_bound(data, 0u, 0u))[0], 1);
+  EXPECT_EQ(std::get<2>(lower_bound(data, 0u, 0u))[0], 3.0);
+  //EXPECT_EQ(lower_bound(data, 0, 1).i_row(), 0);
+  //EXPECT_EQ(lower_bound(data, 0, 1).i_column(), 1);
+  //EXPECT_EQ(lower_bound(data, 0, 2), matrix[0].end());
 
   // EXPECT_EQ(lower_bound(1, 0).i_row(), 1);
   // EXPECT_EQ(lower_bound(1, 0).i_column(), 0);
