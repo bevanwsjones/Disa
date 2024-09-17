@@ -85,31 +85,33 @@ std::enable_if<std::is_convertible_v<_arg_index_type, _index_type>, void>::type 
 CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg_index_type& column) {
 
   using s_index_type = std::make_signed_t<_index_type>;
+  auto& row_offset = data.row_offset;
+  auto& column_index = data.column_index;
+  auto& value = data.value;
 
   // resize rows first
   if(row < size_row(data)) {
-    data.column_index.resize(data.row_offset[row]);
-    data.value.resize(data.row_offset[row]);
+    column_index.resize(row_offset[row]);
+    value.resize(row_offset[row]);
   }
-  data.row_offset.resize(row + 1, data.row_offset.empty() ? 0 : data.row_offset.back());
+  row_offset.resize(row + 1, row_offset.empty() ? 0 : row_offset.back());
 
   // resize columns
   // Note: Since we may have to do column erases over multiple rows we do it directly here rather than use erase().
   if(column < size_column(data)) {
     _index_type offset_loss = 0;
     FOR(row, size_row(data)) {
-      const auto& iter_column_end =
-      data.column_index.begin() + static_cast<s_index_type>(data.row_offset[row + 1] - offset_loss);
-      auto iter_column = std::upper_bound(data.column_index.begin() + static_cast<s_index_type>(data.row_offset[row]),
-                                          iter_column_end, column - 1);
+      const auto& iter_column_end = column_index.begin() + static_cast<s_index_type>(row_offset[row + 1] - offset_loss);
+      auto iter_column =
+      std::upper_bound(column_index.begin() + static_cast<s_index_type>(row_offset[row]), iter_column_end, column - 1);
       if(iter_column != iter_column_end) {
-        const s_index_type& start_distance = std::distance(data.column_index.begin(), iter_column);
-        const s_index_type& end_distance = std::distance(data.column_index.begin(), iter_column_end);
-        data.column_index.erase(iter_column, iter_column_end);
-        data.value.erase(data.value.begin() + start_distance, data.value.begin() + end_distance);
+        const s_index_type& start_distance = std::distance(column_index.begin(), iter_column);
+        const s_index_type& end_distance = std::distance(column_index.begin(), iter_column_end);
+        column_index.erase(iter_column, iter_column_end);
+        value.erase(value.begin() + start_distance, value.begin() + end_distance);
         offset_loss += end_distance - start_distance;
       }
-      data.row_offset[row + 1] -= offset_loss;
+      row_offset[row + 1] -= offset_loss;
     }
   }
   data.columns = column;

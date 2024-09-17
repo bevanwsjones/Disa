@@ -39,6 +39,118 @@ TEST(test_matrix_sparse, size) {
   EXPECT_EQ(size_non_zero(data), 1);
 }
 
+TEST(test_matrix_sparse, resize) {
+
+  CSR_Data<Scalar> data{};
+
+  // check row and column expansion
+  resize(data, 5, 9);
+  EXPECT_EQ(size_row(data), 5);
+  EXPECT_EQ(size_column(data), 9);
+  EXPECT_EQ(size_non_zero(data), 0);
+
+  // check row reduction
+  data = CSR_Data<Scalar>({.row_offset = {0, 2, 5, 5, 7},
+                           .column_index = {1, 3, 0, 2, 3, 3, 4},
+                           .value = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+                           .columns = 5});
+  resize(data, 3, 5);
+  EXPECT_EQ(size_row(data), 3);
+  EXPECT_EQ(size_column(data), 5);
+  EXPECT_EQ(size_non_zero(data), 5);
+
+  // check column reduction
+  data = CSR_Data<Scalar>({.row_offset = {0, 2, 5, 5, 7},
+                           .column_index = {1, 3, 0, 2, 3, 3, 4},
+                           .value = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+                           .columns = 5});
+  resize(data, 4, 2);
+  EXPECT_EQ(size_row(data), 4);
+  EXPECT_EQ(size_column(data), 2);
+  EXPECT_EQ(size_non_zero(data), 2);
+  // row 0
+  EXPECT_EQ(data.row_offset[0], 0);
+  EXPECT_EQ(data.column_index[0], 1);
+  EXPECT_EQ(data.value[0], 1.0);
+  // row 1
+  EXPECT_EQ(data.row_offset[1], 1);
+  EXPECT_EQ(data.column_index[1], 0);
+  EXPECT_EQ(data.value[1], 3.0);
+  // end
+  EXPECT_EQ(data.row_offset[2], 2);
+
+  // check row reduction with column expansion
+  data = CSR_Data<Scalar>({.row_offset = {0, 2, 5, 5, 7},
+                           .column_index = {1, 3, 0, 2, 3, 3, 4},
+                           .value = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+                           .columns = 5});
+  resize(data, 2, 8);
+  EXPECT_EQ(size_row(data), 2);
+  EXPECT_EQ(size_column(data), 8);
+  EXPECT_EQ(size_non_zero(data), 5);
+  // row 0
+  EXPECT_EQ(data.row_offset[0], 0);
+  EXPECT_EQ(data.column_index[0], 1);
+  EXPECT_EQ(data.value[0], 1.0);
+  EXPECT_EQ(data.column_index[1], 3);
+  EXPECT_EQ(data.value[1], 2.0);
+  // row 1
+  EXPECT_EQ(data.row_offset[1], 2);
+  EXPECT_EQ(data.column_index[2], 0);
+  EXPECT_EQ(data.value[2], 3.0);
+  EXPECT_EQ(data.column_index[3], 2);
+  EXPECT_EQ(data.value[3], 4.0);
+  EXPECT_EQ(data.column_index[4], 3);
+  EXPECT_EQ(data.value[4], 5.0);
+  // end
+  EXPECT_EQ(data.row_offset[2], 5);
+
+  // check row expansion with column reduction
+  data = CSR_Data<Scalar>({.row_offset = {0, 2, 5, 5, 7},
+                           .column_index = {1, 3, 0, 2, 3, 3, 4},
+                           .value = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+                           .columns = 5});
+  resize(data, 10, 2);
+  EXPECT_EQ(size_row(data), 10);
+  EXPECT_EQ(size_column(data), 2);
+  EXPECT_EQ(size_non_zero(data), 2);
+  // row 0
+  EXPECT_EQ(data.row_offset[0], 0);
+  EXPECT_EQ(data.column_index[0], 1);
+  EXPECT_EQ(data.value[0], 1.0);
+  // row 1
+  EXPECT_EQ(data.row_offset[1], 1);
+  EXPECT_EQ(data.column_index[1], 0);
+  EXPECT_EQ(data.value[1], 3.0);
+  // end
+  EXPECT_EQ(data.row_offset[2], 2);
+
+  // check row and column reduction
+  data = CSR_Data<Scalar>({.row_offset = {0, 2, 5, 5, 7},
+                           .column_index = {1, 3, 0, 2, 3, 3, 4},
+                           .value = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+                           .columns = 5});
+  resize(data, 1, 2);
+  EXPECT_EQ(size_row(data), 1);
+  EXPECT_EQ(size_column(data), 2);
+  EXPECT_EQ(size_non_zero(data), 1);
+  // row 0
+  EXPECT_EQ(data.row_offset[0], 0);
+  EXPECT_EQ(data.column_index[0], 1);
+  EXPECT_EQ(data.value[0], 1.0);
+  EXPECT_EQ(data.row_offset[1], 1);
+
+  // check zero sizing.
+  data = CSR_Data<Scalar>({.row_offset = {0, 2, 5, 5, 7},
+                           .column_index = {1, 3, 0, 2, 3, 3, 4},
+                           .value = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+                           .columns = 5});
+  resize(data, 0, 0);
+  EXPECT_EQ(size_row(data), 0);
+  EXPECT_EQ(size_column(data), 0);
+  EXPECT_EQ(size_non_zero(data), 0);
+}
+
 TEST(test_matrix_sparse, lower_bound) {
   CSR_Data<Scalar> data = {
   .row_offset = {0, 1, 3, 3}, .column_index = {1, 0, 2}, .value = {3.0, 4.0, 5.0}, .columns = 3};
