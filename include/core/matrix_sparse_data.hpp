@@ -80,8 +80,9 @@ std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert(CS
   return {std::make_tuple(row, iter_column, iter_value), true};
 }
 
-template<typename _value_type, typename _index_type>
-void resize(CSR_Data<_value_type, _index_type>& data, const _index_type& row, const _index_type& column) {
+template<typename _value_type, typename _index_type, typename _arg_index_type>
+std::enable_if<std::is_convertible_v<_arg_index_type, _index_type>, void>::type resize(
+CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg_index_type& column) {
 
   using s_index_type = std::make_signed_t<_index_type>;
 
@@ -122,7 +123,7 @@ lower_bound(CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row
     const auto& iter_start = data.column_index.begin() + data.row_offset[row];
     const auto& iter_end = data.column_index.begin() + data.row_offset[row + 1];
     const auto& iter_lower = std::lower_bound(iter_start, iter_end, column);
-    return std::make_tuple(iter_lower != column.end() ? row : (row + 1), iter_lower,
+    return std::make_tuple(iter_lower != iter_end ? row : (row + 1), iter_lower,
                            data.value.begin() + std::distance(data.column_index.begin(), iter_lower));
   } else return std::make_tuple(size_row(data), data.column_index.end(), data.value.end());
 }

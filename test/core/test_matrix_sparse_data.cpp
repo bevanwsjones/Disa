@@ -24,6 +24,21 @@
 
 using namespace Disa;
 
+TEST(test_matrix_sparse, size) {
+  CSR_Data<Scalar> data{};
+  EXPECT_EQ(size_row(data), 0);
+  EXPECT_EQ(size_column(data), 0);
+  EXPECT_EQ(size_non_zero(data), 0);
+
+  resize(data, 7, 6);
+  data.column_index.push_back(3);
+  data.value.push_back(1.0);
+  data.row_offset[8] = 1;  // add additional entry - show that non-zero increased.
+  EXPECT_EQ(size_row(data), 7);
+  EXPECT_EQ(size_column(data), 6);
+  EXPECT_EQ(size_non_zero(data), 1);
+}
+
 TEST(test_matrix_sparse, lower_bound) {
   CSR_Data<Scalar> data = {
   .row_offset = {0, 1, 3, 3}, .column_index = {1, 0, 2}, .value = {3.0, 4.0, 5.0}, .columns = 3};
@@ -66,24 +81,4 @@ TEST(test_matrix_sparse, lower_bound) {
   EXPECT_EQ(std::get<0>(lower_bound(data, 2, 2)), 3);                        // equivalent to end (row +1 )
   EXPECT_EQ(std::get<1>(lower_bound(data, 2, 2)), data.column_index.end());  // equivalent to end of columns
   EXPECT_EQ(std::get<2>(lower_bound(data, 2, 2)), data.value.end());         // equivalent to end of entries/values.
-
-    // EXPECT_EQ(matrix.lower_bound(2, 0), matrix[2].end());
-  // EXPECT_EQ(matrix.lower_bound(3, 3), matrix.end()->end());
-
-  // const Matrix_Sparse matrix_const({0, 1, 3, 3}, {1, 0, 2}, {3.0, 4.0, 5.0}, 3);
-  // EXPECT_EQ(matrix_const.lower_bound(0, 0).i_row(), 0);
-  // EXPECT_EQ(matrix_const.lower_bound(0, 0).i_column(), 1);
-  // EXPECT_EQ(matrix_const.lower_bound(0, 1).i_row(), 0);
-  // EXPECT_EQ(matrix_const.lower_bound(0, 1).i_column(), 1);
-  // EXPECT_EQ(matrix_const.lower_bound(0, 2), matrix_const[0].end());
-
-  // EXPECT_EQ(matrix_const.lower_bound(1, 0).i_row(), 1);
-  // EXPECT_EQ(matrix_const.lower_bound(1, 0).i_column(), 0);
-  // EXPECT_EQ(matrix_const.lower_bound(1, 1).i_row(), 1);
-  // EXPECT_EQ(matrix_const.lower_bound(1, 1).i_column(), 2);
-  // EXPECT_EQ(matrix_const.lower_bound(1, 2).i_row(), 1);
-  // EXPECT_EQ(matrix_const.lower_bound(1, 2).i_column(), 2);
-
-  // EXPECT_EQ(matrix_const.lower_bound(2, 0), matrix_const[2].end());
-  // EXPECT_EQ(matrix_const.lower_bound(3, 3), (*matrix_const.end()).end());
 }
