@@ -23,6 +23,7 @@
 #ifndef DISA_MATRIX_SPARSE_DATA_H
 #define DISA_MATRIX_SPARSE_DATA_H
 
+#include <span>
 #include <tuple>
 #include <vector>
 
@@ -113,21 +114,23 @@ void resize(CSR_Data<_value_type, _index_type>& data, const _index_type& row, co
   data.columns = column;
 }
 
-template<typename _value_type, typename _index_type>
-CSR_Data<_value_type, _index_type>::iterator lower_bound(CSR_Data<_value_type, _index_type>& data,
-                                                         const _index_type& row, const _index_type& column) {
+template<typename _value_type, typename _index_type, typename _arg_index_type>
+std::enable_if<std::is_convertible_v<_arg_index_type, _index_type>,
+               typename CSR_Data<_value_type, _index_type>::iterator>::type
+lower_bound(CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg_index_type& column) {
   if(row < size_row(data)) {
     const auto& iter_start = data.column_index.begin() + data.row_offset[row];
     const auto& iter_end = data.column_index.begin() + data.row_offset[row + 1];
     const auto& iter_lower = std::lower_bound(iter_start, iter_end, column);
-    return std::make_tuple(iter_lower != iter_end ? row : (row + 1), iter_lower,
+    return std::make_tuple(iter_lower != column.end() ? row : (row + 1), iter_lower,
                            data.value.begin() + std::distance(data.column_index.begin(), iter_lower));
   } else return std::make_tuple(size_row(data), data.column_index.end(), data.value.end());
 }
 
-template<typename _value_type, typename _index_type>
-CSR_Data<_value_type, _index_type>::const_iterator lower_bound(const CSR_Data<_value_type, _index_type>& data,
-                                                               const _index_type& row, const _index_type& column) {
+template<typename _value_type, typename _index_type, typename _arg_index_type>
+std::enable_if<std::is_convertible_v<_arg_index_type, _index_type>,
+               typename CSR_Data<_value_type, _index_type>::const_iterator>::type
+lower_bound(const CSR_Data<_value_type, _index_type>& data, const _index_type& row, const _index_type& column) {
   if(row < size_row(data)) {
     const auto& iter_start = data.column_index.begin() + data.row_offset[row];
     const auto& iter_end = data.column_index.begin() + data.row_offset[row + 1];

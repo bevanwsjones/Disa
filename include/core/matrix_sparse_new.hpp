@@ -24,8 +24,8 @@
 #define DISA_MATRIX_SPARSE_NEW_H
 
 #include <numeric>
-#include <vector>
 #include <span>
+#include <vector>
 
 #include "scalar.hpp"
 
@@ -47,159 +47,193 @@ class Matrix_Sparse;
 template<typename _entry_type, typename _index_type>
 struct Matrix_Sparse_Element {
 
-    public:
-    using index_type = _index_type;
-    using reference_index = _index_type&;
-    using const_reference_index = const _index_type&;
-    using pointer_index = _index_type*;
+ public:
+  using index_type = _index_type;
+  using reference_index = _index_type&;
+  using const_reference_index = const _index_type&;
+  using pointer_index = _index_type*;
 
-    using entry_type = _entry_type;
-    using reference_entry = _entry_type&;
-    using const_reference_entry = const _entry_type&;
-    using pointer_entry = _entry_type*;
-    
-    using base_type = Matrix_Sparse_Element<entry_type, index_type>;
+  using entry_type = _entry_type;
+  using reference_entry = _entry_type&;
+  using const_reference_entry = const _entry_type&;
+  using pointer_entry = _entry_type*;
 
-    /**
+  using base_type = Matrix_Sparse_Element<entry_type, index_type>;
+
+  /**
      * @brief Default constructor.
      */
-    Matrix_Sparse_Element() = default;
+  Matrix_Sparse_Element() = default;
 
-    /**
-     * @brief Destructor.
-     */
-    ~Matrix_Sparse_Element() = default;
+  /**
+    * @brief Destructor.
+    */
+  ~Matrix_Sparse_Element() = default;
 
-    /**
+  /**
      * @brief Constructor that initializes the element with the given row index, column pointer, and entry pointer.
      * 
      * @param row The row index of the element.
      * @param column The column pointer of the element.
      * @param entry The entry pointer of the element.
      */
-    Matrix_Sparse_Element(const index_type& row, pointer_index column, pointer_entry entry) : row_index(row), column_ptr(column), entry_ptr(entry) {};
+  Matrix_Sparse_Element(const index_type& row, pointer_index column, pointer_entry entry)
+      : row_index(row), column_ptr(column), entry_ptr(entry) {};
 
-    /**
+  /**
      * @brief Returns a reference to the value of the element.
      * 
      * @return A reference to the value of the element.
      */
-    reference_entry value() { return *entry_ptr; };
+  reference_entry value() { return *entry_ptr; };
 
-    /**
+  /**
      * @brief Returns the row index of the element.
      * 
      * @return The row index of the element.
      */
-    const_reference_index row() const { return row_index; };
+  const_reference_index row() const { return row_index; };
 
-    /**
+  /**
      * @brief Returns the column index of the element.
      * 
      * @return The column index of the element.
      */
-    const_reference_index column() const { return *column_ptr; };
+  const_reference_index column() const { return *column_ptr; };
 
-    /**
+  /**
      * @brief Returns the value of the element.
      * 
      * @return The value of the element.
      */
-    const_reference_entry value() const { return *entry_ptr; };
+  const_reference_entry value() const { return *entry_ptr; };
 
-    /**
+  /**
      * @brief Prefix increment operator.
      * 
      * @return A reference to the incremented element.
      */
-    base_type& operator++() { ++column_ptr; ++entry_ptr; return *this; };
+  base_type& operator++() {
+    ++column_ptr;
+    ++entry_ptr;
+    return *this;
+  };
 
-    /**
+  /**
      * @brief Postfix increment operator.
      * 
      * @return A copy of the original element before incrementing.
      */
-    base_type operator++(int){base_type old = *this; ++column_ptr; ++entry_ptr; return old; };
+  base_type operator++(int) {
+    base_type old = *this;
+    ++column_ptr;
+    ++entry_ptr;
+    return old;
+  };
 
-    /**
+  /**
      * @brief Prefix decrement operator.
      * 
      * @return A reference to the decremented element.
      */
-    base_type& operator--() {--column_ptr; --entry_ptr; return *this; };
+  base_type& operator--() {
+    --column_ptr;
+    --entry_ptr;
+    return *this;
+  };
 
-    /**
-     * @brief Postfix decrement operator.
-     * 
-     * @return A copy of the original element before decrementing.
-     */
-    base_type operator--(int) {base_type old = *this; --column_ptr; --entry_ptr; return old;};
+  /**
+    * @brief Postfix decrement operator.
+    * 
+    * @return A copy of the original element before decrementing.
+    */
+  base_type operator--(int) {
+    base_type old = *this;
+    --column_ptr;
+    --entry_ptr;
+    return old;
+  };
 
-    /**
-     * @brief Equality comparison operator.
-     * 
-     * @param that The element to compare with.
-     * @return True if the elements (row, column, value) are equal, false otherwise.
-     */
-    [[nodiscard]] bool operator==(const base_type& that) const {
-        return this->row_index == that.row_index && *this->column_ptr == *that.column_ptr 
-               && *this->entry_ptr == *that.entry_ptr; 
-    };
+  /**
+    * @brief Equality comparison operator.
+    * 
+    * @param that The element to compare with.
+    * @return True if the elements (row, column, value) are equal, false otherwise.
+    */
+  [[nodiscard]] bool operator==(const base_type& that) const {
+    return this->row_index == that.row_index && *this->column_ptr == *that.column_ptr &&
+           *this->entry_ptr == *that.entry_ptr;
+  };
 
-    /**
-     * @brief Inequality comparison operator.
-     * 
-     * @param that The element to compare with.
-     * @return True if the elements are not equal, false otherwise.
-     */
-    [[nodiscard]] bool operator!=(const base_type& that) const {
-        return !(*this == that); 
-    };
+  /**
+    * @brief Inequality comparison operator.
+    * 
+    * @param that The element to compare with.
+    * @return True if the elements are not equal, false otherwise.
+    */
+  [[nodiscard]] bool operator!=(const base_type& that) const { return !(*this == that); };
 
-    private:
-    index_type row_index;       /**< The row index of the element. */
-    pointer_index column_ptr;   /**< The column pointer of the element. */
-    pointer_entry entry_ptr;    /**< The entry pointer of the element. */    
+ private:
+  index_type row_index;     /**< The row index of the element. */
+  pointer_index column_ptr; /**< The column pointer of the element. */
+  pointer_entry entry_ptr;  /**< The entry pointer of the element. */
 };
 
 template<typename _entry_type, typename _index_type, bool _is_const>
 struct Base_Iterator_Matrix_Sparse_Element {
-  public:
-    using index_type = _index_type;
-    using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
-    
-    using entry_type = _entry_type;
-    using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;  
-   
-    using value_type = Matrix_Sparse_Element<entry_type, index_type>;
-    using reference = std::conditional_t<_is_const, const Matrix_Sparse_Element<entry_type, index_type>&, Matrix_Sparse_Element<entry_type, index_type>&>;
-    using pointer = std::conditional_t<_is_const, const Matrix_Sparse_Element<entry_type, index_type>*, Matrix_Sparse_Element<entry_type, index_type>*>;
+ public:
+  using index_type = _index_type;
+  using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
 
-    using iterator_type = Base_Iterator_Matrix_Sparse_Element<entry_type, index_type, _is_const>;
+  using entry_type = _entry_type;
+  using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;
 
-    Base_Iterator_Matrix_Sparse_Element() = default;
-    ~Base_Iterator_Matrix_Sparse_Element() = default;
-    Base_Iterator_Matrix_Sparse_Element(value_type element_value) : value(element_value) {};
-    Base_Iterator_Matrix_Sparse_Element(const index_type& row, index_type* column, entry_type* entry) : value(row, column, entry) {};
+  using value_type = Matrix_Sparse_Element<entry_type, index_type>;
+  using reference = std::conditional_t<_is_const, const Matrix_Sparse_Element<entry_type, index_type>&,
+                                       Matrix_Sparse_Element<entry_type, index_type>&>;
+  using pointer = std::conditional_t<_is_const, const Matrix_Sparse_Element<entry_type, index_type>*,
+                                     Matrix_Sparse_Element<entry_type, index_type>*>;
 
-    reference operator*(){ return value; };
-    pointer operator->() { return &value; };
+  using iterator_type = Base_Iterator_Matrix_Sparse_Element<entry_type, index_type, _is_const>;
 
-    iterator_type& operator++() { ++value; return *this; };
-    iterator_type operator++(int){iterator_type old = *this; ++value; return old; };
-    iterator_type& operator--() {--value; return *this; };
-    iterator_type operator--(int) {iterator_type old = *this; --value; return old; };
+  Base_Iterator_Matrix_Sparse_Element() = default;
+  ~Base_Iterator_Matrix_Sparse_Element() = default;
+  Base_Iterator_Matrix_Sparse_Element(value_type element_value) : value(element_value) {};
+  Base_Iterator_Matrix_Sparse_Element(const index_type& row, index_type* column, entry_type* entry)
+      : value(row, column, entry) {};
 
-    [[nodiscard]] bool operator==(const iterator_type& that) const {
-        return this->value == that.value; 
-    };
+  reference operator*() { return value; };
 
-    [[nodiscard]] bool operator!=(const iterator_type& that) const {
-        return this->value != that.value; 
-    };
+  pointer operator->() { return &value; };
 
-  private:
-    value_type value;
+  iterator_type& operator++() {
+    ++value;
+    return *this;
+  };
+
+  iterator_type operator++(int) {
+    iterator_type old = *this;
+    ++value;
+    return old;
+  };
+
+  iterator_type& operator--() {
+    --value;
+    return *this;
+  };
+
+  iterator_type operator--(int) {
+    iterator_type old = *this;
+    --value;
+    return old;
+  };
+
+  [[nodiscard]] bool operator==(const iterator_type& that) const { return this->value == that.value; };
+
+  [[nodiscard]] bool operator!=(const iterator_type& that) const { return this->value != that.value; };
+
+ private:
+  value_type value;
 };
 
 template<typename _entry_type, typename _index_type>
@@ -211,118 +245,153 @@ using Const_Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element
 
 template<typename _entry_type, typename _index_type>
 struct Matrix_Sparse_Row {
-    public:
-    using index_type = _index_type;
-    using reference_index = _index_type&;
-    using pointer_index = _index_type*;
-    using const_pointer_index = const _index_type*;
+ public:
+  using index_type = _index_type;
+  using reference_index = _index_type&;
+  using pointer_index = _index_type*;
+  using const_pointer_index = const _index_type*;
 
-    using entry_type = _entry_type;
-    using reference_entry = _entry_type&;
-    using const_reference_entry = const _entry_type&;
-    using pointer_entry = _entry_type*;
-    using const_pointer_entry = const _entry_type*;
-  
-    using iterator = Iterator_Matrix_Sparse_Element<_entry_type, _index_type>;
-    using const_iterator = Const_Iterator_Matrix_Sparse_Element<_entry_type, _index_type>;
+  using entry_type = _entry_type;
+  using reference_entry = _entry_type&;
+  using const_reference_entry = const _entry_type&;
+  using pointer_entry = _entry_type*;
+  using const_pointer_entry = const _entry_type*;
 
-    using base_type = Matrix_Sparse_Row<_entry_type, _index_type>;
+  using iterator = Iterator_Matrix_Sparse_Element<_entry_type, _index_type>;
+  using const_iterator = Const_Iterator_Matrix_Sparse_Element<_entry_type, _index_type>;
 
-    using matrix_type = Matrix_Sparse<typename std::remove_const<entry_type>::type, typename std::remove_const<index_type>::type>;
-    
-    Matrix_Sparse_Row() = default;
-    ~Matrix_Sparse_Row() = default;
-    Matrix_Sparse_Row(matrix_type* matrix, index_type row, std::span<index_type> column, std::span<entry_type> entries) : 
-    matrix_ptr(matrix), row_index(row), column_index(column), entry(entries) {};
-    
-    Matrix_Sparse_Row(matrix_type* matrix, index_type row, pointer_index s_column, pointer_index e_column,
-                      const_pointer_entry s_entry, const_pointer_entry e_entry) 
-        : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {};
+  using base_type = Matrix_Sparse_Row<_entry_type, _index_type>;
 
-    Matrix_Sparse_Row(const matrix_type* matrix, index_type row, 
-                      const_pointer_index s_column, const_pointer_index e_column,
-                      const_pointer_entry s_entry, const_pointer_entry e_entry) 
-        : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {};
+  using matrix_type =
+  Matrix_Sparse<typename std::remove_const<entry_type>::type, typename std::remove_const<index_type>::type>;
 
+  Matrix_Sparse_Row() = default;
+  ~Matrix_Sparse_Row() = default;
+  Matrix_Sparse_Row(matrix_type* matrix, index_type row, std::span<index_type> column, std::span<entry_type> entries)
+      : matrix_ptr(matrix), row_index(row), column_index(column), entry(entries) {};
 
-    index_type row() const { return row_index; };
-    
-    // Non-const versions
-    iterator begin() { return iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
-    iterator end() { return iterator(row_index, &(*column_index.end()), &(*entry.end())); }
+  Matrix_Sparse_Row(matrix_type* matrix, index_type row, pointer_index s_column, pointer_index e_column,
+                    const_pointer_entry s_entry, const_pointer_entry e_entry)
+      : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {};
 
-    // Const versions
-    const_iterator begin() const { return const_iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
-    const_iterator end() const { return const_iterator(row_index, &(*column_index.end()), &(*entry.end())); }
+  Matrix_Sparse_Row(const matrix_type* matrix, index_type row, const_pointer_index s_column,
+                    const_pointer_index e_column, const_pointer_entry s_entry, const_pointer_entry e_entry)
+      : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {};
 
-    // cbegin and cend versions
-    const_iterator cbegin() const { return const_iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
-    const_iterator cend() const { return const_iterator(row_index, &(*column_index.end()), &(*entry.end())); }
+  index_type row() const { return row_index; };
 
-    base_type& operator++() { ++row_index; return *this; };
-    base_type operator++(int){base_type old = *this; ++row_index; return old; };
-    base_type& operator--() {--row_index; return *this; };
-    base_type operator--(int) {base_type old = *this; --row_index; return old; };
+  // Non-const versions
+  iterator begin() { return iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
 
-    reference_entry operator[](const index_type& i_column) { 
-      const auto iter = std::find(column_index.begin(), column_index.end(), i_column);
-      if(iter != column_index.end()) return *(entry.begin() + std::distance(column_index.begin(), iter));
-      else {
-        matrix_ptr->insert(row_index, i_column, 0.0);
-       // *this = (*matrix_ptr)[row_index];
-        return (*this)[i_column];
-      }
-    };
+  iterator end() { return iterator(row_index, &(*column_index.end()), &(*entry.end())); }
 
-    const_reference_entry operator[](const index_type& i_column) const { 
-        const auto iter = std::find(column_index.begin(), column_index.end(), i_column);
-        return iter != column_index.end() ? *(entry.begin() + std::distance(column_index.begin(), iter)) : zero; 
-    };
+  // Const versions
+  const_iterator begin() const { return const_iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
 
-    private: 
-    matrix_type* matrix_ptr; // used for inserts 
-    index_type row_index;
-    std::span<index_type> column_index;
-    std::span<entry_type> entry;
-    entry_type zero{0};
+  const_iterator end() const { return const_iterator(row_index, &(*column_index.end()), &(*entry.end())); }
+
+  // cbegin and cend versions
+  const_iterator cbegin() const { return const_iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
+
+  const_iterator cend() const { return const_iterator(row_index, &(*column_index.end()), &(*entry.end())); }
+
+  base_type& operator++() {
+    ++row_index;
+    return *this;
+  };
+
+  base_type operator++(int) {
+    base_type old = *this;
+    ++row_index;
+    return old;
+  };
+
+  base_type& operator--() {
+    --row_index;
+    return *this;
+  };
+
+  base_type operator--(int) {
+    base_type old = *this;
+    --row_index;
+    return old;
+  };
+
+  reference_entry operator[](const index_type& i_column) {
+    const auto iter = std::find(column_index.begin(), column_index.end(), i_column);
+    if(iter != column_index.end()) return *(entry.begin() + std::distance(column_index.begin(), iter));
+    else {
+      matrix_ptr->insert(row_index, i_column, 0.0);
+      // *this = (*matrix_ptr)[row_index];
+      return (*this)[i_column];
+    }
+  };
+
+  const_reference_entry operator[](const index_type& i_column) const {
+    const auto iter = std::find(column_index.begin(), column_index.end(), i_column);
+    return iter != column_index.end() ? *(entry.begin() + std::distance(column_index.begin(), iter)) : zero;
+  };
+
+ private:
+  matrix_type* matrix_ptr;  // used for inserts
+  index_type row_index;
+  std::span<index_type> column_index;
+  std::span<entry_type> entry;
+  entry_type zero{0};
 };
 
 template<typename _entry_type, typename _index_type, bool _is_const>
 struct Base_Iterator_Matrix_Sparse_Row {
-  public:
-    using index_type = _index_type;
-    using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
-    
-    using entry_type = _entry_type;
-    using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;  
-   
-    using value_type = Matrix_Sparse_Row<entry_type, index_type>;
-    using reference = std::conditional_t<_is_const, const Matrix_Sparse_Row<entry_type, index_type>&, Matrix_Sparse_Row<entry_type, index_type>&>;
-    using pointer = std::conditional_t<_is_const, const Matrix_Sparse_Row<entry_type, index_type>*, Matrix_Sparse_Row<entry_type, index_type>*>;
+ public:
+  using index_type = _index_type;
+  using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
 
-    using iterator_type = Base_Iterator_Matrix_Sparse_Row<entry_type, index_type, _is_const>;
+  using entry_type = _entry_type;
+  using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;
 
-    Base_Iterator_Matrix_Sparse_Row() = default;
-    ~Base_Iterator_Matrix_Sparse_Row() = default;
-    
-    reference operator*(){ return value; };
-    pointer operator->() { return &value; };
+  using value_type = Matrix_Sparse_Row<entry_type, index_type>;
+  using reference = std::conditional_t<_is_const, const Matrix_Sparse_Row<entry_type, index_type>&,
+                                       Matrix_Sparse_Row<entry_type, index_type>&>;
+  using pointer = std::conditional_t<_is_const, const Matrix_Sparse_Row<entry_type, index_type>*,
+                                     Matrix_Sparse_Row<entry_type, index_type>*>;
 
-    iterator_type& operator++() { ++value; return *this; };
-    iterator_type operator++(int){iterator_type old = *this; ++value; return old; };
-    iterator_type& operator--() {--value; return *this; };
-    iterator_type operator--(int) {iterator_type old = *this; --value; return old; };
+  using iterator_type = Base_Iterator_Matrix_Sparse_Row<entry_type, index_type, _is_const>;
 
-    [[nodiscard]] bool operator==(const iterator_type& that) const {
-        return this->value == that.value; 
-    };
+  Base_Iterator_Matrix_Sparse_Row() = default;
+  ~Base_Iterator_Matrix_Sparse_Row() = default;
 
-    [[nodiscard]] bool operator!=(const iterator_type& that) const {
-        return this->value != that.value; 
-    };
+  reference operator*() { return value; };
 
-  private:
-    value_type value;
+  pointer operator->() { return &value; };
+
+  iterator_type& operator++() {
+    ++value;
+    return *this;
+  };
+
+  iterator_type operator++(int) {
+    iterator_type old = *this;
+    ++value;
+    return old;
+  };
+
+  iterator_type& operator--() {
+    --value;
+    return *this;
+  };
+
+  iterator_type operator--(int) {
+    iterator_type old = *this;
+    --value;
+    return old;
+  };
+
+  [[nodiscard]] bool operator==(const iterator_type& that) const { return this->value == that.value; };
+
+  [[nodiscard]] bool operator!=(const iterator_type& that) const { return this->value != that.value; };
+
+ private:
+  value_type value;
 };
 
 template<typename _entry_type, typename _index_type>
@@ -337,8 +406,7 @@ using Const_Iterator_Matrix_Sparse_Row = Base_Iterator_Matrix_Sparse_Row<_entry_
 template<typename _value_type, typename _index_type>
 class Matrix_Sparse {
 
-  public:
-  
+ public:
   using index_type = _index_type;
   using reference_index = _index_type&;
   using const_reference_index = const _index_type&;
@@ -349,21 +417,18 @@ class Matrix_Sparse {
   using const_reference_value = const _value_type&;
   using pointer_value = _value_type*;
 
-  
   using element_type = Matrix_Sparse_Element<value_type, index_type>;
   using element_iterator = Iterator_Matrix_Sparse_Element<value_type, index_type>;
   using const_element_iterator = Const_Iterator_Matrix_Sparse_Element<value_type, index_type>;
-
 
   using row_type = Matrix_Sparse_Row<value_type, index_type>;
   using const_row_type = Matrix_Sparse_Row<const value_type, const index_type>;
 
   using matrix_type = Matrix_Sparse<value_type, index_type>;
 
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Constructors/Destructors
-// ---------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------------------------------
+  // Constructors/Destructors
+  // ---------------------------------------------------------------------------------------------------------------------
 
   /**
    * @brief Default constructor.
@@ -385,15 +450,15 @@ class Matrix_Sparse {
    * @param[in] column The absolute number of columns per row.
    */
   Matrix_Sparse(std::initializer_list<index_type> non_zero, std::initializer_list<index_type> index,
-                              std::initializer_list<value_type> value, index_type column)
-    : row_offset(non_zero), column_index(index), element_value(value), column_size(column) {
+                std::initializer_list<value_type> value, index_type column)
+      : row_offset(non_zero), column_index(index), element_value(value), column_size(column) {
     ASSERT(row_offset.front() == 0, "First value must be zero, but is " + std::to_string(row_offset.front()) + ".");
     ASSERT(row_offset.back() == column_index.size(), "Number of non-zeros does not match number of column non zeros");
     ASSERT(std::is_sorted(row_offset.begin(), row_offset.end()), "Inconsistent non-zeros list, but be ascending.");
-    ASSERT(column_index.size() == value.size(),
-          "Mis-match in column and value size, " + std::to_string(column_index.size()) + " vs. " +
-          std::to_string(value.size()));
-    
+    ASSERT(column_index.size() == value.size(), "Mis-match in column and value size, " +
+                                                std::to_string(column_index.size()) + " vs. " +
+                                                std::to_string(value.size()));
+
     std::vector<value_type> new_value;
     std::vector<index_type> org_index;
     FOR(row, row_offset.size() - 1) {
@@ -408,16 +473,16 @@ class Matrix_Sparse {
       FOR(i_non_zero, size_non_zero) {
         new_value[i_non_zero] = element_value[row_offset[row] + org_index[i_non_zero]];
         org_index[i_non_zero] = column_index[row_offset[row] + org_index[i_non_zero]];
-        ASSERT(org_index[i_non_zero] < column_size,
-              "Column index, " + std::to_string(org_index[i_non_zero]) + ", in row " + std::to_string(row) +
-              " not in range" + range_column() + ".");
+        ASSERT(org_index[i_non_zero] < column_size, "Column index, " + std::to_string(org_index[i_non_zero]) +
+                                                    ", in row " + std::to_string(row) + " not in range" +
+                                                    range_column() + ".");
       }
       ASSERT(std::adjacent_find(org_index.begin(), org_index.end()) == org_index.end(),
-            "Duplicate column index, " + std::to_string(column_size) + "in row " + std::to_string(row) + ".");
+             "Duplicate column index, " + std::to_string(column_size) + "in row " + std::to_string(row) + ".");
       std::swap_ranges(new_value.begin(), new_value.end(),
-                      std::next(element_value.begin(), static_cast<s_size_t>(row_offset[row])));
+                       std::next(element_value.begin(), static_cast<s_size_t>(row_offset[row])));
       std::swap_ranges(org_index.begin(), org_index.end(),
-                      std::next(column_index.begin(), static_cast<s_size_t>(row_offset[row])));
+                       std::next(column_index.begin(), static_cast<s_size_t>(row_offset[row])));
     }
   }
 
@@ -430,18 +495,17 @@ class Matrix_Sparse {
    * @param[in] row The row index of the element.
    * @return A sparse matrix row helper class, providing further operators for column access.
    */
-  row_type operator[](const_reference_index row){
+  row_type operator[](const_reference_index row) {
     ASSERT_DEBUG(row < size_row(), "Row " + std::to_string(row) + " not in range " + range_row() + ".");
-    return {this, row, 
-            std::span<index_type>(&column_index[row_offset[row]], &column_index[row_offset[row + 1]]),
+    return {this, row, std::span<index_type>(&column_index[row_offset[row]], &column_index[row_offset[row + 1]]),
             std::span<value_type>(&element_value[row_offset[row]], &element_value[row_offset[row + 1]])};
   };
 
   Matrix_Sparse_Row<const value_type, const index_type> operator[](const_reference_index row) const {
-        ASSERT_DEBUG(row < size_row(), "Row " + std::to_string(row) + " not in range " + range_row() + ".");
-        return Matrix_Sparse_Row<const value_type, const index_type>(this, row, 
-                &column_index[row_offset[row]], &column_index[row_offset[row + 1]],
-                &element_value[row_offset[row]], &element_value[row_offset[row + 1]]);
+    ASSERT_DEBUG(row < size_row(), "Row " + std::to_string(row) + " not in range " + range_row() + ".");
+    return Matrix_Sparse_Row<const value_type, const index_type>(
+    this, row, &column_index[row_offset[row]], &column_index[row_offset[row + 1]], &element_value[row_offset[row]],
+    &element_value[row_offset[row + 1]]);
   };
 
   /**
@@ -487,8 +551,8 @@ class Matrix_Sparse {
    * @brief Returns the number of non-zeros in the matrix.
    * @return The number of non-zeros.
    */
-  [[nodiscard]] inline index_type size_non_zero() const noexcept { 
-    return static_cast<index_type>(column_index.size()); 
+  [[nodiscard]] inline index_type size_non_zero() const noexcept {
+    return static_cast<index_type>(column_index.size());
   };
 
   /**
@@ -498,7 +562,6 @@ class Matrix_Sparse {
   [[nodiscard]] inline std::pair<index_type, index_type> size() const noexcept {
     return std::make_pair(size_row(), size_column());
   };
-
 
   /**
    * @brief Reserves storage for the matrix.
@@ -535,7 +598,7 @@ class Matrix_Sparse {
   // -------------------------------------------------------------------------------------------------------------------
   // Modifiers
   // -------------------------------------------------------------------------------------------------------------------
-  
+
   /**
    * @brief Clears the contents of the matrix, sets the column size to zero.
    */
@@ -546,9 +609,8 @@ class Matrix_Sparse {
     column_size = 0;
   };
 
-  // std::pair<element_iterator, bool> 
-void  insert(const_reference_index row, const_reference_index column, 
-                                           const_reference_value value) {
+  // std::pair<element_iterator, bool>
+  void insert(const_reference_index row, const_reference_index column, const_reference_value value) {
     // // Resize if we need to.
     // if(row >= size_row()) resize(row + 1, column_size);
     // if(column >= size_column()) resize(size_row(), column + 1);
@@ -559,7 +621,7 @@ void  insert(const_reference_index row, const_reference_index column,
     //     non_zeros < row_offset.end(); ++(*non_zeros++));
     // const auto distance = std::distance(&*element_value.cbegin(), &*iter_insert);
     // return {element_iterator(row, &*column_index.insert(column_index.begin() + distance, column),
-    //                          &*element_value.insert(element_value.begin() + distance, value)), true}; 
+    //                          &*element_value.insert(element_value.begin() + distance, value)), true};
   }
 
   /**
@@ -585,7 +647,8 @@ void  insert(const_reference_index row, const_reference_index column,
     if(column < size_column()) {
       index_type offset_loss = 0;
       FOR(i_row, size_row()) {
-        const auto& iter_column_end = column_index.begin() + static_cast<s_index_type>(row_offset[i_row + 1] - offset_loss);
+        const auto& iter_column_end =
+        column_index.begin() + static_cast<s_index_type>(row_offset[i_row + 1] - offset_loss);
         auto iter_column = std::upper_bound(column_index.begin() + static_cast<s_index_type>(row_offset[i_row]),
                                             iter_column_end, column - 1);
         if(iter_column != iter_column_end) {
@@ -664,12 +727,12 @@ void  insert(const_reference_index row, const_reference_index column,
   //  */
   // [[nodiscard]] const_iterator_element lower_bound(const std::size_t& i_row, const std::size_t& i_column) const;
 
-
-  private:
-  std::vector<index_type> row_offset;         //!< Offset to non-zero elements in the matrix for each row (size is one greater than number of rows).
-  std::vector<index_type> column_index;       //!< The column index for each non-zero value, corresponds to value.
-  std::vector<value_type> element_value;      //!< The each non-zero value value, corresponds to column_index.
-  index_type column_size{0};                  //!< The number of columns of the matrix (used to check validity of operations).
+ private:
+  std::vector<index_type>
+  row_offset;  //!< Offset to non-zero elements in the matrix for each row (size is one greater than number of rows).
+  std::vector<index_type> column_index;   //!< The column index for each non-zero value, corresponds to value.
+  std::vector<value_type> element_value;  //!< The each non-zero value value, corresponds to column_index.
+  index_type column_size{0};  //!< The number of columns of the matrix (used to check validity of operations).
 
   // -------------------------------------------------------------------------------------------------------------------
   // Private Member Functions
@@ -705,9 +768,8 @@ void  insert(const_reference_index row, const_reference_index column,
    */
   template<bool _is_add>
   Matrix_Sparse& matrix_arithmetic(const Matrix_Sparse& other);
-
 };
 
-}// namespace Disa
+}  // namespace Disa
 
-#endif // DISA_MATRIX_SPARSE_NEW_H
+#endif  // DISA_MATRIX_SPARSE_NEW_H

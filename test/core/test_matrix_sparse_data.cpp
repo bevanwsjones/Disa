@@ -25,24 +25,49 @@
 using namespace Disa;
 
 TEST(test_matrix_sparse, lower_bound) {
-  CSR_Data<Scalar, uint> data = {
+  CSR_Data<Scalar> data = {
   .row_offset = {0, 1, 3, 3}, .column_index = {1, 0, 2}, .value = {3.0, 4.0, 5.0}, .columns = 3};
 
-  EXPECT_EQ(std::get<0>(lower_bound(data, 0u, 0u)), 0);
-  EXPECT_EQ(std::get<1>(lower_bound(data, 0u, 0u))[0], 1);
-  EXPECT_EQ(std::get<2>(lower_bound(data, 0u, 0u))[0], 3.0);
-  //EXPECT_EQ(lower_bound(data, 0, 1).i_row(), 0);
-  //EXPECT_EQ(lower_bound(data, 0, 1).i_column(), 1);
-  //EXPECT_EQ(lower_bound(data, 0, 2), matrix[0].end());
+  // row 0
+  EXPECT_EQ(std::get<0>(lower_bound(data, 0, 0)), 0);
+  EXPECT_EQ(*std::get<1>(lower_bound(data, 0, 0)), 1);
+  EXPECT_EQ(*std::get<2>(lower_bound(data, 0, 0)), 3.0);
 
-  // EXPECT_EQ(lower_bound(1, 0).i_row(), 1);
-  // EXPECT_EQ(lower_bound(1, 0).i_column(), 0);
-  // EXPECT_EQ(lower_bound(1, 1).i_row(), 1);
-  // EXPECT_EQ(lower_bound(1, 1).i_column(), 2);
-  // EXPECT_EQ(lower_bound(1, 2).i_row(), 1);
-  // EXPECT_EQ(lower_bound(1, 2).i_column(), 2);
+  EXPECT_EQ(std::get<0>(lower_bound(data, 0, 1)), 0);
+  EXPECT_EQ(*std::get<1>(lower_bound(data, 0, 1)), 1);
+  EXPECT_EQ(*std::get<2>(lower_bound(data, 0, 1)), 3.0);
 
-  // EXPECT_EQ(matrix.lower_bound(2, 0), matrix[2].end());
+  EXPECT_EQ(std::get<0>(lower_bound(data, 0, 2)), 1);     // equivalent to end (row + 1 )
+  EXPECT_EQ(*std::get<1>(lower_bound(data, 0, 2)), 0);    // equivalent to end (next col: 0)
+  EXPECT_EQ(*std::get<2>(lower_bound(data, 0, 2)), 4.0);  // equivalent to end (next value: 4)
+
+  // row 1
+  EXPECT_EQ(std::get<0>(lower_bound(data, 1, 0)), 1);
+  EXPECT_EQ(*std::get<1>(lower_bound(data, 1, 0)), 0);
+  EXPECT_EQ(*std::get<2>(lower_bound(data, 1, 0)), 4.0);
+
+  EXPECT_EQ(std::get<0>(lower_bound(data, 1, 1)), 1);
+  EXPECT_EQ(*std::get<1>(lower_bound(data, 1, 1)), 2);
+  EXPECT_EQ(*std::get<2>(lower_bound(data, 1, 1)), 5.0);
+
+  EXPECT_EQ(std::get<0>(lower_bound(data, 1, 2)), 1);
+  EXPECT_EQ(*std::get<1>(lower_bound(data, 1, 2)), 2);
+  EXPECT_EQ(*std::get<2>(lower_bound(data, 1, 2)), 5.0);
+
+  // row 2
+  EXPECT_EQ(std::get<0>(lower_bound(data, 2, 0)), 3);                        // equivalent to end (row +1 )
+  EXPECT_EQ(std::get<1>(lower_bound(data, 2, 0)), data.column_index.end());  // equivalent to end of columns
+  EXPECT_EQ(std::get<2>(lower_bound(data, 2, 0)), data.value.end());         // equivalent to end of entries/values.
+
+  EXPECT_EQ(std::get<0>(lower_bound(data, 2, 1)), 3);                        // equivalent to end (row +1 )
+  EXPECT_EQ(std::get<1>(lower_bound(data, 2, 1)), data.column_index.end());  // equivalent to end of columns
+  EXPECT_EQ(std::get<2>(lower_bound(data, 2, 1)), data.value.end());         // equivalent to end of entries/values.
+
+  EXPECT_EQ(std::get<0>(lower_bound(data, 2, 2)), 3);                        // equivalent to end (row +1 )
+  EXPECT_EQ(std::get<1>(lower_bound(data, 2, 2)), data.column_index.end());  // equivalent to end of columns
+  EXPECT_EQ(std::get<2>(lower_bound(data, 2, 2)), data.value.end());         // equivalent to end of entries/values.
+
+    // EXPECT_EQ(matrix.lower_bound(2, 0), matrix[2].end());
   // EXPECT_EQ(matrix.lower_bound(3, 3), matrix.end()->end());
 
   // const Matrix_Sparse matrix_const({0, 1, 3, 3}, {1, 0, 2}, {3.0, 4.0, 5.0}, 3);
