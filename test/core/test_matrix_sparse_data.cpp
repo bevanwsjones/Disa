@@ -156,41 +156,51 @@ TEST(test_matrix_sparse, lower_bound) {
   .row_offset = {0, 1, 3, 3}, .column_index = {1, 0, 2}, .value = {3.0, 4.0, 5.0}, .columns = 3};
 
   // row 0
-  EXPECT_EQ(std::get<0>(lower_bound(data, 0, 0)), 0);
+  EXPECT_EQ(*std::get<0>(lower_bound(data, 0, 0)), 0);
   EXPECT_EQ(*std::get<1>(lower_bound(data, 0, 0)), 1);
   EXPECT_EQ(*std::get<2>(lower_bound(data, 0, 0)), 3.0);
 
-  EXPECT_EQ(std::get<0>(lower_bound(data, 0, 1)), 0);
+  EXPECT_EQ(*std::get<0>(lower_bound(data, 0, 1)), 0);
   EXPECT_EQ(*std::get<1>(lower_bound(data, 0, 1)), 1);
   EXPECT_EQ(*std::get<2>(lower_bound(data, 0, 1)), 3.0);
 
-  EXPECT_EQ(std::get<0>(lower_bound(data, 0, 2)), 1);     // equivalent to end (row + 1 )
+  EXPECT_EQ(*std::get<0>(lower_bound(data, 0, 2)), 1);    // equivalent to end (next row offset: 1)
   EXPECT_EQ(*std::get<1>(lower_bound(data, 0, 2)), 0);    // equivalent to end (next col: 0)
   EXPECT_EQ(*std::get<2>(lower_bound(data, 0, 2)), 4.0);  // equivalent to end (next value: 4)
 
   // row 1
-  EXPECT_EQ(std::get<0>(lower_bound(data, 1, 0)), 1);
+  EXPECT_EQ(*std::get<0>(lower_bound(data, 1, 0)), 1);
   EXPECT_EQ(*std::get<1>(lower_bound(data, 1, 0)), 0);
   EXPECT_EQ(*std::get<2>(lower_bound(data, 1, 0)), 4.0);
 
-  EXPECT_EQ(std::get<0>(lower_bound(data, 1, 1)), 1);
+  EXPECT_EQ(*std::get<0>(lower_bound(data, 1, 1)), 1);
   EXPECT_EQ(*std::get<1>(lower_bound(data, 1, 1)), 2);
   EXPECT_EQ(*std::get<2>(lower_bound(data, 1, 1)), 5.0);
 
-  EXPECT_EQ(std::get<0>(lower_bound(data, 1, 2)), 1);
+  EXPECT_EQ(*std::get<0>(lower_bound(data, 1, 2)), 1);
   EXPECT_EQ(*std::get<1>(lower_bound(data, 1, 2)), 2);
   EXPECT_EQ(*std::get<2>(lower_bound(data, 1, 2)), 5.0);
 
   // row 2
-  EXPECT_EQ(std::get<0>(lower_bound(data, 2, 0)), 3);                        // equivalent to end (row +1 )
-  EXPECT_EQ(std::get<1>(lower_bound(data, 2, 0)), data.column_index.end());  // equivalent to end of columns
-  EXPECT_EQ(std::get<2>(lower_bound(data, 2, 0)), data.value.end());         // equivalent to end of entries/values.
+  EXPECT_EQ(std::get<0>(lower_bound(data, 2, 0)), data.row_offset.end() - 1);  // equivalent to end (i.e. size row)
+  EXPECT_EQ(std::get<1>(lower_bound(data, 2, 0)), data.column_index.end());    // equivalent to end of columns
+  EXPECT_EQ(std::get<2>(lower_bound(data, 2, 0)), data.value.end());           // equivalent to end of entries/values.
 
-  EXPECT_EQ(std::get<0>(lower_bound(data, 2, 1)), 3);                        // equivalent to end (row +1 )
-  EXPECT_EQ(std::get<1>(lower_bound(data, 2, 1)), data.column_index.end());  // equivalent to end of columns
-  EXPECT_EQ(std::get<2>(lower_bound(data, 2, 1)), data.value.end());         // equivalent to end of entries/values.
+  EXPECT_EQ(std::get<0>(lower_bound(data, 2, 1)), data.row_offset.end() - 1);  // equivalent to end (i.e. size row)
+  EXPECT_EQ(std::get<1>(lower_bound(data, 2, 1)), data.column_index.end());    // equivalent to end of columns
+  EXPECT_EQ(std::get<2>(lower_bound(data, 2, 1)), data.value.end());           // equivalent to end of entries/values.
 
-  EXPECT_EQ(std::get<0>(lower_bound(data, 2, 2)), 3);                        // equivalent to end (row +1 )
-  EXPECT_EQ(std::get<1>(lower_bound(data, 2, 2)), data.column_index.end());  // equivalent to end of columns
-  EXPECT_EQ(std::get<2>(lower_bound(data, 2, 2)), data.value.end());         // equivalent to end of entries/values.
+  EXPECT_EQ(std::get<0>(lower_bound(data, 2, 2)), data.row_offset.end() - 1);  // equivalent to end (i.e. size row)
+  EXPECT_EQ(std::get<1>(lower_bound(data, 2, 2)), data.column_index.end());    // equivalent to end of columns
+  EXPECT_EQ(std::get<2>(lower_bound(data, 2, 2)), data.value.end());           // equivalent to end of entries/values.
+
+  // catch when request row is greater than
+  EXPECT_EQ(std::get<0>(lower_bound(data, 3, 0)), data.row_offset.end());    // real row end.
+  EXPECT_EQ(std::get<1>(lower_bound(data, 3, 0)), data.column_index.end());  // equivalent to end of columns
+  EXPECT_EQ(std::get<2>(lower_bound(data, 3, 0)), data.value.end());         // equivalent to end of entries/values.
+
+  // catch when request column is greater than column (result should be same as row 0 last test.)
+  EXPECT_EQ(*std::get<0>(lower_bound(data, 0, 3)), 1);
+  EXPECT_EQ(*std::get<1>(lower_bound(data, 0, 3)), 0);
+  EXPECT_EQ(*std::get<2>(lower_bound(data, 0, 3)), 4.0);
 }

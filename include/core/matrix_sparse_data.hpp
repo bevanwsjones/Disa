@@ -33,10 +33,11 @@ namespace Disa {
 
 template<typename _value_type, typename _index_type = std::size_t>
 struct CSR_Data {
-  using iterator =
-  std::tuple<_index_type, typename std::vector<_index_type>::iterator, typename std::vector<_value_type>::iterator>;
-  using const_iterator = std::tuple<const _index_type, typename std::vector<_index_type>::const_iterator,
-                                    typename std::vector<_value_type>::const_iterator>;
+  using iterator = std::tuple<typename std::vector<_index_type>::iterator, typename std::vector<_index_type>::iterator,
+                              typename std::vector<_value_type>::iterator>;
+  using const_iterator =
+  std::tuple<typename std::vector<_index_type>::const_iterator, typename std::vector<_index_type>::const_iterator,
+             typename std::vector<_value_type>::const_iterator>;
 
   std::vector<_index_type> row_offset;
   std::vector<_index_type> column_index;
@@ -122,12 +123,13 @@ std::enable_if<std::is_convertible_v<_arg_index_type, _index_type>,
                typename CSR_Data<_value_type, _index_type>::const_iterator>::type
 lower_bound(const CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg_index_type& column) {
   if(row < size_row(data)) {
-    const auto& iter_start = data.column_index.begin() + data.row_offset[row];
-    const auto& iter_end = data.column_index.begin() + data.row_offset[row + 1];
+    const auto& iter_row = data.row_offset.cbegin() + row;
+    const auto& iter_start = data.column_index.cbegin() + data.row_offset[row];
+    const auto& iter_end = data.column_index.cbegin() + data.row_offset[row + 1];
     const auto& iter_lower = std::lower_bound(iter_start, iter_end, column);
-    return std::make_tuple(iter_lower != iter_end ? row : (row + 1), iter_lower,
-                           data.value.begin() + std::distance(data.column_index.begin(), iter_lower));
-  } else return std::make_tuple(size_row(data), data.column_index.end(), data.value.end());
+    return std::make_tuple(iter_lower != iter_end ? iter_row : (iter_row + 1), iter_lower,
+                           data.value.cbegin() + std::distance(data.column_index.cbegin(), iter_lower));
+  } else return std::make_tuple(data.row_offset.cend(), data.column_index.cend(), data.value.cend());
 }
 
 template<typename _value_type, typename _index_type, typename _arg_index_type>
@@ -135,7 +137,7 @@ std::enable_if<std::is_convertible_v<_arg_index_type, _index_type>,
                typename CSR_Data<_value_type, _index_type>::iterator>::type
 lower_bound(CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg_index_type& column) {
   const auto& const_iter = lower_bound(static_cast<const CSR_Data<_value_type, _index_type>&>(data), row, column);
-  return std::make_tuple(std::get<0>(const_iter),  // The index_type is already non-const
+  return std::make_tuple(data.row_offset.begin() + std::distance(data.row_offset.cbegin(), std::get<0>(const_iter)),
                          data.column_index.begin() + std::distance(data.column_index.cbegin(), std::get<1>(const_iter)),
                          data.value.begin() + std::distance(data.value.cbegin(), std::get<2>(const_iter)));
 }
