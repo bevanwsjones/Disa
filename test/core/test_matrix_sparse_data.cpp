@@ -15,8 +15,8 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // ---------------------------------------------------------------------------------------------------------------------
-// File Name: test_matrix_sparse_data.hpp
-// Description: Testing file from the matrix sparse data.
+// File Name: test_csr_data.hpp
+// Description: Testing the CSR_Data class, and all free functions.
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "gtest/gtest.h"
@@ -24,7 +24,7 @@
 
 using namespace Disa;
 
-TEST(test_matrix_sparse, size) {
+TEST(test_csr_data, size) {
   CSR_Data<Scalar> data{};
   EXPECT_EQ(size_row(data), 0);
   EXPECT_EQ(size_column(data), 0);
@@ -39,7 +39,7 @@ TEST(test_matrix_sparse, size) {
   EXPECT_EQ(size_non_zero(data), 1);
 }
 
-TEST(test_matrix_sparse, resize) {
+TEST(test_csr_data, resize) {
 
   CSR_Data<Scalar> data{};
 
@@ -151,7 +151,109 @@ TEST(test_matrix_sparse, resize) {
   EXPECT_EQ(size_non_zero(data), 0);
 }
 
-TEST(test_matrix_sparse, lower_bound) {
+TEST(test_csr_data, insert_insert_or_assign) {
+  CSR_Data<Scalar> matrix;
+  resize(matrix, 5, 5);
+
+  insert(matrix, 3, 2, 1.0);
+  EXPECT_EQ(size_row(matrix), 5);
+  EXPECT_EQ(size_column(matrix), 5);
+  EXPECT_EQ(size_non_zero(matrix), 1);
+  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+
+  auto iter_bool_pair = insert(matrix, 3, 1, 3.0);  // out of order testing - will check order at the end.
+  //EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 3.0);
+  EXPECT_TRUE(iter_bool_pair.second);
+  EXPECT_EQ(size_non_zero(matrix), 2);
+  //EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+  //EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+
+  iter_bool_pair = insert(matrix, 2, 1, 4.0);
+  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 4.0);
+  EXPECT_TRUE(iter_bool_pair.second);
+  EXPECT_DOUBLE_EQ(size_non_zero(matrix), 3);
+  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+
+  iter_bool_pair = insert(matrix, 2, 4, 5.0);  // last of columns test
+  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 5.0);
+  EXPECT_TRUE(iter_bool_pair.second);
+  EXPECT_EQ(size_non_zero(matrix), 4.0);
+  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+
+  iter_bool_pair = insert(matrix, 4, 0, 8.0);  // last of rows test
+  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 8.0);
+  EXPECT_TRUE(iter_bool_pair.second);
+  EXPECT_EQ(size_non_zero(matrix), 5);
+  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+  // EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
+
+  iter_bool_pair = insert(matrix, 4, 4, -5.0);  // last row and column test
+  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, -5.0);
+  EXPECT_TRUE(iter_bool_pair.second);
+  EXPECT_EQ(size_non_zero(matrix), 6);
+  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+  // EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
+  // EXPECT_DOUBLE_EQ(matrix[4][4], -5.0);
+
+  iter_bool_pair = insert(matrix, 3, 2, 2.0);  // no insert test
+  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 1.0);
+  EXPECT_FALSE(iter_bool_pair.second);
+  EXPECT_EQ(size_non_zero(matrix), 6);
+  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+  // EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
+  // EXPECT_DOUBLE_EQ(matrix[4][4], -5.0);
+
+  // iter_bool_pair = insert(matrix, 6, 2, 10.0);  // extra rows
+  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 10.0);
+  // EXPECT_TRUE(iter_bool_pair.second);
+  // EXPECT_EQ(size_row(matrix), 7);
+  // EXPECT_EQ(size_non_zero(matrix), 7);
+  // EXPECT_DOUBLE_EQ(matrix[6][2], 10.0);
+
+  // iter_bool_pair = insert(matrix, 2, 6, 50.0);  // extra columns
+  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 50.0);
+  // EXPECT_TRUE(iter_bool_pair.second);
+  // EXPECT_EQ(size_row(matrix), 7);
+  // EXPECT_EQ(size_column(matrix), 7);
+  // EXPECT_EQ(size_non_zero(matrix), 8);
+  // EXPECT_DOUBLE_EQ(matrix[2][6], 50.0);
+
+  // iter_bool_pair = matrix.insert_or_assign(2, 6, -50.0);  // check insert_or_assign
+  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, -50.0);
+  // EXPECT_FALSE(iter_bool_pair.second);
+  // EXPECT_EQ(matrix.size_row(), 7);
+  // EXPECT_EQ(matrix.size_column(), 7);
+  // EXPECT_EQ(matrix.size_non_zero(), 8);
+  // EXPECT_DOUBLE_EQ(matrix[2][6], -50.0);
+
+  // check ascending order has been maintained.
+  // FOR_EACH(row_vector, matrix) {
+  //   auto prev = row_vector.begin();
+  //   FOR_ITER(iter, row_vector) {
+  //     if(iter != row_vector.begin()) {
+  //       EXPECT_GT(iter.i_column(), prev.i_column());
+  //       EXPECT_EQ(iter.i_row(), prev.i_row());  // more of a sanity check.
+  //       ++prev;
+  //     }
+  //   }
+  // }
+}
+
+TEST(test_csr_data, lower_bound) {
   CSR_Data<Scalar> data = {
   .row_offset = {0, 1, 3, 3}, .column_index = {1, 0, 2}, .value = {3.0, 4.0, 5.0}, .columns = 3};
 

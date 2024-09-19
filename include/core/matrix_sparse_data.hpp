@@ -45,6 +45,19 @@ struct CSR_Data {
   _index_type columns;
 };
 
+// assumes iterator is in rage begin() - end()
+template<typename _value_type, typename _index_type>
+_index_type i_row(CSR_Data<_value_type, _index_type>& data,
+                  const typename std::vector<_index_type>::iterator& iter_row) noexcept {
+  return static_cast<_index_type>(std::distance(data.row_offset.begin(), iter_row));
+};
+
+template<typename _value_type, typename _index_type>
+_index_type i_row(const CSR_Data<_value_type, _index_type>& data,
+                  const typename std::vector<_index_type>::const_iterator& iter_row) noexcept {
+  return static_cast<_index_type>(std::distance(data.row_offset.cbegin(), iter_row));
+};
+
 template<typename _value_type, typename _index_type>
 _index_type size_row(const CSR_Data<_value_type, _index_type>& data) noexcept {
   return !data.row_offset.empty() ? data.row_offset.size() - 1 : 0;
@@ -59,27 +72,6 @@ template<typename _value_type, typename _index_type>
 _index_type size_non_zero(const CSR_Data<_value_type, _index_type>& data) noexcept {
   return data.column_index.size();
 };
-
-template<typename _value_type, typename _index_type>
-std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert(CSR_Data<_value_type, _index_type>& data,
-                                                                              const _index_type& row,
-                                                                              const _index_type& column,
-                                                                              const _value_type& value) {
-  // Resize if we need to.
-  using s_index_type = std::make_signed_t<_index_type>;
-
-  if(row >= size_row(data)) resize(data, row + 1, data.columns);
-  if(column >= size_column(data)) resize(data, size_row(data), data.columns + 1);
-  auto iter_insert = lower_bound(data, row, column);
-  if(std::get<0>(iter_insert) == row && *std::get<1>(iter_insert) == column) return {iter_insert, false};
-
-  for(auto non_zeros = std::next(data.row_offset.begin(), static_cast<s_index_type>(row + 1));
-      non_zeros < data.row_offset.end(); ++(*non_zeros++))
-    ;
-  auto iter_column = data.column_index.insert(std::get<1>(iter_insert), column);
-  auto iter_value = data.value.insert(std::get<2>(iter_insert), value);
-  return {std::make_tuple(row, iter_column, iter_value), true};
-}
 
 template<typename _value_type, typename _index_type, typename _arg_index_type>
 std::enable_if<std::is_convertible_v<_arg_index_type, _index_type>, void>::type resize(
@@ -116,6 +108,33 @@ CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg
     }
   }
   data.columns = column;
+}
+
+template<typename _value_type, typename _index_type, typename _arg_index_type>
+std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert(CSR_Data<_value_type, _index_type>& data,
+                                                                              const _arg_index_type& row,
+                                                                              const _arg_index_type& column,
+                                                                              const _value_type& value) {
+  const auto iter_row_start = data.row_offset.begin() + row;
+
+  // Resize if we need to.
+  if(row >= size_row(data)) resize(data, row + 1, static_cast<_arg_index_type>(data.columns));
+  if(column >= size_column(data)) resize(data, size_row(data), data.columns + 1);
+
+  auto [iter_row, iter_column, iter_value] = lower_bound(data, row, column);
+
+  // entry exists, return no insert.
+  std::cout << "\n----";
+  std::cout << "\niter_row:       " << *iter_row << "\t i_row: " << i_row(data, iter_row);
+  std::cout << "\niter_row_start: " << *iter_row_start << "\t i_row: " << i_row(data, iter_row_start);
+  std::cout << "\n----";
+  if(iter_row == iter_row_start && *iter_column == column)
+    return {std::make_tuple(iter_row, iter_column, iter_value), false};
+  std::cout << "\t----";
+  for(auto non_zeros = iter_row + 1; non_zeros < data.row_offset.end(); ++(*non_zeros++)) {};  // increment and ++
+  iter_column = data.column_index.insert(iter_column, column);
+  iter_value = data.value.insert(iter_value, value);
+  return {std::make_tuple(iter_row_start, iter_column, iter_value), true};
 }
 
 template<typename _value_type, typename _index_type, typename _arg_index_type>
