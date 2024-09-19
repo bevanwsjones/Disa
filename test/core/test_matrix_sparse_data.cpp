@@ -152,64 +152,94 @@ TEST(test_csr_data, resize) {
 }
 
 TEST(test_csr_data, insert_insert_or_assign) {
-  CSR_Data<Scalar> matrix;
-  resize(matrix, 5, 5);
+  CSR_Data<Scalar> data;
+  resize(data, 5, 5);
 
-  insert(matrix, 3, 2, 1.0);
-  EXPECT_EQ(size_row(matrix), 5);
-  EXPECT_EQ(size_column(matrix), 5);
-  EXPECT_EQ(size_non_zero(matrix), 1);
-  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+  // add A[3][2] = 1.0
+  auto [iter, is_insert] = insert(data, 3, 2, 1.0);
+  auto [iter_row, iter_column, iter_value] = iter;
+  EXPECT_TRUE(is_insert);
+  EXPECT_EQ(size_row(data), 5);
+  EXPECT_EQ(size_column(data), 5);
+  EXPECT_EQ(size_non_zero(data), 1);
+  EXPECT_EQ(*iter_row, 0);  // together with size_non_zero implicitly checks correct update of offsets.
+  EXPECT_EQ(i_row(data, iter_row), 3);
+  EXPECT_EQ(*iter_column, 2);
+  EXPECT_EQ(*iter_value, 1.0);
 
-  auto iter_bool_pair = insert(matrix, 3, 1, 3.0);  // out of order testing - will check order at the end.
-  //EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 3.0);
-  EXPECT_TRUE(iter_bool_pair.second);
-  EXPECT_EQ(size_non_zero(matrix), 2);
-  //EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
-  //EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+  // add A[3][1] = 3.0
+  std::tie(iter, is_insert) = insert(data, 3, 1, 3.0);  // out of order testing - will check order at the end.
+  std::tie(iter_row, iter_column, iter_value) = iter;
+  EXPECT_TRUE(is_insert);
+  EXPECT_EQ(size_row(data), 5);
+  EXPECT_EQ(size_column(data), 5);
+  EXPECT_EQ(size_non_zero(data), 2);
+  EXPECT_EQ(*iter_row, 0);
+  EXPECT_EQ(i_row(data, iter_row), 3);
+  EXPECT_EQ(*iter_column, 1);
+  EXPECT_EQ(*iter_value, 3.0);
 
-  iter_bool_pair = insert(matrix, 2, 1, 4.0);
-  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 4.0);
-  EXPECT_TRUE(iter_bool_pair.second);
-  EXPECT_DOUBLE_EQ(size_non_zero(matrix), 3);
-  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+  // add A[2][1] = 4.0 - Previous row test
+  std::tie(iter, is_insert) = insert(data, 2, 1, 4.0);
+  std::tie(iter_row, iter_column, iter_value) = iter;
+  EXPECT_TRUE(is_insert);
+  EXPECT_EQ(size_row(data), 5);
+  EXPECT_EQ(size_column(data), 5);
+  EXPECT_EQ(size_non_zero(data), 3);
+  EXPECT_EQ(*iter_row, 0);
+  EXPECT_EQ(i_row(data, iter_row), 2);
+  EXPECT_EQ(*iter_column, 1);
+  EXPECT_EQ(*iter_value, 4.0);
 
-  iter_bool_pair = insert(matrix, 2, 4, 5.0);  // last of columns test
-  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 5.0);
-  EXPECT_TRUE(iter_bool_pair.second);
-  EXPECT_EQ(size_non_zero(matrix), 4.0);
-  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
-  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+  // add A[2][4] = 4.0 - last of columns test
+  std::tie(iter, is_insert) = insert(data, 2, 4, 5.0);
+  std::tie(iter_row, iter_column, iter_value) = iter;
+  EXPECT_TRUE(is_insert);
+  EXPECT_EQ(size_row(data), 5);
+  EXPECT_EQ(size_column(data), 5);
+  EXPECT_EQ(size_non_zero(data), 4);
+  EXPECT_EQ(*iter_row, 0);
+  EXPECT_EQ(i_row(data, iter_row), 2);
+  EXPECT_EQ(*iter_column, 4);
+  EXPECT_EQ(*iter_value, 5.0);
 
-  iter_bool_pair = insert(matrix, 4, 0, 8.0);  // last of rows test
-  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 8.0);
-  EXPECT_TRUE(iter_bool_pair.second);
-  EXPECT_EQ(size_non_zero(matrix), 5);
-  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
-  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
-  // EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
+  // add A[4][0] = 8.0 - last of rows test
+  std::tie(iter, is_insert) = insert(data, 4, 0, 8.0);
+  std::tie(iter_row, iter_column, iter_value) = iter;
+  EXPECT_TRUE(is_insert);
+  EXPECT_EQ(size_row(data), 5);
+  EXPECT_EQ(size_column(data), 5);
+  EXPECT_EQ(size_non_zero(data), 5);
+  EXPECT_EQ(*iter_row, 4);
+  EXPECT_EQ(i_row(data, iter_row), 4);
+  EXPECT_EQ(*iter_column, 0);
+  EXPECT_EQ(*iter_value, 8.0);
 
-  iter_bool_pair = insert(matrix, 4, 4, -5.0);  // last row and column test
-  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, -5.0);
-  EXPECT_TRUE(iter_bool_pair.second);
-  EXPECT_EQ(size_non_zero(matrix), 6);
-  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
-  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
-  // EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
-  // EXPECT_DOUBLE_EQ(matrix[4][4], -5.0);
+  // add A[4][4] = -5.0 - last row and column test
+  std::tie(iter, is_insert) = insert(data, 4, 4, -5.0);
+  std::tie(iter_row, iter_column, iter_value) = iter;
+  EXPECT_TRUE(is_insert);
+  EXPECT_EQ(size_row(data), 5);
+  EXPECT_EQ(size_column(data), 5);
+  EXPECT_EQ(size_non_zero(data), 6);
+  EXPECT_EQ(*iter_row, 4);
+  EXPECT_EQ(i_row(data, iter_row), 4);
+  EXPECT_EQ(*iter_column, 4);
+  EXPECT_EQ(*iter_value, -5.0);
 
-  iter_bool_pair = insert(matrix, 3, 2, 2.0);  // no insert test
-  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 1.0);
-  EXPECT_FALSE(iter_bool_pair.second);
-  EXPECT_EQ(size_non_zero(matrix), 6);
+  // try add A[3][2] = -5.0 (blocked) - no insert test
+  std::tie(iter, is_insert) = insert(data, 3, 2, -5.0);
+  std::tie(iter_row, iter_column, iter_value) = iter;
+  EXPECT_FALSE(is_insert);
+  EXPECT_EQ(size_row(data), 5);
+  EXPECT_EQ(size_column(data), 5);
+  EXPECT_EQ(size_non_zero(data), 6);
+  EXPECT_EQ(*iter_row, 2);
+  EXPECT_EQ(i_row(data, iter_row), 3);
+  EXPECT_EQ(*iter_column, 2);
+  EXPECT_EQ(*iter_value, 1.0);  // previous insert
+
+  // CHECK INTEGRETY BEFORE RESIZES
   // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
   // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
   // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
@@ -222,7 +252,6 @@ TEST(test_csr_data, insert_insert_or_assign) {
   // EXPECT_TRUE(iter_bool_pair.second);
   // EXPECT_EQ(size_row(matrix), 7);
   // EXPECT_EQ(size_non_zero(matrix), 7);
-  // EXPECT_DOUBLE_EQ(matrix[6][2], 10.0);
 
   // iter_bool_pair = insert(matrix, 2, 6, 50.0);  // extra columns
   // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 50.0);
@@ -230,7 +259,6 @@ TEST(test_csr_data, insert_insert_or_assign) {
   // EXPECT_EQ(size_row(matrix), 7);
   // EXPECT_EQ(size_column(matrix), 7);
   // EXPECT_EQ(size_non_zero(matrix), 8);
-  // EXPECT_DOUBLE_EQ(matrix[2][6], 50.0);
 
   // iter_bool_pair = matrix.insert_or_assign(2, 6, -50.0);  // check insert_or_assign
   // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, -50.0);
@@ -238,7 +266,17 @@ TEST(test_csr_data, insert_insert_or_assign) {
   // EXPECT_EQ(matrix.size_row(), 7);
   // EXPECT_EQ(matrix.size_column(), 7);
   // EXPECT_EQ(matrix.size_non_zero(), 8);
-  // EXPECT_DOUBLE_EQ(matrix[2][6], -50.0);
+
+  // FINAL CHECK OF VALUES
+  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
+  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
+  // EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
+  // EXPECT_DOUBLE_EQ(matrix[4][4], -5.0);
+  // EXPECT_DOUBLE_EQ(matrix[6][2], 10.0);
+  // EXPECT_DOUBLE_EQ(matrix[2][6], 50.0);
+  // EXPECT_DOUBLE_EQ(matrix[2][6], -50.0); // used with insert_or_assign
 
   // check ascending order has been maintained.
   // FOR_EACH(row_vector, matrix) {

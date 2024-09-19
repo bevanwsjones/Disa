@@ -131,7 +131,7 @@ std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert(CS
   if(iter_row == iter_row_start && *iter_column == column)
     return {std::make_tuple(iter_row, iter_column, iter_value), false};
   std::cout << "\t----";
-  for(auto non_zeros = iter_row + 1; non_zeros < data.row_offset.end(); ++(*non_zeros++)) {};  // increment and ++
+  for(auto non_zeros = iter_row_start + 1; non_zeros < data.row_offset.end(); ++(*non_zeros++)) {};  // increment and ++
   iter_column = data.column_index.insert(iter_column, column);
   iter_value = data.value.insert(iter_value, value);
   return {std::make_tuple(iter_row_start, iter_column, iter_value), true};
