@@ -27,12 +27,17 @@
 #include <span>
 #include <vector>
 
+#include "matrix_sparse_data.hpp"
 #include "scalar.hpp"
 
 namespace Disa {
 
 template<typename _entry_type, typename _index_type>
 class Matrix_Sparse;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Element and Iterators
+// ---------------------------------------------------------------------------------------------------------------------
 
 /**
  * @brief Represents an element in a sparse matrix.
@@ -41,10 +46,10 @@ class Matrix_Sparse;
  * It provides member functions to access and modify the value, row index, column index, and entry of the element.
  * It also overloads comparison operators for equality and inequality.
  * 
- * @tparam _entry_type The type of the entry in the matrix element.
+ * @tparam _value_type The type of the value in the matrix element.
  * @tparam _index_type The type of the row and column indices.
  */
-template<typename _entry_type, typename _index_type>
+template<typename _value_type, typename _index_type>
 struct Matrix_Sparse_Element {
 
  public:
@@ -53,130 +58,100 @@ struct Matrix_Sparse_Element {
   using const_reference_index = const _index_type&;
   using pointer_index = _index_type*;
 
-  using entry_type = _entry_type;
-  using reference_entry = _entry_type&;
-  using const_reference_entry = const _entry_type&;
-  using pointer_entry = _entry_type*;
+  using entry_value = _value_type;
+  using reference_value = _value_type&;
+  using const_reference_value = const _value_type&;
+  using pointer_value = _value_type*;
 
   using base_type = Matrix_Sparse_Element<entry_type, index_type>;
 
   /**
-     * @brief Default constructor.
-     */
+   * @brief Default constructor.
+   */
   Matrix_Sparse_Element() = default;
 
   /**
-    * @brief Destructor.
-    */
+   * @brief Destructor.
+   */
   ~Matrix_Sparse_Element() = default;
 
   /**
-     * @brief Constructor that initializes the element with the given row index, column pointer, and entry pointer.
-     * 
-     * @param row The row index of the element.
-     * @param column The column pointer of the element.
-     * @param entry The entry pointer of the element.
-     */
-  Matrix_Sparse_Element(const index_type& row, pointer_index column, pointer_entry entry)
-      : row_index(row), column_ptr(column), entry_ptr(entry) {}
+   * @brief Constructor that initializes the element with the given row index, column pointer, and entry pointer.
+   * 
+   * @param row The row index of the element.
+   * @param column The column pointer of the element.
+   * @param entry The entry pointer of the element.
+   */
+  Matrix_Sparse_Element(pointer_index column, pointer_entry value) : column_ptr(column), value_ptr(value) {}
 
   /**
-     * @brief Returns a reference to the value of the element.
-     * 
-     * @return A reference to the value of the element.
-     */
-  reference_entry value() { return *entry_ptr; };
+   * @brief Construct a new Matrix_Sparse_Element object
+   * 
+   * @param other The other Matrix_Sparse_Element object to copy.
+   */
+  Matrix_Sparse_Element(const Matrix_Sparse_Element& other)
+      : column_ptr(other.column_ptr), value_ptr(other.value_ptr) {}
 
   /**
-     * @brief Returns the row index of the element.
-     * 
-     * @return The row index of the element.
-     */
-  const_reference_index row() const { return row_index; };
+    * @brief Returns the column index of the element.
+    * 
+    * @return The column index of the element.
+    */
+  reference_index column() { return *column_ptr; };
 
   /**
-     * @brief Returns the column index of the element.
-     * 
-     * @return The column index of the element.
-     */
+   * @brief Returns a reference to the value of the element.
+   * 
+   * @return A reference to the value of the element.
+   */
+  reference_entry value() { return *value_ptr; };
+
+  /**
+   * @brief Returns the column index of the element.
+   * 
+   * @return The column index of the element.
+   */
   const_reference_index column() const { return *column_ptr; };
 
   /**
-     * @brief Returns the value of the element.
-     * 
-     * @return The value of the element.
-     */
-  const_reference_entry value() const { return *entry_ptr; };
+   * @brief Returns the value of the element.
+   * 
+   * @return The value of the element.
+   */
+  const_reference_entry value() const { return *value_ptr; };
 
   /**
-     * @brief Prefix increment operator.
-     * 
-     * @return A reference to the incremented element.
-     */
-  base_type& operator++() {
-    ++column_ptr;
-    ++entry_ptr;
-    return *this;
-  };
-
-  /**
-     * @brief Postfix increment operator.
-     * 
-     * @return A copy of the original element before incrementing.
-     */
-  base_type operator++(int) {
-    base_type old = *this;
-    ++column_ptr;
-    ++entry_ptr;
-    return old;
-  };
-
-  /**
-     * @brief Prefix decrement operator.
-     * 
-     * @return A reference to the decremented element.
-     */
-  base_type& operator--() {
-    --column_ptr;
-    --entry_ptr;
-    return *this;
-  };
-
-  /**
-    * @brief Postfix decrement operator.
-    * 
-    * @return A copy of the original element before decrementing.
-    */
-  base_type operator--(int) {
-    base_type old = *this;
-    --column_ptr;
-    --entry_ptr;
-    return old;
-  };
-
-  /**
-    * @brief Equality comparison operator.
-    * 
-    * @param that The element to compare with.
-    * @return True if the elements (row, column, value) are equal, false otherwise.
-    */
+   * @brief Equality comparison operator.
+   * 
+   * @param that The element to compare with.
+   * @return True if the elements (row, column, value) are equal, false otherwise.
+   */
   [[nodiscard]] bool operator==(const base_type& that) const {
-    return this->row_index == that.row_index && *this->column_ptr == *that.column_ptr &&
-           *this->entry_ptr == *that.entry_ptr;
+    return *this->column_ptr == *that.column_ptr && *this->entry_ptr == *that.value_ptr;
   };
 
   /**
-    * @brief Inequality comparison operator.
-    * 
-    * @param that The element to compare with.
-    * @return True if the elements are not equal, false otherwise.
-    */
+   * @brief Inequality comparison operator.
+   * 
+   * @param that The element to compare with.
+   * @return True if the elements are not equal, false otherwise.
+   */
   [[nodiscard]] bool operator!=(const base_type& that) const { return !(*this == that); };
 
+  /**
+   * @brief Copy assignment operator.
+   * 
+   * @param other The other Matrix_Sparse_Element object to copy from.
+   * @return Matrix_Sparse_Element& A reference to the copied object.
+   */
+  Matrix_Sparse_Element& operator=(const Matrix_Sparse_Element& other) {
+    if(this != &other) *value_ptr = *other.value_ptr;
+    return *this;
+  }
+
  private:
-  index_type row_index;     /**< The row index of the element. */
   pointer_index column_ptr; /**< The column pointer of the element. */
-  pointer_entry entry_ptr;  /**< The entry pointer of the element. */
+  pointer_value value_ptr;  /**< The entry pointer of the element. */
 };
 
 template<typename _entry_type, typename _index_type, bool _is_const>

@@ -48,13 +48,13 @@ namespace Disa {
 template<typename _value_type, typename _index_type = std::size_t>
 struct CSR_Data {
 
-  using index_type = _index_type;  //!< Alias for index type.
-  using value_type = _value_type;  //!< Alias for value type.
+  using index_type = _index_type;
+  using value_type = _value_type;
   using iterator = std::tuple<typename std::vector<index_type>::iterator, typename std::vector<index_type>::iterator,
-                              typename std::vector<value_type>::iterator>;  //!< Alias for iterator.
+                              typename std::vector<value_type>::iterator>;
   using const_iterator =
   std::tuple<typename std::vector<index_type>::const_iterator, typename std::vector<index_type>::const_iterator,
-             typename std::vector<value_type>::const_iterator>;  //!< Alias for const iterator.
+             typename std::vector<value_type>::const_iterator>;
 
   std::vector<index_type> row_offset{};    //!< The row offset vector.
   std::vector<index_type> column_index{};  //!< The column index vector.
