@@ -30,6 +30,14 @@ add_executable(test_matrix_sparse test_matrix_sparse.cpp)
 target_link_libraries(test_matrix_sparse PRIVATE GTest::gtest_main core)
 gtest_discover_tests(test_matrix_sparse)
 
+add_executable(test_matrix_sparse_data test_matrix_sparse_data.cpp)
+target_link_libraries(test_matrix_sparse_data PRIVATE GTest::gtest_main core)
+gtest_discover_tests(test_matrix_sparse_data)
+
+add_executable(test_matrix_sparse_new test_matrix_sparse_new.cpp)
+target_link_libraries(test_matrix_sparse_new PRIVATE GTest::gtest_main core)
+gtest_discover_tests(test_matrix_sparse_new)
+
 add_executable(test_scalar test_scalar.cpp)
 target_link_libraries(test_scalar PRIVATE GTest::gtest_main core)
 gtest_discover_tests(test_scalar)

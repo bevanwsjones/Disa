@@ -187,7 +187,6 @@ Matrix_Sparse::const_iterator Matrix_Sparse::cend() const noexcept {
 std::pair<Matrix_Sparse::iterator_element, bool> Matrix_Sparse::insert(const std::size_t& i_row,
                                                                        const std::size_t& i_column,
                                                                        const double& value) {
-
   // Resize if we need to.
   if(i_row >= size_row()) resize(i_row + 1, column_size);
   if(i_column >= size_column()) resize(size_row(), i_column + 1);
