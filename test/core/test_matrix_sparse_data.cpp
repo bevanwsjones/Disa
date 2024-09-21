@@ -43,6 +43,10 @@ TEST(test_csr_data, resize) {
 
   CSR_Data<Scalar> data{};
 
+  // Death test
+  EXPECT_DEATH(resize(data, -1, 1), ".*");
+  EXPECT_DEATH(resize(data, 1, -1), ".*");
+
   // check row and column expansion
   resize(data, 5, 9);
   EXPECT_EQ(size_row(data), 5);
@@ -154,6 +158,10 @@ TEST(test_csr_data, resize) {
 TEST(test_csr_data, insert) {
   CSR_Data<Scalar> data;
   resize(data, 5, 5);
+
+  // death tests
+  EXPECT_DEATH(insert(data, -1, 1, 1.0), ".*");
+  EXPECT_DEATH(insert(data, 1, -1, 1.0), ".*");
 
   // add A[3][2] = 1.0
   auto [iter, is_insert] = insert(data, 3, 2, 1.0);
@@ -279,6 +287,10 @@ TEST(test_csr_data, insert) {
 TEST(test_csr_data, lower_bound) {
   CSR_Data<Scalar> data = {
   .row_offset = {0, 1, 3, 3}, .column_index = {1, 0, 2}, .value = {3.0, 4.0, 5.0}, .columns = 3};
+
+  // death tests
+  EXPECT_DEATH(lower_bound(data, -1, 1), ".*");
+  EXPECT_DEATH(lower_bound(data, 1, -1), ".*");
 
   // row 0
   EXPECT_EQ(*std::get<0>(lower_bound(data, 0, 0)), 0);
