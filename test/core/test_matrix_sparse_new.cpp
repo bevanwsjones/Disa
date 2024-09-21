@@ -40,7 +40,7 @@ class matrix_sparse_element_test : public ::testing::Test {
   void SetUp() override {
     column_index = 5;
     value = 3.14;
-    element = new element_type(column_index, value);
+    element = new element_type(&column_index, &value);
   }
 
   void TearDown() override { delete element; }
@@ -52,28 +52,28 @@ TEST_F(matrix_sparse_element_test, constructor_and_accessors) {
 }
 
 TEST_F(matrix_sparse_element_test, const_accessors) {
-  const element_type const_element(column_index, value);
+  const element_type const_element(&column_index, &value);
   EXPECT_EQ(const_element.column(), 5);
   EXPECT_DOUBLE_EQ(const_element.value(), 3.14);
 }
 
 TEST_F(matrix_sparse_element_test, equality_comparison) {
-  element_type same_element(column_index, value);
+  element_type same_element(&column_index, &value);
   EXPECT_TRUE(*element == same_element);
 
   int different_column = 6;
   double different_value = 2.71;
-  element_type different_element(different_column, different_value);
+  element_type different_element(&different_column, &different_value);
   EXPECT_FALSE(*element == different_element);
 }
 
 TEST_F(matrix_sparse_element_test, inequality_comparison) {
-  element_type same_element(column_index, value);
+  element_type same_element(&column_index, &value);
   EXPECT_FALSE(*element != same_element);
 
   int different_column = 6;
   double different_value = 2.71;
-  element_type different_element(different_column, different_value);
+  element_type different_element(&different_column, &different_value);
   EXPECT_TRUE(*element != different_element);
 }
 
@@ -89,85 +89,80 @@ TEST_F(matrix_sparse_element_test, modifiers) {
 // Matrix Sparse Element Iterators
 // ---------------------------------------------------------------------------------------------------------------------
 
-// class base_iterator_matrix_sparse_element_test : public ::testing::Test {
-//  protected:
-//   void SetUp() override {
-//     // Set up test data
-//     columns = {0, 1, 2, 3, 4};
-//     entries = {1.0, 2.0, 3.0, 4.0, 5.0};
-//   }
+class base_iterator_matrix_sparse_element_test : public ::testing::Test {
+ protected:
+  void SetUp() override {
+    // Set up test data
+    columns = {0, 1, 2, 3, 4};
+    entries = {1.0, 2.0, 3.0, 4.0, 5.0};
+  }
 
-//   std::vector<int> columns;
-//   std::vector<double> entries;
-// };
+  std::vector<int> columns;
+  std::vector<double> entries;
+};
 
-// TEST_F(base_iterator_matrix_sparse_element_test, default_constructor) {
-//   Base_Iterator_Matrix_Sparse_Element<double, int, false> it;
-//   // Default-constructed iterator should be in a valid but unspecified state
-//   // We can't make many assumptions about its behavior, but it shouldn't crash
-// }
+TEST_F(base_iterator_matrix_sparse_element_test, default_constructor) {
+  Base_Iterator_Matrix_Sparse_Element<double, int, false> it;
+  // Default-constructed iterator should be in a valid but unspecified state
+  // We can't make many assumptions about its behavior, but it shouldn't crash
+}
 
-// TEST_F(base_iterator_matrix_sparse_element_test, constructor_and_dereference) {
-//   Base_Iterator_Matrix_Sparse_Element<double, int, false> iter(&columns[0], &entries[0]);
-//   auto element = *iter;
-//   EXPECT_EQ(element.column(), 0);
-//   EXPECT_EQ(element.value(), 1.0);
-// }
+TEST_F(base_iterator_matrix_sparse_element_test, constructor_and_dereference) {
+  Base_Iterator_Matrix_Sparse_Element<double, int, false> iter(&columns[0], &entries[0]);
+  auto element = *iter;
+  EXPECT_EQ(element.column(), 0);
+  EXPECT_EQ(element.value(), 1.0);
+}
 
-// TEST_F(base_iterator_matrix_sparse_element_test, increment_and_decrement) {
-//   Base_Iterator_Matrix_Sparse_Element<double, int, false> iter(&columns[0], &entries[0]);
-//   ++iter;
-//   EXPECT_EQ(iter->column(), 1);
-//   EXPECT_EQ(iter->value(), 2.0);
+TEST_F(base_iterator_matrix_sparse_element_test, increment_and_decrement) {
+  Base_Iterator_Matrix_Sparse_Element<double, int, false> iter(&columns[0], &entries[0]);
+  ++iter;
+  EXPECT_EQ((*iter).column(), 1);
+  EXPECT_EQ((*iter).value(), 2.0);
 
-//   iter++;
-//   EXPECT_EQ(iter->column(), 2);
-//   EXPECT_EQ(iter->value(), 3.0);
+  iter++;
+  EXPECT_EQ((*iter).column(), 2);
+  EXPECT_EQ((*iter).value(), 3.0);
 
-//   --iter;
-//   EXPECT_EQ(iter->column(), 1);
-//   EXPECT_EQ(iter->value(), 2.0);
+  --iter;
+  EXPECT_EQ((*iter).column(), 1);
+  EXPECT_EQ((*iter).value(), 2.0);
 
-//   iter--;
-//   EXPECT_EQ(iter->column(), 0);
-//   EXPECT_EQ(iter->value(), 1.0);
-// }
+  iter--;
+  EXPECT_EQ((*iter).column(), 0);
+  EXPECT_EQ((*iter).value(), 1.0);
+}
 
-// TEST_F(base_iterator_matrix_sparse_element_test, comparison) {
-//   Base_Iterator_Matrix_Sparse_Element<double, int, false> iter1(&columns[0], &entries[0]);
-//   Base_Iterator_Matrix_Sparse_Element<double, int, false> iter2(&columns[0], &entries[0]);
-//   Base_Iterator_Matrix_Sparse_Element<double, int, false> iter3(&columns[1], &entries[1]);
+TEST_F(base_iterator_matrix_sparse_element_test, comparison) {
+  Base_Iterator_Matrix_Sparse_Element<double, int, false> iter1(&columns[0], &entries[0]);
+  Base_Iterator_Matrix_Sparse_Element<double, int, false> iter2(&columns[0], &entries[0]);
+  Base_Iterator_Matrix_Sparse_Element<double, int, false> iter3(&columns[1], &entries[1]);
 
-//   EXPECT_EQ(iter1, iter2);
-//   EXPECT_NE(iter1, iter3);
-// }
+  EXPECT_EQ(iter1, iter2);
+  EXPECT_NE(iter1, iter3);
+}
 
-// TEST_F(base_iterator_matrix_sparse_element_test, const_iterator) {
-//   Base_Iterator_Matrix_Sparse_Element<double, int, true> const_it(&columns[0], &entries[0]);
+TEST_F(base_iterator_matrix_sparse_element_test, const_iterator) {
+  Base_Iterator_Matrix_Sparse_Element<double, int, true> const_it(&columns[0], &entries[0]);
 
-//   EXPECT_EQ(const_it->column(), 0);
-//   EXPECT_EQ(const_it->value(), 1.0);
+  const auto element = *const_it;
+  EXPECT_EQ((*const_it).column(), 0);
+  EXPECT_EQ((*const_it).value(), 1.0);
 
-//   // ensure we can increment and decrement the const iterator
-//   ++const_it;
-//   const_it++;
-//   EXPECT_EQ(const_it->column(), 2);
-//   EXPECT_EQ(const_it->value(), 3.0);
-//   --const_it;
-//   const_it--;
-//   EXPECT_EQ(const_it->column(), 0);
-//   EXPECT_EQ(const_it->value(), 1.0);
+  // ensure we can increment and decrement the const iterator
+  ++const_it;
+  const_it++;
+  EXPECT_EQ((*const_it).column(), 2);
+  EXPECT_EQ((*const_it).value(), 3.0);
+  --const_it;
+  const_it--;
+  EXPECT_EQ((*const_it).column(), 0);
+  EXPECT_EQ((*const_it).value(), 1.0);
 
-//   // Ensure that we can't modify the value through a const iterator
-//   // static_assert(std::is_const_v<std::remove_reference_t<decltype(element.value())>>,
-//   //               "Const iterator should return const references");
-// }
-
-// TEST_F(base_iterator_matrix_sparse_element_test, arrow_operator) {
-//   Base_Iterator_Matrix_Sparse_Element<double, int, false> it(&columns[0], &entries[0]);
-//   EXPECT_EQ(it->column(), 0);
-//   EXPECT_EQ(it->value(), 1.0);
-// }
+  // Ensure that we can't modify the value through a const iterator
+  static_assert(std::is_const_v<std::remove_reference_t<decltype(element.value())>>,
+                "Const iterator should return const references");
+}
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Matrix Sparse Row and Iterators
