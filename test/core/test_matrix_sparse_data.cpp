@@ -151,7 +151,7 @@ TEST(test_csr_data, resize) {
   EXPECT_EQ(size_non_zero(data), 0);
 }
 
-TEST(test_csr_data, insert_insert_or_assign) {
+TEST(test_csr_data, insert) {
   CSR_Data<Scalar> data;
   resize(data, 5, 5);
 
@@ -167,8 +167,8 @@ TEST(test_csr_data, insert_insert_or_assign) {
   EXPECT_EQ(*iter_column, 2);
   EXPECT_EQ(*iter_value, 1.0);
 
-  // add A[3][1] = 3.0
-  std::tie(iter, is_insert) = insert(data, 3, 1, 3.0);  // out of order testing - will check order at the end.
+  // add A[3][1] = 3.0 - we insert out of order - will check order at the end.
+  std::tie(iter, is_insert) = insert(data, 3, 1, 3.0);
   std::tie(iter_row, iter_column, iter_value) = iter;
   EXPECT_TRUE(is_insert);
   EXPECT_EQ(size_row(data), 5);
@@ -239,56 +239,41 @@ TEST(test_csr_data, insert_insert_or_assign) {
   EXPECT_EQ(*iter_column, 2);
   EXPECT_EQ(*iter_value, 1.0);  // previous insert
 
-  // CHECK INTEGRETY BEFORE RESIZES
-  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
-  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
-  // EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
-  // EXPECT_DOUBLE_EQ(matrix[4][4], -5.0);
+  // add A[6][2] = 10.0 - new 'key' insert by adding an extra row.
+  std::tie(iter, is_insert) = insert(data, 6, 2, 10.0);
+  std::tie(iter_row, iter_column, iter_value) = iter;
+  EXPECT_TRUE(is_insert);
+  EXPECT_EQ(size_row(data), 7);
+  EXPECT_EQ(size_column(data), 5);
+  EXPECT_EQ(size_non_zero(data), 7);
+  EXPECT_EQ(*iter_row, 6);
+  EXPECT_EQ(i_row(data, iter_row), 6);
+  EXPECT_EQ(*iter_column, 2);
+  EXPECT_EQ(*iter_value, 10.0);
 
-  // iter_bool_pair = insert(matrix, 6, 2, 10.0);  // extra rows
-  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 10.0);
-  // EXPECT_TRUE(iter_bool_pair.second);
-  // EXPECT_EQ(size_row(matrix), 7);
-  // EXPECT_EQ(size_non_zero(matrix), 7);
+  // add A[6][2] = 10.0 - new 'key' insert by adding an extra column.
+  std::tie(iter, is_insert) = insert(data, 2, 6, 50.0);
+  std::tie(iter_row, iter_column, iter_value) = iter;
+  EXPECT_TRUE(is_insert);
+  EXPECT_EQ(size_row(data), 7);
+  EXPECT_EQ(size_column(data), 7);
+  EXPECT_EQ(size_non_zero(data), 8);
+  EXPECT_EQ(*iter_row, 0);
+  EXPECT_EQ(i_row(data, iter_row), 2);
+  EXPECT_EQ(*iter_column, 6);
+  EXPECT_EQ(*iter_value, 50.0);
 
-  // iter_bool_pair = insert(matrix, 2, 6, 50.0);  // extra columns
-  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, 50.0);
-  // EXPECT_TRUE(iter_bool_pair.second);
-  // EXPECT_EQ(size_row(matrix), 7);
-  // EXPECT_EQ(size_column(matrix), 7);
-  // EXPECT_EQ(size_non_zero(matrix), 8);
-
-  // iter_bool_pair = matrix.insert_or_assign(2, 6, -50.0);  // check insert_or_assign
-  // EXPECT_DOUBLE_EQ(*iter_bool_pair.first, -50.0);
-  // EXPECT_FALSE(iter_bool_pair.second);
-  // EXPECT_EQ(matrix.size_row(), 7);
-  // EXPECT_EQ(matrix.size_column(), 7);
-  // EXPECT_EQ(matrix.size_non_zero(), 8);
-
-  // FINAL CHECK OF VALUES
-  // EXPECT_DOUBLE_EQ(matrix[2][1], 4.0);
-  // EXPECT_DOUBLE_EQ(matrix[2][4], 5.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][1], 3.0);
-  // EXPECT_DOUBLE_EQ(matrix[3][2], 1.0);
-  // EXPECT_DOUBLE_EQ(matrix[4][0], 8.0);
-  // EXPECT_DOUBLE_EQ(matrix[4][4], -5.0);
-  // EXPECT_DOUBLE_EQ(matrix[6][2], 10.0);
-  // EXPECT_DOUBLE_EQ(matrix[2][6], 50.0);
-  // EXPECT_DOUBLE_EQ(matrix[2][6], -50.0); // used with insert_or_assign
-
-  // check ascending order has been maintained.
-  // FOR_EACH(row_vector, matrix) {
-  //   auto prev = row_vector.begin();
-  //   FOR_ITER(iter, row_vector) {
-  //     if(iter != row_vector.begin()) {
-  //       EXPECT_GT(iter.i_column(), prev.i_column());
-  //       EXPECT_EQ(iter.i_row(), prev.i_row());  // more of a sanity check.
-  //       ++prev;
-  //     }
-  //   }
-  // }
+  // Check data structure integrity before.
+  iter_row = data.row_offset.begin();
+  iter_column = data.column_index.begin();
+  iter_value = data.value.begin();
+  for(auto check_value : std::vector<CSR_Data<Scalar>::index_type>({0, 0, 0, 3, 5, 7, 7, 8}))
+    EXPECT_EQ(*iter_row++, check_value);
+  for(auto check_value : std::vector<CSR_Data<Scalar>::index_type>({1, 4, 6, 1, 2, 0, 4, 2}))
+    EXPECT_EQ(*iter_column++, check_value);
+  for(auto check_value : std::vector<CSR_Data<Scalar>::value_type>({4.0, 5.0, 50.0, 3.0, 1.0, 8.0, -5.0, 10.0}))
+    EXPECT_EQ(*iter_value++, check_value);
+  EXPECT_EQ(data.columns, 7);
 }
 
 TEST(test_csr_data, lower_bound) {

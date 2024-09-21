@@ -33,16 +33,20 @@ namespace Disa {
 
 template<typename _value_type, typename _index_type = std::size_t>
 struct CSR_Data {
-  using iterator = std::tuple<typename std::vector<_index_type>::iterator, typename std::vector<_index_type>::iterator,
-                              typename std::vector<_value_type>::iterator>;
-  using const_iterator =
-  std::tuple<typename std::vector<_index_type>::const_iterator, typename std::vector<_index_type>::const_iterator,
-             typename std::vector<_value_type>::const_iterator>;
 
-  std::vector<_index_type> row_offset;
-  std::vector<_index_type> column_index;
-  std::vector<_value_type> value;
-  _index_type columns;
+  using index_type = _index_type;
+  using value_type = _value_type;
+
+  using iterator = std::tuple<typename std::vector<index_type>::iterator, typename std::vector<index_type>::iterator,
+                              typename std::vector<value_type>::iterator>;
+  using const_iterator =
+  std::tuple<typename std::vector<index_type>::const_iterator, typename std::vector<index_type>::const_iterator,
+             typename std::vector<value_type>::const_iterator>;
+
+  std::vector<index_type> row_offset;
+  std::vector<index_type> column_index;
+  std::vector<value_type> value;
+  index_type columns;
 };
 
 // assumes iterator is in rage begin() - end()
@@ -93,7 +97,7 @@ CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg
   // Note: Since we may have to do column erases over multiple rows we do it directly here rather than use erase().
   if(column < size_column(data)) {
     _index_type offset_loss = 0;
-    FOR(row, size_row(data)) {
+    for(_index_type row = 0; row < size_row(data); ++row) {
       const auto& iter_column_end = column_index.begin() + static_cast<s_index_type>(row_offset[row + 1] - offset_loss);
       auto iter_column =
       std::upper_bound(column_index.begin() + static_cast<s_index_type>(row_offset[row]), iter_column_end, column - 1);
@@ -115,22 +119,20 @@ std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert(CS
                                                                               const _arg_index_type& row,
                                                                               const _arg_index_type& column,
                                                                               const _value_type& value) {
-  const auto iter_row_start = data.row_offset.begin() + row;
 
   // Resize if we need to.
-  if(row >= size_row(data)) resize(data, row + 1, static_cast<_arg_index_type>(data.columns));
-  if(column >= size_column(data)) resize(data, size_row(data), data.columns + 1);
+  if(row >= size_row(data)) resize(data, row + 1, static_cast<_arg_index_type>(size_column(data)));
+  if(column >= size_column(data)) resize(data, static_cast<_arg_index_type>(size_row(data)), column + 1);
 
+  // Search for new insert
+  const auto iter_row_start = data.row_offset.begin() + row;  // tricky, only create after resizing.
   auto [iter_row, iter_column, iter_value] = lower_bound(data, row, column);
 
-  // entry exists, return no insert.
-  std::cout << "\n----";
-  std::cout << "\niter_row:       " << *iter_row << "\t i_row: " << i_row(data, iter_row);
-  std::cout << "\niter_row_start: " << *iter_row_start << "\t i_row: " << i_row(data, iter_row_start);
-  std::cout << "\n----";
+  // Entry exists, return no insert.
   if(iter_row == iter_row_start && *iter_column == column)
     return {std::make_tuple(iter_row, iter_column, iter_value), false};
-  std::cout << "\t----";
+
+  // Insert new entry.
   for(auto non_zeros = iter_row_start + 1; non_zeros < data.row_offset.end(); ++(*non_zeros++)) {};  // increment and ++
   iter_column = data.column_index.insert(iter_column, column);
   iter_value = data.value.insert(iter_value, value);
