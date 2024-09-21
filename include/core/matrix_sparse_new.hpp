@@ -38,6 +38,8 @@ class Matrix_Sparse;
 // ---------------------------------------------------------------------------------------------------------------------
 // Matrix Sparse Element and Iterators
 // ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Element
+// ---------------------------------------------------------------------------------------------------------------------
 
 /**
  * @struct Matrix_Sparse_Element
@@ -54,17 +56,14 @@ template<typename _value_type, typename _index_type>
 class Matrix_Sparse_Element {
 
  public:
-  using index_type = _index_type;
-  using reference_index = _index_type&;
+  using index_type = const _index_type;
   using const_reference_index = const _index_type&;
-  using pointer_index = _index_type*;
 
   using value_type = _value_type;
   using reference_value = _value_type&;
   using const_reference_value = const _value_type&;
-  using pointer_value = _value_type*;
 
-  using base_type = Matrix_Sparse_Element<value_type, index_type>;
+  using base_type = Matrix_Sparse_Element<value_type, _index_type>;
 
   /**
    * @brief Default constructor.
@@ -83,18 +82,13 @@ class Matrix_Sparse_Element {
    * @param column The column pointer of the element.
    * @param entry The entry pointer of the element.
    */
-  constexpr Matrix_Sparse_Element(pointer_index column, pointer_value value) noexcept
-      : ref_column(*column), ref_value(*value) {}
+  constexpr Matrix_Sparse_Element(const_reference_index column, reference_value value) noexcept
+      : ref_column(column), ref_value(value) {}
 
   /**
-   * @brief Construct a new Matrix_Sparse_Element object
-   * 
-   * @param other The other Matrix_Sparse_Element object to copy.
-   * 
-   * @warning We only copy the value only, the column remains fixed, otherwise we would invalidate CSR ordering.
+   * @brief Cannot copy an element since it would invalidate the CSR ordering.
    */
-  Matrix_Sparse_Element(const Matrix_Sparse_Element& other) noexcept
-      : ref_column(ref_column), ref_value(other.ref_value) {}
+  Matrix_Sparse_Element(const Matrix_Sparse_Element& other) = delete;
 
   /**
    * @brief Returns a reference to the value of the element.
@@ -136,88 +130,91 @@ class Matrix_Sparse_Element {
   [[nodiscard]] constexpr bool operator!=(const base_type& that) noexcept { return !(*this == that); };
 
   /**
-   * @brief Copy assignment operator.
-   * 
-   * @param that The other Matrix_Sparse_Element object to copy from.
-   * @return Matrix_Sparse_Element& A reference to the copied object.
-   * 
-   * @warning We only copy the value only, the column remains fixed, otherwise we would invalidate CSR ordering.
+   * @brief Cannot copy assign an element since it would invalidate the CSR ordering.
    */
-  Matrix_Sparse_Element& operator=(const Matrix_Sparse_Element& that) noexcept {
-    if(this != &that) ref_value = that.ref_value;
-    return *this;
-  }
+  Matrix_Sparse_Element& operator=(const Matrix_Sparse_Element& that) = delete;
 
  private:
-  reference_index ref_column; /**< The column of the CSR element. */
-  reference_value ref_value;  /**< The valuie of the CSR element. */
+  const_reference_index ref_column; /**< The column of the CSR element. */
+  reference_value ref_value;        /**< The valuie of the CSR element. */
 };
 
-// template<typename _entry_type, typename _index_type, bool _is_const>
-// struct Base_Iterator_Matrix_Sparse_Element {
-//  public:
-//   using index_type = _index_type;
-//   using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Element Iterators
+// ---------------------------------------------------------------------------------------------------------------------
 
-//   using entry_type = _entry_type;
-//   using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;
+template<typename _entry_type, typename _index_type, bool _is_const>
+struct Base_Iterator_Matrix_Sparse_Element {
+ public:
+  // Iterator traits
+  using iterator_category = std::bidirectional_iterator_tag;
+  using difference_type = std::ptrdiff_t;
+  using value_type = Matrix_Sparse_Element<_entry_type, _index_type>;
+  using pointer = std::conditional_t<_is_const, const value_type*, value_type*>;
+  using reference = std::conditional_t<_is_const, const value_type&, value_type&>;
 
-//   using value_type = Matrix_Sparse_Element<entry_type, index_type>;
-//   using reference = std::conditional_t<_is_const, const Matrix_Sparse_Element<entry_type, index_type>&,
-//                                        Matrix_Sparse_Element<entry_type, index_type>&>;
-//   using pointer = std::conditional_t<_is_const, const Matrix_Sparse_Element<entry_type, index_type>*,
-//                                      Matrix_Sparse_Element<entry_type, index_type>*>;
+  // type definitions
+  using index_type = _index_type;
+  using entry_type = _entry_type;
+  using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
+  using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;
+  using iterator_type = Base_Iterator_Matrix_Sparse_Element<entry_type, index_type, _is_const>;
 
-//   using iterator_type = Base_Iterator_Matrix_Sparse_Element<entry_type, index_type, _is_const>;
+  Base_Iterator_Matrix_Sparse_Element() noexcept = default;
+  ~Base_Iterator_Matrix_Sparse_Element() noexcept = default;
 
-//   Base_Iterator_Matrix_Sparse_Element() = default;
-//   ~Base_Iterator_Matrix_Sparse_Element() = default;
+  Base_Iterator_Matrix_Sparse_Element(pointer_index column, pointer_entry entry) noexcept
+      : ptr_column(column), ptr_entry(entry) {}
 
-//   Base_Iterator_Matrix_Sparse_Element(value_type element_value) : value(element_value) {}
+  [[nodiscard]] reference operator*() { return value_type(*ptr_column, *ptr_entry); };
 
-//   Base_Iterator_Matrix_Sparse_Element(const index_type& row, index_type* column, entry_type* entry)
-//       : value(row, column, entry) {}
+  pointer operator->() { return &(operator*()); };
 
-//   reference operator*() { return value; };
+  iterator_type& operator++() noexcept {
+    ++ptr_column;
+    ++ptr_entry;
+    return *this;
+  };
 
-//   pointer operator->() { return &value; };
+  iterator_type operator++(int) noexcept {
+    iterator_type old = *this;
+    ++ptr_column;
+    ++ptr_entry;
+    return old;
+  };
 
-//   iterator_type& operator++() {
-//     ++value;
-//     return *this;
-//   };
+  iterator_type& operator--() noexcept {
+    --ptr_column;
+    --ptr_entry;
+    return *this;
+  };
 
-//   iterator_type operator++(int) {
-//     iterator_type old = *this;
-//     ++value;
-//     return old;
-//   };
+  iterator_type operator--(int) noexcept {
+    iterator_type old = *this;
+    --ptr_column;
+    --ptr_entry;
+    return old;
+  };
 
-//   iterator_type& operator--() {
-//     --value;
-//     return *this;
-//   };
+  [[nodiscard]] constexpr bool operator==(const iterator_type& that) noexcept {
+    return ptr_column == that.ptr_column && ptr_entry == that.ptr_entry;
+  };
 
-//   iterator_type operator--(int) {
-//     iterator_type old = *this;
-//     --value;
-//     return old;
-//   };
+  [[nodiscard]] constexpr bool operator!=(const iterator_type& that) noexcept { return !(*this == that); };
 
-//   [[nodiscard]] bool operator==(const iterator_type& that) const { return this->value == that.value; };
+ private:
+  pointer_index ptr_column{nullptr};
+  pointer_entry ptr_entry{nullptr};
+};
 
-//   [[nodiscard]] bool operator!=(const iterator_type& that) const { return this->value != that.value; };
+template<typename _entry_type, typename _index_type>
+using Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element<_entry_type, _index_type, false>;
+template<typename _entry_type, typename _index_type>
+using Const_Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element<_entry_type, _index_type, true>;
 
-//  private:
-//   value_type value;
-// };
-
-// template<typename _entry_type, typename _index_type>
-// using Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element<_entry_type, _index_type, false>;
-// template<typename _entry_type, typename _index_type>
-// using Const_Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element<_entry_type, _index_type, true>;
-
-// // row
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Element and Iterators
+// ---------------------------------------------------------------------------------------------------------------------
 
 // template<typename _entry_type, typename _index_type>
 // struct Matrix_Sparse_Row {
