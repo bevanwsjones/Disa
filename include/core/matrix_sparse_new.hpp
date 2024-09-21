@@ -277,9 +277,13 @@ struct Matrix_Sparse_Row {
                     const_pointer_entry s_entry, const_pointer_entry e_entry)
       : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {}
 
+  // TODO - there is something weird with const here (may resolve with CSR Data)
   Matrix_Sparse_Row(const matrix_type* matrix, index_type row, const_pointer_index s_column,
                     const_pointer_index e_column, const_pointer_entry s_entry, const_pointer_entry e_entry)
-      : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {}
+      : matrix_ptr(const_cast<matrix_type*>(matrix)),
+        row_index(row),
+        column_index(s_column, e_column),
+        entry(s_entry, e_entry) {}
 
   index_type row() const { return row_index; };
 
