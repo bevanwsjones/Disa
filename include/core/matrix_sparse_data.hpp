@@ -56,10 +56,10 @@ struct CSR_Data {
   std::tuple<typename std::vector<index_type>::const_iterator, typename std::vector<index_type>::const_iterator,
              typename std::vector<value_type>::const_iterator>;
 
-  std::vector<index_type> row_offset{};    //!< The row offset vector.
-  std::vector<index_type> column_index{};  //!< The column index vector.
-  std::vector<value_type> value{};         //!< The value vector.
-  index_type columns{0};                   //!< The number of columns in the matrix.
+  std::vector<index_type> row_offset{};   /**< The row offset vector. */
+  std::vector<index_type> column_index{}; /**< The column index vector. */
+  std::vector<value_type> value{};        /**< The value vector. */
+  index_type columns{0};                  /**< The number of columns in the matrix. */
 };
 
 /**

@@ -72,7 +72,7 @@ struct Matrix_Dense : public std::array<Vector_Dense<_type, _col>, _row> {
   /**
    * @brief Initialise empty matrix.
    */
-  Matrix_Dense() : std::array<Vector_Dense<_type, _col>, _row>(){};
+  Matrix_Dense() : std::array<Vector_Dense<_type, _col>, _row>() {};
 
   /**
    * @brief Constructor to construct from initializer of vectors list, list and matrix must be of the same dimensions.
@@ -235,7 +235,7 @@ struct Matrix_Dense<_type, 0, 0> : public std::vector<Vector_Dense<_type, 0>> {
   /**
    * @brief Initialise empty matrix.
    */
-  Matrix_Dense() : std::vector<Vector_Dense<_type, 0>>(){};
+  Matrix_Dense() : std::vector<Vector_Dense<_type, 0>>() {};
 
   /**
    * @brief Constructor to construct a matrix from an initializer list, matrix is resized to list size.

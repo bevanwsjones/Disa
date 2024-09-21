@@ -24,209 +24,160 @@
 
 using namespace Disa;
 
-TEST(MatrixSparseElementTest, DefaultConstructor) {
-  Matrix_Sparse_Element<int, int> element;
-  // Add assertions as necessary, depending on what your default constructor does
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Element and Iterators
+// ---------------------------------------------------------------------------------------------------------------------
+
+class matrix_sparse_element_test : public ::testing::Test {
+ protected:
+  using element_type = Matrix_Sparse_Element<double, int>;
+  int column_index;
+  double value;
+  element_type* element;
+
+  void SetUp() override {
+    column_index = 5;
+    value = 3.14;
+    element = new element_type(&column_index, &value);
+  }
+
+  void TearDown() override { delete element; }
+};
+
+TEST_F(matrix_sparse_element_test, constructor_and_accessors) {
+  EXPECT_EQ(element->column(), 5);
+  EXPECT_DOUBLE_EQ(element->value(), 3.14);
 }
 
-TEST(MatrixSparseElementTest, ValueConstructor) {
-  int row = 1;
-  int column = 2;
-  int value = 3;
-  Matrix_Sparse_Element<int, int> element(row, &column, &value);
-  ASSERT_EQ(element.row(), row);
-  ASSERT_EQ(element.column(), column);
-  ASSERT_EQ(element.value(), value);
+TEST_F(matrix_sparse_element_test, copy_constructor) {
+  element_type copied_element(*element);
+  EXPECT_EQ(copied_element.column(), element->column());
+  EXPECT_DOUBLE_EQ(copied_element.value(), element->value());
 }
 
-TEST(MatrixSparseElementTest, IncrementDecrementOperators) {
-  int row = 1;
-  int column[] = {2, 3};
-  int value[] = {4, 5};
-  Matrix_Sparse_Element<int, int> element(row, column, value);
-  element++;
-  ASSERT_EQ(element.column(), column[1]);
-  ASSERT_EQ(element.value(), value[1]);
-  element--;
-  ASSERT_EQ(element.column(), column[0]);
-  ASSERT_EQ(element.value(), value[0]);
+TEST_F(matrix_sparse_element_test, const_accessors) {
+  const element_type const_element(&column_index, &value);
+  EXPECT_EQ(const_element.column(), 5);
+  EXPECT_DOUBLE_EQ(const_element.value(), 3.14);
 }
 
-TEST(MatrixSparseElementTest, EqualityOperators) {
-  int row1 = 1;
-  int column1 = 2;
-  int value1 = 3;
-  Matrix_Sparse_Element<int, int> element1(row1, &column1, &value1);
+TEST_F(matrix_sparse_element_test, equality_comparison) {
+  element_type same_element(&column_index, &value);
+  EXPECT_TRUE(*element == same_element);
 
-  int row2 = 1;
-  int column2 = 2;
-  int value2 = 3;
-  Matrix_Sparse_Element<int, int> element2(row2, &column2, &value2);
-
-  ASSERT_EQ(element1, element2);
-
-  value2 = 4;  // Change the value that element2 points to
-  ASSERT_NE(element1, element2);
+  int different_column = 6;
+  double different_value = 2.71;
+  element_type different_element(&different_column, &different_value);
+  EXPECT_FALSE(*element == different_element);
 }
 
-TEST(IteratorMatrixSparseElementTest, DefaultConstructor) {
-  Iterator_Matrix_Sparse_Element<int, int> iterator;
-  // Add assertions as necessary, depending on what your default constructor does
+TEST_F(matrix_sparse_element_test, inequality_comparison) {
+  element_type same_element(&column_index, &value);
+  EXPECT_FALSE(*element != same_element);
+
+  int different_column = 6;
+  double different_value = 2.71;
+  element_type different_element(&different_column, &different_value);
+  EXPECT_TRUE(*element != different_element);
 }
 
-TEST(IteratorMatrixSparseElementTest, ValueConstructor) {
-  int row = 1;
-  int column = 2;
-  int value = 3;
-  Matrix_Sparse_Element<int, int> element(row, &column, &value);
-  Iterator_Matrix_Sparse_Element<int, int> iterator(element);
-  ASSERT_EQ(*iterator, element);
+TEST_F(matrix_sparse_element_test, copy_assignment) {
+  int new_column = 7;
+  double new_value = 2.718;
+  element_type new_element(&new_column, &new_value);
+
+  *element = new_element;
+  EXPECT_EQ(element->column(), 5);  // Column should not change
+  EXPECT_DOUBLE_EQ(element->value(), 2.718);
 }
 
-TEST(IteratorMatrixSparseElementTest, IncrementDecrementOperators) {
-  int row = 1;
-  int column[] = {2, 3};
-  int value[] = {4, 5};
-  Matrix_Sparse_Element<int, int> element1(row, column, value);
-  Matrix_Sparse_Element<int, int> element2(row, column, value);
-  ++element2;
-  Iterator_Matrix_Sparse_Element<int, int> iterator = element1;
-  ++iterator;
-  ASSERT_EQ(*iterator, element2);
-  --iterator;
-  ASSERT_EQ(*iterator, element1);
+TEST_F(matrix_sparse_element_test, modifiers) {
+  element->value() = 6.28;
+  EXPECT_DOUBLE_EQ(element->value(), 6.28);
+
+  // Note: We don't test modifying the column because it's a reference
+  // and shouldn't be changed to maintain CSR ordering
 }
 
-TEST(IteratorMatrixSparseElementTest, EqualityOperators) {
-  int row = 1;
-  int column[] = {2, 3};
-  int value[] = {4, 5};
-  Matrix_Sparse_Element<int, int> element1(row, column, value);
-  Matrix_Sparse_Element<int, int> element2(row, column, value);
-  ++element2;
-
-  Iterator_Matrix_Sparse_Element<int, int> iterator1 = element1;
-  Iterator_Matrix_Sparse_Element<int, int> iterator2 = element2;
-  ASSERT_EQ(iterator1, iterator1);
-  ASSERT_NE(iterator1, iterator2);
-}
-
-TEST(ConstIteratorMatrixSparseElementTest, DefaultConstructor) {
-  Const_Iterator_Matrix_Sparse_Element<int, int> iterator;
-  // Add assertions as necessary, depending on what your default constructor does
-}
-
-TEST(ConstIteratorMatrixSparseElementTest, ValueConstructor) {
-  int row = 1;
-  int column[] = {2, 3};
-  int value[] = {4, 5};
-  Matrix_Sparse_Element<int, int> element(row, column, value);
-  Const_Iterator_Matrix_Sparse_Element<int, int> iterator(element);
-  ASSERT_EQ(*iterator, element);
-}
-
-TEST(ConstIteratorMatrixSparseElementTest, IncrementDecrementOperators) {
-  int row = 1;
-  int column[] = {2, 3};
-  int value[] = {4, 5};
-  Matrix_Sparse_Element<int, int> element1(row, column, value);
-  Matrix_Sparse_Element<int, int> element2 = element1;
-  ++element2;
-
-  Const_Iterator_Matrix_Sparse_Element<int, int> iterator = element1;
-  ++iterator;
-  ASSERT_EQ(*iterator, element2);
-  --iterator;
-  ASSERT_EQ(*iterator, element1);
-}
-
-TEST(ConstIteratorMatrixSparseElementTest, EqualityOperators) {
-  int row = 1;
-  int column[] = {2, 3};
-  int value[] = {4, 5};
-  Matrix_Sparse_Element<int, int> element1(row, column, value);
-  Matrix_Sparse_Element<int, int> element2(row, column, value);
-  ++element2;
-
-  Const_Iterator_Matrix_Sparse_Element<int, int> iterator1 = element1;
-  Const_Iterator_Matrix_Sparse_Element<int, int> iterator2 = element2;
-  ASSERT_EQ(iterator1, iterator1);
-  ASSERT_NE(iterator1, iterator2);
-}
-
-//Row:
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Row and Iterators
+// ---------------------------------------------------------------------------------------------------------------------
 
 TEST(MatrixSparseRowTest, BeginEndIterators) {
+  EXPECT_TRUE(false);
+
   // Create a Matrix_Sparse_Row object
-  Matrix_Sparse<int, int> matrix;
-  int row = 0;
-  std::vector<int> column_data = {1, 2, 3};
-  std::vector<int> entry_data = {4, 5, 6};
-  std::span<int> column(column_data);
-  std::span<int> entries(entry_data);
-  Matrix_Sparse_Row<int, int> matrix_row(&matrix, row, column, entries);
+  // Matrix_Sparse<int, int> matrix;
+  // int row = 0;
+  // std::vector<int> column_data = {1, 2, 3};
+  // std::vector<int> entry_data = {4, 5, 6};
+  // std::span<int> column(column_data);
+  // std::span<int> entries(entry_data);
+  // Matrix_Sparse_Row<int, int> matrix_row(&matrix, row, column, entries);
 
-  // Test non-const begin() and end()
-  auto it = matrix_row.begin();
-  auto end = matrix_row.end();
-  ASSERT_NE(it, end);  // Assuming the matrix_row is not empty
+  // // Test non-const begin() and end()
+  // auto it = matrix_row.begin();
+  // auto end = matrix_row.end();
+  // ASSERT_NE(it, end);  // Assuming the matrix_row is not empty
 
-  // Check that the values returned by the iterator match the original data
-  ASSERT_EQ(it->row(), row);
-  ASSERT_EQ(it->column(), column_data[0]);
-  ASSERT_EQ(it->value(), entry_data[0]);
+  // // Check that the values returned by the iterator match the original data
+  // ASSERT_EQ(it->row(), row);
+  // ASSERT_EQ(it->column(), column_data[0]);
+  // ASSERT_EQ(it->value(), entry_data[0]);
 
-  // Test const begin() and end()
-  const auto& const_matrix_row = matrix_row;
-  auto const_it = const_matrix_row.begin();
-  auto const_end = const_matrix_row.end();
-  ASSERT_NE(const_it, const_end);  // Assuming the matrix_row is not empty
+  // // Test const begin() and end()
+  // const auto& const_matrix_row = matrix_row;
+  // auto const_it = const_matrix_row.begin();
+  // auto const_end = const_matrix_row.end();
+  // ASSERT_NE(const_it, const_end);  // Assuming the matrix_row is not empty
 
-  // Check that the values returned by the const iterator match the original data
-  ASSERT_EQ(const_it->row(), row);
-  ASSERT_EQ(const_it->column(), column_data[0]);
-  ASSERT_EQ(const_it->value(), entry_data[0]);
+  // // Check that the values returned by the const iterator match the original data
+  // ASSERT_EQ(const_it->row(), row);
+  // ASSERT_EQ(const_it->column(), column_data[0]);
+  // ASSERT_EQ(const_it->value(), entry_data[0]);
 
-  // Test cbegin() and cend()
-  auto cbegin_it = matrix_row.cbegin();
-  auto cend_it = matrix_row.cend();
-  ASSERT_NE(cbegin_it, cend_it);  // Assuming the matrix_row is not empty
+  // // Test cbegin() and cend()
+  // auto cbegin_it = matrix_row.cbegin();
+  // auto cend_it = matrix_row.cend();
+  // ASSERT_NE(cbegin_it, cend_it);  // Assuming the matrix_row is not empty
 
-  // Check that the values returned by the cbegin iterator match the original data
-  ASSERT_EQ(cbegin_it->row(), row);
-  ASSERT_EQ(cbegin_it->column(), column_data[0]);
-  ASSERT_EQ(cbegin_it->value(), entry_data[0]);
+  // // Check that the values returned by the cbegin iterator match the original data
+  // ASSERT_EQ(cbegin_it->row(), row);
+  // ASSERT_EQ(cbegin_it->column(), column_data[0]);
+  // ASSERT_EQ(cbegin_it->value(), entry_data[0]);
 }
 
 TEST(MatrixSparseRowTest, ArithmeticOperators) {
+  EXPECT_TRUE(false);
+
   // Create a Matrix_Sparse_Row object
-  Matrix_Sparse<int, int> matrix;
-  int row = 0;
-  std::span<int> column;
-  std::span<int> entries;
-  Matrix_Sparse_Row<int, int> matrix_row(&matrix, row, column, entries);
+  // Matrix_Sparse<int, int> matrix;
+  // int row = 0;
+  // std::span<int> column;
+  // std::span<int> entries;
+  // Matrix_Sparse_Row<int, int> matrix_row(&matrix, row, column, entries);
 
-  // Test operator++
-  auto old_row = matrix_row;
-  auto new_row = ++matrix_row;
-  ASSERT_EQ(new_row.row(), old_row.row() + 1);
+  // // Test operator++
+  // auto old_row = matrix_row;
+  // auto new_row = ++matrix_row;
+  // ASSERT_EQ(new_row.row(), old_row.row() + 1);
 
-  // Test operator++(int)
-  old_row = matrix_row;
-  new_row = matrix_row++;
-  ASSERT_EQ(new_row.row(), old_row.row());
-  ASSERT_EQ(matrix_row.row(), old_row.row() + 1);
+  // // Test operator++(int)
+  // old_row = matrix_row;
+  // new_row = matrix_row++;
+  // ASSERT_EQ(new_row.row(), old_row.row());
+  // ASSERT_EQ(matrix_row.row(), old_row.row() + 1);
 
-  // Test operator--
-  old_row = matrix_row;
-  new_row = --matrix_row;
-  ASSERT_EQ(new_row.row(), old_row.row() - 1);
+  // // Test operator--
+  // old_row = matrix_row;
+  // new_row = --matrix_row;
+  // ASSERT_EQ(new_row.row(), old_row.row() - 1);
 
-  // Test operator--(int)
-  old_row = matrix_row;
-  new_row = matrix_row--;
-  ASSERT_EQ(new_row.row(), old_row.row());
-  ASSERT_EQ(matrix_row.row(), old_row.row() - 1);
+  // // Test operator--(int)
+  // old_row = matrix_row;
+  // new_row = matrix_row--;
+  // ASSERT_EQ(new_row.row(), old_row.row());
+  // ASSERT_EQ(matrix_row.row(), old_row.row() - 1);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -236,38 +187,42 @@ TEST(MatrixSparseRowTest, ArithmeticOperators) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 TEST(test_matrix_sparse, constructors_row_column) {
-  Matrix_Sparse<Scalar, std::size_t> matrix(2, 4);
-  EXPECT_EQ(matrix.size_row(), 2);
-  EXPECT_EQ(matrix.size_column(), 4);
+  EXPECT_TRUE(false);
+
+  // Matrix_Sparse<Scalar, std::size_t> matrix(2, 4);
+  // EXPECT_EQ(matrix.size_row(), 2);
+  // EXPECT_EQ(matrix.size_column(), 4);
 }
 
 TEST(test_matrix_sparse, constructors_initialiser_lists) {
-  Matrix_Sparse<Scalar, std::size_t> matrix({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
-                                            5);
-  EXPECT_EQ(matrix.size_row(), 4);
-  EXPECT_EQ(matrix.size_column(), 5);
-  EXPECT_EQ(matrix.size_non_zero(), 7);
-  EXPECT_DOUBLE_EQ(matrix[0][1], 1.0);
-  EXPECT_DOUBLE_EQ(matrix[0][3], 2.0);
-  EXPECT_DOUBLE_EQ(matrix[1][0], 4.0);
-  EXPECT_DOUBLE_EQ(matrix[1][2], 3.0);
-  EXPECT_DOUBLE_EQ(matrix[1][3], 5.0);
-  EXPECT_DOUBLE_EQ(matrix[3][3], 7.0);
-  EXPECT_DOUBLE_EQ(matrix[3][4], 6.0);
+  EXPECT_TRUE(false);
 
-  // Valid construction 2x2: Matrix_Sparse({0, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2)
-  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 0, 0, 1}, {1.0, 2.0, 3.0, 4.0}, 2)),
-               ".*");  // more column indexes than non-zero.back().
-  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0, 4.0}, 2)),
-               ".*");  // mismatch column and entry size.
-  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({1, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2)),
-               ".*");  // first non-zero value is not 0.
-  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({2, 0, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2)),
-               ".*");  // un-ordered non-zeros
-  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 0, 2}, {1.0, 2.0, 3.0}, 2)),
-               ".*");  // column index out of range
-  EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 1, 0}, {1.0, 2.0, 3.0}, 2)),
-               ".*");  // repeated column index
+  // Matrix_Sparse<Scalar, std::size_t> matrix({0, 2, 5, 5, 7}, {1, 3, 2, 0, 3, 4, 3}, {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0},
+  //                                           5);
+  // EXPECT_EQ(matrix.size_row(), 4);
+  // EXPECT_EQ(matrix.size_column(), 5);
+  // EXPECT_EQ(matrix.size_non_zero(), 7);
+  // EXPECT_DOUBLE_EQ(matrix[0][1], 1.0);
+  // EXPECT_DOUBLE_EQ(matrix[0][3], 2.0);
+  // EXPECT_DOUBLE_EQ(matrix[1][0], 4.0);
+  // EXPECT_DOUBLE_EQ(matrix[1][2], 3.0);
+  // EXPECT_DOUBLE_EQ(matrix[1][3], 5.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][3], 7.0);
+  // EXPECT_DOUBLE_EQ(matrix[3][4], 6.0);
+
+  // // Valid construction 2x2: Matrix_Sparse({0, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2)
+  // EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 0, 0, 1}, {1.0, 2.0, 3.0, 4.0}, 2)),
+  //              ".*");  // more column indexes than non-zero.back().
+  // EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0, 4.0}, 2)),
+  //              ".*");  // mismatch column and entry size.
+  // EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({1, 2, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2)),
+  //              ".*");  // first non-zero value is not 0.
+  // EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({2, 0, 3}, {1, 0, 0}, {1.0, 2.0, 3.0}, 2)),
+  //              ".*");  // un-ordered non-zeros
+  // EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 0, 2}, {1.0, 2.0, 3.0}, 2)),
+  //              ".*");  // column index out of range
+  // EXPECT_DEATH((Matrix_Sparse<Scalar, std::size_t>({0, 2, 3}, {1, 1, 0}, {1.0, 2.0, 3.0}, 2)),
+  //              ".*");  // repeated column index
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -275,15 +230,17 @@ TEST(test_matrix_sparse, constructors_initialiser_lists) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 TEST(test_matrix_sparse, operator_subscript) {
-  Matrix_Sparse<Scalar, std::size_t> matrix_0({0, 1, 2}, {0, 1}, {1.0, 2.0}, 2);
-
-  EXPECT_DOUBLE_EQ(matrix_0[0][0], 1.0);
-  EXPECT_DOUBLE_EQ(matrix_0[1][1], 2.0);
   EXPECT_TRUE(false);
-  //matrix_0[0][1] = 3.0; // this should insert a new element.
 
-  const Matrix_Sparse<Scalar, std::size_t> matrix_1 = matrix_0;
-  EXPECT_DOUBLE_EQ(matrix_1[0][0], 1.0);
+  // Matrix_Sparse<Scalar, std::size_t> matrix_0({0, 1, 2}, {0, 1}, {1.0, 2.0}, 2);
+
+  // EXPECT_DOUBLE_EQ(matrix_0[0][0], 1.0);
+  // EXPECT_DOUBLE_EQ(matrix_0[1][1], 2.0);
+  // EXPECT_TRUE(false);
+  // //matrix_0[0][1] = 3.0; // this should insert a new element.
+
+  // const Matrix_Sparse<Scalar, std::size_t> matrix_1 = matrix_0;
+  // EXPECT_DOUBLE_EQ(matrix_1[0][0], 1.0);
   // EXPECT_DOUBLE_EQ(matrix_1[0][1], 3.0);
   // EXPECT_DOUBLE_EQ(matrix_1[1][1], 2.0);
 
@@ -296,64 +253,72 @@ TEST(test_matrix_sparse, operator_subscript) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 TEST(test_matrix_sparse, empty) {
-  Matrix_Sparse<Scalar, std::size_t> matrix;
-  EXPECT_TRUE(matrix.empty());
-  EXPECT_EQ(matrix.size_row(), 0);
-  EXPECT_EQ(matrix.size_column(), 0);
-  EXPECT_EQ(matrix.size_non_zero(), 0);
-  EXPECT_EQ(matrix.size().first, std::make_pair(0, 0).first);
-  EXPECT_EQ(matrix.size().second, std::make_pair(0, 0).second);
+  EXPECT_TRUE(false);
 
-  // check edge cases.
-  matrix.resize(0, 2);
-  EXPECT_TRUE(matrix.empty());
-  matrix.resize(1, 0);
-  EXPECT_FALSE(matrix.empty());
-  matrix.resize(2, 2);
-  EXPECT_FALSE(matrix.empty());
+  // Matrix_Sparse<Scalar, std::size_t> matrix;
+  // EXPECT_TRUE(matrix.empty());
+  // EXPECT_EQ(matrix.size_row(), 0);
+  // EXPECT_EQ(matrix.size_column(), 0);
+  // EXPECT_EQ(matrix.size_non_zero(), 0);
+  // EXPECT_EQ(matrix.size().first, std::make_pair(0, 0).first);
+  // EXPECT_EQ(matrix.size().second, std::make_pair(0, 0).second);
+
+  // // check edge cases.
+  // matrix.resize(0, 2);
+  // EXPECT_TRUE(matrix.empty());
+  // matrix.resize(1, 0);
+  // EXPECT_FALSE(matrix.empty());
+  // matrix.resize(2, 2);
+  // EXPECT_FALSE(matrix.empty());
 }
 
 TEST(test_matrix_sparse, size) {
-  Matrix_Sparse<Scalar, std::size_t> matrix;
-  EXPECT_EQ(matrix.size_row(), 0);
-  EXPECT_EQ(matrix.size_column(), 0);
-  EXPECT_EQ(matrix.size_non_zero(), 0);
-  EXPECT_EQ(matrix.size().first, std::make_pair(0, 0).first);
-  EXPECT_EQ(matrix.size().second, std::make_pair(0, 0).second);
-
-  matrix.resize(7, 6);
   EXPECT_TRUE(false);
-  //  matrix[0][5] = 1.0; // add additional entry - show that non-zero increased.
-  EXPECT_FALSE(matrix.empty());
-  EXPECT_EQ(matrix.size_row(), 7);
-  EXPECT_EQ(matrix.size_column(), 6);
-  EXPECT_EQ(matrix.size_non_zero(), 1);
-  EXPECT_EQ(matrix.size().first, std::make_pair(7, 6).first);
-  EXPECT_EQ(matrix.size().second, std::make_pair(7, 6).second);
+
+  // Matrix_Sparse<Scalar, std::size_t> matrix;
+  // EXPECT_EQ(matrix.size_row(), 0);
+  // EXPECT_EQ(matrix.size_column(), 0);
+  // EXPECT_EQ(matrix.size_non_zero(), 0);
+  // EXPECT_EQ(matrix.size().first, std::make_pair(0, 0).first);
+  // EXPECT_EQ(matrix.size().second, std::make_pair(0, 0).second);
+
+  // matrix.resize(7, 6);
+  // EXPECT_TRUE(false);
+  // //  matrix[0][5] = 1.0; // add additional entry - show that non-zero increased.
+  // EXPECT_FALSE(matrix.empty());
+  // EXPECT_EQ(matrix.size_row(), 7);
+  // EXPECT_EQ(matrix.size_column(), 6);
+  // EXPECT_EQ(matrix.size_non_zero(), 1);
+  // EXPECT_EQ(matrix.size().first, std::make_pair(7, 6).first);
+  // EXPECT_EQ(matrix.size().second, std::make_pair(7, 6).second);
 }
 
 TEST(test_matrix_sparse, reserve_capacity) {
-  Matrix_Sparse<Scalar, std::size_t> matrix;
-  EXPECT_EQ(matrix.capacity().first, 0);
-  EXPECT_EQ(matrix.capacity().second, 0);
+  EXPECT_TRUE(false);
 
-  matrix.reserve(10, 40);
-  EXPECT_EQ(matrix.capacity().first, 11);
-  EXPECT_EQ(matrix.capacity().second, 40);
+  // Matrix_Sparse<Scalar, std::size_t> matrix;
+  // EXPECT_EQ(matrix.capacity().first, 0);
+  // EXPECT_EQ(matrix.capacity().second, 0);
+
+  // matrix.reserve(10, 40);
+  // EXPECT_EQ(matrix.capacity().first, 11);
+  // EXPECT_EQ(matrix.capacity().second, 40);
 }
 
 TEST(test_matrix_sparse, shrink_to_fit) {
-  Matrix_Sparse<Scalar, std::size_t> matrix;
-  matrix.reserve(10, 40);
-  EXPECT_EQ(matrix.capacity().first, 11);
-  EXPECT_EQ(matrix.capacity().second, 40);
-
-  matrix.resize(5, 30);
   EXPECT_TRUE(false);
-  //matrix[4][8] = 10;
-  matrix.shrink_to_fit();
-  EXPECT_EQ(matrix.capacity().first, 6);
-  EXPECT_EQ(matrix.capacity().second, 1);
+
+  // Matrix_Sparse<Scalar, std::size_t> matrix;
+  // matrix.reserve(10, 40);
+  // EXPECT_EQ(matrix.capacity().first, 11);
+  // EXPECT_EQ(matrix.capacity().second, 40);
+
+  // matrix.resize(5, 30);
+  // EXPECT_TRUE(false);
+  // //matrix[4][8] = 10;
+  // matrix.shrink_to_fit();
+  // EXPECT_EQ(matrix.capacity().first, 6);
+  // EXPECT_EQ(matrix.capacity().second, 1);
 }
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -361,27 +326,29 @@ TEST(test_matrix_sparse, shrink_to_fit) {
 // -------------------------------------------------------------------------------------------------------------------
 
 TEST(test_matrix_sparse, clear) {
-  Matrix_Sparse<Scalar, std::size_t> matrix;
-  matrix.resize(7, 6);
   EXPECT_TRUE(false);
-  //matrix[0][5] = 1.0; // add additional entry - show that non-zero increased.
 
-  matrix.clear();
-  EXPECT_TRUE(matrix.empty());
-  EXPECT_EQ(matrix.size_row(), 0);
-  EXPECT_EQ(matrix.size_column(), 0);
-  EXPECT_EQ(matrix.size_non_zero(), 0);
-  EXPECT_EQ(matrix.size().first, std::make_pair(0, 0).first);
-  EXPECT_EQ(matrix.size().second, std::make_pair(0, 0).second);
-  EXPECT_EQ(matrix.capacity().first, std::make_pair(8, 1).first);    // make sure we have not lost capacity.
-  EXPECT_EQ(matrix.capacity().second, std::make_pair(8, 1).second);  // make sure we have not lost capacity.
+  // Matrix_Sparse<Scalar, std::size_t> matrix;
+  // matrix.resize(7, 6);
+  // EXPECT_TRUE(false);
+  // //matrix[0][5] = 1.0; // add additional entry - show that non-zero increased.
+
+  // matrix.clear();
+  // EXPECT_TRUE(matrix.empty());
+  // EXPECT_EQ(matrix.size_row(), 0);
+  // EXPECT_EQ(matrix.size_column(), 0);
+  // EXPECT_EQ(matrix.size_non_zero(), 0);
+  // EXPECT_EQ(matrix.size().first, std::make_pair(0, 0).first);
+  // EXPECT_EQ(matrix.size().second, std::make_pair(0, 0).second);
+  // EXPECT_EQ(matrix.capacity().first, std::make_pair(8, 1).first);    // make sure we have not lost capacity.
+  // EXPECT_EQ(matrix.capacity().second, std::make_pair(8, 1).second);  // make sure we have not lost capacity.
 }
 
 TEST(test_matrix_sparse, insert_insert_or_assign) {
   EXPECT_TRUE(false);
 
-  Matrix_Sparse<Scalar, std::size_t> matrix;
-  matrix.resize(5, 5);
+  // Matrix_Sparse<Scalar, std::size_t> matrix;
+  // matrix.resize(5, 5);
 
   //   matrix.insert(3, 2, 1);
   //   EXPECT_EQ(matrix.size_non_zero(), 1);
