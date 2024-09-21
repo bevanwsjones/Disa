@@ -1,7 +1,14 @@
 var searchData=
 [
-  ['vector_5fdense_288',['Vector_Dense',['../struct_disa_1_1_vector___dense.html',1,'Disa']]],
-  ['vector_5fdense_3c_200_20_3e_289',['Vector_Dense&lt; 0 &gt;',['../struct_vector___dense_3_010_01_4.html',1,'']]],
-  ['vector_5fdense_3c_20_5ftype_2c_200_20_3e_290',['Vector_Dense&lt; _type, 0 &gt;',['../struct_disa_1_1_vector___dense_3_01__type_00_010_01_4.html',1,'Disa']]],
-  ['vector_5fdense_3c_20scalar_2c_200_20_3e_291',['Vector_Dense&lt; Scalar, 0 &gt;',['../struct_disa_1_1_vector___dense.html',1,'Disa']]]
+  ['solver_325',['Solver',['../class_disa_1_1_solver.html',1,'Disa']]],
+  ['solver_5fconfig_326',['Solver_Config',['../struct_disa_1_1_solver___config.html',1,'Disa']]],
+  ['solver_5fdata_327',['Solver_Data',['../struct_disa_1_1_solver___data.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_328',['Solver_Fixed_Point',['../class_disa_1_1_solver___fixed___point.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_5fdata_329',['Solver_Fixed_Point_Data',['../struct_disa_1_1_solver___fixed___point___data.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_5fjacobi_5fdata_330',['Solver_Fixed_Point_Jacobi_Data',['../struct_disa_1_1_solver___fixed___point___jacobi___data.html',1,'Disa']]],
+  ['solver_5ffixed_5fpoint_5fsor_5fdata_331',['Solver_Fixed_Point_Sor_Data',['../struct_disa_1_1_solver___fixed___point___sor___data.html',1,'Disa']]],
+  ['solver_5fiterative_332',['Solver_Iterative',['../class_disa_1_1_solver___iterative.html',1,'Disa']]],
+  ['solver_5fiterative_3c_20solver_5ffixed_5fpoint_3c_20_5fsolver_5ftype_2c_20_5fsolver_5fdata_20_3e_2c_20_5fsolver_5fdata_20_3e_333',['Solver_Iterative&lt; Solver_Fixed_Point&lt; _solver_type, _solver_data &gt;, _solver_data &gt;',['../class_disa_1_1_solver___iterative.html',1,'Disa']]],
+  ['static_5fdemoter_334',['Static_Demoter',['../struct_disa_1_1_static___demoter.html',1,'Disa']]],
+  ['static_5fpromoter_335',['Static_Promoter',['../struct_disa_1_1_static___promoter.html',1,'Disa']]]
 ];

@@ -60,8 +60,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "adjacency__graph_8hpp.html",
-"graph__utilities_8hpp.html#a946a4aa8be66636850f22969a357d6e3",
-"struct_disa_1_1_iterator___matrix___sparse___row.html#a766649e42cc35ff00c120a0697b79dd0"
+"direct_8hpp.html",
+"scalar_8hpp.html#a12f2f0b7a88ef69ff7f5b3d4b6d7a7ac",
+"vector__dense_8hpp.html#a19fe2e53ebf5be324189578cf9c01ad0"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

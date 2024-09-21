@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Disa: Matrix_Sparse Class Reference</title>
+<title>Disa: Matrix_Sparse&lt; _entry_type, _index_type &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('class_disa_1_1_matrix___sparse.html','
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#friends">Friends</a>  </div>
   <div class="headertitle">
-<div class="title">Matrix_Sparse Class Reference</div>  </div>
+<div class="title">Matrix_Sparse&lt; _entry_type, _index_type &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -108,6 +108,34 @@ Public Types</h2></td></tr>
 <tr class="separator:a74f6880451b6edff51331ef93d410aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a927c50fe349b20b591b9131a79407d13"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a927c50fe349b20b591b9131a79407d13">const_iterator_element</a> = <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html">Iterator_Matrix_Sparse_Element</a>&lt; const <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &gt;</td></tr>
 <tr class="separator:a927c50fe349b20b591b9131a79407d13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24c73a80b51e86022f2fc1678cbc9401"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> = _index_type</td></tr>
+<tr class="separator:a24c73a80b51e86022f2fc1678cbc9401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a608e377bc847af37af1c133bc30d51b4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a608e377bc847af37af1c133bc30d51b4">reference_index</a> = _index_type &amp;</td></tr>
+<tr class="separator:a608e377bc847af37af1c133bc30d51b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a249d495a177d9970fe5df3da40ec0034"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a> = const _index_type &amp;</td></tr>
+<tr class="separator:a249d495a177d9970fe5df3da40ec0034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a203125e4f8a5ad3415e7996bfcd7ad"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a7a203125e4f8a5ad3415e7996bfcd7ad">pointer_index</a> = _index_type *</td></tr>
+<tr class="separator:a7a203125e4f8a5ad3415e7996bfcd7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ed2b2b636d2db48510babcd9500c43"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a> = _value_type</td></tr>
+<tr class="separator:a46ed2b2b636d2db48510babcd9500c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49ddddbd1ce57deaa1f0672fb44e3e0b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a49ddddbd1ce57deaa1f0672fb44e3e0b">reference_value</a> = _value_type &amp;</td></tr>
+<tr class="separator:a49ddddbd1ce57deaa1f0672fb44e3e0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ea78850bd3755f26bbe3e704f16406c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a9ea78850bd3755f26bbe3e704f16406c">const_reference_value</a> = const _value_type &amp;</td></tr>
+<tr class="separator:a9ea78850bd3755f26bbe3e704f16406c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85d581d2ae956c1fb84b9f60653a85dd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a85d581d2ae956c1fb84b9f60653a85dd">pointer_value</a> = _value_type *</td></tr>
+<tr class="separator:a85d581d2ae956c1fb84b9f60653a85dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcbf5b74f711ae2d105a01d66fe5e458"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#abcbf5b74f711ae2d105a01d66fe5e458">element_type</a> = <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;</td></tr>
+<tr class="separator:abcbf5b74f711ae2d105a01d66fe5e458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a853c7906df766f3734f1e16a1b2f4789"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a853c7906df766f3734f1e16a1b2f4789">element_iterator</a> = <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html">Iterator_Matrix_Sparse_Element</a>&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;</td></tr>
+<tr class="separator:a853c7906df766f3734f1e16a1b2f4789"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a761f9dead03e219a7b5a180084332d7e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a761f9dead03e219a7b5a180084332d7e">const_element_iterator</a> = <a class="el" href="namespace_disa.html#adaa47d60b553600547fa50e0e5d7e6cd">Const_Iterator_Matrix_Sparse_Element</a>&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;</td></tr>
+<tr class="separator:a761f9dead03e219a7b5a180084332d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9355c7aab4bdfa64f746c95e87dd5ab1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a9355c7aab4bdfa64f746c95e87dd5ab1">row_type</a> = <a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;</td></tr>
+<tr class="separator:a9355c7aab4bdfa64f746c95e87dd5ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac85ad5dbcd49c3e9c7554ad1ccf0c1b5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ac85ad5dbcd49c3e9c7554ad1ccf0c1b5">const_row_type</a> = <a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt; const <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, const <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;</td></tr>
+<tr class="separator:ac85ad5dbcd49c3e9c7554ad1ccf0c1b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af43e1d8d0d7d71a20bfbc87ad3de41d1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#af43e1d8d0d7d71a20bfbc87ad3de41d1">matrix_type</a> = <a class="el" href="class_disa_1_1_matrix___sparse.html">Matrix_Sparse</a>&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;</td></tr>
+<tr class="separator:af43e1d8d0d7d71a20bfbc87ad3de41d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -126,16 +154,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac209847d34c14518a9c37618d0b1b69d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ac209847d34c14518a9c37618d0b1b69d">operator=</a> (const <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;other)=default</td></tr>
 <tr class="memdesc:ac209847d34c14518a9c37618d0b1b69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a trivial deep copy of the assigned matrix.  <a href="class_disa_1_1_matrix___sparse.html#ac209847d34c14518a9c37618d0b1b69d">More...</a><br /></td></tr>
 <tr class="separator:ac209847d34c14518a9c37618d0b1b69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94abb34908c511d248a8b0633352c59f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a94abb34908c511d248a8b0633352c59f">at</a> (const std::size_t &amp;i_row, const std::size_t &amp;i_column)</td></tr>
+<tr class="memitem:a94abb34908c511d248a8b0633352c59f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a94abb34908c511d248a8b0633352c59f">at</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>, const std::size_t &amp;i_column)</td></tr>
 <tr class="memdesc:a94abb34908c511d248a8b0633352c59f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access specified element with bounds checking.  <a href="class_disa_1_1_matrix___sparse.html#a94abb34908c511d248a8b0633352c59f">More...</a><br /></td></tr>
 <tr class="separator:a94abb34908c511d248a8b0633352c59f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8c3416de7d45a99060441acef44afec"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#af8c3416de7d45a99060441acef44afec">at</a> (const std::size_t &amp;i_row, const std::size_t &amp;i_column) const</td></tr>
+<tr class="memitem:af8c3416de7d45a99060441acef44afec"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#af8c3416de7d45a99060441acef44afec">at</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>, const std::size_t &amp;i_column) const</td></tr>
 <tr class="memdesc:af8c3416de7d45a99060441acef44afec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access specified element with bounds checking.  <a href="class_disa_1_1_matrix___sparse.html#af8c3416de7d45a99060441acef44afec">More...</a><br /></td></tr>
 <tr class="separator:af8c3416de7d45a99060441acef44afec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b6f133b34a8aecf0a407a353a90b1f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a8b6f133b34a8aecf0a407a353a90b1f4">operator[]</a> (const std::size_t &amp;i_row)</td></tr>
+<tr class="memitem:a8b6f133b34a8aecf0a407a353a90b1f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a8b6f133b34a8aecf0a407a353a90b1f4">operator[]</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>)</td></tr>
 <tr class="memdesc:a8b6f133b34a8aecf0a407a353a90b1f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscript operator for access to a specified matrix row.  <a href="class_disa_1_1_matrix___sparse.html#a8b6f133b34a8aecf0a407a353a90b1f4">More...</a><br /></td></tr>
 <tr class="separator:a8b6f133b34a8aecf0a407a353a90b1f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93a3c9cb27319c48435c293d26066a0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt; const <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a93a3c9cb27319c48435c293d26066a0a">operator[]</a> (const std::size_t &amp;i_row) const</td></tr>
+<tr class="memitem:a93a3c9cb27319c48435c293d26066a0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt; const <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a93a3c9cb27319c48435c293d26066a0a">operator[]</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>) const</td></tr>
 <tr class="memdesc:a93a3c9cb27319c48435c293d26066a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscript operator for access to a specified matrix row.  <a href="class_disa_1_1_matrix___sparse.html#a93a3c9cb27319c48435c293d26066a0a">More...</a><br /></td></tr>
 <tr class="separator:a93a3c9cb27319c48435c293d26066a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a172ca2da3ac1422279438ec4b4c73081"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; std::size_t *, std::size_t *, <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a172ca2da3ac1422279438ec4b4c73081">data</a> () noexcept</td></tr>
@@ -186,10 +214,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a03bfacfaaba9195e4498375659f43531"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a03bfacfaaba9195e4498375659f43531">clear</a> () noexcept</td></tr>
 <tr class="memdesc:a03bfacfaaba9195e4498375659f43531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the contents of the matrix, sets the column size to zero.  <a href="class_disa_1_1_matrix___sparse.html#a03bfacfaaba9195e4498375659f43531">More...</a><br /></td></tr>
 <tr class="separator:a03bfacfaaba9195e4498375659f43531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35d31891e547486e917f20e92d375e01"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2">iterator_element</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a35d31891e547486e917f20e92d375e01">insert</a> (const std::size_t &amp;i_row, const std::size_t &amp;i_column, const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;value)</td></tr>
+<tr class="memitem:a35d31891e547486e917f20e92d375e01"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2">iterator_element</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a35d31891e547486e917f20e92d375e01">insert</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>, const std::size_t &amp;i_column, const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;value)</td></tr>
 <tr class="memdesc:a35d31891e547486e917f20e92d375e01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts an value with the parsed value at [i_row, i_column], if an value exists nothing occurs.  <a href="class_disa_1_1_matrix___sparse.html#a35d31891e547486e917f20e92d375e01">More...</a><br /></td></tr>
 <tr class="separator:a35d31891e547486e917f20e92d375e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25dc3504e24bfa0722b05b99547836e3"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2">iterator_element</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a25dc3504e24bfa0722b05b99547836e3">insert_or_assign</a> (const std::size_t &amp;i_row, const std::size_t &amp;i_column, const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;value)</td></tr>
+<tr class="memitem:a25dc3504e24bfa0722b05b99547836e3"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2">iterator_element</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a25dc3504e24bfa0722b05b99547836e3">insert_or_assign</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>, const std::size_t &amp;i_column, const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;value)</td></tr>
 <tr class="memdesc:a25dc3504e24bfa0722b05b99547836e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts or updates an value with the parsed value at [i_row, i_column].  <a href="class_disa_1_1_matrix___sparse.html#a25dc3504e24bfa0722b05b99547836e3">More...</a><br /></td></tr>
 <tr class="separator:a25dc3504e24bfa0722b05b99547836e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cf57d139bfea2954d67b97b62686e3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2">iterator_element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a2cf57d139bfea2954d67b97b62686e3a">erase</a> (const <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html">Iterator_Matrix_Sparse_Element</a>&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &gt; &amp;iter_element)</td></tr>
@@ -201,19 +229,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8a3c8605a36c606cdbe774ea54868c11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a8a3c8605a36c606cdbe774ea54868c11">swap</a> (<a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;other) noexcept</td></tr>
 <tr class="memdesc:a8a3c8605a36c606cdbe774ea54868c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the contents of the matrix with the parsed matrix.  <a href="class_disa_1_1_matrix___sparse.html#a8a3c8605a36c606cdbe774ea54868c11">More...</a><br /></td></tr>
 <tr class="separator:a8a3c8605a36c606cdbe774ea54868c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0e53c411691bf2f81b1e03b3a1c4411"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2">iterator_element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ad0e53c411691bf2f81b1e03b3a1c4411">find</a> (const std::size_t &amp;i_row, const std::size_t &amp;i_column)</td></tr>
+<tr class="memitem:ad0e53c411691bf2f81b1e03b3a1c4411"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2">iterator_element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ad0e53c411691bf2f81b1e03b3a1c4411">find</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>, const std::size_t &amp;i_column)</td></tr>
 <tr class="memdesc:ad0e53c411691bf2f81b1e03b3a1c4411"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the value iterator to the matrix value at a row and column.  <a href="class_disa_1_1_matrix___sparse.html#ad0e53c411691bf2f81b1e03b3a1c4411">More...</a><br /></td></tr>
 <tr class="separator:ad0e53c411691bf2f81b1e03b3a1c4411"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47c79fa220401edddbee0a832631851e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a927c50fe349b20b591b9131a79407d13">const_iterator_element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a47c79fa220401edddbee0a832631851e">find</a> (const std::size_t &amp;i_row, const std::size_t &amp;i_column) const</td></tr>
+<tr class="memitem:a47c79fa220401edddbee0a832631851e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a927c50fe349b20b591b9131a79407d13">const_iterator_element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a47c79fa220401edddbee0a832631851e">find</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>, const std::size_t &amp;i_column) const</td></tr>
 <tr class="memdesc:a47c79fa220401edddbee0a832631851e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the value iterator to the matrix value at a row and column.  <a href="class_disa_1_1_matrix___sparse.html#a47c79fa220401edddbee0a832631851e">More...</a><br /></td></tr>
 <tr class="separator:a47c79fa220401edddbee0a832631851e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae459dcff15917949a9018d1cd89fb029"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ae459dcff15917949a9018d1cd89fb029">contains</a> (const std::size_t &amp;i_row, const std::size_t &amp;i_column) const</td></tr>
+<tr class="memitem:ae459dcff15917949a9018d1cd89fb029"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ae459dcff15917949a9018d1cd89fb029">contains</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>, const std::size_t &amp;i_column) const</td></tr>
 <tr class="memdesc:ae459dcff15917949a9018d1cd89fb029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the element at a row and column are non-zero.  <a href="class_disa_1_1_matrix___sparse.html#ae459dcff15917949a9018d1cd89fb029">More...</a><br /></td></tr>
 <tr class="separator:ae459dcff15917949a9018d1cd89fb029"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca3d406441895948986de7e4aaffb38c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2">iterator_element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#aca3d406441895948986de7e4aaffb38c">lower_bound</a> (const std::size_t &amp;i_row, const std::size_t &amp;i_column)</td></tr>
+<tr class="memitem:aca3d406441895948986de7e4aaffb38c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2">iterator_element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#aca3d406441895948986de7e4aaffb38c">lower_bound</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>, const std::size_t &amp;i_column)</td></tr>
 <tr class="memdesc:aca3d406441895948986de7e4aaffb38c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an element iterator to the first element not less than the given key.  <a href="class_disa_1_1_matrix___sparse.html#aca3d406441895948986de7e4aaffb38c">More...</a><br /></td></tr>
 <tr class="separator:aca3d406441895948986de7e4aaffb38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00335586bde57246eac2f5227c4ed87e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a927c50fe349b20b591b9131a79407d13">const_iterator_element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a00335586bde57246eac2f5227c4ed87e">lower_bound</a> (const std::size_t &amp;i_row, const std::size_t &amp;i_column) const</td></tr>
+<tr class="memitem:a00335586bde57246eac2f5227c4ed87e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a927c50fe349b20b591b9131a79407d13">const_iterator_element</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a00335586bde57246eac2f5227c4ed87e">lower_bound</a> (const std::size_t &amp;<a class="el" href="namespace_disa.html#a7b66f6ff7c7c345e4dc9e8547b0033bf">i_row</a>, const std::size_t &amp;i_column) const</td></tr>
 <tr class="memdesc:a00335586bde57246eac2f5227c4ed87e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an element iterator to the first element not less than the given key.  <a href="class_disa_1_1_matrix___sparse.html#a00335586bde57246eac2f5227c4ed87e">More...</a><br /></td></tr>
 <tr class="separator:a00335586bde57246eac2f5227c4ed87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef950ba4e6f97d2018b05e01a7be3af0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#aef950ba4e6f97d2018b05e01a7be3af0">operator*=</a> (const <a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;scalar)</td></tr>
@@ -228,9 +256,61 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa0a009b6cc141cb883b8e8475756abfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#aa0a009b6cc141cb883b8e8475756abfa">operator-=</a> (const <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;other)</td></tr>
 <tr class="memdesc:aa0a009b6cc141cb883b8e8475756abfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtraction by a second matrix, A' = A - B, where A and B are matrices.  <a href="class_disa_1_1_matrix___sparse.html#aa0a009b6cc141cb883b8e8475756abfa">More...</a><br /></td></tr>
 <tr class="separator:aa0a009b6cc141cb883b8e8475756abfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf570c999c8f6533a7ec0bf57cf2a5c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#acf570c999c8f6533a7ec0bf57cf2a5c7">operator*=</a> (const <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;other)</td></tr>
-<tr class="memdesc:acf570c999c8f6533a7ec0bf57cf2a5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies this matrix by another, A' = A*B, where A and B are matrices.  <a href="class_disa_1_1_matrix___sparse.html#acf570c999c8f6533a7ec0bf57cf2a5c7">More...</a><br /></td></tr>
-<tr class="separator:acf570c999c8f6533a7ec0bf57cf2a5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a188dfe984a834967c9a7fd945da88037"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a188dfe984a834967c9a7fd945da88037">operator*=</a> (const <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;other)</td></tr>
+<tr class="memdesc:a188dfe984a834967c9a7fd945da88037"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies this matrix by another, A' = A*B, where A and B are matrices.  <a href="class_disa_1_1_matrix___sparse.html#a188dfe984a834967c9a7fd945da88037">More...</a><br /></td></tr>
+<tr class="separator:a188dfe984a834967c9a7fd945da88037"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a369f2f361d085fc1a51f61a5a28bb1bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a369f2f361d085fc1a51f61a5a28bb1bf">Matrix_Sparse</a> ()=default</td></tr>
+<tr class="memdesc:a369f2f361d085fc1a51f61a5a28bb1bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="class_disa_1_1_matrix___sparse.html#a369f2f361d085fc1a51f61a5a28bb1bf">More...</a><br /></td></tr>
+<tr class="separator:a369f2f361d085fc1a51f61a5a28bb1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3306655b6920e7c1b94ded31487512d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ad3306655b6920e7c1b94ded31487512d">Matrix_Sparse</a> (<a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> row, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> column)</td></tr>
+<tr class="memdesc:ad3306655b6920e7c1b94ded31487512d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a sparse matrix with a set number of rows and columns.  <a href="class_disa_1_1_matrix___sparse.html#ad3306655b6920e7c1b94ded31487512d">More...</a><br /></td></tr>
+<tr class="separator:ad3306655b6920e7c1b94ded31487512d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14b5e1d5baa04a9492888edf634d8f6e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a14b5e1d5baa04a9492888edf634d8f6e">Matrix_Sparse</a> (std::initializer_list&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt; non_zero, std::initializer_list&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt; index, std::initializer_list&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a> &gt; value, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> column)</td></tr>
+<tr class="memdesc:a14b5e1d5baa04a9492888edf634d8f6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializer list based on the 'raw' data structure of a sparse matrix.  <a href="class_disa_1_1_matrix___sparse.html#a14b5e1d5baa04a9492888edf634d8f6e">More...</a><br /></td></tr>
+<tr class="separator:a14b5e1d5baa04a9492888edf634d8f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b0271f3f6c9361af3af9b9ee275b889"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a9355c7aab4bdfa64f746c95e87dd5ab1">row_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a7b0271f3f6c9361af3af9b9ee275b889">operator[]</a> (<a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a> row)</td></tr>
+<tr class="memdesc:a7b0271f3f6c9361af3af9b9ee275b889"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscript operator for access to a specified matrix row.  <a href="class_disa_1_1_matrix___sparse.html#a7b0271f3f6c9361af3af9b9ee275b889">More...</a><br /></td></tr>
+<tr class="separator:a7b0271f3f6c9361af3af9b9ee275b889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f399ae5066b4beea8baec9b0e86fe92"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt; const <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, const <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a2f399ae5066b4beea8baec9b0e86fe92">operator[]</a> (<a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a> row) const</td></tr>
+<tr class="separator:a2f399ae5066b4beea8baec9b0e86fe92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad936b04f5c0167cbaf131c6dfcf98a57"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a7a203125e4f8a5ad3415e7996bfcd7ad">pointer_index</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a7a203125e4f8a5ad3415e7996bfcd7ad">pointer_index</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a85d581d2ae956c1fb84b9f60653a85dd">pointer_value</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ad936b04f5c0167cbaf131c6dfcf98a57">data</a> () noexcept</td></tr>
+<tr class="memdesc:ad936b04f5c0167cbaf131c6dfcf98a57"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_disa_1_1_direct.html" title="Direct Dense Linear Solver Base Class.">Direct</a> access to the underlying array of the sparse matrix.  <a href="class_disa_1_1_matrix___sparse.html#ad936b04f5c0167cbaf131c6dfcf98a57">More...</a><br /></td></tr>
+<tr class="separator:ad936b04f5c0167cbaf131c6dfcf98a57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f6fc5de06a318920d84f3c3742db07f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a3f6fc5de06a318920d84f3c3742db07f">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a3f6fc5de06a318920d84f3c3742db07f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the matrix is empty.  <a href="class_disa_1_1_matrix___sparse.html#a3f6fc5de06a318920d84f3c3742db07f">More...</a><br /></td></tr>
+<tr class="separator:a3f6fc5de06a318920d84f3c3742db07f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a013dbca7c7357fcc6f3df80672d60154"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a013dbca7c7357fcc6f3df80672d60154">size_row</a> () const noexcept</td></tr>
+<tr class="memdesc:a013dbca7c7357fcc6f3df80672d60154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of rows in the matrix.  <a href="class_disa_1_1_matrix___sparse.html#a013dbca7c7357fcc6f3df80672d60154">More...</a><br /></td></tr>
+<tr class="separator:a013dbca7c7357fcc6f3df80672d60154"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6dde54f383932f645bd3064b7af3e1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#af6dde54f383932f645bd3064b7af3e1a">size_column</a> () const noexcept</td></tr>
+<tr class="memdesc:af6dde54f383932f645bd3064b7af3e1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of columns in the matrix.  <a href="class_disa_1_1_matrix___sparse.html#af6dde54f383932f645bd3064b7af3e1a">More...</a><br /></td></tr>
+<tr class="separator:af6dde54f383932f645bd3064b7af3e1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b01553b75b47413cb2c5b95525de9f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a6b01553b75b47413cb2c5b95525de9f4">size_non_zero</a> () const noexcept</td></tr>
+<tr class="memdesc:a6b01553b75b47413cb2c5b95525de9f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of non-zeros in the matrix.  <a href="class_disa_1_1_matrix___sparse.html#a6b01553b75b47413cb2c5b95525de9f4">More...</a><br /></td></tr>
+<tr class="separator:a6b01553b75b47413cb2c5b95525de9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8ae8454869c8afb8e01cf3dd552f72f"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ad8ae8454869c8afb8e01cf3dd552f72f">size</a> () const noexcept</td></tr>
+<tr class="memdesc:ad8ae8454869c8afb8e01cf3dd552f72f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of rows and columns in the matrix.  <a href="class_disa_1_1_matrix___sparse.html#ad8ae8454869c8afb8e01cf3dd552f72f">More...</a><br /></td></tr>
+<tr class="separator:ad8ae8454869c8afb8e01cf3dd552f72f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d24aa0dfb4b029e374ac802978da490"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a5d24aa0dfb4b029e374ac802978da490">reserve</a> (const <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &amp;row, const <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &amp;non_zero) noexcept</td></tr>
+<tr class="memdesc:a5d24aa0dfb4b029e374ac802978da490"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves storage for the matrix.  <a href="class_disa_1_1_matrix___sparse.html#a5d24aa0dfb4b029e374ac802978da490">More...</a><br /></td></tr>
+<tr class="separator:a5d24aa0dfb4b029e374ac802978da490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a344789e6a912caecd9b77dfb1663a15c"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a344789e6a912caecd9b77dfb1663a15c">capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:a344789e6a912caecd9b77dfb1663a15c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of row offsets and non-zeros entries that can be held in currently allocated storage.  <a href="class_disa_1_1_matrix___sparse.html#a344789e6a912caecd9b77dfb1663a15c">More...</a><br /></td></tr>
+<tr class="separator:a344789e6a912caecd9b77dfb1663a15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e4af5032d71179d3abf04db463f791"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ad9e4af5032d71179d3abf04db463f791">shrink_to_fit</a> () noexcept</td></tr>
+<tr class="memdesc:ad9e4af5032d71179d3abf04db463f791"><td class="mdescLeft">&#160;</td><td class="mdescRight">reduces memory usage by the matrix by freeing unused memory for both rows and non-zeros  <a href="class_disa_1_1_matrix___sparse.html#ad9e4af5032d71179d3abf04db463f791">More...</a><br /></td></tr>
+<tr class="separator:ad9e4af5032d71179d3abf04db463f791"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03bfacfaaba9195e4498375659f43531"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a03bfacfaaba9195e4498375659f43531">clear</a> () noexcept</td></tr>
+<tr class="memdesc:a03bfacfaaba9195e4498375659f43531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the contents of the matrix, sets the column size to zero.  <a href="class_disa_1_1_matrix___sparse.html#a03bfacfaaba9195e4498375659f43531">More...</a><br /></td></tr>
+<tr class="separator:a03bfacfaaba9195e4498375659f43531"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2d2ac5851ee8f20c3cf4d01516da820"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#ac2d2ac5851ee8f20c3cf4d01516da820">insert</a> (<a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a> row, <a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a> column, <a class="el" href="class_disa_1_1_matrix___sparse.html#a9ea78850bd3755f26bbe3e704f16406c">const_reference_value</a> value)</td></tr>
+<tr class="separator:ac2d2ac5851ee8f20c3cf4d01516da820"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29b3d9be50618175a214fe0e5729de05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a29b3d9be50618175a214fe0e5729de05">resize</a> (<a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a> row, <a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a> column)</td></tr>
+<tr class="memdesc:a29b3d9be50618175a214fe0e5729de05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the number of rows and columns of the matrix.  <a href="class_disa_1_1_matrix___sparse.html#a29b3d9be50618175a214fe0e5729de05">More...</a><br /></td></tr>
+<tr class="separator:a29b3d9be50618175a214fe0e5729de05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bcea3666a7ed18eb8100325c4741f18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a5bcea3666a7ed18eb8100325c4741f18">swap</a> (<a class="el" href="class_disa_1_1_matrix___sparse.html#af43e1d8d0d7d71a20bfbc87ad3de41d1">matrix_type</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a5bcea3666a7ed18eb8100325c4741f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the contents of the matrix with the parsed matrix.  <a href="class_disa_1_1_matrix___sparse.html#a5bcea3666a7ed18eb8100325c4741f18">More...</a><br /></td></tr>
+<tr class="separator:a5bcea3666a7ed18eb8100325c4741f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -247,15 +327,17 @@ Friends</h2></td></tr>
 <tr class="memitem:a558a8a6d1c026d9ddafad0c8801fcd30"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a558a8a6d1c026d9ddafad0c8801fcd30">Iterator_Matrix_Sparse_Element&lt; const matrix &gt;</a></td></tr>
 <tr class="separator:a558a8a6d1c026d9ddafad0c8801fcd30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12e8ed2466216842caa0558fe20b2589"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html#a12e8ed2466216842caa0558fe20b2589">operator&lt;&lt;</a> (std::ostream &amp;stream, <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;<a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a>)</td></tr>
-<tr class="memdesc:a12e8ed2466216842caa0558fe20b2589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output shift operator - to write to console.  <a href="class_disa_1_1_matrix___sparse.html#a12e8ed2466216842caa0558fe20b2589">More...</a><br /></td></tr>
 <tr class="separator:a12e8ed2466216842caa0558fe20b2589"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A efficient data structure which represents a matrix comprised of mostly zero entries. </p>
+<div class="textblock"><h3>template&lt;typename _entry_type, typename _index_type&gt;<br />
+class Disa::Matrix_Sparse&lt; _entry_type, _index_type &gt;</h3>
+
+<p>A efficient data structure which represents a matrix comprised of mostly zero entries. </p>
 <p>Follows compact storage row (CSR) approach.</p>
 <p>The <a class="el" href="class_disa_1_1_matrix___sparse.html" title="A efficient data structure which represents a matrix comprised of mostly zero entries.">Matrix_Sparse</a> struct implements a mathematical matrix of nxm real numbers, but only stores memory for non-zero entries.</p>
 <p>A CSR matrix stores three vectors; the first indicates the number of non-zeros per row (row_non_zero), this is achieved by recording, for each element (row) in the row_non_zero vector the accumulated non-zeros upto that row. With the last element being one greater than n, the number of rows, and recording the total number of non-zeros in the matrix. The next vector stores the column indexes (column_index) for each non-zero matrix element, and for each row the indexes are sorted in an ascending manner. The start of each row's columns in the column index vector is given by the value in row_non_zero for that row. Finally, the last vector contains the values of each non-zero element (element_value) and has a one-to-one correspondence with column_index vector. The last piece of data stored is the number of columns in the matrix, this ensures correctness of mathematical operations.</p>
-<p>From a design perspective the class has two goals. The first is for the class to have a behaviour similar to that of a dense matrix for sub-script operators and class iterators. This is achieved via a helper class and two iterator classes which allow (range) loops over rows and then columns, further non-const subscript operators are fully able to add non-zero entries to the matrix (just be aware this may invalidate iterators). Finally, the use of iterators (when) accessed sequentially allows for efficient caching, the use of the element_iterator::i_row() and element_iterator::i_column() functions also allow for the iterator to provide use for information about the dereferenceable matrix entry.</p>
+<p>From a design perspective the class has two goals. The first is for the class to have a behaviour similar to that of a dense matrix for sub-script operators and class iterators. This is achieved via a helper class and two iterator classes which allow (range) loops over rows and then columns, further non-const subscript operators are fully able to add non-zero entries to the matrix (just be aware this may invalidate iterators). Finally, the use of iterators (when) accessed sequentially allows for efficient caching, the use of the <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html#aa5bd8037fb505363928aeee50e72e8d1" title="Returns the row index for the dereferenceable matrix element.">element_iterator::i_row()</a> and <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html#aeac2992660f159aa2b41c11783ae05ed" title="Returns the column index for the dereferenceable matrix element.">element_iterator::i_column()</a> functions also allow for the iterator to provide use for information about the dereferenceable matrix entry.</p>
 <p>The second goal is to have have the class have a behaviour similar to a std::map structure, where the 'key' is the row-column index pair for an entry. Thus functions, not normally associated with continuous structures (eg find, contains, lower_bound, etc), are supported by the matrix.</p>
 <dl class="section note"><dt>Note</dt><dd>The user should be aware of the following:<ol type="1">
 <li>Iterators advance over non-zero data - i.e. an iterator will not be dereferenceable to a zero entry (when defined behaviour is expected).</li>
@@ -271,6 +353,20 @@ Friends</h2></td></tr>
 <li>If further sparse matrices are added to <a class="el" href="namespace_disa.html">Disa</a> then this class should be renamed to Matrix_Sparse_CSR </li>
 </ol>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a761f9dead03e219a7b5a180084332d7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a761f9dead03e219a7b5a180084332d7e">&#9670;&nbsp;</a></span>const_element_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a761f9dead03e219a7b5a180084332d7e">const_element_iterator</a> =  <a class="el" href="namespace_disa.html#adaa47d60b553600547fa50e0e5d7e6cd">Const_Iterator_Matrix_Sparse_Element</a>&lt;<a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af8907f7c916cafe0a825a530fb7bee66"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af8907f7c916cafe0a825a530fb7bee66">&#9670;&nbsp;</a></span>const_iterator</h2>
 
@@ -293,6 +389,90 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a927c50fe349b20b591b9131a79407d13">const_iterator_element</a> =  <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html">Iterator_Matrix_Sparse_Element</a>&lt;const <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a249d495a177d9970fe5df3da40ec0034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a249d495a177d9970fe5df3da40ec0034">&#9670;&nbsp;</a></span>const_reference_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a> =  const _index_type&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ea78850bd3755f26bbe3e704f16406c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ea78850bd3755f26bbe3e704f16406c">&#9670;&nbsp;</a></span>const_reference_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a9ea78850bd3755f26bbe3e704f16406c">const_reference_value</a> =  const _value_type&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac85ad5dbcd49c3e9c7554ad1ccf0c1b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac85ad5dbcd49c3e9c7554ad1ccf0c1b5">&#9670;&nbsp;</a></span>const_row_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#ac85ad5dbcd49c3e9c7554ad1ccf0c1b5">const_row_type</a> =  <a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt;const <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, const <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a853c7906df766f3734f1e16a1b2f4789"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a853c7906df766f3734f1e16a1b2f4789">&#9670;&nbsp;</a></span>element_iterator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a853c7906df766f3734f1e16a1b2f4789">element_iterator</a> =  <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html">Iterator_Matrix_Sparse_Element</a>&lt;<a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abcbf5b74f711ae2d105a01d66fe5e458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcbf5b74f711ae2d105a01d66fe5e458">&#9670;&nbsp;</a></span>element_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#abcbf5b74f711ae2d105a01d66fe5e458">element_type</a> =  <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt;<a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a24c73a80b51e86022f2fc1678cbc9401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24c73a80b51e86022f2fc1678cbc9401">&#9670;&nbsp;</a></span>index_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> =  _index_type</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -341,9 +521,107 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="af43e1d8d0d7d71a20bfbc87ad3de41d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af43e1d8d0d7d71a20bfbc87ad3de41d1">&#9670;&nbsp;</a></span>matrix_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#af43e1d8d0d7d71a20bfbc87ad3de41d1">matrix_type</a> =  <a class="el" href="class_disa_1_1_matrix___sparse.html">Matrix_Sparse</a>&lt;<a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a203125e4f8a5ad3415e7996bfcd7ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a203125e4f8a5ad3415e7996bfcd7ad">&#9670;&nbsp;</a></span>pointer_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a7a203125e4f8a5ad3415e7996bfcd7ad">pointer_index</a> =  _index_type*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a85d581d2ae956c1fb84b9f60653a85dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85d581d2ae956c1fb84b9f60653a85dd">&#9670;&nbsp;</a></span>pointer_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a85d581d2ae956c1fb84b9f60653a85dd">pointer_value</a> =  _value_type*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a608e377bc847af37af1c133bc30d51b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a608e377bc847af37af1c133bc30d51b4">&#9670;&nbsp;</a></span>reference_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a608e377bc847af37af1c133bc30d51b4">reference_index</a> =  _index_type&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a49ddddbd1ce57deaa1f0672fb44e3e0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49ddddbd1ce57deaa1f0672fb44e3e0b">&#9670;&nbsp;</a></span>reference_value</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a49ddddbd1ce57deaa1f0672fb44e3e0b">reference_value</a> =  _value_type&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9355c7aab4bdfa64f746c95e87dd5ab1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9355c7aab4bdfa64f746c95e87dd5ab1">&#9670;&nbsp;</a></span>row_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a9355c7aab4bdfa64f746c95e87dd5ab1">row_type</a> =  <a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt;<a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a46ed2b2b636d2db48510babcd9500c43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46ed2b2b636d2db48510babcd9500c43">&#9670;&nbsp;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a> =  _value_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a369f2f361d085fc1a51f61a5a28bb1bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a369f2f361d085fc1a51f61a5a28bb1bf">&#9670;&nbsp;</a></span>Matrix_Sparse() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a369f2f361d085fc1a51f61a5a28bb1bf">&#9670;&nbsp;</a></span>Matrix_Sparse() <span class="overload">[1/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -370,7 +648,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a397ece7d8843a22348efce28c8eb42e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a397ece7d8843a22348efce28c8eb42e4">&#9670;&nbsp;</a></span>Matrix_Sparse() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a397ece7d8843a22348efce28c8eb42e4">&#9670;&nbsp;</a></span>Matrix_Sparse() <span class="overload">[2/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -415,7 +693,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a54f6d6468ba99d850aa7885137ac289b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54f6d6468ba99d850aa7885137ac289b">&#9670;&nbsp;</a></span>Matrix_Sparse() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a54f6d6468ba99d850aa7885137ac289b">&#9670;&nbsp;</a></span>Matrix_Sparse() <span class="overload">[3/6]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -497,6 +775,137 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Default destructor. </p>
+
+</div>
+</div>
+<a id="a369f2f361d085fc1a51f61a5a28bb1bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a369f2f361d085fc1a51f61a5a28bb1bf">&#9670;&nbsp;</a></span>Matrix_Sparse() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse.html">Matrix_Sparse</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+
+</div>
+</div>
+<a id="ad3306655b6920e7c1b94ded31487512d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3306655b6920e7c1b94ded31487512d">&#9670;&nbsp;</a></span>Matrix_Sparse() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse.html">Matrix_Sparse</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&#160;</td>
+          <td class="paramname"><em>column</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a sparse matrix with a set number of rows and columns. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>Number of rows to construct. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>Number of columns to construct. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a14b5e1d5baa04a9492888edf634d8f6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14b5e1d5baa04a9492888edf634d8f6e">&#9670;&nbsp;</a></span>Matrix_Sparse() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse.html">Matrix_Sparse</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;&#160;</td>
+          <td class="paramname"><em>non_zero</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a> &gt;&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&#160;</td>
+          <td class="paramname"><em>column</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializer list based on the 'raw' data structure of a sparse matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">non_zero</td><td>The non-zero offsets per row, must be sized to number of rows + 1, and the first index should be 0. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>The column index of the non-zero value in each row, size must correspond to value, need not be be sorted. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The value at each non-zero position in the matrix, corresponds to index. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>The absolute number of columns per row. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -638,7 +1047,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a8bd80ec84537769cda669edaaaab0f1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bd80ec84537769cda669edaaaab0f1d">&#9670;&nbsp;</a></span>capacity()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd80ec84537769cda669edaaaab0f1d">&#9670;&nbsp;</a></span>capacity() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -648,6 +1057,35 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::pair&lt;std::size_t, std::size_t&gt; capacity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of row offsets and non-zeros entries that can be held in currently allocated storage. </p>
+<dl class="section return"><dt>Returns</dt><dd>[number of rows offsets, number of non-zeros entries.]</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The number of row offsets (for CSR matrices) is always one greater than the actual matrix row size. </dd></dl>
+
+</div>
+</div>
+<a id="a344789e6a912caecd9b77dfb1663a15c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a344789e6a912caecd9b77dfb1663a15c">&#9670;&nbsp;</a></span>capacity() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;<a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt; capacity </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -725,7 +1163,34 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a03bfacfaaba9195e4498375659f43531"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03bfacfaaba9195e4498375659f43531">&#9670;&nbsp;</a></span>clear()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a03bfacfaaba9195e4498375659f43531">&#9670;&nbsp;</a></span>clear() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears the contents of the matrix, sets the column size to zero. </p>
+
+</div>
+</div>
+<a id="a03bfacfaaba9195e4498375659f43531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03bfacfaaba9195e4498375659f43531">&#9670;&nbsp;</a></span>clear() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -791,7 +1256,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a172ca2da3ac1422279438ec4b4c73081"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a172ca2da3ac1422279438ec4b4c73081">&#9670;&nbsp;</a></span>data()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a172ca2da3ac1422279438ec4b4c73081">&#9670;&nbsp;</a></span>data() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -820,8 +1285,66 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="ad936b04f5c0167cbaf131c6dfcf98a57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad936b04f5c0167cbaf131c6dfcf98a57">&#9670;&nbsp;</a></span>data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::tuple&lt;<a class="el" href="class_disa_1_1_matrix___sparse.html#a7a203125e4f8a5ad3415e7996bfcd7ad">pointer_index</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a7a203125e4f8a5ad3415e7996bfcd7ad">pointer_index</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a85d581d2ae956c1fb84b9f60653a85dd">pointer_value</a>&gt; data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="class_disa_1_1_direct.html" title="Direct Dense Linear Solver Base Class.">Direct</a> access to the underlying array of the sparse matrix. </p>
+<dl class="section return"><dt>Returns</dt><dd>tuple [pointer to non zero offset start, pointer to column index start, pointer to Scalar start].</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If empty all pointers will be nullptrs, if the size_non_zero is 0 the element and column index will be nullptrs.</dd></dl>
+<p>todo: Add test for function. </p>
+
+</div>
+</div>
 <a id="a3f6fc5de06a318920d84f3c3742db07f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f6fc5de06a318920d84f3c3742db07f">&#9670;&nbsp;</a></span>empty()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f6fc5de06a318920d84f3c3742db07f">&#9670;&nbsp;</a></span>empty() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks whether the matrix is empty. </p>
+<p>An empty matrix is considered where the number of rows is 0. </p><dl class="section return"><dt>Returns</dt><dd>True if the matrix is empty, else false. </dd></dl>
+
+</div>
+</div>
+<a id="a3f6fc5de06a318920d84f3c3742db07f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f6fc5de06a318920d84f3c3742db07f">&#9670;&nbsp;</a></span>empty() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1016,7 +1539,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a35d31891e547486e917f20e92d375e01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35d31891e547486e917f20e92d375e01">&#9670;&nbsp;</a></span>insert()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a35d31891e547486e917f20e92d375e01">&#9670;&nbsp;</a></span>insert() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1058,6 +1581,48 @@ Friends</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>[iterator to the inserted or existing element, true if insertion took place, else false].</dd></dl>
 <p>If the value to be inserted has a row or column index greater than the current size of the matrix, the matrix is resized to accommodate the insertion. Lower bound is then used to find the iterator to the position where the new value is to be inserted. If there is a value already present at the position the function 'aborts' reporting this as false in the second value of the pair. Otherwise the row non-zero vector us updated indicating the new non-zero in the row by propagating the offset incrementation to the remaining parts of the vector. The column index and element value vectors are appropriately updated. </p>
+
+</div>
+</div>
+<a id="ac2d2ac5851ee8f20c3cf4d01516da820"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2d2ac5851ee8f20c3cf4d01516da820">&#9670;&nbsp;</a></span>insert() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a>&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a>&#160;</td>
+          <td class="paramname"><em>column</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a9ea78850bd3755f26bbe3e704f16406c">const_reference_value</a>&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1187,14 +1752,14 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="acf570c999c8f6533a7ec0bf57cf2a5c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf570c999c8f6533a7ec0bf57cf2a5c7">&#9670;&nbsp;</a></span>operator*=() <span class="overload">[1/2]</span></h2>
+<a id="a188dfe984a834967c9a7fd945da88037"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a188dfe984a834967c9a7fd945da88037">&#9670;&nbsp;</a></span>operator*=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse.html">Matrix_Sparse</a> &amp; operator*= </td>
+          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a>&amp; operator*= </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -1210,8 +1775,7 @@ Friends</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Updated matrix (A').</dd></dl>
-<p>A very basic SpGEMM algorithm, a simple loop through the rows and columns of each matrix looking for non-zero entries to multiply and construct and return the resulting matrix. In debug the matrix sizes are checked for compatibility. </p>
+<dl class="section return"><dt>Returns</dt><dd>Updated matrix (A'). </dd></dl>
 
 </div>
 </div>
@@ -1392,7 +1956,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a8b6f133b34a8aecf0a407a353a90b1f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b6f133b34a8aecf0a407a353a90b1f4">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b6f133b34a8aecf0a407a353a90b1f4">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1420,7 +1984,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a93a3c9cb27319c48435c293d26066a0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93a3c9cb27319c48435c293d26066a0a">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a93a3c9cb27319c48435c293d26066a0a">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1447,8 +2011,115 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a7b0271f3f6c9361af3af9b9ee275b889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b0271f3f6c9361af3af9b9ee275b889">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse.html#a9355c7aab4bdfa64f746c95e87dd5ab1">row_type</a> operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a>&#160;</td>
+          <td class="paramname"><em>row</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscript operator for access to a specified matrix row. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>The row index of the element. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A sparse matrix row helper class, providing further operators for column access. </dd></dl>
+
+</div>
+</div>
+<a id="a2f399ae5066b4beea8baec9b0e86fe92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f399ae5066b4beea8baec9b0e86fe92">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row</a>&lt;const <a class="el" href="class_disa_1_1_matrix___sparse.html#a46ed2b2b636d2db48510babcd9500c43">value_type</a>, const <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt; operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a>&#160;</td>
+          <td class="paramname"><em>row</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d24aa0dfb4b029e374ac802978da490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d24aa0dfb4b029e374ac802978da490">&#9670;&nbsp;</a></span>reserve() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reserve </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &amp;&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &amp;&#160;</td>
+          <td class="paramname"><em>non_zero</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reserves storage for the matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>The number of rows to reserve for. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">non_zero</td><td>The number of non-zeros to reserve. Note this is not the column size.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The number of row offsets which are reserved will be one greater than the row size passed. </dd></dl>
+
+</div>
+</div>
 <a id="aa0b96fc2d748fea0d8b0a74c9d2d2f54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0b96fc2d748fea0d8b0a74c9d2d2f54">&#9670;&nbsp;</a></span>reserve()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0b96fc2d748fea0d8b0a74c9d2d2f54">&#9670;&nbsp;</a></span>reserve() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1494,7 +2165,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a7c9eda05d8a173891ce9b6e82fcad507"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c9eda05d8a173891ce9b6e82fcad507">&#9670;&nbsp;</a></span>resize()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c9eda05d8a173891ce9b6e82fcad507">&#9670;&nbsp;</a></span>resize() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1532,8 +2203,81 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a29b3d9be50618175a214fe0e5729de05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29b3d9be50618175a214fe0e5729de05">&#9670;&nbsp;</a></span>resize() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void resize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a>&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a249d495a177d9970fe5df3da40ec0034">const_reference_index</a>&#160;</td>
+          <td class="paramname"><em>column</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Changes the number of rows and columns of the matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>Number of rows to resized the matrix to. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>Number of columns to resized the matrix to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Does not effect number of non-zeros, unless the new row and column sizes reduce the size of the matrix. </dd></dl>
+
+</div>
+</div>
 <a id="ad9e4af5032d71179d3abf04db463f791"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9e4af5032d71179d3abf04db463f791">&#9670;&nbsp;</a></span>shrink_to_fit()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e4af5032d71179d3abf04db463f791">&#9670;&nbsp;</a></span>shrink_to_fit() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void shrink_to_fit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>reduces memory usage by the matrix by freeing unused memory for both rows and non-zeros </p>
+
+</div>
+</div>
+<a id="ad9e4af5032d71179d3abf04db463f791"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e4af5032d71179d3abf04db463f791">&#9670;&nbsp;</a></span>shrink_to_fit() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1560,7 +2304,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a499b30f71b7401e327ecd9faa0ab676c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a499b30f71b7401e327ecd9faa0ab676c">&#9670;&nbsp;</a></span>size()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a499b30f71b7401e327ecd9faa0ab676c">&#9670;&nbsp;</a></span>size() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1587,8 +2331,36 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="ad8ae8454869c8afb8e01cf3dd552f72f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8ae8454869c8afb8e01cf3dd552f72f">&#9670;&nbsp;</a></span>size() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;<a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt; size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of rows and columns in the matrix. </p>
+<p>If rows are 0, columns are 0. </p><dl class="section return"><dt>Returns</dt><dd>Pair containing [rows, columns]. </dd></dl>
+
+</div>
+</div>
 <a id="ab8e1bee05e9be7b023027c5058874af6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8e1bee05e9be7b023027c5058874af6">&#9670;&nbsp;</a></span>size_column()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8e1bee05e9be7b023027c5058874af6">&#9670;&nbsp;</a></span>size_column() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1615,8 +2387,36 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="af6dde54f383932f645bd3064b7af3e1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6dde54f383932f645bd3064b7af3e1a">&#9670;&nbsp;</a></span>size_column() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> size_column </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of columns in the matrix. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of columns. </dd></dl>
+
+</div>
+</div>
 <a id="a0b117dfb5aaf31ffd8457cf838a0dda3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b117dfb5aaf31ffd8457cf838a0dda3">&#9670;&nbsp;</a></span>size_non_zero()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b117dfb5aaf31ffd8457cf838a0dda3">&#9670;&nbsp;</a></span>size_non_zero() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1643,8 +2443,36 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a6b01553b75b47413cb2c5b95525de9f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b01553b75b47413cb2c5b95525de9f4">&#9670;&nbsp;</a></span>size_non_zero() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> size_non_zero </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of non-zeros in the matrix. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of non-zeros. </dd></dl>
+
+</div>
+</div>
 <a id="a2886b047f03bf5c66882d332d6a951f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2886b047f03bf5c66882d332d6a951f8">&#9670;&nbsp;</a></span>size_row()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2886b047f03bf5c66882d332d6a951f8">&#9670;&nbsp;</a></span>size_row() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1671,8 +2499,36 @@ Friends</h2></td></tr>
 
 </div>
 </div>
+<a id="a013dbca7c7357fcc6f3df80672d60154"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a013dbca7c7357fcc6f3df80672d60154">&#9670;&nbsp;</a></span>size_row() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> size_row </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of rows in the matrix. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of rows. </dd></dl>
+
+</div>
+</div>
 <a id="a8a3c8605a36c606cdbe774ea54868c11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a3c8605a36c606cdbe774ea54868c11">&#9670;&nbsp;</a></span>swap()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a3c8605a36c606cdbe774ea54868c11">&#9670;&nbsp;</a></span>swap() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1684,6 +2540,40 @@ Friends</h2></td></tr>
           <td class="memname">void swap </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#a3f393cdd6239f05141f3af1b49863a77">matrix</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Swaps the contents of the matrix with the parsed matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">other</td><td>The other matrix, this matrix will obtain the other's value and visa versa. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5bcea3666a7ed18eb8100325c4741f18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bcea3666a7ed18eb8100325c4741f18">&#9670;&nbsp;</a></span>swap() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_disa_1_1_matrix___sparse.html#af43e1d8d0d7d71a20bfbc87ad3de41d1">matrix_type</a> &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1872,21 +2762,11 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Output shift operator - to write to console. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">stream</td><td>Stream object to write to. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">matrix</td><td>The sparse matrix to write out. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The inputted stream.</dd></dl>
-<p>todo: properly format - this is just here to help occasional debugging. </p>
-
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/core/<a class="el" href="matrix__sparse_8hpp_source.html">matrix_sparse.hpp</a></li>
+<li>include/core/<a class="el" href="matrix__sparse__new_8hpp_source.html">matrix_sparse_new.hpp</a></li>
 <li>src/core/<a class="el" href="matrix__sparse_8cpp.html">matrix_sparse.cpp</a></li>
 </ul>
 </div><!-- contents -->

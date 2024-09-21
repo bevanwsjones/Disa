@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['iterator_478',['iterator',['../class_disa_1_1_matrix___sparse.html#a1f8941320cf11a7938ff45675c7a2649',1,'Disa::Matrix_Sparse::iterator()'],['../class_disa_1_1_matrix___sparse___row.html#addd2c4324986de171924c9f131b08510',1,'Disa::Matrix_Sparse_Row::iterator()']]],
-  ['iterator_5fcategory_479',['iterator_category',['../struct_disa_1_1_iterator___matrix___sparse___row.html#a8806ca091813ced0b0658fedaa448357',1,'Disa::Iterator_Matrix_Sparse_Row::iterator_category()'],['../struct_disa_1_1_iterator___matrix___sparse___element.html#a8806ca091813ced0b0658fedaa448357',1,'Disa::Iterator_Matrix_Sparse_Element::iterator_category()']]],
-  ['iterator_5felement_480',['iterator_element',['../class_disa_1_1_matrix___sparse.html#a74f6880451b6edff51331ef93d410aa2',1,'Disa::Matrix_Sparse']]]
+  ['edge_551',['Edge',['../namespace_disa.html#a5d0458dbd92d3cbd94eddeb318b6d88f',1,'Disa']]],
+  ['element_5fiterator_552',['element_iterator',['../class_disa_1_1_matrix___sparse.html#a853c7906df766f3734f1e16a1b2f4789',1,'Disa::Matrix_Sparse']]],
+  ['element_5ftype_553',['element_type',['../class_disa_1_1_matrix___sparse.html#abcbf5b74f711ae2d105a01d66fe5e458',1,'Disa::Matrix_Sparse']]],
+  ['entry_5ftype_554',['entry_type',['../struct_disa_1_1_matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0',1,'Disa::Matrix_Sparse_Element::entry_type()'],['../struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0',1,'Disa::Base_Iterator_Matrix_Sparse_Element::entry_type()'],['../class_disa_1_1_matrix___sparse___row.html#adda5512fef0d254cb3c4e244078893b0',1,'Disa::Matrix_Sparse_Row::entry_type()'],['../struct_disa_1_1_base___iterator___matrix___sparse___row.html#adda5512fef0d254cb3c4e244078893b0',1,'Disa::Base_Iterator_Matrix_Sparse_Row::entry_type()']]]
 ];

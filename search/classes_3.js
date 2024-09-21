@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['hash_3c_20disa_3a_3aadjacency_5fgraph_20_3e_267',['hash&lt; Disa::Adjacency_Graph &gt;',['../structhash_3_01_disa_1_1_adjacency___graph_01_4.html',1,'']]],
-  ['hash_3c_20disa_3a_3aadjacency_5fgraph_3c_20_5fdirected_20_3e_20_3e_268',['hash&lt; Disa::Adjacency_Graph&lt; _directed &gt; &gt;',['../structstd_1_1hash_3_01_disa_1_1_adjacency___graph_3_01__directed_01_4_01_4.html',1,'std']]]
+  ['direct_308',['Direct',['../class_disa_1_1_direct.html',1,'Disa']]],
+  ['direct_3c_20direct_5flower_5fupper_5ffactorisation_3c_20_5fsolver_5ftype_2c_20_5fsize_2c_20_5fpivot_20_3e_2c_20_5fsize_20_3e_309',['Direct&lt; Direct_Lower_Upper_Factorisation&lt; _solver_type, _size, _pivot &gt;, _size &gt;',['../class_disa_1_1_direct.html',1,'Disa']]],
+  ['direct_5flower_5fupper_5ffactorisation_310',['Direct_Lower_Upper_Factorisation',['../class_disa_1_1_direct___lower___upper___factorisation.html',1,'Disa']]]
 ];
