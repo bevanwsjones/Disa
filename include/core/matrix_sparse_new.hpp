@@ -78,7 +78,7 @@ struct Matrix_Sparse_Element {
      * @param entry The entry pointer of the element.
      */
   Matrix_Sparse_Element(const index_type& row, pointer_index column, pointer_entry entry)
-      : row_index(row), column_ptr(column), entry_ptr(entry) {};
+      : row_index(row), column_ptr(column), entry_ptr(entry) {}
 
   /**
      * @brief Returns a reference to the value of the element.
@@ -198,9 +198,11 @@ struct Base_Iterator_Matrix_Sparse_Element {
 
   Base_Iterator_Matrix_Sparse_Element() = default;
   ~Base_Iterator_Matrix_Sparse_Element() = default;
-  Base_Iterator_Matrix_Sparse_Element(value_type element_value) : value(element_value) {};
+
+  Base_Iterator_Matrix_Sparse_Element(value_type element_value) : value(element_value) {}
+
   Base_Iterator_Matrix_Sparse_Element(const index_type& row, index_type* column, entry_type* entry)
-      : value(row, column, entry) {};
+      : value(row, column, entry) {}
 
   reference operator*() { return value; };
 
@@ -267,16 +269,17 @@ struct Matrix_Sparse_Row {
 
   Matrix_Sparse_Row() = default;
   ~Matrix_Sparse_Row() = default;
+
   Matrix_Sparse_Row(matrix_type* matrix, index_type row, std::span<index_type> column, std::span<entry_type> entries)
-      : matrix_ptr(matrix), row_index(row), column_index(column), entry(entries) {};
+      : matrix_ptr(matrix), row_index(row), column_index(column), entry(entries) {}
 
   Matrix_Sparse_Row(matrix_type* matrix, index_type row, pointer_index s_column, pointer_index e_column,
                     const_pointer_entry s_entry, const_pointer_entry e_entry)
-      : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {};
+      : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {}
 
   Matrix_Sparse_Row(const matrix_type* matrix, index_type row, const_pointer_index s_column,
                     const_pointer_index e_column, const_pointer_entry s_entry, const_pointer_entry e_entry)
-      : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {};
+      : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {}
 
   index_type row() const { return row_index; };
 
@@ -440,7 +443,7 @@ class Matrix_Sparse {
    * @param[in] row Number of rows to construct.
    * @param[in] column Number of columns to construct.
    */
-  Matrix_Sparse(index_type row, index_type column) : row_offset(row + 1, 0), column_size(column) {};
+  Matrix_Sparse(index_type row, index_type column) : row_offset(row + 1, 0), column_size(column) {}
 
   /**
    * @brief Initializer list based on the 'raw' data structure of a sparse matrix.
