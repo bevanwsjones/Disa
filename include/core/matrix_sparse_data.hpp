@@ -56,10 +56,11 @@ struct CSR_Data {
   std::tuple<typename std::vector<index_type>::const_iterator, typename std::vector<index_type>::const_iterator,
              typename std::vector<value_type>::const_iterator>;
 
-  std::vector<index_type> row_offset{};   /**< The row offset vector. */
-  std::vector<index_type> column_index{}; /**< The column index vector. */
-  std::vector<value_type> value{};        /**< The value vector. */
-  index_type columns{0};                  /**< The number of columns in the matrix. */
+  std::vector<index_type> row_offset{}; /**< The row offset vector. */
+  std::vector<index_type> i_column{};   /**< The column index vector. */
+  std::vector<value_type> value{};      /**< The value vector. */
+  index_type columns{0};                /**< The number of columns in the matrix. */
+  static constexpr value_type zero{0};  /**< The zero value for the matrix (allows for a lvalue to zero). */
 };
 
 /**
@@ -135,7 +136,7 @@ _index_type size_column(const CSR_Data<_value_type, _index_type>& data) noexcept
  */
 template<typename _value_type, typename _index_type>
 _index_type size_non_zero(const CSR_Data<_value_type, _index_type>& data) noexcept {
-  return data.column_index.size();
+  return data.i_column.size();
 };
 
 /**
@@ -162,12 +163,12 @@ CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg
   // Set up alias.
   using s_index_type = std::make_signed_t<_index_type>;
   auto& row_offset = data.row_offset;
-  auto& column_index = data.column_index;
+  auto& i_column = data.i_column;
   auto& value = data.value;
 
   // resize rows first
   if(row < size_row(data)) {
-    column_index.resize(row_offset[row]);
+    i_column.resize(row_offset[row]);
     value.resize(row_offset[row]);
   }
   row_offset.resize(row + 1, row_offset.empty() ? 0 : row_offset.back());
@@ -177,13 +178,13 @@ CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg
   if(column < size_column(data)) {
     _index_type offset_loss = 0;
     for(_index_type row = 0; row < size_row(data); ++row) {
-      const auto& iter_column_end = column_index.begin() + static_cast<s_index_type>(row_offset[row + 1] - offset_loss);
+      const auto& iter_column_end = i_column.begin() + static_cast<s_index_type>(row_offset[row + 1] - offset_loss);
       auto iter_column =
-      std::upper_bound(column_index.begin() + static_cast<s_index_type>(row_offset[row]), iter_column_end, column - 1);
+      std::upper_bound(i_column.begin() + static_cast<s_index_type>(row_offset[row]), iter_column_end, column - 1);
       if(iter_column != iter_column_end) {
-        const auto& start_distance = std::distance(column_index.begin(), iter_column);
-        const auto& end_distance = std::distance(column_index.begin(), iter_column_end);
-        column_index.erase(iter_column, iter_column_end);
+        const auto& start_distance = std::distance(i_column.begin(), iter_column);
+        const auto& end_distance = std::distance(i_column.begin(), iter_column_end);
+        i_column.erase(iter_column, iter_column_end);
         value.erase(value.begin() + start_distance, value.begin() + end_distance);
         offset_loss += end_distance - start_distance;
       }
@@ -235,7 +236,7 @@ std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert(CS
 
   // Insert new entry.
   for(auto non_zeros = iter_row_start + 1; non_zeros < data.row_offset.end(); ++(*non_zeros++)) {};  // increment and ++
-  iter_column = data.column_index.insert(iter_column, column);
+  iter_column = data.i_column.insert(iter_column, column);
   iter_value = data.value.insert(iter_value, value);
   return {std::make_tuple(iter_row_start, iter_column, iter_value), true};
 }
@@ -269,12 +270,12 @@ lower_bound(const CSR_Data<_value_type, _index_type>& data, const _arg_index_typ
 
   if(row < size_row(data)) {
     const auto& iter_row = data.row_offset.cbegin() + row;
-    const auto& iter_start = data.column_index.cbegin() + data.row_offset[row];
-    const auto& iter_end = data.column_index.cbegin() + data.row_offset[row + 1];
+    const auto& iter_start = data.i_column.cbegin() + data.row_offset[row];
+    const auto& iter_end = data.i_column.cbegin() + data.row_offset[row + 1];
     const auto& iter_lower = std::lower_bound(iter_start, iter_end, column);
     return std::make_tuple(iter_lower != iter_end ? iter_row : (iter_row + 1), iter_lower,
-                           data.value.cbegin() + std::distance(data.column_index.cbegin(), iter_lower));
-  } else return std::make_tuple(data.row_offset.cend(), data.column_index.cend(), data.value.cend());
+                           data.value.cbegin() + std::distance(data.i_column.cbegin(), iter_lower));
+  } else return std::make_tuple(data.row_offset.cend(), data.i_column.cend(), data.value.cend());
 }
 
 /**
@@ -307,7 +308,7 @@ lower_bound(CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row
 
   const auto& const_iter = lower_bound(static_cast<const CSR_Data<_value_type, _index_type>&>(data), row, column);
   return std::make_tuple(data.row_offset.begin() + std::distance(data.row_offset.cbegin(), std::get<0>(const_iter)),
-                         data.column_index.begin() + std::distance(data.column_index.cbegin(), std::get<1>(const_iter)),
+                         data.i_column.begin() + std::distance(data.i_column.cbegin(), std::get<1>(const_iter)),
                          data.value.begin() + std::distance(data.value.cbegin(), std::get<2>(const_iter)));
 }
 

@@ -47,13 +47,13 @@ class matrix_sparse_element_test : public ::testing::Test {
 };
 
 TEST_F(matrix_sparse_element_test, constructor_and_accessors) {
-  EXPECT_EQ(element->column(), 5);
+  EXPECT_EQ(element->i_column(), 5);
   EXPECT_DOUBLE_EQ(element->value(), 3.14);
 }
 
 TEST_F(matrix_sparse_element_test, const_accessors) {
   const element_type const_element(&column_index, &value);
-  EXPECT_EQ(const_element.column(), 5);
+  EXPECT_EQ(const_element.i_column(), 5);
   EXPECT_DOUBLE_EQ(const_element.value(), 3.14);
 }
 
@@ -110,26 +110,26 @@ TEST_F(base_iterator_matrix_sparse_element_test, default_constructor) {
 TEST_F(base_iterator_matrix_sparse_element_test, constructor_and_dereference) {
   Base_Iterator_Matrix_Sparse_Element<double, int, false> iter(&columns[0], &entries[0]);
   auto element = *iter;
-  EXPECT_EQ(element.column(), 0);
+  EXPECT_EQ(element.i_column(), 0);
   EXPECT_EQ(element.value(), 1.0);
 }
 
 TEST_F(base_iterator_matrix_sparse_element_test, increment_and_decrement) {
   Base_Iterator_Matrix_Sparse_Element<double, int, false> iter(&columns[0], &entries[0]);
   ++iter;
-  EXPECT_EQ((*iter).column(), 1);
+  EXPECT_EQ((*iter).i_column(), 1);
   EXPECT_EQ((*iter).value(), 2.0);
 
   iter++;
-  EXPECT_EQ((*iter).column(), 2);
+  EXPECT_EQ((*iter).i_column(), 2);
   EXPECT_EQ((*iter).value(), 3.0);
 
   --iter;
-  EXPECT_EQ((*iter).column(), 1);
+  EXPECT_EQ((*iter).i_column(), 1);
   EXPECT_EQ((*iter).value(), 2.0);
 
   iter--;
-  EXPECT_EQ((*iter).column(), 0);
+  EXPECT_EQ((*iter).i_column(), 0);
   EXPECT_EQ((*iter).value(), 1.0);
 }
 
@@ -146,17 +146,17 @@ TEST_F(base_iterator_matrix_sparse_element_test, const_iterator) {
   Base_Iterator_Matrix_Sparse_Element<double, int, true> const_it(&columns[0], &entries[0]);
 
   const auto element = *const_it;
-  EXPECT_EQ((*const_it).column(), 0);
+  EXPECT_EQ((*const_it).i_column(), 0);
   EXPECT_EQ((*const_it).value(), 1.0);
 
   // ensure we can increment and decrement the const iterator
   ++const_it;
   const_it++;
-  EXPECT_EQ((*const_it).column(), 2);
+  EXPECT_EQ((*const_it).i_column(), 2);
   EXPECT_EQ((*const_it).value(), 3.0);
   --const_it;
   const_it--;
-  EXPECT_EQ((*const_it).column(), 0);
+  EXPECT_EQ((*const_it).i_column(), 0);
   EXPECT_EQ((*const_it).value(), 1.0);
 
   // Ensure that we can't modify the value through a const iterator
