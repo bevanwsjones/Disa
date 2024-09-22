@@ -105,7 +105,7 @@ class Matrix_Sparse_Element {
    * 
    * @return The column index of the element.
    */
-  [[nodiscard]] constexpr const_reference_index column() const noexcept { return *ptr_column; }
+  [[nodiscard]] constexpr const_reference_index i_column() const noexcept { return *ptr_column; }
 
   /**
    * @brief Returns a const reference to the value of the element.
@@ -286,110 +286,94 @@ template<typename _entry_type, typename _index_type>
 using Const_Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element<_entry_type, _index_type, true>;
 
 // ---------------------------------------------------------------------------------------------------------------------
-// Matrix Sparse Element and Iterators
+// Matrix Sparse Row and Iterators
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Row
 // ---------------------------------------------------------------------------------------------------------------------
 
-// template<typename _entry_type, typename _index_type>
-// struct Matrix_Sparse_Row {
-//  public:
-//   using index_type = _index_type;
-//   using reference_index = _index_type&;
-//   using pointer_index = _index_type*;
-//   using const_pointer_index = const _index_type*;
+template<typename _value_type, typename _index_type>
+struct Matrix_Sparse_Row {
+ public:
+  using index_type = _index_type;
+  using reference_index = _index_type&;
+  using pointer_index = _index_type*;
+  using const_pointer_index = const _index_type*;
 
-//   using entry_type = _entry_type;
-//   using reference_entry = _entry_type&;
-//   using const_reference_entry = const _entry_type&;
-//   using pointer_entry = _entry_type*;
-//   using const_pointer_entry = const _entry_type*;
+  using value_type = _value_type;
+  using reference_value = _value_type&;
+  using const_reference_value = const _value_type&;
+  using pointer_value = _value_type*;
+  using const_pointer_value = const _value_type*;
 
-//   using iterator = Iterator_Matrix_Sparse_Element<_entry_type, _index_type>;
-//   using const_iterator = Const_Iterator_Matrix_Sparse_Element<_entry_type, _index_type>;
+  using iterator = Iterator_Matrix_Sparse_Element<_value_type, _index_type>;
+  using const_iterator = Const_Iterator_Matrix_Sparse_Element<_value_type, _index_type>;
+  using index_iterator = std::vector<index_type>::iterator;
 
-//   using base_type = Matrix_Sparse_Row<_entry_type, _index_type>;
+  using base_type = Matrix_Sparse_Row<_value_type, _index_type>;
+  using csr_data = CSR_Data<typename std::remove_const<value_type>::type, typename std::remove_const<index_type>::type>;
 
-//   using matrix_type =
-//   Matrix_Sparse<typename std::remove_const<entry_type>::type, typename std::remove_const<index_type>::type>;
+  Matrix_Sparse_Row() = default;
+  ~Matrix_Sparse_Row() = default;
 
-//   Matrix_Sparse_Row() = default;
-//   ~Matrix_Sparse_Row() = default;
+  Matrix_Sparse_Row(csr_data* matrix, index_iterator row) {}
 
-//   Matrix_Sparse_Row(matrix_type* matrix, index_type row, std::span<index_type> column, std::span<entry_type> entries)
-//       : matrix_ptr(matrix), row_index(row), column_index(column), entry(entries) {}
+  Matrix_Sparse_Row(csr_data* matrix, index_iterator row, pointer_index s_column, pointer_index e_column,
+                    const_pointer_entry s_entry, const_pointer_entry e_entry)
+      : ptr_data(matrix), row_offset(row), i_column(s_column, e_column), entry(s_entry, e_entry) {}
 
-//   Matrix_Sparse_Row(matrix_type* matrix, index_type row, pointer_index s_column, pointer_index e_column,
-//                     const_pointer_entry s_entry, const_pointer_entry e_entry)
-//       : matrix_ptr(matrix), row_index(row), column_index(s_column, e_column), entry(s_entry, e_entry) {}
+  // TODO - there is something weird with const here (may resolve with CSR Data)
+  Matrix_Sparse_Row(const csr_data* matrix, index_iterator row, const_pointer_index s_column,
+                    const_pointer_index e_column, const_pointer_entry s_entry, const_pointer_entry e_entry)
+      : ptr_data(const_cast<csr_data*>(matrix)),
+        row_offset(row),
+        i_column(s_column, e_column),
+        entry(s_entry, e_entry) {}
 
-//   // TODO - there is something weird with const here (may resolve with CSR Data)
-//   Matrix_Sparse_Row(const matrix_type* matrix, index_type row, const_pointer_index s_column,
-//                     const_pointer_index e_column, const_pointer_entry s_entry, const_pointer_entry e_entry)
-//       : matrix_ptr(const_cast<matrix_type*>(matrix)),
-//         row_index(row),
-//         column_index(s_column, e_column),
-//         entry(s_entry, e_entry) {}
+  index_type row_offset() const { return *ptr_row_offset; };
 
-//   index_type row() const { return row_index; };
+  index_type row() const { return i_row(ptr_data, ptr_row_offset); };
 
-//   // Non-const versions
-//   iterator begin() { return iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
+  // Non-const versions
+  iterator begin() { return iterator(&(*i_column.begin()), &(*entry.begin())); }
 
-//   iterator end() { return iterator(row_index, &(*column_index.end()), &(*entry.end())); }
+  iterator end() { return iterator(&(*i_column.end()), &(*entry.end())); }
 
-//   // Const versions
-//   const_iterator begin() const { return const_iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
+  // Const versions
+  const_iterator begin() const { return const_iterator(&(*i_column.begin()), &(*entry.begin())); }
 
-//   const_iterator end() const { return const_iterator(row_index, &(*column_index.end()), &(*entry.end())); }
+  const_iterator end() const { return const_iterator(&(*i_column.end()), &(*entry.end())); }
 
-//   // cbegin and cend versions
-//   const_iterator cbegin() const { return const_iterator(row_index, &(*column_index.begin()), &(*entry.begin())); }
+  // cbegin and cend versions
+  const_iterator cbegin() const { return const_iterator(&(*i_column.begin()), &(*entry.begin())); }
 
-//   const_iterator cend() const { return const_iterator(row_index, &(*column_index.end()), &(*entry.end())); }
+  const_iterator cend() const { return const_iterator(&(*i_column.end()), &(*entry.end())); }
 
-//   base_type& operator++() {
-//     ++row_index;
-//     return *this;
-//   };
+  reference_entry operator[](const index_type& i_column) {
+    const auto iter = std::find(i_column.begin(), i_column.end(), i_column);
+    if(iter != i_column.end()) return *(entry.begin() + std::distance(i_column.begin(), iter));
+    else {
+      const _index_type i_row = row();
+      ptr_data->insert(row_offset, i_column, 0.0);
+      std::swap(*this, Matrix_Sparse_Row(ptr_data, ptr_data->row_offset.begin() + i_row));
+      return (*this)[i_column];
+    }
+  };
 
-//   base_type operator++(int) {
-//     base_type old = *this;
-//     ++row_index;
-//     return old;
-//   };
+  const_reference_entry operator[](const index_type& i_column) const {
+    const auto iter = std::find(i_column.begin(), i_column.end(), i_column);
+    return iter != i_column.end() ? *(entry.begin() + std::distance(i_column.begin(), iter)) : ptr_data->zero;
+  };
+//at
+ private:
+  csr_data* ptr_data;  // used for inserts
+  const_pointer_index ptr_row_offset;
+  const std::span<index_type> i_column;
+  const std::span<value_type> entry;
+};
 
-//   base_type& operator--() {
-//     --row_index;
-//     return *this;
-//   };
-
-//   base_type operator--(int) {
-//     base_type old = *this;
-//     --row_index;
-//     return old;
-//   };
-
-//   reference_entry operator[](const index_type& i_column) {
-//     const auto iter = std::find(column_index.begin(), column_index.end(), i_column);
-//     if(iter != column_index.end()) return *(entry.begin() + std::distance(column_index.begin(), iter));
-//     else {
-//       matrix_ptr->insert(row_index, i_column, 0.0);
-//       // *this = (*matrix_ptr)[row_index];
-//       return (*this)[i_column];
-//     }
-//   };
-
-//   const_reference_entry operator[](const index_type& i_column) const {
-//     const auto iter = std::find(column_index.begin(), column_index.end(), i_column);
-//     return iter != column_index.end() ? *(entry.begin() + std::distance(column_index.begin(), iter)) : zero;
-//   };
-
-//  private:
-//   matrix_type* matrix_ptr;  // used for inserts
-//   index_type row_index;
-//   std::span<index_type> column_index;
-//   std::span<entry_type> entry;
-//   entry_type zero{0};
-// };
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Row Iterators
+// ---------------------------------------------------------------------------------------------------------------------
 
 // template<typename _entry_type, typename _index_type, bool _is_const>
 // struct Base_Iterator_Matrix_Sparse_Row {
