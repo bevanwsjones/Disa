@@ -242,6 +242,34 @@ std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert(CS
 }
 
 /**
+ * @brief Inserts a new element or assigns to an existing element in the CSR data structure.
+ * 
+ * This function either inserts a new element into the CSR data structure if the specified
+ * row and column do not exist, or assigns a new value to an existing element. If the row
+ * or column exceed the current dimensions of the matrix, the matrix is resized accordingly.
+ * 
+ * @tparam _value_type The type of the values stored in the matrix.
+ * @tparam _index_type The type of the indices used in the matrix.
+ * @tparam _arg_index_type The type of the argument indices (must be convertible to _index_type).
+ * @param data The CSR data structure to modify.
+ * @param row The row index of the element to insert or assign.
+ * @param column The column index of the element to insert or assign.
+ * @param value The value to insert or assign.
+ * @return A pair consisting of an iterator to the inserted or found position and a boolean indicating
+ *         whether the insertion was successful (true) or the value was assigned (false).
+ */
+template<typename _value_type, typename _index_type, typename _arg_index_type>
+std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert_or_assign(CSR_Data<_value_type, _index_type>& data,
+                                                                              const _arg_index_type& row,
+                                                                              const _arg_index_type& column,
+                                                                              const _value_type& value){
+  auto [iter, is_insert] = insert(data, row, column, value);
+  if(!is_insert) *std::get<2>(iter) = value;
+  return {iter, is_insert};                
+}
+
+
+/**
  * @brief Finds the lower bound of a specified element position in a CSR data structure.
  *
  * This function searches for the lower bound of a specified element position in a CSR data structure. It returns an 

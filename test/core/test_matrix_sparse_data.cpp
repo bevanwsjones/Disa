@@ -284,6 +284,47 @@ TEST(test_csr_data, insert) {
   EXPECT_EQ(data.columns, 7);
 }
 
+TEST(test_csr_data, insert_or_assign) {
+    CSR_Data<Scalar> data;
+    resize(data, 3, 3);
+
+    // Test insertion of new element
+    auto [iter1, is_insert1] = insert_or_assign(data, 1, 1, 5.0);
+    EXPECT_TRUE(is_insert1);
+    EXPECT_EQ(*std::get<2>(iter1), 5.0);
+    EXPECT_EQ(size_non_zero(data), 1);
+
+    // Test assignment to existing element
+    auto [iter2, is_insert2] = insert_or_assign(data, 1, 1, 7.0);
+    EXPECT_FALSE(is_insert2);
+    EXPECT_EQ(*std::get<2>(iter2), 7.0);
+    EXPECT_EQ(size_non_zero(data), 1);
+
+    // Test insertion that causes row expansion
+    auto [iter3, is_insert3] = insert_or_assign(data, 4, 1, 3.0);
+    EXPECT_TRUE(is_insert3);
+    EXPECT_EQ(*std::get<2>(iter3), 3.0);
+    EXPECT_EQ(size_row(data), 5);
+    EXPECT_EQ(size_non_zero(data), 2);
+
+    // Test insertion that causes column expansion
+    auto [iter4, is_insert4] = insert_or_assign(data, 2, 4, 9.0);
+    EXPECT_TRUE(is_insert4);
+    EXPECT_EQ(*std::get<2>(iter4), 9.0);
+    EXPECT_EQ(size_column(data), 5);
+    EXPECT_EQ(size_non_zero(data), 3);
+
+    // Verify final state
+    EXPECT_EQ(size_row(data), 5);
+    EXPECT_EQ(size_column(data), 5);
+    EXPECT_EQ(size_non_zero(data), 3);
+
+    // Check values
+    EXPECT_EQ(*std::get<2>(lower_bound(data, 1, 1)), 7.0);
+    EXPECT_EQ(*std::get<2>(lower_bound(data, 4, 1)), 3.0);
+    EXPECT_EQ(*std::get<2>(lower_bound(data, 2, 4)), 9.0);
+}
+
 TEST(test_csr_data, lower_bound) {
   CSR_Data<Scalar> data = {.row_offset = {0, 1, 3, 3}, .i_column = {1, 0, 2}, .value = {3.0, 4.0, 5.0}, .columns = 3};
 
