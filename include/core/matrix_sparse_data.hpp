@@ -259,15 +259,13 @@ std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert(CS
  *         whether the insertion was successful (true) or the value was assigned (false).
  */
 template<typename _value_type, typename _index_type, typename _arg_index_type>
-std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert_or_assign(CSR_Data<_value_type, _index_type>& data,
-                                                                              const _arg_index_type& row,
-                                                                              const _arg_index_type& column,
-                                                                              const _value_type& value){
+std::pair<typename CSR_Data<_value_type, _index_type>::iterator, bool> insert_or_assign(
+CSR_Data<_value_type, _index_type>& data, const _arg_index_type& row, const _arg_index_type& column,
+const _value_type& value) {
   auto [iter, is_insert] = insert(data, row, column, value);
   if(!is_insert) *std::get<2>(iter) = value;
-  return {iter, is_insert};                
+  return {iter, is_insert};
 }
-
 
 /**
  * @brief Finds the lower bound of a specified element position in a CSR data structure.
