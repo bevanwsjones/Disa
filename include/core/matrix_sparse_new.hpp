@@ -339,10 +339,10 @@ struct Matrix_Sparse_Row {
      */
     operator const_reference_value() const {
       auto iter = std::find(i_column.begin(), i_column.end(), i_column);
-      ASSERT_DEBUG(iter != i_column.end(), "Attempting to implicitly insert an new element at "
-                                           << "(" << i_row(ptr_data, ptr_row_offset) << ", " << i_column << ") "
-                                           << "must use explicit assignment operator.");
-      return *const_iterator(&(*iter), &(*(entry.begin() + std::distance(i_column.begin(), iter))););
+      ASSERT_DEBUG(iter != i_column.end(), "Attempting to implicitly insert an new element at (" +
+                                           std::string(i_row(ptr_data, ptr_row_offset)) + ", " + std::string(i_column) +
+                                           ") must use explicit assignment operator.");
+      return *const_iterator(&(*iter), &(*(entry.begin() + std::distance(i_column.begin(), iter))));
     }
 
     /**
@@ -378,36 +378,21 @@ struct Matrix_Sparse_Row {
    * @param[in] matrix Pointer to the CSR data structure.
    * @param[in] row Iterator to the row offset.
    */
-  Matrix_Sparse_Row(csr_data* matrix, index_iterator row) {}
+  Matrix_Sparse_Row(csr_data* matrix, pointer_index row)
+      : csr_data(matrix),
+        ptr_row_offset(row),
+        i_column(matrix->i_column.begin() + i_row(matrix, row), matrix->i_column.begin() + i_row(matrix, row + 1)),
+        entry(matrix->value.begin() + i_row(matrix, row), matrix->value.begin() + i_row(matrix, row + 1)) {}
 
   /**
-   * @brief Constructs a Matrix_Sparse_Row object with specified column and entry ranges.
+   * @brief Constructs a Matrix_Sparse_Row object.
    * @param[in] matrix Pointer to the CSR data structure.
    * @param[in] row Iterator to the row offset.
-   * @param[in] s_column Pointer to the start of the column indices.
-   * @param[in] e_column Pointer to the end of the column indices.
-   * @param[in] s_entry Pointer to the start of the entry values.
-   * @param[in] e_entry Pointer to the end of the entry values.
+   * 
+   * Note since the 'const' members do not change the underlying data, we can safely remove the const.
    */
-  Matrix_Sparse_Row(csr_data* matrix, index_iterator row, pointer_index s_column, pointer_index e_column,
-                    const_pointer_entry s_entry, const_pointer_entry e_entry)
-      : ptr_data(matrix), row_offset(row), i_column(s_column, e_column), entry(s_entry, e_entry) {}
-
-  /**
-   * @brief Constructs a const Matrix_Sparse_Row object with specified column and entry ranges.
-   * @param[in] matrix Pointer to the const CSR data structure.
-   * @param[in] row Iterator to the row offset.
-   * @param[in] s_column Pointer to the start of the const column indices.
-   * @param[in] e_column Pointer to the end of the const column indices.
-   * @param[in] s_entry Pointer to the start of the const entry values.
-   * @param[in] e_entry Pointer to the end of the const entry values.
-   */
-  Matrix_Sparse_Row(const csr_data* matrix, index_iterator row, const_pointer_index s_column,
-                    const_pointer_index e_column, const_pointer_entry s_entry, const_pointer_entry e_entry)
-      : ptr_data(const_cast<csr_data*>(matrix)),
-        row_offset(row),
-        i_column(s_column, e_column),
-        entry(s_entry, e_entry) {}
+  Matrix_Sparse_Row(csr_data* matrix, const_pointer_index row)
+      : Matrix_Sparse_Row(const_cast<csr_data*>(matrix), const_cast<pointer_index*>(row)) {}
 
   /**
    * @brief Returns the row offset.
@@ -469,9 +454,9 @@ struct Matrix_Sparse_Row {
    */
   [[nodiscard]] const_pointer_value at(const index_type& i_column) const {
     auto iter = std::find(i_column.begin(), i_column.end(), i_column);
-    ASSERT(iter != i_column.end(),
-           "Column index " << i_column << ", is out of range for row " << i_row(ptr_data, ptr_row_offset) << ".");
-    return *const_iterator(&(*iter), &(*(entry.begin() + std::distance(i_column.begin(), iter))););
+    ASSERT(iter != i_column.end(), "Column index " + std::to_string(i_column) + ", is out of range for row "
+                                   << std::to_string(i_row(ptr_data, ptr_row_offset)) + ".");
+    return *const_iterator(&(*iter), &(*(entry.begin() + std::distance(i_column.begin(), iter))));
   }
 
   /**
@@ -480,7 +465,7 @@ struct Matrix_Sparse_Row {
    * @return Pointer to the value at the specified column index.
    * @throws std::runtime_error if the column index is out of range.
    */
-  [[nodiscard]] pointer_value at(const index_type& i_column) const { return at(i_column); }
+  [[nodiscard]] pointer_value at(const index_type& i_column) { return at(i_column); }
 
   /**
    * @brief Accesses the element at the specified column index.
