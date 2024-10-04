@@ -42,15 +42,14 @@ class Matrix_Sparse;
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @struct Matrix_Sparse_Element
- * @brief Represents an element in a sparse (CSR) matrix.  
+ * @class Matrix_Sparse_Element
+ * @brief Represents an element in a sparse (CSR) matrix.
  * @tparam _value_type The type of the value in the matrix element.
  * @tparam _index_type The type of the row and column indices.
  * 
- * @details
- * The class represents a sparse matrix element for the CSR matrix. It provides read-write access to the element value,
- * however the column value is read only, since updating it may cause the CSR ordering to be invalidated. Some 
- * additional operators are provided for comparison and assignment.
+ * This class encapsulates a single element in a sparse matrix stored in Compressed Sparse Row (CSR) format. It provides
+ * read-write access to the element value and read-only access to the column index. The column value is read-only to 
+ * maintain the validity of the CSR ordering.
  */
 template<typename _value_type, typename _index_type>
 class Matrix_Sparse_Element {
@@ -80,9 +79,8 @@ class Matrix_Sparse_Element {
 
   /**
    * @brief Constructor that initializes the element with the given column pointer and value pointer.
-   * 
-   * @param column The column pointer of the element.
-   * @param value The value pointer of the element.
+   * @param[in] column Pointer to the column index of the element.
+   * @param[in] value Pointer to the value of the element.
    */
   constexpr Matrix_Sparse_Element(const_pointer_index column, pointer_value value) noexcept
       : ptr_column(column), ptr_value(value) {}
@@ -95,29 +93,25 @@ class Matrix_Sparse_Element {
 
   /**
    * @brief Returns a reference to the value of the element.
-   * 
    * @return A reference to the value of the element.
    */
   [[nodiscard]] constexpr reference_value value() noexcept { return *ptr_value; }
 
   /**
    * @brief Returns the column index of the element.
-   * 
    * @return The column index of the element.
    */
   [[nodiscard]] constexpr const_reference_index i_column() const noexcept { return *ptr_column; }
 
   /**
    * @brief Returns a const reference to the value of the element.
-   * 
    * @return A const reference to the value of the element.
    */
   [[nodiscard]] constexpr const_reference_value value() const noexcept { return *ptr_value; }
 
   /**
    * @brief Equality comparison operator.
-   * 
-   * @param that The element to compare with.
+   * @param[in] that The element to compare with.
    * @return True if the elements (column, value) are equal, false otherwise.
    */
   [[nodiscard]] constexpr bool operator==(const base_type& that) const noexcept {
@@ -126,8 +120,7 @@ class Matrix_Sparse_Element {
 
   /**
    * @brief Inequality comparison operator.
-   * 
-   * @param that The element to compare with.
+   * @param[in] that The element to compare with.
    * @return True if the elements are not equal, false otherwise.
    */
   [[nodiscard]] constexpr bool operator!=(const base_type& that) const noexcept { return !(*this == that); }
@@ -148,19 +141,18 @@ class Matrix_Sparse_Element {
 // ---------------------------------------------------------------------------------------------------------------------
 
 /**
- * @struct Base_Iterator_Matrix_Sparse_Element
+ * @class Base_Iterator_Matrix_Sparse_Element
  * @brief Base iterator for Matrix_Sparse_Element.
  * @tparam _entry_type The type of the entry in the matrix element.
  * @tparam _index_type The type of the indices.
  * @tparam _is_const Whether this is a const iterator or not.
  * 
- * This structure provides a bidirectional iterator for Matrix_Sparse_Element. It can be used to iterate over the 
- * elements of a sparse matrix in CSR format, typically row-wise although not exclusively.
+ * This class provides a bidirectional iterator for Matrix_Sparse_Element. It can be used to iterate over the elements 
+ * of a sparse matrix in CSR format, typically row-wise although not exclusively.
  */
 template<typename _entry_type, typename _index_type, bool _is_const>
 struct Base_Iterator_Matrix_Sparse_Element {
  public:
-  // Iterator traits
   using iterator_category = std::bidirectional_iterator_tag;
   using difference_type = std::ptrdiff_t;
   using value_type = Matrix_Sparse_Element<_entry_type, _index_type>;
@@ -168,7 +160,6 @@ struct Base_Iterator_Matrix_Sparse_Element {
   using pointer = std::conditional_t<_is_const, const_value_type*, value_type*>;
   using reference = std::conditional_t<_is_const, const_value_type&, value_type&>;
 
-  // type definitions
   using index_type = _index_type;
   using entry_type = _entry_type;
   using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
@@ -187,17 +178,17 @@ struct Base_Iterator_Matrix_Sparse_Element {
 
   /**
    * @brief Constructor that initializes the iterator with column and entry pointers.
-   * 
-   * @param column Pointer to the column index.
-   * @param entry Pointer to the entry value.
+   * @param[in] column Pointer to the column index.
+   * @param[in] entry Pointer to the entry value.
    */
   constexpr Base_Iterator_Matrix_Sparse_Element(pointer_index column, pointer_entry entry) noexcept
       : ptr_column(column), ptr_entry(entry) {}
 
   /**
    * @brief Dereference operator.
-   * 
    * @return A Matrix_Sparse_Element object.
+   * 
+   * This operator creates and returns a Matrix_Sparse_Element object using the current column and entry pointers.
    */
   [[nodiscard]] constexpr auto operator*() const noexcept {
     if constexpr(_is_const) return const_value_type(ptr_column, ptr_entry);
@@ -206,8 +197,9 @@ struct Base_Iterator_Matrix_Sparse_Element {
 
   /**
    * @brief Pre-increment operator.
-   * 
    * @return Reference to the incremented iterator.
+   * 
+   * Advances the iterator to the next element by incrementing both column and entry pointers.
    */
   constexpr iterator_type& operator++() noexcept {
     ++ptr_column;
@@ -217,8 +209,9 @@ struct Base_Iterator_Matrix_Sparse_Element {
 
   /**
    * @brief Post-increment operator.
-   * 
    * @return Copy of the iterator before increment.
+   * 
+   * Returns a copy of the current iterator and then advances to the next element.
    */
   constexpr iterator_type operator++(int) noexcept {
     iterator_type old = *this;
@@ -228,8 +221,9 @@ struct Base_Iterator_Matrix_Sparse_Element {
 
   /**
    * @brief Pre-decrement operator.
-   * 
    * @return Reference to the decremented iterator.
+   * 
+   * Moves the iterator to the previous element by decrementing both column and entry pointers.
    */
   constexpr iterator_type& operator--() noexcept {
     --ptr_column;
@@ -239,8 +233,9 @@ struct Base_Iterator_Matrix_Sparse_Element {
 
   /**
    * @brief Post-decrement operator.
-   * 
    * @return Copy of the iterator before decrement.
+   * 
+   * Returns a copy of the current iterator and then moves to the previous element.
    */
   constexpr iterator_type operator--(int) noexcept {
     iterator_type old = *this;
@@ -250,9 +245,10 @@ struct Base_Iterator_Matrix_Sparse_Element {
 
   /**
    * @brief Equality comparison operator.
-   * 
-   * @param that The iterator to compare with.
+   * @param[in] that The iterator to compare with.
    * @return True if the iterators are equal, false otherwise.
+   * 
+   * Two iterators are considered equal if they point to the same column and entry.
    */
   [[nodiscard]] constexpr bool operator==(const iterator_type& that) const noexcept {
     return ptr_column == that.ptr_column && ptr_entry == that.ptr_entry;
@@ -260,15 +256,14 @@ struct Base_Iterator_Matrix_Sparse_Element {
 
   /**
    * @brief Inequality comparison operator.
-   * 
-   * @param that The iterator to compare with.
+   * @param[in] that The iterator to compare with.
    * @return True if the iterators are not equal, false otherwise.
    */
   [[nodiscard]] constexpr bool operator!=(const iterator_type& that) const noexcept { return !(*this == that); }
 
  private:
-  pointer_index ptr_column{nullptr};
-  pointer_entry ptr_entry{nullptr};
+  pointer_index ptr_column{nullptr}; /**< Pointer to the current column index. */
+  pointer_entry ptr_entry{nullptr};  /**< Pointer to the current entry value. */
 };
 
 /**
@@ -291,6 +286,13 @@ using Const_Iterator_Matrix_Sparse_Element = Base_Iterator_Matrix_Sparse_Element
 // Matrix Sparse Row
 // ---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * @class Matrix_Sparse_Row
+ * @brief Represents a row in a sparse matrix and provides access to its elements.
+ * 
+ * This class encapsulates the data and operations for a single row in a sparse matrix. It provides
+ * iterators for traversing the row's elements and methods for accessing specific elements.
+ */
 template<typename _value_type, typename _index_type>
 struct Matrix_Sparse_Row {
  public:
@@ -312,10 +314,29 @@ struct Matrix_Sparse_Row {
   using base_type = Matrix_Sparse_Row<_value_type, _index_type>;
   using csr_data = CSR_Data<typename std::remove_const<value_type>::type, typename std::remove_const<index_type>::type>;
 
+  /**
+   * @class SparseAccessor
+   * @brief Provides access and modification capabilities for sparse matrix elements.
+   * 
+   * This class acts as a proxy for accessing and modifying elements in a sparse matrix. It allows for
+   * implicit reading of existing elements and explicit insertion or modification of elements.
+   */
   class SparseAccessor {
    public:
+    /**
+     * @brief Constructs a SparseAccessor object.
+     * @param[in] row Reference to the Matrix_Sparse_Row object.
+     * @param[in] column The column index of the element to access.
+     */
     SparseAccessor(Matrix_Sparse_Row& row, index_type column) : row_(row), i_column(column) {}
 
+    /**
+     * @brief Implicit conversion operator to const_reference_value.
+     * @return The value of the element at the specified position.
+     * @throws std::runtime_error if attempting to access a non-existent element.
+     * 
+     * This operator allows for implicit reading of existing elements in the sparse matrix.
+     */
     operator const_reference_value() const {
       auto iter = std::find(i_column.begin(), i_column.end(), i_column);
       ASSERT_DEBUG(iter != i_column.end(), "Attempting to implicitly insert an new element at "
@@ -324,6 +345,13 @@ struct Matrix_Sparse_Row {
       return *const_iterator(&(*iter), &(*(entry.begin() + std::distance(i_column.begin(), iter))););
     }
 
+    /**
+     * @brief Assignment operator for modifying or inserting an element.
+     * @param[in] value The value to assign to the element.
+     * @return Reference to this SparseAccessor object.
+     * 
+     * This operator allows for explicit insertion or modification of elements in the sparse matrix.
+     */
     SparseAccessor& operator=(const_reference_value value) {
       insert_or_assign(i_row(row_.ptr_data, row_), i_column, value);
       std::swap(row_, Matrix_Sparse_Row(ptr_data, ptr_data->row_offset.begin() + i_row));
@@ -335,16 +363,45 @@ struct Matrix_Sparse_Row {
     index_type i_column;
   };
 
+  /**
+   * @brief Default constructor.
+   */
   Matrix_Sparse_Row() = default;
+
+  /**
+   * @brief Destructor.
+   */
   ~Matrix_Sparse_Row() = default;
 
+  /**
+   * @brief Constructs a Matrix_Sparse_Row object.
+   * @param[in] matrix Pointer to the CSR data structure.
+   * @param[in] row Iterator to the row offset.
+   */
   Matrix_Sparse_Row(csr_data* matrix, index_iterator row) {}
 
+  /**
+   * @brief Constructs a Matrix_Sparse_Row object with specified column and entry ranges.
+   * @param[in] matrix Pointer to the CSR data structure.
+   * @param[in] row Iterator to the row offset.
+   * @param[in] s_column Pointer to the start of the column indices.
+   * @param[in] e_column Pointer to the end of the column indices.
+   * @param[in] s_entry Pointer to the start of the entry values.
+   * @param[in] e_entry Pointer to the end of the entry values.
+   */
   Matrix_Sparse_Row(csr_data* matrix, index_iterator row, pointer_index s_column, pointer_index e_column,
                     const_pointer_entry s_entry, const_pointer_entry e_entry)
       : ptr_data(matrix), row_offset(row), i_column(s_column, e_column), entry(s_entry, e_entry) {}
 
-  // TODO - there is something weird with const here (may resolve with CSR Data)
+  /**
+   * @brief Constructs a const Matrix_Sparse_Row object with specified column and entry ranges.
+   * @param[in] matrix Pointer to the const CSR data structure.
+   * @param[in] row Iterator to the row offset.
+   * @param[in] s_column Pointer to the start of the const column indices.
+   * @param[in] e_column Pointer to the end of the const column indices.
+   * @param[in] s_entry Pointer to the start of the const entry values.
+   * @param[in] e_entry Pointer to the end of the const entry values.
+   */
   Matrix_Sparse_Row(const csr_data* matrix, index_iterator row, const_pointer_index s_column,
                     const_pointer_index e_column, const_pointer_entry s_entry, const_pointer_entry e_entry)
       : ptr_data(const_cast<csr_data*>(matrix)),
@@ -352,37 +409,87 @@ struct Matrix_Sparse_Row {
         i_column(s_column, e_column),
         entry(s_entry, e_entry) {}
 
-  index_type row_offset() const noexcept { return *ptr_row_offset; };
+  /**
+   * @brief Returns the row offset.
+   * @return The row offset.
+   */
+  [[nodiscard]] index_type row_offset() const noexcept { return *ptr_row_offset; };
 
-  index_type row() const noexcept { return i_row(ptr_data, ptr_row_offset); };
+  /**
+   * @brief Returns the row index.
+   * @return The row index.
+   */
+  [[nodiscard]] index_type row() const noexcept { return i_row(ptr_data, ptr_row_offset); };
 
-  // Non-const versions
-  iterator begin() noexcept { return iterator(&(*i_column.begin()), &(*entry.begin())); }
+  /**
+   * @brief Returns an iterator to the beginning of the row.
+   * @return Iterator to the beginning.
+   */
+  [[nodiscard]] iterator begin() noexcept { return iterator(&(*i_column.begin()), &(*entry.begin())); }
 
-  iterator end() noexcept { return iterator(&(*i_column.end()), &(*entry.end())); }
+  /**
+   * @brief Returns an iterator to the end of the row.
+   * @return Iterator to the end.
+   */
+  [[nodiscard]] iterator end() noexcept { return iterator(&(*i_column.end()), &(*entry.end())); }
 
-  // Const versions
-  const_iterator begin() const noexcept { return const_iterator(&(*i_column.begin()), &(*entry.begin())); }
+  /**
+   * @brief Returns a const iterator to the beginning of the row.
+   * @return Const iterator to the beginning.
+   */
+  [[nodiscard]] const_iterator begin() const noexcept {
+    return const_iterator(&(*i_column.begin()), &(*entry.begin()));
+  }
 
-  const_iterator end() const noexcept { return const_iterator(&(*i_column.end()), &(*entry.end())); }
+  /**
+   * @brief Returns a const iterator to the end of the row.
+   * @return Const iterator to the end.
+   */
+  [[nodiscard]] const_iterator end() const noexcept { return const_iterator(&(*i_column.end()), &(*entry.end())); }
 
-  // cbegin and cend versions
-  const_iterator cbegin() const noexcept { return const_iterator(&(*i_column.begin()), &(*entry.begin())); }
+  /**
+   * @brief Returns a const iterator to the beginning of the row.
+   * @return Const iterator to the beginning.
+   */
+  [[nodiscard]] const_iterator cbegin() const noexcept {
+    return const_iterator(&(*i_column.begin()), &(*entry.begin()));
+  }
 
-  const_iterator cend() const noexcept { return const_iterator(&(*i_column.end()), &(*entry.end())); }
+  /**
+   * @brief Returns a const iterator to the end of the row.
+   * @return Const iterator to the end.
+   */
+  [[nodiscard]] const_iterator cend() const noexcept { return const_iterator(&(*i_column.end()), &(*entry.end())); }
 
-  // at - range checking
-  const_pointer_value at(const index_type& i_column) const {
+  /**
+   * @brief Accesses the element at the specified column index.
+   * @param[in] i_column The column index.
+   * @return Pointer to the value at the specified column index.
+   * @throws std::runtime_error if the column index is out of range.
+   */
+  [[nodiscard]] const_pointer_value at(const index_type& i_column) const {
     auto iter = std::find(i_column.begin(), i_column.end(), i_column);
     ASSERT(iter != i_column.end(),
            "Column index " << i_column << ", is out of range for row " << i_row(ptr_data, ptr_row_offset) << ".");
     return *const_iterator(&(*iter), &(*(entry.begin() + std::distance(i_column.begin(), iter))););
   }
 
-  pointer_value at(const index_type& i_column) const { return at(i_column); }
+  /**
+   * @brief Accesses the element at the specified column index.
+   * @param[in] i_column The column index.
+   * @return Pointer to the value at the specified column index.
+   * @throws std::runtime_error if the column index is out of range.
+   */
+  [[nodiscard]] pointer_value at(const index_type& i_column) const { return at(i_column); }
 
-  // operator[]
-  const_reference_value operator[](const index_type& i_column) const {
+  /**
+   * @brief Accesses the element at the specified column index.
+   * @param[in] i_column The column index.
+   * @return Reference to the value at the specified column index.
+   * 
+   * This operator provides bounds checking in debug mode.
+   */
+  [[nodiscard]] const_reference_value operator[](const index_type& i_column) const {
 #ifdef DISA_DEBUG
     return at(i_column);
 #else
@@ -391,14 +498,20 @@ struct Matrix_Sparse_Row {
 #endif
   };
 
+  /**
+   * @brief Accesses or inserts an element at the specified column index.
+   * @param[in] i_column The column index.
+   * @return SparseAccessor object for the specified column index.
+   * 
+   * This operator allows for reading existing elements or inserting new elements.
+   */
   SparseAccessor operator[](const index_type& i_column) noexcept { return Proxy(*this, i_column); };
 
-  //at
  private:
-  csr_data* ptr_data;  // used for inserts
-  const_pointer_index ptr_row_offset;
-  const std::span<index_type> i_column;
-  const std::span<value_type> entry;
+  csr_data* ptr_data;                   /**< Pointer to the CSR data structure. */
+  const_pointer_index ptr_row_offset;   /**< Pointer to the row offset. */
+  const std::span<index_type> i_column; /**< Span of column indices for this row. */
+  const std::span<value_type> entry;    /**< Span of entry values for this row. */
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
