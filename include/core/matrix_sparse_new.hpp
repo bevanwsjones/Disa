@@ -25,6 +25,7 @@
 
 #include <numeric>
 #include <span>
+#include <utility>
 #include <vector>
 
 #include "matrix_sparse_data.hpp"
@@ -322,47 +323,48 @@ struct Matrix_Sparse_Row {
    * This class acts as a proxy for accessing and modifying elements in a sparse matrix. It allows for
    * implicit reading of existing elements and explicit insertion or modification of elements.
    */
-  // class SparseAccessor {
-  //  public:
-  //   /**
-  //    * @brief Constructs a SparseAccessor object.
-  //    * @param[in] row Reference to the Matrix_Sparse_Row object.
-  //    * @param[in] column The column index of the element to access.
-  //    */
-  //   SparseAccessor(Matrix_Sparse_Row& row, index_type column) : row_(row), i_column(column) {}
+  class SparseAccessor {
+   public:
+    /**
+     * @brief Constructs a SparseAccessor object.
+     * @param[in] row Reference to the Matrix_Sparse_Row object.
+     * @param[in] column The column index of the element to access.
+     */
+    SparseAccessor(Matrix_Sparse_Row& row, index_type column) : row_(row), i_column(column) {}
 
-  //   /**
-  //    * @brief Implicit conversion operator to const_reference_value.
-  //    * @return The value of the element at the specified position.
-  //    * @throws std::runtime_error if attempting to access a non-existent element.
-  //    *
-  //    * This operator allows for implicit reading of existing elements in the sparse matrix.
-  //    */
-  //   operator const_reference_value() const {
-  //     auto iter = std::find(i_column.begin(), i_column.end(), i_column);
-  //     ASSERT_DEBUG(iter != i_column.end(), "Attempting to implicitly insert an new element at (" +
-  //                                          std::string(i_row(ptr_data, row_.iter_row_offset)) + ", " + std::string(i_column) +
-  //                                          ") must use explicit assignment operator.");
-  //     return *const_iterator(&(*iter), &(*(row_.value.begin() + std::distance(i_column.begin(), iter))));
-  //   }
+    /**
+     * @brief Implicit conversion operator to const_reference_value.
+     * @return The value of the element at the specified position.
+     * @throws std::runtime_error if attempting to access a non-existent element.
+     *
+     * This operator allows for implicit reading of existing elements in the sparse matrix.
+     */
+    [[nodiscard]] operator const_reference_value() const {
+      auto iter = std::find(row_.i_column.begin(), row_.i_column.end(), i_column);
+      ASSERT_DEBUG(iter != row_.i_column.end(), "Attempting to implicitly insert an new element at (" +
+                                                std::to_string(row_.row()) + ", " + std::to_string(i_column) +
+                                                ") must use explicit assignment operator.");
+      return *(row_.value.begin() + std::distance(row_.i_column.begin(), iter));
+    }
 
-  //   /**
-  //    * @brief Assignment operator for modifying or inserting an element.
-  //    * @param[in] value The value to assign to the element.
-  //    * @return Reference to this SparseAccessor object.
-  //    *
-  //    * This operator allows for explicit insertion or modification of elements in the sparse matrix.
-  //    */
-  //   SparseAccessor& operator=(const_reference_value value) {
-  //     insert_or_assign(i_row(row_.ptr_data, row_), i_column, value);
-  //     std::swap(row_, Matrix_Sparse_Row(ptr_data, ptr_data->row_offset.begin() + i_row));
-  //     return *this;
-  //   }
+    /**
+     * @brief Assignment operator for modifying or inserting an element.
+     * @param[in] value The value to assign to the element.
+     * @return Reference to this SparseAccessor object.
+     *
+     * This operator allows for explicit insertion or modification of elements in the sparse matrix.
+     */
+    SparseAccessor& operator=(const_reference_value value) {
+      const index_type i_row = row_.row();
+      insert_or_assign(*row_.ptr_data, i_row, i_column, value);
+      row_ = std::move(Matrix_Sparse_Row(row_.ptr_data, row_.ptr_data->row_offset.begin() + i_row));
+      return *this;
+    }
 
-  //  private:
-  //   Matrix_Sparse_Row& row_;
-  //   index_type i_column;
-  // };
+   private:
+    Matrix_Sparse_Row& row_;
+    index_type i_column;
+  };
 
   /**
    * @brief Default constructor.
@@ -396,10 +398,41 @@ struct Matrix_Sparse_Row {
       : Matrix_Sparse_Row(const_cast<csr_data*>(matrix), i_row) {};
 
   /**
+   * @brief Copy Constructor
+   * @param[in] other The Matrix_Sparse_Row object to copy.
+   */
+  Matrix_Sparse_Row(const base_type& other)
+      : ptr_data(other.ptr_data), iter_row_offset(other.iter_row_offset), i_column(other.i_column), value(other.value) {
+        };
+
+  /**
+   * @brief Move constructor.
+   * @param[in,out] other The Matrix_Sparse_Row to move from. After the move, other is left in a valid but unspecified 
+   * state.
+   */
+  Matrix_Sparse_Row(Matrix_Sparse_Row&& other) noexcept
+      : ptr_data(std::exchange(other.ptr_data, nullptr)),
+        iter_row_offset(std::exchange(other.iter_row_offset, {})),
+        i_column(std::exchange(other.i_column, {})),
+        value(std::exchange(other.value, {})) {}
+
+  /**
    * @brief Returns the row offset.
    * @return The row offset.
    */
   [[nodiscard]] index_type row_offset() const noexcept { return *(iter_row_offset + 1); };
+
+  /**
+   * @brief Returns the number of columns.
+   * @return The row offset.
+   */
+  [[nodiscard]] index_type size() const noexcept { return ptr_data->columns; };
+
+  /**
+   * @brief Returns the number of non-zeros in the row.
+   * @return The number of non-zeroes.
+   */
+  [[nodiscard]] index_type size_non_zero() const noexcept { return *(iter_row_offset + 1) - *(iter_row_offset); };
 
   /**
    * @brief Returns the row index.
@@ -453,11 +486,11 @@ struct Matrix_Sparse_Row {
    * @return Pointer to the value at the specified column index.
    * @throws std::runtime_error if the column index is out of range.
    */
-  [[nodiscard]] const_pointer_value at(const index_type& i_column) const {
-    auto iter = std::find(i_column.begin(), i_column.end(), i_column);
-    ASSERT(iter != i_column.end(), "Column index " + std::to_string(i_column) + ", is out of range for row "
-                                   << std::to_string(i_row(ptr_data, iter_row_offset)) + ".");
-    return *const_iterator(&(*iter), &(*(value.begin() + std::distance(i_column.begin(), iter))));
+  [[nodiscard]] const_reference_value at(const index_type& column) const {
+    auto iter = std::find(i_column.begin(), i_column.end(), column);
+    ASSERT(iter != i_column.end(),
+           "Column index " + std::to_string(column) + ", is out of range for row " + std::to_string(row()) + ".");
+    return *(value.begin() + std::distance(i_column.begin(), iter));
   }
 
   /**
@@ -466,7 +499,9 @@ struct Matrix_Sparse_Row {
    * @return Pointer to the value at the specified column index.
    * @throws std::runtime_error if the column index is out of range.
    */
-  [[nodiscard]] pointer_value at(const index_type& i_column) { return at(i_column); }
+  [[nodiscard]] reference_value at(const index_type& column) {
+    return const_cast<reference_value>(static_cast<const base_type*>(this)->at(column));
+  }
 
   /**
    * @brief Accesses the element at the specified column index.
@@ -491,13 +526,29 @@ struct Matrix_Sparse_Row {
    * 
    * This operator allows for reading existing elements or inserting new elements.
    */
-  // SparseAccessor operator[](const index_type& i_column) noexcept { return Proxy(*this, i_column); };
+  SparseAccessor operator[](const index_type& i_column) noexcept { return SparseAccessor(*this, i_column); };
+
+  /**
+   * @brief Move assignment operator.
+   * @param[in,out] other The Matrix_Sparse_Row to move from. After the move, other is left in a valid but unspecified 
+   *                      state.
+   * @return Matrix_Sparse_Row& A reference to *this.
+   */
+  Matrix_Sparse_Row& operator=(Matrix_Sparse_Row&& other) noexcept {
+    if(this != &other) {
+      ptr_data = std::exchange(other.ptr_data, nullptr);
+      iter_row_offset = std::exchange(other.iter_row_offset, {});
+      i_column = std::exchange(other.i_column, {});
+      value = std::exchange(other.value, {});
+    }
+    return *this;
+  }
 
  private:
-  csr_data* ptr_data;                   /**< Pointer to the CSR data structure. */
-  index_iterator iter_row_offset;       /**< Iterator to the row offset. */
-  const std::span<index_type> i_column; /**< Span of column indices for this row. */
-  const std::span<value_type> value;    /**< Span of values for this row. */
+  csr_data* ptr_data;             /**< Pointer to the CSR data structure. */
+  index_iterator iter_row_offset; /**< Iterator to the row offset. */
+  std::span<index_type> i_column; /**< Span of column indices for this row. */
+  std::span<value_type> value;    /**< Span of values for this row. */
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
