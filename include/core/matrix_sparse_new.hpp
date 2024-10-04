@@ -385,7 +385,7 @@ struct Matrix_Sparse_Row {
       : ptr_data(matrix),
         iter_row_offset(row),
         i_column(matrix->i_column.begin() + *row, matrix->i_column.begin() + *(row + 1)),
-        value(matrix->value.begin() + *row, matrix->value.begin() + *(row + 1)) {};
+        value(matrix->value.begin() + *row, matrix->value.begin() + *(row + 1)) {}
 
   /**
    * @brief Constructs a Matrix_Sparse_Row object.
@@ -395,15 +395,17 @@ struct Matrix_Sparse_Row {
    * Note since the 'const' members do not change the underlying data, we can safely remove the const.
    */
   Matrix_Sparse_Row(const csr_data* matrix, index_iterator i_row)
-      : Matrix_Sparse_Row(const_cast<csr_data*>(matrix), i_row) {};
+      : Matrix_Sparse_Row(const_cast<csr_data*>(matrix), i_row) {}
 
   /**
    * @brief Copy Constructor
    * @param[in] other The Matrix_Sparse_Row object to copy.
    */
   Matrix_Sparse_Row(const base_type& other)
-      : ptr_data(other.ptr_data), iter_row_offset(other.iter_row_offset), i_column(other.i_column), value(other.value) {
-        };
+      : ptr_data(other.ptr_data),
+        iter_row_offset(other.iter_row_offset),
+        i_column(other.i_column),
+        value(other.value) {}
 
   /**
    * @brief Move constructor.
@@ -420,25 +422,25 @@ struct Matrix_Sparse_Row {
    * @brief Returns the row offset.
    * @return The row offset.
    */
-  [[nodiscard]] index_type row_offset() const noexcept { return *(iter_row_offset + 1); };
+  [[nodiscard]] index_type row_offset() const noexcept { return *(iter_row_offset + 1); }
 
   /**
    * @brief Returns the number of columns.
    * @return The row offset.
    */
-  [[nodiscard]] index_type size() const noexcept { return ptr_data->columns; };
+  [[nodiscard]] index_type size() const noexcept { return ptr_data->columns; }
 
   /**
    * @brief Returns the number of non-zeros in the row.
    * @return The number of non-zeroes.
    */
-  [[nodiscard]] index_type size_non_zero() const noexcept { return *(iter_row_offset + 1) - *(iter_row_offset); };
+  [[nodiscard]] index_type size_non_zero() const noexcept { return *(iter_row_offset + 1) - *(iter_row_offset); }
 
   /**
    * @brief Returns the row index.
    * @return The row index.
    */
-  [[nodiscard]] index_type row() const noexcept { return i_row(*ptr_data, iter_row_offset); };
+  [[nodiscard]] index_type row() const noexcept { return i_row(*ptr_data, iter_row_offset); }
 
   /**
    * @brief Returns an iterator to the beginning of the row.
@@ -517,7 +519,7 @@ struct Matrix_Sparse_Row {
     auto iter = std::find(i_column.begin(), i_column.end(), i_column);
     return *const_iterator(&(*iter), &(*(value.begin() + std::distance(i_column.begin(), iter))););
 #endif
-  };
+  }
 
   /**
    * @brief Accesses or inserts an element at the specified column index.
