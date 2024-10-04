@@ -312,32 +312,28 @@ struct Matrix_Sparse_Row {
   using base_type = Matrix_Sparse_Row<_value_type, _index_type>;
   using csr_data = CSR_Data<typename std::remove_const<value_type>::type, typename std::remove_const<index_type>::type>;
 
-  class Proxy {
-  public:
-      Proxy(Matrix_Sparse_Row& row, index_type column) : row_(row), i_column(column) {}
+  class SparseAccessor {
+   public:
+    SparseAccessor(Matrix_Sparse_Row& row, index_type column) : row_(row), i_column(column) {}
 
-      operator const_reference_value() const {
-        const auto iter = std::find(row_.i_column.begin(), row_.i_column.end(), i_column);
-        // switch to at
-#ifdef DISA_DEBUG
-        if(iter != row_.i_column.end()) return *(row_.entry.begin() + std::distance(row_.i_column.begin(), iter));
-        ERROR_EXIT("Trying to read ");
-#else
-        return *(row_.entry.begin() + std::distance(row_.i_column.begin(), iter));
-#endif
-      }
+    operator const_reference_value() const {
+      auto iter = std::find(i_column.begin(), i_column.end(), i_column);
+      ASSERT_DEBUG(iter != i_column.end(), "Attempting to implicitly insert an new element at "
+                                           << "(" << i_row(ptr_data, ptr_row_offset) << ", " << i_column << ") "
+                                           << "must use explicit assignment operator.");
+      return *const_iterator(&(*iter), &(*(entry.begin() + std::distance(i_column.begin(), iter))););
+    }
 
-      Proxy& operator=(const_reference_value value) {
-          insert_or_assign(i_row(row_.ptr_data, row_), i_column, value);
-          std::swap(row_, Matrix_Sparse_Row(ptr_data, ptr_data->row_offset.begin() + i_row));
-          return *this;
-      }
+    SparseAccessor& operator=(const_reference_value value) {
+      insert_or_assign(i_row(row_.ptr_data, row_), i_column, value);
+      std::swap(row_, Matrix_Sparse_Row(ptr_data, ptr_data->row_offset.begin() + i_row));
+      return *this;
+    }
 
-  private:
-      Matrix_Sparse_Row& row_;
-      index_type i_column;
+   private:
+    Matrix_Sparse_Row& row_;
+    index_type i_column;
   };
-
 
   Matrix_Sparse_Row() = default;
   ~Matrix_Sparse_Row() = default;
@@ -356,9 +352,9 @@ struct Matrix_Sparse_Row {
         i_column(s_column, e_column),
         entry(s_entry, e_entry) {}
 
-  index_type row_offset() const { return *ptr_row_offset; };
+  index_type row_offset() const noexcept { return *ptr_row_offset; };
 
-  index_type row() const { return i_row(ptr_data, ptr_row_offset); };
+  index_type row() const noexcept { return i_row(ptr_data, ptr_row_offset); };
 
   // Non-const versions
   iterator begin() noexcept { return iterator(&(*i_column.begin()), &(*entry.begin())); }
@@ -375,21 +371,29 @@ struct Matrix_Sparse_Row {
 
   const_iterator cend() const noexcept { return const_iterator(&(*i_column.end()), &(*entry.end())); }
 
-  Proxy operator[](const index_type& i_column) noexcept {
-    return Proxy(*this, i_column);
-  };
+  // at - range checking
+  const_pointer_value at(const index_type& i_column) const {
+    auto iter = std::find(i_column.begin(), i_column.end(), i_column);
+    ASSERT(iter != i_column.end(),
+           "Column index " << i_column << ", is out of range for row " << i_row(ptr_data, ptr_row_offset) << ".");
+    return *const_iterator(&(*iter), &(*(entry.begin() + std::distance(i_column.begin(), iter))););
+  }
 
-  const_reference_value operator[](const index_type& i_column) const noexcept {
-    const auto iter = std::find(i_column.begin(), i_column.end(), i_column);
-    //switch to at 
-#ifdef DISA_DEBUG 
-    if(iter != i_column.end()) return *(entry.begin() + std::distance(i_column.begin(), iter));
-    ERROR_EXIT("Trying to read ");
+  pointer_value at(const index_type& i_column) const { return at(i_column); }
+
+  // operator[]
+  const_reference_value operator[](const index_type& i_column) const {
+#ifdef DISA_DEBUG
+    return at(i_column);
 #else
-    return *(entry.begin() + std::distance(i_column.begin(), iter));
+    auto iter = std::find(i_column.begin(), i_column.end(), i_column);
+    return *const_iterator(&(*iter), &(*(entry.begin() + std::distance(i_column.begin(), iter))););
 #endif
   };
-//at
+
+  SparseAccessor operator[](const index_type& i_column) noexcept { return Proxy(*this, i_column); };
+
+  //at
  private:
   csr_data* ptr_data;  // used for inserts
   const_pointer_index ptr_row_offset;
