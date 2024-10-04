@@ -312,6 +312,33 @@ struct Matrix_Sparse_Row {
   using base_type = Matrix_Sparse_Row<_value_type, _index_type>;
   using csr_data = CSR_Data<typename std::remove_const<value_type>::type, typename std::remove_const<index_type>::type>;
 
+  class Proxy {
+  public:
+      Proxy(Matrix_Sparse_Row& row, index_type column) : row_(row), i_column(column) {}
+
+      operator const_reference_value() const {
+        const auto iter = std::find(row_.i_column.begin(), row_.i_column.end(), i_column);
+        // switch to at
+#ifdef DISA_DEBUG
+        if(iter != row_.i_column.end()) return *(row_.entry.begin() + std::distance(row_.i_column.begin(), iter));
+        ERROR_EXIT("Trying to read ");
+#else
+        return *(row_.entry.begin() + std::distance(row_.i_column.begin(), iter));
+#endif
+      }
+
+      Proxy& operator=(const_reference_value value) {
+          insert_or_assign(i_row(row_.ptr_data, row_), i_column, value);
+          std::swap(row_, Matrix_Sparse_Row(ptr_data, ptr_data->row_offset.begin() + i_row));
+          return *this;
+      }
+
+  private:
+      Matrix_Sparse_Row& row_;
+      index_type i_column;
+  };
+
+
   Matrix_Sparse_Row() = default;
   ~Matrix_Sparse_Row() = default;
 
@@ -334,34 +361,33 @@ struct Matrix_Sparse_Row {
   index_type row() const { return i_row(ptr_data, ptr_row_offset); };
 
   // Non-const versions
-  iterator begin() { return iterator(&(*i_column.begin()), &(*entry.begin())); }
+  iterator begin() noexcept { return iterator(&(*i_column.begin()), &(*entry.begin())); }
 
-  iterator end() { return iterator(&(*i_column.end()), &(*entry.end())); }
+  iterator end() noexcept { return iterator(&(*i_column.end()), &(*entry.end())); }
 
   // Const versions
-  const_iterator begin() const { return const_iterator(&(*i_column.begin()), &(*entry.begin())); }
+  const_iterator begin() const noexcept { return const_iterator(&(*i_column.begin()), &(*entry.begin())); }
 
-  const_iterator end() const { return const_iterator(&(*i_column.end()), &(*entry.end())); }
+  const_iterator end() const noexcept { return const_iterator(&(*i_column.end()), &(*entry.end())); }
 
   // cbegin and cend versions
-  const_iterator cbegin() const { return const_iterator(&(*i_column.begin()), &(*entry.begin())); }
+  const_iterator cbegin() const noexcept { return const_iterator(&(*i_column.begin()), &(*entry.begin())); }
 
-  const_iterator cend() const { return const_iterator(&(*i_column.end()), &(*entry.end())); }
+  const_iterator cend() const noexcept { return const_iterator(&(*i_column.end()), &(*entry.end())); }
 
-  reference_entry operator[](const index_type& i_column) {
-    const auto iter = std::find(i_column.begin(), i_column.end(), i_column);
-    if(iter != i_column.end()) return *(entry.begin() + std::distance(i_column.begin(), iter));
-    else {
-      const _index_type i_row = row();
-      ptr_data->insert(row_offset, i_column, 0.0);
-      std::swap(*this, Matrix_Sparse_Row(ptr_data, ptr_data->row_offset.begin() + i_row));
-      return (*this)[i_column];
-    }
+  Proxy operator[](const index_type& i_column) noexcept {
+    return Proxy(*this, i_column);
   };
 
-  const_reference_entry operator[](const index_type& i_column) const {
+  const_reference_value operator[](const index_type& i_column) const noexcept {
     const auto iter = std::find(i_column.begin(), i_column.end(), i_column);
-    return iter != i_column.end() ? *(entry.begin() + std::distance(i_column.begin(), iter)) : ptr_data->zero;
+    //switch to at 
+#ifdef DISA_DEBUG 
+    if(iter != i_column.end()) return *(entry.begin() + std::distance(i_column.begin(), iter));
+    ERROR_EXIT("Trying to read ");
+#else
+    return *(entry.begin() + std::distance(i_column.begin(), iter));
+#endif
   };
 //at
  private:
