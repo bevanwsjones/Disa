@@ -85,19 +85,22 @@ $(document).ready(function(){initNavTree('functions_i.html',''); initResizable()
 <div class="textblock">Here is a list of all struct and union fields with links to the structures/unions they belong to:</div>
 
 <h3><a id="index_i"></a>- i -</h3><ul>
-<li>i_column()
-: <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html#aeac2992660f159aa2b41c11783ae05ed">Iterator_Matrix_Sparse_Element&lt; _matrix_type &gt;</a>
+<li>i_column
+: <a class="el" href="struct_disa_1_1_c_s_r___data.html#ace2fcacdad9438d24aed3e7dc130278a">CSR_Data&lt; _value_type, _index_type &gt;</a>
+, <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html#aeac2992660f159aa2b41c11783ae05ed">Iterator_Matrix_Sparse_Element&lt; _matrix_type &gt;</a>
+, <a class="el" href="class_disa_1_1_matrix___sparse___element.html#aecaf90338af88cd6327a89c8c19ff611">Matrix_Sparse_Element&lt; _value_type, _index_type &gt;</a>
 </li>
 <li>i_row()
 : <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html#aa5bd8037fb505363928aeee50e72e8d1">Iterator_Matrix_Sparse_Element&lt; _matrix_type &gt;</a>
 </li>
+<li>index_iterator
+: <a class="el" href="class_disa_1_1_matrix___sparse___row.html#ae8c89061f4f091b029da0fba7381108c">Matrix_Sparse_Row&lt; _value_type, _index_type &gt;</a>
+</li>
 <li>index_type
 : <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt;</a>
-, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___row.html#a24c73a80b51e86022f2fc1678cbc9401">Base_Iterator_Matrix_Sparse_Row&lt; _entry_type, _index_type, _is_const &gt;</a>
 , <a class="el" href="struct_disa_1_1_c_s_r___data.html#a24c73a80b51e86022f2fc1678cbc9401">CSR_Data&lt; _value_type, _index_type &gt;</a>
-, <a class="el" href="class_disa_1_1_matrix___sparse.html#a24c73a80b51e86022f2fc1678cbc9401">Matrix_Sparse&lt; _entry_type, _index_type &gt;</a>
-, <a class="el" href="struct_disa_1_1_matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">Matrix_Sparse_Element&lt; _entry_type, _index_type &gt;</a>
-, <a class="el" href="class_disa_1_1_matrix___sparse___row.html#a24c73a80b51e86022f2fc1678cbc9401">Matrix_Sparse_Row&lt; _entry_type, _index_type &gt;</a>
+, <a class="el" href="class_disa_1_1_matrix___sparse___element.html#af6aa0203070d3e2ba8b427340079ccc2">Matrix_Sparse_Element&lt; _value_type, _index_type &gt;</a>
+, <a class="el" href="class_disa_1_1_matrix___sparse___row.html#a24c73a80b51e86022f2fc1678cbc9401">Matrix_Sparse_Row&lt; _value_type, _index_type &gt;</a>
 </li>
 <li>initialise()
 : <a class="el" href="class_disa_1_1_direct.html#a144e1092069bfb6d21a3defe761002d4">Direct&lt; _solver, _size &gt;</a>
@@ -139,10 +142,11 @@ $(document).ready(function(){initNavTree('functions_i.html',''); initResizable()
 <li>iterator
 : <a class="el" href="struct_disa_1_1_c_s_r___data.html#a79238486df800eb717202b836f471f5c">CSR_Data&lt; _value_type, _index_type &gt;</a>
 , <a class="el" href="class_disa_1_1_matrix___sparse.html#a1f8941320cf11a7938ff45675c7a2649">Matrix_Sparse&lt; _entry_type, _index_type &gt;</a>
-, <a class="el" href="class_disa_1_1_matrix___sparse___row.html#addd2c4324986de171924c9f131b08510">Matrix_Sparse_Row&lt; _entry_type, _index_type &gt;</a>
+, <a class="el" href="class_disa_1_1_matrix___sparse___row.html#addd2c4324986de171924c9f131b08510">Matrix_Sparse_Row&lt; _value_type, _index_type &gt;</a>
 </li>
 <li>iterator_category
-: <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html#a8806ca091813ced0b0658fedaa448357">Iterator_Matrix_Sparse_Element&lt; _matrix_type &gt;</a>
+: <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a13fe24ca0865b19fbff05ff095c4ffea">Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt;</a>
+, <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html#a8806ca091813ced0b0658fedaa448357">Iterator_Matrix_Sparse_Element&lt; _matrix_type &gt;</a>
 , <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___row.html#a8806ca091813ced0b0658fedaa448357">Iterator_Matrix_Sparse_Row&lt; _matrix_type &gt;</a>
 </li>
 <li>iterator_element
@@ -164,17 +168,16 @@ $(document).ready(function(){initNavTree('functions_i.html',''); initResizable()
 : <a class="el" href="class_disa_1_1_matrix___sparse.html#a95f0ba020da860e1f378766f6ad46f5d">Matrix_Sparse&lt; _entry_type, _index_type &gt;</a>
 </li>
 <li>Iterator_Matrix_Sparse_Row&lt; const Matrix_Sparse &gt;
-: <a class="el" href="class_disa_1_1_matrix___sparse___row.html#a91dace2b3afc2a421691fc6d87a9eea4">Matrix_Sparse_Row&lt; _entry_type, _index_type &gt;</a>
+: <a class="el" href="class_disa_1_1_matrix___sparse___row.html#a91dace2b3afc2a421691fc6d87a9eea4">Matrix_Sparse_Row&lt; _value_type, _index_type &gt;</a>
 </li>
 <li>Iterator_Matrix_Sparse_Row&lt; matrix &gt;
 : <a class="el" href="class_disa_1_1_matrix___sparse.html#ae0790bcffa36816f5707b2912cd612e3">Matrix_Sparse&lt; _entry_type, _index_type &gt;</a>
 </li>
 <li>Iterator_Matrix_Sparse_Row&lt; Matrix_Sparse &gt;
-: <a class="el" href="class_disa_1_1_matrix___sparse___row.html#a9245d51d36e284a41879baea7ce24133">Matrix_Sparse_Row&lt; _entry_type, _index_type &gt;</a>
+: <a class="el" href="class_disa_1_1_matrix___sparse___row.html#a9245d51d36e284a41879baea7ce24133">Matrix_Sparse_Row&lt; _value_type, _index_type &gt;</a>
 </li>
 <li>iterator_type
 : <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt;</a>
-, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___row.html#a125c5ddceb346e8b8d2951140015d205">Base_Iterator_Matrix_Sparse_Row&lt; _entry_type, _index_type, _is_const &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->

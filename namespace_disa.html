@@ -117,14 +117,13 @@ Data Structures</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A efficient data structure which represents a matrix comprised of mostly zero entries.  <a href="class_disa_1_1_matrix___sparse.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_c_s_r___data.html">CSR_Data</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure to represent Compressed Sparse Row (CSR) data format.  <a href="struct_disa_1_1_c_s_r___data.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a sparse matrix in Compressed Sparse Row (CSR) format.  <a href="struct_disa_1_1_c_s_r___data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an element in a sparse matrix.  <a href="struct_disa_1_1_matrix___sparse___element.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an element in a sparse (CSR) matrix.  <a href="class_disa_1_1_matrix___sparse___element.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___row.html">Base_Iterator_Matrix_Sparse_Row</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_vector___dense.html">Vector_Dense</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mathematical Vector, of dimension _size, where every vector element has allocated has memory.  <a href="struct_disa_1_1_vector___dense.html#details">More...</a><br /></td></tr>
@@ -178,18 +177,14 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a7d4bf73548962961b7931d56f612f906"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a7d4bf73548962961b7931d56f612f906">s_size_t</a> = std::make_signed&lt; std::size_t &gt;::type</td></tr>
 <tr class="memdesc:a7d4bf73548962961b7931d56f612f906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for static casting where needed, and to prevent compile warnings (if you are using a signed type for size_t, you are doing something wrong).  <a href="namespace_disa.html#a7d4bf73548962961b7931d56f612f906">More...</a><br /></td></tr>
 <tr class="separator:a7d4bf73548962961b7931d56f612f906"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a310fb338c09aaac54f8477a1eda924fc"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
-<tr class="memitem:a310fb338c09aaac54f8477a1eda924fc"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a310fb338c09aaac54f8477a1eda924fc">Iterator_Matrix_Sparse_Element</a> = <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a>&lt; _entry_type, _index_type, false &gt;</td></tr>
-<tr class="separator:a310fb338c09aaac54f8477a1eda924fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adaa47d60b553600547fa50e0e5d7e6cd"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
-<tr class="memitem:adaa47d60b553600547fa50e0e5d7e6cd"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#adaa47d60b553600547fa50e0e5d7e6cd">Const_Iterator_Matrix_Sparse_Element</a> = <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a>&lt; _entry_type, _index_type, true &gt;</td></tr>
-<tr class="separator:adaa47d60b553600547fa50e0e5d7e6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cf519c3058235d92ce10a3527c9537b"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
-<tr class="memitem:a3cf519c3058235d92ce10a3527c9537b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a3cf519c3058235d92ce10a3527c9537b">Iterator_Matrix_Sparse_Row</a> = <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___row.html">Base_Iterator_Matrix_Sparse_Row</a>&lt; _entry_type, _index_type, false &gt;</td></tr>
-<tr class="separator:a3cf519c3058235d92ce10a3527c9537b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd7574056c1e0422414e635f3da304c2"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
-<tr class="memitem:abd7574056c1e0422414e635f3da304c2"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#abd7574056c1e0422414e635f3da304c2">Const_Iterator_Matrix_Sparse_Row</a> = <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___row.html">Base_Iterator_Matrix_Sparse_Row</a>&lt; _entry_type, _index_type, true &gt;</td></tr>
-<tr class="separator:abd7574056c1e0422414e635f3da304c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca32d90b542c9479e294479cfcf37f91"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
+<tr class="memitem:aca32d90b542c9479e294479cfcf37f91"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#aca32d90b542c9479e294479cfcf37f91">Iterator_Matrix_Sparse_Element</a> = <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a>&lt; _entry_type, _index_type, false &gt;</td></tr>
+<tr class="memdesc:aca32d90b542c9479e294479cfcf37f91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-const iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>.  <a href="namespace_disa.html#aca32d90b542c9479e294479cfcf37f91">More...</a><br /></td></tr>
+<tr class="separator:aca32d90b542c9479e294479cfcf37f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58aa5b83c06527eb9fe7b12ba7c2408d"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
+<tr class="memitem:a58aa5b83c06527eb9fe7b12ba7c2408d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a58aa5b83c06527eb9fe7b12ba7c2408d">Const_Iterator_Matrix_Sparse_Element</a> = <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a>&lt; _entry_type, _index_type, true &gt;</td></tr>
+<tr class="memdesc:a58aa5b83c06527eb9fe7b12ba7c2408d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>.  <a href="namespace_disa.html#a58aa5b83c06527eb9fe7b12ba7c2408d">More...</a><br /></td></tr>
+<tr class="separator:a58aa5b83c06527eb9fe7b12ba7c2408d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c2981f3f834be9448a6ab06c28748eb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> = double</td></tr>
 <tr class="separator:a8c2981f3f834be9448a6ab06c28748eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d0458dbd92d3cbd94eddeb318b6d88f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a5d0458dbd92d3cbd94eddeb318b6d88f">Edge</a> = std::pair&lt; std::size_t, std::size_t &gt;</td></tr>
@@ -331,6 +326,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ad1a8533e55a859a9015dcf8f14f380c0"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; typename <a class="el" href="struct_disa_1_1_c_s_r___data.html">CSR_Data</a>&lt; _value_type, _index_type &gt;::iterator, bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#ad1a8533e55a859a9015dcf8f14f380c0">insert</a> (<a class="el" href="struct_disa_1_1_c_s_r___data.html">CSR_Data</a>&lt; _value_type, _index_type &gt; &amp;data, const _arg_index_type &amp;row, const _arg_index_type &amp;column, const _value_type &amp;value)</td></tr>
 <tr class="memdesc:ad1a8533e55a859a9015dcf8f14f380c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a value into a CSR data structure.  <a href="namespace_disa.html#ad1a8533e55a859a9015dcf8f14f380c0">More...</a><br /></td></tr>
 <tr class="separator:ad1a8533e55a859a9015dcf8f14f380c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af05218ba0dad64b4604969ae146c275c"><td class="memTemplParams" colspan="2">template&lt;typename _value_type , typename _index_type , typename _arg_index_type &gt; </td></tr>
+<tr class="memitem:af05218ba0dad64b4604969ae146c275c"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; typename <a class="el" href="struct_disa_1_1_c_s_r___data.html">CSR_Data</a>&lt; _value_type, _index_type &gt;::iterator, bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#af05218ba0dad64b4604969ae146c275c">insert_or_assign</a> (<a class="el" href="struct_disa_1_1_c_s_r___data.html">CSR_Data</a>&lt; _value_type, _index_type &gt; &amp;data, const _arg_index_type &amp;row, const _arg_index_type &amp;column, const _value_type &amp;value)</td></tr>
+<tr class="memdesc:af05218ba0dad64b4604969ae146c275c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a new element or assigns to an existing element in the CSR data structure.  <a href="namespace_disa.html#af05218ba0dad64b4604969ae146c275c">More...</a><br /></td></tr>
+<tr class="separator:af05218ba0dad64b4604969ae146c275c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a762a396681758b31ec1eacca2ffbdd36"><td class="memTemplParams" colspan="2">template&lt;typename _value_type , typename _index_type , typename _arg_index_type &gt; </td></tr>
 <tr class="memitem:a762a396681758b31ec1eacca2ffbdd36"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if&lt; std::is_convertible_v&lt; _arg_index_type, _index_type &gt;, typename <a class="el" href="struct_disa_1_1_c_s_r___data.html">CSR_Data</a>&lt; _value_type, _index_type &gt;::const_iterator &gt;::type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a762a396681758b31ec1eacca2ffbdd36">lower_bound</a> (const <a class="el" href="struct_disa_1_1_c_s_r___data.html">CSR_Data</a>&lt; _value_type, _index_type &gt; &amp;data, const _arg_index_type &amp;row, const _arg_index_type &amp;column)</td></tr>
 <tr class="memdesc:a762a396681758b31ec1eacca2ffbdd36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the lower bound of a specified element position in a CSR data structure.  <a href="namespace_disa.html#a762a396681758b31ec1eacca2ffbdd36">More...</a><br /></td></tr>
@@ -483,31 +482,19 @@ Variables</h2></td></tr>
 <tr class="separator:acbf188d2f52238f11ae72c35ff61d996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="adaa47d60b553600547fa50e0e5d7e6cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adaa47d60b553600547fa50e0e5d7e6cd">&#9670;&nbsp;</a></span>Const_Iterator_Matrix_Sparse_Element</h2>
+<a id="a58aa5b83c06527eb9fe7b12ba7c2408d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58aa5b83c06527eb9fe7b12ba7c2408d">&#9670;&nbsp;</a></span>Const_Iterator_Matrix_Sparse_Element</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_disa.html#adaa47d60b553600547fa50e0e5d7e6cd">Const_Iterator_Matrix_Sparse_Element</a> =  <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a>&lt;_entry_type, _index_type, true&gt;</td>
+          <td class="memname"><a class="el" href="namespace_disa.html#a58aa5b83c06527eb9fe7b12ba7c2408d">Const_Iterator_Matrix_Sparse_Element</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="abd7574056c1e0422414e635f3da304c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd7574056c1e0422414e635f3da304c2">&#9670;&nbsp;</a></span>Const_Iterator_Matrix_Sparse_Row</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespace_disa.html#abd7574056c1e0422414e635f3da304c2">Const_Iterator_Matrix_Sparse_Row</a> =  <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___row.html">Base_Iterator_Matrix_Sparse_Row</a>&lt;_entry_type, _index_type, true&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Const iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>. </p>
 
 </div>
 </div>
@@ -525,31 +512,19 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a310fb338c09aaac54f8477a1eda924fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a310fb338c09aaac54f8477a1eda924fc">&#9670;&nbsp;</a></span>Iterator_Matrix_Sparse_Element</h2>
+<a id="aca32d90b542c9479e294479cfcf37f91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca32d90b542c9479e294479cfcf37f91">&#9670;&nbsp;</a></span>Iterator_Matrix_Sparse_Element</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html">Iterator_Matrix_Sparse_Element</a> =  <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a>&lt;_entry_type, _index_type, false&gt;</td>
+          <td class="memname"><a class="el" href="struct_disa_1_1_iterator___matrix___sparse___element.html">Iterator_Matrix_Sparse_Element</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a3cf519c3058235d92ce10a3527c9537b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cf519c3058235d92ce10a3527c9537b">&#9670;&nbsp;</a></span>Iterator_Matrix_Sparse_Row</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="struct_disa_1_1_iterator___matrix___sparse___row.html">Iterator_Matrix_Sparse_Row</a> =  <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___row.html">Base_Iterator_Matrix_Sparse_Row</a>&lt;_entry_type, _index_type, false&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Non-const iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>. </p>
 
 </div>
 </div>
@@ -1549,13 +1524,13 @@ Variables</h2></td></tr>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>A reference to the <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="A structure to represent Compressed Sparse Row (CSR) data format.">CSR_Data</a> object containing the matrix data. </td></tr>
-    <tr><td class="paramname">iter_row</td><td>An iterator pointing to a specific row in the row offset vector. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>A reference to the <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="Represents a sparse matrix in Compressed Sparse Row (CSR) format.">CSR_Data</a> object containing the matrix data. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">iter_row</td><td>An iterator pointing to a specific row in the row offset vector. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The row index corresponding to the given iterator.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>assumes iterator is in rage begin() - end(). </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Assumes iterator is in range [begin(), end()). </dd></dl>
 
 </div>
 </div>
@@ -1603,13 +1578,13 @@ Variables</h2></td></tr>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>A reference to the <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="A structure to represent Compressed Sparse Row (CSR) data format.">CSR_Data</a> object containing the matrix data. </td></tr>
-    <tr><td class="paramname">iter_row</td><td>An iterator pointing to a specific row in the row offset vector. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>A reference to the <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="Represents a sparse matrix in Compressed Sparse Row (CSR) format.">CSR_Data</a> object containing the matrix data. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">iter_row</td><td>An iterator pointing to a specific row in the row offset vector. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The row index corresponding to the given iterator.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>assumes iterator is in rage begin() - end(). </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Assumes iterator is in range [begin(), end()). </dd></dl>
 
 </div>
 </div>
@@ -1652,25 +1627,86 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Inserts a value into a CSR data structure. </p>
-<p>This function inserts a value into the specified position (row, column) of the <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="A structure to represent Compressed Sparse Row (CSR) data format.">CSR_Data</a> structure. If the position already contains a value, the function returns without inserting. If the row or column index is out of bounds, the function resizes the data structure accordingly (much in the same way an insert into a map would add a new key-value pair).</p>
+<p>This function inserts a value into the specified position (row, column) of the <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="Represents a sparse matrix in Compressed Sparse Row (CSR) format.">CSR_Data</a> structure. If the position already contains a value, the function returns without inserting. If the row or column index is out of bounds, the function resizes the data structure accordingly.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">_value_type</td><td>The type of the values stored in the matrix. </td></tr>
-    <tr><td class="paramname">_index_type</td><td>The type of the indices used in the <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="A structure to represent Compressed Sparse Row (CSR) data format.">CSR_Data</a> structure. </td></tr>
+    <tr><td class="paramname">_index_type</td><td>The type of the indices used in the <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="Represents a sparse matrix in Compressed Sparse Row (CSR) format.">CSR_Data</a> structure. </td></tr>
     <tr><td class="paramname">_arg_index_type</td><td>The type of the row and column indices provided as arguments. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>The <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="A structure to represent Compressed Sparse Row (CSR) data format.">CSR_Data</a> structure representing the sparse matrix. </td></tr>
-    <tr><td class="paramname">row</td><td>The row non-negative index where the value should be inserted. </td></tr>
-    <tr><td class="paramname">column</td><td>The column non-negative index where the value should be inserted. </td></tr>
-    <tr><td class="paramname">value</td><td>The value to be inserted into the matrix. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">data</td><td>The <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="Represents a sparse matrix in Compressed Sparse Row (CSR) format.">CSR_Data</a> structure representing the sparse matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>The row non-negative index where the value should be inserted. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>The column non-negative index where the value should be inserted. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The value to be inserted into the matrix. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pair consisting of an iterator to the inserted position and a boolean indicating whether the insertion was successful (true) or if the position already contained a value (false). </dd></dl>
+
+</div>
+</div>
+<a id="af05218ba0dad64b4604969ae146c275c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af05218ba0dad64b4604969ae146c275c">&#9670;&nbsp;</a></span>insert_or_assign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;typename <a class="el" href="struct_disa_1_1_c_s_r___data.html">CSR_Data</a>&lt;_value_type, _index_type&gt;::iterator, bool&gt; Disa::insert_or_assign </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_disa_1_1_c_s_r___data.html">CSR_Data</a>&lt; _value_type, _index_type &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const _arg_index_type &amp;&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const _arg_index_type &amp;&#160;</td>
+          <td class="paramname"><em>column</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const _value_type &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inserts a new element or assigns to an existing element in the CSR data structure. </p>
+<p>This function either inserts a new element into the CSR data structure if the specified row and column do not exist, or assigns a new value to an existing element.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">_value_type</td><td>The type of the values stored in the matrix. </td></tr>
+    <tr><td class="paramname">_index_type</td><td>The type of the indices used in the matrix. </td></tr>
+    <tr><td class="paramname">_arg_index_type</td><td>The type of the argument indices (must be convertible to _index_type). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">data</td><td>The CSR data structure to modify. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>The row index of the element to insert or assign. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>The column index of the element to insert or assign. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The value to insert or assign. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pair consisting of an iterator to the inserted or found position and a boolean indicating whether the insertion was successful (true) or the value was assigned (false). </dd></dl>
 
 </div>
 </div>
@@ -2178,7 +2214,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Finds the lower bound of a specified element position in a CSR data structure. </p>
-<p>This function searches for the lower bound of a specified element position in a CSR data structure. It returns an iterator to the first element that is not less than the specified row and column indices, in must the same way as a map. If no element is found, the function returns an iterator to the end of the 'row', such that insert maybe used to insert into the row.</p>
+<p>This function searches for the lower bound of a specified element position in a CSR data structure. It returns an iterator to the first element that is not less than the specified row and column indices.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">_value_type</td><td>The type of the values stored in the matrix. </td></tr>
@@ -2189,14 +2225,14 @@ Variables</h2></td></tr>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>The CSR matrix data. </td></tr>
-    <tr><td class="paramname">row</td><td>The row non-negative index to search for. </td></tr>
-    <tr><td class="paramname">column</td><td>The column non-negative index to search for. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>The CSR matrix data. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>The row non-negative index to search for. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>The column non-negative index to search for. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A CSR Data iterator to the row, column, and value of the found element. If not found, returns end iterators.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>A simple comparison with end() for each iterator, in the returned tuple iterator, is not sufficient to check if the element was not found. The iterators must be checked on a 'per row' basis. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>A simple comparison with end() for each iterator in the returned tuple iterator is not sufficient to check if the element was not found. The iterators must be checked on a 'per row' basis. </dd></dl>
 
 </div>
 </div>
@@ -2233,7 +2269,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Finds the lower bound of a specified element position in a CSR data structure. </p>
-<p>This function searches for the lower bound of a specified element position in a CSR data structure. It returns an iterator to the first element that is not less than the specified row and column indices, in must the same way as a map. If no element is found, the function returns an iterator to the end of the 'row', such that insert maybe used to insert into the row.</p>
+<p>This function searches for the lower bound of a specified element position in a CSR data structure. It returns an iterator to the first element that is not less than the specified row and column indices.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">_value_type</td><td>The type of the values stored in the matrix. </td></tr>
@@ -2244,14 +2280,14 @@ Variables</h2></td></tr>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>The CSR matrix data. </td></tr>
-    <tr><td class="paramname">row</td><td>The row non-negative index to search for. </td></tr>
-    <tr><td class="paramname">column</td><td>The column non-negative index to search for. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>The CSR matrix data. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>The row non-negative index to search for. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>The column non-negative index to search for. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A CSR Data iterator to the row, column, and value of the found element. If not found, returns end iterators.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>A simple comparison with end() for each iterator, in the returned tuple iterator, is not sufficient to check if the element was not found. The iterators must be checked on a 'per row' basis. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>A simple comparison with end() for each iterator in the returned tuple iterator is not sufficient to check if the element was not found. The iterators must be checked on a 'per row' basis. </dd></dl>
 
 </div>
 </div>
@@ -3576,7 +3612,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Resizes the CSR data structure to represent a new specified number of rows and columns. </p>
-<p>This function adjusts the size of the CSR data structure, which resizing the row offsets, column indices, and values. If the new size is smaller than the current size, the function will truncate the data accordingly. Specifically for column truncation, the function will loop over each row to remove any columns that exceed the new column size.</p>
+<p>This function adjusts the size of the CSR data structure by resizing the row offsets, column indices, and values. If the new size is smaller than the current size, the function will truncate the data accordingly.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">_value_type</td><td>The type of the values stored in the CSR data structure. </td></tr>
@@ -3587,9 +3623,9 @@ Variables</h2></td></tr>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>The CSR data structure to be resized. </td></tr>
-    <tr><td class="paramname">row</td><td>The new number of rows, must be non-negative. </td></tr>
-    <tr><td class="paramname">column</td><td>The new number of columns, must be non-negative. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">data</td><td>The CSR data structure to be resized. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>The new number of rows, must be non-negative. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>The new number of columns, must be non-negative. </td></tr>
   </table>
   </dd>
 </dl>
@@ -3630,11 +3666,11 @@ Variables</h2></td></tr>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>The CSR data structure containing the matrix data. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>The CSR data structure containing the matrix data. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>_index_type The number of columns in the CSR data structure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of columns in the CSR data structure. </dd></dl>
 
 </div>
 </div>
@@ -3672,7 +3708,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>The CSR data structure containing the sparse matrix data. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>The CSR data structure containing the sparse matrix data. </td></tr>
   </table>
   </dd>
 </dl>
@@ -3705,7 +3741,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the number of rows in a CSR matrix. </p>
-<p>This function calculates the number of rows in the given <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="A structure to represent Compressed Sparse Row (CSR) data format.">CSR_Data</a> structure. It checks if the row_offset vector is not empty and returns its size minus one. If the row_offset vector is empty, it returns 0.</p>
+<p>This function calculates the number of rows in the given <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="Represents a sparse matrix in Compressed Sparse Row (CSR) format.">CSR_Data</a> structure. It checks if the row_offset vector is not empty and returns its size minus one. If the row_offset vector is empty, it returns 0.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">_value_type</td><td>The type of the values stored in the CSR matrix. </td></tr>
@@ -3715,7 +3751,7 @@ Variables</h2></td></tr>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>The <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="A structure to represent Compressed Sparse Row (CSR) data format.">CSR_Data</a> structure containing the matrix data. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>The <a class="el" href="struct_disa_1_1_c_s_r___data.html" title="Represents a sparse matrix in Compressed Sparse Row (CSR) format.">CSR_Data</a> structure containing the matrix data. </td></tr>
   </table>
   </dd>
 </dl>

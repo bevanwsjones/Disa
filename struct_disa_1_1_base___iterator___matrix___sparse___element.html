@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Disa: Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt; Struct Template Reference</title>
+<title>Disa: Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,59 +86,116 @@ $(document).ready(function(){initNavTree('struct_disa_1_1_base___iterator___matr
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt; Struct Template Reference</div>  </div>
+<div class="title">Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Base iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>.  
+ <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="matrix__sparse__new_8hpp_source.html">matrix_sparse_new.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr class="memitem:a13fe24ca0865b19fbff05ff095c4ffea"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a13fe24ca0865b19fbff05ff095c4ffea">iterator_category</a> = std::bidirectional_iterator_tag</td></tr>
+<tr class="separator:a13fe24ca0865b19fbff05ff095c4ffea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace405568d0b2f3fad4990044252c7732"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#ace405568d0b2f3fad4990044252c7732">difference_type</a> = std::ptrdiff_t</td></tr>
+<tr class="separator:ace405568d0b2f3fad4990044252c7732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe581f57feed78482b5b0ac1451d6e89"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#abe581f57feed78482b5b0ac1451d6e89">value_type</a> = <a class="el" href="class_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt; _entry_type, _index_type &gt;</td></tr>
+<tr class="separator:abe581f57feed78482b5b0ac1451d6e89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bf9da8cd73dcb9d82df08b218a11e21"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a3bf9da8cd73dcb9d82df08b218a11e21">const_value_type</a> = <a class="el" href="class_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt; const _entry_type, const _index_type &gt;</td></tr>
+<tr class="separator:a3bf9da8cd73dcb9d82df08b218a11e21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66bee983192c4e1f5533b628f83a4b27"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a66bee983192c4e1f5533b628f83a4b27">pointer</a> = std::conditional_t&lt; _is_const, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a3bf9da8cd73dcb9d82df08b218a11e21">const_value_type</a> *, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#abe581f57feed78482b5b0ac1451d6e89">value_type</a> * &gt;</td></tr>
+<tr class="separator:a66bee983192c4e1f5533b628f83a4b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a177a0e3c8c102009e54539a4b50c78eb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a177a0e3c8c102009e54539a4b50c78eb">reference</a> = std::conditional_t&lt; _is_const, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a3bf9da8cd73dcb9d82df08b218a11e21">const_value_type</a> &amp;, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#abe581f57feed78482b5b0ac1451d6e89">value_type</a> &amp; &gt;</td></tr>
+<tr class="separator:a177a0e3c8c102009e54539a4b50c78eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24c73a80b51e86022f2fc1678cbc9401"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> = _index_type</td></tr>
 <tr class="separator:a24c73a80b51e86022f2fc1678cbc9401"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac15efb35da797380e5d878bcde4e7393"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#ac15efb35da797380e5d878bcde4e7393">pointer_index</a> = std::conditional_t&lt; _is_const, const _index_type *, _index_type * &gt;</td></tr>
-<tr class="separator:ac15efb35da797380e5d878bcde4e7393"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda5512fef0d254cb3c4e244078893b0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a> = _entry_type</td></tr>
 <tr class="separator:adda5512fef0d254cb3c4e244078893b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac15efb35da797380e5d878bcde4e7393"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#ac15efb35da797380e5d878bcde4e7393">pointer_index</a> = std::conditional_t&lt; _is_const, const _index_type *, _index_type * &gt;</td></tr>
+<tr class="separator:ac15efb35da797380e5d878bcde4e7393"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bde3d1ae7b9ecbd010959613e481219"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a2bde3d1ae7b9ecbd010959613e481219">pointer_entry</a> = std::conditional_t&lt; _is_const, const _entry_type *, _entry_type * &gt;</td></tr>
 <tr class="separator:a2bde3d1ae7b9ecbd010959613e481219"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a470c0da4d9503fd2ed72d3bd9c029a72"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a470c0da4d9503fd2ed72d3bd9c029a72">value_type</a> = <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt; <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt;</td></tr>
-<tr class="separator:a470c0da4d9503fd2ed72d3bd9c029a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29f9ee6b50119b56bb496dc0039d390c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a29f9ee6b50119b56bb496dc0039d390c">reference</a> = std::conditional_t&lt; _is_const, const <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt; <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt; &amp;, <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt; <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt; &amp; &gt;</td></tr>
-<tr class="separator:a29f9ee6b50119b56bb496dc0039d390c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fd91a427d30b64c59961dd2c33b2229"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a6fd91a427d30b64c59961dd2c33b2229">pointer</a> = std::conditional_t&lt; _is_const, const <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt; <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt; *, <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt; <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &gt; * &gt;</td></tr>
-<tr class="separator:a6fd91a427d30b64c59961dd2c33b2229"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27fd95f65ffd7737b818fbd1f4a413af"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> = <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a>&lt; <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>, _is_const &gt;</td></tr>
 <tr class="separator:a27fd95f65ffd7737b818fbd1f4a413af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0d3342ade4c4926e2233116a65c52c03"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a0d3342ade4c4926e2233116a65c52c03">Base_Iterator_Matrix_Sparse_Element</a> ()=default</td></tr>
-<tr class="separator:a0d3342ade4c4926e2233116a65c52c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73ac261fc770c47126463e156c8871ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a73ac261fc770c47126463e156c8871ad">~Base_Iterator_Matrix_Sparse_Element</a> ()=default</td></tr>
-<tr class="separator:a73ac261fc770c47126463e156c8871ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cdde2f5cf047309c1387df77a371f2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a3cdde2f5cf047309c1387df77a371f2c">Base_Iterator_Matrix_Sparse_Element</a> (<a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a470c0da4d9503fd2ed72d3bd9c029a72">value_type</a> element_value)</td></tr>
-<tr class="separator:a3cdde2f5cf047309c1387df77a371f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae27083a2bf8afa4871f2b194389a8d48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#ae27083a2bf8afa4871f2b194389a8d48">Base_Iterator_Matrix_Sparse_Element</a> (const <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &amp;row, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> *column, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a> *entry)</td></tr>
-<tr class="separator:ae27083a2bf8afa4871f2b194389a8d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dcf39edbd9ee12afd82c2e31567144e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a29f9ee6b50119b56bb496dc0039d390c">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a3dcf39edbd9ee12afd82c2e31567144e">operator*</a> ()</td></tr>
-<tr class="separator:a3dcf39edbd9ee12afd82c2e31567144e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a170c65e2b49f7a77927598d053661ddb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a6fd91a427d30b64c59961dd2c33b2229">pointer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a170c65e2b49f7a77927598d053661ddb">operator-&gt;</a> ()</td></tr>
-<tr class="separator:a170c65e2b49f7a77927598d053661ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e736a27afb0f9448a56baf887cd62c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a8e736a27afb0f9448a56baf887cd62c6">operator++</a> ()</td></tr>
-<tr class="separator:a8e736a27afb0f9448a56baf887cd62c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a943c91de0702a2f1d6faea78bde707d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a943c91de0702a2f1d6faea78bde707d1">operator++</a> (int)</td></tr>
-<tr class="separator:a943c91de0702a2f1d6faea78bde707d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ff32b81d9da9a281debbe8b2349e312"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a6ff32b81d9da9a281debbe8b2349e312">operator--</a> ()</td></tr>
-<tr class="separator:a6ff32b81d9da9a281debbe8b2349e312"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2889873cbc1f674c34cf3b555386b5b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a2889873cbc1f674c34cf3b555386b5b6">operator--</a> (int)</td></tr>
-<tr class="separator:a2889873cbc1f674c34cf3b555386b5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25030f7a0389a7ae964a321adaeb8b42"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a25030f7a0389a7ae964a321adaeb8b42">operator==</a> (const <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;that) const</td></tr>
-<tr class="separator:a25030f7a0389a7ae964a321adaeb8b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a770a7f6b9d4237e42a39e8e1371b48ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a770a7f6b9d4237e42a39e8e1371b48ce">operator!=</a> (const <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;that) const</td></tr>
-<tr class="separator:a770a7f6b9d4237e42a39e8e1371b48ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48db85d62f8af7e851584679d122aba1"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a48db85d62f8af7e851584679d122aba1">Base_Iterator_Matrix_Sparse_Element</a> () noexcept=default</td></tr>
+<tr class="memdesc:a48db85d62f8af7e851584679d122aba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a48db85d62f8af7e851584679d122aba1">More...</a><br /></td></tr>
+<tr class="separator:a48db85d62f8af7e851584679d122aba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62a4eb69a04169600cd9061fa28645f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a62a4eb69a04169600cd9061fa28645f2">~Base_Iterator_Matrix_Sparse_Element</a> () noexcept=default</td></tr>
+<tr class="memdesc:a62a4eb69a04169600cd9061fa28645f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a62a4eb69a04169600cd9061fa28645f2">More...</a><br /></td></tr>
+<tr class="separator:a62a4eb69a04169600cd9061fa28645f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6b3edee841688a9e0b457ae0056070c"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#ab6b3edee841688a9e0b457ae0056070c">Base_Iterator_Matrix_Sparse_Element</a> (<a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#ac15efb35da797380e5d878bcde4e7393">pointer_index</a> column, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a2bde3d1ae7b9ecbd010959613e481219">pointer_entry</a> entry) noexcept</td></tr>
+<tr class="memdesc:ab6b3edee841688a9e0b457ae0056070c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that initializes the iterator with column and entry pointers.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#ab6b3edee841688a9e0b457ae0056070c">More...</a><br /></td></tr>
+<tr class="separator:ab6b3edee841688a9e0b457ae0056070c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf756bdc112aa2efba0caf17c83147cb"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#aaf756bdc112aa2efba0caf17c83147cb">operator*</a> () const noexcept</td></tr>
+<tr class="memdesc:aaf756bdc112aa2efba0caf17c83147cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dereference operator.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#aaf756bdc112aa2efba0caf17c83147cb">More...</a><br /></td></tr>
+<tr class="separator:aaf756bdc112aa2efba0caf17c83147cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d9a3676f67bd90edde097abd49ca7ac"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a2d9a3676f67bd90edde097abd49ca7ac">operator++</a> () noexcept</td></tr>
+<tr class="memdesc:a2d9a3676f67bd90edde097abd49ca7ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-increment operator.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a2d9a3676f67bd90edde097abd49ca7ac">More...</a><br /></td></tr>
+<tr class="separator:a2d9a3676f67bd90edde097abd49ca7ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9e33692d78965aa729cc2bac7c09df"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a5a9e33692d78965aa729cc2bac7c09df">operator++</a> (int) noexcept</td></tr>
+<tr class="memdesc:a5a9e33692d78965aa729cc2bac7c09df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post-increment operator.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a5a9e33692d78965aa729cc2bac7c09df">More...</a><br /></td></tr>
+<tr class="separator:a5a9e33692d78965aa729cc2bac7c09df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f9ec991a024f6a795d798db6f5d6721"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a9f9ec991a024f6a795d798db6f5d6721">operator--</a> () noexcept</td></tr>
+<tr class="memdesc:a9f9ec991a024f6a795d798db6f5d6721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-decrement operator.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a9f9ec991a024f6a795d798db6f5d6721">More...</a><br /></td></tr>
+<tr class="separator:a9f9ec991a024f6a795d798db6f5d6721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedecb4eba87596daaee1f59db891c428"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#aedecb4eba87596daaee1f59db891c428">operator--</a> (int) noexcept</td></tr>
+<tr class="memdesc:aedecb4eba87596daaee1f59db891c428"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post-decrement operator.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#aedecb4eba87596daaee1f59db891c428">More...</a><br /></td></tr>
+<tr class="separator:aedecb4eba87596daaee1f59db891c428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad37409567cad6a0862ecf88bcc45ad9"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#aad37409567cad6a0862ecf88bcc45ad9">operator==</a> (const <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;that) const noexcept</td></tr>
+<tr class="memdesc:aad37409567cad6a0862ecf88bcc45ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality comparison operator.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#aad37409567cad6a0862ecf88bcc45ad9">More...</a><br /></td></tr>
+<tr class="separator:aad37409567cad6a0862ecf88bcc45ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f3fd93457c84b2d806fe8bc3f340c0b"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a4f3fd93457c84b2d806fe8bc3f340c0b">operator!=</a> (const <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;that) const noexcept</td></tr>
+<tr class="memdesc:a4f3fd93457c84b2d806fe8bc3f340c0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inequality comparison operator.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a4f3fd93457c84b2d806fe8bc3f340c0b">More...</a><br /></td></tr>
+<tr class="separator:a4f3fd93457c84b2d806fe8bc3f340c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename _entry_type, typename _index_type, bool _is_const&gt;<br />
+class Disa::Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt;</h3>
+
+<p>Base iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">_entry_type</td><td>The type of the entry in the matrix element. </td></tr>
+    <tr><td class="paramname">_index_type</td><td>The type of the indices. </td></tr>
+    <tr><td class="paramname">_is_const</td><td>Whether this is a const iterator or not.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This class provides a bidirectional iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>. It can be used to iterate over the elements of a sparse matrix in CSR format, typically row-wise although not exclusively. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a3bf9da8cd73dcb9d82df08b218a11e21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bf9da8cd73dcb9d82df08b218a11e21">&#9670;&nbsp;</a></span>const_value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a3bf9da8cd73dcb9d82df08b218a11e21">const_value_type</a> =  <a class="el" href="class_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt;const _entry_type, const _index_type&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace405568d0b2f3fad4990044252c7732"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace405568d0b2f3fad4990044252c7732">&#9670;&nbsp;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#ace405568d0b2f3fad4990044252c7732">difference_type</a> =  std::ptrdiff_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="adda5512fef0d254cb3c4e244078893b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adda5512fef0d254cb3c4e244078893b0">&#9670;&nbsp;</a></span>entry_type</h2>
 
@@ -167,6 +224,20 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a13fe24ca0865b19fbff05ff095c4ffea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13fe24ca0865b19fbff05ff095c4ffea">&#9670;&nbsp;</a></span>iterator_category</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a13fe24ca0865b19fbff05ff095c4ffea">iterator_category</a> =  std::bidirectional_iterator_tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a27fd95f65ffd7737b818fbd1f4a413af"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a27fd95f65ffd7737b818fbd1f4a413af">&#9670;&nbsp;</a></span>iterator_type</h2>
 
@@ -181,14 +252,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6fd91a427d30b64c59961dd2c33b2229"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fd91a427d30b64c59961dd2c33b2229">&#9670;&nbsp;</a></span>pointer</h2>
+<a id="a66bee983192c4e1f5533b628f83a4b27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66bee983192c4e1f5533b628f83a4b27">&#9670;&nbsp;</a></span>pointer</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a6fd91a427d30b64c59961dd2c33b2229">pointer</a> =  std::conditional_t&lt;_is_const, const <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt;<a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;*, <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt;<a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;*&gt;</td>
+          <td class="memname">using <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a66bee983192c4e1f5533b628f83a4b27">pointer</a> =  std::conditional_t&lt;_is_const, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a3bf9da8cd73dcb9d82df08b218a11e21">const_value_type</a>*, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#abe581f57feed78482b5b0ac1451d6e89">value_type</a>*&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -223,28 +294,28 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a29f9ee6b50119b56bb496dc0039d390c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29f9ee6b50119b56bb496dc0039d390c">&#9670;&nbsp;</a></span>reference</h2>
+<a id="a177a0e3c8c102009e54539a4b50c78eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a177a0e3c8c102009e54539a4b50c78eb">&#9670;&nbsp;</a></span>reference</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a29f9ee6b50119b56bb496dc0039d390c">reference</a> =  std::conditional_t&lt;_is_const, const <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt;<a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;&amp;, <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt;<a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;&amp;&gt;</td>
+          <td class="memname">using <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a177a0e3c8c102009e54539a4b50c78eb">reference</a> =  std::conditional_t&lt;_is_const, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a3bf9da8cd73dcb9d82df08b218a11e21">const_value_type</a>&amp;, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#abe581f57feed78482b5b0ac1451d6e89">value_type</a>&amp;&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a470c0da4d9503fd2ed72d3bd9c029a72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a470c0da4d9503fd2ed72d3bd9c029a72">&#9670;&nbsp;</a></span>value_type</h2>
+<a id="abe581f57feed78482b5b0ac1451d6e89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe581f57feed78482b5b0ac1451d6e89">&#9670;&nbsp;</a></span>value_type</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a470c0da4d9503fd2ed72d3bd9c029a72">value_type</a> =  <a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt;<a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a>, <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a>&gt;</td>
+          <td class="memname">using <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#abe581f57feed78482b5b0ac1451d6e89">value_type</a> =  <a class="el" href="class_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element</a>&lt;_entry_type, _index_type&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -252,8 +323,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a0d3342ade4c4926e2233116a65c52c03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d3342ade4c4926e2233116a65c52c03">&#9670;&nbsp;</a></span>Base_Iterator_Matrix_Sparse_Element() <span class="overload">[1/3]</span></h2>
+<a id="a48db85d62f8af7e851584679d122aba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48db85d62f8af7e851584679d122aba1">&#9670;&nbsp;</a></span>Base_Iterator_Matrix_Sparse_Element() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,7 +333,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a> </td>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -270,15 +341,17 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Default constructor. </p>
+
 </div>
 </div>
-<a id="a73ac261fc770c47126463e156c8871ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73ac261fc770c47126463e156c8871ad">&#9670;&nbsp;</a></span>~Base_Iterator_Matrix_Sparse_Element()</h2>
+<a id="a62a4eb69a04169600cd9061fa28645f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62a4eb69a04169600cd9061fa28645f2">&#9670;&nbsp;</a></span>~Base_Iterator_Matrix_Sparse_Element()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -295,15 +368,17 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Destructor. </p>
+
 </div>
 </div>
-<a id="a3cdde2f5cf047309c1387df77a371f2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cdde2f5cf047309c1387df77a371f2c">&#9670;&nbsp;</a></span>Base_Iterator_Matrix_Sparse_Element() <span class="overload">[2/3]</span></h2>
+<a id="ab6b3edee841688a9e0b457ae0056070c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6b3edee841688a9e0b457ae0056070c">&#9670;&nbsp;</a></span>Base_Iterator_Matrix_Sparse_Element() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -312,47 +387,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a> </td>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a470c0da4d9503fd2ed72d3bd9c029a72">value_type</a>&#160;</td>
-          <td class="paramname"><em>element_value</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae27083a2bf8afa4871f2b194389a8d48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae27083a2bf8afa4871f2b194389a8d48">&#9670;&nbsp;</a></span>Base_Iterator_Matrix_Sparse_Element() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element</a> </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> &amp;&#160;</td>
-          <td class="paramname"><em>row</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a24c73a80b51e86022f2fc1678cbc9401">index_type</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#ac15efb35da797380e5d878bcde4e7393">pointer_index</a>&#160;</td>
           <td class="paramname"><em>column</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#adda5512fef0d254cb3c4e244078893b0">entry_type</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a2bde3d1ae7b9ecbd010959613e481219">pointer_entry</a>&#160;</td>
           <td class="paramname"><em>entry</em>&#160;</td>
         </tr>
         <tr>
@@ -363,16 +406,25 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Constructor that initializes the iterator with column and entry pointers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">column</td><td>Pointer to the column index. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">entry</td><td>Pointer to the entry value. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a770a7f6b9d4237e42a39e8e1371b48ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a770a7f6b9d4237e42a39e8e1371b48ce">&#9670;&nbsp;</a></span>operator!=()</h2>
+<a id="a4f3fd93457c84b2d806fe8bc3f340c0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f3fd93457c84b2d806fe8bc3f340c0b">&#9670;&nbsp;</a></span>operator!=()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -381,7 +433,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator!= </td>
+          <td class="memname">constexpr bool operator!= </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;&#160;</td>
           <td class="paramname"><em>that</em></td><td>)</td>
@@ -390,15 +442,24 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Inequality comparison operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">that</td><td>The iterator to compare with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the iterators are not equal, false otherwise. </dd></dl>
+
 </div>
 </div>
-<a id="a3dcf39edbd9ee12afd82c2e31567144e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dcf39edbd9ee12afd82c2e31567144e">&#9670;&nbsp;</a></span>operator*()</h2>
+<a id="aaf756bdc112aa2efba0caf17c83147cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf756bdc112aa2efba0caf17c83147cb">&#9670;&nbsp;</a></span>operator*()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -407,7 +468,36 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a29f9ee6b50119b56bb496dc0039d390c">reference</a> operator* </td>
+          <td class="memname">constexpr auto operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dereference operator. </p>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a> object.</dd></dl>
+<p>This operator creates and returns a <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a> object using the current column and entry pointers. </p>
+
+</div>
+</div>
+<a id="a2d9a3676f67bd90edde097abd49ca7ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d9a3676f67bd90edde097abd49ca7ac">&#9670;&nbsp;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a>&amp; operator++ </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -415,15 +505,19 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Pre-increment operator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the incremented iterator.</dd></dl>
+<p>Advances the iterator to the next element by incrementing both column and entry pointers. </p>
+
 </div>
 </div>
-<a id="a8e736a27afb0f9448a56baf887cd62c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e736a27afb0f9448a56baf887cd62c6">&#9670;&nbsp;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+<a id="a5a9e33692d78965aa729cc2bac7c09df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a9e33692d78965aa729cc2bac7c09df">&#9670;&nbsp;</a></span>operator++() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -432,83 +526,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a>&amp; operator++ </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a943c91de0702a2f1d6faea78bde707d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a943c91de0702a2f1d6faea78bde707d1">&#9670;&nbsp;</a></span>operator++() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> operator++ </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6ff32b81d9da9a281debbe8b2349e312"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ff32b81d9da9a281debbe8b2349e312">&#9670;&nbsp;</a></span>operator--() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a>&amp; operator-- </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a2889873cbc1f674c34cf3b555386b5b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2889873cbc1f674c34cf3b555386b5b6">&#9670;&nbsp;</a></span>operator--() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> operator-- </td>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> operator++ </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -517,15 +535,19 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Post-increment operator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Copy of the iterator before increment.</dd></dl>
+<p>Returns a copy of the current iterator and then advances to the next element. </p>
+
 </div>
 </div>
-<a id="a170c65e2b49f7a77927598d053661ddb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a170c65e2b49f7a77927598d053661ddb">&#9670;&nbsp;</a></span>operator-&gt;()</h2>
+<a id="a9f9ec991a024f6a795d798db6f5d6721"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f9ec991a024f6a795d798db6f5d6721">&#9670;&nbsp;</a></span>operator--() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -534,7 +556,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a6fd91a427d30b64c59961dd2c33b2229">pointer</a> operator-&gt; </td>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a>&amp; operator-- </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -542,15 +564,19 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Pre-decrement operator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the decremented iterator.</dd></dl>
+<p>Moves the iterator to the previous element by decrementing both column and entry pointers. </p>
+
 </div>
 </div>
-<a id="a25030f7a0389a7ae964a321adaeb8b42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25030f7a0389a7ae964a321adaeb8b42">&#9670;&nbsp;</a></span>operator==()</h2>
+<a id="aedecb4eba87596daaee1f59db891c428"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedecb4eba87596daaee1f59db891c428">&#9670;&nbsp;</a></span>operator--() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -559,7 +585,37 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool operator== </td>
+          <td class="memname">constexpr <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> operator-- </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Post-decrement operator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Copy of the iterator before decrement.</dd></dl>
+<p>Returns a copy of the current iterator and then moves to the previous element. </p>
+
+</div>
+</div>
+<a id="aad37409567cad6a0862ecf88bcc45ad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad37409567cad6a0862ecf88bcc45ad9">&#9670;&nbsp;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool operator== </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#a27fd95f65ffd7737b818fbd1f4a413af">iterator_type</a> &amp;&#160;</td>
           <td class="paramname"><em>that</em></td><td>)</td>
@@ -568,14 +624,24 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Equality comparison operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">that</td><td>The iterator to compare with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the iterators are equal, false otherwise.</dd></dl>
+<p>Two iterators are considered equal if they point to the same column and entry. </p>
+
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/core/<a class="el" href="matrix__sparse__new_8hpp_source.html">matrix_sparse_new.hpp</a></li>
 </ul>
 </div><!-- contents -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['base_5ftype_538',['base_type',['../struct_disa_1_1_matrix___sparse___element.html#ab453cd5ba802ad3910589cea0b68ca13',1,'Disa::Matrix_Sparse_Element::base_type()'],['../class_disa_1_1_matrix___sparse___row.html#ad33e633bba19a1df48aa9d24c81893ac',1,'Disa::Matrix_Sparse_Row::base_type()']]]
+  ['base_5ftype_529',['base_type',['../class_disa_1_1_matrix___sparse___element.html#aa0644568719f084ea82cd2b11b1dfa14',1,'Disa::Matrix_Sparse_Element::base_type()'],['../class_disa_1_1_matrix___sparse___row.html#aee7079056d64f60074cbe8d09ae1904a',1,'Disa::Matrix_Sparse_Row::base_type()']]]
 ];

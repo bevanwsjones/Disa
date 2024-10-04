@@ -4,6 +4,7 @@ var matrix__sparse__data_8hpp =
     [ "i_row", "matrix__sparse__data_8hpp.html#a7b66f6ff7c7c345e4dc9e8547b0033bf", null ],
     [ "i_row", "matrix__sparse__data_8hpp.html#a6eb08ff507c367fde7fff5805a3e4601", null ],
     [ "insert", "matrix__sparse__data_8hpp.html#ad1a8533e55a859a9015dcf8f14f380c0", null ],
+    [ "insert_or_assign", "matrix__sparse__data_8hpp.html#af05218ba0dad64b4604969ae146c275c", null ],
     [ "lower_bound", "matrix__sparse__data_8hpp.html#a762a396681758b31ec1eacca2ffbdd36", null ],
     [ "lower_bound", "matrix__sparse__data_8hpp.html#a9ef5c780184d66fb5e0e6b1dfa8379a6", null ],
     [ "resize", "matrix__sparse__data_8hpp.html#a63d4bf99c9baadbac3a806578989c07a", null ],

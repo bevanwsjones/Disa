@@ -92,25 +92,26 @@ $(document).ready(function(){initNavTree('matrix__sparse__new_8hpp.html',''); in
 <div class="contents">
 <div class="textblock"><code>#include &lt;numeric&gt;</code><br />
 <code>#include &lt;span&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="matrix__sparse__data_8hpp_source.html">matrix_sparse_data.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="scalar_8hpp_source.html">scalar.hpp</a>&quot;</code><br />
 </div>
 <p><a href="matrix__sparse__new_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element&lt; _entry_type, _index_type &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an element in a sparse matrix.  <a href="struct_disa_1_1_matrix___sparse___element.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse___element.html">Matrix_Sparse_Element&lt; _value_type, _index_type &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an element in a sparse (CSR) matrix.  <a href="class_disa_1_1_matrix___sparse___element.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___element.html">Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, _is_const &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>.  <a href="struct_disa_1_1_base___iterator___matrix___sparse___element.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row&lt; _entry_type, _index_type &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse___row.html">Matrix_Sparse_Row&lt; _value_type, _index_type &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper class, enables column iteration support.  <a href="class_disa_1_1_matrix___sparse___row.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_disa_1_1_base___iterator___matrix___sparse___row.html">Base_Iterator_Matrix_Sparse_Row&lt; _entry_type, _index_type, _is_const &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse.html">Matrix_Sparse&lt; _entry_type, _index_type &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A efficient data structure which represents a matrix comprised of mostly zero entries.  <a href="class_disa_1_1_matrix___sparse.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_disa_1_1_matrix___sparse___row_1_1_sparse_accessor.html">Matrix_Sparse_Row&lt; _value_type, _index_type &gt;::SparseAccessor</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides access and modification capabilities for sparse matrix elements.  <a href="class_disa_1_1_matrix___sparse___row_1_1_sparse_accessor.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -120,18 +121,14 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a310fb338c09aaac54f8477a1eda924fc"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
-<tr class="memitem:a310fb338c09aaac54f8477a1eda924fc"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a310fb338c09aaac54f8477a1eda924fc">Iterator_Matrix_Sparse_Element</a> = Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, false &gt;</td></tr>
-<tr class="separator:a310fb338c09aaac54f8477a1eda924fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adaa47d60b553600547fa50e0e5d7e6cd"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
-<tr class="memitem:adaa47d60b553600547fa50e0e5d7e6cd"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#adaa47d60b553600547fa50e0e5d7e6cd">Const_Iterator_Matrix_Sparse_Element</a> = Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, true &gt;</td></tr>
-<tr class="separator:adaa47d60b553600547fa50e0e5d7e6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cf519c3058235d92ce10a3527c9537b"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
-<tr class="memitem:a3cf519c3058235d92ce10a3527c9537b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a3cf519c3058235d92ce10a3527c9537b">Iterator_Matrix_Sparse_Row</a> = Base_Iterator_Matrix_Sparse_Row&lt; _entry_type, _index_type, false &gt;</td></tr>
-<tr class="separator:a3cf519c3058235d92ce10a3527c9537b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd7574056c1e0422414e635f3da304c2"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
-<tr class="memitem:abd7574056c1e0422414e635f3da304c2"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#abd7574056c1e0422414e635f3da304c2">Const_Iterator_Matrix_Sparse_Row</a> = Base_Iterator_Matrix_Sparse_Row&lt; _entry_type, _index_type, true &gt;</td></tr>
-<tr class="separator:abd7574056c1e0422414e635f3da304c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca32d90b542c9479e294479cfcf37f91"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
+<tr class="memitem:aca32d90b542c9479e294479cfcf37f91"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#aca32d90b542c9479e294479cfcf37f91">Iterator_Matrix_Sparse_Element</a> = Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, false &gt;</td></tr>
+<tr class="memdesc:aca32d90b542c9479e294479cfcf37f91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-const iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>.  <a href="namespace_disa.html#aca32d90b542c9479e294479cfcf37f91">More...</a><br /></td></tr>
+<tr class="separator:aca32d90b542c9479e294479cfcf37f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58aa5b83c06527eb9fe7b12ba7c2408d"><td class="memTemplParams" colspan="2">template&lt;typename _entry_type , typename _index_type &gt; </td></tr>
+<tr class="memitem:a58aa5b83c06527eb9fe7b12ba7c2408d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_disa.html#a58aa5b83c06527eb9fe7b12ba7c2408d">Const_Iterator_Matrix_Sparse_Element</a> = Base_Iterator_Matrix_Sparse_Element&lt; _entry_type, _index_type, true &gt;</td></tr>
+<tr class="memdesc:a58aa5b83c06527eb9fe7b12ba7c2408d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Const iterator for <a class="el" href="class_disa_1_1_matrix___sparse___element.html" title="Represents an element in a sparse (CSR) matrix.">Matrix_Sparse_Element</a>.  <a href="namespace_disa.html#a58aa5b83c06527eb9fe7b12ba7c2408d">More...</a><br /></td></tr>
+<tr class="separator:a58aa5b83c06527eb9fe7b12ba7c2408d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
