@@ -170,11 +170,11 @@ struct Base_Iterator_Matrix_Sparse_Element {
   using pointer = std::unique_ptr<value_type>;
   using reference = value_type&;
 
-  using index_type = _index_type;
-  using entry_type = _entry_type;
-  using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
-  using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;
-  using iterator_type = Base_Iterator_Matrix_Sparse_Element<entry_type, index_type, _is_const>;
+  using index_type = std::conditional_t<_is_const, const _index_type, _index_type>;
+  using entry_type = std::conditional_t<_is_const, const _entry_type, _entry_type>;
+  using pointer_index = _index_type*;
+  using pointer_entry = _entry_type*;
+  using iterator_type = Base_Iterator_Matrix_Sparse_Element<_entry_type, _index_type, _is_const>;
 
   /**
    * @brief Default constructor.
