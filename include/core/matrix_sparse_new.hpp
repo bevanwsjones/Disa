@@ -352,7 +352,7 @@ struct Matrix_Sparse_Row {
   using index_iterator = std::vector<index_type>::iterator;
 
   using base_type = Matrix_Sparse_Row<_value_type, _index_type>;
-  using csr_data = CSR_Data<_value_type, _index_type>;
+  using csr_data_type = CSR_Data<_value_type, _index_type>;
 
   /**
    * @class SparseAccessor
@@ -419,7 +419,7 @@ struct Matrix_Sparse_Row {
    * @param[in] matrix Pointer to the CSR data structure.
    * @param[in] row Iterator to the row offset.
    */
-  Matrix_Sparse_Row(csr_data* matrix, index_iterator row)
+  Matrix_Sparse_Row(csr_data_type* matrix, index_iterator row)
       : ptr_data(matrix),
         iter_row_offset(row),
         i_column(matrix->i_column.begin() + *row, matrix->i_column.begin() + *(row + 1)),
@@ -432,8 +432,8 @@ struct Matrix_Sparse_Row {
    * 
    * Note since the 'const' members do not change the underlying data, we can safely remove the const.
    */
-  Matrix_Sparse_Row(const csr_data* matrix, index_iterator i_row)
-      : Matrix_Sparse_Row(const_cast<csr_data*>(matrix), i_row) {}
+  Matrix_Sparse_Row(const csr_data_type* matrix, index_iterator i_row)
+      : Matrix_Sparse_Row(const_cast<csr_data_type*>(matrix), i_row) {}
 
   /**
    * @brief Copy Constructor
@@ -585,7 +585,7 @@ struct Matrix_Sparse_Row {
   }
 
  private:
-  csr_data* ptr_data;             /**< Pointer to the CSR data structure. */
+  csr_data_type* ptr_data;        /**< Pointer to the CSR data structure. */
   index_iterator iter_row_offset; /**< Iterator to the row offset. */
   std::span<index_type> i_column; /**< Span of column indices for this row. */
   std::span<value_type> value;    /**< Span of values for this row. */
@@ -595,64 +595,89 @@ struct Matrix_Sparse_Row {
 // Matrix Sparse Row Iterators
 // ---------------------------------------------------------------------------------------------------------------------
 
-// template<typename _entry_type, typename _index_type, bool _is_const>
-// struct Base_Iterator_Matrix_Sparse_Row {
-//  public:
-//   using index_type = _index_type;
-//   using pointer_index = std::conditional_t<_is_const, const _index_type*, _index_type*>;
+template<typename _entry_type, typename _index_type, bool _is_const>
+struct Base_Iterator_Matrix_Sparse_Row {
+ public:
+  using iterator_category = std::bidirectional_iterator_tag;
+  using difference_type = std::ptrdiff_t;
+  using value_type = std::conditional_t<!_is_const, Matrix_Sparse_Row<_entry_type, _index_type>,
+                                        const Matrix_Sparse_Row<_entry_type, _index_type>>;
+  using pointer = std::unique_ptr<value_type>;
+  using reference = value_type&;
 
-//   using entry_type = _entry_type;
-//   using pointer_entry = std::conditional_t<_is_const, const _entry_type*, _entry_type*>;
+  using index_type = std::conditional_t<_is_const, const _index_type*, _index_type*>;
+  using pointer_index = index_type*;
 
-//   using value_type = Matrix_Sparse_Row<entry_type, index_type>;
-//   using reference = std::conditional_t<_is_const, const Matrix_Sparse_Row<entry_type, index_type>&,
-//                                        Matrix_Sparse_Row<entry_type, index_type>&>;
-//   using pointer = std::conditional_t<_is_const, const Matrix_Sparse_Row<entry_type, index_type>*,
-//                                      Matrix_Sparse_Row<entry_type, index_type>*>;
+  using csr_data_type = CSR_Data<_entry_type, _index_type>;
+  using iterator_type = Base_Iterator_Matrix_Sparse_Row<_entry_type, _index_type, _is_const>;
 
-//   using iterator_type = Base_Iterator_Matrix_Sparse_Row<entry_type, index_type, _is_const>;
+  constexpr Base_Iterator_Matrix_Sparse_Row() noexcept = default;
+  ~Base_Iterator_Matrix_Sparse_Row() noexcept = default;
 
-//   Base_Iterator_Matrix_Sparse_Row() = default;
-//   ~Base_Iterator_Matrix_Sparse_Row() = default;
+  // constexpr Base_Iterator_Matrix_Sparse_Row(pointer_index column, pointer_entry entry) noexcept
+  //     : ptr_column(column), ptr_entry(entry) {}
 
-//   reference operator*() { return value; };
+  [[nodiscard]] constexpr value_type operator*() noexcept
+    requires(!_is_const)
+  {
+    return value_type(ptr_data, ptr_data->row_offset.begin() + (ptr_data->row_offset[0] - ptr_row_offset));
+    ;
+  }
 
-//   pointer operator->() { return &value; };
+  [[nodiscard]] constexpr const value_type operator*() const noexcept {
+    return value_type(ptr_data, ptr_data->row_offset.begin() + (ptr_data->row_offset[0] - ptr_row_offset));
+  }
 
-//   iterator_type& operator++() {
-//     ++value;
-//     return *this;
-//   };
+  [[nodiscard]] constexpr pointer operator->()
+    requires(!_is_const)
+  {
+    return std::make_unique<value_type>(ptr_data,
+                                        ptr_data->row_offset.begin() + (ptr_data->row_offset[0] - ptr_row_offset));
+  }
 
-//   iterator_type operator++(int) {
-//     iterator_type old = *this;
-//     ++value;
-//     return old;
-//   };
+  [[nodiscard]] constexpr pointer operator->() const {
+    return std::make_unique<value_type>(ptr_data,
+                                        ptr_data->row_offset.begin() + (ptr_data->row_offset[0] - ptr_row_offset));
+  }
 
-//   iterator_type& operator--() {
-//     --value;
-//     return *this;
-//   };
+  constexpr iterator_type& operator++() noexcept {
+    ++ptr_row_offset;
+    return *this;
+  }
 
-//   iterator_type operator--(int) {
-//     iterator_type old = *this;
-//     --value;
-//     return old;
-//   };
+  constexpr iterator_type operator++(int) noexcept {
+    iterator_type old = *this;
+    ++(*this);
+    return old;
+  }
 
-//   [[nodiscard]] bool operator==(const iterator_type& that) const { return this->value == that.value; };
+  constexpr iterator_type& operator--() noexcept {
+    --ptr_row_offset;
+    return *this;
+  }
 
-//   [[nodiscard]] bool operator!=(const iterator_type& that) const { return this->value != that.value; };
+  constexpr iterator_type operator--(int) noexcept {
+    iterator_type old = *this;
+    --(*this);
+    return old;
+  }
 
-//  private:
-//   value_type value;
-// };
+  [[nodiscard]] constexpr bool operator==(const iterator_type& that) const noexcept {
+    return ptr_data == that.ptr_data && ptr_row_offset == that.ptr_row_offset;
+  }
 
-// template<typename _entry_type, typename _index_type>
-// using Iterator_Matrix_Sparse_Row = Base_Iterator_Matrix_Sparse_Row<_entry_type, _index_type, false>;
-// template<typename _entry_type, typename _index_type>
-// using Const_Iterator_Matrix_Sparse_Row = Base_Iterator_Matrix_Sparse_Row<_entry_type, _index_type, true>;
+  [[nodiscard]] constexpr bool operator!=(const iterator_type& that) const noexcept { return !(*this == that); }
+
+ private:
+  csr_data_type* ptr_data{nullptr};       /**< Pointer to the CSR data structure. */
+  pointer_index* ptr_row_offset{nullptr}; /**< Pointer to the row offset in the data structure. */
+};
+
+template<typename _entry_type, typename _index_type>
+using Iterator_Matrix_Sparse_Row = Base_Iterator_Matrix_Sparse_Row<_entry_type, _index_type, false>;
+
+template<typename _entry_type, typename _index_type>
+using Const_Iterator_Matrix_Sparse_Row = Base_Iterator_Matrix_Sparse_Row<_entry_type, _index_type, true>;
 
 // // ---------------------------------------------------------------------------------------------------------------------
 // // Matrix Sparse
