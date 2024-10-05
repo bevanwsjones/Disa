@@ -23,6 +23,8 @@
 #ifndef DISA_MATRIX_SPARSE_NEW_H
 #define DISA_MATRIX_SPARSE_NEW_H
 
+#include <iterator>
+#include <memory>
 #include <numeric>
 #include <span>
 #include <utility>
@@ -52,21 +54,20 @@ class Matrix_Sparse;
  * read-write access to the element value and read-only access to the column index. The column value is read-only to 
  * maintain the validity of the CSR ordering.
  */
-template<typename _value_type, typename _index_type>
+template<typename _value_type, typename _index_type, bool _is_const>
 class Matrix_Sparse_Element {
 
  public:
+  // Index type is always const.
   using index_type = const _index_type;
-  using const_pointer_index = const _index_type*;
-  using const_reference_index = const _index_type&;
+  using pointer_index = index_type*;
+  using reference_index = index_type&;
 
-  using value_type = _value_type;
-  using pointer_value = _value_type*;
-  using reference_value = _value_type&;
-  using const_pointer_value = const _value_type*;
-  using const_reference_value = const _value_type&;
+  using value_type = std::conditional_t<!_is_const, _value_type, const _value_type>;
+  using pointer_value = value_type*;
+  using reference_value = value_type&;
 
-  using base_type = Matrix_Sparse_Element<value_type, _index_type>;
+  using base_type = Matrix_Sparse_Element<value_type, _index_type, _is_const>;
 
   /**
    * @brief Default constructor.
@@ -83,7 +84,7 @@ class Matrix_Sparse_Element {
    * @param[in] column Pointer to the column index of the element.
    * @param[in] value Pointer to the value of the element.
    */
-  constexpr Matrix_Sparse_Element(const_pointer_index column, pointer_value value) noexcept
+  constexpr Matrix_Sparse_Element(pointer_index column, pointer_value value) noexcept
       : ptr_column(column), ptr_value(value) {}
 
   /**
@@ -93,22 +94,30 @@ class Matrix_Sparse_Element {
   Matrix_Sparse_Element(const Matrix_Sparse_Element& other) = delete;
 
   /**
-   * @brief Returns a reference to the value of the element.
-   * @return A reference to the value of the element.
-   */
-  [[nodiscard]] constexpr reference_value value() noexcept { return *ptr_value; }
-
-  /**
    * @brief Returns the column index of the element.
    * @return The column index of the element.
    */
-  [[nodiscard]] constexpr const_reference_index i_column() const noexcept { return *ptr_column; }
+  [[nodiscard]] constexpr reference_index i_column() const noexcept
+
+  {
+    return *ptr_column;
+  }
+
+  /**
+   * @brief Returns a reference to the value of the element.
+   * @return A const reference to the value of the element.
+   */
+  [[nodiscard]] constexpr reference_value value() noexcept
+    requires(!_is_const)
+  {
+    return *ptr_value;
+  }
 
   /**
    * @brief Returns a const reference to the value of the element.
-   * @return A const reference to the value of the element.
+   * @return A reference to the value of the element.
    */
-  [[nodiscard]] constexpr const_reference_value value() const noexcept { return *ptr_value; }
+  [[nodiscard]] constexpr const reference_value value() const noexcept { return *ptr_value; }
 
   /**
    * @brief Equality comparison operator.
@@ -133,8 +142,8 @@ class Matrix_Sparse_Element {
   Matrix_Sparse_Element& operator=(const Matrix_Sparse_Element& that) = delete;
 
  private:
-  const_pointer_index ptr_column{nullptr}; /**< The column of the CSR element. */
-  pointer_value ptr_value{nullptr};        /**< The value of the CSR element. */
+  pointer_index ptr_column{nullptr}; /**< The column of the CSR element. */
+  pointer_value ptr_value{nullptr};  /**< The value of the CSR element. */
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -156,10 +165,10 @@ struct Base_Iterator_Matrix_Sparse_Element {
  public:
   using iterator_category = std::bidirectional_iterator_tag;
   using difference_type = std::ptrdiff_t;
-  using value_type = Matrix_Sparse_Element<_entry_type, _index_type>;
-  using const_value_type = Matrix_Sparse_Element<const _entry_type, const _index_type>;
-  using pointer = std::conditional_t<_is_const, const_value_type*, value_type*>;
-  using reference = std::conditional_t<_is_const, const_value_type&, value_type&>;
+  using value_type = std::conditional_t<!_is_const, Matrix_Sparse_Element<_entry_type, _index_type, _is_const>,
+                                        const Matrix_Sparse_Element<_entry_type, _index_type, _is_const>>;
+  using pointer = std::unique_ptr<value_type>;
+  using reference = value_type&;
 
   using index_type = _index_type;
   using entry_type = _entry_type;
@@ -191,10 +200,39 @@ struct Base_Iterator_Matrix_Sparse_Element {
    * 
    * This operator creates and returns a Matrix_Sparse_Element object using the current column and entry pointers.
    */
-  [[nodiscard]] constexpr auto operator*() const noexcept {
-    if constexpr(_is_const) return const_value_type(ptr_column, ptr_entry);
-    else return value_type(ptr_column, ptr_entry);
+  [[nodiscard]] constexpr value_type operator*() noexcept
+    requires(!_is_const)
+  {
+    return value_type(ptr_column, ptr_entry);
   }
+
+  /**
+   * @brief Const dereference operator.
+   * @return A Matrix_Sparse_Element object.
+   * 
+   * This operator creates and returns a Matrix_Sparse_Element object using the current column and entry pointers.
+   */
+  [[nodiscard]] constexpr const value_type operator*() const noexcept { return value_type(ptr_column, ptr_entry); }
+
+  /**
+   * @brief Member access operator.
+   * @return Pointer to the Matrix_Sparse_Element object.
+   * 
+   * This operator returns a pointer to the Matrix_Sparse_Element object at the current position.
+   */
+  [[nodiscard]] constexpr pointer operator->()
+    requires(!_is_const)
+  {
+    return std::make_unique<value_type>(ptr_column, ptr_entry);
+  }
+
+  /**
+   * @brief Const member access operator.
+   * @return Pointer to the Matrix_Sparse_Element object.
+   * 
+   * This operator returns a pointer to the Matrix_Sparse_Element object at the current position.
+   */
+  [[nodiscard]] constexpr pointer operator->() const { return std::make_unique<value_type>(ptr_column, ptr_entry); }
 
   /**
    * @brief Pre-increment operator.

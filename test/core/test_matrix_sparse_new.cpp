@@ -32,15 +32,16 @@ using namespace Disa;
 
 class matrix_sparse_element_test : public ::testing::Test {
  protected:
-  using element_type = Matrix_Sparse_Element<double, int>;
+  template<bool _is_const>
+  using element_type = Matrix_Sparse_Element<double, int, _is_const>;
   int column_index;
   double value;
-  element_type* element;
+  element_type<false>* element;
 
   void SetUp() override {
     column_index = 5;
     value = 3.14;
-    element = new element_type(&column_index, &value);
+    element = new element_type<false>(&column_index, &value);
   }
 
   void TearDown() override { delete element; }
@@ -52,28 +53,28 @@ TEST_F(matrix_sparse_element_test, constructor_and_accessors) {
 }
 
 TEST_F(matrix_sparse_element_test, const_accessors) {
-  const element_type const_element(&column_index, &value);
+  const element_type<true> const_element(&column_index, &value);
   EXPECT_EQ(const_element.i_column(), 5);
   EXPECT_DOUBLE_EQ(const_element.value(), 3.14);
 }
 
 TEST_F(matrix_sparse_element_test, equality_comparison) {
-  element_type same_element(&column_index, &value);
+  element_type<false> same_element(&column_index, &value);
   EXPECT_TRUE(*element == same_element);
 
   int different_column = 6;
   double different_value = 2.71;
-  element_type different_element(&different_column, &different_value);
+  element_type<false> different_element(&different_column, &different_value);
   EXPECT_FALSE(*element == different_element);
 }
 
 TEST_F(matrix_sparse_element_test, inequality_comparison) {
-  element_type same_element(&column_index, &value);
+  element_type<false> same_element(&column_index, &value);
   EXPECT_FALSE(*element != same_element);
 
   int different_column = 6;
   double different_value = 2.71;
-  element_type different_element(&different_column, &different_value);
+  element_type<false> different_element(&different_column, &different_value);
   EXPECT_TRUE(*element != different_element);
 }
 
@@ -109,28 +110,35 @@ TEST_F(base_iterator_matrix_sparse_element_test, default_constructor) {
 
 TEST_F(base_iterator_matrix_sparse_element_test, constructor_and_dereference) {
   Base_Iterator_Matrix_Sparse_Element<double, int, false> iter(&columns[0], &entries[0]);
-  auto element = *iter;
-  EXPECT_EQ(element.i_column(), 0);
-  EXPECT_EQ(element.value(), 1.0);
+  EXPECT_EQ((*iter).i_column(), 0);
+  EXPECT_EQ((*iter).value(), 1.0);
 }
 
 TEST_F(base_iterator_matrix_sparse_element_test, increment_and_decrement) {
   Base_Iterator_Matrix_Sparse_Element<double, int, false> iter(&columns[0], &entries[0]);
   ++iter;
   EXPECT_EQ((*iter).i_column(), 1);
+  EXPECT_EQ(iter->i_column(), 1);
   EXPECT_EQ((*iter).value(), 2.0);
+  EXPECT_EQ(iter->value(), 2.0);
 
   iter++;
   EXPECT_EQ((*iter).i_column(), 2);
+  EXPECT_EQ(iter->i_column(), 2);
   EXPECT_EQ((*iter).value(), 3.0);
+  EXPECT_EQ(iter->value(), 3.0);
 
   --iter;
   EXPECT_EQ((*iter).i_column(), 1);
+  EXPECT_EQ(iter->i_column(), 1);
   EXPECT_EQ((*iter).value(), 2.0);
+  EXPECT_EQ(iter->value(), 2.0);
 
   iter--;
   EXPECT_EQ((*iter).i_column(), 0);
+  EXPECT_EQ(iter->i_column(), 0);
   EXPECT_EQ((*iter).value(), 1.0);
+  EXPECT_EQ(iter->value(), 1.0);
 }
 
 TEST_F(base_iterator_matrix_sparse_element_test, comparison) {
@@ -144,8 +152,6 @@ TEST_F(base_iterator_matrix_sparse_element_test, comparison) {
 
 TEST_F(base_iterator_matrix_sparse_element_test, const_iterator) {
   Base_Iterator_Matrix_Sparse_Element<double, int, true> const_it(&columns[0], &entries[0]);
-
-  const auto element = *const_it;
   EXPECT_EQ((*const_it).i_column(), 0);
   EXPECT_EQ((*const_it).value(), 1.0);
 
@@ -153,15 +159,15 @@ TEST_F(base_iterator_matrix_sparse_element_test, const_iterator) {
   ++const_it;
   const_it++;
   EXPECT_EQ((*const_it).i_column(), 2);
+  EXPECT_EQ(const_it->i_column(), 2);
   EXPECT_EQ((*const_it).value(), 3.0);
+  EXPECT_EQ(const_it->value(), 3.0);
   --const_it;
   const_it--;
   EXPECT_EQ((*const_it).i_column(), 0);
+  EXPECT_EQ(const_it->i_column(), 0);
   EXPECT_EQ((*const_it).value(), 1.0);
-
-  // Ensure that we can't modify the value through a const iterator
-  static_assert(std::is_const_v<std::remove_reference_t<decltype(element.value())>>,
-                "Const iterator should return const references");
+  EXPECT_EQ(const_it->value(), 1.0);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
