@@ -3,16 +3,14 @@
 ![GitHub](https://img.shields.io/github/license/bevanwsjones/Disa)
 [![CMake](https://github.com/bevanwsjones/Disa/actions/workflows/cmake.yml/badge.svg)](https://github.com/bevanwsjones/Disa/actions/workflows/cmake.yml)
 
-General purpose linear algebra library with sparse solving capabilities.
+General purpose linear algebra library with sparse solving capabilities, which will ultimately be 'rolled' into a CFD solver (currently not public). 
 
-## Install:
-
-- TBD
+The full cloud-based project Fyn-Tech can be found [here](https://github.com/fyn-tech), where the current development focus can be found.
 
 ## Design Goals:
 
 - Easy to use linear algebra objects, static vs. dynamic vs. sparse
-  - Containers should feel natural to use, almost as an extension of the `C++ stl`.
+- Containers should feel natural to use, almost as an extension of the `C++ stl`.
 
 ## Behaviour Notes:
 
