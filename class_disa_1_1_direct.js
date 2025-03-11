@@ -6,5 +6,5 @@ var class_disa_1_1_direct =
     [ "factorise", "class_disa_1_1_direct.html#a427967cef30c3f345c4437e7a582545e", null ],
     [ "get_config", "class_disa_1_1_direct.html#a708f8f61a293a32749811f0340ca6c39", null ],
     [ "initialise", "class_disa_1_1_direct.html#a144e1092069bfb6d21a3defe761002d4", null ],
-    [ "solve", "class_disa_1_1_direct.html#aeda09c44124a44f2fd040669a68feadc", null ]
+    [ "solve", "class_disa_1_1_direct.html#aa853f9ee54bd958c0c6bfc31764fb383", null ]
 ];

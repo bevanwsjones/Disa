@@ -38,7 +38,7 @@ var hierarchy =
     [ "Solver_Iterative< Solver_Fixed_Point< _solver_type, _solver_data >, _solver_data >", "class_disa_1_1_solver___iterative.html", [
       [ "Solver_Fixed_Point< _solver_type, _solver_data >", "class_disa_1_1_solver___fixed___point.html", null ]
     ] ],
-    [ "Matrix_Sparse_Row< _value_type, _index_type >::SparseAccessor", "class_disa_1_1_matrix___sparse___row_1_1_sparse_accessor.html", null ],
+    [ "SparseAccessor", "class_disa_1_1_matrix___sparse___row_1_1_sparse_accessor.html", null ],
     [ "Static_Demoter< _vector0, _vector1 >", "struct_disa_1_1_static___demoter.html", null ],
     [ "Static_Promoter< _vector0, _vector1 >", "struct_disa_1_1_static___promoter.html", null ],
     [ "vector", null, [

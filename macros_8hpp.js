@@ -21,5 +21,5 @@ var macros_8hpp =
       [ "Info", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea4059b0251f66a18cb56f544728796875", null ],
       [ "Debug", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0eaa603905470e2a5b8c13e96b579ef0dba", null ]
     ] ],
-    [ "console_format", "macros_8hpp.html#a313943c669dbb0d1eff816585b62c881", null ]
+    [ "console_format", "macros_8hpp.html#ac35c94a4a0d0a799032263bf434b4426", null ]
 ];

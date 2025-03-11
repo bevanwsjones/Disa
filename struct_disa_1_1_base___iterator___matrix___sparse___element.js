@@ -16,9 +16,9 @@ var struct_disa_1_1_base___iterator___matrix___sparse___element =
     [ "Base_Iterator_Matrix_Sparse_Element", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#ab6b3edee841688a9e0b457ae0056070c", null ],
     [ "operator!=", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#a4f3fd93457c84b2d806fe8bc3f340c0b", null ],
     [ "operator*", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#aaf756bdc112aa2efba0caf17c83147cb", null ],
-    [ "operator++", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#a2d9a3676f67bd90edde097abd49ca7ac", null ],
+    [ "operator++", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#aa36d2d94012789b5165dd28929cb60b2", null ],
     [ "operator++", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#a5a9e33692d78965aa729cc2bac7c09df", null ],
-    [ "operator--", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#a9f9ec991a024f6a795d798db6f5d6721", null ],
+    [ "operator--", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#a8dabdd0a4dbf81d152997d1b18a8f7cf", null ],
     [ "operator--", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#aedecb4eba87596daaee1f59db891c428", null ],
     [ "operator==", "struct_disa_1_1_base___iterator___matrix___sparse___element.html#aad37409567cad6a0862ecf88bcc45ad9", null ]
 ];

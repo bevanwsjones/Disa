@@ -1,14 +1,14 @@
 var matrix__sparse_8hpp =
 [
-    [ "Matrix_Sparse", "class_disa_1_1_matrix___sparse.html", "class_disa_1_1_matrix___sparse" ],
-    [ "Matrix_Sparse_Row", "class_disa_1_1_matrix___sparse___row.html", "class_disa_1_1_matrix___sparse___row" ],
-    [ "Iterator_Matrix_Sparse_Row", "struct_disa_1_1_iterator___matrix___sparse___row.html", "struct_disa_1_1_iterator___matrix___sparse___row" ],
-    [ "Iterator_Matrix_Sparse_Element", "struct_disa_1_1_iterator___matrix___sparse___element.html", "struct_disa_1_1_iterator___matrix___sparse___element" ],
-    [ "operator*", "matrix__sparse_8hpp.html#a8bad92e4006dd16d1ac6b6149e647ff4", null ],
-    [ "operator*", "matrix__sparse_8hpp.html#af509d324b0288be3dd64abb559e35e23", null ],
-    [ "operator*", "matrix__sparse_8hpp.html#a4ef2ba6a0c7cefc2c527b386d901ed2e", null ],
-    [ "operator+", "matrix__sparse_8hpp.html#aff24d51f9c4906a5d5a6cc8c4f4879b8", null ],
-    [ "operator-", "matrix__sparse_8hpp.html#a73b5088e0d1932d3bf48f2186cbc59c5", null ],
-    [ "operator/", "matrix__sparse_8hpp.html#a6d366a4065a104d047950a627bad4c33", null ],
-    [ "operator<<", "matrix__sparse_8hpp.html#abc9ac18476d94a7fb07a8ccbcd276327", null ]
+    [ "Matrix_Sparse< _entry_type, _index_type >", "class_disa_1_1_matrix___sparse.html", "class_disa_1_1_matrix___sparse" ],
+    [ "Matrix_Sparse_Row< _value_type, _index_type >", "class_disa_1_1_matrix___sparse___row.html", "class_disa_1_1_matrix___sparse___row" ],
+    [ "Iterator_Matrix_Sparse_Row< _matrix_type >", "struct_disa_1_1_iterator___matrix___sparse___row.html", "struct_disa_1_1_iterator___matrix___sparse___row" ],
+    [ "Iterator_Matrix_Sparse_Element< _matrix_type >", "struct_disa_1_1_iterator___matrix___sparse___element.html", "struct_disa_1_1_iterator___matrix___sparse___element" ],
+    [ "operator*", "matrix__sparse_8hpp.html#a879515fd9c7093a7acd7c1370754a17b", null ],
+    [ "operator*", "matrix__sparse_8hpp.html#aa68b3d96aa88caf13adea60f8ece795b", null ],
+    [ "operator*", "matrix__sparse_8hpp.html#a787e11b0a5a455213458b7ff985e2993", null ],
+    [ "operator+", "matrix__sparse_8hpp.html#afd4f7639d4176eb9b7282bab0cf75dee", null ],
+    [ "operator-", "matrix__sparse_8hpp.html#aa40fafd22dccc295be62b377b3664548", null ],
+    [ "operator/", "matrix__sparse_8hpp.html#ab3154ed59f9f1409556726de02a7395e", null ],
+    [ "operator<<", "matrix__sparse_8hpp.html#a052007bda508d45fc37791501997fb13", null ]
 ];

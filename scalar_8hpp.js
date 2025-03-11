@@ -1,11 +1,11 @@
 var scalar_8hpp =
 [
     [ "Scalar", "scalar_8hpp.html#a8c2981f3f834be9448a6ab06c28748eb", null ],
-    [ "is_nearly_equal", "scalar_8hpp.html#a4a2e6c44ba8374882573d628b743271d", null ],
-    [ "is_nearly_greater", "scalar_8hpp.html#aa779399caa791454283aac3a9627a869", null ],
-    [ "is_nearly_greater_equal", "scalar_8hpp.html#ac79b4c22b2251a16b4ce10ab35754083", null ],
-    [ "is_nearly_less", "scalar_8hpp.html#ac30c55fc1693e9407d06d204a86b28aa", null ],
-    [ "is_nearly_less_equal", "scalar_8hpp.html#a169f81a587880e04bd2bab802b3de310", null ],
+    [ "is_nearly_equal", "scalar_8hpp.html#a5e577764eccce1946fe24957464846f0", null ],
+    [ "is_nearly_greater", "scalar_8hpp.html#a8a3219aaac7d12285f826a6e2bd88eef", null ],
+    [ "is_nearly_greater_equal", "scalar_8hpp.html#ab4806c7d78a254db248a9d65b346171a", null ],
+    [ "is_nearly_less", "scalar_8hpp.html#aea5c831f1a27aa14ad2b0b71f939e712", null ],
+    [ "is_nearly_less_equal", "scalar_8hpp.html#a02ee22c2bb24a54ca42d00e7fd2de475", null ],
     [ "default_absolute", "scalar_8hpp.html#a0f0e38acec7e979eee6eaddf423d93b7", null ],
     [ "default_relative", "scalar_8hpp.html#acbf188d2f52238f11ae72c35ff61d996", null ],
     [ "scalar_epsilon", "scalar_8hpp.html#a7ba5e5cba5f93f1f374fde90b8004f33", null ],
