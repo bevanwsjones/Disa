@@ -173,6 +173,8 @@ TEST_F(base_iterator_matrix_sparse_element_test, const_iterator) {
 // ---------------------------------------------------------------------------------------------------------------------
 // Matrix Sparse Row and Iterators
 // ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Row
+// ---------------------------------------------------------------------------------------------------------------------
 
 class matrix_sparse_row_test : public ::testing::Test {
  protected:
@@ -349,6 +351,41 @@ TEST_F(matrix_sparse_row_test, empty_row) {
   double remove_warning = 0;
   EXPECT_DEATH(remove_warning = row.at(0), ".*");
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Matrix Sparse Row Iterator
+// ---------------------------------------------------------------------------------------------------------------------
+
+class base_iterator_matrix_sparse_row_test : public ::testing::Test {
+ protected:
+  void SetUp() override {
+    // Set up a sample CSR matrix
+    csr_data.row_offset = {0, 2, 4, 7};
+    csr_data.i_column = {0, 2, 1, 3, 0, 2, 4};
+    csr_data.value = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0};
+    csr_data.columns = 5;
+  }
+
+  CSR_Data<double, int> csr_data;
+};
+
+TEST_F(base_iterator_matrix_sparse_row_test, default_constructor) {
+  Base_Iterator_Matrix_Sparse_Row<double, int, false> it;
+  // Default-constructed iterator should be in a valid but unspecified state
+  // We can't make many assumptions about its behavior, but it shouldn't crash
+  EXPECT_NO_THROW({
+    auto dummy = *it;
+    (void)dummy;  // Avoid unused variable warning
+  });
+}
+
+TEST_F(base_iterator_matrix_sparse_row_test, constructor_and_dereference) {}
+
+TEST_F(base_iterator_matrix_sparse_row_test, increment_and_decrement) {}
+
+TEST_F(base_iterator_matrix_sparse_row_test, comparison) {}
+
+TEST_F(base_iterator_matrix_sparse_row_test, const_iterator) {}
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Matrix Sparse

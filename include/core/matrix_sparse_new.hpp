@@ -163,10 +163,9 @@ class Matrix_Sparse_Element {
 template<typename _entry_type, typename _index_type, bool _is_const>
 struct Base_Iterator_Matrix_Sparse_Element {
  public:
-  using iterator_category = std::bidirectional_iterator_tag;
+  //  using iterator_category = std::bidirectional_iterator_tag;
   using difference_type = std::ptrdiff_t;
-  using value_type = std::conditional_t<!_is_const, Matrix_Sparse_Element<_entry_type, _index_type, _is_const>,
-                                        const Matrix_Sparse_Element<_entry_type, _index_type, _is_const>>;
+  using value_type = Matrix_Sparse_Element<_entry_type, _index_type, _is_const>;
   using pointer = std::unique_ptr<value_type>;
   using reference = value_type&;
 
@@ -598,14 +597,14 @@ struct Matrix_Sparse_Row {
 template<typename _entry_type, typename _index_type, bool _is_const>
 struct Base_Iterator_Matrix_Sparse_Row {
  public:
-  using iterator_category = std::bidirectional_iterator_tag;
+  //using iterator_category = std::bidirectional_iterator_tag;
   using difference_type = std::ptrdiff_t;
   using value_type = std::conditional_t<!_is_const, Matrix_Sparse_Row<_entry_type, _index_type>,
                                         const Matrix_Sparse_Row<_entry_type, _index_type>>;
   using pointer = std::unique_ptr<value_type>;
   using reference = value_type&;
 
-  using index_type = std::conditional_t<_is_const, const _index_type*, _index_type*>;
+  using index_type = std::conditional_t<_is_const, const _index_type, _index_type>;
   using pointer_index = index_type*;
 
   using csr_data_type = CSR_Data<_entry_type, _index_type>;
@@ -620,24 +619,24 @@ struct Base_Iterator_Matrix_Sparse_Row {
   [[nodiscard]] constexpr value_type operator*() noexcept
     requires(!_is_const)
   {
-    return value_type(ptr_data, ptr_data->row_offset.begin() + (ptr_data->row_offset[0] - ptr_row_offset));
+    return value_type(ptr_data, ptr_data->row_offset.begin() + (ptr_row_offset - ptr_data->row_offset.data()));
     ;
   }
 
   [[nodiscard]] constexpr const value_type operator*() const noexcept {
-    return value_type(ptr_data, ptr_data->row_offset.begin() + (ptr_data->row_offset[0] - ptr_row_offset));
+    return value_type(ptr_data, ptr_data->row_offset.begin() + (ptr_row_offset - ptr_data->row_offset.data()));
   }
 
   [[nodiscard]] constexpr pointer operator->()
     requires(!_is_const)
   {
     return std::make_unique<value_type>(ptr_data,
-                                        ptr_data->row_offset.begin() + (ptr_data->row_offset[0] - ptr_row_offset));
+                                        ptr_data->row_offset.begin() + (ptr_row_offset - ptr_data->row_offset.data()));
   }
 
   [[nodiscard]] constexpr pointer operator->() const {
     return std::make_unique<value_type>(ptr_data,
-                                        ptr_data->row_offset.begin() + (ptr_data->row_offset[0] - ptr_row_offset));
+                                        ptr_data->row_offset.begin() + (ptr_row_offset - ptr_data->row_offset.data()));
   }
 
   constexpr iterator_type& operator++() noexcept {
@@ -669,8 +668,8 @@ struct Base_Iterator_Matrix_Sparse_Row {
   [[nodiscard]] constexpr bool operator!=(const iterator_type& that) const noexcept { return !(*this == that); }
 
  private:
-  csr_data_type* ptr_data{nullptr};       /**< Pointer to the CSR data structure. */
-  pointer_index* ptr_row_offset{nullptr}; /**< Pointer to the row offset in the data structure. */
+  csr_data_type* ptr_data{nullptr};      /**< Pointer to the CSR data structure. */
+  pointer_index ptr_row_offset{nullptr}; /**< Pointer to the row offset in the data structure. */
 };
 
 template<typename _entry_type, typename _index_type>
