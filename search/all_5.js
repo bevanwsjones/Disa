@@ -11,5 +11,5 @@ var searchData=
   ['for_5fiter_8',['FOR_ITER',['../macros_8hpp.html#a37c1943622f839f10d05795fc62180dd',1,'macros.hpp']]],
   ['for_5fiter_5fref_9',['FOR_ITER_REF',['../macros_8hpp.html#a2b282a5f22fb3369cd4dc05a8d8cee52',1,'macros.hpp']]],
   ['forward_5fsweep_10',['forward_sweep',['../namespace_disa.html#ae5cee576c937deee71b3db031f96bcf7',1,'Disa']]],
-  ['front_11',['front',['../class_disa_1_1_adjacency___subgraph.html#ab4d9fe4f431922d0e271393f03251789',1,'Disa::Adjacency_Subgraph::front()'],['../class_disa_1_1_adjacency___subgraph.html#a0cefe8adda01a2b2120ba09e5c178952',1,'Disa::Adjacency_Subgraph::front() const'],['../class_disa_1_1_adjacency___graph.html#ab4d9fe4f431922d0e271393f03251789',1,'Disa::Adjacency_Graph::front()'],['../class_disa_1_1_adjacency___graph.html#a0cefe8adda01a2b2120ba09e5c178952',1,'Disa::Adjacency_Graph::front() const']]]
+  ['front_11',['front',['../class_disa_1_1_adjacency___graph.html#a0cefe8adda01a2b2120ba09e5c178952',1,'Disa::Adjacency_Graph::front() const'],['../class_disa_1_1_adjacency___graph.html#ab4d9fe4f431922d0e271393f03251789',1,'Disa::Adjacency_Graph::front()'],['../class_disa_1_1_adjacency___subgraph.html#a0cefe8adda01a2b2120ba09e5c178952',1,'Disa::Adjacency_Subgraph::front() const'],['../class_disa_1_1_adjacency___subgraph.html#ab4d9fe4f431922d0e271393f03251789',1,'Disa::Adjacency_Subgraph::front()']]]
 ];

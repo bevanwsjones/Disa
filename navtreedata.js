@@ -60,11 +60,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "adjacency__graph_8hpp.html",
-"class_disa_1_1_matrix___sparse.html#ad89fccf341087359afc46b9f433623a9",
-"functions_func_g.html",
-"solver__iterative_8hpp.html",
-"struct_disa_1_1_matrix___dense_3_01__type_00_010_00_010_01_4.html#a8b9ed1f325122cee4905e0d780db5f63"
+"class_disa_1_1_matrix___sparse.html#ad9e4af5032d71179d3abf04db463f791",
+"functions_func_u.html",
+"struct_disa_1_1_convergence___data.html#a18234427cdbff299f4e7c4d0a0dbeb3b",
+"struct_disa_1_1_vector___dense_3_01__type_00_010_01_4.html#a88373869d8235ffb1bd8eabfc29a1dc2"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

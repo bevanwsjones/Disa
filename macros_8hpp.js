@@ -14,12 +14,12 @@ var macros_8hpp =
     [ "GET_MACRO", "macros_8hpp.html#a857fa4baf727f64fa21f32da2b6c0468", null ],
     [ "INFO", "macros_8hpp.html#a809f816dd6df4e17499413cff1926fd4", null ],
     [ "WARNING", "macros_8hpp.html#aaf99b8fcaa4b837f684ea0505ed34487", null ],
-    [ "s_size_t", "macros_8hpp.html#a7d4bf73548962961b7931d56f612f906", null ],
-    [ "Log_Level", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0e", [
-      [ "Error", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea902b0d55fddef6f8d651fe1035b7d4bd", null ],
-      [ "Warning", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea0eaadb4fcb48a0a0ed7bc9868be9fbaa", null ],
-      [ "Info", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0ea4059b0251f66a18cb56f544728796875", null ],
-      [ "Debug", "macros_8hpp.html#a6ad351ea7d2afe4c8726f1e0fd6a0b0eaa603905470e2a5b8c13e96b579ef0dba", null ]
+    [ "Disa::s_size_t", "namespace_disa.html#a39d8d758707a7dd20844d2c7b05ae7b3", null ],
+    [ "Disa::Log_Level", "namespace_disa.html#afed75e625ed340c789b2bdc141d242eb", [
+      [ "Disa::Log_Level::Error", "namespace_disa.html#afed75e625ed340c789b2bdc141d242eba902b0d55fddef6f8d651fe1035b7d4bd", null ],
+      [ "Disa::Log_Level::Warning", "namespace_disa.html#afed75e625ed340c789b2bdc141d242eba0eaadb4fcb48a0a0ed7bc9868be9fbaa", null ],
+      [ "Disa::Log_Level::Info", "namespace_disa.html#afed75e625ed340c789b2bdc141d242eba4059b0251f66a18cb56f544728796875", null ],
+      [ "Disa::Log_Level::Debug", "namespace_disa.html#afed75e625ed340c789b2bdc141d242ebaa603905470e2a5b8c13e96b579ef0dba", null ]
     ] ],
-    [ "console_format", "macros_8hpp.html#ac35c94a4a0d0a799032263bf434b4426", null ]
+    [ "Disa::console_format", "namespace_disa.html#ac35c94a4a0d0a799032263bf434b4426", null ]
 ];

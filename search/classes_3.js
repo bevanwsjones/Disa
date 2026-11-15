@@ -2,5 +2,7 @@ var searchData=
 [
   ['direct_0',['Direct',['../class_disa_1_1_direct.html',1,'Disa']]],
   ['direct_3c_20direct_5flower_5fupper_5ffactorisation_3c_20_5fsolver_5ftype_2c_20_5fsize_2c_20_5fpivot_20_3e_2c_20_5fsize_20_3e_1',['Direct&lt; Direct_Lower_Upper_Factorisation&lt; _solver_type, _size, _pivot &gt;, _size &gt;',['../class_disa_1_1_direct.html',1,'Disa']]],
-  ['direct_5flower_5fupper_5ffactorisation_2',['Direct_Lower_Upper_Factorisation',['../class_disa_1_1_direct___lower___upper___factorisation.html',1,'Disa']]]
+  ['direct_5flower_5fupper_5ffactorisation_2',['Direct_Lower_Upper_Factorisation',['../class_disa_1_1_direct___lower___upper___factorisation.html',1,'Disa']]],
+  ['direct_5flower_5fupper_5ffactorisation_3c_20solver_5ftype_3a_3alower_5fupper_5ffactorisation_2c_20_5fsize_2c_20false_20_3e_3',['Direct_Lower_Upper_Factorisation&lt; Solver_Type::lower_upper_factorisation, _size, false &gt;',['../class_disa_1_1_direct___lower___upper___factorisation.html',1,'Disa']]],
+  ['direct_5flower_5fupper_5ffactorisation_3c_20solver_5ftype_3a_3alower_5fupper_5ffactorisation_2c_20_5fsize_2c_20true_20_3e_4',['Direct_Lower_Upper_Factorisation&lt; Solver_Type::lower_upper_factorisation, _size, true &gt;',['../class_disa_1_1_direct___lower___upper___factorisation.html',1,'Disa']]]
 ];
