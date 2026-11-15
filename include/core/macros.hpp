@@ -22,6 +22,7 @@
 #ifndef DISA_MACROS_H
 #define DISA_MACROS_H
 
+#include <cstdint>
 #include <iostream>
 #include <source_location>
 #include <string>
@@ -37,7 +38,7 @@ namespace Disa {
  * \enum Log_Level
  * \brief Logging Level, used to defines the severity of messages to the console.
  */
-enum class Log_Level : uint8_t {
+enum class Log_Level : std::uint8_t {
   Error,
   Warning,
   Info,
